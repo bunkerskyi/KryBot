@@ -870,8 +870,7 @@ namespace KryBot
                         var sgGiveaway = new SteamGifts.SgGiveaway
                         {
                             Name = node.SelectSingleNode(".//a[@class='giveaway__heading__name']").InnerText,
-                            Link =
-                                node.SelectSingleNode(".//a[@class='giveaway__heading__name']").Attributes["href"].Value
+                            Link = node.SelectSingleNode(".//a[@class='giveaway__heading__name']").Attributes["href"].Value
                         };
                         sgGiveaway.Code = sgGiveaway.Link.Split('/')[2];
 
@@ -884,13 +883,19 @@ namespace KryBot
                         }
                         catch (FormatException)
                         {
-                            Debug.WriteLine(
-                                node.SelectSingleNode(".//span[@class='giveaway__heading__thin'][1]").InnerText);
                             sgGiveaway.Price =
                                 int.Parse(
                                     node.SelectSingleNode(".//span[@class='giveaway__heading__thin'][2]")
                                         .InnerText.Split('(')[1].Split('P')[0]);
                         }
+
+                        try
+                        {
+                            sgGiveaway.Level = int.Parse(node.SelectSingleNode(".//div[@title='Contributor Level']")
+                                .InnerText.Split(' ')[1].Replace("+", ""));
+                        }
+                        catch (NullReferenceException)
+                        {}
 
                         if (sgGiveaway.Price <= bot.SteamGiftsPoint && sgGiveaway.Price <= bot.SteamGiftsJoinPointLimit)
                         {
@@ -898,8 +903,7 @@ namespace KryBot
                         }
                     }
                     catch (NullReferenceException)
-                    {
-                    }
+                    {}
                 }
             }
         }
