@@ -897,7 +897,7 @@ namespace KryBot
                         catch (NullReferenceException)
                         {}
 
-                        if (sgGiveaway.Price <= bot.SteamGiftsPoint && sgGiveaway.Price <= bot.SteamGiftsJoinPointLimit)
+                        if (sgGiveaway.Price <= bot.SteamGiftsPoint && sgGiveaway.Price <= bot.SteamGiftsJoinPointLimit && sgGiveaway.Level >= bot.SteamGiftsMinLevel)
                         {
                             giveaways?.Add(sgGiveaway);
                         }

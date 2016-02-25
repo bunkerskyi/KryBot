@@ -76,22 +76,28 @@ namespace KryBot
             return log;
         }
 
-        public static Log GiveawayJoined(string site, string name, int price, int points)
+        public static Log GiveawayJoined(string site, string name, int price, int points, int level)
         {
             Properties.Settings.Default.JoinsPerSession += 1;
             Properties.Settings.Default.JoinsTotal += 1;
             Properties.Settings.Default.Save();
 
-            var log = new Log
+            var log = new Log();
+
+            if (level > 0)
             {
-                Content =
-                    GetDateTime() + '{' + site + @"} " + strings.GiveawayJoined_Join + ' ' + '"' + name + '"' + ' ' +
-                    strings.GiveawayJoined_ConfirmedFor + ' ' + price +
-                    (site == "GameMiner"
-                        ? ' ' + strings.GiveawayJoined_Coal + @" ("
-                        : ' ' + strings.GiveawayJoined_Points + @" (") + points + ')' + "\n",
-                Color = Color.Green
-            };
+                log.Content =
+                    $"{GetDateTime()}[{site}] {strings.GiveawayJoined_Join} '{name}' [{level}] {strings.GiveawayJoined_ConfirmedFor} {price} " +
+                    $"{strings.GiveawayJoined_Points} ({points}) \n";
+            }
+            else
+            {
+                log.Content =
+                    $"{GetDateTime()}[{site}] {strings.GiveawayJoined_Join} '{name}' {strings.GiveawayJoined_ConfirmedFor} {price} " +
+                    $"{strings.GiveawayJoined_Points} ({points}) \n";
+            }
+
+            log.Color = Color.Green;
             return log;
         }
 

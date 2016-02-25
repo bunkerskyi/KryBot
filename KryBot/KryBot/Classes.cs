@@ -40,11 +40,13 @@ namespace KryBot
             public bool SteamGiftsGroup { get; set; }
             public bool SteamGiftsRegular { get; set; } = true;
             public bool SteamGiftsWishList { get; set; }
+            public bool SteamGiftsLevelSort { get; set; }
             public string SteamGiftsPhpSessId { get; set; }
             public int SteamGiftsPoint { get; set; }
             public int SteamGiftsLevel { get; set; }
             public int SteamGiftsJoinPointLimit { get; set; } = 300;
             public int SteamGiftsPointsReserv { get; set; }
+            public int SteamGiftsMinLevel { get; set; }
             // StemGifts //
 
             // SteamCompanion //

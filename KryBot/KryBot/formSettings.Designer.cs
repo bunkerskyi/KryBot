@@ -88,6 +88,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbSGMinLevel = new System.Windows.Forms.CheckBox();
+            this.numSGLevel = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPageCommun.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -99,6 +101,7 @@
             this.tabPageST.SuspendLayout();
             this.tabPageSteam.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSGLevel)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -419,6 +422,8 @@
             // 
             // tabPageSG
             // 
+            this.tabPageSG.Controls.Add(this.numSGLevel);
+            this.tabPageSG.Controls.Add(this.cbSGMinLevel);
             this.tabPageSG.Controls.Add(this.cbSGRegular);
             this.tabPageSG.Controls.Add(this.btnSGCookies);
             this.tabPageSG.Controls.Add(this.tbSGReserv);
@@ -457,7 +462,7 @@
             // 
             // tbSGReserv
             // 
-            this.tbSGReserv.Location = new System.Drawing.Point(246, 69);
+            this.tbSGReserv.Location = new System.Drawing.Point(243, 92);
             this.tbSGReserv.Name = "tbSGReserv";
             this.tbSGReserv.Size = new System.Drawing.Size(26, 20);
             this.tbSGReserv.TabIndex = 7;
@@ -466,7 +471,7 @@
             // 
             // tbSGMaxValue
             // 
-            this.tbSGMaxValue.Location = new System.Drawing.Point(130, 69);
+            this.tbSGMaxValue.Location = new System.Drawing.Point(127, 92);
             this.tbSGMaxValue.Name = "tbSGMaxValue";
             this.tbSGMaxValue.Size = new System.Drawing.Size(26, 20);
             this.tbSGMaxValue.TabIndex = 6;
@@ -476,7 +481,7 @@
             // lblSGReserv
             // 
             this.lblSGReserv.AutoSize = true;
-            this.lblSGReserv.Location = new System.Drawing.Point(162, 72);
+            this.lblSGReserv.Location = new System.Drawing.Point(159, 95);
             this.lblSGReserv.Name = "lblSGReserv";
             this.lblSGReserv.Size = new System.Drawing.Size(78, 13);
             this.lblSGReserv.TabIndex = 5;
@@ -485,7 +490,7 @@
             // lblSGMaxValue
             // 
             this.lblSGMaxValue.AutoSize = true;
-            this.lblSGMaxValue.Location = new System.Drawing.Point(6, 72);
+            this.lblSGMaxValue.Location = new System.Drawing.Point(3, 95);
             this.lblSGMaxValue.Name = "lblSGMaxValue";
             this.lblSGMaxValue.Size = new System.Drawing.Size(125, 13);
             this.lblSGMaxValue.TabIndex = 4;
@@ -734,6 +739,24 @@
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
+            // cbSGMinLevel
+            // 
+            this.cbSGMinLevel.AutoSize = true;
+            this.cbSGMinLevel.Location = new System.Drawing.Point(6, 75);
+            this.cbSGMinLevel.Name = "cbSGMinLevel";
+            this.cbSGMinLevel.Size = new System.Drawing.Size(181, 17);
+            this.cbSGMinLevel.TabIndex = 12;
+            this.cbSGMinLevel.Text = "Минимальный уровень раздач";
+            this.cbSGMinLevel.UseVisualStyleBackColor = true;
+            this.cbSGMinLevel.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // numSGLevel
+            // 
+            this.numSGLevel.Location = new System.Drawing.Point(183, 74);
+            this.numSGLevel.Name = "numSGLevel";
+            this.numSGLevel.Size = new System.Drawing.Size(27, 20);
+            this.numSGLevel.TabIndex = 13;
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -770,6 +793,7 @@
             this.tabPageSteam.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSGLevel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -837,5 +861,7 @@
         private System.Windows.Forms.CheckBox cbSGRegular;
         private System.Windows.Forms.CheckBox cbSCRegular;
         private System.Windows.Forms.Button btnDeleteCookies;
+        private System.Windows.Forms.NumericUpDown numSGLevel;
+        private System.Windows.Forms.CheckBox cbSGMinLevel;
     }
 }

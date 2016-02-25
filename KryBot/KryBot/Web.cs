@@ -157,7 +157,7 @@ namespace KryBot
                 if (jsonresponse.Status == "ok")
                 {
                     bot.GameMinerCoal = jsonresponse.Coal;
-                    return Messages.GiveawayJoined("GameMiner", giveaway.Name, giveaway.Price, jsonresponse.Coal);
+                    return Messages.GiveawayJoined("GameMiner", giveaway.Name, giveaway.Price, jsonresponse.Coal, 0);
                 }
                 var jresponse = JsonConvert.DeserializeObject<GameMiner.JsonResponseError>(response.RestResponse.Content);
                 return Messages.GiveawayNotJoined("GameMiner", giveaway.Name, jresponse.Error.Message);
@@ -200,7 +200,7 @@ namespace KryBot
                 if (jsonresponse.Type == "success")
                 {
                     bot.SteamGiftsPoint = jsonresponse.Points;
-                    return Messages.GiveawayJoined("SteamGifts", giveaway.Name, giveaway.Price, jsonresponse.Points);
+                    return Messages.GiveawayJoined("SteamGifts", giveaway.Name, giveaway.Price, jsonresponse.Points, giveaway.Level);
                 }
                 var jresponse = JsonConvert.DeserializeObject<GameMiner.JsonResponseError>(response.RestResponse.Content);
                 try
@@ -264,7 +264,7 @@ namespace KryBot
 						{
 							bot.SteamCompanionPoint = int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]);
 							return Messages.GiveawayJoined("SteamCompanion", giveaway.Name, giveaway.Price,
-								int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]));
+								int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]), 0);
 						}
 					}
 					catch(IndexOutOfRangeException)
@@ -318,7 +318,7 @@ namespace KryBot
                 {
                     bot.SteamPortalPoints = int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]);
                     return Messages.GiveawayJoined("SteamPortal", giveaway.Name, giveaway.Price,
-                        int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]));
+                        int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]), 0);
                 }
                 return Messages.GiveawayNotJoined("SteamPortal", giveaway.Name, "Error");
             }
@@ -366,7 +366,7 @@ namespace KryBot
                 {
                     bot.GameAwaysPoints = jsonresponse.Balance;
                     return Messages.GiveawayJoined("GameAways", giveaway.Name, giveaway.Price,
-                        int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]));
+                        int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]), 0);
                 }
                 return Messages.GiveawayNotJoined("GameAways", giveaway.Name, "Error");
             }
@@ -406,7 +406,7 @@ namespace KryBot
                     bot.Proxy);
                 if (response.RestResponse.StatusCode == HttpStatusCode.OK)
                 {
-                    return Messages.GiveawayJoined("SteamTrade", giveaway.Name.Trim(), 0, 0);
+                    return Messages.GiveawayJoined("SteamTrade", giveaway.Name.Trim(), 0, 0, 0);
                 }
                 return Messages.GiveawayNotJoined("SteamTrade", giveaway.Name,
                     response.RestResponse.StatusCode.ToString());

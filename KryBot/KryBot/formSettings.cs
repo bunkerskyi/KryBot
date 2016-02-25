@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 using KryBot.Properties;
 
@@ -66,6 +67,9 @@ namespace KryBot
             cbSGWishlist.Checked = _bot.SteamGiftsWishList;
             cbSGGroup.Checked = _bot.SteamGiftsGroup;
             cbSGRegular.Checked = _bot.SteamGiftsRegular;
+            cbSGMinLevel.Checked = _bot.SteamGiftsLevelSort;
+            numSGLevel.Enabled = _bot.SteamGiftsLevelSort;
+            numSGLevel.Value = _bot.SteamGiftsMinLevel;
             tbSGMaxValue.Text = _bot.SteamGiftsJoinPointLimit.ToString();
             tbSGReserv.Text = _bot.SteamGiftsPointsReserv.ToString();
 
@@ -120,6 +124,8 @@ namespace KryBot
             _bot.SteamGiftsRegular = cbSGRegular.Checked;
             _bot.SteamGiftsJoinPointLimit = int.Parse(tbSGMaxValue.Text);
             _bot.SteamGiftsPointsReserv = int.Parse(tbSGReserv.Text);
+            _bot.SteamGiftsMinLevel = int.Parse(numSGLevel.Value.ToString(CultureInfo.InvariantCulture));
+            _bot.SteamGiftsLevelSort = cbSGMinLevel.Checked;
 
             _bot.SteamCompanionWishList = cbSCWishlist.Checked;
             _bot.SteamCompanionGroup = cbSCGroup.Checked;
@@ -313,6 +319,11 @@ namespace KryBot
         private void cbSCGroup_CheckedChanged(object sender, EventArgs e)
         {
             cbSCAutojoin.Enabled = cbSCGroup.Checked;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            numSGLevel.Enabled = cbSGMinLevel.Checked;
         }
     }
 }
