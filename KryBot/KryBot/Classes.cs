@@ -111,7 +111,7 @@ namespace KryBot
 
         public class Settings
         {
-            public bool LogActive { get; set; }
+            public bool LogActive { get; set; } = true;
             public bool FirstExecute { get; set; }
             public string Lang { get; set; }
             public bool Sort { get; set; }
