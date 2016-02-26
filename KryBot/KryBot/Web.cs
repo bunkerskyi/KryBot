@@ -196,25 +196,19 @@ namespace KryBot
                 var response = Post("http://www.steamgifts.com/", "/ajax.php",
                     Generate.PostData_SteamGifts(giveaway.Token, giveaway.Code), new List<HttpHeader>(),
                     Generate.Cookies_SteamGifts(bot.SteamGiftsPhpSessId), bot.UserAgent, bot.Proxy ?? "");
-                if (response != null)
+                var jsonresponse = JsonConvert.DeserializeObject<SteamGifts.JsonResponse>(response.RestResponse.Content);
+                if (jsonresponse.Type == "success")
                 {
-                    var jsonresponse =
-                        JsonConvert.DeserializeObject<SteamGifts.JsonResponse>(response.RestResponse.Content);
-                    if (jsonresponse.Type == "success")
-                    {
-                        bot.SteamGiftsPoint = jsonresponse.Points;
-                        return Messages.GiveawayJoined("SteamGifts", giveaway.Name, giveaway.Price, jsonresponse.Points,
-                            giveaway.Level);
-                    }
-                    var jresponse =
-                        JsonConvert.DeserializeObject<GameMiner.JsonResponseError>(response.RestResponse.Content);
-                    try
-                    {
-                        return Messages.GiveawayNotJoined("SteamGifts", giveaway.Name, jresponse.Error.Message);
-                    }
-                    catch (NullReferenceException)
-                    {
-                    }
+                    bot.SteamGiftsPoint = jsonresponse.Points;
+                    return Messages.GiveawayJoined("SteamGifts", giveaway.Name, giveaway.Price, jsonresponse.Points, giveaway.Level);
+                }
+                var jresponse = JsonConvert.DeserializeObject<GameMiner.JsonResponseError>(response.RestResponse.Content);
+                try
+                {
+                    return Messages.GiveawayNotJoined("SteamGifts", giveaway.Name, jresponse.Error.Message);
+                }
+                catch (NullReferenceException)
+                {
                 }
             }
             return null;

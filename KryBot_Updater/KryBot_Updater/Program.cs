@@ -56,8 +56,8 @@ namespace KryBot_Updater
                     Console.WriteLine(strings.RemoteVersion + @": " + version);
                     if (int.Parse(args[0].Replace(".", "")) <= int.Parse(version.Replace(".", "")))
                     {
-                        GetRemoteFiles(Release.assets[UpdatePosition].browser_download_url);
-                        if (Unzip())
+                        GetRemoteFiles(version, Release.assets[UpdatePosition].browser_download_url);
+                        if (Unzip(version))
                         {
                             Console.WriteLine(strings.Start + @" KryBot.exe...");
                             Process.Start("KryBot.exe");
@@ -68,8 +68,8 @@ namespace KryBot_Updater
                 else
                 {
                     Console.WriteLine(strings.RemoteVersion + @": " + version);
-                    GetRemoteFiles(Release.assets[UpdatePosition].browser_download_url);
-                    if (Unzip())
+                    GetRemoteFiles(version, Release.assets[UpdatePosition].browser_download_url);
+                    if (Unzip(version))
                     {
                         Console.WriteLine(strings.Start + @" KryBot.exe...");
                         Process.Start("KryBot.exe");
@@ -106,12 +106,12 @@ namespace KryBot_Updater
             return null;
         }
 
-        private static void GetRemoteFiles(string url)
+        private static void GetRemoteFiles(string version, string url)
         {
             try
             {
                 string remoteUri = url;
-                string fileName = "KryBot_Portable.zip";
+                string fileName = "KryBot_Portable_." + version + ".zip";
                 WebClient myWebClient = new WebClient();
                 var myStringWebResource = remoteUri;
                 Console.WriteLine(strings.DownloadingFile + @" " + fileName + @" " + strings.From + @" " + myStringWebResource + @"...");
@@ -124,9 +124,9 @@ namespace KryBot_Updater
             }
         }
 
-        private static bool Unzip()
+        private static bool Unzip(string version)
         {
-            Console.WriteLine(strings.UnzipingFile + @" KryBot_Portable.zip...");
+            Console.WriteLine(strings.UnzipingFile + @" KryBot_Portable_." + version + @".zip...");
             try
             {
                 string[] files = Directory.GetFiles(Environment.CurrentDirectory);
@@ -145,8 +145,8 @@ namespace KryBot_Updater
                         }
                     }    
                 }
-                System.IO.Compression.ZipFile.ExtractToDirectory("KryBot_Portable.zip", Environment.CurrentDirectory);
-                File.Delete("KryBot_Portable.zip");
+                System.IO.Compression.ZipFile.ExtractToDirectory("KryBot_Portable_." + version + ".zip", Environment.CurrentDirectory);
+                File.Delete("KryBot_Portable_." + version + ".zip");
             }
             catch (NullReferenceException e)
             {
