@@ -1834,7 +1834,7 @@ namespace KryBot
                         return false;
                     }
 
-                    if (Tools.VersionCompare(Application.ProductVersion, release.tag_name))
+                    if (release.tag_name != null && Tools.VersionCompare(Application.ProductVersion, release.tag_name))
                     {
                         LogBuffer =
                             Tools.ConstructLog(
