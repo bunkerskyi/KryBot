@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Net;
 using RestSharp;
 
@@ -124,5 +125,22 @@ namespace KryBot
             public int TimerInterval { get; set; }
             public int TimerLoops { get; set; }
         }
+
+        // GitHub //
+        public class GitHubRelease
+        {
+            public string tag_name { get; set; }
+            public bool prerelease { get; set; }
+            public List<GitHunReleaseAssets> assets { get; set; }
+            public string body { get; set; }
+        }
+
+        public class GitHunReleaseAssets
+        {
+            public string name { get; set; }
+            public int size { get; set; }
+            public string browser_download_url { get; set; }
+        }
+        // GitHub//
     }
 }

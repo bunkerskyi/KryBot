@@ -524,5 +524,45 @@ namespace KryBot
             }
             return false;
         }
+
+        public static string GetVersionInGitHub(string url)
+        {
+            try
+            {
+                var client = new RestClient(url)
+                {
+                    FollowRedirects = true,
+                };
+
+                var request = new RestRequest("", Method.GET);
+
+                var response = client.Execute(request);
+
+                return response.Content;
+            }
+            catch (TimeoutException)
+            {
+                return null;
+            }
+        }
+
+        public static async Task<string> GetVersionInGitHubAsync(string url)
+        {
+            var task = new TaskCompletionSource<string>();
+            await Task.Run(() =>
+            {
+                try
+                {
+                    var result = GetVersionInGitHub(url);
+                    task.SetResult(result);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            });
+
+            return task.Task.Result;
+        }
     }
 }

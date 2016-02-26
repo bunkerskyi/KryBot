@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using KryBot.lang;
 using KryBot.Properties;
+using Newtonsoft.Json;
 using RestSharp;
-using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 namespace KryBot
 {
@@ -1820,26 +1820,29 @@ namespace KryBot
         {
             try
             {
-                var response =
-                await
-                    Web.GetAsync("http://vk.com/krybot", "", new List<Parameter>(), new CookieContainer(),
-                        new List<HttpHeader>(), "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36", "");
-                if (response.RestResponse.StatusCode != 0)
-                {
-                    var htmldoc = new HtmlDocument();
-                    htmldoc.LoadHtml(response.RestResponse.Content);
+                string json = await Web.GetVersionInGitHubAsync(Settings.Default.GitHubRepoReleaseUrl);
 
-                    var version =
-                    htmldoc.DocumentNode.SelectSingleNode("//span[@class='current_text']").InnerText.Split('[')[1].Split
-                        (']')[0];
-                    if (Tools.VersionCompare(Application.ProductVersion, version))
+                if(json != null)
+                {
+                    Classes.GitHubRelease release;
+                    try
+                    {
+                        release = JsonConvert.DeserializeObject<Classes.GitHubRelease>(json);
+                    }
+                    catch (JsonReaderException)
+                    {
+                        return false;
+                    }
+
+                    if (Tools.VersionCompare(Application.ProductVersion, release.tag_name))
                     {
                         LogBuffer =
                             Tools.ConstructLog(
-                                "Для скачивания доступна новая версия [" + version + "] http://vk.com/krybot",
+                                $"Для скачивания доступна новая версия [{release.tag_name}] {Settings.Default.GitHubRepoUrl}",
                                 Color.Green, true, true);
                         LogChanged?.Invoke();
-                        DialogResult dr = MessageBox.Show(@"Для скачивания доступна новая версия " + version + @". Скачать?",
+
+                        DialogResult dr = MessageBox.Show($"Для скачивания доступна новая версия { release.tag_name}. Скачать?",
                             @"Обновление", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                         if (dr == DialogResult.Yes)
                         {

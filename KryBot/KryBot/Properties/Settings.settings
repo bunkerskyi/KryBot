@@ -56,5 +56,11 @@
     <Setting Name="TimerLoops" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="GitHubRepoUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://github.com/KriBetko/KryBot</Value>
+    </Setting>
+    <Setting Name="GitHubRepoReleaseUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://api.github.com/repos/KriBetko/KryBot/releases/latest</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
