@@ -81,6 +81,7 @@ namespace KryBot
         public class GmGiveaway
         {
             public string Name { get; set; }
+            public string StoreId { get; set; }
             public int Price { get; set; }
             public int Page { get; set; }
             public string Region { get; set; }

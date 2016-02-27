@@ -6,6 +6,7 @@ namespace KryBot
         public class SgGiveaway
         {
             public string Name { get; set; }
+            public string StoreId { get; set; }
             public int Price { get; set; }
             public int Level { get; set; }
             public string Code { get; set; }

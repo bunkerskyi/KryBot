@@ -522,6 +522,14 @@ namespace KryBot
                         lot.IsGolden = giveaway.Golden;
                         lot.Page = json.Page;
                         lot.Price = giveaway.Price;
+                        if (giveaway.Game.Url != "javascript:void(0);")
+                        {
+                            lot.StoreId = giveaway.Game.Url.Split('/')[4];
+                        }
+                        else
+                        {
+                            break;
+                        }
                         giveaways?.Add(lot);
                     }
                     catch (NullReferenceException)
@@ -876,7 +884,8 @@ namespace KryBot
                         var sgGiveaway = new SteamGifts.SgGiveaway
                         {
                             Name = node.SelectSingleNode(".//a[@class='giveaway__heading__name']").InnerText,
-                            Link = node.SelectSingleNode(".//a[@class='giveaway__heading__name']").Attributes["href"].Value
+                            Link = node.SelectSingleNode(".//a[@class='giveaway__heading__name']").Attributes["href"].Value,
+                            StoreId = node.SelectSingleNode(".//a[@class='giveaway__icon']").Attributes["href"].Value.Split('/')[4]
                         };
                         sgGiveaway.Code = sgGiveaway.Link.Split('/')[2];
 
@@ -1338,6 +1347,9 @@ namespace KryBot
                 htmlDoc.LoadHtml(response.RestResponse.Content);
                 try
                 {
+                    giveaway.StoreId =
+                        htmlDoc.DocumentNode.SelectSingleNode("//a[@class='banner large-5 columns']").Attributes["href"
+                            ].Value.Split('/')[4];
                     giveaway.Code =
                         htmlDoc.DocumentNode.SelectSingleNode("//input[@name='giftID']").Attributes["value"].Value;
                     return ConstructLog("", Color.AliceBlue, true, false);
@@ -1590,7 +1602,8 @@ namespace KryBot
                     {
                         var spGiveaway = new SteamPortal.SpGiveaway
                         {
-                            Name = node.SelectSingleNode(".//div[@class='giveaway_name']").InnerText
+                            Name = node.SelectSingleNode(".//div[@class='giveaway_name']").InnerText,
+                            StoreId = node.SelectSingleNode(".//a[@class='steam-icon']").Attributes["href"].Value.Split('/')[4]
                         };
 
                         try
@@ -1761,7 +1774,8 @@ namespace KryBot
                             var spGiveaway = new SteamTrade.StGiveaway
                             {
                                 Name = node.SelectSingleNode(".//td[1]/a[2]").InnerText,
-                                Link = node.SelectSingleNode(".//td[1]/a[2]").Attributes["href"].Value
+                                Link = node.SelectSingleNode(".//td[1]/a[2]").Attributes["href"].Value,
+                                StoreId = node.SelectSingleNode(".//td[1]/a[1]").Attributes["href"].Value.Split('/')[4]
                             };
                             giveaways?.Add(spGiveaway);
                         }

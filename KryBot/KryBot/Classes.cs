@@ -12,7 +12,6 @@ namespace KryBot
             public bool Enabled { get; set; }
             public string Name { get; set; }
             public string UserAgent { get; set; }
-            public string Vesion { get; set; }
 
             // Steam //
             public bool SteamEnabled { get; set; }
