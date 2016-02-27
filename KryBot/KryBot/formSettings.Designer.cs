@@ -58,6 +58,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPageSG = new System.Windows.Forms.TabPage();
+            this.numSGLevel = new System.Windows.Forms.NumericUpDown();
+            this.cbSGMinLevel = new System.Windows.Forms.CheckBox();
             this.cbSGRegular = new System.Windows.Forms.CheckBox();
             this.btnSGCookies = new System.Windows.Forms.Button();
             this.tbSGReserv = new System.Windows.Forms.TextBox();
@@ -88,20 +90,19 @@
             this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cbSGMinLevel = new System.Windows.Forms.CheckBox();
-            this.numSGLevel = new System.Windows.Forms.NumericUpDown();
+            this.cbSGSortTeLessLevel = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPageCommun.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbTimerSettings.SuspendLayout();
             this.tabPageGM.SuspendLayout();
             this.tabPageSG.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSGLevel)).BeginInit();
             this.tabPageSC.SuspendLayout();
             this.tabPageSP.SuspendLayout();
             this.tabPageST.SuspendLayout();
             this.tabPageSteam.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numSGLevel)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -422,6 +423,7 @@
             // 
             // tabPageSG
             // 
+            this.tabPageSG.Controls.Add(this.cbSGSortTeLessLevel);
             this.tabPageSG.Controls.Add(this.numSGLevel);
             this.tabPageSG.Controls.Add(this.cbSGMinLevel);
             this.tabPageSG.Controls.Add(this.cbSGRegular);
@@ -439,6 +441,24 @@
             this.tabPageSG.TabIndex = 1;
             this.tabPageSG.Text = "SG";
             this.tabPageSG.UseVisualStyleBackColor = true;
+            // 
+            // numSGLevel
+            // 
+            this.numSGLevel.Location = new System.Drawing.Point(183, 74);
+            this.numSGLevel.Name = "numSGLevel";
+            this.numSGLevel.Size = new System.Drawing.Size(27, 20);
+            this.numSGLevel.TabIndex = 13;
+            // 
+            // cbSGMinLevel
+            // 
+            this.cbSGMinLevel.AutoSize = true;
+            this.cbSGMinLevel.Location = new System.Drawing.Point(6, 75);
+            this.cbSGMinLevel.Name = "cbSGMinLevel";
+            this.cbSGMinLevel.Size = new System.Drawing.Size(181, 17);
+            this.cbSGMinLevel.TabIndex = 12;
+            this.cbSGMinLevel.Text = "Минимальный уровень раздач";
+            this.cbSGMinLevel.UseVisualStyleBackColor = true;
+            this.cbSGMinLevel.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // cbSGRegular
             // 
@@ -462,7 +482,7 @@
             // 
             // tbSGReserv
             // 
-            this.tbSGReserv.Location = new System.Drawing.Point(243, 92);
+            this.tbSGReserv.Location = new System.Drawing.Point(243, 115);
             this.tbSGReserv.Name = "tbSGReserv";
             this.tbSGReserv.Size = new System.Drawing.Size(26, 20);
             this.tbSGReserv.TabIndex = 7;
@@ -471,7 +491,7 @@
             // 
             // tbSGMaxValue
             // 
-            this.tbSGMaxValue.Location = new System.Drawing.Point(127, 92);
+            this.tbSGMaxValue.Location = new System.Drawing.Point(127, 115);
             this.tbSGMaxValue.Name = "tbSGMaxValue";
             this.tbSGMaxValue.Size = new System.Drawing.Size(26, 20);
             this.tbSGMaxValue.TabIndex = 6;
@@ -481,7 +501,7 @@
             // lblSGReserv
             // 
             this.lblSGReserv.AutoSize = true;
-            this.lblSGReserv.Location = new System.Drawing.Point(159, 95);
+            this.lblSGReserv.Location = new System.Drawing.Point(159, 118);
             this.lblSGReserv.Name = "lblSGReserv";
             this.lblSGReserv.Size = new System.Drawing.Size(78, 13);
             this.lblSGReserv.TabIndex = 5;
@@ -490,7 +510,7 @@
             // lblSGMaxValue
             // 
             this.lblSGMaxValue.AutoSize = true;
-            this.lblSGMaxValue.Location = new System.Drawing.Point(3, 95);
+            this.lblSGMaxValue.Location = new System.Drawing.Point(3, 118);
             this.lblSGMaxValue.Name = "lblSGMaxValue";
             this.lblSGMaxValue.Size = new System.Drawing.Size(125, 13);
             this.lblSGMaxValue.TabIndex = 4;
@@ -739,23 +759,15 @@
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
-            // cbSGMinLevel
+            // cbSGSortTeLessLevel
             // 
-            this.cbSGMinLevel.AutoSize = true;
-            this.cbSGMinLevel.Location = new System.Drawing.Point(6, 75);
-            this.cbSGMinLevel.Name = "cbSGMinLevel";
-            this.cbSGMinLevel.Size = new System.Drawing.Size(181, 17);
-            this.cbSGMinLevel.TabIndex = 12;
-            this.cbSGMinLevel.Text = "Минимальный уровень раздач";
-            this.cbSGMinLevel.UseVisualStyleBackColor = true;
-            this.cbSGMinLevel.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // numSGLevel
-            // 
-            this.numSGLevel.Location = new System.Drawing.Point(183, 74);
-            this.numSGLevel.Name = "numSGLevel";
-            this.numSGLevel.Size = new System.Drawing.Size(27, 20);
-            this.numSGLevel.TabIndex = 13;
+            this.cbSGSortTeLessLevel.AutoSize = true;
+            this.cbSGSortTeLessLevel.Location = new System.Drawing.Point(6, 98);
+            this.cbSGSortTeLessLevel.Name = "cbSGSortTeLessLevel";
+            this.cbSGSortTeLessLevel.Size = new System.Drawing.Size(216, 17);
+            this.cbSGSortTeLessLevel.TabIndex = 14;
+            this.cbSGSortTeLessLevel.Text = "Сначала раздачи найвысшего уровня";
+            this.cbSGSortTeLessLevel.UseVisualStyleBackColor = true;
             // 
             // FormSettings
             // 
@@ -785,6 +797,7 @@
             this.tabPageGM.PerformLayout();
             this.tabPageSG.ResumeLayout(false);
             this.tabPageSG.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numSGLevel)).EndInit();
             this.tabPageSC.ResumeLayout(false);
             this.tabPageSC.PerformLayout();
             this.tabPageSP.ResumeLayout(false);
@@ -793,7 +806,6 @@
             this.tabPageSteam.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numSGLevel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -863,5 +875,6 @@
         private System.Windows.Forms.Button btnDeleteCookies;
         private System.Windows.Forms.NumericUpDown numSGLevel;
         private System.Windows.Forms.CheckBox cbSGMinLevel;
+        private System.Windows.Forms.CheckBox cbSGSortTeLessLevel;
     }
 }

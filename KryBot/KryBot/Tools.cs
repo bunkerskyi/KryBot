@@ -242,8 +242,7 @@ namespace KryBot
                 Sort = Properties.Settings.Default.Sort,
                 ShowFarmTip = Properties.Settings.Default.ShowFarmTip,
                 ShowWonTip = Properties.Settings.Default.ShowWonTip,
-                Autorun = Properties.Settings.Default.Autorun,
-                FirstExecute = Properties.Settings.Default.FirstExecute
+                Autorun = Properties.Settings.Default.Autorun
             };
             try
             {
@@ -271,7 +270,6 @@ namespace KryBot
                 reader.Close();
 
                 Properties.Settings.Default.Autorun = sets.Autorun;
-                Properties.Settings.Default.FirstExecute = sets.FirstExecute;
                 Properties.Settings.Default.Sort = sets.Sort;
                 Properties.Settings.Default.SortToLess = sets.SortToLess;
                 Properties.Settings.Default.SortToMore = sets.SortToMore;

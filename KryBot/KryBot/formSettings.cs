@@ -67,8 +67,9 @@ namespace KryBot
             cbSGWishlist.Checked = _bot.SteamGiftsWishList;
             cbSGGroup.Checked = _bot.SteamGiftsGroup;
             cbSGRegular.Checked = _bot.SteamGiftsRegular;
-            cbSGMinLevel.Checked = _bot.SteamGiftsLevelSort;
-            numSGLevel.Enabled = _bot.SteamGiftsLevelSort;
+            cbSGMinLevel.Checked = _bot.SteamGiftsSortLevel;
+            cbSGSortTeLessLevel.Checked = _bot.SteamGiftsSortToLessLevel;
+            numSGLevel.Enabled = _bot.SteamGiftsSortLevel;
             numSGLevel.Value = _bot.SteamGiftsMinLevel;
             tbSGMaxValue.Text = _bot.SteamGiftsJoinPointLimit.ToString();
             tbSGReserv.Text = _bot.SteamGiftsPointsReserv.ToString();
@@ -125,7 +126,8 @@ namespace KryBot
             _bot.SteamGiftsJoinPointLimit = int.Parse(tbSGMaxValue.Text);
             _bot.SteamGiftsPointsReserv = int.Parse(tbSGReserv.Text);
             _bot.SteamGiftsMinLevel = int.Parse(numSGLevel.Value.ToString(CultureInfo.InvariantCulture));
-            _bot.SteamGiftsLevelSort = cbSGMinLevel.Checked;
+            _bot.SteamGiftsSortLevel = cbSGMinLevel.Checked;
+            _bot.SteamGiftsSortToLessLevel = cbSGSortTeLessLevel.Checked;
 
             _bot.SteamCompanionWishList = cbSCWishlist.Checked;
             _bot.SteamCompanionGroup = cbSCGroup.Checked;

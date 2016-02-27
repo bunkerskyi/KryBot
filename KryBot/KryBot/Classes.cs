@@ -39,7 +39,8 @@ namespace KryBot
             public bool SteamGiftsGroup { get; set; }
             public bool SteamGiftsRegular { get; set; } = true;
             public bool SteamGiftsWishList { get; set; }
-            public bool SteamGiftsLevelSort { get; set; }
+            public bool SteamGiftsSortLevel { get; set; }
+            public bool SteamGiftsSortToLessLevel { get; set; }
             public string SteamGiftsPhpSessId { get; set; }
             public int SteamGiftsPoint { get; set; }
             public int SteamGiftsLevel { get; set; }
@@ -110,7 +111,6 @@ namespace KryBot
         public class Settings
         {
             public bool LogActive { get; set; } = true;
-            public bool FirstExecute { get; set; }
             public string Lang { get; set; }
             public bool Sort { get; set; }
             public bool SortToMore { get; set; }

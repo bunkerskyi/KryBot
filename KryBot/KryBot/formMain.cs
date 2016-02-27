@@ -473,6 +473,12 @@ namespace KryBot
                                     SgGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
                                 }
                             }
+
+                            if (Bot.SteamGiftsSortToLessLevel)
+                            {
+                                SgGiveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
+                            }
+
                             foreach (var giveaway in SgGiveaways)
                             {
                                 if (giveaway.Price <= Bot.SteamGiftsPoint &&
