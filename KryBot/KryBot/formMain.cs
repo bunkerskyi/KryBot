@@ -424,6 +424,14 @@ namespace KryBot
                         }
                     }
                 }
+                else
+                {
+                    BlockTabpage(tabPageGM, false);
+                    btnGMLogin.Enabled = true;
+                    btnGMLogin.Visible = true;
+                    linkLabel1.Enabled = true;
+                    lblGMStatus.Text = @"Статус: " + strings.LoginFaild;
+                }
             }
             toolStripProgressBar1.Value++;
 
@@ -506,6 +514,14 @@ namespace KryBot
                         }
                     }
                 }
+                else
+                {
+                    BlockTabpage(tabPageSG, false);
+                    btnSGLogin.Enabled = true;
+                    btnSGLogin.Visible = true;
+                    linkLabel2.Enabled = true;
+                    lblSGStatus.Text = @"Статус: " + strings.LoginFaild;
+                }
             }
             toolStripProgressBar1.Value++;
 
@@ -581,6 +597,14 @@ namespace KryBot
                         }
                     }
                 }
+                else
+                {
+                    BlockTabpage(tabPageSC, false);
+                    btnSCLogin.Enabled = true;
+                    btnSCLogin.Visible = true;
+                    linkLabel3.Enabled = true;
+                    lblSCStatus.Text = @"Статус: " + strings.LoginFaild;
+                }
             }
 
             if (Bot.SteamPortalEnabled)
@@ -655,6 +679,14 @@ namespace KryBot
                         }
                     }
                 }
+                else
+                {
+                    BlockTabpage(tabPageSP, false);
+                    btnSPLogin.Enabled = true;
+                    btnSPLogin.Visible = true;
+                    linkLabel4.Enabled = true;
+                    lblSPStatus.Text = @"Статус: " + strings.LoginFaild;
+                }
             }
 
             if (Bot.SteamTradeEnabled)
@@ -705,6 +737,14 @@ namespace KryBot
                             }
                         }
                     }
+                }
+                else
+                {
+                    BlockTabpage(tabPageSteam, false);
+                    btnSteamLogin.Enabled = true;
+                    btnSteamLogin.Visible = true;
+                    linkLabel6.Enabled = true;
+                    lblSteamStatus.Text = @"Статус: " + strings.LoginFaild;
                 }
             }
 

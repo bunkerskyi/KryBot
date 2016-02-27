@@ -58,6 +58,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPageSG = new System.Windows.Forms.TabPage();
+            this.cbSGSortTeLessLevel = new System.Windows.Forms.CheckBox();
             this.numSGLevel = new System.Windows.Forms.NumericUpDown();
             this.cbSGMinLevel = new System.Windows.Forms.CheckBox();
             this.cbSGRegular = new System.Windows.Forms.CheckBox();
@@ -90,7 +91,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cbSGSortTeLessLevel = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPageCommun.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -181,8 +181,6 @@
             // cbAutorun
             // 
             this.cbAutorun.AutoSize = true;
-            this.cbAutorun.Checked = true;
-            this.cbAutorun.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cbAutorun.Location = new System.Drawing.Point(160, 28);
             this.cbAutorun.Name = "cbAutorun";
             this.cbAutorun.Size = new System.Drawing.Size(96, 17);
@@ -441,6 +439,16 @@
             this.tabPageSG.TabIndex = 1;
             this.tabPageSG.Text = "SG";
             this.tabPageSG.UseVisualStyleBackColor = true;
+            // 
+            // cbSGSortTeLessLevel
+            // 
+            this.cbSGSortTeLessLevel.AutoSize = true;
+            this.cbSGSortTeLessLevel.Location = new System.Drawing.Point(6, 98);
+            this.cbSGSortTeLessLevel.Name = "cbSGSortTeLessLevel";
+            this.cbSGSortTeLessLevel.Size = new System.Drawing.Size(216, 17);
+            this.cbSGSortTeLessLevel.TabIndex = 14;
+            this.cbSGSortTeLessLevel.Text = "Сначала раздачи найвысшего уровня";
+            this.cbSGSortTeLessLevel.UseVisualStyleBackColor = true;
             // 
             // numSGLevel
             // 
@@ -758,16 +766,6 @@
             this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
-            // 
-            // cbSGSortTeLessLevel
-            // 
-            this.cbSGSortTeLessLevel.AutoSize = true;
-            this.cbSGSortTeLessLevel.Location = new System.Drawing.Point(6, 98);
-            this.cbSGSortTeLessLevel.Name = "cbSGSortTeLessLevel";
-            this.cbSGSortTeLessLevel.Size = new System.Drawing.Size(216, 17);
-            this.cbSGSortTeLessLevel.TabIndex = 14;
-            this.cbSGSortTeLessLevel.Text = "Сначала раздачи найвысшего уровня";
-            this.cbSGSortTeLessLevel.UseVisualStyleBackColor = true;
             // 
             // FormSettings
             // 
