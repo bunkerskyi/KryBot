@@ -809,7 +809,6 @@ namespace KryBot
         public static string SteamGiftsLoadGroupGiveaways(Classes.Bot bot, List<SteamGifts.SgGiveaway> giveaways)
         {
             var nodesCount = 0;
-            int pages;
 
             var response = Web.Get("http://www.steamgifts.com", "/giveaways/search?type=group",
                 new List<Parameter>(), Generate.Cookies_SteamGifts(bot.SteamGiftsPhpSessId), new List<HttpHeader>(),
@@ -819,6 +818,7 @@ namespace KryBot
                 var htmlDoc = new HtmlDocument();
                 htmlDoc.LoadHtml(response.RestResponse.Content);
 
+                int pages;
                 try
                 {
                     pages =
@@ -1346,10 +1346,10 @@ namespace KryBot
             var response = Web.Get(giveaway.Link, "",
                 new List<Parameter>(), Generate.Cookies_SteamCompanion(phpsessid, userc, userid, usert),
                 new List<HttpHeader>(), useragent, proxy ?? "");
-            var htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(response.RestResponse.Content);
-            if (response.RestResponse.Content != "")
+            if (response != null)
             {
+                var htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(response.RestResponse.Content);
                 try
                 {
                     giveaway.Code =

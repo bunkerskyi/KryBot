@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -194,12 +195,12 @@ namespace KryBot
             if (giveaway.Token != null)
             {
                 var response = Post("http://www.steamgifts.com/", "/ajax.php",
-                    Generate.PostData_SteamGifts(giveaway.Token, giveaway.Code), new List<HttpHeader>(),
+                    Generate.PostData_SteamGifts(giveaway.Token, giveaway.Code, "entry_insert"), new List<HttpHeader>(),
                     Generate.Cookies_SteamGifts(bot.SteamGiftsPhpSessId), bot.UserAgent, bot.Proxy ?? "");
                 if (response != null)
                 {
                     var jsonresponse =
-                        JsonConvert.DeserializeObject<SteamGifts.JsonResponse>(response.RestResponse.Content);
+                        JsonConvert.DeserializeObject<SteamGifts.JsonResponseJoin>(response.RestResponse.Content);
                     if (jsonresponse.Type == "success")
                     {
                         bot.SteamGiftsPoint = jsonresponse.Points;
@@ -554,6 +555,41 @@ namespace KryBot
                 try
                 {
                     var result = GetVersionInGitHub(url);
+                    task.SetResult(result);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            });
+
+            return task.Task.Result;
+        }
+
+        public static Classes.Log SteamGiftsSyncAccount(Classes.Bot bot)
+        {
+            var response = Post("http://www.steamgifts.com/ajax.php", "ajax.php",
+                        Generate.PostData_SteamGifts(bot.GameMinerxsrf, "", "sync"), new List<HttpHeader>(), Generate.Cookies_SteamGifts(bot.SteamGiftsPhpSessId), "", "");
+            if (response != null)
+            {
+                var result = JsonConvert.DeserializeObject<SteamGifts.JsonResponseSyncAccount>(response.RestResponse.Content);
+                if (result.type == "success")
+                {
+                    return Tools.ConstructLog(result.msg, Color.Green, true, true);
+                }
+                return Tools.ConstructLog(result.msg, Color.Red, false, true);
+            }
+            return null;
+        }
+
+        public static async Task<Classes.Log> SteamGiftsSyncAccountAsync(Classes.Bot bot)
+        {
+            var task = new TaskCompletionSource<Classes.Log>();
+            await Task.Run(() =>
+            {
+                try
+                {
+                    var result = SteamGiftsSyncAccount(bot);
                     task.SetResult(result);
                 }
                 catch (Exception ex)

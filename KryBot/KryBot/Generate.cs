@@ -108,7 +108,7 @@ namespace KryBot
             return cookie;
         }
 
-        public static List<Parameter> PostData_SteamGifts(string xsrfToken, string code)
+        public static List<Parameter> PostData_SteamGifts(string xsrfToken, string code, string action)
         {
             var list = new List<Parameter>();
 
@@ -124,17 +124,20 @@ namespace KryBot
             {
                 Type = ParameterType.GetOrPost,
                 Name = "do",
-                Value = "entry_insert"
+                Value = action
             };
             list.Add(doParam);
 
-            var codeParam = new Parameter
+            if (code != "")
             {
-                Type = ParameterType.GetOrPost,
-                Name = "code",
-                Value = code
-            };
-            list.Add(codeParam);
+                var codeParam = new Parameter
+                {
+                    Type = ParameterType.GetOrPost,
+                    Name = "code",
+                    Value = code
+                };
+                list.Add(codeParam);
+            }
 
             return list;
         }

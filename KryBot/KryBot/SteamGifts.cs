@@ -1,4 +1,5 @@
-﻿namespace KryBot
+﻿
+namespace KryBot
 {
     public class SteamGifts
     {
@@ -12,11 +13,17 @@
             public string Link { get; set; }
         }
 
-        public class JsonResponse
+        public class JsonResponseJoin
         {
             public string Type { get; set; }
             public string EntryCount { get; set; }
             public int Points { get; set; }
+        }
+
+        public class JsonResponseSyncAccount
+        {
+            public string type { get; set; }
+            public string msg { get; set; }
         }
     }
 }
