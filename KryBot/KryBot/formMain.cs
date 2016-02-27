@@ -1054,7 +1054,7 @@ namespace KryBot
             var cookie = Tools.GetSessCookieInresponse(getLoginHref.Cookies, "steamtrade.info", "PHPSESSID");
 
             BrowserStart(location, "http://steamtrade.info/", "SteamTrade - Login", cookie,
-                Bot.SteamEnabled ? Generate.Cookies_Steam(Bot.SteamSessid, Bot.SteamLogin) : new CookieContainer());
+                Bot.SteamEnabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
             Tools.SaveProfile(Bot, "");
 
             toolStripStatusLabel1.Image = Resources.load;
@@ -1109,7 +1109,7 @@ namespace KryBot
         {
             btnSPLogin.Enabled = false;
             BrowserStart("http://steamportal.net/page/steam", "http://steamportal.net/", "SteamPortal - Login", "",
-                Bot.SteamEnabled ? Generate.Cookies_Steam(Bot.SteamSessid, Bot.SteamLogin) : new CookieContainer());
+                Bot.SteamEnabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
             Tools.SaveProfile(Bot, "");
 
             toolStripStatusLabel1.Image = Resources.load;
@@ -1155,7 +1155,7 @@ namespace KryBot
         {
             btnSCLogin.Enabled = false;
             BrowserStart("https://steamcompanion.com/login", "https://steamcompanion.com/", "SteamCompanion - Login", "",
-                Bot.SteamEnabled ? Generate.Cookies_Steam(Bot.SteamSessid, Bot.SteamLogin) : new CookieContainer());
+                Bot.SteamEnabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
             Tools.SaveProfile(Bot, "");
 
             toolStripStatusLabel1.Image = Resources.load;
@@ -1200,7 +1200,7 @@ namespace KryBot
         {
             btnSGLogin.Enabled = false;
             BrowserStart("http://www.steamgifts.com/?login", "http://www.steamgifts.com/", "SteamGifts - Login", "",
-                Bot.SteamEnabled ? Generate.Cookies_Steam(Bot.SteamSessid, Bot.SteamLogin) : new CookieContainer());
+                Bot.SteamEnabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
             Tools.SaveProfile(Bot, "");
 
             toolStripStatusLabel1.Image = Resources.load;
@@ -1246,7 +1246,7 @@ namespace KryBot
             btnGMLogin.Enabled = false;
             BrowserStart("http://gameminer.net/login/steam?backurl=http%3A%2F%2Fgameminer.net%2F%3Flang%3D" + Settings.Default.Lang + @"&agree=True",
                 "http://gameminer.net/?lang=" + Settings.Default.Lang, "GameMiner - Login", "",
-                Bot.SteamEnabled ? Generate.Cookies_Steam(Bot.SteamSessid, Bot.SteamLogin) : new CookieContainer());
+                Bot.SteamEnabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
             if (string.IsNullOrEmpty(Bot.UserAgent))
             {
                 Bot.UserAgent = Tools.UserAgent();

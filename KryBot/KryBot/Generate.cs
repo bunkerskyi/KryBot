@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Windows.Forms;
+using KryBot.Properties;
 using RestSharp;
 
 namespace KryBot
@@ -8,14 +10,14 @@ namespace KryBot
     internal class Generate
     {
         // Steam //
-        public static CookieContainer Cookies_Steam(string sessid, string login)
+        public static CookieContainer Cookies_Steam(Classes.Bot bot)
         {
             var cookie = new CookieContainer();
             var target = new Uri("http://steamcommunity.com/");
             try
             {
-                cookie.Add(new Cookie("sessionid", sessid) {Domain = target.Host});
-                cookie.Add(new Cookie("steamLogin", login) {Domain = target.Host});
+                cookie.Add(new Cookie("sessionid", bot.SteamSessid) {Domain = target.Host});
+                cookie.Add(new Cookie("steamLogin", bot.SteamLogin) {Domain = target.Host});
             }
             catch (CookieException)
             {
@@ -50,15 +52,15 @@ namespace KryBot
         // Steam //
 
         // GameMiner //
-        public static CookieContainer Cookies_GameMiner(string token, string xsrf, string lang)
+        public static CookieContainer Cookies_GameMiner(Classes.Bot bot)
         {
             var cookie = new CookieContainer();
             var target = new Uri("http://gameminer.net/");
             try
             {
-                cookie.Add(new Cookie("token", token) {Domain = target.Host});
-                cookie.Add(new Cookie("_xsrf", xsrf) {Domain = target.Host});
-                cookie.Add(new Cookie("lang", lang) {Domain = target.Host});
+                cookie.Add(new Cookie("token", bot.GameMinerToken) {Domain = target.Host});
+                cookie.Add(new Cookie("_xsrf", bot.GameMinerxsrf) {Domain = target.Host});
+                cookie.Add(new Cookie("lang", Settings.Default.Lang) {Domain = target.Host});
             }
             catch (Exception)
             {
@@ -93,13 +95,13 @@ namespace KryBot
         // GameMiner //
 
         // SteamGifts //
-        public static CookieContainer Cookies_SteamGifts(string phpSessId)
+        public static CookieContainer Cookies_SteamGifts(Classes.Bot bot)
         {
             var cookie = new CookieContainer();
             var target = new Uri("http://www.steamgifts.com/");
             try
             {
-                cookie.Add(new Cookie("PHPSESSID", phpSessId) {Domain = target.Host});
+                cookie.Add(new Cookie("PHPSESSID", bot.SteamGiftsPhpSessId) {Domain = target.Host});
             }
             catch (Exception)
             {
@@ -145,16 +147,16 @@ namespace KryBot
         // SteamGifts //
 
         // SteamCompanion //
-        public static CookieContainer Cookies_SteamCompanion(string phpSessId, string userc, string userid, string usert)
+        public static CookieContainer Cookies_SteamCompanion(Classes.Bot bot)
         {
             var cookie = new CookieContainer();
             var target = new Uri("https://steamcompanion.com/");
             try
             {
-                cookie.Add(new Cookie("PHPSESSID", phpSessId) {Domain = target.Host});
-                cookie.Add(new Cookie("userc", userc) {Domain = target.Host});
-                cookie.Add(new Cookie("userid", userid) {Domain = target.Host});
-                cookie.Add(new Cookie("usert", usert) {Domain = target.Host});
+                cookie.Add(new Cookie("PHPSESSID", bot.SteamCompanionPhpSessId) {Domain = target.Host});
+                cookie.Add(new Cookie("userc", bot.SteamCompanionUserC) {Domain = target.Host});
+                cookie.Add(new Cookie("userid", bot.SteamCompanionUserId) {Domain = target.Host});
+                cookie.Add(new Cookie("usert", bot.SteamCompanionUserT) {Domain = target.Host});
             }
             catch (Exception)
             {
@@ -205,13 +207,13 @@ namespace KryBot
         // SteamCompanion //
 
         // SteamPortal //
-        public static CookieContainer Cookies_SteamPortal(string phpSessId)
+        public static CookieContainer Cookies_SteamPortal(Classes.Bot bot)
         {
             var cookie = new CookieContainer();
             var target = new Uri("http://steamportal.net/");
             try
             {
-                cookie.Add(new Cookie("PHPSESSID", phpSessId) {Domain = target.Host});
+                cookie.Add(new Cookie("PHPSESSID", bot.SteamPortalPhpSessId) {Domain = target.Host});
             }
             catch (Exception)
             {
@@ -261,13 +263,13 @@ namespace KryBot
         // Steamportal //
 
         // GameAways //
-        public static CookieContainer Cookies_GameAways(string phpSessId)
+        public static CookieContainer Cookies_GameAways(Classes.Bot bot)
         {
             var cookie = new CookieContainer();
             var target = new Uri("http://www.gameaways.com/");
             try
             {
-                cookie.Add(new Cookie("ASP.NET_SessionId", phpSessId) {Domain = target.Host});
+                cookie.Add(new Cookie("ASP.NET_SessionId", bot.GameAwaysPhpSessId) {Domain = target.Host});
             }
             catch (Exception)
             {
@@ -317,17 +319,16 @@ namespace KryBot
         // GameAways //
 
         // SteamTrade //
-        public static CookieContainer Cookies_SteamTrade(string phpSessId, string dleUserId, string dlePassword,
-            string passHash)
+        public static CookieContainer Cookies_SteamTrade(Classes.Bot bot)
         {
             var cookie = new CookieContainer();
             var target = new Uri("http://steamtrade.info/");
             try
             {
-                cookie.Add(new Cookie("PHPSESSID", phpSessId) {Domain = target.Host});
-                cookie.Add(new Cookie("dle_user_id", dleUserId) {Domain = target.Host});
-                cookie.Add(new Cookie("dle_password", dlePassword) {Domain = target.Host});
-                cookie.Add(new Cookie("passhash", passHash) {Domain = target.Host});
+                cookie.Add(new Cookie("PHPSESSID", bot.SteamTradePhpSessId) {Domain = target.Host});
+                cookie.Add(new Cookie("dle_user_id", bot.SteamTradeDleUserId) {Domain = target.Host});
+                cookie.Add(new Cookie("dle_password", bot.SteamTradeDlePassword) {Domain = target.Host});
+                cookie.Add(new Cookie("passhash", bot.SteamTradePassHash) {Domain = target.Host});
             }
             catch (CookieException)
             {

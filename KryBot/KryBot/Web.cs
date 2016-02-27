@@ -150,7 +150,7 @@ namespace KryBot
             var response = Post("http://gameminer.net/",
                 "/giveaway/enter/" + giveaway.Id + "?" + (giveaway.IsSandbox ? "sandbox" : "coal") + "_page=" +
                 giveaway.Page, Generate.PostData_GameMiner(bot.GameMinerxsrf), new List<HttpHeader>(),
-                Generate.Cookies_GameMiner(bot.GameMinerToken, bot.GameMinerxsrf, "ru_RU"), bot.UserAgent,
+                Generate.Cookies_GameMiner(bot), bot.UserAgent,
                 bot.Proxy ?? "");
             try
             {
@@ -191,12 +191,12 @@ namespace KryBot
         public static Classes.Log SteamGiftsJoinGiveaway(Classes.Bot bot, SteamGifts.SgGiveaway giveaway)
         {
             Thread.Sleep(100);
-            giveaway = Parse.SteamGiftsGetJoinData(giveaway, bot.SteamGiftsPhpSessId, bot.UserAgent, bot.Proxy ?? "");
+            giveaway = Parse.SteamGiftsGetJoinData(giveaway, bot);
             if (giveaway.Token != null)
             {
                 var response = Post("http://www.steamgifts.com/", "/ajax.php",
                     Generate.PostData_SteamGifts(giveaway.Token, giveaway.Code, "entry_insert"), new List<HttpHeader>(),
-                    Generate.Cookies_SteamGifts(bot.SteamGiftsPhpSessId), bot.UserAgent, bot.Proxy ?? "");
+                    Generate.Cookies_SteamGifts(bot), bot.UserAgent, bot.Proxy ?? "");
                 if (response != null)
                 {
                     var jsonresponse =
@@ -244,10 +244,7 @@ namespace KryBot
         public static Classes.Log SteamCompanionJoinGiveaway(Classes.Bot bot, SteamCompanion.ScGiveaway giveaway)
         {
             Thread.Sleep(300);
-            var data = Parse.SteamCompanionGetJoinData(giveaway, bot.SteamCompanionPhpSessId, bot.SteamCompanionUserId,
-                bot.SteamCompanionUserC,
-                bot.SteamCompanionUserT, bot.UserAgent, bot.Name, bot.Proxy ?? "", bot.SteamSessid,
-                bot.SteamCompanionAutoJoin, bot.SteamLogin);
+            var data = Parse.SteamCompanionGetJoinData(giveaway, bot);
             if (data != null && data.Success)
             {
                 if (giveaway.Code != null)
@@ -262,8 +259,7 @@ namespace KryBot
 
                     var response = Post("https://steamcompanion.com", "/gifts/steamcompanion.php",
                         Generate.PostData_SteamCompanion(giveaway.Code), list,
-                        Generate.Cookies_SteamCompanion(bot.SteamCompanionPhpSessId, bot.SteamCompanionUserC,
-                            bot.SteamCompanionUserId, bot.SteamCompanionUserT), bot.UserAgent, bot.Proxy ?? "");
+                        Generate.Cookies_SteamCompanion(bot), bot.UserAgent, bot.Proxy ?? "");
 							
 					try
 					{
@@ -320,7 +316,7 @@ namespace KryBot
 
                 var response = Post("http://steamportal.net/", "page/join",
                     Generate.PostData_SteamPortal(giveaway.Code), list,
-                    Generate.Cookies_SteamPortal(bot.SteamPortalPhpSessId), bot.UserAgent, bot.Proxy ?? "");
+                    Generate.Cookies_SteamPortal(bot), bot.UserAgent, bot.Proxy ?? "");
                 if (response.RestResponse.Content.Contains("Joined already"))
                 {
                     bot.SteamPortalPoints = int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]);
@@ -367,7 +363,7 @@ namespace KryBot
 
                 var response = Get(giveaway.Link, "",
                     Generate.GetData_GameAways(giveaway.Id),
-                    Generate.Cookies_GameAways(bot.GameAwaysPhpSessId), list, bot.UserAgent, bot.Proxy ?? "");
+                    Generate.Cookies_GameAways(bot), list, bot.UserAgent, bot.Proxy ?? "");
                 var jsonresponse = JsonConvert.DeserializeObject<GameAways.JsonResponse>(response.RestResponse.Content);
                 if (response.RestResponse.Content != "")
                 {
@@ -402,13 +398,11 @@ namespace KryBot
         public static Classes.Log SteamTradeJoinGiveaway(Classes.Bot bot, SteamTrade.StGiveaway giveaway)
         {
             Thread.Sleep(100);
-            giveaway = Parse.SteamTradeGetJoinData(giveaway, bot.SteamTradePhpSessId, bot.UserAgent, bot.Name,
-                bot.Proxy ?? "", bot.SteamTradeDleUserId, bot.SteamTradeDlePassword, bot.SteamTradePassHash);
+            giveaway = Parse.SteamTradeGetJoinData(giveaway, bot);
             if (giveaway.LinkJoin != null)
             {
                 var response = Get("http://steamtrade.info", giveaway.LinkJoin, new List<Parameter>(),
-                    Generate.Cookies_SteamTrade(bot.SteamTradePhpSessId, bot.SteamTradeDleUserId,
-                        bot.SteamTradeDlePassword, bot.SteamTradePassHash),
+                    Generate.Cookies_SteamTrade(bot),
                     new List<HttpHeader>(), bot.UserAgent,
                     bot.Proxy);
                 if (response.RestResponse.StatusCode == HttpStatusCode.OK)
@@ -570,7 +564,7 @@ namespace KryBot
         {
 
             var xsrf = Get("http://www.steamgifts.com/account/profile/sync", "",
-                new List<Parameter>(), Generate.Cookies_SteamGifts(bot.SteamGiftsPhpSessId), new List<HttpHeader>(), "", "");
+                new List<Parameter>(), Generate.Cookies_SteamGifts(bot), new List<HttpHeader>(), "", "");
             if (xsrf != null)
             {
                 var htmlDoc = new HtmlAgilityPack.HtmlDocument();
@@ -597,7 +591,7 @@ namespace KryBot
 
                 var response = Post("http://www.steamgifts.com/", "ajax.php",
                     Generate.PostData_SteamGifts(xsrfToken, "", "sync"), headers,
-                    Generate.Cookies_SteamGifts(bot.SteamGiftsPhpSessId), "", "");
+                    Generate.Cookies_SteamGifts(bot), "", "");
                 if (response != null)
                 {
                     var result =
@@ -636,8 +630,7 @@ namespace KryBot
         public static Classes.Log SteamCompanionSyncAccount(Classes.Bot bot)
         {
             var response = Get("https://steamcompanion.com//settings/resync&success=true", "", new List<Parameter>(),
-                Generate.Cookies_SteamCompanion(bot.SteamCompanionPhpSessId, bot.SteamCompanionUserC,
-                    bot.SteamCompanionUserId, bot.SteamCompanionUserT), new List<HttpHeader>(), "", "");
+                Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(), "", "");
             if (response != null)
             {
                 return Tools.ConstructLog(Messages.GetDateTime() + "{SteamGifts} Success!", Color.Green, true, true);
