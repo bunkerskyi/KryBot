@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Schema;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -568,16 +569,48 @@ namespace KryBot
 
         public static Classes.Log SteamGiftsSyncAccount(Classes.Bot bot)
         {
-            var response = Post("http://www.steamgifts.com/ajax.php", "ajax.php",
-                        Generate.PostData_SteamGifts(bot.GameMinerxsrf, "", "sync"), new List<HttpHeader>(), Generate.Cookies_SteamGifts(bot.SteamGiftsPhpSessId), "", "");
-            if (response != null)
+
+            var xsrf = Get("http://www.steamgifts.com/account/profile/sync", "",
+                new List<Parameter>(), Generate.Cookies_SteamGifts(bot.SteamGiftsPhpSessId), new List<HttpHeader>(), "", "");
+            if (xsrf != null)
             {
-                var result = JsonConvert.DeserializeObject<SteamGifts.JsonResponseSyncAccount>(response.RestResponse.Content);
-                if (result.type == "success")
+                var htmlDoc = new HtmlAgilityPack.HtmlDocument();
+                htmlDoc.LoadHtml(xsrf.RestResponse.Content);
+
+                string xsrfToken;
+                try
                 {
-                    return Tools.ConstructLog(result.msg, Color.Green, true, true);
+                    xsrfToken =
+                        htmlDoc.DocumentNode.SelectSingleNode("//input[@name='xsrf_token']").Attributes["value"].Value;
                 }
-                return Tools.ConstructLog(result.msg, Color.Red, false, true);
+                catch (NullReferenceException)
+                {
+                    return null;
+                }
+
+                List<HttpHeader> headers = new List<HttpHeader>();
+                HttpHeader header = new HttpHeader
+                {
+                    Name = "X-Requested-With",
+                    Value = "XMLHttpRequest"
+                };
+                headers.Add(header);
+
+                var response = Post("http://www.steamgifts.com/", "ajax.php",
+                    Generate.PostData_SteamGifts(xsrfToken, "", "sync"), headers,
+                    Generate.Cookies_SteamGifts(bot.SteamGiftsPhpSessId), "", "");
+                if (response != null)
+                {
+                    var result =
+                        JsonConvert.DeserializeObject<SteamGifts.JsonResponseSyncAccount>(response.RestResponse.Content);
+                    if (result.type == "success")
+                    {
+                        return Tools.ConstructLog(Messages.GetDateTime() + "{SteamGifts} " + result.msg, Color.Green,
+                            true, true);
+                    }
+                    return Tools.ConstructLog(Messages.GetDateTime() + "{SteamGifts} " + result.msg, Color.Red, false,
+                        true);
+                }
             }
             return null;
         }
