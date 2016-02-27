@@ -13,7 +13,7 @@ namespace KryBot
         {
             var log = new Log
             {
-                Content = Application.ProductName + @" [" + Application.ProductVersion + @"]" + "\n",
+                Content = $"{Application.ProductName} [{Application.ProductVersion}] \n",
                 Color = Color.White
             };
             return log;
@@ -23,9 +23,7 @@ namespace KryBot
         {
             var log = new Log
             {
-                Content =
-                    GetDateTime() + strings.GetBotInConfig_Config + " '" + fileName + "' " +
-                    strings.GetBotInConfig_NotLoaded,
+                Content = $"{GetDateTime()}{strings.GetBotInConfig_Config} '{fileName}' {strings.GetBotInConfig_NotLoaded}",
                 Color = Color.Red
             };
             return log;
@@ -33,14 +31,14 @@ namespace KryBot
 
         public static string GetDateTime()
         {
-            return '[' + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToLongTimeString() + "] ";
+            return $"[{DateTime.Now.ToShortDateString()} {DateTime.Now.ToLongTimeString()}] ";
         }
 
         public static Log ProfileLoaded()
         {
             var log = new Log
             {
-                Content = GetDateTime() + strings.LoadProfile_Load + "\n",
+                Content = GetDateTime() + $"{strings.LoadProfile_Load}\n",
                 Color = Color.White
             };
             return log;
@@ -50,7 +48,7 @@ namespace KryBot
         {
             var log = new Log
             {
-                Content = GetDateTime() + strings.DllNotLoad + " '" + name + "' " + strings.DllNotLoad_1,
+                Content = GetDateTime() + $"{strings.DllNotLoad} '{name}' {strings.DllNotLoad_1}",
                 Color = Color.White
             };
             return log;
@@ -60,7 +58,7 @@ namespace KryBot
         {
             var log = new Log
             {
-                Content = GetDateTime() + strings.DoFarm_Start + "\n",
+                Content = GetDateTime() + $"{strings.DoFarm_Start}\n",
                 Color = Color.White
             };
             return log;
@@ -70,7 +68,7 @@ namespace KryBot
         {
             var log = new Log
             {
-                Content = GetDateTime() + strings.DoFarm_Finish + " за " + time + "\n",
+                Content = GetDateTime() + $"{strings.DoFarm_Finish} за {time}\n",
                 Color = Color.White
             };
             return log;
@@ -106,9 +104,9 @@ namespace KryBot
             var log = new Log
             {
                 Content =
-                    GetDateTime() + '{' + site + @"} " + strings.GiveawayJoined_Join + ' ' + '"' + name + '"' + ' ' +
-                    strings.GiveawayNotJoined_NotConfirmed
-                    + @" {" + message + '}' + "\n",
+                    GetDateTime() + "{" + site + "}" +
+                    $"{strings.GiveawayJoined_Join} '{name}' {strings.GiveawayNotJoined_NotConfirmed}" + @" {" + message +
+                    '}' + "\n",
                 Color = Color.Red
             };
             return log;
@@ -116,7 +114,7 @@ namespace KryBot
 
         public static Log GiveawayHaveWon(string site, int count)
         {
-            return ConstructLog(GetDateTime() + '{' + site + @"} " + strings.GiveawaysHaveWon + @" (" + count + ')',
+            return ConstructLog(GetDateTime() + "{" + site + @"} " + $"{strings.GiveawaysHaveWon} ({count})",
                 Color.Orange, true, true);
         }
 
