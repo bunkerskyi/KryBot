@@ -13,7 +13,6 @@ namespace KryBot
             public string Name { get; set; }
             public string UserAgent { get; set; }
             public string Vesion { get; set; }
-            public string Proxy { get; set; }
 
             // Steam //
             public bool SteamEnabled { get; set; }
