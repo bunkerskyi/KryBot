@@ -42,20 +42,34 @@ namespace KryBot_Updater
             string version = GetRemoteVersion();
             if (version != null)
             {
-                foreach (var asset in Release.assets)
+                if (Release.assets.Count != 0)
                 {
-                    if (asset.name.Contains("Portable"))
+                    foreach (var asset in Release.assets)
                     {
-                        UpdatePosition = Release.assets.IndexOf(asset);
+                        if (asset.name.Contains("Portable"))
+                        {
+                            UpdatePosition = Release.assets.IndexOf(asset);
+                        }
                     }
-                }
 
-                if (args.Length != 0)
-                {
-                    Console.WriteLine(strings.LocalVersion + @": " + args[0]);
-                    Console.WriteLine(strings.RemoteVersion + @": " + version);
-                    if (int.Parse(args[0].Replace(".", "")) <= int.Parse(version.Replace(".", "")))
+                    if (args.Length != 0)
                     {
+                        Console.WriteLine(strings.LocalVersion + @": " + args[0]);
+                        Console.WriteLine(strings.RemoteVersion + @": " + version);
+                        if (int.Parse(args[0].Replace(".", "")) <= int.Parse(version.Replace(".", "")))
+                        {
+                            GetRemoteFiles(Release.assets[UpdatePosition].browser_download_url);
+                            if (Unzip())
+                            {
+                                Console.WriteLine(strings.Start + @" KryBot.exe...");
+                                Process.Start("KryBot.exe");
+                                Console.WriteLine(@"KryBot.exe " + strings.Started);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine(strings.RemoteVersion + @": " + version);
                         GetRemoteFiles(Release.assets[UpdatePosition].browser_download_url);
                         if (Unzip())
                         {
@@ -65,20 +79,8 @@ namespace KryBot_Updater
                         }
                     }
                 }
-                else
-                {
-                    Console.WriteLine(strings.RemoteVersion + @": " + version);
-                    GetRemoteFiles(Release.assets[UpdatePosition].browser_download_url);
-                    if (Unzip())
-                    {
-                        Console.WriteLine(strings.Start + @" KryBot.exe...");
-                        Process.Start("KryBot.exe");
-                        Console.WriteLine(@"KryBot.exe " + strings.Started);
-                    }
-                }
             }
             Console.WriteLine(strings.Close);
-            Console.ReadKey();
             Application.Exit();
         }
 
