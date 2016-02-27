@@ -5,7 +5,6 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Schema;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -623,6 +622,37 @@ namespace KryBot
                 try
                 {
                     var result = SteamGiftsSyncAccount(bot);
+                    task.SetResult(result);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            });
+
+            return task.Task.Result;
+        }
+
+        public static Classes.Log SteamCompanionSyncAccount(Classes.Bot bot)
+        {
+            var response = Get("https://steamcompanion.com//settings/resync&success=true", "", new List<Parameter>(),
+                Generate.Cookies_SteamCompanion(bot.SteamCompanionPhpSessId, bot.SteamCompanionUserC,
+                    bot.SteamCompanionUserId, bot.SteamCompanionUserT), new List<HttpHeader>(), "", "");
+            if (response != null)
+            {
+                return Tools.ConstructLog(Messages.GetDateTime() + "{SteamGifts} Success!", Color.Green, true, true);
+            }
+            return Tools.ConstructLog(Messages.GetDateTime() + "{SteamGifts} Failed", Color.Red, false, true);
+        }
+
+        public static async Task<Classes.Log> SteamCompanionSyncAccountAsync(Classes.Bot bot)
+        {
+            var task = new TaskCompletionSource<Classes.Log>();
+            await Task.Run(() =>
+            {
+                try
+                {
+                    var result = SteamCompanionSyncAccount(bot);
                     task.SetResult(result);
                 }
                 catch (Exception ex)

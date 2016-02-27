@@ -1424,6 +1424,14 @@ namespace KryBot
                     LogBuffer = won;
                     LogChanged?.Invoke();
                 }
+
+                var async = await Web.SteamGiftsSyncAccountAsync(Bot);
+                if (async != null)
+                {
+                    LogBuffer = async;
+                    LogChanged?.Invoke();
+                }
+
                 btnSGLogin.Enabled = false;
                 btnSGLogin.Visible = false;
                 lblSGStatus.Text = @"Статус: " + strings.LoginSuccess;
@@ -1468,6 +1476,14 @@ namespace KryBot
                 btnSCLogin.Visible = false;
                 lblSCStatus.Text = @"Статус: " + strings.LoginSuccess;
                 BlockTabpage(tabPageSC, true);
+
+                var async = await Web.SteamCompanionSyncAccountAsync(Bot);
+                if (async != null)
+                {
+                    LogBuffer = async;
+                    LogChanged?.Invoke();
+                }
+
             }
             else
             {
