@@ -83,7 +83,7 @@ namespace KryBot
         // Steam //
 
         // GameMiner //
-        public static Classes.Log GameMinerGetProfile(Classes.Bot bot, bool echo)
+        public static Classes.Log GameMinerGetProfile(Classes.Bot bot, bool echo)   
         {
             try
             {
@@ -665,39 +665,44 @@ namespace KryBot
                         new List<Parameter>(), Generate.Cookies_SteamGifts(bot.SteamGiftsPhpSessId),
                         new List<HttpHeader>(),
                         bot.UserAgent, bot.Proxy ?? "");
-                    var htmlDoc = new HtmlDocument();
-                    htmlDoc.LoadHtml(response.RestResponse.Content);
-                    var pages =
-                        int.Parse(
-                            htmlDoc.DocumentNode.SelectSingleNode("//div[@class='pagination__navigation']/a[" +
-                                                                  (htmlDoc.DocumentNode.SelectNodes(
-                                                                      "//div[@class='pagination__navigation']/a")
-                                                                      .Count - 1) + "]").Attributes["data-page-number"]
-                                .Value);
-
-                    if (pages != 1)
+                    if (response != null)
                     {
-                        for (var i = 1; i < pages + 1; i++)
-                        {
-                            response = Web.Get("http://www.steamgifts.com", "/giveaways/search?page=" + (i + 1),
-                                new List<Parameter>(), Generate.Cookies_SteamGifts(bot.SteamGiftsPhpSessId),
-                                new List<HttpHeader>(),
-                                bot.UserAgent, bot.Proxy ?? "");
-                            htmlDoc = new HtmlDocument();
-                            htmlDoc.LoadHtml(response.RestResponse.Content);
+                        var htmlDoc = new HtmlDocument();
+                        htmlDoc.LoadHtml(response.RestResponse.Content);
+                        var pages =
+                            int.Parse(
+                                htmlDoc.DocumentNode.SelectSingleNode("//div[@class='pagination__navigation']/a[" +
+                                                                      (htmlDoc.DocumentNode.SelectNodes(
+                                                                          "//div[@class='pagination__navigation']/a")
+                                                                          .Count - 1) + "]").Attributes[
+                                                                              "data-page-number"]
+                                    .Value);
 
-                            var nodes =
-                                htmlDoc.DocumentNode.SelectNodes(
-                                    "//div[@class='widget-container']//div[2]//div[3]//div[@class='giveaway__row-outer-wrap']//div[@class='giveaway__row-inner-wrap']");
-                            pages =
-                                int.Parse(
-                                    htmlDoc.DocumentNode.SelectSingleNode("//div[@class='pagination__navigation']/a[" +
-                                                                          (htmlDoc.DocumentNode.SelectNodes(
-                                                                              "//div[@class='pagination__navigation']/a")
-                                                                              .Count - 1) + "]").Attributes[
-                                                                                  "data-page-number"]
-                                        .Value);
-                            SteamGiftsAddGiveaways(nodes, bot, giveaways);
+                        if (pages != 1)
+                        {
+                            for (var i = 1; i < pages + 1; i++)
+                            {
+                                response = Web.Get("http://www.steamgifts.com", "/giveaways/search?page=" + (i + 1),
+                                    new List<Parameter>(), Generate.Cookies_SteamGifts(bot.SteamGiftsPhpSessId),
+                                    new List<HttpHeader>(),
+                                    bot.UserAgent, bot.Proxy ?? "");
+                                htmlDoc = new HtmlDocument();
+                                htmlDoc.LoadHtml(response.RestResponse.Content);
+
+                                var nodes =
+                                    htmlDoc.DocumentNode.SelectNodes(
+                                        "//div[@class='widget-container']//div[2]//div[3]//div[@class='giveaway__row-outer-wrap']//div[@class='giveaway__row-inner-wrap']");
+                                pages =
+                                    int.Parse(
+                                        htmlDoc.DocumentNode.SelectSingleNode(
+                                            "//div[@class='pagination__navigation']/a[" +
+                                            (htmlDoc.DocumentNode.SelectNodes(
+                                                "//div[@class='pagination__navigation']/a")
+                                                .Count - 1) + "]").Attributes[
+                                                    "data-page-number"]
+                                            .Value);
+                                SteamGiftsAddGiveaways(nodes, bot, giveaways);
+                            }
                         }
                     }
                 }
@@ -809,32 +814,34 @@ namespace KryBot
             var response = Web.Get("http://www.steamgifts.com", "/giveaways/search?type=group",
                 new List<Parameter>(), Generate.Cookies_SteamGifts(bot.SteamGiftsPhpSessId), new List<HttpHeader>(),
                 bot.UserAgent, bot.Proxy ?? "");
-            var htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(response.RestResponse.Content);
+            if (response != null)
+            {
+                var htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(response.RestResponse.Content);
 
-            try
-            {
-                pages =
-                    int.Parse(
-                        htmlDoc.DocumentNode.SelectSingleNode("//div[@class='pagination__navigation']/a[" +
-                                                              (htmlDoc.DocumentNode.SelectNodes(
-                                                                  "//div[@class='pagination__navigation']/a")
-                                                                  .Count - 1) + "]").Attributes["data-page-number"]
-                            .Value);
-            }
-            catch (NullReferenceException)
-            {
-                pages = 1;
-            }
-
-            if (pages != 1)
-            {
-                for (var i = 1; i < pages + 1; i++)
+                try
                 {
-                    var nodes =
-                htmlDoc.DocumentNode.SelectNodes(
-                    "//div[@class='widget-container']//div[2]//div[3]//div[@class='giveaway__row-outer-wrap']//div[@class='giveaway__row-inner-wrap']");
                     pages =
+                        int.Parse(
+                            htmlDoc.DocumentNode.SelectSingleNode("//div[@class='pagination__navigation']/a[" +
+                                                                  (htmlDoc.DocumentNode.SelectNodes(
+                                                                      "//div[@class='pagination__navigation']/a")
+                                                                      .Count - 1) + "]").Attributes["data-page-number"]
+                                .Value);
+                }
+                catch (NullReferenceException)
+                {
+                    pages = 1;
+                }
+
+                if (pages != 1)
+                {
+                    for (var i = 1; i < pages + 1; i++)
+                    {
+                        var nodes =
+                            htmlDoc.DocumentNode.SelectNodes(
+                                "//div[@class='widget-container']//div[2]//div[3]//div[@class='giveaway__row-outer-wrap']//div[@class='giveaway__row-inner-wrap']");
+                        pages =
                             int.Parse(
                                 htmlDoc.DocumentNode.SelectSingleNode("//div[@class='pagination__navigation']/a[" +
                                                                       (htmlDoc.DocumentNode.SelectNodes(
@@ -842,16 +849,17 @@ namespace KryBot
                                                                           .Count - 1) + "]").Attributes[
                                                                               "data-page-number"]
                                     .Value);
-                    nodesCount += nodes?.Count ?? 0;
+                        nodesCount += nodes?.Count ?? 0;
+                        SteamGiftsAddGiveaways(nodes, bot, giveaways);
+                    }
+                }
+                else
+                {
+                    var nodes =
+                        htmlDoc.DocumentNode.SelectNodes(
+                            "//div[@class='widget-container']//div[2]//div[3]//div[@class='giveaway__row-outer-wrap']//div[@class='giveaway__row-inner-wrap']");
                     SteamGiftsAddGiveaways(nodes, bot, giveaways);
                 }
-            }
-            else
-            {
-                var nodes =
-                htmlDoc.DocumentNode.SelectNodes(
-                    "//div[@class='widget-container']//div[2]//div[3]//div[@class='giveaway__row-outer-wrap']//div[@class='giveaway__row-inner-wrap']");
-                SteamGiftsAddGiveaways(nodes, bot, giveaways);
             }
 
             return GetDateTime() + @"{SteamGifts} " + strings.ParseLoadGiveaways_FoundGiveAwaysInGroup + @": " +
@@ -954,17 +962,24 @@ namespace KryBot
                     Generate.Cookies_SteamCompanion(bot.SteamCompanionPhpSessId, bot.SteamCompanionUserC,
                         bot.SteamCompanionUserId, bot.SteamCompanionUserT),
                     new List<HttpHeader>(), bot.UserAgent, bot.Proxy ?? "");
-                var htmlDoc = new HtmlDocument();
-                htmlDoc.LoadHtml(response.RestResponse.Content);
+                if (response != null)
+                {
 
-                bot.SteamCompanionPoint =
-                    int.Parse(htmlDoc.DocumentNode.SelectSingleNode("//span[@class='points']").InnerText);
-                bot.SteamCompanionProfileLink =
-                    htmlDoc.DocumentNode.SelectSingleNode("//ul[@class='right']/li[1]/a[1]").Attributes["href"].Value;
-                return
-                    ConstructLog(
-                        GetDateTime() + @"{SteamCompanion} " + strings.ParseProfile_Points + @": " +
-                        bot.SteamCompanionPoint, Color.White, true, echo);
+                    var htmlDoc = new HtmlDocument();
+                    htmlDoc.LoadHtml(response.RestResponse.Content);
+
+                    bot.SteamCompanionPoint =
+                        int.Parse(htmlDoc.DocumentNode.SelectSingleNode("//span[@class='points']").InnerText);
+                    bot.SteamCompanionProfileLink =
+                        htmlDoc.DocumentNode.SelectSingleNode("//ul[@class='right']/li[1]/a[1]").Attributes["href"]
+                            .Value;
+                    return
+                        ConstructLog(
+                            GetDateTime() + @"{SteamCompanion} " + strings.ParseProfile_Points + @": " +
+                            bot.SteamCompanionPoint, Color.White, true, echo);
+                }
+                return ConstructLog(GetDateTime() + @"{SteamCompanion} " + strings.ParseProfile_LoginOrServerError,
+                    Color.Red, false, echo);
             }
             catch (Exception)
             {
@@ -998,26 +1013,29 @@ namespace KryBot
                 Generate.Cookies_SteamCompanion(bot.SteamCompanionPhpSessId, bot.SteamCompanionUserC,
                     bot.SteamCompanionUserId, bot.SteamCompanionUserT), new List<HttpHeader>(),
                 bot.UserAgent, bot.Proxy ?? "");
-            var htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(response.RestResponse.Content);
-
-            var nodes = htmlDoc.DocumentNode.SelectNodes("//table[@id='created_giveaway']/tbody/tr");
-
-            if (nodes != null)
+            if (response != null)
             {
-                for (var i = 0; i < nodes.Count; i++)
-                {
-                    var test = nodes[i].SelectSingleNode(".//input[@checked]");
-                    if (test != null)
-                    {
-                        nodes.Remove(nodes[i]);
-                        i--;
-                    }
-                }
+                var htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(response.RestResponse.Content);
 
-                if (nodes.Count > 0)
+                var nodes = htmlDoc.DocumentNode.SelectNodes("//table[@id='created_giveaway']/tbody/tr");
+
+                if (nodes != null)
                 {
-                    return GiveawayHaveWon("SteamCompanion", nodes.Count);
+                    for (var i = 0; i < nodes.Count; i++)
+                    {
+                        var test = nodes[i].SelectSingleNode(".//input[@checked]");
+                        if (test != null)
+                        {
+                            nodes.Remove(nodes[i]);
+                            i--;
+                        }
+                    }
+
+                    if (nodes.Count > 0)
+                    {
+                        return GiveawayHaveWon("SteamCompanion", nodes.Count);
+                    }
                 }
             }
             return null;
@@ -1068,55 +1086,61 @@ namespace KryBot
                         Generate.Cookies_SteamCompanion(bot.SteamCompanionPhpSessId, bot.SteamCompanionUserC,
                             bot.SteamCompanionUserId, bot.SteamCompanionUserT), new List<HttpHeader>(), bot.UserAgent,
                         bot.Proxy ?? "");
-                    var htmlDoc = new HtmlDocument();
-                    htmlDoc.LoadHtml(response.RestResponse.Content);
-
-                    try
+                    if (response != null)
                     {
+
+                        var htmlDoc = new HtmlDocument();
+                        htmlDoc.LoadHtml(response.RestResponse.Content);
+
                         try
-                        {
-                            pages =
-                                int.Parse(
-                                    htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]").Attributes["href"
-                                        ]
-                                        .Value
-                                        .Split('=')[1].Split('&')[0]);
-                        }
-                        catch (Exception)
-                        {
-                            pages =
-                                 int.Parse(
-                                     htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]").Attributes["href"
-                                         ]
-                                         .Value
-                                         .Split('=')[2]);
-                        }
-                    }
-                    catch (NullReferenceException)
-                    {
-                    }
-
-                    var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/a");
-                    if (nodes != null)
-                    {
-                        for (var j = 0; j < nodes.Count; j++)
                         {
                             try
                             {
-                                if (nodes[j].Attributes["style"].Value == "opacity: 0.5;")
-                                {
-                                    nodes.Remove(nodes[j]);
-                                    j--;
-                                }
+                                pages =
+                                    int.Parse(
+                                        htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]").Attributes[
+                                            "href"
+                                            ]
+                                            .Value
+                                            .Split('=')[1].Split('&')[0]);
                             }
-                            catch (NullReferenceException)
+                            catch (Exception)
                             {
+                                pages =
+                                    int.Parse(
+                                        htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]").Attributes[
+                                            "href"
+                                            ]
+                                            .Value
+                                            .Split('=')[2]);
                             }
                         }
-
-                        if (nodes.Count > 0)
+                        catch (NullReferenceException)
                         {
-                            SteamCompanionAddGiveaways(nodes, bot, giveaways);
+                        }
+
+                        var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/a");
+                        if (nodes != null)
+                        {
+                            for (var j = 0; j < nodes.Count; j++)
+                            {
+                                try
+                                {
+                                    if (nodes[j].Attributes["style"].Value == "opacity: 0.5;")
+                                    {
+                                        nodes.Remove(nodes[j]);
+                                        j--;
+                                    }
+                                }
+                                catch (NullReferenceException)
+                                {
+                                }
+                            }
+
+                            if (nodes.Count > 0)
+                            {
+                                SteamCompanionAddGiveaways(nodes, bot, giveaways);
+                            }
                         }
                     }
                 }
@@ -1168,45 +1192,43 @@ namespace KryBot
                     Generate.Cookies_SteamCompanion(bot.SteamCompanionPhpSessId, bot.SteamCompanionUserC,
                         bot.SteamCompanionUserId, bot.SteamCompanionUserT), new List<HttpHeader>(), bot.UserAgent,
                     bot.Proxy ?? "");
-                var htmlDoc = new HtmlDocument();
-                htmlDoc.LoadHtml(response.RestResponse.Content);
+                if (response != null)
+                {
+                    var htmlDoc = new HtmlDocument();
+                    htmlDoc.LoadHtml(response.RestResponse.Content);
 
-                try
-                {
-                    pages =
-                        int.Parse(
-                            htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]").Attributes["href"].Value
-                                .Split('=')[1]);
-                }
-                catch (NullReferenceException)
-                {
-
-                }
-                catch (FormatException)
-                {
-                    
-                }
-
-                var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/a");
-                if (nodes != null)
-                {
-                    for (var j = 0; j < nodes.Count; j++)
+                    try
                     {
-                        try
-                        {
-                            if (nodes[j].Attributes["style"].Value == "opacity: 0.5;")
-                            {
-                                nodes.Remove(nodes[j]);
-                                j--;
-                            }
-                        }
-                        catch (NullReferenceException)
-                        {
-
-                        }
+                        pages =
+                            int.Parse(
+                                htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]").Attributes["href"]
+                                    .Value
+                                    .Split('=')[1]);
                     }
-                    count += nodes.Count;
-                    SteamCompanionAddGiveaways(nodes, bot, giveaways);
+                    catch (NullReferenceException)
+                    {}
+                    catch (FormatException)
+                    {}
+
+                    var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/a");
+                    if (nodes != null)
+                    {
+                        for (var j = 0; j < nodes.Count; j++)
+                        {
+                            try
+                            {
+                                if (nodes[j].Attributes["style"].Value == "opacity: 0.5;")
+                                {
+                                    nodes.Remove(nodes[j]);
+                                    j--;
+                                }
+                            }
+                            catch (NullReferenceException)
+                            {}
+                        }
+                        count += nodes.Count;
+                        SteamCompanionAddGiveaways(nodes, bot, giveaways);
+                    }
                 }
             }
             return GetDateTime() + @"{SteamCompanion} " + strings.ParseLoadGiveaways_Found + ' ' + (giveaways.Count == 0 ? 0 : count) + ' ' +
@@ -1226,50 +1248,54 @@ namespace KryBot
                     Generate.Cookies_SteamCompanion(bot.SteamCompanionPhpSessId, bot.SteamCompanionUserC,
                         bot.SteamCompanionUserId, bot.SteamCompanionUserT), new List<HttpHeader>(), bot.UserAgent,
                     bot.Proxy ?? "");
-                var htmlDoc = new HtmlDocument();
-                htmlDoc.LoadHtml(response.RestResponse.Content);
+                if (response != null)
+                {
 
-                try
-                {
-                    pages =
-                        int.Parse(
-                            htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]").Attributes["href"].Value
-                                .Split('=')[1].Split('&')[0]);
-                }
-                catch (NullReferenceException)
-                {
-                }
-                catch (FormatException)
-                {
-                    Debug.WriteLine(
-                        htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]").Attributes["href"].Value
-                            .Split('=')[1].Split('&')[0]);
-                    pages =
-                        int.Parse(
-                            htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]").Attributes["href"].Value
-                                .Split('=')[2]);
-                    Debug.WriteLine(
-                        htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]").Attributes["href"].Value
-                            .Split('=')[2]);
-                }
+                    var htmlDoc = new HtmlDocument();
+                    htmlDoc.LoadHtml(response.RestResponse.Content);
 
-                var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/a");
-                for (var j = 0; j < nodes.Count; j++)
-                {
                     try
                     {
-                        if (nodes[j].Attributes["style"].Value == "opacity: 0.5;")
-                        {
-                            nodes.Remove(nodes[j]);
-                            j--;
-                        }
+                        pages =
+                            int.Parse(
+                                htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]").Attributes["href"]
+                                    .Value
+                                    .Split('=')[1].Split('&')[0]);
                     }
                     catch (NullReferenceException)
+                    {}
+                    catch (FormatException)
                     {
+                        Debug.WriteLine(
+                            htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]").Attributes["href"].Value
+                                .Split('=')[1].Split('&')[0]);
+                        pages =
+                            int.Parse(
+                                htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]").Attributes["href"]
+                                    .Value
+                                    .Split('=')[2]);
+                        Debug.WriteLine(
+                            htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]").Attributes["href"].Value
+                                .Split('=')[2]);
                     }
+
+                    var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/a");
+                    for (var j = 0; j < nodes.Count; j++)
+                    {
+                        try
+                        {
+                            if (nodes[j].Attributes["style"].Value == "opacity: 0.5;")
+                            {
+                                nodes.Remove(nodes[j]);
+                                j--;
+                            }
+                        }
+                        catch (NullReferenceException)
+                        {}
+                    }
+                    count += nodes.Count;
+                    SteamCompanionAddGiveaways(nodes, bot, giveaways);
                 }
-                count += nodes.Count;
-                SteamCompanionAddGiveaways(nodes, bot, giveaways);
             }
 
             return GetDateTime() + @"{SteamCompanion} " + strings.ParseLoadGiveaways_Found + ' ' + count + ' ' +
