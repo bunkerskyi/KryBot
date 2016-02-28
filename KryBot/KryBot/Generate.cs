@@ -91,6 +91,21 @@ namespace KryBot
             return list;
         }
 
+        public static List<Parameter> SyncPostData_GameMiner(string xsrf)
+        {
+            var list = new List<Parameter>();
+
+            var xsrfParam = new Parameter
+            {
+                Type = ParameterType.GetOrPost,
+                Name = "_xsrf",
+                Value = xsrf
+            };
+            list.Add(xsrfParam);
+
+            return list;
+        }
+
         // GameMiner //
 
         // SteamGifts //

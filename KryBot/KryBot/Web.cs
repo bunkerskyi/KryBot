@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using KryBot.lang;
 using Newtonsoft.Json;
 using RestSharp;
 
@@ -634,6 +635,44 @@ namespace KryBot
                 try
                 {
                     var result = SteamCompanionSyncAccount(bot);
+                    task.SetResult(result);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            });
+
+            return task.Task.Result;
+        }
+
+        public static Classes.Log GameMinerSyncAccount(Classes.Bot bot)
+        {
+            var response = Post("http://gameminer.net/account/sync", "",
+                    Generate.SyncPostData_GameMiner(bot.GameMinerxsrf), new List<HttpHeader>(), 
+                    Generate.Cookies_GameMiner(bot), bot.UserAgent);
+            if (response != null)
+            {
+                if (response.RestResponse.StatusCode == HttpStatusCode.OK)
+                {
+                    return Tools.ConstructLog($"{Messages.GetDateTime()}{{GameMiner}} Success", Color.Green,
+                        true, true);
+                }
+                return Tools.ConstructLog($"{Messages.GetDateTime()}{{GameMiner}} Failed", Color.Red, false,
+                    true);
+            }
+            return Tools.ConstructLog($"{Messages.GetDateTime()}{{GameMiner}} {strings.ParseProfile_LoginOrServerError}", Color.Red, false,
+                    true);
+        }
+
+        public static async Task<Classes.Log> GameMinerSyncAccountAsync(Classes.Bot bot)
+        {
+            var task = new TaskCompletionSource<Classes.Log>();
+            await Task.Run(() =>
+            {
+                try
+                {
+                    var result = GameMinerSyncAccount(bot);
                     task.SetResult(result);
                 }
                 catch (Exception ex)

@@ -1452,6 +1452,14 @@ namespace KryBot
                     LogBuffer = won;
                     LogChanged?.Invoke();
                 }
+
+                var async = await Web.GameMinerSyncAccountAsync(Bot);
+                if (async != null)
+                {
+                    LogBuffer = async;
+                    LogChanged?.Invoke();
+                }
+
                 btnGMLogin.Enabled = false;
                 btnGMLogin.Visible = false;
                 lblGMStatus.Text = @"Статус: " + strings.LoginSuccess;
