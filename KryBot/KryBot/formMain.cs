@@ -23,6 +23,7 @@ namespace KryBot
         public static List<SteamCompanion.ScGiveaway> ScGiveaways = new List<SteamCompanion.ScGiveaway>();
         public static List<SteamPortal.SpGiveaway> SpGiveaways = new List<SteamPortal.SpGiveaway>();
         public static List<SteamTrade.StGiveaway> StGiveaways = new List<SteamTrade.StGiveaway>();
+        public static string[] BlackList;
 
         public static bool Hided;
 
@@ -57,12 +58,6 @@ namespace KryBot
             }
         }
 
-        private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = new FormSettings(Bot);
-            form.ShowDialog();
-        }
-
         private async void FormMain_Load(object sender, EventArgs e)
         {
             if (Settings.Default.FirstExecute)
@@ -84,6 +79,7 @@ namespace KryBot
             LoadProfilesInfo += ShowProfileInfo;
             LogActive = Settings.Default.LogActive;
             Design();
+            BlackList = Tools.LoadBlackList();
 
             if (LoadProfile())
             {
@@ -375,7 +371,7 @@ namespace KryBot
                         }
                     }
 
-                    var giveaways = await Parse.GameMinerLoadGiveawaysAsync(Bot, GmGiveaways);
+                    var giveaways = await Parse.GameMinerLoadGiveawaysAsync(Bot, GmGiveaways, BlackList);
                     if (giveaways != null && giveaways.Content != "\n")
                     {
                         LogBuffer = giveaways;
@@ -383,7 +379,7 @@ namespace KryBot
                     }
 
                     if (GmGiveaways?.Count > 0)
-                    {
+                    { 
                         if (Settings.Default.Sort)
                         {
                             if (Settings.Default.SortToMore)
@@ -461,7 +457,7 @@ namespace KryBot
 
                     if (Bot.SteamGiftsPoint > 0)
                     {
-                        var giveaways = await Parse.SteamGiftsLoadGiveawaysAsync(Bot, SgGiveaways);
+                        var giveaways = await Parse.SteamGiftsLoadGiveawaysAsync(Bot, SgGiveaways, BlackList);
                         if (giveaways != null && giveaways.Content != "\n")
                         {
                             LogBuffer = giveaways;
@@ -550,7 +546,7 @@ namespace KryBot
 
                     if (Bot.SteamCompanionPoint > 0)
                     {
-                        var giveaways = await Parse.SteamCompanionLoadGiveawaysAsync(Bot, ScGiveaways);
+                        var giveaways = await Parse.SteamCompanionLoadGiveawaysAsync(Bot, ScGiveaways, BlackList);
                         if (giveaways != null && giveaways.Content != "\n")
                         {
                             LogBuffer = giveaways;
@@ -632,7 +628,7 @@ namespace KryBot
 
                     if (Bot.SteamPortalPoints > 0)
                     {
-                        var giveaways = await Parse.SteamPortalLoadGiveawaysAsync(Bot, SpGiveaways);
+                        var giveaways = await Parse.SteamPortalLoadGiveawaysAsync(Bot, SpGiveaways, BlackList);
                         if (giveaways != null && giveaways.Content != "\n")
                         {
                             LogBuffer = giveaways;
@@ -707,7 +703,7 @@ namespace KryBot
                     //    LogChanged?.Invoke();
                     //}
 
-                    var giveaways = await Parse.SteamTradeLoadGiveawaysAsync(Bot, StGiveaways);
+                    var giveaways = await Parse.SteamTradeLoadGiveawaysAsync(Bot, StGiveaways, BlackList);
                     if (giveaways != null && giveaways.Content != "\n")
                     {
                         LogBuffer = giveaways;
@@ -2014,6 +2010,19 @@ namespace KryBot
         private void вПапкуСБотомToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("explorer", Environment.CurrentDirectory);
+        }
+
+        private void черныйСписокToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormBlackList form = new FormBlackList();
+            form.ShowDialog();
+            BlackList = Tools.LoadBlackList();
+        }
+
+        private void настройкиToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var form = new FormSettings(Bot);
+            form.ShowDialog();
         }
     }
 }

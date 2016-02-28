@@ -200,7 +200,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log GameMinerLoadGiveaways(Classes.Bot bot, List<GameMiner.GmGiveaway> giveaways)
+        public static Classes.Log GameMinerLoadGiveaways(Classes.Bot bot, List<GameMiner.GmGiveaway> giveaways, string[] blackList)
         {
             try
             {
@@ -467,6 +467,19 @@ namespace KryBot
                             content + GetDateTime() + @"{GameMiner} " + strings.ParseLoadGiveaways_FoundMatchGiveaways +
                             @": " + 0, Color.White, true, true);
                 }
+
+                for (int i = 0; i < giveaways.Count; i++)
+                {
+                    foreach (var id in blackList)
+                    {
+                        if (giveaways[i].StoreId == id)
+                        {
+                            giveaways.Remove(giveaways[i]);
+                            i--;
+                        }
+                    }
+                }
+
                 return
                     ConstructLog(
                         content + GetDateTime() + @"{GameMiner} " + strings.ParseLoadGiveaways_FoundMatchGiveaways +
@@ -479,14 +492,14 @@ namespace KryBot
         }
 
         public static async Task<Classes.Log> GameMinerLoadGiveawaysAsync(Classes.Bot bot,
-            List<GameMiner.GmGiveaway> giveaways)
+            List<GameMiner.GmGiveaway> giveaways, string[] blackList)
         {
             var task = new TaskCompletionSource<Classes.Log>();
             await Task.Run(() =>
             {
                 try
                 {
-                    var result = GameMinerLoadGiveaways(bot, giveaways);
+                    var result = GameMinerLoadGiveaways(bot, giveaways, blackList);
                     task.SetResult(result);
                 }
                 catch (Exception ex)
@@ -648,7 +661,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamGiftsLoadGiveaways(Classes.Bot bot, List<SteamGifts.SgGiveaway> giveaways)
+        public static Classes.Log SteamGiftsLoadGiveaways(Classes.Bot bot, List<SteamGifts.SgGiveaway> giveaways, string[] blackList)
         {
             try
             {
@@ -720,6 +733,19 @@ namespace KryBot
                             content + GetDateTime() + @"{SteamGifts} " + strings.ParseLoadGiveaways_FoundMatchGiveaways +
                             @": " + 0, Color.White, true, true);
                 }
+
+                for (int i = 0; i < giveaways.Count; i++)
+                {
+                    foreach (var id in blackList)
+                    {
+                        if (giveaways[i].StoreId == id)
+                        {
+                            giveaways.Remove(giveaways[i]);
+                            i--;
+                        }
+                    }
+                }
+
                 return
                     ConstructLog(
                         content + GetDateTime() + @"{SteamGifts} " + strings.ParseLoadGiveaways_FoundMatchGiveaways +
@@ -735,14 +761,14 @@ namespace KryBot
         }
 
         public static async Task<Classes.Log> SteamGiftsLoadGiveawaysAsync(Classes.Bot bot,
-            List<SteamGifts.SgGiveaway> giveaways)
+            List<SteamGifts.SgGiveaway> giveaways, string[] blackList)
         {
             var task = new TaskCompletionSource<Classes.Log>();
             await Task.Run(() =>
             {
                 try
                 {
-                    var result = SteamGiftsLoadGiveaways(bot, giveaways);
+                    var result = SteamGiftsLoadGiveaways(bot, giveaways, blackList);
                     task.SetResult(result);
                 }
                 catch (Exception ex)
@@ -1063,7 +1089,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamCompanionLoadGiveaways(Classes.Bot bot, List<SteamCompanion.ScGiveaway> giveaways)
+        public static Classes.Log SteamCompanionLoadGiveaways(Classes.Bot bot, List<SteamCompanion.ScGiveaway> giveaways, string[] blackList)
         {
             var content = "";
             giveaways?.Clear();
@@ -1154,6 +1180,19 @@ namespace KryBot
                         content + GetDateTime() + @"{SteamCompanion} " + strings.ParseLoadGiveaways_FoundMatchGiveaways +
                         @": " + 0, Color.White, true, true);
             }
+
+            //for (int i = 0; i < giveaways.Count; i++)
+            //{
+            //    foreach (var id in blackList)
+            //    {
+            //        if (giveaways[i].StoreId == id)
+            //        {
+            //            giveaways.Remove(giveaways[i]);
+            //            i--;
+            //        }
+            //    }
+            //}
+
             return
                 ConstructLog(
                     content + GetDateTime() + @"{SteamCompanion} " + strings.ParseLoadGiveaways_FoundMatchGiveaways +
@@ -1161,14 +1200,14 @@ namespace KryBot
         }
 
         public static async Task<Classes.Log> SteamCompanionLoadGiveawaysAsync(Classes.Bot bot,
-            List<SteamCompanion.ScGiveaway> giveaways)
+            List<SteamCompanion.ScGiveaway> giveaways, string[] blackList)
         {
             var task = new TaskCompletionSource<Classes.Log>();
             await Task.Run(() =>
             {
                 try
                 {
-                    var result = SteamCompanionLoadGiveaways(bot, giveaways);
+                    var result = SteamCompanionLoadGiveaways(bot, giveaways, blackList);
                     task.SetResult(result);
                 }
                 catch (Exception ex)
@@ -1503,7 +1542,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamPortalLoadGiveaways(Classes.Bot bot, List<SteamPortal.SpGiveaway> giveaways)
+        public static Classes.Log SteamPortalLoadGiveaways(Classes.Bot bot, List<SteamPortal.SpGiveaway> giveaways, string[] blackList)
         {
             try
             {
@@ -1560,6 +1599,19 @@ namespace KryBot
                             0,
                             Color.White, true, true);
                 }
+
+                for (int i = 0; i < giveaways.Count; i++)
+                {
+                    foreach (var id in blackList)
+                    {
+                        if (giveaways[i].StoreId == id)
+                        {
+                            giveaways.Remove(giveaways[i]);
+                            i--;
+                        }
+                    }
+                }
+
                 return
                     ConstructLog(
                         GetDateTime() + @"{SteamPortal} " + strings.ParseLoadGiveaways_FoundMatchGiveaways + @": " +
@@ -1572,14 +1624,14 @@ namespace KryBot
         }
 
         public static async Task<Classes.Log> SteamPortalLoadGiveawaysAsync(Classes.Bot bot,
-            List<SteamPortal.SpGiveaway> giveaways)
+            List<SteamPortal.SpGiveaway> giveaways, string[] blackList)
         {
             var task = new TaskCompletionSource<Classes.Log>();
             await Task.Run(() =>
             {
                 try
                 {
-                    var result = SteamPortalLoadGiveaways(bot, giveaways);
+                    var result = SteamPortalLoadGiveaways(bot, giveaways, blackList);
                     task.SetResult(result);
                 }
                 catch (Exception ex)
@@ -1707,7 +1759,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamTradeLoadGiveaways(Classes.Bot bot, List<SteamTrade.StGiveaway> giveaways)
+        public static Classes.Log SteamTradeLoadGiveaways(Classes.Bot bot, List<SteamTrade.StGiveaway> giveaways, string[] blackList)
         {
             try
             {
@@ -1730,6 +1782,19 @@ namespace KryBot
                             0,
                             Color.White, true, true);
                 }
+
+                for (int i = 0; i < giveaways.Count; i++)
+                {
+                    foreach (var id in blackList)
+                    {
+                        if (giveaways[i].StoreId == id)
+                        {
+                            giveaways.Remove(giveaways[i]);
+                            i--;
+                        }
+                    }
+                }
+
                 return
                     ConstructLog(
                         GetDateTime() + @"{SteamTrade} " + strings.ParseLoadGiveaways_FoundMatchGiveaways + @": " +
@@ -1742,14 +1807,14 @@ namespace KryBot
         }
 
         public static async Task<Classes.Log> SteamTradeLoadGiveawaysAsync(Classes.Bot bot,
-            List<SteamTrade.StGiveaway> giveaways)
+            List<SteamTrade.StGiveaway> giveaways, string[] blackList)
         {
             var task = new TaskCompletionSource<Classes.Log>();
             await Task.Run(() =>
             {
                 try
                 {
-                    var result = SteamTradeLoadGiveaways(bot, giveaways);
+                    var result = SteamTradeLoadGiveaways(bot, giveaways, blackList);
                     task.SetResult(result);
                 }
                 catch (Exception ex)

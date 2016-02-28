@@ -107,6 +107,12 @@
     <Compile Include="formAbout.Designer.cs">
       <DependentUpon>formAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="formBlackList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formBlackList.Designer.cs">
+      <DependentUpon>formBlackList.cs</DependentUpon>
+    </Compile>
     <Compile Include="formCookie.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formAbout.resx">
       <DependentUpon>formAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formBlackList.resx">
+      <DependentUpon>formBlackList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formCookie.resx">
       <DependentUpon>formCookie.cs</DependentUpon>
@@ -290,6 +299,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\KryBot_Updater.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blocked.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

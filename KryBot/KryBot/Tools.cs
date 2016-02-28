@@ -290,5 +290,23 @@ namespace KryBot
                 return false;
             }
         }
+
+        public static string[] LoadBlackList()
+        {
+            if (File.Exists("blacklist.txt"))
+            {
+                try
+                {
+                    return File.ReadAllLines("blacklist.txt");
+                            
+                }
+                catch (IOException ex)
+                {
+                    MessageBox.Show(@"Ошибка", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return null;
+                }
+            }
+            return null;
+        }
     }
 }

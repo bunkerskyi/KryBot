@@ -447,7 +447,7 @@
             this.cbSGSortTeLessLevel.Name = "cbSGSortTeLessLevel";
             this.cbSGSortTeLessLevel.Size = new System.Drawing.Size(216, 17);
             this.cbSGSortTeLessLevel.TabIndex = 14;
-            this.cbSGSortTeLessLevel.Text = "Сначала раздачи найвысшего уровня";
+            this.cbSGSortTeLessLevel.Text = "Сначала раздачи наивысшего уровня";
             this.cbSGSortTeLessLevel.UseVisualStyleBackColor = true;
             // 
             // numSGLevel
