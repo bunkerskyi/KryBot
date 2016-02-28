@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Windows.Forms;
 using KryBot.Properties;
 using RestSharp;
 
@@ -165,7 +164,7 @@ namespace KryBot
             return cookie;
         }
 
-        public static List<Parameter> PostData_SteamCompanion(string giftId)
+        public static List<Parameter> PostData_SteamCompanion(string hashId)
         {
             var list = new List<Parameter>();
 
@@ -180,8 +179,8 @@ namespace KryBot
             var codeParam = new Parameter
             {
                 Type = ParameterType.GetOrPost,
-                Name = "giftID",
-                Value = giftId
+                Name = "hashID",
+                Value = hashId
             };
             list.Add(codeParam);
 

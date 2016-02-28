@@ -476,6 +476,7 @@ namespace KryBot
                         {
                             giveaways.Remove(giveaways[i]);
                             i--;
+                            break;
                         }
                     }
                 }
@@ -742,6 +743,7 @@ namespace KryBot
                         {
                             giveaways.Remove(giveaways[i]);
                             i--;
+                            break;
                         }
                     }
                 }
@@ -1189,6 +1191,7 @@ namespace KryBot
             //        {
             //            giveaways.Remove(giveaways[i]);
             //            i--;
+            //            break;
             //        }
             //    }
             //}
@@ -1390,7 +1393,7 @@ namespace KryBot
                         htmlDoc.DocumentNode.SelectSingleNode("//a[@class='banner large-5 columns']").Attributes["href"
                             ].Value.Split('/')[4];
                     giveaway.Code =
-                        htmlDoc.DocumentNode.SelectSingleNode("//input[@name='giftID']").Attributes["value"].Value;
+                        htmlDoc.DocumentNode.SelectSingleNode($"//div[@data-points='{giveaway.Price}']").Attributes["data-hashid"].Value;
                     return ConstructLog("", Color.AliceBlue, true, false);
                 }
                 catch (NullReferenceException)
@@ -1608,6 +1611,7 @@ namespace KryBot
                         {
                             giveaways.Remove(giveaways[i]);
                             i--;
+                            break;
                         }
                     }
                 }
@@ -1791,6 +1795,7 @@ namespace KryBot
                         {
                             giveaways.Remove(giveaways[i]);
                             i--;
+                            break;
                         }
                     }
                 }
