@@ -453,6 +453,11 @@
             // numSGLevel
             // 
             this.numSGLevel.Location = new System.Drawing.Point(183, 74);
+            this.numSGLevel.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             this.numSGLevel.Name = "numSGLevel";
             this.numSGLevel.Size = new System.Drawing.Size(27, 20);
             this.numSGLevel.TabIndex = 13;

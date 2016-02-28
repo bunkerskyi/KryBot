@@ -1103,7 +1103,7 @@ namespace KryBot
             toolStripStatusLabel1.Text = @"Авторизация";
             var login = await CheckLoginSt();
             if (login)
-            {
+            {                                
                 //var won = await Parse.GameMinerSteamTradeWonParseAsync(Bot);
                 //if (won != null && won.Content != "\n")
                 //{
@@ -1116,15 +1116,21 @@ namespace KryBot
                 lblSTStatus.Text = @"Статус: " + strings.LoginSuccess;
                 LoadProfilesInfo?.Invoke();
                 btnStart.Enabled = true;
+                pbSTreload.Visible = true;
+                btnSTExit.Visible = true;
+                btnSTExit.Enabled = true;
+                cbSTEnable.Checked = true;
+                Bot.SteamTradeEnabled = true;
+
                 LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + "{SteamTrade} " + strings.LoginSuccess,
                     Color.Green, true, true);
                 LogChanged?.Invoke();
-                pbSTreload.Visible = true;
-                btnSTExit.Visible = true;
+
                 var st = await Parse.SteamTradeGetProfileAsync(Bot, true);
                 LogBuffer = st;
                 LogChanged?.Invoke();
                 LoadProfilesInfo?.Invoke();
+
             }
             else
             {
@@ -1172,11 +1178,16 @@ namespace KryBot
                 lblSPStatus.Text = @"Статус: " + strings.LoginSuccess;
                 LoadProfilesInfo?.Invoke();
                 btnStart.Enabled = true;
+                pbSPReload.Visible = true;
+                btnSPExit.Visible = true;
+                btnSPExit.Enabled = true;
+                cbSPEnable.Checked = true;
+                Bot.SteamPortalEnabled = true;
+
                 LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + "{SteamPortal} " + strings.LoginSuccess,
                     Color.Green, true, true);
                 LogChanged?.Invoke();
-                pbSPReload.Visible = true;
-                btnSPExit.Visible = true;
+
                 var sp = await Parse.SteamPortalGetProfileAsync(Bot, true);
                 LogBuffer = sp;
                 LogChanged?.Invoke();
@@ -1217,11 +1228,16 @@ namespace KryBot
                 lblSCStatus.Text = @"Статус: " + strings.LoginSuccess;
                 LoadProfilesInfo?.Invoke();
                 btnStart.Enabled = true;
+                pbSCReload.Visible = true;
+                btnSCExit.Visible = true;
+                btnSCExit.Enabled = true;
+                cbSCEnable.Checked = true;
+                Bot.SteamCompanionEnabled = true;
+
                 LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + "{SteamCompanion} " + strings.LoginSuccess,
                     Color.Green, true, true);
                 LogChanged?.Invoke();
-                pbSCReload.Visible = true;
-                btnSCExit.Visible = true;
+
                 var sc = await Parse.SteamCompanionGetProfileAsync(Bot, true);
                 LogBuffer = sc;
                 LogChanged?.Invoke();
@@ -1262,11 +1278,16 @@ namespace KryBot
                 lblSGStatus.Text = @"Статус: " + strings.LoginSuccess;
                 LoadProfilesInfo?.Invoke();
                 btnStart.Enabled = true;
+                pbSGReload.Visible = true;
+                btnSGExit.Visible = true;
+                btnSGExit.Enabled = true;
+                cbSGEnable.Checked = true;
+                Bot.SteamGiftsEnabled = true;
+
                 LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + "{SteamGifts} " + strings.LoginSuccess,
                     Color.Green, true, true);
                 LogChanged?.Invoke();
-                pbSGReload.Visible = true;
-                btnSGExit.Visible = true;
+
                 var sg = await Parse.SteamGiftsGetProfileAsync(Bot, true);
                 LogBuffer = sg;
                 LogChanged?.Invoke();
@@ -1312,11 +1333,16 @@ namespace KryBot
                 lblGMStatus.Text = @"Статус: " + strings.LoginSuccess;
                 LoadProfilesInfo?.Invoke();
                 btnStart.Enabled = true;
+                pbGMReload.Visible = true;
+                btnGMExit.Visible = true;
+                btnGMExit.Enabled = true;
+                cbGMEnable.Checked = true;
+                Bot.GameMinerEnabled = true;
+
                 LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + "{GameMiner} " + strings.LoginSuccess,
                     Color.Green, true, true);
                 LogChanged?.Invoke();
-                pbGMReload.Visible = true;
-                btnGMExit.Visible = true;
+
                 var gm = await Parse.GameMinerGetProfileAsync(Bot, Bot.GameMinerEnabled);
                 LogBuffer = gm;
                 LogChanged?.Invoke();
@@ -1405,6 +1431,7 @@ namespace KryBot
 
         private async void pbGMReload_Click(object sender, EventArgs e)
         {
+            btnGMExit.Enabled = false;
             pbGMReload.Image = Resources.load;
             toolStripStatusLabel1.Text = @"Обновление информации о GameMiner";
             toolStripStatusLabel1.Image = Resources.load;
@@ -1442,10 +1469,12 @@ namespace KryBot
             toolStripStatusLabel1.Image = null;
             pbGMReload.Image = Resources.refresh;
             toolStripStatusLabel1.Text = @"Завершено";
+            btnGMExit.Enabled = true;
         }
 
         private async void pbSGReload_Click(object sender, EventArgs e)
         {
+            btnGMExit.Enabled = false;
             pbSGReload.Image = Resources.load;
             toolStripStatusLabel1.Text = @"Обновление информации о SteamGifts";
             toolStripStatusLabel1.Image = Resources.load;
@@ -1490,10 +1519,12 @@ namespace KryBot
             toolStripStatusLabel1.Image = null;
             pbSGReload.Image = Resources.refresh;
             toolStripStatusLabel1.Text = @"Завершено";
+            btnGMExit.Enabled = true;
         }
 
         private async void pbSCReload_Click(object sender, EventArgs e)
         {
+            btnGMExit.Enabled = false;
             pbSCReload.Image = Resources.load;
             toolStripStatusLabel1.Text = @"Обновление информации о SteamCompanion";
             toolStripStatusLabel1.Image = Resources.load;
@@ -1538,10 +1569,12 @@ namespace KryBot
             toolStripStatusLabel1.Image = null;
             pbSCReload.Image = Resources.refresh;
             toolStripStatusLabel1.Text = @"Завершено";
+            btnGMExit.Enabled = true;
         }
 
         private async void pbSPReload_Click(object sender, EventArgs e)
         {
+            btnGMExit.Enabled = false;
             pbSPReload.Image = Resources.load;
             toolStripStatusLabel1.Text = @"Обновление информации о SteamPortal";
             toolStripStatusLabel1.Image = Resources.load;
@@ -1572,10 +1605,12 @@ namespace KryBot
             toolStripStatusLabel1.Image = null;
             pbSPReload.Image = Resources.refresh;
             toolStripStatusLabel1.Text = @"Завершено";
+            btnGMExit.Enabled = true;
         }
 
         private async void pbSTreload_Click(object sender, EventArgs e)
         {
+            btnGMExit.Enabled = false;
             pbSTreload.Image = Resources.load;
             toolStripStatusLabel1.Text = @"Обновление информации о SteamTrade";
             toolStripStatusLabel1.Image = Resources.load;
@@ -1606,6 +1641,7 @@ namespace KryBot
             toolStripStatusLabel1.Image = null;
             pbSTreload.Image = Resources.refresh;
             toolStripStatusLabel1.Text = @"Завершено";
+            btnGMExit.Enabled = true;
         }
 
         private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -1793,11 +1829,21 @@ namespace KryBot
                 BlockTabpage(tabPageSteam, true);
                 btnSteamLogin.Enabled = false;
                 btnSteamLogin.Visible = false;
+
                 lblSteamStatus.Text = @"Статус: " + strings.LoginSuccess;
                 LoadProfilesInfo?.Invoke();
+
                 LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + "{Steam} " + strings.LoginSuccess, Color.Green,
                     true, true);
                 LogChanged?.Invoke();
+
+                var steam = await Parse.SteamGetProfileAsync(Bot, Bot.SteamEnabled);
+                if (steam.Echo)
+                {
+                    LogBuffer = steam;
+                    LogChanged?.Invoke();
+                }
+                LoadProfilesInfo?.Invoke();
             }
             else
             {

@@ -235,14 +235,14 @@
             this.донатToolStripMenuItem});
             this.оПрограммеToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("оПрограммеToolStripMenuItem.Image")));
             this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
-            this.оПрограммеToolStripMenuItem.Text = "Информация";
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(130, 20);
+            this.оПрограммеToolStripMenuItem.Text = "Информация       ";
             // 
             // статстикаToolStripMenuItem
             // 
             this.статстикаToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("статстикаToolStripMenuItem.Image")));
             this.статстикаToolStripMenuItem.Name = "статстикаToolStripMenuItem";
-            this.статстикаToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.статстикаToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.статстикаToolStripMenuItem.Text = "Статистика";
             this.статстикаToolStripMenuItem.Click += new System.EventHandler(this.статстикаToolStripMenuItem_Click);
             // 
@@ -250,7 +250,7 @@
             // 
             this.оПрограммеToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("оПрограммеToolStripMenuItem1.Image")));
             this.оПрограммеToolStripMenuItem1.Name = "оПрограммеToolStripMenuItem1";
-            this.оПрограммеToolStripMenuItem1.Size = new System.Drawing.Size(149, 22);
+            this.оПрограммеToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.оПрограммеToolStripMenuItem1.Text = "О программе";
             this.оПрограммеToolStripMenuItem1.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem1_Click);
             // 
@@ -258,7 +258,7 @@
             // 
             this.донатToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("донатToolStripMenuItem.Image")));
             this.донатToolStripMenuItem.Name = "донатToolStripMenuItem";
-            this.донатToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.донатToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.донатToolStripMenuItem.Text = "Донат";
             this.донатToolStripMenuItem.Click += new System.EventHandler(this.донатToolStripMenuItem_Click);
             // 
