@@ -104,9 +104,7 @@ namespace KryBot
             var log = new Log
             {
                 Content =
-                    GetDateTime() + "{" + site + "}" +
-                    $"{strings.GiveawayJoined_Join} '{name}' {strings.GiveawayNotJoined_NotConfirmed}" + @" {" + message +
-                    '}' + "\n",
+                    $"{GetDateTime()}{{{site} {strings.GiveawayJoined_Join} '{name}' {strings.GiveawayNotJoined_NotConfirmed} {{{message}}}\n",
                 Color = Color.Red
             };
             return log;

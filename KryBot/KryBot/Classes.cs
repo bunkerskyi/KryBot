@@ -110,7 +110,7 @@ namespace KryBot
 
         public class Settings
         {
-            public bool LogActive { get; set; } = true;
+            public bool LogActive { get; set; }
             public string Lang { get; set; }
             public bool Sort { get; set; }
             public bool SortToMore { get; set; }
