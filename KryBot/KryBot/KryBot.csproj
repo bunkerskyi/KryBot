@@ -26,7 +26,7 @@
     <MinimumRequiredVersion>1.0.11.0</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.1.0.0</ApplicationVersion>
+    <ApplicationVersion>1.1.4.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -298,10 +298,10 @@
     <None Include="Resources\wallet.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\KryBot_Updater.exe" />
+    <None Include="Resources\blocked.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\blocked.png" />
+    <Content Include="Resources\KryBot_Updater.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
