@@ -142,21 +142,27 @@ namespace KryBot
                 "/giveaway/enter/" + giveaway.Id + "?" + (giveaway.IsSandbox ? "sandbox" : "coal") + "_page=" +
                 giveaway.Page, Generate.PostData_GameMiner(bot.GameMinerxsrf), new List<HttpHeader>(),
                 Generate.Cookies_GameMiner(bot), bot.UserAgent);
-            try
+            if (response != null)
             {
-                var jsonresponse = JsonConvert.DeserializeObject<GameMiner.JsonResponse>(response.RestResponse.Content);
-                if (jsonresponse.Status == "ok")
+                try
                 {
-                    bot.GameMinerCoal = jsonresponse.Coal;
-                    return Messages.GiveawayJoined("GameMiner", giveaway.Name, giveaway.Price, jsonresponse.Coal, 0);
+                    var jsonresponse =
+                        JsonConvert.DeserializeObject<GameMiner.JsonResponse>(response.RestResponse.Content);
+                    if (jsonresponse.Status == "ok")
+                    {
+                        bot.GameMinerCoal = jsonresponse.Coal;
+                        return Messages.GiveawayJoined("GameMiner", giveaway.Name, giveaway.Price, jsonresponse.Coal, 0);
+                    }
+                    var jresponse =
+                        JsonConvert.DeserializeObject<GameMiner.JsonResponseError>(response.RestResponse.Content);
+                    return Messages.GiveawayNotJoined("GameMiner", giveaway.Name, jresponse.Error.Message);
                 }
-                var jresponse = JsonConvert.DeserializeObject<GameMiner.JsonResponseError>(response.RestResponse.Content);
-                return Messages.GiveawayNotJoined("GameMiner", giveaway.Name, jresponse.Error.Message);
+                catch (JsonReaderException)
+                {
+                    return Messages.GiveawayNotJoined("GameMiner", giveaway.Name, response.RestResponse.Content);
+                }
             }
-            catch (JsonReaderException)
-            {
-                return Messages.GiveawayNotJoined("GameMiner", giveaway.Name, response.RestResponse.Content);
-            }
+            return Messages.GiveawayNotJoined("GameMiner", giveaway.Name, "Content is empty");
         }
 
         public static async Task<Classes.Log> GameMinerJoinGiveawayAsync(Classes.Bot bot, GameMiner.GmGiveaway giveaway)

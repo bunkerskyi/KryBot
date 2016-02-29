@@ -1412,7 +1412,7 @@ namespace KryBot
                                 Generate.Cookies_Steam(bot), new List<HttpHeader>(), bot.UserAgent);
                             if (result)
                             {
-                                return GroupJoined(trueGroupUrl.RestResponse.ResponseUri.AbsoluteUri);
+                               return GroupJoined(trueGroupUrl.RestResponse.ResponseUri.AbsoluteUri);
                             }
                             return GroupNotJoinde(trueGroupUrl.RestResponse.ResponseUri.AbsoluteUri);
                         }
