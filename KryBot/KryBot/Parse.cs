@@ -591,17 +591,6 @@ namespace KryBot
             }
             catch (Exception)
             {
-                var error = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='notification notification--warning']");
-
-                if (error != null)
-                {
-                    bot.SteamGiftsEnabled = false;
-                    bot.SteamGiftsPhpSessId = "";
-                    SaveProfile(bot, "");
-                    return ConstructLog(GetDateTime() + @"{SteamGifts} " + strings.AccountNotActive,
-                    Color.Red, false, echo);
-                }
-
                 return ConstructLog(GetDateTime() + @"{SteamGifts} " + strings.ParseProfile_LoginOrServerError,
                     Color.Red, false, echo);
             }
