@@ -1319,21 +1319,28 @@ namespace KryBot
                     }
 
                     var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/a");
-                    for (var j = 0; j < nodes.Count; j++)
+                    if (nodes != null)
                     {
-                        try
+                        for (var j = 0; j < nodes.Count; j++)
                         {
-                            if (nodes[j].Attributes["style"].Value == "opacity: 0.5;")
+                            try
                             {
-                                nodes.Remove(nodes[j]);
-                                j--;
+                                if (nodes[j].Attributes["style"].Value == "opacity: 0.5;")
+                                {
+                                    nodes.Remove(nodes[j]);
+                                    j--;
+                                }
+                            }
+                            catch (NullReferenceException)
+                            {
                             }
                         }
-                        catch (NullReferenceException)
-                        {}
+                        count += nodes.Count;
+                        if (nodes.Count > 0)
+                        {
+                            SteamCompanionAddGiveaways(nodes, bot, giveaways);
+                        }
                     }
-                    count += nodes.Count;
-                    SteamCompanionAddGiveaways(nodes, bot, giveaways);
                 }
             }
 
