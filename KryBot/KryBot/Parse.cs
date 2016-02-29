@@ -1394,6 +1394,8 @@ namespace KryBot
                             ].Value.Split('/')[4];
                     giveaway.Code =
                         htmlDoc.DocumentNode.SelectSingleNode($"//div[@data-points='{giveaway.Price}']").Attributes["data-hashid"].Value;
+                    var giftId =
+                        htmlDoc.DocumentNode.SelectSingleNode("//input[@name='giftID']").Attributes["value"].Value;
                     return ConstructLog("", Color.AliceBlue, true, false);
                 }
                 catch (NullReferenceException)
