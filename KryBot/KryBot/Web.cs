@@ -628,9 +628,9 @@ namespace KryBot
                 Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(), bot.UserAgent);
             if (response != null)
             {
-                return Tools.ConstructLog(Messages.GetDateTime() + "{SteamGifts} Success!", Color.Green, true, true);
+                return Tools.ConstructLog(Messages.GetDateTime() + "{SteamCompanion} Success!", Color.Green, true, true);
             }
-            return Tools.ConstructLog(Messages.GetDateTime() + "{SteamGifts} Failed", Color.Red, false, true);
+            return Tools.ConstructLog(Messages.GetDateTime() + "{SteamCompanion} Failed", Color.Red, false, true);
         }
 
         public static async Task<Classes.Log> SteamCompanionSyncAccountAsync(Classes.Bot bot)
