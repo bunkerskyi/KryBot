@@ -151,22 +151,31 @@ namespace KryBot
             var htmlDoc = new HtmlDocument();
             htmlDoc.LoadHtml(response.RestResponse.Content);
 
-            var nodes = htmlDoc.DocumentNode.SelectNodes("//tbody[@class='giveaways__giveaways']//td[@class='valign-middle m-table-state-finished']");
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//tbody[@class='giveaways__giveaways']/tr");
 
             if (nodes != null)
             {
-                for (int i = 0; i < nodes.Count; i++)
+                foreach (var node in nodes)
                 {
-                    if (!nodes[i].InnerText.Contains("требует подтверждения") && !nodes[i].InnerText.Contains("to be confirmed"))
-                    {
-                        nodes.Remove(nodes[i]);
-                        i--;
-                    }
-                }
+                    var test = node.SelectNodes(".//td[@class='valign-middle m-table-state-finished']");
 
-                if (nodes.Count > 0)
-                {
-                    return GiveawayHaveWon("GameMiner", nodes.Count);
+                    if (test != null)
+                    {
+                        for (var i = 0; i < test.Count; i++)
+                        {
+                            if (test[i].InnerText == "Закончена\n\n" || test[i].InnerText == "Приз выслан победителю")
+                            {
+                                test.Remove(test[i]);
+                                i--;
+                            }
+                        }
+
+                        if (test.Count > 0)
+                        {
+                            return GiveawayHaveWon("GameMiner", test.Count);
+                        }
+                        return null;
+                    }
                 }
             }
             return null;
