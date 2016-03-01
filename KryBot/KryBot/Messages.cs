@@ -118,7 +118,7 @@ namespace KryBot
 
         public static Log GroupJoined(string url)
         {
-            return ConstructLog(strings.SteamGroupJoined + " {" + url + '}', Color.Yellow, true, true);
+            return ConstructLog(strings.SteamGroupJoined + " {" + url + '}', Color.Yellow, false, true);
         }
 
         public static Log GroupNotJoinde(string url)
