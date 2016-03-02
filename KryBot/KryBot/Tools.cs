@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Security;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using Microsoft.Win32;
@@ -307,6 +308,31 @@ namespace KryBot
                 }
             }
             return null;
+        }
+
+        public static bool CheckMd5(string localPath, string embeddedPath)
+        {
+            byte[] localFile;
+            byte[] embeddedFile;
+
+            using (var md5 = MD5.Create())
+            {
+                using (var stream = File.OpenRead(localPath))
+                {
+                    localFile = md5.ComputeHash(stream);
+                }
+
+                using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(embeddedPath))
+                {
+                    embeddedFile = md5.ComputeHash(stream);
+                }
+            }
+
+            if (localFile == embeddedFile)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

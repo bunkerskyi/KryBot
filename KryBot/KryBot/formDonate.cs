@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using KryBot.Properties;
@@ -32,6 +33,11 @@ namespace KryBot
             textBoxYandex.ReadOnly = true;
             textBoxPayPal.Text = @"kribetko@gmail.com";
             textBoxPayPal.ReadOnly = true;
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://steamcommunity.com/tradeoffer/new/?partner=107171644&token=eSC3IOi7");
         }
     }
 }

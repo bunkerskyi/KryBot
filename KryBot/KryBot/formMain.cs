@@ -1960,8 +1960,17 @@ namespace KryBot
                         {
                             if (File.Exists("KryBot_Updater.exe"))
                             {
-                                Process.Start("KryBot_Updater.exe", Application.ProductVersion);
-                                Application.Exit();
+                                if (Tools.CheckMd5("KryBot_Updater.exe", "KryBot.Resources.KryBot_Updater.exe"))
+                                {
+                                    Process.Start("KryBot_Updater.exe", Application.ProductVersion);
+                                    Application.Exit();
+                                }
+                                else
+                                {
+                                    Tools.CopyResource("KryBot.Resources.KryBot_Updater.exe", Application.StartupPath + "\\KryBot_Updater.exe");
+                                    Process.Start("KryBot_Updater.exe", Application.ProductVersion);
+                                    Application.Exit();
+                                }
                             }
                             else
                             {

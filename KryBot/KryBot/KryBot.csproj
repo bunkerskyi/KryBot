@@ -301,7 +301,7 @@
     <None Include="Resources\blocked.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\KryBot_Updater.exe" />
+    <EmbeddedResource Include="Resources\KryBot_Updater.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
