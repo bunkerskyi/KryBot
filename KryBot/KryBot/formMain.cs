@@ -164,11 +164,6 @@ namespace KryBot
                 }
                 else
                 {
-                    LogBuffer =
-                        Tools.ConstructLog(
-                            Messages.GetDateTime() + "Пропуск попытки фарма. Предыдущий цикл фарма еше не окончен.",
-                            Color.Red, false, true);
-                    LogChanged?.Invoke();
                     _timer.Stop();
                     _timerTickCount.Stop();
                     btnStart.Text = @"Старт";
@@ -211,7 +206,6 @@ namespace KryBot
                             Color.Red, false, true);
                     LogChanged?.Invoke();
                     btnStart.Text = @"Старт";
-                    btnStart.Enabled = true;
                 }
             }
         }
@@ -755,6 +749,7 @@ namespace KryBot
             toolStripStatusLabel1.Image = null;
             toolStripStatusLabel1.Text = @"Завершено";
             _farming = false;
+            btnStart.Enabled = true;
 
             Settings.Default.JoinsLoops += 1;
             Settings.Default.JoinsLoopsTotal += 1;
