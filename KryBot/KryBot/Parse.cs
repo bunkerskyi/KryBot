@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -516,6 +515,7 @@ namespace KryBot
                         {
                             break;
                         }
+
                         if (lot.Price > bot.GameMinerCoal || lot.Price > bot.GameMinerJoinCoalLimit)
                         {
                             break;
@@ -527,6 +527,12 @@ namespace KryBot
                         lot.IsGolden = giveaway.Golden;
                         lot.Page = json.Page;
                         lot.Price = giveaway.Price;
+
+                        if (giveaway.regionlock_type_id != null)
+                        {
+                            lot.Region = giveaway.regionlock_type_id;
+                        }
+
                         if (giveaway.Game.Url != "javascript:void(0);")
                         {
                             lot.StoreId = giveaway.Game.Url.Split('/')[4];
@@ -920,6 +926,13 @@ namespace KryBot
                         catch (NullReferenceException)
                         {}
 
+                        try
+                        {
+                            sgGiveaway.Region = node.SelectSingleNode(".//a[@title='Region Restricted']")
+                                .Attributes["href"].Value.Split('/')[2];
+                        }
+                        catch (NullReferenceException) { }
+
                         if (sgGiveaway.Price <= bot.SteamGiftsPoint && sgGiveaway.Price <= bot.SteamGiftsJoinPointLimit && sgGiveaway.Level >= bot.SteamGiftsMinLevel)
                         {
                             giveaways?.Add(sgGiveaway);
@@ -1285,17 +1298,11 @@ namespace KryBot
                     {}
                     catch (FormatException)
                     {
-                        Debug.WriteLine(
-                            htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]").Attributes["href"].Value
-                                .Split('=')[1].Split('&')[0]);
                         pages =
                             int.Parse(
                                 htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]").Attributes["href"]
                                     .Value
                                     .Split('=')[2]);
-                        Debug.WriteLine(
-                            htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]").Attributes["href"].Value
-                                .Split('=')[2]);
                     }
 
                     var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/a");
@@ -1352,6 +1359,17 @@ namespace KryBot
                                             .Length - 1]),
                             Link = node.Attributes["href"].Value
                         };
+
+                        try
+                        {
+                            var region = node.SelectSingleNode(".//span[@class='icon-region']");
+                            if (region != null)
+                            {
+                                scGiveaway.Region = true;
+                            }
+                        }
+                        catch (NullReferenceException)
+                        {}
 
                         if (scGiveaway.Price <= bot.SteamCompanionPoint && scGiveaway.Price <= bot.SteamCompanionJoinPointLimit)
                         {
@@ -1660,14 +1678,32 @@ namespace KryBot
                                 .Split(',')[0].Remove(
                                     node.SelectSingleNode(".//div[@class='ga_coin_join']").Attributes["onclick"].Value
                                         .Split(':')[1].Split(',')[0].Length - 1);
+
+                            try
+                            {
+                                var iconsBlock = node.SelectSingleNode(".//div[@class='giveaway_iconbar']");
+                                var icons = iconsBlock.SelectNodes(".//span");
+                                if (icons != null)
+                                {
+                                    foreach (var icon in icons)
+                                    {
+                                        if (icon.Attributes["class"].Value.Contains("region"))
+                                        {
+                                            spGiveaway.Region = icon.Attributes["class"].Value.Split('-')[1];
+                                        }     
+                                    }   
+                                }
+                            }
+                            catch (NullReferenceException)
+                            {}
                             if (spGiveaway.Price <= bot.SteamPortalPoints && spGiveaway.Price <= bot.SteamPortalMaxJoinValue)
                             {
                                 giveaways?.Add(spGiveaway);
                             }
                         }
                         catch (NullReferenceException)
-                        {
-                        }
+                        {}
+
                     }
                     catch (NullReferenceException)
                     {
