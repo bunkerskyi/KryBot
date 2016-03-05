@@ -92,6 +92,15 @@ namespace KryBot
             public string SteamTradeDlePassword { get; set; }
             public string SteamTradePassHash { get; set; }
             // SteamTrade //
+
+            // PlayBlink //
+            public bool PlayBlinkEnabled { get; set; }
+            public string PlayBlinkPhpSessId { get; set; }
+            public int PlayBlinkPoints { get; set; }
+            public int PlayBlinkLevel { get; set; }
+            public int PlayBlinkMaxJoinValue { get; set; } = 50;
+            public int PlayBlinkPointReserv { get; set; } = 0;
+            // PlayBlink //
         }
 
         public class Response

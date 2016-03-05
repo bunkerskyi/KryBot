@@ -376,5 +376,49 @@ namespace KryBot
         }
 
         // Steamtrade //
+
+        // PlayBlink //
+        public static CookieContainer Cookies_PlayBlink(Classes.Bot bot)
+        {
+            var cookie = new CookieContainer();
+            var target = new Uri("http://playblink.com/");
+            try
+            {
+                cookie.Add(new Cookie("PHPSESSID", bot.PlayBlinkPhpSessId) { Domain = target.Host });
+                cookie.Add(new Cookie("entry", "1") { Domain = target.Host });
+                cookie.Add(new Cookie("level", bot.PlayBlinkLevel.ToString()) { Domain = target.Host });
+                cookie.Add(new Cookie("order", "2") { Domain = target.Host });
+                cookie.Add(new Cookie("ppage", "100") { Domain = target.Host });
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            return cookie;
+        }
+
+        public static List<Parameter> PostData_PlayBlink(string game)
+        {
+            var list = new List<Parameter>();
+
+            var doParam = new Parameter
+            {
+                Type = ParameterType.GetOrPost,
+                Name = "do",
+                Value = "blink"
+            };
+            list.Add(doParam);
+
+            var gameParam = new Parameter
+            {
+                Type = ParameterType.GetOrPost,
+                Name = "game",
+                Value = game
+            };
+            list.Add(gameParam);
+
+            return list;
+        }
+        // PlayBlink //
     }
 }

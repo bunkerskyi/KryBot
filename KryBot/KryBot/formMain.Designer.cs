@@ -93,6 +93,15 @@
             this.lblSTPoints = new System.Windows.Forms.Label();
             this.lblSTLevel = new System.Windows.Forms.Label();
             this.btnSTLogin = new System.Windows.Forms.Button();
+            this.tabPagePB = new System.Windows.Forms.TabPage();
+            this.btnPBExit = new System.Windows.Forms.Button();
+            this.btnPBLogin = new System.Windows.Forms.Button();
+            this.pbPBRefresh = new System.Windows.Forms.PictureBox();
+            this.cbPBEnabled = new System.Windows.Forms.CheckBox();
+            this.linkLabel7 = new System.Windows.Forms.LinkLabel();
+            this.lblPBStatus = new System.Windows.Forms.Label();
+            this.lblPBPoints = new System.Windows.Forms.Label();
+            this.lblPBLevel = new System.Windows.Forms.Label();
             this.tabPageSteam = new System.Windows.Forms.TabPage();
             this.btnSteamExit = new System.Windows.Forms.Button();
             this.btnSteamLogin = new System.Windows.Forms.Button();
@@ -117,6 +126,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbSPReload)).BeginInit();
             this.tabPageST.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSTreload)).BeginInit();
+            this.tabPagePB.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPBRefresh)).BeginInit();
             this.tabPageSteam.SuspendLayout();
             this.toolStripMenuItem_Main.SuspendLayout();
             this.SuspendLayout();
@@ -242,7 +253,7 @@
             // 
             this.статстикаToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("статстикаToolStripMenuItem.Image")));
             this.статстикаToolStripMenuItem.Name = "статстикаToolStripMenuItem";
-            this.статстикаToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.статстикаToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.статстикаToolStripMenuItem.Text = "Статистика";
             this.статстикаToolStripMenuItem.Click += new System.EventHandler(this.статстикаToolStripMenuItem_Click);
             // 
@@ -250,7 +261,7 @@
             // 
             this.оПрограммеToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("оПрограммеToolStripMenuItem1.Image")));
             this.оПрограммеToolStripMenuItem1.Name = "оПрограммеToolStripMenuItem1";
-            this.оПрограммеToolStripMenuItem1.Size = new System.Drawing.Size(220, 22);
+            this.оПрограммеToolStripMenuItem1.Size = new System.Drawing.Size(149, 22);
             this.оПрограммеToolStripMenuItem1.Text = "О программе";
             this.оПрограммеToolStripMenuItem1.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem1_Click);
             // 
@@ -258,7 +269,7 @@
             // 
             this.донатToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("донатToolStripMenuItem.Image")));
             this.донатToolStripMenuItem.Name = "донатToolStripMenuItem";
-            this.донатToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.донатToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.донатToolStripMenuItem.Text = "Поддержать";
             this.донатToolStripMenuItem.Click += new System.EventHandler(this.донатToolStripMenuItem_Click);
             // 
@@ -277,6 +288,7 @@
             this.tabControl1.Controls.Add(this.tabPageSC);
             this.tabControl1.Controls.Add(this.tabPageSP);
             this.tabControl1.Controls.Add(this.tabPageST);
+            this.tabControl1.Controls.Add(this.tabPagePB);
             this.tabControl1.Controls.Add(this.tabPageSteam);
             this.tabControl1.Location = new System.Drawing.Point(4, 27);
             this.tabControl1.Name = "tabControl1";
@@ -771,6 +783,102 @@
             this.btnSTLogin.UseVisualStyleBackColor = true;
             this.btnSTLogin.Click += new System.EventHandler(this.btnSTLogin_Click);
             // 
+            // tabPagePB
+            // 
+            this.tabPagePB.Controls.Add(this.btnPBExit);
+            this.tabPagePB.Controls.Add(this.btnPBLogin);
+            this.tabPagePB.Controls.Add(this.pbPBRefresh);
+            this.tabPagePB.Controls.Add(this.cbPBEnabled);
+            this.tabPagePB.Controls.Add(this.linkLabel7);
+            this.tabPagePB.Controls.Add(this.lblPBStatus);
+            this.tabPagePB.Controls.Add(this.lblPBPoints);
+            this.tabPagePB.Controls.Add(this.lblPBLevel);
+            this.tabPagePB.Location = new System.Drawing.Point(4, 22);
+            this.tabPagePB.Name = "tabPagePB";
+            this.tabPagePB.Size = new System.Drawing.Size(334, 61);
+            this.tabPagePB.TabIndex = 6;
+            this.tabPagePB.Text = "PB";
+            this.tabPagePB.UseVisualStyleBackColor = true;
+            // 
+            // btnPBExit
+            // 
+            this.btnPBExit.Location = new System.Drawing.Point(134, 19);
+            this.btnPBExit.Name = "btnPBExit";
+            this.btnPBExit.Size = new System.Drawing.Size(75, 23);
+            this.btnPBExit.TabIndex = 32;
+            this.btnPBExit.Text = "Выход";
+            this.btnPBExit.UseVisualStyleBackColor = true;
+            this.btnPBExit.Click += new System.EventHandler(this.btnPBExit_Click);
+            // 
+            // btnPBLogin
+            // 
+            this.btnPBLogin.Location = new System.Drawing.Point(134, 19);
+            this.btnPBLogin.Name = "btnPBLogin";
+            this.btnPBLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnPBLogin.TabIndex = 31;
+            this.btnPBLogin.Text = "Логин";
+            this.btnPBLogin.UseVisualStyleBackColor = true;
+            this.btnPBLogin.Click += new System.EventHandler(this.btnPBLogin_Click);
+            // 
+            // pbPBRefresh
+            // 
+            this.pbPBRefresh.Image = ((System.Drawing.Image)(resources.GetObject("pbPBRefresh.Image")));
+            this.pbPBRefresh.Location = new System.Drawing.Point(314, 42);
+            this.pbPBRefresh.Name = "pbPBRefresh";
+            this.pbPBRefresh.Size = new System.Drawing.Size(16, 16);
+            this.pbPBRefresh.TabIndex = 30;
+            this.pbPBRefresh.TabStop = false;
+            this.pbPBRefresh.Click += new System.EventHandler(this.pbPBRefresh_Click);
+            // 
+            // cbPBEnabled
+            // 
+            this.cbPBEnabled.AutoSize = true;
+            this.cbPBEnabled.Checked = true;
+            this.cbPBEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbPBEnabled.Location = new System.Drawing.Point(315, 3);
+            this.cbPBEnabled.Name = "cbPBEnabled";
+            this.cbPBEnabled.Size = new System.Drawing.Size(15, 14);
+            this.cbPBEnabled.TabIndex = 29;
+            this.cbPBEnabled.UseVisualStyleBackColor = true;
+            // 
+            // linkLabel7
+            // 
+            this.linkLabel7.AutoSize = true;
+            this.linkLabel7.Location = new System.Drawing.Point(6, 42);
+            this.linkLabel7.Name = "linkLabel7";
+            this.linkLabel7.Size = new System.Drawing.Size(47, 13);
+            this.linkLabel7.TabIndex = 28;
+            this.linkLabel7.TabStop = true;
+            this.linkLabel7.Text = "На сайт";
+            this.linkLabel7.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel7_LinkClicked);
+            // 
+            // lblPBStatus
+            // 
+            this.lblPBStatus.AutoSize = true;
+            this.lblPBStatus.Location = new System.Drawing.Point(6, 3);
+            this.lblPBStatus.Name = "lblPBStatus";
+            this.lblPBStatus.Size = new System.Drawing.Size(129, 13);
+            this.lblPBStatus.TabIndex = 27;
+            this.lblPBStatus.Text = "Статус: Не авторизован";
+            // 
+            // lblPBPoints
+            // 
+            this.lblPBPoints.AutoSize = true;
+            this.lblPBPoints.Location = new System.Drawing.Point(6, 29);
+            this.lblPBPoints.Name = "lblPBPoints";
+            this.lblPBPoints.Size = new System.Drawing.Size(42, 13);
+            this.lblPBPoints.TabIndex = 26;
+            this.lblPBPoints.Text = "Points: ";
+            // 
+            // lblPBLevel
+            // 
+            this.lblPBLevel.AutoSize = true;
+            this.lblPBLevel.Location = new System.Drawing.Point(6, 16);
+            this.lblPBLevel.Name = "lblPBLevel";
+            this.lblPBLevel.Size = new System.Drawing.Size(57, 13);
+            this.lblPBLevel.TabIndex = 25;
+            this.lblPBLevel.Text = "Уровень: ";
+            // 
             // tabPageSteam
             // 
             this.tabPageSteam.Controls.Add(this.btnSteamExit);
@@ -910,6 +1018,9 @@
             this.tabPageST.ResumeLayout(false);
             this.tabPageST.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSTreload)).EndInit();
+            this.tabPagePB.ResumeLayout(false);
+            this.tabPagePB.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbPBRefresh)).EndInit();
             this.tabPageSteam.ResumeLayout(false);
             this.tabPageSteam.PerformLayout();
             this.toolStripMenuItem_Main.ResumeLayout(false);
@@ -994,6 +1105,15 @@
         private System.Windows.Forms.ToolStripMenuItem вПапкуСБотомToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem черныйСписокToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem1;
+        private System.Windows.Forms.TabPage tabPagePB;
+        private System.Windows.Forms.Button btnPBExit;
+        private System.Windows.Forms.Button btnPBLogin;
+        private System.Windows.Forms.PictureBox pbPBRefresh;
+        private System.Windows.Forms.CheckBox cbPBEnabled;
+        private System.Windows.Forms.LinkLabel linkLabel7;
+        private System.Windows.Forms.Label lblPBStatus;
+        private System.Windows.Forms.Label lblPBPoints;
+        private System.Windows.Forms.Label lblPBLevel;
     }
 }
 

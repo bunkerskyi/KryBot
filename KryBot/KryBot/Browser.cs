@@ -114,6 +114,11 @@ namespace KryBot
                     {
                         SteamTradeAuth();
                     }
+
+                    if (_endPage == "http://playblink.com/")
+                    {
+                        PlayBlinkAuth();
+                    }
                 }
             }
             catch (ObjectDisposedException){}
@@ -267,6 +272,22 @@ namespace KryBot
                 }
             }
             _bot.SteamTradeEnabled = true;
+            webBrowser.Dispose();
+            Close();
+        }
+
+        private void PlayBlinkAuth()
+        {
+            var container = GetUriCookieContainer(webBrowser.Url);
+            var cookies = container.GetCookies(webBrowser.Url);
+            foreach (Cookie cookie in cookies)
+            {
+                if (cookie.Name == "PHPSESSID")
+                {
+                    _bot.PlayBlinkPhpSessId = cookie.Value;
+                }
+            }
+            _bot.PlayBlinkEnabled = true;
             webBrowser.Dispose();
             Close();
         }
