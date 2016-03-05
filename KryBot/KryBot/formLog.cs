@@ -8,7 +8,7 @@ namespace KryBot
 {
     public partial class FormLog : Form
     {
-        private readonly int _x;
+        private int _x;
         private readonly int _y;
         public bool Win7;
 
@@ -21,15 +21,20 @@ namespace KryBot
 
         private void formLog_Load(object sender, EventArgs e)
         {
-            Location = new Point(_x, _y);
-            var owner = Owner as FormMain;
-            if (owner != null) AppendText(richTextBox1, owner.LogBuffer.Content, owner.LogBuffer.Color);
-            Design();
-
             if (Environment.OSVersion.Version.ToString().Split('.')[1] == "1")
             {
                 Win7 = true;
             }
+
+            if (Win7)
+            {
+                _x = _x + 15;
+            }
+
+            Location = new Point(_x, _y);
+            var owner = Owner as FormMain;
+            if (owner != null) AppendText(richTextBox1, owner.LogBuffer.Content, owner.LogBuffer.Color);
+            Design();
         }
 
         public void FormHide()

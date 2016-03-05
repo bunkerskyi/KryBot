@@ -60,7 +60,7 @@ namespace KryBot
             public JsonGame Game { get; set; }
             public int Finish { get; set; }
             public JsonAward Award { get; set; }
-            public object RegionlockTypeId { get; set; }
+            public string regionlock_type_id { get; set; }
             public List<object> Regionlocks { get; set; }
             public int Entries { get; set; }
             public string GiveawayTypeId { get; set; }

@@ -23,6 +23,7 @@ namespace KryBot
         public static List<SteamCompanion.ScGiveaway> ScGiveaways = new List<SteamCompanion.ScGiveaway>();
         public static List<SteamPortal.SpGiveaway> SpGiveaways = new List<SteamPortal.SpGiveaway>();
         public static List<SteamTrade.StGiveaway> StGiveaways = new List<SteamTrade.StGiveaway>();
+        public static List<PlayBlink.PbGiveaway> PbGiveaways = new List<PlayBlink.PbGiveaway>();
         public static string[] BlackList;
 
         public static bool Hided;
@@ -164,11 +165,6 @@ namespace KryBot
                 }
                 else
                 {
-                    LogBuffer =
-                        Tools.ConstructLog(
-                            Messages.GetDateTime() + "Пропуск попытки фарма. Предыдущий цикл фарма еше не окончен.",
-                            Color.Red, false, true);
-                    LogChanged?.Invoke();
                     _timer.Stop();
                     _timerTickCount.Stop();
                     btnStart.Text = @"Старт";
@@ -211,7 +207,6 @@ namespace KryBot
                             Color.Red, false, true);
                     LogChanged?.Invoke();
                     btnStart.Text = @"Старт";
-                    btnStart.Enabled = true;
                 }
             }
         }
@@ -233,12 +228,14 @@ namespace KryBot
             btnSCLogin.Visible = false;
             btnSPLogin.Visible = false;
             btnSTLogin.Visible = false;
+            btnPBLogin.Visible = false;
             btnSteamLogin.Visible = false;
             btnGMExit.Visible = false;
             btnSGExit.Visible = false;
             btnSCExit.Visible = false;
             btnSPExit.Visible = false;
             btnSTExit.Visible = false;
+            btnPBExit.Visible = false;
             btnSteamExit.Visible = false;
 
             toolStripProgressBar1.Visible = false;
@@ -250,6 +247,7 @@ namespace KryBot
             pbSCReload.Visible = false;
             pbSPReload.Visible = false;
             pbSTreload.Visible = false;
+            pbPBRefresh.Visible = false;
 
             if (LogActive)
             {
@@ -744,6 +742,98 @@ namespace KryBot
                 }
             }
 
+            if (Bot.PlayBlinkEnabled)
+            {
+                var profile = await Parse.PlayBlinkGetProfileAsync(Bot, true);
+                if (profile.Echo)
+                {
+                    LogBuffer = profile;
+                    LogChanged?.Invoke();
+                }
+                LoadProfilesInfo?.Invoke();
+
+                if (profile.Success)
+                {
+                    //var won = await Parse.PlayBlinkWonParseAsync(Bot);
+                    //if (won != null && won.Content != "\n")
+                    //{
+                    //    LogBuffer = won;
+                    //    LogChanged?.Invoke();
+                    //    if (Settings.Default.ShowWonTip)
+                    //    {
+                    //        ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info,
+                    //            "http://playblink.com/");
+                    //    }
+                    //}
+
+                    if(Bot.PlayBlinkPoints > 0)
+                    { 
+                    var giveaways = await Parse.PlayBlinkLoadGiveawaysAsync(Bot, PbGiveaways, BlackList);
+                    if (giveaways != null && giveaways.Content != "\n")
+                    {
+                        LogBuffer = giveaways;
+                        LogChanged?.Invoke();
+                    }
+
+                        if (PbGiveaways?.Count > 0)
+                        {
+                            if (Settings.Default.Sort)
+                            {
+                                if (Settings.Default.SortToMore)
+                                {
+                                    PbGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+                                }
+                                else
+                                {
+                                    PbGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+                                }
+                            }
+                            foreach (var giveaway in PbGiveaways)
+                            {
+                                if (giveaway.Price <= Bot.PlayBlinkMaxJoinValue && giveaway.Price <= Bot.PlayBlinkPoints)
+                                {
+                                    if (Bot.PlayBlinkPointReserv <= Bot.PlayBlinkPoints - giveaway.Price ||
+                                        giveaway.Price == 0)
+                                    {
+                                        var data = await Web.PlayBlinkJoinGiveawayAsync(Bot, giveaway);
+                                        if (data != null && data.Content != "\n")
+                                        {
+                                            if (Settings.Default.FullLog)
+                                            {
+                                                LogBuffer = data;
+                                                LogChanged?.Invoke();
+                                            }
+                                            else
+                                            {
+                                                if (data.Color != Color.Yellow && data.Color != Color.Red)
+                                                {
+                                                    LogBuffer = data;
+                                                    LogChanged?.Invoke();
+                                                }
+                                            }
+
+                                            //if (data.Content.Contains("Captcha"))
+                                            //{
+                                            //    break;
+                                            //}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    BlockTabpage(tabPagePB, false);
+                    btnPBLogin.Enabled = true;
+                    btnPBLogin.Visible = true;
+                    linkLabel7.Enabled = true;
+                    lblPBStatus.Text = @"Статус: " + strings.LoginFaild;
+                }
+            }
+            toolStripProgressBar1.Value++;
+
             stopWatch.Stop();
             var ts = stopWatch.Elapsed;
             string elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds/10:00}";
@@ -755,6 +845,7 @@ namespace KryBot
             toolStripStatusLabel1.Image = null;
             toolStripStatusLabel1.Text = @"Завершено";
             _farming = false;
+            btnStart.Enabled = true;
 
             Settings.Default.JoinsLoops += 1;
             Settings.Default.JoinsLoopsTotal += 1;
@@ -779,12 +870,15 @@ namespace KryBot
 
             lblSTPoints.Text = @"Points: -";
             lblSTLevel.Text = @"Уровень: -";
+
+            lblPBPoints.Text = @"Points: " + Bot.PlayBlinkPoints;
+            lblPBLevel.Text = @"Уровень: " + Bot.PlayBlinkLevel;
         }
 
         private async Task<bool> LoginCheck()
         {
             toolStripProgressBar1.Value = 0;
-            toolStripProgressBar1.Maximum = 6;
+            toolStripProgressBar1.Maximum = 7;
             toolStripProgressBar1.Visible = true;
             toolStripStatusLabel1.Image = Resources.load;
             toolStripStatusLabel1.Text = @"Авторизация";
@@ -1025,6 +1119,58 @@ namespace KryBot
                 btnSTLogin.Enabled = true;
                 btnSTLogin.Visible = true;
                 linkLabel5.Enabled = true;
+            }
+            toolStripProgressBar1.Value++;
+
+            if (Bot.PlayBlinkEnabled)
+            {
+                var pb = await Parse.PlayBlinkGetProfileAsync(Bot, Bot.PlayBlinkEnabled);
+                if (pb.Echo)
+                {
+                    LogBuffer = pb;
+                    LogChanged?.Invoke();
+                }
+                LoadProfilesInfo?.Invoke();
+
+                if (pb.Success)
+                {
+                    //var won = await Parse.PlayBlinkWonParseAsync(Bot);
+                    //if (won != null && won.Content != "\n")
+                    //{
+                    //    LogBuffer = won;
+                    //    LogChanged?.Invoke();
+                    //    if (Settings.Default.ShowWonTip)
+                    //    {
+                    //        ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info,
+                    //            "http://playblink.com/");
+                    //    }
+                    //}
+
+                    LoadProfilesInfo?.Invoke();
+
+                    login = true;
+                    btnPBLogin.Enabled = false;
+                    btnPBLogin.Visible = false;
+                    lblPBStatus.Text = @"Статус: " + strings.LoginSuccess;
+                    LoadProfilesInfo?.Invoke();
+                    pbPBRefresh.Visible = true;
+                    btnPBExit.Visible = true;
+                }
+                else
+                {
+                    BlockTabpage(tabPagePB, false);
+                    btnPBLogin.Enabled = true;
+                    btnPBLogin.Visible = true;
+                    linkLabel7.Enabled = true;
+                    lblPBStatus.Text = @"Статус: " + strings.LoginFaild;
+                }
+            }
+            else
+            {
+                BlockTabpage(tabPagePB, false);
+                btnPBLogin.Enabled = true;
+                btnPBLogin.Visible = true;
+                linkLabel7.Enabled = true;
             }
             toolStripProgressBar1.Value++;
 
@@ -1420,6 +1566,16 @@ namespace KryBot
         }
 
         private async Task<bool> CheckLoginSteam()
+        {
+            var login = await Parse.SteamGetProfileAsync(Bot, false);
+            if (login.Success)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private async Task<bool> CheckLoginPb()
         {
             var login = await Parse.SteamGetProfileAsync(Bot, false);
             if (login.Success)
@@ -2061,7 +2217,6 @@ namespace KryBot
         {
             Bot.GameMinerToken = "";
             Bot.GameMinerxsrf = "";
-            Bot.UserAgent = "";
             Bot.GameMinerEnabled = false;
             BlockTabpage(tabPageGM, false);
             btnGMLogin.Enabled = true;
@@ -2086,6 +2241,113 @@ namespace KryBot
         {
             var form = new FormSettings(Bot);
             form.ShowDialog();
+        }
+
+        private async void btnPBLogin_Click(object sender, EventArgs e)
+        {
+            btnPBLogin.Enabled = false;
+            BrowserStart("http://playblink.com/?do=login&act=signin",
+                "http://playblink.com/", "PlayBlink - Login", "",
+                Bot.SteamEnabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
+            if (string.IsNullOrEmpty(Bot.UserAgent))
+            {
+                Bot.UserAgent = Tools.UserAgent();
+            }
+            Tools.SaveProfile(Bot, "");
+
+            toolStripStatusLabel1.Image = Resources.load;
+            toolStripStatusLabel1.Text = @"Авторизация";
+            var login = await CheckLoginPb();
+            if (login)
+            {
+                //var won = await Parse.PlayBlinkWonParseAsync(Bot);
+                //if (won != null && won.Content != "\n")
+                //{
+                //    LogBuffer = won;
+                //    LogChanged?.Invoke();
+                //}
+                BlockTabpage(tabPagePB, true);
+                btnPBLogin.Enabled = false;
+                btnPBLogin.Visible = false;
+                lblPBStatus.Text = @"Статус: " + strings.LoginSuccess;
+                LoadProfilesInfo?.Invoke();
+                btnStart.Enabled = true;
+                pbPBRefresh.Visible = true;
+                btnPBExit.Visible = true;
+                btnPBExit.Enabled = true;
+                cbPBEnabled.Checked = true;
+                Bot.PlayBlinkEnabled = true;
+
+                LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + "{PlayBlink} " + strings.LoginSuccess,
+                    Color.Green, true, true);
+                LogChanged?.Invoke();
+
+                var pb = await Parse.PlayBlinkGetProfileAsync(Bot, Bot.GameMinerEnabled);
+                LogBuffer = pb;
+                LogChanged?.Invoke();
+                LoadProfilesInfo?.Invoke();
+            }
+            else
+            {
+                lblPBStatus.Text = @"Статус: " + strings.LoginFaild;
+                BlockTabpage(tabPagePB, false);
+                btnPBLogin.Enabled = true;
+                btnPBLogin.Visible = true;
+            }
+            toolStripStatusLabel1.Image = null;
+            toolStripStatusLabel1.Text = @"Завершено";
+        }
+
+        private void btnPBExit_Click(object sender, EventArgs e)
+        {
+            Bot.PlayBlinkPhpSessId = "";
+            Bot.PlayBlinkEnabled = false;
+            BlockTabpage(tabPagePB, false);
+            btnPBLogin.Enabled = true;
+            btnPBLogin.Visible = true;
+            btnPBExit.Visible = false;
+            Tools.SaveProfile(Bot, "");
+        }
+
+        private void linkLabel7_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("http://playblink.com/");
+        }
+
+        private async void pbPBRefresh_Click(object sender, EventArgs e)
+        {
+            btnPBExit.Enabled = false;
+            pbPBRefresh.Image = Resources.load;
+            toolStripStatusLabel1.Text = @"Обновление информации о PlayBlink";
+            toolStripStatusLabel1.Image = Resources.load;
+
+            var profile = await Parse.PlayBlinkGetProfileAsync(Bot, false);
+            if (profile.Echo)
+            {
+                LogBuffer = profile;
+                LogChanged?.Invoke();
+            }
+            LoadProfilesInfo?.Invoke();
+
+            if (profile.Success)
+            {
+                btnPBLogin.Enabled = false;
+                btnPBLogin.Visible = false;
+                lblPBStatus.Text = @"Статус: " + strings.LoginSuccess;
+                BlockTabpage(tabPagePB, true);
+            }
+            else
+            {
+                BlockTabpage(tabPagePB, false);
+                btnPBLogin.Enabled = true;
+                btnPBLogin.Visible = true;
+                lblPBStatus.Text = @"Статус: " + strings.LoginFaild;
+            }
+
+            toolStripStatusLabel1.Image = null;
+            pbPBRefresh.Image = Resources.refresh;
+            toolStripStatusLabel1.Text = @"Завершено";
+            btnPBExit.Enabled = true;
         }
     }
 }

@@ -87,10 +87,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.tabPageST = new System.Windows.Forms.TabPage();
             this.btnSTCookies = new System.Windows.Forms.Button();
+            this.tabPagePB = new System.Windows.Forms.TabPage();
+            this.btnPBCookies = new System.Windows.Forms.Button();
             this.tabPageSteam = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbPBReserv = new System.Windows.Forms.TextBox();
+            this.tbPBMaxValue = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPageCommun.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -101,6 +107,7 @@
             this.tabPageSC.SuspendLayout();
             this.tabPageSP.SuspendLayout();
             this.tabPageST.SuspendLayout();
+            this.tabPagePB.SuspendLayout();
             this.tabPageSteam.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -113,6 +120,7 @@
             this.tabControl1.Controls.Add(this.tabPageSC);
             this.tabControl1.Controls.Add(this.tabPageSP);
             this.tabControl1.Controls.Add(this.tabPageST);
+            this.tabControl1.Controls.Add(this.tabPagePB);
             this.tabControl1.Controls.Add(this.tabPageSteam);
             this.tabControl1.Location = new System.Drawing.Point(0, 27);
             this.tabControl1.Name = "tabControl1";
@@ -734,6 +742,30 @@
             this.btnSTCookies.UseVisualStyleBackColor = true;
             this.btnSTCookies.Click += new System.EventHandler(this.btnSTCookies_Click);
             // 
+            // tabPagePB
+            // 
+            this.tabPagePB.Controls.Add(this.tbPBReserv);
+            this.tabPagePB.Controls.Add(this.tbPBMaxValue);
+            this.tabPagePB.Controls.Add(this.label9);
+            this.tabPagePB.Controls.Add(this.label10);
+            this.tabPagePB.Controls.Add(this.btnPBCookies);
+            this.tabPagePB.Location = new System.Drawing.Point(4, 22);
+            this.tabPagePB.Name = "tabPagePB";
+            this.tabPagePB.Size = new System.Drawing.Size(309, 155);
+            this.tabPagePB.TabIndex = 7;
+            this.tabPagePB.Text = "PB";
+            this.tabPagePB.UseVisualStyleBackColor = true;
+            // 
+            // btnPBCookies
+            // 
+            this.btnPBCookies.Image = global::KryBot.Properties.Resources.locked;
+            this.btnPBCookies.Location = new System.Drawing.Point(278, 6);
+            this.btnPBCookies.Name = "btnPBCookies";
+            this.btnPBCookies.Size = new System.Drawing.Size(23, 23);
+            this.btnPBCookies.TabIndex = 20;
+            this.btnPBCookies.UseVisualStyleBackColor = true;
+            this.btnPBCookies.Click += new System.EventHandler(this.btnPBCookies_Click);
+            // 
             // tabPageSteam
             // 
             this.tabPageSteam.Controls.Add(this.button1);
@@ -772,6 +804,42 @@
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
+            // tbPBReserv
+            // 
+            this.tbPBReserv.Location = new System.Drawing.Point(244, 3);
+            this.tbPBReserv.Name = "tbPBReserv";
+            this.tbPBReserv.Size = new System.Drawing.Size(26, 20);
+            this.tbPBReserv.TabIndex = 24;
+            this.tbPBReserv.Text = "0";
+            this.tbPBReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPBReserv_KeyPress);
+            // 
+            // tbPBMaxValue
+            // 
+            this.tbPBMaxValue.Location = new System.Drawing.Point(128, 3);
+            this.tbPBMaxValue.Name = "tbPBMaxValue";
+            this.tbPBMaxValue.Size = new System.Drawing.Size(26, 20);
+            this.tbPBMaxValue.TabIndex = 23;
+            this.tbPBMaxValue.Text = "30";
+            this.tbPBMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPBMaxValue_KeyPress);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(160, 6);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(78, 13);
+            this.label9.TabIndex = 22;
+            this.label9.Text = "Резерв points:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(3, 6);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(125, 13);
+            this.label10.TabIndex = 21;
+            this.label10.Text = "Максимальная ставка:";
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -806,6 +874,8 @@
             this.tabPageSP.ResumeLayout(false);
             this.tabPageSP.PerformLayout();
             this.tabPageST.ResumeLayout(false);
+            this.tabPagePB.ResumeLayout(false);
+            this.tabPagePB.PerformLayout();
             this.tabPageSteam.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -879,5 +949,11 @@
         private System.Windows.Forms.NumericUpDown numSGLevel;
         private System.Windows.Forms.CheckBox cbSGMinLevel;
         private System.Windows.Forms.CheckBox cbSGSortTeLessLevel;
+        private System.Windows.Forms.TabPage tabPagePB;
+        private System.Windows.Forms.Button btnPBCookies;
+        private System.Windows.Forms.TextBox tbPBReserv;
+        private System.Windows.Forms.TextBox tbPBMaxValue;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
     }
 }

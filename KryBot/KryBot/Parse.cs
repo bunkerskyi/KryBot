@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -50,13 +49,13 @@ namespace KryBot
                     }
                 }
                 return
-                    ConstructLog(
-                        GetDateTime() + @"{Steam} Login success (" + login + ')', Color.White, true, echo);
+                    ConstructLog( $"{GetDateTime()} {{Steam}} Login success ({login})"
+                    , Color.White, true, echo);
             }
             catch (NullReferenceException)
             {
                 ProfileLoaded();
-                return ConstructLog(GetDateTime() + @"{Steam} " + strings.ParseProfile_LoginOrServerError, Color.Red,
+                return ConstructLog($"{GetDateTime()} {{Steam}} {strings.ParseProfile_LoginOrServerError}", Color.Red,
                     false, echo);
             }
         }
@@ -83,7 +82,7 @@ namespace KryBot
         // Steam //
 
         // GameMiner //
-        public static Classes.Log GameMinerGetProfile(Classes.Bot bot, bool echo)   
+        public static Classes.Log GameMinerGetProfile(Classes.Bot bot, bool echo)
         {
             try
             {
@@ -106,20 +105,19 @@ namespace KryBot
                 //    bot.GameMinerToken = "";
                 //    SaveSettings(bot, "");
                 //    return
-                //    ConstructLog(
-                //        GetDateTime() + @"{GameMiner} " + strings.AccountNotActive, Color.Red, false, true);
+                //    ConstructLog($"{GetDateTime()} {{GameMiner}} {strings.AccountNotActive}", Color.Red, false, true);
                 //}
 
                 ProfileLoaded();
                 return
                     ConstructLog(
-                        GetDateTime() + @"{GameMiner} " + strings.ParseProfile_Coal + @": " + bot.GameMinerCoal + ' '
-                        + strings.ParseProfile_Level + @": " + bot.GameMinerLevel, Color.White, true, echo);
+                        $"{GetDateTime()} {{GameMiner}} {strings.ParseProfile_Coal}: {bot.GameMinerCoal} {strings.ParseProfile_Level}: {bot.GameMinerLevel}", 
+                        Color.White, true, echo);
             }
             catch (NullReferenceException)
             {
                 ProfileLoaded();
-                return ConstructLog(GetDateTime() + @"{GameMiner} " + strings.ParseProfile_LoginOrServerError, Color.Red,
+                return ConstructLog($"{GetDateTime()} {{GameMiner}} {strings.ParseProfile_LoginOrServerError}", Color.Red,
                     false, echo);
             }
         }
@@ -213,10 +211,9 @@ namespace KryBot
                                 goldenFreesResponse.RestResponse.Content);
                         GameMinerAddGiveaways(goldenFreeJsonResponse, bot, giveaways);
 
-                        content += GetDateTime() + @"{GameMiner} " + strings.ParseLoadGiveaways_Found + ' ' +
-                                   goldenFreeJsonResponse.Total +
-                                   ' ' + strings.ParseLoadGiveaways_FreeGoldenGiveawaysIn + ' ' +
-                                   goldenFreeJsonResponse.Last_Page + ' ' + strings.ParseLoadGiveaways_Pages + "\n";
+                        content +=
+                            $"{GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {goldenFreeJsonResponse.Total} " +
+                            $"{strings.ParseLoadGiveaways_FreeGoldenGiveawaysIn} {goldenFreeJsonResponse.Last_Page} {strings.ParseLoadGiveaways_Pages}\n";
 
                         pages = goldenFreeJsonResponse.Last_Page;
 
@@ -455,27 +452,30 @@ namespace KryBot
                 {
                     return
                         ConstructLog(
-                            content + GetDateTime() + @"{GameMiner} " + strings.ParseLoadGiveaways_FoundMatchGiveaways +
-                            @": " + 0, Color.White, true, true);
+                            $"{content}{GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0", 
+                        Color.White, true, true);
                 }
 
-                for (int i = 0; i < giveaways.Count; i++)
+                if (blackList != null)
                 {
-                    foreach (var id in blackList)
+                    for (int i = 0; i < giveaways.Count; i++)
                     {
-                        if (giveaways[i].StoreId == id)
+                        foreach (var id in blackList)
                         {
-                            giveaways.Remove(giveaways[i]);
-                            i--;
-                            break;
+                            if (giveaways[i].StoreId == id)
+                            {
+                                giveaways.Remove(giveaways[i]);
+                                i--;
+                                break;
+                            }
                         }
                     }
                 }
 
                 return
                     ConstructLog(
-                        content + GetDateTime() + @"{GameMiner} " + strings.ParseLoadGiveaways_FoundMatchGiveaways +
-                        @": " + giveaways.Count, Color.White, true, true);
+                        $"{content}{GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {giveaways.Count}", 
+                        Color.White, true, true);
             }
             catch (NullReferenceException)
             {
@@ -516,6 +516,7 @@ namespace KryBot
                         {
                             break;
                         }
+
                         if (lot.Price > bot.GameMinerCoal || lot.Price > bot.GameMinerJoinCoalLimit)
                         {
                             break;
@@ -527,6 +528,12 @@ namespace KryBot
                         lot.IsGolden = giveaway.Golden;
                         lot.Page = json.Page;
                         lot.Price = giveaway.Price;
+
+                        if (giveaway.regionlock_type_id != null)
+                        {
+                            lot.Region = giveaway.regionlock_type_id;
+                        }
+
                         if (giveaway.Game.Url != "javascript:void(0);")
                         {
                             lot.StoreId = giveaway.Game.Url.Split('/')[4];
@@ -715,15 +722,18 @@ namespace KryBot
                             @": " + 0, Color.White, true, true);
                 }
 
-                for (int i = 0; i < giveaways.Count; i++)
+                if (blackList != null)
                 {
-                    foreach (var id in blackList)
+                    for (int i = 0; i < giveaways.Count; i++)
                     {
-                        if (giveaways[i].StoreId == id)
+                        foreach (var id in blackList)
                         {
-                            giveaways.Remove(giveaways[i]);
-                            i--;
-                            break;
+                            if (giveaways[i].StoreId == id)
+                            {
+                                giveaways.Remove(giveaways[i]);
+                                i--;
+                                break;
+                            }
                         }
                     }
                 }
@@ -919,6 +929,13 @@ namespace KryBot
                         }
                         catch (NullReferenceException)
                         {}
+
+                        try
+                        {
+                            sgGiveaway.Region = node.SelectSingleNode(".//a[@title='Region Restricted']")
+                                .Attributes["href"].Value.Split('/')[2];
+                        }
+                        catch (NullReferenceException) { }
 
                         if (sgGiveaway.Price <= bot.SteamGiftsPoint && sgGiveaway.Price <= bot.SteamGiftsJoinPointLimit && sgGiveaway.Level >= bot.SteamGiftsMinLevel)
                         {
@@ -1163,15 +1180,18 @@ namespace KryBot
                         @": " + 0, Color.White, true, true);
             }
 
-            //for (int i = 0; i < giveaways.Count; i++)
+            //if (blackList != null)
             //{
-            //    foreach (var id in blackList)
+            //    for (int i = 0; i < giveaways.Count; i++)
             //    {
-            //        if (giveaways[i].StoreId == id)
+            //        foreach (var id in blackList)
             //        {
-            //            giveaways.Remove(giveaways[i]);
-            //            i--;
-            //            break;
+            //            if (giveaways[i].StoreId == id)
+            //            {
+            //                giveaways.Remove(giveaways[i]);
+            //                i--;
+            //                break;
+            //            }
             //        }
             //    }
             //}
@@ -1285,17 +1305,11 @@ namespace KryBot
                     {}
                     catch (FormatException)
                     {
-                        Debug.WriteLine(
-                            htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]").Attributes["href"].Value
-                                .Split('=')[1].Split('&')[0]);
                         pages =
                             int.Parse(
                                 htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]").Attributes["href"]
                                     .Value
                                     .Split('=')[2]);
-                        Debug.WriteLine(
-                            htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]").Attributes["href"].Value
-                                .Split('=')[2]);
                     }
 
                     var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/a");
@@ -1352,6 +1366,17 @@ namespace KryBot
                                             .Length - 1]),
                             Link = node.Attributes["href"].Value
                         };
+
+                        try
+                        {
+                            var region = node.SelectSingleNode(".//span[@class='icon-region']");
+                            if (region != null)
+                            {
+                                scGiveaway.Region = true;
+                            }
+                        }
+                        catch (NullReferenceException)
+                        {}
 
                         if (scGiveaway.Price <= bot.SteamCompanionPoint && scGiveaway.Price <= bot.SteamCompanionJoinPointLimit)
                         {
@@ -1592,15 +1617,18 @@ namespace KryBot
                             Color.White, true, true);
                 }
 
-                for (int i = 0; i < giveaways.Count; i++)
+                if (blackList != null)
                 {
-                    foreach (var id in blackList)
+                    for (int i = 0; i < giveaways.Count; i++)
                     {
-                        if (giveaways[i].StoreId == id)
+                        foreach (var id in blackList)
                         {
-                            giveaways.Remove(giveaways[i]);
-                            i--;
-                            break;
+                            if (giveaways[i].StoreId == id)
+                            {
+                                giveaways.Remove(giveaways[i]);
+                                i--;
+                                break;
+                            }
                         }
                     }
                 }
@@ -1660,14 +1688,32 @@ namespace KryBot
                                 .Split(',')[0].Remove(
                                     node.SelectSingleNode(".//div[@class='ga_coin_join']").Attributes["onclick"].Value
                                         .Split(':')[1].Split(',')[0].Length - 1);
+
+                            try
+                            {
+                                var iconsBlock = node.SelectSingleNode(".//div[@class='giveaway_iconbar']");
+                                var icons = iconsBlock.SelectNodes(".//span");
+                                if (icons != null)
+                                {
+                                    foreach (var icon in icons)
+                                    {
+                                        if (icon.Attributes["class"].Value.Contains("region"))
+                                        {
+                                            spGiveaway.Region = icon.Attributes["class"].Value.Split('-')[1];
+                                        }     
+                                    }   
+                                }
+                            }
+                            catch (NullReferenceException)
+                            {}
                             if (spGiveaway.Price <= bot.SteamPortalPoints && spGiveaway.Price <= bot.SteamPortalMaxJoinValue)
                             {
                                 giveaways?.Add(spGiveaway);
                             }
                         }
                         catch (NullReferenceException)
-                        {
-                        }
+                        {}
+
                     }
                     catch (NullReferenceException)
                     {
@@ -1776,15 +1822,18 @@ namespace KryBot
                             Color.White, true, true);
                 }
 
-                for (int i = 0; i < giveaways.Count; i++)
+                if (blackList != null)
                 {
-                    foreach (var id in blackList)
+                    for (int i = 0; i < giveaways.Count; i++)
                     {
-                        if (giveaways[i].StoreId == id)
+                        foreach (var id in blackList)
                         {
-                            giveaways.Remove(giveaways[i]);
-                            i--;
-                            break;
+                            if (giveaways[i].StoreId == id)
+                            {
+                                giveaways.Remove(giveaways[i]);
+                                i--;
+                                break;
+                            }
                         }
                     }
                 }
@@ -1866,5 +1915,171 @@ namespace KryBot
         }
 
         // SteamTrade //
+
+        // PlayBlink //
+        public static Classes.Log PlayBlinkGetProfile(Classes.Bot bot, bool echo)
+        {
+            var response = Web.Get("http://playblink.com/", "", new List<Parameter>(),
+                Generate.Cookies_PlayBlink(bot), new List<HttpHeader>(),
+                bot.UserAgent);
+            var htmlDoc = new HtmlDocument();
+            htmlDoc.LoadHtml(response.RestResponse.Content);
+
+            try
+            {
+                bot.PlayBlinkPoints =
+                    int.Parse(
+                        htmlDoc.DocumentNode.SelectSingleNode("//td[@id='points']").InnerText.Split('P')[0].Split('\n')[
+                            1].Trim());
+                bot.PlayBlinkLevel =
+                    int.Parse(htmlDoc.DocumentNode.SelectSingleNode("//a[@title='Your contribution level']/b").InnerText);
+
+                ProfileLoaded();
+                return
+                    ConstructLog($"{GetDateTime()} {{PlayBlink}} {strings.ParseProfile_Points}: " +
+                                 $"{bot.PlayBlinkPoints} {strings.ParseProfile_Level}: {bot.PlayBlinkLevel}", Color.White,
+                        true, echo);
+            }
+            catch (NullReferenceException)
+            {
+                ProfileLoaded();
+                return ConstructLog($"{GetDateTime()}{{PlayBlink}} {strings.ParseProfile_LoginOrServerError}", Color.Red,
+                    false, echo);
+            }
+        }
+
+        public static async Task<Classes.Log> PlayBlinkGetProfileAsync(Classes.Bot bot, bool echo)
+        {
+            var task = new TaskCompletionSource<Classes.Log>();
+            await Task.Run(() =>
+            {
+                try
+                {
+                    var result = PlayBlinkGetProfile(bot, echo);
+                    task.SetResult(result);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            });
+
+            return task.Task.Result;
+        }
+
+        public static Classes.Log PlayBlinkLoadGiveaways(Classes.Bot bot, List<PlayBlink.PbGiveaway> giveaways,
+            string[] blackList)
+        {
+            try
+            {
+                giveaways?.Clear();
+
+                var response = Web.Get("http://playblink.com/", "", new List<Parameter>(),
+                    Generate.Cookies_PlayBlink(bot),
+                    new List<HttpHeader>(), bot.UserAgent);
+
+                if (response.RestResponse.Content != null)
+                {
+                    var htmlDoc = new HtmlDocument();
+                    htmlDoc.LoadHtml(response.RestResponse.Content);
+
+                    var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@id='games_free']/div[@class='game_box']");
+                    if (nodes != null)
+                    {
+                        PlayBlinkAddGiveaways(nodes, giveaways);
+                    }
+
+                    if (giveaways == null)
+                    {
+                        return
+                            ConstructLog(
+                                $"{GetDateTime()} {{PlayBlink}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0",
+                                Color.White, true, true);
+                    }
+
+                    if (blackList != null)
+                    {
+                        for (int i = 0; i < giveaways.Count; i++)
+                        {
+                            foreach (var id in blackList)
+                            {
+                                if (giveaways[i].StoreId == id)
+                                {
+                                    giveaways.Remove(giveaways[i]);
+                                    i--;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                return
+                    ConstructLog(
+                        $"{GetDateTime()} {{PlayBlink}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {giveaways?.Count}",
+                        Color.White, true, true);
+            }
+            catch (NullReferenceException)
+            {
+                return null;
+            }
+        }
+
+        public static async Task<Classes.Log> PlayBlinkLoadGiveawaysAsync(Classes.Bot bot,
+            List<PlayBlink.PbGiveaway> giveaways, string[] blackList)
+        {
+            var task = new TaskCompletionSource<Classes.Log>();
+            await Task.Run(() =>
+            {
+                try
+                {
+                    var result = PlayBlinkLoadGiveaways(bot, giveaways, blackList);
+                    task.SetResult(result);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            });
+
+            return task.Task.Result;
+        }
+
+        private static void PlayBlinkAddGiveaways(HtmlNodeCollection nodes, List<PlayBlink.PbGiveaway> giveaways)
+        {
+            if (nodes != null)
+            {
+                foreach (var node in nodes)
+                {
+                    try
+                    {
+                        if (node.SelectSingleNode(".//a[@class='button grey']") == null)
+                        {
+                            var pbGiveaway = new PlayBlink.PbGiveaway();
+
+                            pbGiveaway.Level = int.Parse(node.SelectSingleNode(".//div[@class='min_level tooltip']").InnerText.Replace("L", ""));
+                            pbGiveaway.Name = node.SelectSingleNode(".//div[@class='name']/div").InnerText;
+                            pbGiveaway.StoreId = node.SelectSingleNode("//div[@class='description']/a").Attributes["href"].Value.Split('/')[4];
+                            pbGiveaway.Id = node.SelectSingleNode(".//a[@class='blink button blue']").Attributes["id"].Value.Replace("blink_", "");
+
+                            try
+                            {
+                                pbGiveaway.Price = int.Parse(
+                                    node.SelectSingleNode(".//div[@class='stats']/table/tr[3]/td/div[2]").InnerText.Replace("Point(s)", "").Replace("Entrance Fee:", "").Trim());
+                            }
+                            catch (NullReferenceException)
+                            {
+                                pbGiveaway.Price = int.Parse(
+                                    node.SelectSingleNode(".//div[@class='stats']/table/tr[3]").InnerText.Replace("Point(s)", "").Replace("Entrance Fee:", "").Trim());
+                            }
+                            giveaways?.Add(pbGiveaway);
+                        }
+                    }
+                    catch (NullReferenceException)
+                    {
+                    }
+                }
+            }
+        }
+        // PlayBlink //
     }
 }

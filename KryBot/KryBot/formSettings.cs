@@ -83,6 +83,9 @@ namespace KryBot
             tbSCMaxValue.Text = _bot.SteamCompanionJoinPointLimit.ToString();
             tbSCReserv.Text = _bot.SteamCompanionPointsReserv.ToString();
 
+            tbPBMaxValue.Text = _bot.PlayBlinkMaxJoinValue.ToString();
+            tbPBReserv.Text = _bot.PlayBlinkPointReserv.ToString();
+
             tbSPMaxValue.Text = _bot.SteamPortalMaxJoinValue.ToString();
             tbSPReserv.Text = _bot.SteamPortalPointsReserv.ToString();
 
@@ -90,6 +93,7 @@ namespace KryBot
             cbWonTip.Checked = Settings.Default.ShowWonTip;
             cbFarmTip.Checked = Settings.Default.ShowFarmTip;
             cbFullLog.Checked = Settings.Default.FullLog;
+
         }
 
         private void btbGMCookies_Click(object sender, EventArgs e)
@@ -138,6 +142,9 @@ namespace KryBot
 
             _bot.SteamPortalMaxJoinValue = int.Parse(tbSPMaxValue.Text);
             _bot.SteamPortalPointsReserv = int.Parse(tbSPReserv.Text);
+
+            _bot.PlayBlinkMaxJoinValue = int.Parse(tbPBMaxValue.Text);
+            _bot.PlayBlinkPointReserv = int.Parse(tbPBReserv.Text);
 
             Settings.Default.Timer = cbTimerEnable.Checked;
             Settings.Default.TimerInterval = int.Parse(tbTimerInterval.Text)*60000;
@@ -326,6 +333,26 @@ namespace KryBot
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             numSGLevel.Enabled = cbSGMinLevel.Checked;
+        }
+
+        private void btnPBCookies_Click(object sender, EventArgs e)
+        {
+            var names = new List<string> { "PHPSESSID:" + _bot.PlayBlinkPhpSessId };
+
+            var form = new FormCookie("PlayBlink", names, _bot);
+            form.ShowDialog();
+        }
+
+        private void tbPBMaxValue_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)Keys.Back))
+                e.Handled = true;
+        }
+
+        private void tbPBReserv_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)Keys.Back))
+                e.Handled = true;
         }
     }
 }

@@ -8,6 +8,7 @@
             public string StoreId { get; set; }
             public int Price { get; set; }
             public string Code { get; set; }
+            public string Region { get; set; }
         }
     }
 }

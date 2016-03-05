@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using KryBot.lang;
 using Newtonsoft.Json;
 using RestSharp;
+using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 namespace KryBot
 {
@@ -593,10 +594,10 @@ namespace KryBot
                         JsonConvert.DeserializeObject<SteamGifts.JsonResponseSyncAccount>(response.RestResponse.Content);
                     if (result.type == "success")
                     {
-                        return Tools.ConstructLog(Messages.GetDateTime() + "{SteamGifts} " + result.msg, Color.Green,
+                        return Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamGifts}} {result.msg}", Color.Green,
                             true, true);
                     }
-                    return Tools.ConstructLog(Messages.GetDateTime() + "{SteamGifts} " + result.msg, Color.Red, false,
+                    return Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamGifts}} {result.msg}", Color.Red, false,
                         true);
                 }
             }
@@ -628,9 +629,9 @@ namespace KryBot
                 Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(), bot.UserAgent);
             if (response != null)
             {
-                return Tools.ConstructLog(Messages.GetDateTime() + "{SteamCompanion} Success!", Color.Green, true, true);
+                return Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamCompanion}} Success!", Color.Green, true, true);
             }
-            return Tools.ConstructLog(Messages.GetDateTime() + "{SteamCompanion} Failed", Color.Red, false, true);
+            return Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamCompanion}} Failed", Color.Red, false, true);
         }
 
         public static async Task<Classes.Log> SteamCompanionSyncAccountAsync(Classes.Bot bot)
@@ -661,13 +662,13 @@ namespace KryBot
             {
                 if (response.RestResponse.StatusCode == HttpStatusCode.OK)
                 {
-                    return Tools.ConstructLog($"{Messages.GetDateTime()}{{GameMiner}} Success", Color.Green,
+                    return Tools.ConstructLog($"{Messages.GetDateTime()} {{GameMiner}} Success", Color.Green,
                         true, true);
                 }
-                return Tools.ConstructLog($"{Messages.GetDateTime()}{{GameMiner}} Failed", Color.Red, false,
+                return Tools.ConstructLog($"{Messages.GetDateTime()} {{GameMiner}} Failed", Color.Red, false,
                     true);
             }
-            return Tools.ConstructLog($"{Messages.GetDateTime()}{{GameMiner}} {strings.ParseProfile_LoginOrServerError}", Color.Red, false,
+            return Tools.ConstructLog($"{Messages.GetDateTime()} {{GameMiner}} {strings.ParseProfile_LoginOrServerError}", Color.Red, false,
                     true);
         }
 
@@ -679,6 +680,77 @@ namespace KryBot
                 try
                 {
                     var result = GameMinerSyncAccount(bot);
+                    task.SetResult(result);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
+            });
+
+            return task.Task.Result;
+        }
+
+        public static Classes.Log PlayBlinkJoinGiveaway(Classes.Bot bot, PlayBlink.PbGiveaway giveaway)
+        {
+            Thread.Sleep(1000);
+            if (giveaway.Id != null)
+            {
+                var list = new List<HttpHeader>();
+                var header = new HttpHeader
+                {
+                    Name = "X-Requested-With",
+                    Value = "XMLHttpRequest"
+                };
+                list.Add(header);
+
+                var response = Post("http://playblink.com/", $"?do=blink&game={giveaway.Id}&captcha=1",
+                    Generate.PostData_PlayBlink(giveaway.Id), list,
+                    Generate.Cookies_PlayBlink(bot), bot.UserAgent);
+
+                if (response.RestResponse.StatusCode == HttpStatusCode.OK)
+                {
+                    if (response.RestResponse.Content != null)
+                    {
+                        HtmlDocument htmldoc = new HtmlDocument();
+                        htmldoc.LoadHtml(response.RestResponse.Content);
+
+                        try
+                        {
+                            var message =
+                                htmldoc.DocumentNode.SelectSingleNode("//div[@class='msgbox success']").InnerText;
+                            if (message != null)
+                            {
+                                bot.PlayBlinkPoints = bot.PlayBlinkPoints - giveaway.Price;
+                                return Messages.GiveawayJoined("PlayBlink", giveaway.Name, giveaway.Price,
+                                    bot.PlayBlinkPoints, 0);
+                            }
+                        }
+                        catch (NullReferenceException)
+                        {
+                            var captcha = htmldoc.DocumentNode.SelectSingleNode("//div[@class='flash_rules']");
+                            if (captcha != null)
+                            {
+                                bot.PlayBlinkPoints = bot.PlayBlinkPoints - giveaway.Price;
+                                return Messages.GiveawayNotJoined("PlayBlink", giveaway.Name, "Captcha");
+                            }
+                        }  
+                    }
+                    return Messages.GiveawayNotJoined("PlayBlink", giveaway.Name, "Error");
+                }
+                return Messages.GiveawayNotJoined("PlayBlink", giveaway.Name, "Error");
+            }
+            return null;
+        }
+
+        public static async Task<Classes.Log> PlayBlinkJoinGiveawayAsync(Classes.Bot bot, PlayBlink.PbGiveaway giveaway)
+        {
+            var task = new TaskCompletionSource<Classes.Log>();
+            await Task.Run(() =>
+            {
+                try
+                {
+                    var result = PlayBlinkJoinGiveaway(bot, giveaway);
                     task.SetResult(result);
                 }
                 catch (Exception ex)
