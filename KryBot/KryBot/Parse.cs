@@ -12,7 +12,7 @@ using static KryBot.Tools;
 using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 namespace KryBot
-{
+{                                                                                                                                                     
     public class Parse
     {
         // Steam //

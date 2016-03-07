@@ -105,9 +105,6 @@ namespace KryBot
                 btnSteamLogin.Visible = true;
                 btnStart.Enabled = false;
             }
-
-            WebBrowser web = new WebBrowser();
-            MessageBox.Show(web.Version.ToString());
         }                                    
 
         private void FormMain_LocationChanged(object sender, EventArgs e)
