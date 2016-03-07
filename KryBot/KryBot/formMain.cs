@@ -923,7 +923,6 @@ namespace KryBot
                     BlockTabpage(tabPageGM, false);
                     btnGMLogin.Enabled = true;
                     btnGMLogin.Visible = true;
-                    linkLabel1.Enabled = true;
                     lblGMStatus.Text = @"Статус: " + strings.LoginFaild;
                 }
             }
@@ -932,7 +931,6 @@ namespace KryBot
                 BlockTabpage(tabPageGM, false);
                 btnGMLogin.Enabled = true;
                 btnGMLogin.Visible = true;
-                linkLabel1.Enabled = true;
             }
             toolStripProgressBar1.Value++;
 
@@ -973,7 +971,6 @@ namespace KryBot
                     BlockTabpage(tabPageSG, false);
                     btnSGLogin.Enabled = true;
                     btnSGLogin.Visible = true;
-                    linkLabel2.Enabled = true;
                     lblSGStatus.Text = @"Статус: " + strings.LoginFaild;
                 }
             }
@@ -982,7 +979,6 @@ namespace KryBot
                 BlockTabpage(tabPageSG, false);
                 btnSGLogin.Enabled = true;
                 btnSGLogin.Visible = true;
-                linkLabel2.Enabled = true;
             }
             toolStripProgressBar1.Value++;
 
@@ -1023,7 +1019,6 @@ namespace KryBot
                     BlockTabpage(tabPageSC, false);
                     btnSCLogin.Enabled = true;
                     btnSCLogin.Visible = true;
-                    linkLabel3.Enabled = true;
                     lblSCStatus.Text = @"Статус: " + strings.LoginFaild;
                 }
             }
@@ -1032,7 +1027,6 @@ namespace KryBot
                 BlockTabpage(tabPageSC, false);
                 btnSCLogin.Enabled = true;
                 btnSCLogin.Visible = true;
-                linkLabel3.Enabled = true;
             }
             toolStripProgressBar1.Value++;
 
@@ -1072,7 +1066,6 @@ namespace KryBot
                     BlockTabpage(tabPageSP, false);
                     btnSPLogin.Enabled = true;
                     btnSPLogin.Visible = true;
-                    linkLabel4.Enabled = true;
                     lblSPStatus.Text = @"Статус: " + strings.LoginFaild;
                 }
             }
@@ -1081,7 +1074,6 @@ namespace KryBot
                 BlockTabpage(tabPageSP, false);
                 btnSPLogin.Enabled = true;
                 btnSPLogin.Visible = true;
-                linkLabel4.Enabled = true;
             }
             toolStripProgressBar1.Value++;
 
@@ -1109,7 +1101,6 @@ namespace KryBot
                     BlockTabpage(tabPageST, false);
                     btnSTLogin.Enabled = true;
                     btnSTLogin.Visible = true;
-                    linkLabel5.Enabled = true;
                     lblSTStatus.Text = @"Статус: " + strings.LoginFaild;
                 }
             }
@@ -1118,7 +1109,6 @@ namespace KryBot
                 BlockTabpage(tabPageST, false);
                 btnSTLogin.Enabled = true;
                 btnSTLogin.Visible = true;
-                linkLabel5.Enabled = true;
             }
             toolStripProgressBar1.Value++;
 
@@ -1161,7 +1151,6 @@ namespace KryBot
                     BlockTabpage(tabPagePB, false);
                     btnPBLogin.Enabled = true;
                     btnPBLogin.Visible = true;
-                    linkLabel7.Enabled = true;
                     lblPBStatus.Text = @"Статус: " + strings.LoginFaild;
                 }
             }
@@ -1170,7 +1159,6 @@ namespace KryBot
                 BlockTabpage(tabPagePB, false);
                 btnPBLogin.Enabled = true;
                 btnPBLogin.Visible = true;
-                linkLabel7.Enabled = true;
             }
             toolStripProgressBar1.Value++;
 
@@ -1196,7 +1184,6 @@ namespace KryBot
                     BlockTabpage(tabPageSteam, false);
                     btnSteamLogin.Enabled = true;
                     btnSteamLogin.Visible = true;
-                    linkLabel6.Enabled = true;
                     lblSteamStatus.Text = @"Статус: " + strings.LoginFaild;
                 }
             }
@@ -1205,7 +1192,6 @@ namespace KryBot
                 BlockTabpage(tabPageSteam, false);
                 btnSteamLogin.Enabled = true;
                 btnSteamLogin.Visible = true;
-                linkLabel6.Enabled = true;
             }
             toolStripProgressBar1.Value++;
 
@@ -1219,8 +1205,7 @@ namespace KryBot
         {
             foreach (Control control in tabPage.Controls)
             {
-                if (control == linkLabel1 || control == linkLabel2 || control == linkLabel3 || control == linkLabel4 ||
-                    control == linkLabel5)
+                if (control.GetType().FullName == "System.Windows.Forms.LinkLabel")
                 {
                     control.Enabled = true;
                 }
@@ -1268,7 +1253,7 @@ namespace KryBot
                 cbSTEnable.Checked = true;
                 Bot.SteamTradeEnabled = true;
 
-                LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + "{SteamTrade} " + strings.LoginSuccess,
+                LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamTrade}} {strings.LoginSuccess}",
                     Color.Green, true, true);
                 LogChanged?.Invoke();
 
@@ -1577,7 +1562,7 @@ namespace KryBot
 
         private async Task<bool> CheckLoginPb()
         {
-            var login = await Parse.SteamGetProfileAsync(Bot, false);
+            var login = await Parse.PlayBlinkGetProfileAsync(Bot, false);
             if (login.Success)
             {
                 return true;
