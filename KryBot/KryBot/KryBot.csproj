@@ -241,6 +241,18 @@
     <None Include="Resources\load.gif" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bar-graph1.png" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Resources\info28.png" />
   </ItemGroup>
   <ItemGroup>
@@ -253,12 +265,18 @@
     <None Include="Resources\save31.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\locked59.png" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Resources\HtmlAgilityPack.dll" />
     <EmbeddedResource Include="Resources\Newtonsoft.Json.dll" />
     <EmbeddedResource Include="Resources\RestSharp.dll" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close47.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\gift85.png" />
@@ -282,37 +300,19 @@
     <None Include="Resources\KryBotPresent_256b.ico" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\KryBot_Updater.exe" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\blocked.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\close.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\file.png" />
+    <None Include="Resources\coins28.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\folder.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\lock.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\log.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\refresh.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\statistic.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\wallet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blocked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\KryBot_Updater.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

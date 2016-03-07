@@ -2024,7 +2024,7 @@ namespace KryBot
             notifyIcon.BalloonTipIcon = icon;
             notifyIcon.BalloonTipText = content;
             notifyIcon.BalloonTipTitle = Application.ProductName;
-            notifyIcon.Tag = ""; //url;
+            notifyIcon.Tag = url;
             notifyIcon.BalloonTipClicked += NotifyIconOnBalloonTipClicked;
             notifyIcon.ShowBalloonTip(interval);
         }
@@ -2332,25 +2332,6 @@ namespace KryBot
             pbPBRefresh.Image = Resources.refresh;
             toolStripStatusLabel1.Text = @"Завершено";
             btnPBExit.Enabled = true;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ImageList imgs = new ImageList();
-
-            for (int i = 0; i < 8; i++)
-            {
-                imgs.Images.Add(i.ToString(), Resources.gift);
-            }
-
-            tabControl1.ImageList = imgs;
-            tabPageGM.ImageKey = "1";
-            tabPageSG.ImageKey = "2";
-            tabPageSC.ImageKey = "3";
-            tabPageSP.ImageKey = "4";
-            tabPageST.ImageKey = "5";
-            tabPagePB.ImageKey = "6";
-            tabPageSteam.ImageKey = "7";
         }
     }
 }

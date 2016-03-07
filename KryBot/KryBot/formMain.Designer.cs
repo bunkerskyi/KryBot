@@ -49,7 +49,6 @@
             this.логToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageGM = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnGMExit = new System.Windows.Forms.Button();
             this.cbGMEnable = new System.Windows.Forms.CheckBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -135,6 +134,9 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripProgressBar1});
             this.statusStrip1.Location = new System.Drawing.Point(0, 186);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(350, 22);
@@ -155,6 +157,11 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.файлToolStripMenuItem,
+            this.настройкиToolStripMenuItem,
+            this.оПрограммеToolStripMenuItem,
+            this.логToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(350, 24);
@@ -163,14 +170,19 @@
             // 
             // файлToolStripMenuItem
             // 
-            this.файлToolStripMenuItem.Image = global::KryBot.Properties.Resources.file;
+            this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.вПапкуСБотомToolStripMenuItem,
+            this.сохранитьToolStripMenuItem,
+            this.сохранитьКакToolStripMenuItem,
+            this.загрузитьToolStripMenuItem});
+            this.файлToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("файлToolStripMenuItem.Image")));
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
             // вПапкуСБотомToolStripMenuItem
             // 
-            this.вПапкуСБотомToolStripMenuItem.Image = global::KryBot.Properties.Resources.folder;
+            this.вПапкуСБотомToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("вПапкуСБотомToolStripMenuItem.Image")));
             this.вПапкуСБотомToolStripMenuItem.Name = "вПапкуСБотомToolStripMenuItem";
             this.вПапкуСБотомToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.вПапкуСБотомToolStripMenuItem.Text = "Открыть папку с ботом";
@@ -228,6 +240,10 @@
             // 
             // оПрограммеToolStripMenuItem
             // 
+            this.оПрограммеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.статстикаToolStripMenuItem,
+            this.оПрограммеToolStripMenuItem1,
+            this.донатToolStripMenuItem});
             this.оПрограммеToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("оПрограммеToolStripMenuItem.Image")));
             this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
             this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(130, 20);
@@ -235,9 +251,9 @@
             // 
             // статстикаToolStripMenuItem
             // 
-            this.статстикаToolStripMenuItem.Image = global::KryBot.Properties.Resources.statistic;
+            this.статстикаToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("статстикаToolStripMenuItem.Image")));
             this.статстикаToolStripMenuItem.Name = "статстикаToolStripMenuItem";
-            this.статстикаToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.статстикаToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.статстикаToolStripMenuItem.Text = "Статистика";
             this.статстикаToolStripMenuItem.Click += new System.EventHandler(this.статстикаToolStripMenuItem_Click);
             // 
@@ -245,7 +261,7 @@
             // 
             this.оПрограммеToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("оПрограммеToolStripMenuItem1.Image")));
             this.оПрограммеToolStripMenuItem1.Name = "оПрограммеToolStripMenuItem1";
-            this.оПрограммеToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.оПрограммеToolStripMenuItem1.Size = new System.Drawing.Size(149, 22);
             this.оПрограммеToolStripMenuItem1.Text = "О программе";
             this.оПрограммеToolStripMenuItem1.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem1_Click);
             // 
@@ -253,7 +269,7 @@
             // 
             this.донатToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("донатToolStripMenuItem.Image")));
             this.донатToolStripMenuItem.Name = "донатToolStripMenuItem";
-            this.донатToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.донатToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.донатToolStripMenuItem.Text = "Поддержать";
             this.донатToolStripMenuItem.Click += new System.EventHandler(this.донатToolStripMenuItem_Click);
             // 
@@ -282,7 +298,6 @@
             // 
             // tabPageGM
             // 
-            this.tabPageGM.Controls.Add(this.button1);
             this.tabPageGM.Controls.Add(this.btnGMExit);
             this.tabPageGM.Controls.Add(this.cbGMEnable);
             this.tabPageGM.Controls.Add(this.linkLabel1);
@@ -298,16 +313,6 @@
             this.tabPageGM.TabIndex = 0;
             this.tabPageGM.Text = "GM";
             this.tabPageGM.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(251, 32);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 28;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnGMExit
             // 
@@ -1109,7 +1114,6 @@
         private System.Windows.Forms.Label lblPBStatus;
         private System.Windows.Forms.Label lblPBPoints;
         private System.Windows.Forms.Label lblPBLevel;
-        private System.Windows.Forms.Button button1;
     }
 }
 
