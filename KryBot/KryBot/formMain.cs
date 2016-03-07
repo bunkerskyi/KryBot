@@ -90,6 +90,7 @@ namespace KryBot
                 cbSCEnable.Checked = Bot.SteamCompanionEnabled;
                 cbSPEnable.Checked = Bot.SteamPortalEnabled;
                 cbSTEnable.Checked = Bot.SteamTradeEnabled;
+                cbPBEnabled.Checked = Bot.SteamTradeEnabled;
                 btnStart.Enabled = await LoginCheck();
             }
             else
@@ -100,10 +101,14 @@ namespace KryBot
                 btnSCLogin.Visible = true;
                 btnSPLogin.Visible = true;
                 btnSTLogin.Visible = true;
+                btnPBLogin.Visible = true;
                 btnSteamLogin.Visible = true;
                 btnStart.Enabled = false;
             }
-        }
+
+            WebBrowser web = new WebBrowser();
+            MessageBox.Show(web.Version.ToString());
+        }                                    
 
         private void FormMain_LocationChanged(object sender, EventArgs e)
         {
@@ -1524,6 +1529,11 @@ namespace KryBot
             {
                 return true;
             }
+            else
+            {
+                LogBuffer = login;
+                LogChanged?.Invoke();
+            }
             return false;
         }
 
@@ -1533,6 +1543,11 @@ namespace KryBot
             if (login.Success)
             {
                 return true;
+            }
+            else
+            {
+                LogBuffer = login;
+                LogChanged?.Invoke();
             }
             return false;
         }
@@ -1544,6 +1559,11 @@ namespace KryBot
             {
                 return true;
             }
+            else
+            {
+                LogBuffer = login;
+                LogChanged?.Invoke();
+            }
             return false;
         }
 
@@ -1554,6 +1574,11 @@ namespace KryBot
             {
                 return true;
             }
+            else
+            {
+                LogBuffer = login;
+                LogChanged?.Invoke();
+            }
             return false;
         }
 
@@ -1563,6 +1588,11 @@ namespace KryBot
             if (login.Success)
             {
                 return true;
+            }
+            else
+            {
+                LogBuffer = login;
+                LogChanged?.Invoke();
             }
             return false;
         }
@@ -2124,7 +2154,7 @@ namespace KryBot
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message + @"{" + ex.Source + @"} {" + ex.InnerException.Message + @"} {" + ex.StackTrace + @"}");
+                MessageBox.Show($"[{ex.Message}] {{{ex.InnerException?.Message}}}");
             }                                                                                                                 
             return true;                                                                                 
         }

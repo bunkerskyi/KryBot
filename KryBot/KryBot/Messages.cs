@@ -110,9 +110,9 @@ namespace KryBot
             return log;
         }
 
-        public static Log GiveawayHaveWon(string site, int count)
+        public static Log GiveawayHaveWon(string site, int count, string url)
         {
-            return ConstructLog($"{GetDateTime()} {{{site}}} {strings.GiveawaysHaveWon} ({count})",
+            return ConstructLog($"{GetDateTime()} {{{site}}} {strings.GiveawaysHaveWon} ({count}) {{{url}}}",
                 Color.Orange, true, true);
         }
 

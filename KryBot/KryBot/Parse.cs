@@ -160,7 +160,7 @@ namespace KryBot
 
                 if (nodes.Count > 0)
                 {
-                    return GiveawayHaveWon("GameMiner", nodes.Count);
+                    return GiveawayHaveWon("GameMiner", nodes.Count, "http://gameminer.net/giveaways/won");
                 }
             }
             return null;
@@ -609,7 +609,7 @@ namespace KryBot
 
             if (nodes != null)
             {
-                return GiveawayHaveWon("SteamGifts", int.Parse(nodes.InnerText));
+                return GiveawayHaveWon("SteamGifts", int.Parse(nodes.InnerText), "http://www.steamgifts.com/giveaways/won");
             }
             return null;
         }
@@ -1040,7 +1040,7 @@ namespace KryBot
 
                     if (nodes.Count > 0)
                     {
-                        return GiveawayHaveWon("SteamCompanion", nodes.Count);
+                        return GiveawayHaveWon("SteamCompanion", nodes.Count, "https://steamcompanion.com/gifts/won");
                     }
                 }
             }
@@ -1067,7 +1067,7 @@ namespace KryBot
         }
 
         public static Classes.Log SteamCompanionLoadGiveaways(Classes.Bot bot, List<SteamCompanion.ScGiveaway> giveaways,
-            string[] blackList)
+            string[]     blackList)
         {
             var content = "";
             giveaways?.Clear();
@@ -1421,7 +1421,11 @@ namespace KryBot
                     {
                         var exception =
                             htmlDoc.DocumentNode.SelectSingleNode("//a[@class='notification regular-button']").InnerText;
-                        return GiveawayNotJoined("SteamCompanion", giveaway.Name, exception);
+
+                        if(exception != null)
+                        {
+                            return GiveawayNotJoined("SteamCompanion", giveaway.Name, exception);
+                        }   
                     }
                 }
             }
@@ -1507,7 +1511,7 @@ namespace KryBot
                         i--;
                     }
                 }
-                return GiveawayHaveWon("SteamPortal", nodes.Count);
+                return GiveawayHaveWon("SteamPortal", nodes.Count, "http://steamportal.net/profile/logs");
             }
             return null;
         }

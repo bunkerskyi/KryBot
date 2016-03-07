@@ -305,7 +305,8 @@ namespace KryBot
             var names = new List<string>
             {
                 "steamLogin:" + _bot.SteamLogin,
-                "sessionid:" + _bot.SteamSessid
+                "sessionid:" + _bot.SteamSessid,
+                "steamRememberLogin:" + _bot.SteamRememberLogin
             };
 
             var form = new FormCookie("Steam", names, _bot);
