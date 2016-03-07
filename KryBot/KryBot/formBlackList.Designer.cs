@@ -85,7 +85,7 @@
             // 
             // удалитьToolStripMenuItem1
             // 
-            this.удалитьToolStripMenuItem1.Image = global::KryBot.Properties.Resources.close;
+            this.удалитьToolStripMenuItem1.Image = global::KryBot.Properties.Resources.exit;
             this.удалитьToolStripMenuItem1.Name = "удалитьToolStripMenuItem1";
             this.удалитьToolStripMenuItem1.Size = new System.Drawing.Size(79, 20);
             this.удалитьToolStripMenuItem1.Text = "Удалить";
