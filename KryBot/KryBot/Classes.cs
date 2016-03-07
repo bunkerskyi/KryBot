@@ -17,6 +17,7 @@ namespace KryBot
             public bool SteamEnabled { get; set; }
             public string SteamSessid { get; set; }
             public string SteamLogin { get; set; }
+            public string SteamRememberLogin { get; set; }
             // Steam //
 
             // GameMiner //

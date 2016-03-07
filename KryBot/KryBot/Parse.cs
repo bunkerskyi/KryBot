@@ -49,8 +49,8 @@ namespace KryBot
                     }
                 }
                 return
-                    ConstructLog( $"{GetDateTime()} {{Steam}} Login success ({login})"
-                    , Color.White, true, echo);
+                    ConstructLog( $"{GetDateTime()} {{Steam}} {strings.LoginSuccess} ({login})", 
+                    Color.White, true, echo);
             }
             catch (NullReferenceException)
             {
@@ -109,16 +109,12 @@ namespace KryBot
                 //}
 
                 ProfileLoaded();
-                return
-                    ConstructLog(
-                        $"{GetDateTime()} {{GameMiner}} {strings.ParseProfile_Coal}: {bot.GameMinerCoal} {strings.ParseProfile_Level}: {bot.GameMinerLevel}", 
-                        Color.White, true, echo);
+                return ParseProfile("GameMiner", bot.GameMinerCoal, bot.GameMinerLevel);
             }
             catch (NullReferenceException)
             {
                 ProfileLoaded();
-                return ConstructLog($"{GetDateTime()} {{GameMiner}} {strings.ParseProfile_LoginOrServerError}", Color.Red,
-                    false, echo);
+                return ParseProfile("GameMiner", false);
             }
         }
 
@@ -256,10 +252,8 @@ namespace KryBot
                                 JsonConvert.DeserializeObject<GameMiner.JsonRootObject>(
                                     regularGiftsResponse.RestResponse.Content);
                             GameMinerAddGiveaways(regularGiftJsonResponse, bot, giveaways);
-                            content += GetDateTime() + @"{GameMiner} " + strings.ParseLoadGiveaways_Found + ' ' +
-                                       regularGiftJsonResponse.Total +
-                                       ' ' + strings.ParseLoadGiveaways_RegularGiveawaysIn + ' ' +
-                                       regularGiftJsonResponse.Last_Page + ' ' + strings.ParseLoadGiveaways_Pages + "\n";
+                            content += $"{GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {regularGiftJsonResponse.Total} " +
+                                       $"{strings.ParseLoadGiveaways_RegularGiveawaysIn} {regularGiftJsonResponse.Last_Page} {strings.ParseLoadGiveaways_Pages}\n";
 
                             pages = regularGiftJsonResponse.Last_Page;
                         }
@@ -281,10 +275,8 @@ namespace KryBot
                                 JsonConvert.DeserializeObject<GameMiner.JsonRootObject>(
                                     regularAnyResponse.RestResponse.Content);
                             GameMinerAddGiveaways(regularAnyJsonResponse, bot, giveaways);
-                            content += GetDateTime() + @"{GameMiner} " + strings.ParseLoadGiveaways_Found + ' ' +
-                                       regularAnyJsonResponse.Total +
-                                       ' ' + strings.ParseLoadGiveaways_RegularGiveawaysIn + ' ' +
-                                       regularAnyJsonResponse.Last_Page + ' ' + strings.ParseLoadGiveaways_Pages + "\n";
+                            content += $"{GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {regularAnyJsonResponse.Total} " +
+                                       $"{strings.ParseLoadGiveaways_RegularGiveawaysIn} {strings.ParseLoadGiveaways_Pages}\n";
                             pages = regularAnyJsonResponse.Last_Page;
                         }
                         catch (JsonReaderException)
@@ -359,10 +351,8 @@ namespace KryBot
                                     sandboxGiftsResponse.RestResponse.Content);
                             GameMinerAddGiveaways(sandboxGiftJsonResponse, bot, giveaways);
 
-                            content += GetDateTime() + @"{GameMiner} " + strings.ParseLoadGiveaways_Found + ' ' +
-                                       sandboxGiftJsonResponse.Total +
-                                       ' ' + strings.ParseLoadGiveaways_RegularGiveawaysIn + ' ' +
-                                       sandboxGiftJsonResponse.Last_Page + ' ' + strings.ParseLoadGiveaways_Pages + "\n";
+                            content += $"{GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {sandboxGiftJsonResponse.Total} " +
+                                       $"{strings.ParseLoadGiveaways_RegularGiveawaysIn} {sandboxGiftJsonResponse.Last_Page} {strings.ParseLoadGiveaways_Pages}\n";
 
                             pages = sandboxGiftJsonResponse.Last_Page;
                         }
@@ -385,10 +375,8 @@ namespace KryBot
                                     regularAnyResponse.RestResponse.Content);
                             GameMinerAddGiveaways(regularAnyJsonResponse, bot, giveaways);
 
-                            content += GetDateTime() + @"{GameMiner} " + strings.ParseLoadGiveaways_Found + ' ' +
-                                       regularAnyJsonResponse.Total +
-                                       ' ' + strings.ParseLoadGiveaways_SandboxGiveawaysIn + ' ' +
-                                       regularAnyJsonResponse.Last_Page + ' ' + strings.ParseLoadGiveaways_Pages + "\n";
+                            content += $"{GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {regularAnyJsonResponse.Total} " +
+                                       $"{strings.ParseLoadGiveaways_SandboxGiveawaysIn} {regularAnyJsonResponse.Last_Page} {strings.ParseLoadGiveaways_Pages}\n";
 
                             pages = regularAnyJsonResponse.Last_Page;
                         }
@@ -582,15 +570,11 @@ namespace KryBot
                     int.Parse(
                         htmlDoc.DocumentNode.SelectSingleNode("//a[@href='/account']/span[2]").InnerText.Split(' ')[1]);
                 return
-                    ConstructLog(
-                        GetDateTime() + @"{SteamGifts} " + strings.ParseProfile_Points + @": " + bot.SteamGiftsPoint +
-                        ' '
-                        + strings.ParseProfile_Level + @": " + bot.SteamGiftsLevel, Color.White, true, echo);
+                    ParseProfile("SteamGifts", bot.SteamGiftsPoint, bot.SteamGiftsLevel);
             }
             catch (Exception)
             {
-                return ConstructLog(GetDateTime() + @"{SteamGifts} " + strings.ParseProfile_LoginOrServerError,
-                    Color.Red, false, echo);
+                return ParseProfile("SteamGifts", false);
             }
         }
 
@@ -649,7 +633,8 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamGiftsLoadGiveaways(Classes.Bot bot, List<SteamGifts.SgGiveaway> giveaways, string[] blackList)
+        public static Classes.Log SteamGiftsLoadGiveaways(Classes.Bot bot, List<SteamGifts.SgGiveaway> giveaways,
+            string[] blackList)
         {
             try
             {
@@ -718,8 +703,8 @@ namespace KryBot
                 {
                     return
                         ConstructLog(
-                            content + GetDateTime() + @"{SteamGifts} " + strings.ParseLoadGiveaways_FoundMatchGiveaways +
-                            @": " + 0, Color.White, true, true);
+                            $"{content}{GetDateTime()} {{SteamGifts}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0",
+                            Color.White, true, true);
                 }
 
                 if (blackList != null)
@@ -740,15 +725,15 @@ namespace KryBot
 
                 return
                     ConstructLog(
-                        content + GetDateTime() + @"{SteamGifts} " + strings.ParseLoadGiveaways_FoundMatchGiveaways +
-                        @": " + giveaways.Count, Color.White, true, true);
+                        $"{content}{GetDateTime()} {{SteamGifts}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {giveaways.Count}",
+                        Color.White, true, true);
             }
             catch (NullReferenceException)
             {
                 return
                     ConstructLog(
-                        "" + GetDateTime() + @"{SteamGifts} " + strings.ParseLoadGiveaways_FoundMatchGiveaways +
-                        @": " + giveaways?.Count, Color.White, true, true);
+                        $"{GetDateTime()} {{SteamGifts}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {giveaways?.Count}",
+                        Color.White, true, true);
             }
         }
 
@@ -826,8 +811,7 @@ namespace KryBot
                 SteamGiftsAddGiveaways(nodes, bot, giveaways);
             }
 
-            return GetDateTime() + @"{SteamGifts} " + strings.ParseLoadGiveaways_FoundGiveAwaysInWishList + @": " +
-                   nodesCount + "\n";
+            return $"{GetDateTime()} {{SteamGifts}} {strings.ParseLoadGiveaways_FoundGiveAwaysInWishList}: {nodesCount}\n";
         }
 
         public static string SteamGiftsLoadGroupGiveaways(Classes.Bot bot, List<SteamGifts.SgGiveaway> giveaways)
@@ -886,8 +870,7 @@ namespace KryBot
                 }
             }
 
-            return GetDateTime() + @"{SteamGifts} " + strings.ParseLoadGiveaways_FoundGiveAwaysInGroup + @": " +
-                   nodesCount + "\n";
+            return $"{GetDateTime()} {{SteamGifts}} {strings.ParseLoadGiveaways_FoundGiveAwaysInGroup}: {nodesCount}\n";
         }
 
         private static void SteamGiftsAddGiveaways(HtmlNodeCollection nodes, Classes.Bot bot,
@@ -1002,18 +985,13 @@ namespace KryBot
                     bot.SteamCompanionProfileLink =
                         htmlDoc.DocumentNode.SelectSingleNode("//ul[@class='right']/li[1]/a[1]").Attributes["href"]
                             .Value;
-                    return
-                        ConstructLog(
-                            GetDateTime() + @"{SteamCompanion} " + strings.ParseProfile_Points + @": " +
-                            bot.SteamCompanionPoint, Color.White, true, echo);
+                    return ParseProfile("SteamCompanion", bot.SteamCompanionPoint, -1);
                 }
-                return ConstructLog(GetDateTime() + @"{SteamCompanion} " + strings.ParseProfile_LoginOrServerError,
-                    Color.Red, false, echo);
+                return ParseProfile("SteamCompanion", false);
             }
             catch (Exception)
             {
-                return ConstructLog(GetDateTime() + @"{SteamCompanion} " + strings.ParseProfile_LoginOrServerError,
-                    Color.Red, false, echo);
+                return ParseProfile("SteamCompanion", false);
             }
         }
 
@@ -1088,7 +1066,8 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamCompanionLoadGiveaways(Classes.Bot bot, List<SteamCompanion.ScGiveaway> giveaways, string[] blackList)
+        public static Classes.Log SteamCompanionLoadGiveaways(Classes.Bot bot, List<SteamCompanion.ScGiveaway> giveaways,
+            string[] blackList)
         {
             var content = "";
             giveaways?.Clear();
@@ -1176,8 +1155,8 @@ namespace KryBot
             {
                 return
                     ConstructLog(
-                        content + GetDateTime() + @"{SteamCompanion} " + strings.ParseLoadGiveaways_FoundMatchGiveaways +
-                        @": " + 0, Color.White, true, true);
+                        $"{content}{GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0",
+                        Color.White, true, true);
             }
 
             //if (blackList != null)
@@ -1198,8 +1177,8 @@ namespace KryBot
 
             return
                 ConstructLog(
-                    content + GetDateTime() + @"{SteamCompanion} " + strings.ParseLoadGiveaways_FoundMatchGiveaways +
-                    @": " + giveaways.Count, Color.White, true, true);
+                    $"{content}{GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {giveaways.Count}",
+                    Color.White, true, true);
         }
 
         public static async Task<Classes.Log> SteamCompanionLoadGiveawaysAsync(Classes.Bot bot,
@@ -1272,9 +1251,7 @@ namespace KryBot
                     }
                 }
             }
-            return GetDateTime() + @"{SteamCompanion} " + strings.ParseLoadGiveaways_Found + ' ' + (giveaways.Count == 0 ? 0 : count) + ' ' +
-                   strings.ParseLoadGiveaways_WishListGiveAwaysIn +                                                    
-                   ' ' + pages + ' ' + strings.ParseLoadGiveaways_Pages + "\n";
+            return $"{GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_Found} {(giveaways.Count == 0 ? 0 : count)} {strings.ParseLoadGiveaways_WishListGiveAwaysIn} {pages} {strings.ParseLoadGiveaways_Pages}\n";
         }
 
         public static string SteamCompanionLoadGroupGiveaways(Classes.Bot bot, List<SteamCompanion.ScGiveaway> giveaways)
@@ -1338,9 +1315,8 @@ namespace KryBot
                 }
             }
 
-            return GetDateTime() + @"{SteamCompanion} " + strings.ParseLoadGiveaways_Found + ' ' + count + ' ' +
-                   strings.ParseLoadGiveaways_GroupGiveAwaysIn +
-                   ' ' + pages + ' ' + strings.ParseLoadGiveaways_Pages + "\n";
+            return $"{GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_Found} {count} {strings.ParseLoadGiveaways_GroupGiveAwaysIn} {pages} " +
+                   $"{strings.ParseLoadGiveaways_Pages} \n";
         }
 
         private static void SteamCompanionAddGiveaways(HtmlNodeCollection nodes, Classes.Bot bot,
@@ -1485,15 +1461,11 @@ namespace KryBot
                                              htmlDoc.DocumentNode.SelectSingleNode("//div[@class='my_profile']/a[1]")
                                                  .Attributes["href"].Value;
 
-                return
-                    ConstructLog(
-                        GetDateTime() + @"{SteamPortal} " + strings.ParseProfile_Points + @": " + bot.SteamPortalPoints,
-                        Color.White, true, echo);
+                return ParseProfile("SteamPortal", bot.SteamPortalPoints, -1);
             }
             catch (Exception)
             {
-                return ConstructLog(GetDateTime() + @"{SteamPortal} " + strings.ParseProfile_LoginOrServerError,
-                    Color.Red, false, echo);
+                return ParseProfile("Steamportal", false);
             }
         }
 
@@ -1559,7 +1531,8 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamPortalLoadGiveaways(Classes.Bot bot, List<SteamPortal.SpGiveaway> giveaways, string[] blackList)
+        public static Classes.Log SteamPortalLoadGiveaways(Classes.Bot bot, List<SteamPortal.SpGiveaway> giveaways,
+            string[] blackList)
         {
             try
             {
@@ -1612,8 +1585,7 @@ namespace KryBot
                 {
                     return
                         ConstructLog(
-                            GetDateTime() + @"{SteamPortal} " + strings.ParseLoadGiveaways_FoundMatchGiveaways + @": " +
-                            0,
+                            $"{GetDateTime()} {{SteamPortal}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0",
                             Color.White, true, true);
                 }
 
@@ -1635,8 +1607,8 @@ namespace KryBot
 
                 return
                     ConstructLog(
-                        GetDateTime() + @"{SteamPortal} " + strings.ParseLoadGiveaways_FoundMatchGiveaways + @": " +
-                        giveaways.Count, Color.White, true, true);
+                        $"{GetDateTime()} {{SteamPortal}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {giveaways.Count}",
+                        Color.White, true, true);
             }
             catch (NullReferenceException)
             {
@@ -1770,12 +1742,11 @@ namespace KryBot
 
                 // ReSharper disable once UnusedVariable
                 var test = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='topm1']").Attributes["href"].Value;
-                return ConstructLog(GetDateTime() + @"{SteamTrade} " + @"Login success", Color.White, true, echo);
+                return ParseProfile("SteamTrade", true);
             }
             catch (NullReferenceException)
             {
-                return ConstructLog(GetDateTime() + @"{SteamTrade} " + strings.ParseProfile_LoginOrServerError,
-                    Color.Red, false, echo);
+                return ParseProfile("SteamTrade", false);
             }
         }
 
@@ -1798,7 +1769,8 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamTradeLoadGiveaways(Classes.Bot bot, List<SteamTrade.StGiveaway> giveaways, string[] blackList)
+        public static Classes.Log SteamTradeLoadGiveaways(Classes.Bot bot, List<SteamTrade.StGiveaway> giveaways,
+            string[] blackList)
         {
             try
             {
@@ -1817,8 +1789,7 @@ namespace KryBot
                 {
                     return
                         ConstructLog(
-                            GetDateTime() + @"{SteamTrade} " + strings.ParseLoadGiveaways_FoundMatchGiveaways + @": " +
-                            0,
+                            $"{GetDateTime()} {{SteamTrade}} {strings.ParseLoadGiveaways_FoundMatchGiveaways} : 0",
                             Color.White, true, true);
                 }
 
@@ -1840,8 +1811,8 @@ namespace KryBot
 
                 return
                     ConstructLog(
-                        GetDateTime() + @"{SteamTrade} " + strings.ParseLoadGiveaways_FoundMatchGiveaways + @": " +
-                        giveaways.Count, Color.White, true, true);
+                        $"{GetDateTime()} {{SteamTrade}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {giveaways.Count}",
+                        Color.White, true, true);
             }
             catch (NullReferenceException)
             {
@@ -1935,16 +1906,12 @@ namespace KryBot
                     int.Parse(htmlDoc.DocumentNode.SelectSingleNode("//a[@title='Your contribution level']/b").InnerText);
 
                 ProfileLoaded();
-                return
-                    ConstructLog($"{GetDateTime()} {{PlayBlink}} {strings.ParseProfile_Points}: " +
-                                 $"{bot.PlayBlinkPoints} {strings.ParseProfile_Level}: {bot.PlayBlinkLevel}", Color.White,
-                        true, echo);
+                return ParseProfile("PlayBlink", bot.PlayBlinkPoints, bot.PlayBlinkLevel);
             }
             catch (NullReferenceException)
             {
                 ProfileLoaded();
-                return ConstructLog($"{GetDateTime()}{{PlayBlink}} {strings.ParseProfile_LoginOrServerError}", Color.Red,
-                    false, echo);
+                return ParseProfile("PlayBlink", false);
             }
         }
 
