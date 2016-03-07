@@ -17,6 +17,7 @@ namespace KryBot
             {
                 cookie.Add(new Cookie("sessionid", bot.SteamSessid) {Domain = target.Host});
                 cookie.Add(new Cookie("steamLogin", bot.SteamLogin) {Domain = target.Host});
+                cookie.Add(new Cookie("steamRememberLogin", bot.SteamRememberLogin) { Domain = target.Host });
             }
             catch (CookieException)
             {
