@@ -106,6 +106,15 @@ namespace KryBot.lang {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Ошибка.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Конфигурация.
         /// </summary>
         internal static string GetBotInConfig_Config {

@@ -23,7 +23,7 @@ namespace KryBot
         {
             var log = new Log
             {
-                Content = $"{GetDateTime()} {strings.GetBotInConfig_Config} '{fileName}' {strings.GetBotInConfig_NotLoaded}",
+                Content = $"{GetDateTime()} {strings.GetBotInConfig_Config} \"{fileName}\" {strings.GetBotInConfig_NotLoaded}",
                 Color = Color.Red
             };
             return log;
@@ -48,7 +48,7 @@ namespace KryBot
         {
             var log = new Log
             {
-                Content = $"{GetDateTime()} {strings.DllNotLoad} '{name}' {strings.DllNotLoad_1}",
+                Content = $"{GetDateTime()} {strings.DllNotLoad} \"{name}\" {strings.DllNotLoad_1}",
                 Color = Color.White
             };
             return log;
@@ -85,13 +85,13 @@ namespace KryBot
             if (level > 0)
             {
                 log.Content =
-                    $"{GetDateTime()} {{site}} {strings.GiveawayJoined_Join} \"{name}\" [{level}] {strings.GiveawayJoined_ConfirmedFor} {price} " +
+                    $"{GetDateTime()} {{{site}}} {strings.GiveawayJoined_Join} \"{name}\" [{level}] {strings.GiveawayJoined_ConfirmedFor} {price} " +
                     $"{strings.GiveawayJoined_Points} ({points}) \n";
             }
             else
             {
                 log.Content =
-                    $"{GetDateTime()} {{site}} {strings.GiveawayJoined_Join} \"{name}\" {strings.GiveawayJoined_ConfirmedFor} {price} " +
+                    $"{GetDateTime()} {{{site}}} {strings.GiveawayJoined_Join} \"{name}\" {strings.GiveawayJoined_ConfirmedFor} {price} " +
                     $"{strings.GiveawayJoined_Points} ({points}) \n";
             }
 
@@ -112,18 +112,43 @@ namespace KryBot
 
         public static Log GiveawayHaveWon(string site, int count)
         {
-            return ConstructLog($"{GetDateTime()} {{site}} {strings.GiveawaysHaveWon} ({count})",
+            return ConstructLog($"{GetDateTime()} {{{site}}} {strings.GiveawaysHaveWon} ({count})",
                 Color.Orange, true, true);
         }
 
         public static Log GroupJoined(string url)
         {
-            return ConstructLog($"{GetDateTime()} {strings.SteamGroupJoined} {{url}}", Color.Yellow, false, true);
+            return ConstructLog($"{GetDateTime()} {strings.SteamGroupJoined} {{{url}}}", Color.Yellow, false, true);
         }
 
         public static Log GroupNotJoinde(string url)
         {
-            return ConstructLog($"{GetDateTime()} {strings.SteamGroupNotJoined} {{url}}", Color.Yellow, false, true);
+            return ConstructLog($"{GetDateTime()} {strings.SteamGroupNotJoined} {{{url}}}", Color.Yellow, false, true);
+        }
+
+        public static Log ParseProfile(string site, int points, int level)
+        {
+            var str = $"{GetDateTime()} {{{site}}} {strings.ParseProfile_Points}: {points}";
+
+            if (level != -1)
+            {
+                str += $" {strings.ParseProfile_Level}: {level}";
+            }
+            return ConstructLog(str, Color.White, true, true);
+        }
+
+        public static Log ParseProfile(string site, bool success)
+        {
+            if (!success)
+            {
+                return ConstructLog($"{GetDateTime()} {{{site}}} {strings.ParseProfile_LoginOrServerError}", Color.Red,
+                    false, true);
+            }
+            else
+            {
+                return ConstructLog($"{GetDateTime()} {{{site}}} {strings.LoginSuccess}", Color.White,
+                    true, true);
+            }
         }
     }
 }

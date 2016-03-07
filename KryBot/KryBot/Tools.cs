@@ -10,6 +10,7 @@ using System.Security;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using KryBot.lang;
 using Microsoft.Win32;
 using RestSharp;
 
@@ -186,7 +187,7 @@ namespace KryBot
             {
                 MessageBox.Show(
                    @"При записи в реестр произошла ошибка. Запись в реестр разрешена администратором?",
-                   @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                   strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }
@@ -210,7 +211,7 @@ namespace KryBot
             {
                 MessageBox.Show(
                    @"При записи в реестр произошла ошибка. Запись в реестр разрешена администратором?",
-                   @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                   strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }
@@ -303,7 +304,7 @@ namespace KryBot
                 }
                 catch (IOException ex)
                 {
-                    MessageBox.Show(@"Ошибка", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(strings.Error, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null;
                 }
             }
