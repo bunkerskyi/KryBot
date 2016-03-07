@@ -88,15 +88,15 @@
             this.tabPageST = new System.Windows.Forms.TabPage();
             this.btnSTCookies = new System.Windows.Forms.Button();
             this.tabPagePB = new System.Windows.Forms.TabPage();
+            this.tbPBReserv = new System.Windows.Forms.TextBox();
+            this.tbPBMaxValue = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.btnPBCookies = new System.Windows.Forms.Button();
             this.tabPageSteam = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tbPBReserv = new System.Windows.Forms.TextBox();
-            this.tbPBMaxValue = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPageCommun.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -333,7 +333,7 @@
             // 
             // btbGMCookies
             // 
-            this.btbGMCookies.Image = global::KryBot.Properties.Resources.locked;
+            this.btbGMCookies.Image = global::KryBot.Properties.Resources.locked1;
             this.btbGMCookies.Location = new System.Drawing.Point(278, 6);
             this.btbGMCookies.Name = "btbGMCookies";
             this.btbGMCookies.Size = new System.Drawing.Size(23, 23);
@@ -493,7 +493,7 @@
             // 
             // btnSGCookies
             // 
-            this.btnSGCookies.Image = global::KryBot.Properties.Resources.locked;
+            this.btnSGCookies.Image = global::KryBot.Properties.Resources.locked1;
             this.btnSGCookies.Location = new System.Drawing.Point(278, 6);
             this.btnSGCookies.Name = "btnSGCookies";
             this.btnSGCookies.Size = new System.Drawing.Size(23, 23);
@@ -597,7 +597,7 @@
             // 
             // btnSCCookies
             // 
-            this.btnSCCookies.Image = global::KryBot.Properties.Resources.locked;
+            this.btnSCCookies.Image = global::KryBot.Properties.Resources.locked1;
             this.btnSCCookies.Location = new System.Drawing.Point(278, 6);
             this.btnSCCookies.Name = "btnSCCookies";
             this.btnSCCookies.Size = new System.Drawing.Size(23, 23);
@@ -678,7 +678,7 @@
             // 
             // btnSPCookies
             // 
-            this.btnSPCookies.Image = global::KryBot.Properties.Resources.locked;
+            this.btnSPCookies.Image = global::KryBot.Properties.Resources.locked1;
             this.btnSPCookies.Location = new System.Drawing.Point(278, 6);
             this.btnSPCookies.Name = "btnSPCookies";
             this.btnSPCookies.Size = new System.Drawing.Size(23, 23);
@@ -734,7 +734,7 @@
             // 
             // btnSTCookies
             // 
-            this.btnSTCookies.Image = global::KryBot.Properties.Resources.locked;
+            this.btnSTCookies.Image = global::KryBot.Properties.Resources.locked1;
             this.btnSTCookies.Location = new System.Drawing.Point(278, 6);
             this.btnSTCookies.Name = "btnSTCookies";
             this.btnSTCookies.Size = new System.Drawing.Size(23, 23);
@@ -755,54 +755,6 @@
             this.tabPagePB.TabIndex = 7;
             this.tabPagePB.Text = "PB";
             this.tabPagePB.UseVisualStyleBackColor = true;
-            // 
-            // btnPBCookies
-            // 
-            this.btnPBCookies.Image = global::KryBot.Properties.Resources.locked;
-            this.btnPBCookies.Location = new System.Drawing.Point(278, 6);
-            this.btnPBCookies.Name = "btnPBCookies";
-            this.btnPBCookies.Size = new System.Drawing.Size(23, 23);
-            this.btnPBCookies.TabIndex = 20;
-            this.btnPBCookies.UseVisualStyleBackColor = true;
-            this.btnPBCookies.Click += new System.EventHandler(this.btnPBCookies_Click);
-            // 
-            // tabPageSteam
-            // 
-            this.tabPageSteam.Controls.Add(this.button1);
-            this.tabPageSteam.Location = new System.Drawing.Point(4, 22);
-            this.tabPageSteam.Name = "tabPageSteam";
-            this.tabPageSteam.Size = new System.Drawing.Size(309, 155);
-            this.tabPageSteam.TabIndex = 6;
-            this.tabPageSteam.Text = "Steam";
-            this.tabPageSteam.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Image = global::KryBot.Properties.Resources.locked;
-            this.button1.Location = new System.Drawing.Point(278, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(23, 23);
-            this.button1.TabIndex = 20;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.сохранитьToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(317, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // сохранитьToolStripMenuItem
-            // 
-            this.сохранитьToolStripMenuItem.Image = global::KryBot.Properties.Resources.save;
-            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
-            this.сохранитьToolStripMenuItem.Text = "Сохранить";
-            this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
             // tbPBReserv
             // 
@@ -839,6 +791,54 @@
             this.label10.Size = new System.Drawing.Size(125, 13);
             this.label10.TabIndex = 21;
             this.label10.Text = "Максимальная ставка:";
+            // 
+            // btnPBCookies
+            // 
+            this.btnPBCookies.Image = global::KryBot.Properties.Resources.locked1;
+            this.btnPBCookies.Location = new System.Drawing.Point(278, 6);
+            this.btnPBCookies.Name = "btnPBCookies";
+            this.btnPBCookies.Size = new System.Drawing.Size(23, 23);
+            this.btnPBCookies.TabIndex = 20;
+            this.btnPBCookies.UseVisualStyleBackColor = true;
+            this.btnPBCookies.Click += new System.EventHandler(this.btnPBCookies_Click);
+            // 
+            // tabPageSteam
+            // 
+            this.tabPageSteam.Controls.Add(this.button1);
+            this.tabPageSteam.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSteam.Name = "tabPageSteam";
+            this.tabPageSteam.Size = new System.Drawing.Size(309, 155);
+            this.tabPageSteam.TabIndex = 6;
+            this.tabPageSteam.Text = "Steam";
+            this.tabPageSteam.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Image = global::KryBot.Properties.Resources.locked1;
+            this.button1.Location = new System.Drawing.Point(278, 6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(23, 23);
+            this.button1.TabIndex = 20;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.сохранитьToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(317, 24);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // сохранитьToolStripMenuItem
+            // 
+            this.сохранитьToolStripMenuItem.Image = global::KryBot.Properties.Resources.check;
+            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
+            this.сохранитьToolStripMenuItem.Text = "Сохранить";
+            this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
             // FormSettings
             // 

@@ -23,7 +23,7 @@ namespace KryBot
         private void formCookie_Load(object sender, EventArgs e)
         {
             Text = _site;
-            Icon = Icon.FromHandle(Resources.locked.GetHicon());
+            Icon = Icon.FromHandle(Resources.locked1.GetHicon());
 
             foreach (var name in _names)
             {

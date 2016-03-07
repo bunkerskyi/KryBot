@@ -2024,7 +2024,7 @@ namespace KryBot
             notifyIcon.BalloonTipIcon = icon;
             notifyIcon.BalloonTipText = content;
             notifyIcon.BalloonTipTitle = Application.ProductName;
-            notifyIcon.Tag = url;
+            notifyIcon.Tag = ""; //url;
             notifyIcon.BalloonTipClicked += NotifyIconOnBalloonTipClicked;
             notifyIcon.ShowBalloonTip(interval);
         }
