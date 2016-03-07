@@ -19,7 +19,7 @@ namespace KryBot
 
         private void Design()
         {
-            Icon = Icon.FromHandle(Resources.statistic.GetHicon());
+            Icon = Icon.FromHandle(Resources.statistic1.GetHicon());
             Text = @"Статистика";
 
             lblSessionJoins.Text += Settings.Default.JoinsPerSession;

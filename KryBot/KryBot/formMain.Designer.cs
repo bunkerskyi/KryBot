@@ -175,14 +175,14 @@
             this.сохранитьToolStripMenuItem,
             this.сохранитьКакToolStripMenuItem,
             this.загрузитьToolStripMenuItem});
-            this.файлToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("файлToolStripMenuItem.Image")));
+            this.файлToolStripMenuItem.Image = global::KryBot.Properties.Resources.file;
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
             // вПапкуСБотомToolStripMenuItem
             // 
-            this.вПапкуСБотомToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("вПапкуСБотомToolStripMenuItem.Image")));
+            this.вПапкуСБотомToolStripMenuItem.Image = global::KryBot.Properties.Resources.folder;
             this.вПапкуСБотомToolStripMenuItem.Name = "вПапкуСБотомToolStripMenuItem";
             this.вПапкуСБотомToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.вПапкуСБотомToolStripMenuItem.Text = "Открыть папку с ботом";
@@ -190,7 +190,7 @@
             // 
             // сохранитьToolStripMenuItem
             // 
-            this.сохранитьToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("сохранитьToolStripMenuItem.Image")));
+            this.сохранитьToolStripMenuItem.Image = global::KryBot.Properties.Resources.file;
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
             this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
@@ -198,7 +198,7 @@
             // 
             // сохранитьКакToolStripMenuItem
             // 
-            this.сохранитьКакToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("сохранитьКакToolStripMenuItem.Image")));
+            this.сохранитьКакToolStripMenuItem.Image = global::KryBot.Properties.Resources.file;
             this.сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
             this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.сохранитьКакToolStripMenuItem.Text = "Сохранить как...";
@@ -206,7 +206,7 @@
             // 
             // загрузитьToolStripMenuItem
             // 
-            this.загрузитьToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("загрузитьToolStripMenuItem.Image")));
+            this.загрузитьToolStripMenuItem.Image = global::KryBot.Properties.Resources.exit;
             this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
             this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
             this.загрузитьToolStripMenuItem.Text = "Выйти";
@@ -224,7 +224,7 @@
             // 
             // настройкиToolStripMenuItem1
             // 
-            this.настройкиToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("настройкиToolStripMenuItem1.Image")));
+            this.настройкиToolStripMenuItem1.Image = global::KryBot.Properties.Resources.settings;
             this.настройкиToolStripMenuItem1.Name = "настройкиToolStripMenuItem1";
             this.настройкиToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
             this.настройкиToolStripMenuItem1.Text = "Настройки";
@@ -232,7 +232,7 @@
             // 
             // черныйСписокToolStripMenuItem
             // 
-            this.черныйСписокToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("черныйСписокToolStripMenuItem.Image")));
+            this.черныйСписокToolStripMenuItem.Image = global::KryBot.Properties.Resources.blocked;
             this.черныйСписокToolStripMenuItem.Name = "черныйСписокToolStripMenuItem";
             this.черныйСписокToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.черныйСписокToolStripMenuItem.Text = "Черный список";
@@ -244,38 +244,38 @@
             this.статстикаToolStripMenuItem,
             this.оПрограммеToolStripMenuItem1,
             this.донатToolStripMenuItem});
-            this.оПрограммеToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("оПрограммеToolStripMenuItem.Image")));
+            this.оПрограммеToolStripMenuItem.Image = global::KryBot.Properties.Resources.info;
             this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
             this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(130, 20);
             this.оПрограммеToolStripMenuItem.Text = "Информация       ";
             // 
             // статстикаToolStripMenuItem
             // 
-            this.статстикаToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("статстикаToolStripMenuItem.Image")));
+            this.статстикаToolStripMenuItem.Image = global::KryBot.Properties.Resources.statistic1;
             this.статстикаToolStripMenuItem.Name = "статстикаToolStripMenuItem";
-            this.статстикаToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.статстикаToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.статстикаToolStripMenuItem.Text = "Статистика";
             this.статстикаToolStripMenuItem.Click += new System.EventHandler(this.статстикаToolStripMenuItem_Click);
             // 
             // оПрограммеToolStripMenuItem1
             // 
-            this.оПрограммеToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("оПрограммеToolStripMenuItem1.Image")));
+            this.оПрограммеToolStripMenuItem1.Image = global::KryBot.Properties.Resources.info;
             this.оПрограммеToolStripMenuItem1.Name = "оПрограммеToolStripMenuItem1";
-            this.оПрограммеToolStripMenuItem1.Size = new System.Drawing.Size(149, 22);
+            this.оПрограммеToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.оПрограммеToolStripMenuItem1.Text = "О программе";
             this.оПрограммеToolStripMenuItem1.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem1_Click);
             // 
             // донатToolStripMenuItem
             // 
-            this.донатToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("донатToolStripMenuItem.Image")));
+            this.донатToolStripMenuItem.Image = global::KryBot.Properties.Resources.wallet;
             this.донатToolStripMenuItem.Name = "донатToolStripMenuItem";
-            this.донатToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.донатToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.донатToolStripMenuItem.Text = "Поддержать";
             this.донатToolStripMenuItem.Click += new System.EventHandler(this.донатToolStripMenuItem_Click);
             // 
             // логToolStripMenuItem
             // 
-            this.логToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("логToolStripMenuItem.Image")));
+            this.логToolStripMenuItem.Image = global::KryBot.Properties.Resources.log1;
             this.логToolStripMenuItem.Name = "логToolStripMenuItem";
             this.логToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
             this.логToolStripMenuItem.Text = "Лог <<";
@@ -316,6 +316,7 @@
             // 
             // btnGMExit
             // 
+            this.btnGMExit.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnGMExit.Location = new System.Drawing.Point(134, 19);
             this.btnGMExit.Name = "btnGMExit";
             this.btnGMExit.Size = new System.Drawing.Size(75, 23);
@@ -349,7 +350,7 @@
             // 
             // pbGMReload
             // 
-            this.pbGMReload.Image = ((System.Drawing.Image)(resources.GetObject("pbGMReload.Image")));
+            this.pbGMReload.Image = global::KryBot.Properties.Resources.refresh;
             this.pbGMReload.Location = new System.Drawing.Point(314, 42);
             this.pbGMReload.Name = "pbGMReload";
             this.pbGMReload.Size = new System.Drawing.Size(16, 16);
@@ -447,7 +448,7 @@
             // 
             // pbSGReload
             // 
-            this.pbSGReload.Image = ((System.Drawing.Image)(resources.GetObject("pbSGReload.Image")));
+            this.pbSGReload.Image = global::KryBot.Properties.Resources.refresh;
             this.pbSGReload.Location = new System.Drawing.Point(314, 42);
             this.pbSGReload.Name = "pbSGReload";
             this.pbSGReload.Size = new System.Drawing.Size(16, 16);
@@ -544,7 +545,7 @@
             // 
             // pbSCReload
             // 
-            this.pbSCReload.Image = ((System.Drawing.Image)(resources.GetObject("pbSCReload.Image")));
+            this.pbSCReload.Image = global::KryBot.Properties.Resources.refresh;
             this.pbSCReload.Location = new System.Drawing.Point(314, 42);
             this.pbSCReload.Name = "pbSCReload";
             this.pbSCReload.Size = new System.Drawing.Size(16, 16);
@@ -641,7 +642,7 @@
             // 
             // pbSPReload
             // 
-            this.pbSPReload.Image = ((System.Drawing.Image)(resources.GetObject("pbSPReload.Image")));
+            this.pbSPReload.Image = global::KryBot.Properties.Resources.refresh;
             this.pbSPReload.Location = new System.Drawing.Point(314, 42);
             this.pbSPReload.Name = "pbSPReload";
             this.pbSPReload.Size = new System.Drawing.Size(16, 16);
@@ -738,7 +739,7 @@
             // 
             // pbSTreload
             // 
-            this.pbSTreload.Image = ((System.Drawing.Image)(resources.GetObject("pbSTreload.Image")));
+            this.pbSTreload.Image = global::KryBot.Properties.Resources.refresh;
             this.pbSTreload.Location = new System.Drawing.Point(314, 42);
             this.pbSTreload.Name = "pbSTreload";
             this.pbSTreload.Size = new System.Drawing.Size(16, 16);
@@ -822,7 +823,7 @@
             // 
             // pbPBRefresh
             // 
-            this.pbPBRefresh.Image = ((System.Drawing.Image)(resources.GetObject("pbPBRefresh.Image")));
+            this.pbPBRefresh.Image = global::KryBot.Properties.Resources.refresh;
             this.pbPBRefresh.Location = new System.Drawing.Point(314, 42);
             this.pbPBRefresh.Name = "pbPBRefresh";
             this.pbPBRefresh.Size = new System.Drawing.Size(16, 16);

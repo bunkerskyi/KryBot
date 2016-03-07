@@ -20,7 +20,7 @@ namespace KryBot
 
         private void Design()
         {
-            Icon = Icon.FromHandle(Resources.information.GetHicon());
+            Icon = Icon.FromHandle(Resources.info.GetHicon());
             Text = @"О программе";
 
             labelVersion.Text = @"KryBot - " + Application.ProductVersion;

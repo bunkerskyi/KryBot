@@ -21,7 +21,7 @@ namespace KryBot
         private void Design()
         {
             Icon = Icon.FromHandle(Resources.wallet.GetHicon());
-            Text = @"Донат";
+            Text = @"Поддержать разработчика";
 
             textBoxWMR.Text = @"R287737597223";
             textBoxWMR.ReadOnly = true;
