@@ -377,7 +377,7 @@ namespace KryBot
                     }
 
                     if (GmGiveaways?.Count > 0)
-                    { 
+                    {
                         if (Settings.Default.Sort)
                         {
                             if (Settings.Default.SortToMore)
@@ -542,48 +542,45 @@ namespace KryBot
                         }
                     }
 
-                    if (Bot.SteamCompanionPoint > 0)
+                    var giveaways = await Parse.SteamCompanionLoadGiveawaysAsync(Bot, ScGiveaways, BlackList);
+                    if (giveaways != null && giveaways.Content != "\n")
                     {
-                        var giveaways = await Parse.SteamCompanionLoadGiveawaysAsync(Bot, ScGiveaways, BlackList);
-                        if (giveaways != null && giveaways.Content != "\n")
-                        {
-                            LogBuffer = giveaways;
-                            LogChanged?.Invoke();
-                        }
+                        LogBuffer = giveaways;
+                        LogChanged?.Invoke();
+                    }
 
-                        if (ScGiveaways?.Count > 0)
+                    if (ScGiveaways?.Count > 0)
+                    {
+                        if (Settings.Default.Sort)
                         {
-                            if (Settings.Default.Sort)
+                            if (Settings.Default.SortToMore)
                             {
-                                if (Settings.Default.SortToMore)
-                                {
-                                    ScGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
-                                }
-                                else
-                                {
-                                    ScGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
-                                }
+                                ScGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
                             }
-                            foreach (var giveaway in ScGiveaways)
+                            else
                             {
-                                if (giveaway.Price <= Bot.SteamCompanionPoint &&
-                                    Bot.SteamCompanionPointsReserv <= Bot.SteamCompanionPoint - giveaway.Price)
+                                ScGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+                            }
+                        }
+                        foreach (var giveaway in ScGiveaways)
+                        {
+                            if (giveaway.Price <= Bot.SteamCompanionPoint &&
+                                Bot.SteamCompanionPointsReserv <= Bot.SteamCompanionPoint - giveaway.Price)
+                            {
+                                var data = await Web.SteamCompanionJoinGiveawayAsync(Bot, giveaway);
+                                if (data != null && data.Content != "\n")
                                 {
-                                    var data = await Web.SteamCompanionJoinGiveawayAsync(Bot, giveaway);
-                                    if (data != null && data.Content != "\n")
+                                    if (Settings.Default.FullLog)
                                     {
-                                        if (Settings.Default.FullLog)
+                                        LogBuffer = data;
+                                        LogChanged?.Invoke();
+                                    }
+                                    else
+                                    {
+                                        if (data.Color != Color.Yellow && data.Color != Color.Red)
                                         {
                                             LogBuffer = data;
                                             LogChanged?.Invoke();
-                                        }
-                                        else
-                                        {
-                                            if (data.Color != Color.Yellow && data.Color != Color.Red)
-                                            {
-                                                LogBuffer = data;
-                                                LogChanged?.Invoke();
-                                            }
                                         }
                                     }
                                 }
@@ -766,14 +763,14 @@ namespace KryBot
                     //    }
                     //}
 
-                    if(Bot.PlayBlinkPoints > 0)
-                    { 
-                    var giveaways = await Parse.PlayBlinkLoadGiveawaysAsync(Bot, PbGiveaways, BlackList);
-                    if (giveaways != null && giveaways.Content != "\n")
+                    if (Bot.PlayBlinkPoints > 0)
                     {
-                        LogBuffer = giveaways;
-                        LogChanged?.Invoke();
-                    }
+                        var giveaways = await Parse.PlayBlinkLoadGiveawaysAsync(Bot, PbGiveaways, BlackList);
+                        if (giveaways != null && giveaways.Content != "\n")
+                        {
+                            LogBuffer = giveaways;
+                            LogChanged?.Invoke();
+                        }
 
                         if (PbGiveaways?.Count > 0)
                         {
@@ -1315,7 +1312,7 @@ namespace KryBot
                 cbSPEnable.Checked = true;
                 Bot.SteamPortalEnabled = true;
 
-                LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + "{SteamPortal} " + strings.LoginSuccess,
+                LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamPortal}} {strings.LoginSuccess}",
                     Color.Green, true, true);
                 LogChanged?.Invoke();
 
@@ -1365,7 +1362,7 @@ namespace KryBot
                 cbSCEnable.Checked = true;
                 Bot.SteamCompanionEnabled = true;
 
-                LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + "{SteamCompanion} " + strings.LoginSuccess,
+                LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamCompanion}} {strings.LoginSuccess}",
                     Color.Green, true, true);
                 LogChanged?.Invoke();
 
@@ -1415,7 +1412,7 @@ namespace KryBot
                 cbSGEnable.Checked = true;
                 Bot.SteamGiftsEnabled = true;
 
-                LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + "{SteamGifts} " + strings.LoginSuccess,
+                LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamGifts}} {strings.LoginSuccess}",
                     Color.Green, true, true);
                 LogChanged?.Invoke();
 
@@ -1470,7 +1467,7 @@ namespace KryBot
                 cbGMEnable.Checked = true;
                 Bot.GameMinerEnabled = true;
 
-                LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + "{GameMiner} " + strings.LoginSuccess,
+                LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} {{GameMiner}} {strings.LoginSuccess}",
                     Color.Green, true, true);
                 LogChanged?.Invoke();
 
@@ -1978,11 +1975,13 @@ namespace KryBot
                 BlockTabpage(tabPageSteam, true);
                 btnSteamLogin.Enabled = false;
                 btnSteamLogin.Visible = false;
+                btnSteamExit.Enabled = true;
+                btnSteamExit.Visible = true;
 
                 lblSteamStatus.Text = @"Статус: " + strings.LoginSuccess;
                 LoadProfilesInfo?.Invoke();
 
-                LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + "{Steam} " + strings.LoginSuccess, Color.Green,
+                LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} {{Steam}} {strings.LoginSuccess}", Color.Green,
                     true, true);
                 LogChanged?.Invoke();
 
@@ -2263,7 +2262,7 @@ namespace KryBot
                 cbPBEnabled.Checked = true;
                 Bot.PlayBlinkEnabled = true;
 
-                LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + "{PlayBlink} " + strings.LoginSuccess,
+                LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} {{PlayBlink}} {strings.LoginSuccess}",
                     Color.Green, true, true);
                 LogChanged?.Invoke();
 

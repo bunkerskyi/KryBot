@@ -1251,7 +1251,7 @@ namespace KryBot
                     }
                 }
             }
-            return $"{GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_Found}{(giveaways.Count == 0 ? 0 : count)} {strings.ParseLoadGiveaways_WishListGiveAwaysIn} {pages} {strings.ParseLoadGiveaways_Pages}\n";
+            return $"{GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_Found} {(giveaways.Count == 0 ? 0 : count)} {strings.ParseLoadGiveaways_WishListGiveAwaysIn} {pages} {strings.ParseLoadGiveaways_Pages}\n";
         }
 
         public static string SteamCompanionLoadGroupGiveaways(Classes.Bot bot, List<SteamCompanion.ScGiveaway> giveaways)
