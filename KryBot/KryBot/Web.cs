@@ -424,15 +424,28 @@ namespace KryBot
             return data;
         }
 
-        public static bool SteamJoinGroup(string url, string subUrl, List<Parameter> parameters, CookieContainer cookies,
+        public static Classes.Log SteamJoinGroup(string url, string subUrl, List<Parameter> parameters, CookieContainer cookies,
             List<HttpHeader> headers, string userAgent)
         {
             var response = Post(url, subUrl, parameters, new List<HttpHeader>(), cookies, userAgent);
-            if (response.RestResponse.StatusCode == HttpStatusCode.OK)
+            if (response.RestResponse.Content != "")
             {
-                return true;
+                HtmlDocument  htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(response.RestResponse.Content);
+
+                var node = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='btn_blue_white_innerfade btn_medium']");
+                if (node != null)
+                {
+                    return Messages.GroupJoined(url);
+                }
+
+                var error = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='error_ctn']");
+                if (error != null && error.InnerText.Contains("You are already a member of this group."))
+                {
+                    return Messages.GroupAlreadyMember(url);
+                }
             }
-            return false;
+            return Messages.GroupNotJoinde(url);
         }
 
         public static string GetVersionInGitHub(string url)

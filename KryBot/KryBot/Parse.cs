@@ -1117,17 +1117,10 @@ namespace KryBot
                         var trueGroupUrl = Web.Get(@group.Attributes["href"].Value, "", new List<Parameter>(),
                             Generate.Cookies_Steam(bot),
                             new List<HttpHeader>(), bot.UserAgent);
-                        var result = Web.SteamJoinGroup(trueGroupUrl.RestResponse.ResponseUri.AbsoluteUri, "",
+
+                        return Web.SteamJoinGroup(trueGroupUrl.RestResponse.ResponseUri.AbsoluteUri, "",
                             Generate.PostData_SteamGroupJoin(bot.SteamSessid),
                             Generate.Cookies_Steam(bot), new List<HttpHeader>(), bot.UserAgent);
-                        if (result)
-                        {
-                            return GroupJoined(trueGroupUrl.RestResponse.ResponseUri.AbsoluteUri);
-                        }
-                        else
-                        {
-                            return GroupNotJoinde(trueGroupUrl.RestResponse.ResponseUri.AbsoluteUri);
-                        }
                     }
                     var error =
                         htmlDoc.DocumentNode.SelectSingleNode("//a[@class='notification group-join regular-button qa']");

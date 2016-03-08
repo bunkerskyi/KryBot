@@ -118,12 +118,17 @@ namespace KryBot
 
         public static Log GroupJoined(string url)
         {
-            return ConstructLog($"{GetDateTime()} {strings.SteamGroupJoined} {{{url}}}", Color.Yellow, false, true);
+            return ConstructLog($"{GetDateTime()} {{Steam}} {strings.SteamGroupJoined} {{{url}}}", Color.Yellow, false, true);
         }
 
         public static Log GroupNotJoinde(string url)
         {
-            return ConstructLog($"{GetDateTime()} {strings.SteamGroupNotJoined} {{{url}}}", Color.Yellow, false, true);
+            return ConstructLog($"{GetDateTime()} {{Steam}} {strings.SteamGroupNotJoined} {{{url}}}", Color.Yellow, false, true);
+        }
+
+        public static Log GroupAlreadyMember(string url)
+        {
+            return ConstructLog($"{GetDateTime()} {{Steam}} {strings.SteamGroupAlreadyMember} {{{url}}}", Color.Yellow, false, true);
         }
 
         public static Log ParseProfile(string site, int points, int level)
