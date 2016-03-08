@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using KryBot.Properties;
+using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 namespace KryBot
 {
@@ -16,7 +17,6 @@ namespace KryBot
         private readonly string _phpSessId;
         private readonly string _startPage;
         private readonly string _title;
-
 
         public Browser(Classes.Bot bot, string startPage, string endPage, string title, string phpSessId,
             CookieContainer cookies)
@@ -285,18 +285,28 @@ namespace KryBot
 
         private void PlayBlinkAuth()
         {
-            var container = GetUriCookieContainer(webBrowser.Url);
-            var cookies = container.GetCookies(webBrowser.Url);
-            foreach (Cookie cookie in cookies)
+            if (webBrowser.DocumentText != "")
             {
-                if (cookie.Name == "PHPSESSID")
+                HtmlDocument htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(webBrowser.DocumentText);
+
+                var node = htmlDoc.DocumentNode.SelectSingleNode("//a[@title='Your contribution level']");
+                if (node != null)
                 {
-                    _bot.PlayBlinkPhpSessId = cookie.Value;
+                    var container = GetUriCookieContainer(webBrowser.Url);
+                    var cookies = container.GetCookies(webBrowser.Url);
+                    foreach (Cookie cookie in cookies)
+                    {
+                        if (cookie.Name == "PHPSESSID")
+                        {
+                            _bot.PlayBlinkPhpSessId = cookie.Value;
+                        }
+                    }
+                    _bot.PlayBlinkEnabled = true;
+                    webBrowser.Dispose();
+                    Close();
                 }
             }
-            _bot.PlayBlinkEnabled = true;
-            webBrowser.Dispose();
-            Close();
         }
 
         public static CookieContainer GetUriCookieContainer(Uri uri)
@@ -345,6 +355,7 @@ namespace KryBot
 
         private void webBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
+            toolStripStatusLabelLoad.Image = null;
             toolStripStatusLabelURL.Text = @"URL: " + webBrowser.Url?.AbsoluteUri;
         }
     }
