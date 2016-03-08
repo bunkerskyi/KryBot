@@ -93,6 +93,7 @@ namespace KryBot
             cbWonTip.Checked = Settings.Default.ShowWonTip;
             cbFarmTip.Checked = Settings.Default.ShowFarmTip;
             cbFullLog.Checked = Settings.Default.FullLog;
+            cbWishlistSort.Checked = Settings.Default.WishlistSort;
 
         }
 
@@ -154,6 +155,7 @@ namespace KryBot
             Settings.Default.ShowWonTip = cbWonTip.Checked;
             Settings.Default.ShowFarmTip = cbFarmTip.Checked;
             Settings.Default.FullLog = cbFullLog.Checked;
+            Settings.Default.WishlistSort = !cbWishlistSort.Checked;
 
             Tools.SaveProfile(_bot, "");
             Settings.Default.Save();

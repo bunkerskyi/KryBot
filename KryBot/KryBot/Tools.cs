@@ -244,8 +244,10 @@ namespace KryBot
                 Sort = Properties.Settings.Default.Sort,
                 ShowFarmTip = Properties.Settings.Default.ShowFarmTip,
                 ShowWonTip = Properties.Settings.Default.ShowWonTip,
-                Autorun = Properties.Settings.Default.Autorun
+                Autorun = Properties.Settings.Default.Autorun,
+                WishlistSort = Properties.Settings.Default.WishlistSort
             };
+
             try
             {
                 using (var fs = new FileStream("settings.xml", FileMode.Create, FileAccess.Write))
@@ -280,6 +282,7 @@ namespace KryBot
                 Properties.Settings.Default.TimerLoops = sets.TimerLoops;
                 Properties.Settings.Default.LogActive = sets.LogActive;
                 Properties.Settings.Default.FullLog = sets.FullLog;
+                Properties.Settings.Default.WishlistSort = sets.WishlistSort;
                 Properties.Settings.Default.Lang = sets.Lang;
                 Properties.Settings.Default.ShowFarmTip = sets.ShowFarmTip;
                 Properties.Settings.Default.ShowWonTip = sets.ShowWonTip;

@@ -20,7 +20,9 @@ namespace KryBot
         public static Classes.Bot Bot = new Classes.Bot();
         public static List<GameMiner.GmGiveaway> GmGiveaways = new List<GameMiner.GmGiveaway>();
         public static List<SteamGifts.SgGiveaway> SgGiveaways = new List<SteamGifts.SgGiveaway>();
+        public static List<SteamGifts.SgGiveaway> SgWishListGiveaways = new List<SteamGifts.SgGiveaway>();
         public static List<SteamCompanion.ScGiveaway> ScGiveaways = new List<SteamCompanion.ScGiveaway>();
+        public static List<SteamCompanion.ScGiveaway> ScWishListGiveaways = new List<SteamCompanion.ScGiveaway>();
         public static List<SteamPortal.SpGiveaway> SpGiveaways = new List<SteamPortal.SpGiveaway>();
         public static List<SteamTrade.StGiveaway> StGiveaways = new List<SteamTrade.StGiveaway>();
         public static List<PlayBlink.PbGiveaway> PbGiveaways = new List<PlayBlink.PbGiveaway>();
@@ -391,33 +393,8 @@ namespace KryBot
                                 GmGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
                             }
                         }
-                        foreach (var giveaway in GmGiveaways)
-                        {
-                            if (giveaway.Price <= Bot.GameMinerJoinCoalLimit && giveaway.Price <= Bot.GameMinerCoal)
-                            {
-                                if (Bot.GameMinerCoalReserv <= Bot.GameMinerCoal - giveaway.Price ||
-                                    giveaway.Price == 0)
-                                {
-                                    var data = await Web.GameMinerJoinGiveawayAsync(Bot, giveaway);
-                                    if (data != null && data.Content != "\n")
-                                    {
-                                        if (Settings.Default.FullLog)
-                                        {
-                                            LogBuffer = data;
-                                            LogChanged?.Invoke();
-                                        }
-                                        else
-                                        {
-                                            if (data.Color != Color.Yellow && data.Color != Color.Red)
-                                            {
-                                                LogBuffer = data;
-                                                LogChanged?.Invoke();
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+
+                        JoinGiveaways(GmGiveaways);
                     }
                 }
                 else
@@ -457,7 +434,7 @@ namespace KryBot
 
                     if (Bot.SteamGiftsPoint > 0)
                     {
-                        var giveaways = await Parse.SteamGiftsLoadGiveawaysAsync(Bot, SgGiveaways, BlackList);
+                        var giveaways = await Parse.SteamGiftsLoadGiveawaysAsync(Bot, SgGiveaways, SgWishListGiveaways, BlackList);
                         if (giveaways != null && giveaways.Content != "\n")
                         {
                             LogBuffer = giveaways;
@@ -471,42 +448,32 @@ namespace KryBot
                                 if (Settings.Default.SortToMore)
                                 {
                                     SgGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+                                    if (Settings.Default.WishlistSort)
+                                    {
+                                        SgWishListGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+                                    }
                                 }
                                 else
                                 {
                                     SgGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+                                    if (Settings.Default.WishlistSort)
+                                    {
+                                        SgWishListGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+                                    }
                                 }
                             }
 
                             if (Bot.SteamGiftsSortToLessLevel)
                             {
                                 SgGiveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
-                            }
-
-                            foreach (var giveaway in SgGiveaways)
-                            {
-                                if (giveaway.Price <= Bot.SteamGiftsPoint &&
-                                    Bot.SteamGiftsPointsReserv <= Bot.SteamGiftsPoint - giveaway.Price)
+                                if (Settings.Default.WishlistSort)
                                 {
-                                    var data = await Web.SteamGiftsJoinGiveawayAsync(Bot, giveaway);
-                                    if (data != null && data.Content != "\n")
-                                    {
-                                        if (Settings.Default.FullLog)
-                                        {
-                                            LogBuffer = data;
-                                            LogChanged?.Invoke();
-                                        }
-                                        else
-                                        {
-                                            if (data.Color != Color.Yellow && data.Color != Color.Red)
-                                            {
-                                                LogBuffer = data;
-                                                LogChanged?.Invoke();
-                                            }
-                                        }
-                                    }
+                                    SgWishListGiveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
                                 }
                             }
+
+                            JoinGiveaways(SgGiveaways, false);
+                            JoinGiveaways(SgWishListGiveaways, true);
                         }
                     }
                 }
@@ -544,7 +511,7 @@ namespace KryBot
                         }
                     }
 
-                    var giveaways = await Parse.SteamCompanionLoadGiveawaysAsync(Bot, ScGiveaways, BlackList);
+                    var giveaways = await Parse.SteamCompanionLoadGiveawaysAsync(Bot, ScGiveaways, ScWishListGiveaways, BlackList);
                     if (giveaways != null && giveaways.Content != "\n")
                     {
                         LogBuffer = giveaways;
@@ -558,36 +525,23 @@ namespace KryBot
                             if (Settings.Default.SortToMore)
                             {
                                 ScGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+                                if (Settings.Default.WishlistSort)
+                                {
+                                    ScWishListGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+                                }
                             }
                             else
                             {
                                 ScGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
-                            }
-                        }
-                        foreach (var giveaway in ScGiveaways)
-                        {
-                            if (giveaway.Price <= Bot.SteamCompanionPoint &&
-                                Bot.SteamCompanionPointsReserv <= Bot.SteamCompanionPoint - giveaway.Price)
-                            {
-                                var data = await Web.SteamCompanionJoinGiveawayAsync(Bot, giveaway);
-                                if (data != null && data.Content != "\n")
+                                if (Settings.Default.WishlistSort)
                                 {
-                                    if (Settings.Default.FullLog)
-                                    {
-                                        LogBuffer = data;
-                                        LogChanged?.Invoke();
-                                    }
-                                    else
-                                    {
-                                        if (data.Color != Color.Yellow && data.Color != Color.Red)
-                                        {
-                                            LogBuffer = data;
-                                            LogChanged?.Invoke();
-                                        }
-                                    }
+                                    ScWishListGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
                                 }
                             }
                         }
+
+                        JoinGiveaways(ScGiveaways, false);
+                        JoinGiveaways(ScWishListGiveaways, true);
                     }
                 }
                 else
@@ -645,30 +599,8 @@ namespace KryBot
                                     SpGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
                                 }
                             }
-                            foreach (var giveaway in SpGiveaways)
-                            {
-                                if (giveaway.Price <= Bot.SteamPortalPoints &&
-                                    Bot.SteamPortalPointsReserv <= Bot.SteamPortalPoints - giveaway.Price)
-                                {
-                                    var data = await Web.SteamPortalJoinGiveawayAsync(Bot, giveaway);
-                                    if (data != null && data.Content != "\n")
-                                    {
-                                        if (Settings.Default.FullLog)
-                                        {
-                                            LogBuffer = data;
-                                            LogChanged?.Invoke();
-                                        }
-                                        else
-                                        {
-                                            if (data.Color != Color.Yellow && data.Color != Color.Red)
-                                            {
-                                                LogBuffer = data;
-                                                LogChanged?.Invoke();
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+
+                            JoinGiveaways(SpGiveaways);
                         }
                     }
                 }
@@ -709,26 +641,7 @@ namespace KryBot
 
                     if (StGiveaways?.Count > 0)
                     {
-                        foreach (var giveaway in StGiveaways)
-                        {
-                            var data = await Web.SteamTradeJoinGiveawayAsync(Bot, giveaway);
-                            if (data != null && data.Content != "\n")
-                            {
-                                if (Settings.Default.FullLog)
-                                {
-                                    LogBuffer = data;
-                                    LogChanged?.Invoke();
-                                }
-                                else
-                                {
-                                    if (data.Color != Color.Yellow && data.Color != Color.Red)
-                                    {
-                                        LogBuffer = data;
-                                        LogChanged?.Invoke();
-                                    }
-                                }
-                            }
-                        }
+                        JoinGiveaways(StGiveaways);    
                     }
                 }
                 else
@@ -787,38 +700,8 @@ namespace KryBot
                                     PbGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
                                 }
                             }
-                            foreach (var giveaway in PbGiveaways)
-                            {
-                                if (giveaway.Price <= Bot.PlayBlinkMaxJoinValue && giveaway.Price <= Bot.PlayBlinkPoints)
-                                {
-                                    if (Bot.PlayBlinkPointReserv <= Bot.PlayBlinkPoints - giveaway.Price ||
-                                        giveaway.Price == 0)
-                                    {
-                                        var data = await Web.PlayBlinkJoinGiveawayAsync(Bot, giveaway);
-                                        if (data != null && data.Content != "\n")
-                                        {
-                                            if (Settings.Default.FullLog)
-                                            {
-                                                LogBuffer = data;
-                                                LogChanged?.Invoke();
-                                            }
-                                            else
-                                            {
-                                                if (data.Color != Color.Yellow && data.Color != Color.Red)
-                                                {
-                                                    LogBuffer = data;
-                                                    LogChanged?.Invoke();
-                                                }
-                                            }
 
-                                            //if (data.Content.Contains("Captcha"))
-                                            //{
-                                            //    break;
-                                            //}
-                                        }
-                                    }
-                                }
-                            }
+                            JoinGiveaways(PbGiveaways);
                         }
                     }
                 }
@@ -2355,6 +2238,233 @@ namespace KryBot
             pbPBRefresh.Image = Resources.refresh;
             toolStripStatusLabel1.Text = @"Завершено";
             btnPBExit.Enabled = true;
+        }
+
+        private async void JoinGiveaways(List<GameMiner.GmGiveaway> giveaways)
+        {
+            foreach (var giveaway in giveaways)
+            {
+                if (giveaway.Price <= Bot.GameMinerJoinCoalLimit && giveaway.Price <= Bot.GameMinerCoal)
+                {
+                    if (Bot.GameMinerCoalReserv <= Bot.GameMinerCoal - giveaway.Price ||
+                        giveaway.Price == 0)
+                    {
+                        var data = await Web.GameMinerJoinGiveawayAsync(Bot, giveaway);
+                        if (data != null && data.Content != "\n")
+                        {
+                            if (Settings.Default.FullLog)
+                            {
+                                LogBuffer = data;
+                                LogChanged?.Invoke();
+                            }
+                            else
+                            {
+                                if (data.Color != Color.Yellow && data.Color != Color.Red)
+                                {
+                                    LogBuffer = data;
+                                    LogChanged?.Invoke();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private async void JoinGiveaways(List<SteamGifts.SgGiveaway> giveaways, bool wishlist)
+        {
+            foreach (var giveaway in giveaways)
+            {
+                if (wishlist)
+                {
+                    if (giveaway.Price <= Bot.SteamGiftsPoint)
+                    {
+                        var data = await Web.SteamGiftsJoinGiveawayAsync(Bot, giveaway);
+                        if (data != null && data.Content != "\n")
+                        {
+                            if (Settings.Default.FullLog)
+                            {
+                                LogBuffer = data;
+                                LogChanged?.Invoke();
+                            }
+                            else
+                            {
+                                if (data.Color != Color.Yellow && data.Color != Color.Red)
+                                {
+                                    LogBuffer = data;
+                                    LogChanged?.Invoke();
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (giveaway.Price <= Bot.SteamGiftsPoint &&
+                    Bot.SteamGiftsPointsReserv <= Bot.SteamGiftsPoint - giveaway.Price)
+                    {
+                        var data = await Web.SteamGiftsJoinGiveawayAsync(Bot, giveaway);
+                        if (data != null && data.Content != "\n")
+                        {
+                            if (Settings.Default.FullLog)
+                            {
+                                LogBuffer = data;
+                                LogChanged?.Invoke();
+                            }
+                            else
+                            {
+                                if (data.Color != Color.Yellow && data.Color != Color.Red)
+                                {
+                                    LogBuffer = data;
+                                    LogChanged?.Invoke();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private async void JoinGiveaways(List<SteamCompanion.ScGiveaway> giveaways, bool wishlist)
+        {
+            foreach (var giveaway in giveaways)
+            {
+                if (wishlist)
+                {
+                    if (giveaway.Price <= Bot.SteamCompanionPoint)
+                    {
+                        var data = await Web.SteamCompanionJoinGiveawayAsync(Bot, giveaway);
+                        if (data != null && data.Content != "\n")
+                        {
+                            if (Settings.Default.FullLog)
+                            {
+                                LogBuffer = data;
+                                LogChanged?.Invoke();
+                            }
+                            else
+                            {
+                                if (data.Color != Color.Yellow && data.Color != Color.Red)
+                                {
+                                    LogBuffer = data;
+                                    LogChanged?.Invoke();
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (giveaway.Price <= Bot.SteamCompanionPoint &&
+                    Bot.SteamCompanionPointsReserv <= Bot.SteamCompanionPoint - giveaway.Price)
+                    {
+                        var data = await Web.SteamCompanionJoinGiveawayAsync(Bot, giveaway);
+                        if (data != null && data.Content != "\n")
+                        {
+                            if (Settings.Default.FullLog)
+                            {
+                                LogBuffer = data;
+                                LogChanged?.Invoke();
+                            }
+                            else
+                            {
+                                if (data.Color != Color.Yellow && data.Color != Color.Red)
+                                {
+                                    LogBuffer = data;
+                                    LogChanged?.Invoke();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private async void JoinGiveaways(List<SteamPortal.SpGiveaway> giveaways)
+        {
+            foreach (var giveaway in giveaways)
+            {
+                if (giveaway.Price <= Bot.SteamPortalPoints &&
+                    Bot.SteamPortalPointsReserv <= Bot.SteamPortalPoints - giveaway.Price)
+                {
+                    var data = await Web.SteamPortalJoinGiveawayAsync(Bot, giveaway);
+                    if (data != null && data.Content != "\n")
+                    {
+                        if (Settings.Default.FullLog)
+                        {
+                            LogBuffer = data;
+                            LogChanged?.Invoke();
+                        }
+                        else
+                        {
+                            if (data.Color != Color.Yellow && data.Color != Color.Red)
+                            {
+                                LogBuffer = data;
+                                LogChanged?.Invoke();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private async void JoinGiveaways(List<SteamTrade.StGiveaway> giveaways)
+        {
+            foreach (var giveaway in giveaways)
+            {
+                var data = await Web.SteamTradeJoinGiveawayAsync(Bot, giveaway);
+                if (data != null && data.Content != "\n")
+                {
+                    if (Settings.Default.FullLog)
+                    {
+                        LogBuffer = data;
+                        LogChanged?.Invoke();
+                    }
+                    else
+                    {
+                        if (data.Color != Color.Yellow && data.Color != Color.Red)
+                        {
+                            LogBuffer = data;
+                            LogChanged?.Invoke();
+                        }
+                    }
+                }
+            }
+        }
+
+        private async void JoinGiveaways(List<PlayBlink.PbGiveaway> giveaways)
+        {
+            foreach (var giveaway in giveaways)
+            {
+                if (giveaway.Price <= Bot.PlayBlinkMaxJoinValue && giveaway.Price <= Bot.PlayBlinkPoints)
+                {
+                    if (Bot.PlayBlinkPointReserv <= Bot.PlayBlinkPoints - giveaway.Price ||
+                        giveaway.Price == 0)
+                    {
+                        var data = await Web.PlayBlinkJoinGiveawayAsync(Bot, giveaway);
+                        if (data != null && data.Content != "\n")
+                        {
+                            if (Settings.Default.FullLog)
+                            {
+                                LogBuffer = data;
+                                LogChanged?.Invoke();
+                            }
+                            else
+                            {
+                                if (data.Color != Color.Yellow && data.Color != Color.Red)
+                                {
+                                    LogBuffer = data;
+                                    LogChanged?.Invoke();
+                                }
+                            }
+
+                            //if (data.Content.Contains("Captcha"))
+                            //{
+                            //    break;
+                            //}
+                        }
+                    }
+                }
+            }
         }
     }
 }

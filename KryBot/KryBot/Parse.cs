@@ -452,14 +452,14 @@ namespace KryBot
         }
 
         public static Classes.Log SteamGiftsLoadGiveaways(Classes.Bot bot, List<SteamGifts.SgGiveaway> giveaways,
-            string[] blackList)
+            List<SteamGifts.SgGiveaway> wishlistGiveaways, string[] blackList)
         {
             var content = "";
             giveaways?.Clear();
 
             if (bot.SteamGiftsWishList)
             {
-                content += SteamGiftsLoadWishListGiveaways(bot, giveaways);
+                content += SteamGiftsLoadWishListGiveaways(bot, wishlistGiveaways);
             }
 
             if (bot.SteamGiftsGroup)
@@ -557,12 +557,12 @@ namespace KryBot
         }
 
         public static async Task<Classes.Log> SteamGiftsLoadGiveawaysAsync(Classes.Bot bot,
-            List<SteamGifts.SgGiveaway> giveaways, string[] blackList)
+            List<SteamGifts.SgGiveaway> giveaways, List<SteamGifts.SgGiveaway> wishlistGiveaways, string[] blackList)
         {
             var task = new TaskCompletionSource<Classes.Log>();
             await Task.Run(() =>
             {
-                var result = SteamGiftsLoadGiveaways(bot, giveaways, blackList);
+                var result = SteamGiftsLoadGiveaways(bot, giveaways, wishlistGiveaways, blackList);
                 task.SetResult(result);
             });
 
@@ -842,14 +842,14 @@ namespace KryBot
         }
 
         public static Classes.Log SteamCompanionLoadGiveaways(Classes.Bot bot, List<SteamCompanion.ScGiveaway> giveaways,
-            string[] blackList)
+            List<SteamCompanion.ScGiveaway> wishlistGiveaways, string[] blackList)
         {
             var content = "";
             giveaways?.Clear();
 
             if (bot.SteamCompanionWishList)
             {
-                content += SteamCompanionLoadWishListGiveaways(bot, giveaways);
+                content += SteamCompanionLoadWishListGiveaways(bot, wishlistGiveaways);
             }
 
             if (bot.SteamCompanionGroup)
@@ -938,12 +938,12 @@ namespace KryBot
         }
 
         public static async Task<Classes.Log> SteamCompanionLoadGiveawaysAsync(Classes.Bot bot,
-            List<SteamCompanion.ScGiveaway> giveaways, string[] blackList)
+            List<SteamCompanion.ScGiveaway> giveaways, List<SteamCompanion.ScGiveaway> wishlistGiveaways, string[] blackList)
         {
             var task = new TaskCompletionSource<Classes.Log>();
             await Task.Run(() =>
             {
-                var result = SteamCompanionLoadGiveaways(bot, giveaways, blackList);
+                var result = SteamCompanionLoadGiveaways(bot, giveaways, wishlistGiveaways, blackList);
                 task.SetResult(result);
             });
 

@@ -262,5 +262,17 @@ namespace KryBot.Properties {
                 this["GitHubRepoReleaseUrl"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool WishlistSort {
+            get {
+                return ((bool)(this["WishlistSort"]));
+            }
+            set {
+                this["WishlistSort"] = value;
+            }
+        }
     }
 }

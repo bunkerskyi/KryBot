@@ -97,6 +97,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cbWishlistSort = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPageCommun.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -130,6 +131,7 @@
             // 
             // tabPageCommun
             // 
+            this.tabPageCommun.Controls.Add(this.cbWishlistSort);
             this.tabPageCommun.Controls.Add(this.btnDeleteCookies);
             this.tabPageCommun.Controls.Add(this.cbFullLog);
             this.tabPageCommun.Controls.Add(this.cbFarmTip);
@@ -840,6 +842,16 @@
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
+            // cbWishlistSort
+            // 
+            this.cbWishlistSort.AutoSize = true;
+            this.cbWishlistSort.Location = new System.Drawing.Point(160, 117);
+            this.cbWishlistSort.Name = "cbWishlistSort";
+            this.cbWishlistSort.Size = new System.Drawing.Size(144, 30);
+            this.cbWishlistSort.TabIndex = 8;
+            this.cbWishlistSort.Text = "Не применять \r\nсортировку к вишлисту";
+            this.cbWishlistSort.UseVisualStyleBackColor = true;
+            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -955,5 +967,6 @@
         private System.Windows.Forms.TextBox tbPBMaxValue;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox cbWishlistSort;
     }
 }
