@@ -534,9 +534,9 @@ namespace KryBot
                 Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(), bot.UserAgent);
             if (response.RestResponse.Content != "")
             {
-                return Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamCompanion}} Success!", Color.Green, true, true);
+                return Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamCompanion}} Sync success!", Color.Green, true, true);
             }
-            return Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamCompanion}} Failed", Color.Red, false, true);
+            return Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamCompanion}} Sync failed", Color.Red, false, true);
         }
 
         public static async Task<Classes.Log> SteamCompanionSyncAccountAsync(Classes.Bot bot)
@@ -561,10 +561,10 @@ namespace KryBot
             {
                 if (response.RestResponse.StatusCode == HttpStatusCode.OK)
                 {
-                    return Tools.ConstructLog($"{Messages.GetDateTime()} {{GameMiner}} Success", Color.Green,
+                    return Tools.ConstructLog($"{Messages.GetDateTime()} {{GameMiner}} Sync success", Color.Green,
                         true, true);
                 }
-                return Tools.ConstructLog($"{Messages.GetDateTime()} {{GameMiner}} Failed", Color.Red, false,
+                return Tools.ConstructLog($"{Messages.GetDateTime()} {{GameMiner}} Sync failed", Color.Red, false,
                     true);
             }
             return Tools.ConstructLog($"{Messages.GetDateTime()} {{GameMiner}} {strings.ParseProfile_LoginOrServerError}", Color.Red, false,

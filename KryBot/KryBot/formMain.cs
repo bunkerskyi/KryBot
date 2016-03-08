@@ -542,6 +542,13 @@ namespace KryBot
 
                         JoinGiveaways(ScGiveaways, false);
                         JoinGiveaways(ScWishListGiveaways, true);
+
+                        var async = await Web.SteamCompanionSyncAccountAsync(Bot);
+                        if (async != null)
+                        {
+                            LogBuffer = async;
+                            LogChanged?.Invoke();
+                        }
                     }
                 }
                 else
@@ -1612,7 +1619,6 @@ namespace KryBot
                     LogBuffer = async;
                     LogChanged?.Invoke();
                 }
-
             }
             else
             {
