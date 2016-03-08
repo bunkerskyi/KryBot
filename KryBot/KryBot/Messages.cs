@@ -110,20 +110,25 @@ namespace KryBot
             return log;
         }
 
-        public static Log GiveawayHaveWon(string site, int count)
+        public static Log GiveawayHaveWon(string site, int count, string url)
         {
-            return ConstructLog($"{GetDateTime()} {{{site}}} {strings.GiveawaysHaveWon} ({count})",
+            return ConstructLog($"{GetDateTime()} {{{site}}} {strings.GiveawaysHaveWon} ({count}) {{{url}}}",
                 Color.Orange, true, true);
         }
 
         public static Log GroupJoined(string url)
         {
-            return ConstructLog($"{GetDateTime()} {strings.SteamGroupJoined} {{{url}}}", Color.Yellow, false, true);
+            return ConstructLog($"{GetDateTime()} {{Steam}} {strings.SteamGroupJoined} {{{url}}}", Color.Yellow, false, true);
         }
 
         public static Log GroupNotJoinde(string url)
         {
-            return ConstructLog($"{GetDateTime()} {strings.SteamGroupNotJoined} {{{url}}}", Color.Yellow, false, true);
+            return ConstructLog($"{GetDateTime()} {{Steam}} {strings.SteamGroupNotJoined} {{{url}}}", Color.Yellow, false, true);
+        }
+
+        public static Log GroupAlreadyMember(string url)
+        {
+            return ConstructLog($"{GetDateTime()} {{Steam}} {strings.SteamGroupAlreadyMember} {{{url}}}", Color.Yellow, false, true);
         }
 
         public static Log ParseProfile(string site, int points, int level)

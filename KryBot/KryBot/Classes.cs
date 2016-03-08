@@ -130,6 +130,7 @@ namespace KryBot
             public bool ShowWonTip { get; set; }
             public bool ShowFarmTip { get; set; }
             public bool FullLog { get; set; }
+            public bool WishlistSort { get; set; }
             public int TimerInterval { get; set; }
             public int TimerLoops { get; set; }
         }

@@ -63,7 +63,8 @@ namespace KryBot
                 InternetSetCookie("http://steamtrade.info/", "PHPSESSID", _phpSessId);
             }
             toolStripStatusLabelURL.Text = @"URL: " + _startPage;
-            webBrowser.Url = new Uri(_startPage);
+
+            webBrowser.Navigate(_startPage);
         }
 
         private void wb_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -75,7 +76,7 @@ namespace KryBot
             try
             {
                 if (webBrowser.Url.AbsoluteUri.Contains(_endPage) ||
-    webBrowser.Url.AbsoluteUri.Contains("http://steamcommunity.com/profiles/"))
+                    webBrowser.Url.AbsoluteUri.Contains("http://steamcommunity.com/profiles/"))
                 {
                     if (_endPage == "http://steamcommunity.com/id/")
                     {
@@ -83,7 +84,8 @@ namespace KryBot
                     }
                 }
 
-                if (webBrowser.Url.AbsoluteUri == _endPage || webBrowser.Url.AbsoluteUri == "http://www.steamgifts.com/register")
+                if (webBrowser.Url.AbsoluteUri == _endPage ||
+                    webBrowser.Url.AbsoluteUri == "http://www.steamgifts.com/register")
                 {
                     if (_endPage == "http://gameminer.net/?lang=ru_RU" || _endPage == "http://gameminer.net/?lang=en_US")
                     {

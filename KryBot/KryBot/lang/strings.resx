@@ -216,6 +216,9 @@
   <data name="ParseProfile_Points" xml:space="preserve">
     <value>Points</value>
   </data>
+  <data name="SteamGroupAlreadyMember" xml:space="preserve">
+    <value>Вы уже состоите в этой группе</value>
+  </data>
   <data name="SteamGroupJoined" xml:space="preserve">
     <value>Участие в группе подтверждено</value>
   </data>

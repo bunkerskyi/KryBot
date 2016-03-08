@@ -358,6 +358,15 @@ namespace KryBot.lang {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы уже состоите в этой группе.
+        /// </summary>
+        internal static string SteamGroupAlreadyMember {
+            get {
+                return ResourceManager.GetString("SteamGroupAlreadyMember", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Участие в группе подтверждено.
         /// </summary>
         internal static string SteamGroupJoined {

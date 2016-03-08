@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using KryBot.lang;
 using Newtonsoft.Json;
 using RestSharp;
@@ -17,43 +15,36 @@ namespace KryBot
         public static Classes.Response Get(string url, string subUrl, List<Parameter> parameters,
             CookieContainer cookies, List<HttpHeader> headers, string userAgent)
         {
-            try
+            var client = new RestClient(url)
             {
-                var client = new RestClient(url)
-                {
-                    UserAgent = userAgent == "" ? null : userAgent,
-                    FollowRedirects = true,
-                    CookieContainer = cookies
-                };
+                UserAgent = userAgent == "" ? null : userAgent,
+                FollowRedirects = true,
+                CookieContainer = cookies
+            };
 
-                var request = new RestRequest(subUrl, Method.GET);
+            var request = new RestRequest(subUrl, Method.GET);
 
-                foreach (var header in headers)
-                {
-                    request.AddHeader(header.Name, header.Value);
-                }
-
-                foreach (var param in parameters)
-                {
-                    request.AddParameter(param);
-                }
-
-                var response = client.Execute(request);
-
-                var data = new Classes.Response
-                {
-                    Cookies = client.CookieContainer,
-                    RestResponse = response
-                };
-
-                Thread.Sleep(200);
-
-                return data;
-            }
-            catch (TimeoutException)
+            foreach (var header in headers)
             {
-                return null;
+                request.AddHeader(header.Name, header.Value);
             }
+
+            foreach (var param in parameters)
+            {
+                request.AddParameter(param);
+            }
+
+            var response = client.Execute(request);
+
+            var data = new Classes.Response
+            {
+                Cookies = client.CookieContainer,
+                RestResponse = response
+            };
+
+            Thread.Sleep(200);
+
+            return data;
         }
 
         public static async Task<Classes.Response> GetAsync(string url, string subUrl, List<Parameter> parameters,
@@ -62,15 +53,8 @@ namespace KryBot
             var task = new TaskCompletionSource<Classes.Response>();
             await Task.Run(() =>
             {
-                try
-                {
-                    var result = Get(url, subUrl, parameters, cookies, headers, userAgent);
-                    task.SetResult(result);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
+                var result = Get(url, subUrl, parameters, cookies, headers, userAgent);
+                task.SetResult(result);
             });
 
             return task.Task.Result;
@@ -79,40 +63,33 @@ namespace KryBot
         public static Classes.Response Post(string url, string subUrl, List<Parameter> parameters,
             List<HttpHeader> headers, CookieContainer cookies, string userAgent)
         {
-            try
+            var client = new RestClient(url)
             {
-                var client = new RestClient(url)
-                {
-                    UserAgent = userAgent == "" ? null : userAgent,
-                    FollowRedirects = true,
-                    CookieContainer = cookies
-                };
+                UserAgent = userAgent == "" ? null : userAgent,
+                FollowRedirects = true,
+                CookieContainer = cookies
+            };
 
-                var request = new RestRequest(subUrl, Method.POST);
+            var request = new RestRequest(subUrl, Method.POST);
 
-                foreach (var header in headers)
-                {
-                    request.AddHeader(header.Name, header.Value);
-                }
-
-                foreach (var param in parameters)
-                {
-                    request.AddParameter(param);
-                }
-
-                var response = client.Execute(request);
-                var data = new Classes.Response
-                {
-                    Cookies = client.CookieContainer,
-                    RestResponse = response
-                };
-
-                return data;
-            }
-            catch (TimeoutException)
+            foreach (var header in headers)
             {
-                return null;
+                request.AddHeader(header.Name, header.Value);
             }
+
+            foreach (var param in parameters)
+            {
+                request.AddParameter(param);
+            }
+
+            var response = client.Execute(request);
+            var data = new Classes.Response
+            {
+                Cookies = client.CookieContainer,
+                RestResponse = response
+            };
+
+            return data;
         }
 
         public static async Task<Classes.Response> PostAsync(string url, string subUrl, List<Parameter> parameters,
@@ -121,15 +98,8 @@ namespace KryBot
             var task = new TaskCompletionSource<Classes.Response>();
             await Task.Run(() =>
             {
-                try
-                {
-                    var result = Post(url, subUrl, parameters, headers, cookie, userAgent);
-                    task.SetResult(result);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
+                var result = Post(url, subUrl, parameters, headers, cookie, userAgent);
+                task.SetResult(result);
             });
 
             return task.Task.Result;
@@ -143,7 +113,8 @@ namespace KryBot
                 "/giveaway/enter/" + giveaway.Id + "?" + (giveaway.IsSandbox ? "sandbox" : "coal") + "_page=" +
                 giveaway.Page, Generate.PostData_GameMiner(bot.GameMinerxsrf), new List<HttpHeader>(),
                 Generate.Cookies_GameMiner(bot), bot.UserAgent);
-            if (response != null)
+
+            if (response.RestResponse.Content != "")
             {
                 try
                 {
@@ -171,15 +142,8 @@ namespace KryBot
             var task = new TaskCompletionSource<Classes.Log>();
             await Task.Run(() =>
             {
-                try
-                {
-                    var result = GameMinerJoinGiveaway(bot, giveaway);
-                    task.SetResult(result);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
+                var result = GameMinerJoinGiveaway(bot, giveaway);
+                task.SetResult(result);
             });
 
             return task.Task.Result;
@@ -189,12 +153,14 @@ namespace KryBot
         {
             Thread.Sleep(100);
             giveaway = Parse.SteamGiftsGetJoinData(giveaway, bot);
+
             if (giveaway.Token != null)
             {
                 var response = Post("http://www.steamgifts.com/", "/ajax.php",
                     Generate.PostData_SteamGifts(giveaway.Token, giveaway.Code, "entry_insert"), new List<HttpHeader>(),
                     Generate.Cookies_SteamGifts(bot), bot.UserAgent);
-                if (response != null)
+
+                if (response.RestResponse.Content != null)
                 {
                     var jsonresponse =
                         JsonConvert.DeserializeObject<SteamGifts.JsonResponseJoin>(response.RestResponse.Content);
@@ -204,15 +170,10 @@ namespace KryBot
                         return Messages.GiveawayJoined("SteamGifts", giveaway.Name, giveaway.Price, jsonresponse.Points,
                             giveaway.Level);
                     }
+
                     var jresponse =
                         JsonConvert.DeserializeObject<GameMiner.JsonResponseError>(response.RestResponse.Content);
-                    try
-                    {
-                        return Messages.GiveawayNotJoined("SteamGifts", giveaway.Name, jresponse.Error.Message);
-                    }
-                    catch (NullReferenceException)
-                    {
-                    }
+                    return Messages.GiveawayNotJoined("SteamGifts", giveaway.Name, jresponse.Error.Message);
                 }
             }
             return null;
@@ -224,15 +185,8 @@ namespace KryBot
             var task = new TaskCompletionSource<Classes.Log>();
             await Task.Run(() =>
             {
-                try
-                {
-                    var result = SteamGiftsJoinGiveaway(bot, giveaway);
-                    task.SetResult(result);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
+                var result = SteamGiftsJoinGiveaway(bot, giveaway);
+                task.SetResult(result);
             });
 
             return task.Task.Result;
@@ -257,19 +211,12 @@ namespace KryBot
                     var response = Post("https://steamcompanion.com", "/gifts/steamcompanion.php",
                         Generate.PostData_SteamCompanion(giveaway.Code), list,
                         Generate.Cookies_SteamCompanion(bot), bot.UserAgent);
-							
-					try
+
+					if (response.RestResponse.Content.Split('"')[3].Split('"')[0] == "Success")
 					{
-						if (response.RestResponse.Content.Split('"')[3].Split('"')[0] == "Success")
-						{
-							bot.SteamCompanionPoint = int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]);
-							return Messages.GiveawayJoined("SteamCompanion", giveaway.Name, giveaway.Price,
-								int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]), 0);
-						}
-					}
-					catch(IndexOutOfRangeException)
-					{
-						//MessageBox.Show(@"IndexOutOfRangeException: " + response.RestResponse.Content, @"Неожиданное сообщение от сервера");
+						bot.SteamCompanionPoint = int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]);
+						return Messages.GiveawayJoined("SteamCompanion", giveaway.Name, giveaway.Price,
+							int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]), 0);
 					}
 					
                     return Messages.GiveawayNotJoined("SteamCompanion", giveaway.Name, response.RestResponse.Content);
@@ -284,15 +231,8 @@ namespace KryBot
             var task = new TaskCompletionSource<Classes.Log>();
             await Task.Run(() =>
             {
-                try
-                {
-                    var result = SteamCompanionJoinGiveaway(bot, giveaway);
-                    task.SetResult(result);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
+                var result = SteamCompanionJoinGiveaway(bot, giveaway);
+                task.SetResult(result);
             });
 
             return task.Task.Result;
@@ -331,15 +271,8 @@ namespace KryBot
             var task = new TaskCompletionSource<Classes.Log>();
             await Task.Run(() =>
             {
-                try
-                {
                     var result = SteamPortalJoinGiveaway(bot, giveaway);
                     task.SetResult(result);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
             });
 
             return task.Task.Result;
@@ -378,15 +311,8 @@ namespace KryBot
             var task = new TaskCompletionSource<Classes.Log>();
             await Task.Run(() =>
             {
-                try
-                {
-                    var result = GameAwayslJoinGiveaway(bot, giveaway);
-                    task.SetResult(result);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
+                var result = GameAwayslJoinGiveaway(bot, giveaway);
+                task.SetResult(result);
             });
 
             return task.Task.Result;
@@ -417,15 +343,8 @@ namespace KryBot
             var task = new TaskCompletionSource<Classes.Log>();
             await Task.Run(() =>
             {
-                try
-                {
-                    var result = SteamTradeJoinGiveaway(bot, giveaway);
-                    task.SetResult(result);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
+                var result = SteamTradeJoinGiveaway(bot, giveaway);
+                task.SetResult(result);
             });
 
             return task.Task.Result;
@@ -505,36 +424,42 @@ namespace KryBot
             return data;
         }
 
-        public static bool SteamJoinGroup(string url, string subUrl, List<Parameter> parameters, CookieContainer cookies,
+        public static Classes.Log SteamJoinGroup(string url, string subUrl, List<Parameter> parameters, CookieContainer cookies,
             List<HttpHeader> headers, string userAgent)
         {
             var response = Post(url, subUrl, parameters, new List<HttpHeader>(), cookies, userAgent);
-            if (response.RestResponse.StatusCode == HttpStatusCode.OK)
+            if (response.RestResponse.Content != "")
             {
-                return true;
+                HtmlDocument  htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(response.RestResponse.Content);
+
+                var node = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='btn_blue_white_innerfade btn_medium']");
+                if (node != null)
+                {
+                    return Messages.GroupJoined(url);
+                }
+
+                var error = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='error_ctn']");
+                if (error != null && error.InnerText.Contains("You are already a member of this group."))
+                {
+                    return Messages.GroupAlreadyMember(url);
+                }
             }
-            return false;
+            return Messages.GroupNotJoinde(url);
         }
 
         public static string GetVersionInGitHub(string url)
         {
-            try
+            var client = new RestClient(url)
             {
-                var client = new RestClient(url)
-                {
-                    FollowRedirects = true,
-                };
+                FollowRedirects = true,
+            };
 
-                var request = new RestRequest("", Method.GET);
+            var request = new RestRequest("", Method.GET);
 
-                var response = client.Execute(request);
+            var response = client.Execute(request);
 
-                return response.Content;
-            }
-            catch (TimeoutException)
-            {
-                return null;
-            }
+            return response.Content;
         }
 
         public static async Task<string> GetVersionInGitHubAsync(string url)
@@ -542,15 +467,8 @@ namespace KryBot
             var task = new TaskCompletionSource<string>();
             await Task.Run(() =>
             {
-                try
-                {
-                    var result = GetVersionInGitHub(url);
-                    task.SetResult(result);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
+                var result = GetVersionInGitHub(url);
+                task.SetResult(result);
             });
 
             return task.Task.Result;
@@ -561,44 +479,38 @@ namespace KryBot
 
             var xsrf = Get("http://www.steamgifts.com/account/profile/sync", "",
                 new List<Parameter>(), Generate.Cookies_SteamGifts(bot), new List<HttpHeader>(), bot.UserAgent);
-            if (xsrf != null)
+
+            if (xsrf.RestResponse.Content != null)
             {
-                var htmlDoc = new HtmlAgilityPack.HtmlDocument();
+                var htmlDoc = new HtmlDocument();
                 htmlDoc.LoadHtml(xsrf.RestResponse.Content);
 
-                string xsrfToken;
-                try
+                var xsrfToken = htmlDoc.DocumentNode.SelectSingleNode("//input[@name='xsrf_token']");
+                if (xsrfToken != null)
                 {
-                    xsrfToken =
-                        htmlDoc.DocumentNode.SelectSingleNode("//input[@name='xsrf_token']").Attributes["value"].Value;
-                }
-                catch (NullReferenceException)
-                {
-                    return null;
-                }
-
-                List<HttpHeader> headers = new List<HttpHeader>();
-                HttpHeader header = new HttpHeader
-                {
-                    Name = "X-Requested-With",
-                    Value = "XMLHttpRequest"
-                };
-                headers.Add(header);
-
-                var response = Post("http://www.steamgifts.com/", "ajax.php",
-                    Generate.PostData_SteamGifts(xsrfToken, "", "sync"), headers,
-                    Generate.Cookies_SteamGifts(bot), bot.UserAgent);
-                if (response != null)
-                {
-                    var result =
-                        JsonConvert.DeserializeObject<SteamGifts.JsonResponseSyncAccount>(response.RestResponse.Content);
-                    if (result.type == "success")
+                    List<HttpHeader> headers = new List<HttpHeader>();
+                    HttpHeader header = new HttpHeader
                     {
-                        return Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamGifts}} {result.msg}", Color.Green,
-                            true, true);
+                        Name = "X-Requested-With",
+                        Value = "XMLHttpRequest"
+                    };
+                    headers.Add(header);
+
+                    var response = Post("http://www.steamgifts.com/", "ajax.php",
+                        Generate.PostData_SteamGifts(xsrfToken.Attributes["value"].Value, "", "sync"), headers,
+                        Generate.Cookies_SteamGifts(bot), bot.UserAgent);
+                    if (response != null)
+                    {
+                        var result =
+                            JsonConvert.DeserializeObject<SteamGifts.JsonResponseSyncAccount>(response.RestResponse.Content);
+                        if (result.type == "success")
+                        {
+                            return Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamGifts}} {result.msg}", Color.Green,
+                                true, true);
+                        }
+                        return Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamGifts}} {result.msg}", Color.Red, false,
+                            true);
                     }
-                    return Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamGifts}} {result.msg}", Color.Red, false,
-                        true);
                 }
             }
             return null;
@@ -609,15 +521,8 @@ namespace KryBot
             var task = new TaskCompletionSource<Classes.Log>();
             await Task.Run(() =>
             {
-                try
-                {
-                    var result = SteamGiftsSyncAccount(bot);
-                    task.SetResult(result);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
+                var result = SteamGiftsSyncAccount(bot);
+                task.SetResult(result);
             });
 
             return task.Task.Result;
@@ -627,7 +532,7 @@ namespace KryBot
         {
             var response = Get("https://steamcompanion.com//settings/resync&success=true", "", new List<Parameter>(),
                 Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(), bot.UserAgent);
-            if (response != null)
+            if (response.RestResponse.Content != "")
             {
                 return Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamCompanion}} Success!", Color.Green, true, true);
             }
@@ -639,15 +544,8 @@ namespace KryBot
             var task = new TaskCompletionSource<Classes.Log>();
             await Task.Run(() =>
             {
-                try
-                {
-                    var result = SteamCompanionSyncAccount(bot);
-                    task.SetResult(result);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
+                var result = SteamCompanionSyncAccount(bot);
+                task.SetResult(result);
             });
 
             return task.Task.Result;
@@ -658,7 +556,8 @@ namespace KryBot
             var response = Post("http://gameminer.net/account/sync", "",
                     Generate.SyncPostData_GameMiner(bot.GameMinerxsrf), new List<HttpHeader>(), 
                     Generate.Cookies_GameMiner(bot), bot.UserAgent);
-            if (response != null)
+
+            if (response.RestResponse.Content != "")
             {
                 if (response.RestResponse.StatusCode == HttpStatusCode.OK)
                 {
@@ -677,15 +576,8 @@ namespace KryBot
             var task = new TaskCompletionSource<Classes.Log>();
             await Task.Run(() =>
             {
-                try
-                {
-                    var result = GameMinerSyncAccount(bot);
-                    task.SetResult(result);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
+                var result = GameMinerSyncAccount(bot);
+                task.SetResult(result);
             });
 
             return task.Task.Result;
@@ -710,31 +602,26 @@ namespace KryBot
 
                 if (response.RestResponse.StatusCode == HttpStatusCode.OK)
                 {
-                    if (response.RestResponse.Content != null)
+                    if (response.RestResponse.Content != "")
                     {
                         HtmlDocument htmldoc = new HtmlDocument();
                         htmldoc.LoadHtml(response.RestResponse.Content);
 
-                        try
+                        var message =
+                            htmldoc.DocumentNode.SelectSingleNode("//div[@class='msgbox success']");
+                        if (message != null)
                         {
-                            var message =
-                                htmldoc.DocumentNode.SelectSingleNode("//div[@class='msgbox success']").InnerText;
-                            if (message != null)
-                            {
-                                bot.PlayBlinkPoints = bot.PlayBlinkPoints - giveaway.Price;
-                                return Messages.GiveawayJoined("PlayBlink", giveaway.Name, giveaway.Price,
-                                    bot.PlayBlinkPoints, 0);
-                            }
+                            bot.PlayBlinkPoints = bot.PlayBlinkPoints - giveaway.Price;
+                            return Messages.GiveawayJoined("PlayBlink", giveaway.Name, giveaway.Price,
+                                bot.PlayBlinkPoints, 0);
                         }
-                        catch (NullReferenceException)
+
+                        var captcha = htmldoc.DocumentNode.SelectSingleNode("//div[@class='flash_rules']");
+                        if (captcha != null)
                         {
-                            var captcha = htmldoc.DocumentNode.SelectSingleNode("//div[@class='flash_rules']");
-                            if (captcha != null)
-                            {
-                                bot.PlayBlinkPoints = bot.PlayBlinkPoints - giveaway.Price;
-                                return Messages.GiveawayNotJoined("PlayBlink", giveaway.Name, "Captcha");
-                            }
-                        }  
+                            bot.PlayBlinkPoints = bot.PlayBlinkPoints - giveaway.Price;
+                            return Messages.GiveawayNotJoined("PlayBlink", giveaway.Name, "Captcha");
+                        } 
                     }
                     return Messages.GiveawayNotJoined("PlayBlink", giveaway.Name, "Error");
                 }
@@ -748,15 +635,8 @@ namespace KryBot
             var task = new TaskCompletionSource<Classes.Log>();
             await Task.Run(() =>
             {
-                try
-                {
-                    var result = PlayBlinkJoinGiveaway(bot, giveaway);
-                    task.SetResult(result);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString());
-                }
+                var result = PlayBlinkJoinGiveaway(bot, giveaway);
+                task.SetResult(result);
             });
 
             return task.Task.Result;
