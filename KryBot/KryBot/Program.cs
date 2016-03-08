@@ -4,6 +4,7 @@ using System.Threading;
 using System.Windows.Forms;
 using KryBot.lang;
 using Microsoft.Win32;
+using Exceptionless;
 
 namespace KryBot
 {
@@ -18,6 +19,8 @@ namespace KryBot
             Application.ThreadException += FormMain_UIThreadException;
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
             {
+                ExceptionlessClient.Default.Register();
+
                 Registry.CurrentUser.CreateSubKey(
                     @"Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION");
                 RegistryKey key =
@@ -34,6 +37,7 @@ namespace KryBot
 
         public static void FormMain_UIThreadException(object sender, ThreadExceptionEventArgs t)
         {
+            t.Exception.ToExceptionless().Submit();
             MessageBox.Show($"[{t.Exception.TargetSite}] {{{t.Exception.Message}}}", strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             Environment.Exit(0);
         }
