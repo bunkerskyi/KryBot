@@ -2097,63 +2097,59 @@ namespace KryBot
 
         private async Task<bool> CheckForUpdates()
         {
-            try
+            string json = await Web.GetVersionInGitHubAsync(Settings.Default.GitHubRepoReleaseUrl);
+
+            if (json != "")
             {
-                string json = await Web.GetVersionInGitHubAsync(Settings.Default.GitHubRepoReleaseUrl);
-
-                if(json != null)
+                Classes.GitHubRelease release;
+                try
                 {
-                    Classes.GitHubRelease release;
-                    try
-                    {
-                        release = JsonConvert.DeserializeObject<Classes.GitHubRelease>(json);
-                    }
-                    catch (JsonReaderException)
-                    {
-                        return false;
-                    }
+                    release = JsonConvert.DeserializeObject<Classes.GitHubRelease>(json);
+                }
+                catch (JsonReaderException)
+                {
+                    return false;
+                }
 
-                    if (release.tag_name != null && Tools.VersionCompare(Application.ProductVersion, release.tag_name))
-                    {
-                        LogBuffer =
-                            Tools.ConstructLog(
-                                $"Для скачивания доступна новая версия [{release.tag_name}] {Settings.Default.GitHubRepoUrl}",
-                                Color.Green, true, true);
-                        LogChanged?.Invoke();
+                if (release.tag_name != null && Tools.VersionCompare(Application.ProductVersion, release.tag_name))
+                {
+                    LogBuffer =
+                        Tools.ConstructLog(
+                            $"Для скачивания доступна новая версия [{release.tag_name}] {Settings.Default.GitHubRepoUrl}",
+                            Color.Green, true, true);
+                    LogChanged?.Invoke();
 
-                        DialogResult dr = MessageBox.Show($"Для скачивания доступна новая версия { release.tag_name}. Скачать?",
+                    DialogResult dr =
+                        MessageBox.Show($"Для скачивания доступна новая версия {release.tag_name}. Скачать?",
                             @"Обновление", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                        if (dr == DialogResult.Yes)
+                    if (dr == DialogResult.Yes)
+                    {
+                        if (File.Exists("KryBot_Updater.exe"))
                         {
-                            if (File.Exists("KryBot_Updater.exe"))
+                            if (Tools.CheckMd5("KryBot_Updater.exe", "KryBot.Resources.KryBot_Updater.exe"))
                             {
-                                if (Tools.CheckMd5("KryBot_Updater.exe", "KryBot.Resources.KryBot_Updater.exe"))
-                                {
-                                    Process.Start("KryBot_Updater.exe", Application.ProductVersion);
-                                    Application.Exit();
-                                }
-                                else
-                                {
-                                    Tools.CopyResource("KryBot.Resources.KryBot_Updater.exe", Application.StartupPath + "\\KryBot_Updater.exe");
-                                    Process.Start("KryBot_Updater.exe", Application.ProductVersion);
-                                    Application.Exit();
-                                }
+                                Process.Start("KryBot_Updater.exe", Application.ProductVersion);
+                                Application.Exit();
                             }
                             else
                             {
-                                Tools.CopyResource("KryBot.Resources.KryBot_Updater.exe", Application.StartupPath + "\\KryBot_Updater.exe");
+                                Tools.CopyResource("KryBot.Resources.KryBot_Updater.exe",
+                                    Application.StartupPath + "\\KryBot_Updater.exe");
                                 Process.Start("KryBot_Updater.exe", Application.ProductVersion);
                                 Application.Exit();
                             }
                         }
+                        else
+                        {
+                            Tools.CopyResource("KryBot.Resources.KryBot_Updater.exe",
+                                Application.StartupPath + "\\KryBot_Updater.exe");
+                            Process.Start("KryBot_Updater.exe", Application.ProductVersion);
+                            Application.Exit();
+                        }
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"[{ex.Message}] {{{ex.InnerException?.Message}}}");
-            }                                                                                                                 
-            return true;                                                                                 
+            return true;
         }
 
         private void донатToolStripMenuItem_Click(object sender, EventArgs e)
