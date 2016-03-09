@@ -32,6 +32,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabelLoad = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabelURL = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabelIE = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,7 +52,8 @@
             this.statusStrip1.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabelLoad,
-            this.toolStripStatusLabelURL});
+            this.toolStripStatusLabelURL,
+            this.toolStripStatusLabelIE});
             this.statusStrip1.Location = new System.Drawing.Point(0, 239);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(284, 22);
@@ -71,6 +73,12 @@
             this.toolStripStatusLabelURL.Name = "toolStripStatusLabelURL";
             this.toolStripStatusLabelURL.Size = new System.Drawing.Size(28, 17);
             this.toolStripStatusLabelURL.Text = "URL";
+            // 
+            // toolStripStatusLabelIE
+            // 
+            this.toolStripStatusLabelIE.Name = "toolStripStatusLabelIE";
+            this.toolStripStatusLabelIE.Size = new System.Drawing.Size(16, 17);
+            this.toolStripStatusLabelIE.Text = "IE";
             // 
             // Browser
             // 
@@ -96,5 +104,6 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelLoad;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelURL;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelIE;
     }
 }

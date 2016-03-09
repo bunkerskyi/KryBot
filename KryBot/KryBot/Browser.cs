@@ -46,6 +46,7 @@ namespace KryBot
         {
             Text = _title;
             Icon = Resources.KryBotPresent_256b;
+            toolStripStatusLabelIE.Text = $"IE: {webBrowser.Version}";
             webBrowser.ScriptErrorsSuppressed = true;
             webBrowser.DocumentCompleted += wb_DocumentCompleted;
 
@@ -63,8 +64,7 @@ namespace KryBot
                 InternetSetCookie("http://steamtrade.info/", "PHPSESSID", _phpSessId);
             }
             toolStripStatusLabelURL.Text = @"URL: " + _startPage;
-
-            webBrowser.Navigate(_startPage);
+            webBrowser.Navigate(_startPage, "_self", null, "User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64; Trident/7.0; rv:11.0) like Gecko");
         }
 
         private void wb_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)

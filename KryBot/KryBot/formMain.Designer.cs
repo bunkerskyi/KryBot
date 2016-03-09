@@ -246,14 +246,14 @@
             this.донатToolStripMenuItem});
             this.оПрограммеToolStripMenuItem.Image = global::KryBot.Properties.Resources.info;
             this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(130, 20);
-            this.оПрограммеToolStripMenuItem.Text = "Информация       ";
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
+            this.оПрограммеToolStripMenuItem.Text = "Информация";
             // 
             // статстикаToolStripMenuItem
             // 
             this.статстикаToolStripMenuItem.Image = global::KryBot.Properties.Resources.statistic1;
             this.статстикаToolStripMenuItem.Name = "статстикаToolStripMenuItem";
-            this.статстикаToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.статстикаToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.статстикаToolStripMenuItem.Text = "Статистика";
             this.статстикаToolStripMenuItem.Click += new System.EventHandler(this.статстикаToolStripMenuItem_Click);
             // 
@@ -261,7 +261,7 @@
             // 
             this.оПрограммеToolStripMenuItem1.Image = global::KryBot.Properties.Resources.info;
             this.оПрограммеToolStripMenuItem1.Name = "оПрограммеToolStripMenuItem1";
-            this.оПрограммеToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.оПрограммеToolStripMenuItem1.Size = new System.Drawing.Size(149, 22);
             this.оПрограммеToolStripMenuItem1.Text = "О программе";
             this.оПрограммеToolStripMenuItem1.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem1_Click);
             // 
@@ -269,12 +269,13 @@
             // 
             this.донатToolStripMenuItem.Image = global::KryBot.Properties.Resources.wallet;
             this.донатToolStripMenuItem.Name = "донатToolStripMenuItem";
-            this.донатToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.донатToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.донатToolStripMenuItem.Text = "Поддержать";
             this.донатToolStripMenuItem.Click += new System.EventHandler(this.донатToolStripMenuItem_Click);
             // 
             // логToolStripMenuItem
             // 
+            this.логToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.логToolStripMenuItem.Image = global::KryBot.Properties.Resources.log1;
             this.логToolStripMenuItem.Name = "логToolStripMenuItem";
             this.логToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
