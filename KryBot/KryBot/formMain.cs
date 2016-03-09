@@ -394,7 +394,7 @@ namespace KryBot
                             }
                         }
 
-                        JoinGiveaways(GmGiveaways);
+                        await JoinGiveaways(GmGiveaways);
                     }
                 }
                 else
@@ -472,8 +472,8 @@ namespace KryBot
                                 }
                             }
 
-                            JoinGiveaways(SgGiveaways, false);
-                            JoinGiveaways(SgWishListGiveaways, true);
+                            await JoinGiveaways(SgWishListGiveaways, true);
+                            await JoinGiveaways(SgGiveaways, false);
                         }
                     }
                 }
@@ -540,8 +540,8 @@ namespace KryBot
                             }
                         }
 
-                        JoinGiveaways(ScGiveaways, false);
-                        JoinGiveaways(ScWishListGiveaways, true);
+                        await JoinGiveaways(ScWishListGiveaways, true);
+                        await JoinGiveaways(ScGiveaways, false);
 
                         var async = await Web.SteamCompanionSyncAccountAsync(Bot);
                         if (async != null)
@@ -607,7 +607,7 @@ namespace KryBot
                                 }
                             }
 
-                            JoinGiveaways(SpGiveaways);
+                            await JoinGiveaways(SpGiveaways);
                         }
                     }
                 }
@@ -648,7 +648,7 @@ namespace KryBot
 
                     if (StGiveaways?.Count > 0)
                     {
-                        JoinGiveaways(StGiveaways);    
+                        await JoinGiveaways(StGiveaways);    
                     }
                 }
                 else
@@ -708,7 +708,7 @@ namespace KryBot
                                 }
                             }
 
-                            JoinGiveaways(PbGiveaways);
+                            await JoinGiveaways(PbGiveaways);
                         }
                     }
                 }
@@ -2246,7 +2246,7 @@ namespace KryBot
             btnPBExit.Enabled = true;
         }
 
-        private async void JoinGiveaways(List<GameMiner.GmGiveaway> giveaways)
+        private async Task<bool> JoinGiveaways(List<GameMiner.GmGiveaway> giveaways)
         {
             foreach (var giveaway in giveaways)
             {
@@ -2275,9 +2275,10 @@ namespace KryBot
                     }
                 }
             }
+            return true;
         }
 
-        private async void JoinGiveaways(List<SteamGifts.SgGiveaway> giveaways, bool wishlist)
+        private async Task<bool> JoinGiveaways(List<SteamGifts.SgGiveaway> giveaways, bool wishlist)
         {
             foreach (var giveaway in giveaways)
             {
@@ -2329,9 +2330,10 @@ namespace KryBot
                     }
                 }
             }
+            return true;
         }
 
-        private async void JoinGiveaways(List<SteamCompanion.ScGiveaway> giveaways, bool wishlist)
+        private async Task<bool> JoinGiveaways(List<SteamCompanion.ScGiveaway> giveaways, bool wishlist)
         {
             foreach (var giveaway in giveaways)
             {
@@ -2383,9 +2385,10 @@ namespace KryBot
                     }
                 }
             }
+            return true;
         }
 
-        private async void JoinGiveaways(List<SteamPortal.SpGiveaway> giveaways)
+        private async Task<bool> JoinGiveaways(List<SteamPortal.SpGiveaway> giveaways)
         {
             foreach (var giveaway in giveaways)
             {
@@ -2411,9 +2414,10 @@ namespace KryBot
                     }
                 }
             }
+            return true;
         }
 
-        private async void JoinGiveaways(List<SteamTrade.StGiveaway> giveaways)
+        private async Task<bool> JoinGiveaways(List<SteamTrade.StGiveaway> giveaways)
         {
             foreach (var giveaway in giveaways)
             {
@@ -2435,9 +2439,10 @@ namespace KryBot
                     }
                 }
             }
+            return true;
         }
 
-        private async void JoinGiveaways(List<PlayBlink.PbGiveaway> giveaways)
+        private async Task<bool> JoinGiveaways(List<PlayBlink.PbGiveaway> giveaways)
         {
             foreach (var giveaway in giveaways)
             {
@@ -2471,6 +2476,7 @@ namespace KryBot
                     }
                 }
             }
+            return true;
         }
     }
 }

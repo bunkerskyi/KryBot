@@ -173,7 +173,7 @@ namespace KryBot
 
                     var jresponse =
                         JsonConvert.DeserializeObject<GameMiner.JsonResponseError>(response.RestResponse.Content);
-                    return Messages.GiveawayNotJoined("SteamGifts", giveaway.Name, jresponse.Error.Message);
+                    return Messages.GiveawayNotJoined("SteamGifts", giveaway.Name, jresponse.Error?.Message);
                 }
             }
             return null;
