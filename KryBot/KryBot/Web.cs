@@ -12,6 +12,8 @@ namespace KryBot
 {
     internal class Web
     {
+        private static int requestInterval = 400;
+
         public static Classes.Response Get(string url, string subUrl, List<Parameter> parameters,
             CookieContainer cookies, List<HttpHeader> headers, string userAgent)
         {
@@ -42,7 +44,7 @@ namespace KryBot
                 RestResponse = response
             };
 
-            Thread.Sleep(200);
+            Thread.Sleep(requestInterval);
 
             return data;
         }
@@ -89,6 +91,8 @@ namespace KryBot
                 RestResponse = response
             };
 
+            Thread.Sleep(requestInterval);
+
             return data;
         }
 
@@ -108,7 +112,7 @@ namespace KryBot
         public static Classes.Log GameMinerJoinGiveaway(Classes.Bot bot, GameMiner.GmGiveaway giveaway)
         {
 
-            Thread.Sleep(200);
+            Thread.Sleep(requestInterval);
             var response = Post("http://gameminer.net/",
                 "/giveaway/enter/" + giveaway.Id + "?" + (giveaway.IsSandbox ? "sandbox" : "coal") + "_page=" +
                 giveaway.Page, Generate.PostData_GameMiner(bot.GameMinerxsrf), new List<HttpHeader>(),
@@ -151,7 +155,7 @@ namespace KryBot
 
         public static Classes.Log SteamGiftsJoinGiveaway(Classes.Bot bot, SteamGifts.SgGiveaway giveaway)
         {
-            Thread.Sleep(100);
+            Thread.Sleep(requestInterval);
             giveaway = Parse.SteamGiftsGetJoinData(giveaway, bot);
 
             if (giveaway.Token != null)
@@ -194,7 +198,7 @@ namespace KryBot
 
         public static Classes.Log SteamCompanionJoinGiveaway(Classes.Bot bot, SteamCompanion.ScGiveaway giveaway)
         {
-            Thread.Sleep(300);
+            Thread.Sleep(requestInterval);
             var data = Parse.SteamCompanionGetJoinData(giveaway, bot);
             if (data != null && data.Success)
             {
@@ -240,7 +244,7 @@ namespace KryBot
 
         public static Classes.Log SteamPortalJoinGiveaway(Classes.Bot bot, SteamPortal.SpGiveaway giveaway)
         {
-            Thread.Sleep(100);
+            Thread.Sleep(requestInterval);
             if (giveaway.Code != null)
             {
                 var list = new List<HttpHeader>();
@@ -280,7 +284,7 @@ namespace KryBot
 
         public static Classes.Log GameAwayslJoinGiveaway(Classes.Bot bot, GameAways.SaGiveaway giveaway)
         {
-            Thread.Sleep(100);
+            Thread.Sleep(requestInterval);
             if (giveaway.Id != null)
             {
                 var list = new List<HttpHeader>();
@@ -320,7 +324,7 @@ namespace KryBot
 
         public static Classes.Log SteamTradeJoinGiveaway(Classes.Bot bot, SteamTrade.StGiveaway giveaway)
         {
-            Thread.Sleep(100);
+            Thread.Sleep(requestInterval);
             giveaway = Parse.SteamTradeGetJoinData(giveaway, bot);
             if (giveaway.LinkJoin != null)
             {
@@ -384,6 +388,8 @@ namespace KryBot
                 RestResponse = response
             };
 
+            Thread.Sleep(requestInterval);
+
             return data;
         }
 
@@ -420,6 +426,8 @@ namespace KryBot
                 Cookies = client.CookieContainer,
                 RestResponse = response
             };
+
+            Thread.Sleep(requestInterval);
 
             return data;
         }
