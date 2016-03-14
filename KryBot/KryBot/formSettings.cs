@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using KryBot.Properties;
+using KryBot.lang;
 
 namespace KryBot
 {
@@ -113,6 +114,13 @@ namespace KryBot
 
         private void SaveSettings()
         {
+            if(int.Parse(tbTimerInterval.Text) == 0)
+            {
+                MessageBox.Show("Интервал таймера не может ровняться 0", strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                tbTimerInterval.Text = Settings.Default.TimerInterval.ToString();
+                return;
+            }
+
             Settings.Default.Sort = cbSort.Checked;
             Settings.Default.SortToMore = cbSortBy.Text == @"дорогие";
             Settings.Default.SortToLess = cbSortBy.Text == @"дешевые";
