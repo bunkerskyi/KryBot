@@ -123,6 +123,15 @@ namespace KryBot
                 ShowMessage();
                 Close();
             }
+
+            if (_site == "PlayBlink")
+            {
+                _bot.PlayBlinkPhpSessId = (Controls["PHPSESSID"] as TextBox)?.Text;
+                _bot.PlayBlinkEnabled = true;
+                Tools.SaveProfile(_bot, "");
+                ShowMessage();
+                Close();
+            }
         }
 
         private void ShowMessage()
