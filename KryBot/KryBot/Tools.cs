@@ -214,6 +214,10 @@ namespace KryBot
                    strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+            catch (ArgumentException)
+            {
+                return false;
+            }
         }
 
         public static bool VersionCompare(string sClient, string sServer)
