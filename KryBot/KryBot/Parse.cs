@@ -401,6 +401,15 @@ namespace KryBot
                     bot.SteamGiftsLevel = int.Parse(level.InnerText.Split(' ')[1]);
                     return ParseProfile("SteamGifts", bot.SteamGiftsPoint, bot.SteamGiftsLevel);
                 }
+
+                var error = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='notification notification--warning']");
+                if (error != null)
+                {
+                    bot.SteamGiftsEnabled = false;
+                    bot.GameMinerxsrf = "";
+                    SaveProfile(bot, "");
+                    return ConstructLog($"{GetDateTime()} {{GameMiner}} {strings.AccountNotActive} {{{error.InnerText}}}", Color.Red, false, true);
+                }
             }
             return ParseProfile("SteamGifts", false);
         }
