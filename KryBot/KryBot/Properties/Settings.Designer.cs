@@ -266,12 +266,12 @@ namespace KryBot.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool WishlistSort {
+        public bool WishlistNotSort {
             get {
-                return ((bool)(this["WishlistSort"]));
+                return ((bool)(this["WishlistNotSort"]));
             }
             set {
-                this["WishlistSort"] = value;
+                this["WishlistNotSort"] = value;
             }
         }
     }

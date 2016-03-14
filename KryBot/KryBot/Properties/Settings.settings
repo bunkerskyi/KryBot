@@ -62,7 +62,7 @@
     <Setting Name="GitHubRepoReleaseUrl" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://api.github.com/repos/KriBetko/KryBot/releases/latest</Value>
     </Setting>
-    <Setting Name="WishlistSort" Type="System.Boolean" Scope="User">
+    <Setting Name="WishlistNotSort" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

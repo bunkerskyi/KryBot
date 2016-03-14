@@ -448,7 +448,7 @@ namespace KryBot
                                 if (Settings.Default.SortToMore)
                                 {
                                     SgGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
-                                    if (Settings.Default.WishlistSort)
+                                    if (!Settings.Default.WishlistNotSort)
                                     {
                                         SgWishListGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
                                     }
@@ -456,7 +456,7 @@ namespace KryBot
                                 else
                                 {
                                     SgGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
-                                    if (Settings.Default.WishlistSort)
+                                    if (!Settings.Default.WishlistNotSort)
                                     {
                                         SgWishListGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
                                     }
@@ -466,7 +466,7 @@ namespace KryBot
                             if (Bot.SteamGiftsSortToLessLevel)
                             {
                                 SgGiveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
-                                if (Settings.Default.WishlistSort)
+                                if (!Settings.Default.WishlistNotSort)
                                 {
                                     SgWishListGiveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
                                 }
@@ -525,7 +525,7 @@ namespace KryBot
                             if (Settings.Default.SortToMore)
                             {
                                 ScGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
-                                if (Settings.Default.WishlistSort)
+                                if (!Settings.Default.WishlistNotSort)
                                 {
                                     ScWishListGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
                                 }
@@ -533,7 +533,7 @@ namespace KryBot
                             else
                             {
                                 ScGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
-                                if (Settings.Default.WishlistSort)
+                                if (!Settings.Default.WishlistNotSort)
                                 {
                                     ScWishListGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
                                 }
