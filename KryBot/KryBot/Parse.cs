@@ -987,7 +987,7 @@ namespace KryBot
                     {
                         for (var j = 0; j < nodes.Count; j++)
                         {
-                            if (nodes[j].Attributes["style"].Value == "opacity: 0.5;")
+                            if (nodes[j].Attributes["style"] != null && nodes[j].Attributes["style"].Value == "opacity: 0.5;")
                             {
                                 nodes.Remove(nodes[j]);
                                 j--;
