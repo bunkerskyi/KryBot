@@ -26,21 +26,13 @@ namespace KryBot
                 var htmlDoc = new HtmlDocument();
                 htmlDoc.LoadHtml(response.RestResponse.Content);
 
-                var login = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='user_avatar playerAvatar in-game']");
+                var login = htmlDoc.DocumentNode.SelectSingleNode("//a[contains(@class, 'user_avatar') and contains(@class, 'playerAvatar')]");
                 if (login == null)
                 {
-                    login = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='user_avatar playerAvatar online']");
-                    if (login == null)
-                    {
-                        login = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='user_avatar playerAvatar offline']");
-                        if (login == null)
-                        {
-                            ProfileLoaded();
-                            return ConstructLog($"{GetDateTime()} {{Steam}} {strings.ParseProfile_LoginOrServerError}",
-                                Color.Red,
-                                false, echo);
-                        }
-                    }
+                    ProfileLoaded();
+                    return ConstructLog($"{GetDateTime()} {{Steam}} {strings.ParseProfile_LoginOrServerError}",
+                        Color.Red,
+                        false, echo);
                 }
 
                 return

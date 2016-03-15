@@ -13,16 +13,16 @@ namespace KryBot
         {
             var cookie = new CookieContainer();
             var target = new Uri("http://steamcommunity.com/");
-            try
-            {
-                cookie.Add(new Cookie("sessionid", bot.SteamSessid) {Domain = target.Host});
-                cookie.Add(new Cookie("steamLogin", bot.SteamLogin) {Domain = target.Host});
+
+            if(bot.SteamSessid != null)
+                cookie.Add(new Cookie("sessionid", bot.SteamSessid) { Domain = target.Host });
+
+            if (bot.SteamLogin != null)
+                cookie.Add(new Cookie("steamLogin", bot.SteamLogin) { Domain = target.Host });
+
+            if (bot.SteamRememberLogin != null)
                 cookie.Add(new Cookie("steamRememberLogin", bot.SteamRememberLogin) { Domain = target.Host });
-            }
-            catch (CookieException)
-            {
-                return null;
-            }
+
             return cookie;
         }
 
@@ -56,16 +56,14 @@ namespace KryBot
         {
             var cookie = new CookieContainer();
             var target = new Uri("http://gameminer.net/");
-            try
-            {
+            if(bot.GameMinerToken != null)
                 cookie.Add(new Cookie("token", bot.GameMinerToken) {Domain = target.Host});
+
+            if (bot.GameMinerxsrf != null)
                 cookie.Add(new Cookie("_xsrf", bot.GameMinerxsrf) {Domain = target.Host});
+
+            if (Settings.Default.Lang != null)
                 cookie.Add(new Cookie("lang", Settings.Default.Lang) {Domain = target.Host});
-            }
-            catch (Exception)
-            {
-                return null;
-            }
             return cookie;
         }
 
@@ -114,14 +112,10 @@ namespace KryBot
         {
             var cookie = new CookieContainer();
             var target = new Uri("http://www.steamgifts.com/");
-            try
-            {
+
+            if(bot.SteamGiftsPhpSessId != null)
                 cookie.Add(new Cookie("PHPSESSID", bot.SteamGiftsPhpSessId) {Domain = target.Host});
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+
             return cookie;
         }
 
@@ -166,17 +160,19 @@ namespace KryBot
         {
             var cookie = new CookieContainer();
             var target = new Uri("https://steamcompanion.com/");
-            try
-            {
+
+            if(bot.SteamCompanionPhpSessId !=null)
                 cookie.Add(new Cookie("PHPSESSID", bot.SteamCompanionPhpSessId) {Domain = target.Host});
+
+            if (bot.SteamCompanionUserC != null)
                 cookie.Add(new Cookie("userc", bot.SteamCompanionUserC) {Domain = target.Host});
+
+            if (bot.SteamCompanionUserId != null)
                 cookie.Add(new Cookie("userid", bot.SteamCompanionUserId) {Domain = target.Host});
+
+            if (bot.SteamCompanionUserT != null)
                 cookie.Add(new Cookie("usert", bot.SteamCompanionUserT) {Domain = target.Host});
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+
             return cookie;
         }
 
@@ -226,14 +222,10 @@ namespace KryBot
         {
             var cookie = new CookieContainer();
             var target = new Uri("http://steamportal.net/");
-            try
-            {
+
+            if (bot.SteamPortalPhpSessId != null)
                 cookie.Add(new Cookie("PHPSESSID", bot.SteamPortalPhpSessId) {Domain = target.Host});
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+
             return cookie;
         }
 
@@ -282,14 +274,10 @@ namespace KryBot
         {
             var cookie = new CookieContainer();
             var target = new Uri("http://www.gameaways.com/");
-            try
-            {
+
+            if (bot.GameAwaysPhpSessId != null)
                 cookie.Add(new Cookie("ASP.NET_SessionId", bot.GameAwaysPhpSessId) {Domain = target.Host});
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+
             return cookie;
         }
 
@@ -338,17 +326,19 @@ namespace KryBot
         {
             var cookie = new CookieContainer();
             var target = new Uri("http://steamtrade.info/");
-            try
-            {
+
+            if (bot.SteamTradePhpSessId != null)
                 cookie.Add(new Cookie("PHPSESSID", bot.SteamTradePhpSessId) {Domain = target.Host});
+
+            if (bot.SteamTradeDleUserId != null)
                 cookie.Add(new Cookie("dle_user_id", bot.SteamTradeDleUserId) {Domain = target.Host});
+
+            if (bot.SteamTradeDlePassword != null)
                 cookie.Add(new Cookie("dle_password", bot.SteamTradeDlePassword) {Domain = target.Host});
+
+            if (bot.SteamTradePassHash != null)
                 cookie.Add(new Cookie("passhash", bot.SteamTradePassHash) {Domain = target.Host});
-            }
-            catch (CookieException)
-            {
-                return null;
-            }
+
             return cookie;
         }
 
@@ -383,18 +373,15 @@ namespace KryBot
         {
             var cookie = new CookieContainer();
             var target = new Uri("http://playblink.com/");
-            try
-            {
+
+            if (bot.PlayBlinkPhpSessId != null)
                 cookie.Add(new Cookie("PHPSESSID", bot.PlayBlinkPhpSessId) { Domain = target.Host });
-                cookie.Add(new Cookie("entry", "1") { Domain = target.Host });
-                cookie.Add(new Cookie("level", bot.PlayBlinkLevel.ToString()) { Domain = target.Host });
-                cookie.Add(new Cookie("order", "2") { Domain = target.Host });
-                cookie.Add(new Cookie("ppage", "100") { Domain = target.Host });
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+
+            cookie.Add(new Cookie("entry", "1") { Domain = target.Host });
+            cookie.Add(new Cookie("level", bot.PlayBlinkLevel.ToString()) { Domain = target.Host });
+            cookie.Add(new Cookie("order", "2") { Domain = target.Host });
+            cookie.Add(new Cookie("ppage", "100") { Domain = target.Host });
+
             return cookie;
         }
 
