@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.IO.Compression;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Windows.Forms;
@@ -96,10 +99,8 @@ namespace KryBot_Updater
                 {
                     return Release.tag_name;
                 }
-                else
-                {
-                    return null;
-                }
+
+                return null;
             }
             catch (Exception e)
             {
@@ -128,26 +129,36 @@ namespace KryBot_Updater
 
         private static bool Unzip()
         {
+            List<string> filesToExtract = new List<string>();
+            string[] filesToUpdate = Directory.GetFiles(Environment.CurrentDirectory);
+
             Console.WriteLine(strings.UnzipingFile + @" KryBot_Portable.zip...");
             try
             {
-                string[] files = Directory.GetFiles(Environment.CurrentDirectory);
-                foreach (var file in files)
+                using (var zip = ZipFile.OpenRead("KryBot_Portable.zip"))
                 {
-                    if (file == Environment.CurrentDirectory + "\\KryBot.exe")
+                    filesToExtract.AddRange(zip.Entries.Select(e => e.Name));
+                }
+
+                foreach (var fileToUpdate in filesToUpdate)
+                {
+                    foreach (var fileToExtract in filesToExtract)
                     {
-                        try
+                        if (fileToUpdate == Environment.CurrentDirectory + "\\" + fileToExtract)
                         {
-                            File.Delete(file);
-                        }
-                        catch (UnauthorizedAccessException)
-                        {
-                            MessageBox.Show(strings.Error_UpdateClosePogramNeeded, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return false;
-                        }
+                            try
+                            {
+                                File.Delete(fileToUpdate);
+                            }
+                            catch (UnauthorizedAccessException)
+                            {
+                                MessageBox.Show(strings.Error_UpdateClosePogramNeeded, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return false;
+                            }
+                        }      
                     }    
                 }
-                System.IO.Compression.ZipFile.ExtractToDirectory("KryBot_Portable.zip", Environment.CurrentDirectory);
+                ZipFile.ExtractToDirectory("KryBot_Portable.zip", Environment.CurrentDirectory);
                 File.Delete("KryBot_Portable.zip");
             }
             catch (NullReferenceException e)
