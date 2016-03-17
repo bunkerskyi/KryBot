@@ -31,10 +31,10 @@ namespace KryBot
         }
 
         [DllImport("wininet.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        public static extern bool InternetSetCookie(string lpszUrlName, string lbszCookieName, string lpszCookieData);
+        private static extern bool InternetSetCookie(string lpszUrlName, string lbszCookieName, string lpszCookieData);
 
         [DllImport("wininet.dll", SetLastError = true)]
-        public static extern bool InternetGetCookieEx(
+        private static extern bool InternetGetCookieEx(
             string url,
             string cookieName,
             StringBuilder cookieData,

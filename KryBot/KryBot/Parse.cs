@@ -527,7 +527,7 @@ namespace KryBot
                 }
             }
 
-            if (giveaways == null)
+            if (giveaways?.Count == 0 && wishlistGiveaways.Count == 0)
             {
                 return
                     ConstructLog(
@@ -537,7 +537,7 @@ namespace KryBot
 
             if (blackList != null)
             {
-                for (int i = 0; i < giveaways.Count; i++)
+                for (int i = 0; i < giveaways?.Count; i++)
                 {
                     foreach (var id in blackList)
                     {
@@ -553,7 +553,7 @@ namespace KryBot
 
             return
                 ConstructLog(
-                    $"{content}{GetDateTime()} {{SteamGifts}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {giveaways.Count}",
+                    $"{content}{GetDateTime()} {{SteamGifts}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {giveaways?.Count + wishlistGiveaways.Count}",
                     Color.White, true, true);
         }
 
@@ -908,7 +908,7 @@ namespace KryBot
                 }
             }
 
-            if (giveaways == null)
+            if (giveaways?.Count == 0 && wishlistGiveaways.Count == 0)
             {
                 return
                     ConstructLog(
@@ -934,7 +934,7 @@ namespace KryBot
 
             return
                 ConstructLog(
-                    $"{content}{GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {giveaways.Count}",
+                    $"{content}{GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {giveaways?.Count + wishlistGiveaways.Count}",
                     Color.White, true, true);
         }
 

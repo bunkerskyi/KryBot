@@ -441,13 +441,12 @@ namespace KryBot
                             LogChanged?.Invoke();
                         }
 
-                        if (SgGiveaways?.Count > 0)
+                        if (SgWishListGiveaways.Count > 0)
                         {
                             if (Settings.Default.Sort)
                             {
                                 if (Settings.Default.SortToMore)
                                 {
-                                    SgGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
                                     if (!Settings.Default.WishlistNotSort)
                                     {
                                         SgWishListGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
@@ -455,7 +454,6 @@ namespace KryBot
                                 }
                                 else
                                 {
-                                    SgGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
                                     if (!Settings.Default.WishlistNotSort)
                                     {
                                         SgWishListGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
@@ -465,7 +463,6 @@ namespace KryBot
 
                             if (Bot.SteamGiftsSortToLessLevel)
                             {
-                                SgGiveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
                                 if (!Settings.Default.WishlistNotSort)
                                 {
                                     SgWishListGiveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
@@ -473,11 +470,32 @@ namespace KryBot
                             }
 
                             await JoinGiveaways(SgWishListGiveaways, true);
+                        }
+
+                        if (SgGiveaways.Count > 0)
+                        {
+                            if (Settings.Default.Sort)
+                            {
+                                if (Settings.Default.SortToMore)
+                                {
+                                    SgGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+                                }
+                                else
+                                {
+                                    SgGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+                                }
+                            }
+
+                            if (Bot.SteamGiftsSortToLessLevel)
+                            {
+                                SgGiveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
+                            }
+
                             await JoinGiveaways(SgGiveaways, false);
                         }
                     }
                 }
-                else
+                else         
                 {
                     BlockTabpage(tabPageSG, false);
                     btnSGLogin.Enabled = true;
@@ -518,7 +536,30 @@ namespace KryBot
                         LogChanged?.Invoke();
                     }
 
-                    if (ScGiveaways?.Count > 0)
+                    if (ScWishListGiveaways.Count > 0)
+                    {
+                        if (Settings.Default.Sort)
+                        {
+                            if (Settings.Default.SortToMore)
+                            {
+                                if (!Settings.Default.WishlistNotSort)
+                                {
+                                    ScWishListGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+                                }
+                            }
+                            else
+                            {
+                                if (!Settings.Default.WishlistNotSort)
+                                {
+                                    ScWishListGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+                                }
+                            }
+                        }
+
+                        await JoinGiveaways(ScWishListGiveaways, true);
+                    }
+
+                    if (ScGiveaways.Count > 0)
                     {
                         if (Settings.Default.Sort)
                         {
@@ -539,16 +580,15 @@ namespace KryBot
                                 }
                             }
                         }
+                    }
 
-                        await JoinGiveaways(ScWishListGiveaways, true);
-                        await JoinGiveaways(ScGiveaways, false);
+                    await JoinGiveaways(ScGiveaways, false);
 
-                        var async = await Web.SteamCompanionSyncAccountAsync(Bot);
-                        if (async != null)
-                        {
-                            LogBuffer = async;
-                            LogChanged?.Invoke();
-                        }
+                    var async = await Web.SteamCompanionSyncAccountAsync(Bot);
+                    if (async != null)
+                    {
+                        LogBuffer = async;
+                        LogChanged?.Invoke();
                     }
                 }
                 else
