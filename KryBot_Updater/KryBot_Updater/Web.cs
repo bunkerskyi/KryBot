@@ -8,23 +8,16 @@ namespace KryBot_Updater
     {
         public static string Get(string url)
         {
-            try
+            var client = new RestClient(url)
             {
-                var client = new RestClient(url)
-                {
-                    FollowRedirects = true,
-                };
+                FollowRedirects = true,
+            };
 
-                var request = new RestRequest("", Method.GET);
+            var request = new RestRequest("", Method.GET);
 
-                var response = client.Execute(request);
+            var response = client.Execute(request);
 
-                return response.Content;
-            }
-            catch (TimeoutException)
-            {
-                return null;
-            }
+            return response.Content;
         }
     }
 }
