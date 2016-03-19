@@ -2381,5 +2381,20 @@ namespace KryBot
             toolStripStatusLabel1.Image = image;
             toolStripStatusLabel1.Text = text;
         }
+
+        private void cbPBEnabled_CheckedChanged(object sender, EventArgs e)
+        {
+            if (lblPBStatus.Enabled)
+            {
+                BlockTabpage(tabPagePB, false);
+                cbPBEnabled.Enabled = true;
+                Bot.PlayBlinkEnabled = false;
+            }
+            else
+            {
+                BlockTabpage(tabPagePB, true);
+                Bot.PlayBlinkEnabled = true;
+            }
+        }
     }
 }

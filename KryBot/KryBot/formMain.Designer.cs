@@ -842,6 +842,7 @@
             this.cbPBEnabled.Size = new System.Drawing.Size(15, 14);
             this.cbPBEnabled.TabIndex = 29;
             this.cbPBEnabled.UseVisualStyleBackColor = true;
+            this.cbPBEnabled.CheckedChanged += new System.EventHandler(this.cbPBEnabled_CheckedChanged);
             // 
             // linkLabel7
             // 
