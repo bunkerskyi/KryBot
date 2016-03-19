@@ -14,7 +14,7 @@ namespace KryBot
 {                                                                                                                                                     
     public class Parse
     {
-        // Steam //
+        #region Steam
         public static Classes.Log SteamGetProfile(Classes.Bot bot, bool echo)
         {
             var response = Web.Get("http://steamcommunity.com/", "", new List<Parameter>(),
@@ -30,17 +30,12 @@ namespace KryBot
                 if (login == null)
                 {
                     ProfileLoaded();
-                    return ConstructLog($"{GetDateTime()} {{Steam}} {strings.ParseProfile_LoginOrServerError}",
-                        Color.Red,
-                        false, echo);
+                    return ParseProfile("Steam", false);
                 }
 
-                return
-                    ConstructLog(
-                        $"{GetDateTime()} {{Steam}} {strings.LoginSuccess} ({login.Attributes["href"].Value.Split('/')[4]})",
-                        Color.White, true, echo);
+                return ParseProfile("Steam", true);
             }
-            return ConstructLog($"{GetDateTime()} {{Steam}} {strings.ParseProfile_LoginOrServerError}", Color.Red, false, echo);
+            return ParseProfile("Steam", false);
         }
 
         public static async Task<Classes.Log> SteamGetProfileAsync(Classes.Bot bot, bool echo)
@@ -54,10 +49,9 @@ namespace KryBot
 
             return task.Task.Result;
         }
+        #endregion
 
-        // Steam //
-
-        // GameMiner //
+        #region GameMiner
         public static Classes.Log GameMinerGetProfile(Classes.Bot bot, bool echo)
         {
             var response = Web.Get("http://gameminer.net/", "", new List<Parameter>(),
@@ -370,10 +364,9 @@ namespace KryBot
                     giveaways?.Add(lot);
                 }
         }
+        #endregion
 
-        //GameMiner //
-
-        // SteamGifts//
+        #region SteamGifts
         public static Classes.Log SteamGiftsGetProfile(Classes.Bot bot, bool echo)
         {
             var response = Web.Get("http://www.steamgifts.com/", "", new List<Parameter>(),
@@ -758,10 +751,9 @@ namespace KryBot
             }
             return giveaway;
         }
+        #endregion
 
-        // SteamGifts //
-
-        // SteamCompanion //
+        #region SteamCompanion 
         public static Classes.Log SteamCompanionGetProfile(Classes.Bot bot, bool echo)
         {
             var response = Web.Get("https://steamcompanion.com", "/", new List<Parameter>(),
@@ -1142,10 +1134,9 @@ namespace KryBot
             }
             return GiveawayNotJoined("SteamCompanion", giveaway.Name, "Content is empty");
         }
+        #endregion
 
-        // SteamCompanion //
-
-        // SteamPortal //
+        #region SteamPortal
         public static Classes.Log SteamPortalGetProfile(Classes.Bot bot, bool echo)
         {
             var response = Web.Get("http://steamportal.net/", "", new List<Parameter>(),
@@ -1376,10 +1367,9 @@ namespace KryBot
                 }
             }
         }
+        #endregion
 
-        // SteamPortal //
-
-        // GameAways //
+        #region GameAways
         public static bool GameAwaysProfile(Classes.Bot bot, bool echo)
         {
 
@@ -1406,10 +1396,9 @@ namespace KryBot
             }
             return false;
         }
+        #endregion
 
-        // GameAways //
-
-        // SteamTrade //
+        #region SteamTrade
         public static Classes.Log SteamTradeGetProfile(Classes.Bot bot, bool echo)
         {
             var response = Web.Get("http://steamtrade.info/", "", new List<Parameter>(),
@@ -1549,10 +1538,9 @@ namespace KryBot
             }
             return giveaway;
         }
+        #endregion
 
-        // SteamTrade //
-
-        // PlayBlink //
+        #region PlayBlink
         public static Classes.Log PlayBlinkGetProfile(Classes.Bot bot, bool echo)
         {
             var response = Web.Get("http://playblink.com/", "", new List<Parameter>(),
@@ -1687,6 +1675,6 @@ namespace KryBot
                 }
             }
         }
-        // PlayBlink //
+        #endregion
     }
 }

@@ -126,14 +126,11 @@
   <data name="DllNotLoad_1" xml:space="preserve">
     <value>не была загружена. </value>
   </data>
-  <data name="DoFarm_Finish" xml:space="preserve">
-    <value>Завершено</value>
-  </data>
-  <data name="DoFarm_Start" xml:space="preserve">
-    <value>Старт...</value>
-  </data>
   <data name="Error" xml:space="preserve">
     <value>Ошибка</value>
+  </data>
+  <data name="Finish" xml:space="preserve">
+    <value>Завершено</value>
   </data>
   <data name="GetBotInConfig_Config" xml:space="preserve">
     <value>Конфигурация</value>
@@ -216,6 +213,9 @@
   <data name="ParseProfile_Points" xml:space="preserve">
     <value>Points</value>
   </data>
+  <data name="Start" xml:space="preserve">
+    <value>Старт...</value>
+  </data>
   <data name="SteamGroupAlreadyMember" xml:space="preserve">
     <value>Вы уже состоите в этой группе</value>
   </data>
@@ -224,5 +224,8 @@
   </data>
   <data name="SteamGroupNotJoined" xml:space="preserve">
     <value>Участие в группе НЕ подтверждено</value>
+  </data>
+  <data name="TryLogin" xml:space="preserve">
+    <value>Авторизация...</value>
   </data>
 </root>

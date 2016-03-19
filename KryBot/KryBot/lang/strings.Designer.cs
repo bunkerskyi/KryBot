@@ -88,29 +88,20 @@ namespace KryBot.lang {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Завершено.
-        /// </summary>
-        internal static string DoFarm_Finish {
-            get {
-                return ResourceManager.GetString("DoFarm_Finish", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Старт....
-        /// </summary>
-        internal static string DoFarm_Start {
-            get {
-                return ResourceManager.GetString("DoFarm_Start", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на Ошибка.
         /// </summary>
         internal static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Завершено.
+        /// </summary>
+        internal static string Finish {
+            get {
+                return ResourceManager.GetString("Finish", resourceCulture);
             }
         }
         
@@ -358,6 +349,15 @@ namespace KryBot.lang {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Старт....
+        /// </summary>
+        internal static string Start {
+            get {
+                return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Вы уже состоите в этой группе.
         /// </summary>
         internal static string SteamGroupAlreadyMember {
@@ -381,6 +381,15 @@ namespace KryBot.lang {
         internal static string SteamGroupNotJoined {
             get {
                 return ResourceManager.GetString("SteamGroupNotJoined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Авторизация....
+        /// </summary>
+        internal static string TryLogin {
+            get {
+                return ResourceManager.GetString("TryLogin", resourceCulture);
             }
         }
     }

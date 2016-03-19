@@ -58,7 +58,7 @@ namespace KryBot
         {
             var log = new Log
             {
-                Content = $"{GetDateTime()} {strings.DoFarm_Start}\n",
+                Content = $"{GetDateTime()} {strings.Start}\n",
                 Color = Color.White
             };
             return log;
@@ -68,7 +68,7 @@ namespace KryBot
         {
             var log = new Log
             {
-                Content = $"{GetDateTime()} {strings.DoFarm_Finish} за {time}\n",
+                Content = $"{GetDateTime()} {strings.Finish} за {time}\n",
                 Color = Color.White
             };
             return log;
@@ -133,26 +133,24 @@ namespace KryBot
 
         public static Log ParseProfile(string site, int points, int level)
         {
-            var str = $"{GetDateTime()} {{{site}}} {strings.ParseProfile_Points}: {points}";
+            var str = $"{GetDateTime()} {{{site}}} {strings.LoginSuccess} {strings.ParseProfile_Points}: {points}";
 
             if (level != -1)
             {
                 str += $" {strings.ParseProfile_Level}: {level}";
             }
-            return ConstructLog(str, Color.White, true, true);
+            return ConstructLog(str, Color.Green, true, true);
         }
 
         public static Log ParseProfile(string site, bool success)
         {
             if (!success)
             {
-                return ConstructLog($"{GetDateTime()} {{{site}}} {strings.ParseProfile_LoginOrServerError}", Color.Red,
-                    false, true);
+                return ConstructLog($"{GetDateTime()} {{{site}}} {strings.ParseProfile_LoginOrServerError}", Color.Red, false, true);
             }
             else
             {
-                return ConstructLog($"{GetDateTime()} {{{site}}} {strings.LoginSuccess}", Color.White,
-                    true, true);
+                return ConstructLog($"{GetDateTime()} {{{site}}} {strings.LoginSuccess}", Color.Green, true, true);
             }
         }
     }
