@@ -10,5 +10,16 @@
             public string Code { get; set; }
             public string Region { get; set; }
         }
+
+        public class JsonJoin
+        {
+            public int error { get; set; }
+            public TargetH target_h { get; set; }
+        }
+
+        public class TargetH
+        {
+            public int my_coins { get; set; }
+        }
     }
 }

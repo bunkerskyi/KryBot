@@ -258,11 +258,12 @@ namespace KryBot
                 var response = Post("http://steamportal.net/", "page/join",
                     Generate.PostData_SteamPortal(giveaway.Code), list,
                     Generate.Cookies_SteamPortal(bot), bot.UserAgent);
-                if (response.RestResponse.Content.Contains("Joined already"))
+                var jresponse = JsonConvert.DeserializeObject<SteamPortal.JsonJoin>(response.RestResponse.Content.Replace(".", ""));
+                if (jresponse.error == 0)
                 {
-                    bot.SteamPortalPoints = int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]);
+                    bot.SteamPortalPoints = jresponse.target_h.my_coins;
                     return Messages.GiveawayJoined("SteamPortal", giveaway.Name, giveaway.Price,
-                        int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]), 0);
+                        jresponse.target_h.my_coins, 0);
                 }
                 return Messages.GiveawayNotJoined("SteamPortal", giveaway.Name, "Error");
             }
