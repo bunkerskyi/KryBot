@@ -1157,7 +1157,7 @@ namespace KryBot
                     return ParseProfile("SteamPortal", bot.SteamPortalPoints, -1);
                 }
             }
-            return ParseProfile("Steamportal", false);
+            return ParseProfile("SteamPortal", false);
         }
 
         public static async Task<Classes.Log> SteamPortalGetProfileAsync(Classes.Bot bot, bool echo)
@@ -1332,16 +1332,11 @@ namespace KryBot
                         };
 
                         var price = node.SelectSingleNode(".//span[@class='coin-white-icon']");
-                        var code = node.SelectSingleNode(".//div[@class='ga_coin_join']");
+                        var code = node.SelectSingleNode(".//div[@class='ga_join_btn ga_coin_join']");
                         if (price != null && code != null)
                         {
                             spGiveaway.Price = int.Parse(price.InnerText);
-                            spGiveaway.Code = code.Attributes[
-                                "onclick"].Value.Split(':')[1]
-                                .Split(',')[0].Remove(
-                                    node.SelectSingleNode(".//div[@class='ga_coin_join']").Attributes["onclick"]
-                                        .Value
-                                        .Split(':')[1].Split(',')[0].Length - 1);
+                            spGiveaway.Code = code.Attributes["onclick"].Value.Split('\'')[5].Replace("ga:", "");
 
                             var iconsBlock = node.SelectSingleNode(".//div[@class='giveaway_iconbar']");
                             var icons = iconsBlock?.SelectNodes(".//span");
