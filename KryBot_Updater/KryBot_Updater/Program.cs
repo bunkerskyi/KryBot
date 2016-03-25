@@ -20,6 +20,7 @@ namespace KryBot_Updater
         public static int UpdatePosition;
         public static string Lang = "ru-RU";
         public static bool RunInTheProgram;
+        public static string RootPath = @"C:\Users\kribe\Source\Repos\KryBot\KryBot_Updater\KryBot_Updater\bin";
 
         static void Main(string[] args)
         {
@@ -30,15 +31,20 @@ namespace KryBot_Updater
 
                 foreach (var arg in args)
                 {
-                    if (arg == "RunInTheProgram")
-                    {
-                        RunInTheProgram = true;
-                    }
-
                     if (arg == "ru-RU" || arg == "en-EN")
                     {
                         Lang = arg;
                     }
+
+                    if (arg.Contains("Path:"))
+                    {
+                        RootPath = arg.Split(':')[1];
+                    }
+                }
+
+                if (RootPath == "")
+                {
+                    Application.Exit();
                 }
 
                 if (Lang != null && Lang != "en-EN")
@@ -81,7 +87,7 @@ namespace KryBot_Updater
                             if (Unzip())
                             {
                                 Console.WriteLine(strings.Start + @" KryBot.exe...");
-                                Process.Start("KryBot.exe");
+                                Process.Start(RootPath + "\\KryBot.exe");
                                 Console.WriteLine(@"KryBot.exe " + strings.Started);
                             }
                         }
@@ -120,7 +126,7 @@ namespace KryBot_Updater
         private static bool Unzip()
         {
             List<string> filesToExtract = new List<string>();
-            string[] filesToUpdate = Directory.GetFiles(Environment.CurrentDirectory);
+            string[] filesToUpdate = Directory.GetFiles(RootPath);
 
             Console.WriteLine(strings.UnzipingFile + @" KryBot_Portable.zip...");
 
@@ -133,7 +139,7 @@ namespace KryBot_Updater
             {
                 foreach (var fileToExtract in filesToExtract)
                 {
-                    if (fileToUpdate == Environment.CurrentDirectory + "\\" + fileToExtract)
+                        if (fileToUpdate == RootPath + "\\" + fileToExtract)
                     {
                         try
                         {
@@ -141,13 +147,14 @@ namespace KryBot_Updater
                         }
                         catch (UnauthorizedAccessException)
                         {
-                            MessageBox.Show(strings.Error_UpdateClosePogramNeeded, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show(strings.Error_UpdateClosePogramNeeded, strings.Error,
+                                MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return false;
                         }
                     }      
                 }    
             }
-            ZipFile.ExtractToDirectory("KryBot_Portable.zip", Environment.CurrentDirectory);
+            ZipFile.ExtractToDirectory("KryBot_Portable.zip", RootPath);
             File.Delete("KryBot_Portable.zip");
 
             Console.WriteLine(strings.UnzipeComplete);
