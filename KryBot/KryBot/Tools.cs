@@ -86,18 +86,17 @@ namespace KryBot
 
         public static string UserAgent()
         {
-            //var js =
-            //    @"<script type='text/javascript'>function getUserAgent(){document.write(navigator.userAgent)}</script>";
+            var js =
+                @"<script type='text/javascript'>function getUserAgent(){document.write(navigator.userAgent)}</script>";
 
-            //var wb = new WebBrowser {Url = new Uri("about:blank")};
-            //if (wb.Document != null)
-            //{
-            //    wb.Document.Write(js);
-            //    wb.Document.InvokeScript("getUserAgent");
-            //}
+            var wb = new WebBrowser { Url = new Uri("about:blank") };
+            if (wb.Document != null)
+            {
+                wb.Document.Write(js);
+                wb.Document.InvokeScript("getUserAgent");
+            }
 
-            //return wb.DocumentText.Substring(js.Length);
-            return "User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64; Trident/7.0; rv:11.0) like Gecko";
+            return wb.DocumentText.Substring(js.Length);
         }
 
         public static Classes.Log ConstructLog(string content, Color color, bool success, bool echo)

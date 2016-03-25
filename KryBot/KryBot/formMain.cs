@@ -1092,7 +1092,7 @@ namespace KryBot
         private async void btnSTLogin_Click(object sender, EventArgs e)
         {
             btnSTLogin.Enabled = false;
-            var first = Web.Get("http://steamtrade.info", "", new List<Parameter>(), new CookieContainer(),
+            var first = Web.Get("http://steamtrade.info/", "", new List<Parameter>(), new CookieContainer(),
                 new List<HttpHeader>(), Bot.UserAgent);
             var getLoginHref = Web.SteamTradeDoAuth("http://steamtrade.info/", "reg.php?login",
                 Generate.LoginData_SteamTrade(), first.Cookies, new List<HttpHeader>(), Bot.UserAgent, "");
