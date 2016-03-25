@@ -1125,16 +1125,6 @@ namespace KryBot
                 btnSTExit.Enabled = true;
                 cbSTEnable.Checked = true;
                 Bot.SteamTradeEnabled = true;
-
-                LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamTrade}} {strings.LoginSuccess}",
-                    Color.Green, true, true);
-                LogChanged?.Invoke();
-
-                var st = await Parse.SteamTradeGetProfileAsync(Bot, true);
-                LogBuffer = st;
-                LogChanged?.Invoke();
-                LoadProfilesInfo?.Invoke();
-
             }
             else
             {
@@ -1187,15 +1177,6 @@ namespace KryBot
                 btnSPExit.Enabled = true;
                 cbSPEnable.Checked = true;
                 Bot.SteamPortalEnabled = true;
-
-                LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamPortal}} {strings.LoginSuccess}",
-                    Color.Green, true, true);
-                LogChanged?.Invoke();
-
-                var sp = await Parse.SteamPortalGetProfileAsync(Bot, true);
-                LogBuffer = sp;
-                LogChanged?.Invoke();
-                LoadProfilesInfo?.Invoke();
             }
             else
             {
@@ -1237,15 +1218,6 @@ namespace KryBot
                 btnSCExit.Enabled = true;
                 cbSCEnable.Checked = true;
                 Bot.SteamCompanionEnabled = true;
-
-                LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamCompanion}} {strings.LoginSuccess}",
-                    Color.Green, true, true);
-                LogChanged?.Invoke();
-
-                var sc = await Parse.SteamCompanionGetProfileAsync(Bot, true);
-                LogBuffer = sc;
-                LogChanged?.Invoke();
-                LoadProfilesInfo?.Invoke();
             }
             else
             {
@@ -1287,15 +1259,6 @@ namespace KryBot
                 btnSGExit.Enabled = true;
                 cbSGEnable.Checked = true;
                 Bot.SteamGiftsEnabled = true;
-
-                LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamGifts}} {strings.LoginSuccess}",
-                    Color.Green, true, true);
-                LogChanged?.Invoke();
-
-                var sg = await Parse.SteamGiftsGetProfileAsync(Bot, true);
-                LogBuffer = sg;
-                LogChanged?.Invoke();
-                LoadProfilesInfo?.Invoke();
             }
             else
             {
@@ -1342,15 +1305,6 @@ namespace KryBot
                 btnGMExit.Enabled = true;
                 cbGMEnable.Checked = true;
                 Bot.GameMinerEnabled = true;
-
-                LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} {{GameMiner}} {strings.LoginSuccess}",
-                    Color.Green, true, true);
-                LogChanged?.Invoke();
-
-                var gm = await Parse.GameMinerGetProfileAsync(Bot, Bot.GameMinerEnabled);
-                LogBuffer = gm;
-                LogChanged?.Invoke();
-                LoadProfilesInfo?.Invoke();
             }
             else
             {
@@ -1793,18 +1747,6 @@ namespace KryBot
 
                 lblSteamStatus.Text = @"Статус: " + strings.LoginSuccess;
                 LoadProfilesInfo?.Invoke();
-
-                LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} {{Steam}} {strings.LoginSuccess}", Color.Green,
-                    true, true);
-                LogChanged?.Invoke();
-
-                var steam = await Parse.SteamGetProfileAsync(Bot, Bot.SteamEnabled);
-                if (steam.Echo)
-                {
-                    LogBuffer = steam;
-                    LogChanged?.Invoke();
-                }
-                LoadProfilesInfo?.Invoke();
             }
             else
             {
@@ -2070,15 +2012,6 @@ namespace KryBot
                 btnPBExit.Enabled = true;
                 cbPBEnabled.Checked = true;
                 Bot.PlayBlinkEnabled = true;
-
-                LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} {{PlayBlink}} {strings.LoginSuccess}",
-                    Color.Green, true, true);
-                LogChanged?.Invoke();
-
-                var pb = await Parse.PlayBlinkGetProfileAsync(Bot, Bot.GameMinerEnabled);
-                LogBuffer = pb;
-                LogChanged?.Invoke();
-                LoadProfilesInfo?.Invoke();
             }
             else
             {

@@ -393,7 +393,7 @@ namespace KryBot
                     bot.SteamGiftsEnabled = false;
                     bot.GameMinerxsrf = "";
                     SaveProfile(bot, "");
-                    return ConstructLog($"{GetDateTime()} {{GameMiner}} {strings.AccountNotActive} {{{error.InnerText}}}", Color.Red, false, true);
+                    return ConstructLog($"{GetDateTime()} {{SteamGifts}} {strings.AccountNotActive} {{{error.InnerText}}}", Color.Red, false, true);
                 }
             }
             return ParseProfile("SteamGifts", false);

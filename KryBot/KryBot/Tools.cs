@@ -121,11 +121,14 @@ namespace KryBot
 
         public static string GetSessCookieInresponse(CookieContainer cookies, string domain, string cookieName)
         {
-            var list = CookieContainer_ToList(cookies);
+            if (cookies.Count > 0)
+            {
+                var list = CookieContainer_ToList(cookies);
 
-            return
-                (from cookie in list where cookie.Name == cookieName && cookie.Domain == domain select cookie.Value)
-                    .FirstOrDefault();
+                return (from cookie in list where cookie.Name == cookieName && cookie.Domain == domain select cookie.Value)
+                        .FirstOrDefault();
+            }
+            return null;
         }
 
         public static List<Cookie> CookieContainer_ToList(CookieContainer container)
