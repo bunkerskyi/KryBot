@@ -10,7 +10,6 @@ using System.Threading;
 using System.Windows.Forms;
 using KryBot_Updater.lang;
 using Newtonsoft.Json;
-using Exceptionless;
 
 namespace KryBot_Updater
 {
@@ -18,78 +17,63 @@ namespace KryBot_Updater
     {
         public static Classes.GitHubRelease Release = new Classes.GitHubRelease();
         public static int UpdatePosition;
-        public static string Lang = "ru-RU";
-        public static bool RunInTheProgram;
-        public static string RootPath = @"C:\Users\kribe\Source\Repos\KryBot\KryBot_Updater\KryBot_Updater\bin";
+        public static string Lang = "en-EN";
+        public static string RootPath;
 
         static void Main(string[] args)
         {
-            Application.ThreadException += Console_UIThreadException;
-            Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+            Console.Title = Application.ProductName + @" [" + Application.ProductVersion + @"]";
+
+            Lang = args[1].Replace('_', '-');
+            RootPath = args[2];
+
+            if (RootPath == null)
             {
-                Console.Title = Application.ProductName + @" [" + Application.ProductVersion + @"]";
+                Application.Exit();
+            }
 
-                foreach (var arg in args)
+            if (Lang != null && Lang != "en-EN")
+            {
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Lang);
+            }
+
+            string version = GetRemoteVersion();
+            if (version != null)
+            {
+                if (Release.assets.Count != 0)
                 {
-                    if (arg == "ru-RU" || arg == "en-EN")
+                    foreach (var asset in Release.assets)
                     {
-                        Lang = arg;
+                        if (asset.name.Contains("Portable"))
+                        {
+                            UpdatePosition = Release.assets.IndexOf(asset);
+                        }
                     }
 
-                    if (arg.Contains("Path:"))
+                    if (args.Length != 0)
                     {
-                        RootPath = arg.Split(':')[1];
-                    }
-                }
-
-                if (RootPath == "")
-                {
-                    Application.Exit();
-                }
-
-                if (Lang != null && Lang != "en-EN")
-                {
-                    Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Lang);
-                }
-
-                string version = GetRemoteVersion();
-                if (version != null)
-                {
-                    if (Release.assets.Count != 0)
-                    {
-                        foreach (var asset in Release.assets)
+                        Console.WriteLine(strings.LocalVersion + @": " + args[0]);
+                        Console.WriteLine(strings.RemoteVersion + @": " + version);
+                        if (int.Parse(args[0].Replace(".", "")) <= int.Parse(version.Replace(".", "")))
                         {
-                            if (asset.name.Contains("Portable"))
-                            {
-                                UpdatePosition = Release.assets.IndexOf(asset);
-                            }
-                        }
-
-                        if (args.Length != 0)
-                        {
-                            Console.WriteLine(strings.LocalVersion + @": " + args[0]);
-                            Console.WriteLine(strings.RemoteVersion + @": " + version);
-                            if (int.Parse(args[0].Replace(".", "")) <= int.Parse(version.Replace(".", "")))
-                            {
-                                GetRemoteFiles(Release.assets[UpdatePosition].browser_download_url);
-                                if (Unzip())
-                                {
-                                    Console.WriteLine(strings.Start + @" KryBot.exe...");
-                                    Process.Start("KryBot.exe");
-                                    Console.WriteLine(@"KryBot.exe " + strings.Started);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine(strings.RemoteVersion + @": " + version);
                             GetRemoteFiles(Release.assets[UpdatePosition].browser_download_url);
                             if (Unzip())
                             {
                                 Console.WriteLine(strings.Start + @" KryBot.exe...");
-                                Process.Start(RootPath + "\\KryBot.exe");
+                                Process.Start("KryBot.exe");
                                 Console.WriteLine(@"KryBot.exe " + strings.Started);
                             }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine(strings.RemoteVersion + @": " + version);
+                        GetRemoteFiles(Release.assets[UpdatePosition].browser_download_url);
+                        if (Unzip())
+                        {
+                            Console.WriteLine(strings.Start + @" KryBot.exe...");
+                            Process.Start(RootPath + "\\KryBot.exe");
+                            Console.WriteLine(@"KryBot.exe " + strings.Started);
                         }
                     }
                 }
@@ -159,13 +143,6 @@ namespace KryBot_Updater
 
             Console.WriteLine(strings.UnzipeComplete);
             return true;
-        }
-
-        public static void Console_UIThreadException(object sender, ThreadExceptionEventArgs t)
-        {
-            t.Exception.ToExceptionless().Submit();
-            MessageBox.Show($"[{t.Exception.TargetSite}] {{{t.Exception.Message}}}", strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            Environment.Exit(0);
         }
     }
 }

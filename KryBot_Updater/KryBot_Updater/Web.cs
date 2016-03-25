@@ -1,6 +1,5 @@
-﻿using System;
-using RestSharp;
-using RestSharp.Extensions;
+﻿using RestSharp;
+
 
 namespace KryBot_Updater
 {

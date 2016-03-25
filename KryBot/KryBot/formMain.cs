@@ -1852,28 +1852,22 @@ namespace KryBot
                             @"Обновление", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                     if (dr == DialogResult.Yes)
                     {
-                        if (File.Exists("KryBot_Updater.exe"))
+                        if (!Directory.Exists("updater"))
                         {
-                            if (Tools.CheckMd5("KryBot_Updater.exe", "KryBot.Resources.KryBot_Updater.exe"))
-                            {
-                                Process.Start("KryBot_Updater.exe", Application.ProductVersion);
-                                Application.Exit();
-                            }
-                            else
-                            {
-                                Tools.CopyResource("KryBot.Resources.KryBot_Updater.exe",
-                                    Application.StartupPath + "\\KryBot_Updater.exe");
-                                Process.Start("KryBot_Updater.exe", Application.ProductVersion);
-                                Application.Exit();
-                            }
+                            Directory.CreateDirectory("updater");
                         }
-                        else
-                        {
-                            Tools.CopyResource("KryBot.Resources.KryBot_Updater.exe",
-                                Application.StartupPath + "\\KryBot_Updater.exe");
-                            Process.Start("KryBot_Updater.exe", Application.ProductVersion);
-                            Application.Exit();
-                        }
+
+                        Tools.CopyResource("KryBot.Resources.KryBot_Updater.exe",
+                            Application.StartupPath + "\\updater\\KryBot_Updater.exe");
+                        Tools.CopyResource("KryBot.Resources.HtmlAgilityPack.dll", 
+                            Application.StartupPath + "\\updater\\HtmlAgilityPack.dll");
+                        Tools.CopyResource("KryBot.Resources.Newtonsoft.Json.dll", 
+                            Application.StartupPath + "\\updater\\Newtonsoft.Json.dll");
+                        Tools.CopyResource("KryBot.Resources.RestSharp.dll", 
+                            Application.StartupPath + "\\updater\\RestSharp.dll");
+                        Process.Start(Application.StartupPath + "\\updater\\KryBot_Updater.exe",
+                            $"{Application.ProductVersion} {Settings.Default.Lang} {Application.StartupPath}");
+                        Application.Exit();
                     }
                 }
             }
