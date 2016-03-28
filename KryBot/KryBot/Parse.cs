@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using HtmlAgilityPack;
 using KryBot.lang;
 using Newtonsoft.Json;
@@ -33,6 +37,7 @@ namespace KryBot
                     return ParseProfile("Steam", false);
                 }
 
+                bot.SteamProfileLink = login.Attributes["href"].Value;
                 return ParseProfile("Steam", true);
             }
             return ParseProfile("Steam", false);
@@ -49,6 +54,22 @@ namespace KryBot
 
             return task.Task.Result;
         }
+
+        public static async Task<List<string>> SteamGetUserGames(string profileLink)
+        {
+            var responseXmlProfile = await Web.GetAsync($"{profileLink}?xml=1", "", new List<Parameter>(), new CookieContainer(), new List<HttpHeader>(), "");
+            var serializer = new XmlSerializer(typeof(Classes.Profile));
+            TextReader reader = new StringReader(responseXmlProfile.RestResponse.Content);
+            var userId64 = (Classes.Profile)serializer.Deserialize(reader);
+            var responseJsonGames = await Web.GetAsync($"http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=5A5D4A6B747FC6020B4E898710665F29&steamid={userId64.SteamID64}&format=json", 
+                "", new List<Parameter>(), new CookieContainer(), new List<HttpHeader>(), "");
+            if (!responseJsonGames.RestResponse.Content.Contains("Internal Server Error"))
+            {
+                var json = JsonConvert.DeserializeObject<Classes.OwnedGames>(responseJsonGames.RestResponse.Content);
+                return json.response.games.Select(game => game.appid).ToList();
+            }
+            return new List<string>();
+        } 
         #endregion
 
         #region GameMiner

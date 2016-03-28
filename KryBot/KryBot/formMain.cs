@@ -1884,6 +1884,7 @@ namespace KryBot
         {
             Bot.SteamSessid = "";
             Bot.SteamLogin = "";
+            Bot.SteamProfileLink = "";
             Bot.SteamEnabled = false;
             BlockTabpage(tabPageSteam, false);
             btnSteamLogin.Visible = true;
@@ -1961,7 +1962,7 @@ namespace KryBot
 
         private void черныйСписокToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormBlackList form = new FormBlackList();
+            FormBlackList form = new FormBlackList(Bot);
             form.ShowDialog();
             BlackList = Tools.LoadBlackList();
         }

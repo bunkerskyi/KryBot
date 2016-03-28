@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Net;
+using System.Xml.Serialization;
 using RestSharp;
 
 namespace KryBot
@@ -18,6 +19,7 @@ namespace KryBot
             public string SteamSessid { get; set; }
             public string SteamLogin { get; set; }
             public string SteamRememberLogin { get; set; }
+            public string SteamProfileLink { get; set; }
             // Steam //
 
             // GameMiner //
@@ -151,5 +153,28 @@ namespace KryBot
             public string browser_download_url { get; set; }
         }
         // GitHub//
+
+        public class OwnedGames
+        {
+            public OwnedGamesResponse response { get; set; }
+        }
+
+        public class OwnedGamesGame
+        {
+            public string appid { get; set; }
+        }
+
+        public class OwnedGamesResponse
+        {
+            public List<OwnedGamesGame> games { get; set; }
+        }
+
+        [XmlRoot(ElementName = "profile")]
+        public class Profile
+        {
+            [XmlElement(ElementName = "steamID64")]
+            public string SteamID64 { get; set; }
+
+        }
     }
 }

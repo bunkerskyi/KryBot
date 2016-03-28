@@ -8,8 +8,10 @@ namespace KryBot
 {
     public partial class FormBlackList : Form
     {
-        public FormBlackList()
+        private Classes.Bot bot;
+        public FormBlackList(Classes.Bot bot)
         {
+            this.bot = bot;
             InitializeComponent();
         }
 
@@ -36,6 +38,7 @@ namespace KryBot
                     {
                         listBox.Items.Add(str);
                     }
+                    toolStripStatusLabel.Text = $"Количество: {strings.Length}";
                 }
                 catch (IOException ex)
                 {
@@ -88,6 +91,37 @@ namespace KryBot
             if (listBox.SelectedIndex != -1)
             {
                 listBox.Items.Remove(listBox.Items[listBox.SelectedIndex]);
+            }
+        }
+
+        private async void профильSteamToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (bot.SteamEnabled && bot.SteamProfileLink != "")
+            {
+                toolStripStatusLabel.Image = Resources.load;
+                var list = await Parse.SteamGetUserGames(bot.SteamProfileLink);
+
+                if (list.Count > 0)
+                {
+                    foreach (string item in listBox.Items)
+                    {
+                        for (int i = 0; i < list.Count; i++)
+                        {
+                            if (item == list[i])
+                            {
+                                list.Remove(list[i]);
+                                i--;
+                            }    
+                        }
+                    }
+
+                    foreach (var id in list)
+                    {
+                        listBox.Items.Add(id);
+                    }
+                }
+                toolStripStatusLabel.Image = null;
+                toolStripStatusLabel.Text = $"Количество: {listBox.Items.Count}";
             }
         }
     }
