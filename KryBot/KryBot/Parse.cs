@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -55,21 +54,29 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static async Task<List<string>> SteamGetUserGames(string profileLink)
+        public static async Task<Classes.ProfileGamesList> SteamGetUserGames(string profileLink)
         {
-            var responseXmlProfile = await Web.GetAsync($"{profileLink}?xml=1", "", new List<Parameter>(), new CookieContainer(), new List<HttpHeader>(), "");
-            var serializer = new XmlSerializer(typeof(Classes.Profile));
+            var responseXmlProfile = await Web.GetAsync($"{profileLink}games?tab=all&xml=1", "", new List<Parameter>(), new CookieContainer(), new List<HttpHeader>(), "");
+            var serializer = new XmlSerializer(typeof(Classes.ProfileGamesList));
             TextReader reader = new StringReader(responseXmlProfile.RestResponse.Content);
-            var userId64 = (Classes.Profile)serializer.Deserialize(reader);
-            var responseJsonGames = await Web.GetAsync($"http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=5A5D4A6B747FC6020B4E898710665F29&steamid={userId64.SteamID64}&format=json", 
-                "", new List<Parameter>(), new CookieContainer(), new List<HttpHeader>(), "");
-            if (!responseJsonGames.RestResponse.Content.Contains("Internal Server Error"))
+            var games = (Classes.ProfileGamesList)serializer.Deserialize(reader);
+            return games;
+        }
+
+        public static async Task<string> SteamGetGameName(string appId)
+        {
+            var responseJsonDetail = await Web.GetAsync($"http://store.steampowered.com/api/appdetails?appids={appId}", "", new List<Parameter>(), 
+                new CookieContainer(), new List<HttpHeader>(), "");
+
+            if (responseJsonDetail.RestResponse.Content == "null" || responseJsonDetail.RestResponse.Content == "")
             {
-                var json = JsonConvert.DeserializeObject<Classes.OwnedGames>(responseJsonGames.RestResponse.Content);
-                return json.response.games.Select(game => game.appid).ToList();
+                return null;
             }
-            return new List<string>();
-        } 
+
+            string json = responseJsonDetail.RestResponse.Content.Replace($"{{\"{appId}\":", "");
+            var gameDetail = JsonConvert.DeserializeObject<Classes.GameDetail>(json.Substring(0, json.Length - 1));
+            return gameDetail.success ? gameDetail.data.name : null;
+        }
         #endregion
 
         #region GameMiner

@@ -28,7 +28,7 @@
     <MinimumRequiredVersion>1.0.11.0</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.2.16.0</ApplicationVersion>
+    <ApplicationVersion>1.2.17.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -171,6 +171,12 @@
     <Compile Include="formStatistic.Designer.cs">
       <DependentUpon>formStatistic.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormTextBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTextBox.Designer.cs">
+      <DependentUpon>FormTextBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="GameAways.cs" />
     <Compile Include="GameMiner.cs" />
     <Compile Include="Generate.cs" />
@@ -203,6 +209,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formBlackList.resx">
       <DependentUpon>formBlackList.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="formCookie.resx">
       <DependentUpon>formCookie.cs</DependentUpon>
@@ -358,6 +365,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\KryBot_Updater.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

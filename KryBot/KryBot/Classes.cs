@@ -14,15 +14,15 @@ namespace KryBot
             public string Name { get; set; }
             public string UserAgent { get; set; }
 
-            // Steam //
+            #region Steam
             public bool SteamEnabled { get; set; }
             public string SteamSessid { get; set; }
             public string SteamLogin { get; set; }
             public string SteamRememberLogin { get; set; }
             public string SteamProfileLink { get; set; }
-            // Steam //
+            #endregion
 
-            // GameMiner //
+            #region GameMiner
             public bool GameMinerEnabled { get; set; }
             public string GameMinerToken { get; set; }
             public string GameMinerxsrf { get; set; }
@@ -35,9 +35,9 @@ namespace KryBot
             public bool GameMinerFreeGolden { get; set; } = true;
             public bool GameMinerOnlyGifts { get; set; }
             public bool GameMinerNoRegion { get; set; }
-            // GameMiner //
+            #endregion
 
-            // SteamGifts //
+            #region SteamGifts
             public bool SteamGiftsEnabled { get; set; }
             public bool SteamGiftsGroup { get; set; }
             public bool SteamGiftsRegular { get; set; } = true;
@@ -50,9 +50,9 @@ namespace KryBot
             public int SteamGiftsJoinPointLimit { get; set; } = 300;
             public int SteamGiftsPointsReserv { get; set; }
             public int SteamGiftsMinLevel { get; set; }
-            // StemGifts //
+            #endregion
 
-            // SteamCompanion //
+            #region SteamCompanion
             public bool SteamCompanionEnabled { get; set; }
             public bool SteamCompanionRegular { get; set; } = true;
             public bool SteamCompanionWishList { get; set; }
@@ -66,18 +66,18 @@ namespace KryBot
             public int SteamCompanionPoint { get; set; }
             public int SteamCompanionJoinPointLimit { get; set; } = 1500;
             public int SteamCompanionPointsReserv { get; set; }
-            // SteamCompanion //
+            #endregion
 
-            // SteamPortal //
+            #region SteamPortal
             public bool SteamPortalEnabled { get; set; }
             public string SteamPortalPhpSessId { get; set; }
             public string SteamPortalProfileLink { get; set; }
             public int SteamPortalPoints { get; set; }
             public int SteamPortalMaxJoinValue { get; set; } = 30;
             public int SteamPortalPointsReserv { get; set; }
-            // SteamPortal //
+            #endregion
 
-            // GameAways //
+            #region GameAways
             public bool GameAwaysEnabled { get; set; }
             public bool GameAwaysWishList { get; set; }
             public bool GameAwaysGroup { get; set; }
@@ -86,24 +86,24 @@ namespace KryBot
             public int GameAwaysPoints { get; set; }
             public int GameAwaysMaxJoinValue { get; set; } = 10000;
             public int GameAwaysPointsReserv { get; set; }
-            // GameAways //
+            #endregion
 
-            // SteamTrade //
+            #region SteamTrade
             public bool SteamTradeEnabled { get; set; }
             public string SteamTradePhpSessId { get; set; }
             public string SteamTradeDleUserId { get; set; }
             public string SteamTradeDlePassword { get; set; }
             public string SteamTradePassHash { get; set; }
-            // SteamTrade //
+            #endregion
 
-            // PlayBlink //
+            #region PlayBlink
             public bool PlayBlinkEnabled { get; set; }
             public string PlayBlinkPhpSessId { get; set; }
             public int PlayBlinkPoints { get; set; }
             public int PlayBlinkLevel { get; set; }
             public int PlayBlinkMaxJoinValue { get; set; } = 50;
             public int PlayBlinkPointReserv { get; set; } = 0;
-            // PlayBlink //
+            #endregion
         }
 
         public class Response
@@ -137,7 +137,7 @@ namespace KryBot
             public int TimerLoops { get; set; }
         }
 
-        // GitHub //
+        #region GitHub
         public class GitHubRelease
         {
             public string tag_name { get; set; }
@@ -152,23 +152,9 @@ namespace KryBot
             public int size { get; set; }
             public string browser_download_url { get; set; }
         }
-        // GitHub//
+        #endregion
 
-        public class OwnedGames
-        {
-            public OwnedGamesResponse response { get; set; }
-        }
-
-        public class OwnedGamesGame
-        {
-            public string appid { get; set; }
-        }
-
-        public class OwnedGamesResponse
-        {
-            public List<OwnedGamesGame> games { get; set; }
-        }
-
+        #region SteamXmlUserId64
         [XmlRoot(ElementName = "profile")]
         public class Profile
         {
@@ -176,5 +162,57 @@ namespace KryBot
             public string SteamID64 { get; set; }
 
         }
+        #endregion
+
+        #region SteamXMLUserGames
+        [XmlRoot(ElementName = "game")]
+        public class ProfileGame
+        {
+            [XmlElement(ElementName = "appID")]
+            public string AppID { get; set; }
+            [XmlElement(ElementName = "name")]
+            public string Name { get; set; }
+        }
+
+        [XmlRoot(ElementName = "games")]
+        public class ProfileGames
+        {
+            [XmlElement(ElementName = "game")]
+            public List<ProfileGame> Game { get; set; }
+        }
+
+        [XmlRoot(ElementName = "gamesList")]
+        public class ProfileGamesList
+        {
+            [XmlElement(ElementName = "games")]
+            public ProfileGames Games { get; set; }
+        }
+        #endregion
+
+        #region SteamJsonGameDetail
+        public class GameDetail
+        {
+            public bool success { get; set; }
+            public GameDetailData data { get; set; }
+        }
+
+        public class GameDetailData
+        {
+            public string name { get; set; }
+        }
+        #endregion
+
+        #region Blacklist
+        public class Blacklist
+        {
+            public List<BlacklistItem> Items;
+        }
+
+        public class BlacklistItem
+        {
+            public string Id { get; set; }
+            public string Name { get; set; }
+        }
+        #endregion
     }
 }

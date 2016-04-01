@@ -1,18 +1,25 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
+using KryBot.lang;
 using KryBot.Properties;
 
 namespace KryBot
 {
     public partial class FormBlackList : Form
     {
-        private Classes.Bot bot;
+        private readonly Classes.Bot _bot;
+
         public FormBlackList(Classes.Bot bot)
         {
-            this.bot = bot;
+            _bot = bot;
             InitializeComponent();
+            listView.ListViewItemSorter = new ListViewItemComparer();
         }
 
         private void formBlackList_Load(object sender, EventArgs e)
@@ -25,103 +32,190 @@ namespace KryBot
         {
             Text = @"Черный список";
             Icon = Icon.FromHandle(Resources.blocked.GetHicon());
+
+            listView.Columns.Add("ID");
+            listView.Columns.Add("Name", Width - listView.Columns[0].Width);
         }
 
         private void LoadBlackList()
         {
-            if (File.Exists("blacklist.txt"))
+            if (File.Exists("blacklist.xml"))
             {
                 try
                 {
-                    var strings = File.ReadAllLines("blacklist.txt");
-                    foreach (var str in strings)
+                    using (var reader = new StreamReader("blacklist.xml"))
                     {
-                        listBox.Items.Add(str);
+                        var serializer = new XmlSerializer(typeof(Classes.Blacklist));
+                        var blacklist = (Classes.Blacklist)serializer.Deserialize(reader);
+
+                        foreach (var item in blacklist.Items)
+                        {
+                            listView.Items.Add(item.Id).SubItems.Add(item.Name);
+                        }
+
+                        toolStripStatusLabel.Text = $"Количество: {listView.Items.Count}";
+                        reader.Close();
                     }
-                    toolStripStatusLabel.Text = $"Количество: {strings.Length}";
                 }
-                catch (IOException ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(@"Ошибка", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void SaveBlackList()
         {
-            listBox.Items.Add(tbId.Text);
-            tbId.Text = "";
-            tbId.Focus();
-        }
+            var blacklist = new Classes.Blacklist { Items = new List<Classes.BlacklistItem>() };
 
-        private void tbId_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-        }
-
-        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (SaveBlackList())
+            if (listView.Items.Count > 0)
             {
-                Close();
-            }    
-        }
+                foreach (ListViewItem lvitem in listView.Items)
+                {
+                    var item = new Classes.BlacklistItem
+                    {
+                        Id = lvitem.SubItems[0].Text,
+                        Name = lvitem.SubItems[1].Text
+                    };
+                    blacklist.Items.Add(item);
+                }
+            }
 
-        private bool SaveBlackList()
-        {
             try
             {
-                StreamWriter saveFile = new StreamWriter("blacklist.txt");
-                foreach (var item in listBox.Items)
+                using (var fs = new FileStream("blacklist.xml", FileMode.Create, FileAccess.Write))
                 {
-                    saveFile.WriteLine(item.ToString());
+                    var serializer = new XmlSerializer(typeof(Classes.Blacklist));
+                    serializer.Serialize(fs, blacklist);
                 }
-                saveFile.Close();
-                return true;
             }
-            catch (IOException ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(@"Ошибка", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
             }
         }
 
         private void удалитьToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (listBox.SelectedIndex != -1)
+            if (listView.SelectedItems.Count > 0)
             {
-                listBox.Items.Remove(listBox.Items[listBox.SelectedIndex]);
+                for (int i = 0; i < listView.SelectedItems.Count; i++)
+                {
+                    listView.Items.Remove(listView.Items[listView.SelectedItems[i].Index]);
+                    i--;
+                }
+                toolStripStatusLabel.Text = $"Количество: {listView.Items.Count}";
             }
         }
 
         private async void профильSteamToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (bot.SteamEnabled && bot.SteamProfileLink != "")
+            if (_bot.SteamEnabled && _bot.SteamProfileLink != "")
             {
                 toolStripStatusLabel.Image = Resources.load;
-                var list = await Parse.SteamGetUserGames(bot.SteamProfileLink);
+                var list = await Parse.SteamGetUserGames(_bot.SteamProfileLink);
 
-                if (list.Count > 0)
+                if (list.Games.Game.Count > 0)
                 {
-                    foreach (string item in listBox.Items)
+                    foreach (ListViewItem item in listView.Items)
                     {
-                        for (int i = 0; i < list.Count; i++)
+                        for (int i = 0; i < list.Games.Game.Count; i++)
                         {
-                            if (item == list[i])
+                            if (item.Text == list.Games.Game[i].AppID)
                             {
-                                list.Remove(list[i]);
+                                list.Games.Game.Remove(list.Games.Game[i]);
                                 i--;
                             }    
                         }
                     }
 
-                    foreach (var id in list)
+                    foreach (var game in list.Games.Game)
                     {
-                        listBox.Items.Add(id);
+                        listView.Items.Add(game.AppID).SubItems.Add(game.Name);
                     }
                 }
+
                 toolStripStatusLabel.Image = null;
-                toolStripStatusLabel.Text = $"Количество: {listBox.Items.Count}";
+                toolStripStatusLabel.Text = $"Количество: {listView.Items.Count}";
+            }
+            else
+            {
+                MessageBox.Show(@"Нужна авторизация в Steam", strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void FormBlackList_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveBlackList();
+        }
+
+        private async void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormTextBox form = new FormTextBox("Enter id", true);
+            form.ShowDialog();
+            if (Settings.Default._idCache != "")
+            {
+                listView.Items.Add(Settings.Default._idCache).SubItems.Add(await LoadName(Settings.Default._idCache));
+                Settings.Default._idCache = "";
+            }
+            toolStripStatusLabel.Text = $"Количество: {listView.Items.Count}";
+        }
+
+        private async Task<string> LoadName(string id)
+        {
+            toolStripStatusLabel.Image = Resources.load;
+            var name = await Parse.SteamGetGameName(id) ?? "";
+            toolStripStatusLabel.Image = null;
+            return name;
+        }
+
+        private void listView_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            ListViewItemComparer comparer = (ListViewItemComparer)listView.ListViewItemSorter;
+            comparer.Order = e.Column == comparer.Column ? comparer.Swap(comparer.Order) : SortOrder.Ascending;
+            comparer.Column = e.Column;
+            listView.Sort();
+        }
+
+        private class ListViewItemComparer : IComparer
+        {
+            public SortOrder Order;
+            public int Column;
+
+            public int Compare(object x, object y)
+            {
+                if (Column == 0)
+                {
+                    var int1 = int.Parse(((ListViewItem)x).SubItems[Column].Text);
+                    var int2 = int.Parse(((ListViewItem)y).SubItems[Column].Text);
+
+                    return Order == SortOrder.Ascending ? int1.CompareTo(int2) : int2.CompareTo(int1);
+                }
+
+                if (Column == 1)
+                {
+                    string str1 = ((ListViewItem)x).SubItems[Column].Text;
+                    string str2 = ((ListViewItem)y).SubItems[Column].Text;
+
+                    return Order == SortOrder.Ascending ? string.Compare(str1, str2, StringComparison.Ordinal) : string.Compare(str2, str1, StringComparison.Ordinal);
+                }
+
+                return 0;
+            }
+
+            public SortOrder Swap(SortOrder a)
+            {
+                if (a == SortOrder.Ascending)
+                {
+                    return SortOrder.Descending;
+                }
+
+                if (a == SortOrder.Descending)
+                {
+                    return SortOrder.Ascending;
+                }
+
+                return SortOrder.Ascending;
             }
         }
     }
