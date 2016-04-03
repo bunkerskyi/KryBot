@@ -55,6 +55,7 @@
             this.ShowInTaskbar = false;
             this.Text = "formLog";
             this.Load += new System.EventHandler(this.formLog_Load);
+            this.ResizeEnd += new System.EventHandler(this.FormLog_ResizeEnd);
             this.ResumeLayout(false);
 
         }

@@ -68,5 +68,11 @@
     <Setting Name="_idCache" Type="System.String" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="LogHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">247</Value>
+    </Setting>
+    <Setting Name="LogWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">500</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

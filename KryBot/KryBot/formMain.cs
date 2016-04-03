@@ -1078,14 +1078,7 @@ namespace KryBot
         {
             foreach (Control control in tabPage.Controls)
             {
-                if (control.GetType().FullName == "System.Windows.Forms.LinkLabel")
-                {
-                    control.Enabled = true;
-                }
-                else
-                {
-                    control.Enabled = state;
-                }
+                control.Enabled = control.GetType().FullName == "System.Windows.Forms.LinkLabel" || state;
             }
         }
 

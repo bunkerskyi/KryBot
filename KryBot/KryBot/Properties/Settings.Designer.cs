@@ -286,5 +286,29 @@ namespace KryBot.Properties {
                 this["_idCache"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("247")]
+        public int LogHeight {
+            get {
+                return ((int)(this["LogHeight"]));
+            }
+            set {
+                this["LogHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        public int LogWidth {
+            get {
+                return ((int)(this["LogWidth"]));
+            }
+            set {
+                this["LogWidth"] = value;
+            }
+        }
     }
 }
