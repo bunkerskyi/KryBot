@@ -873,6 +873,11 @@ namespace KryBot
                 content += SteamCompanionLoadWishListGiveaways(bot, wishlistGiveaways);
             }
 
+            if (bot.SteamCompanionContributors)
+            {
+                content += SteamCompanionLoadContributorsGiveaways(bot, giveaways);
+            }
+
             if (bot.SteamCompanionGroup)
             {
                 content += SteamCompanionLoadGroupGiveaways(bot, giveaways);
@@ -971,8 +976,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static string SteamCompanionLoadWishListGiveaways(Classes.Bot bot,
-            List<SteamCompanion.ScGiveaway> giveaways)
+        public static string SteamCompanionLoadWishListGiveaways(Classes.Bot bot, List<SteamCompanion.ScGiveaway> giveaways)
         {
             var count = 0;
             var pages = 1;
@@ -1011,6 +1015,47 @@ namespace KryBot
                 }
             }
             return $"{GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_Found} {(giveaways.Count == 0 ? 0 : count)} {strings.ParseLoadGiveaways_WishListGiveAwaysIn} {pages} {strings.ParseLoadGiveaways_Pages}\n";
+        }
+
+        public static string SteamCompanionLoadContributorsGiveaways(Classes.Bot bot, List<SteamCompanion.ScGiveaway> giveaways)
+        {
+            var count = 0;
+            var pages = 1;
+            for (var i = 0; i < pages; i++)
+            {
+                var response = Web.Get("https://steamcompanion.com",
+                    i == 0 ? "/gifts/search/?type=contributor" : "/gifts/search/?type=contributor&page=" + (i + 1),
+                    new List<Parameter>(),
+                    Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(), bot.UserAgent);
+
+                if (response.RestResponse.Content != null)
+                {
+                    var htmlDoc = new HtmlDocument();
+                    htmlDoc.LoadHtml(response.RestResponse.Content);
+
+                    var pageNode = htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]");
+                    if (pageNode != null)
+                    {
+                        pages = int.Parse(pageNode.Attributes["href"].Value.Split('=')[1]);
+                    }
+
+                    var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/a");
+                    if (nodes != null)
+                    {
+                        for (var j = 0; j < nodes.Count; j++)
+                        {
+                            if (nodes[j].Attributes["style"] != null && nodes[j].Attributes["style"].Value == "opacity: 0.5;")
+                            {
+                                nodes.Remove(nodes[j]);
+                                j--;
+                            }
+                        }
+                        count += nodes.Count;
+                        SteamCompanionAddGiveaways(nodes, bot, giveaways);
+                    }
+                }
+            }
+            return $"{GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_Found} {(giveaways.Count == 0 ? 0 : count)} {strings.ParseLoadGiveaways__ContributorsIn} {pages} {strings.ParseLoadGiveaways_Pages}\n";
         }
 
         public static string SteamCompanionLoadGroupGiveaways(Classes.Bot bot, List<SteamCompanion.ScGiveaway> giveaways)

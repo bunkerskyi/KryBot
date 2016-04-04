@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageCommun = new System.Windows.Forms.TabPage();
+            this.cbWishlistSort = new System.Windows.Forms.CheckBox();
             this.btnDeleteCookies = new System.Windows.Forms.Button();
             this.cbFullLog = new System.Windows.Forms.CheckBox();
             this.cbFarmTip = new System.Windows.Forms.CheckBox();
@@ -97,7 +98,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cbWishlistSort = new System.Windows.Forms.CheckBox();
+            this.cbSCContributors = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPageCommun.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -146,6 +147,16 @@
             this.tabPageCommun.TabIndex = 5;
             this.tabPageCommun.Text = "Общие";
             this.tabPageCommun.UseVisualStyleBackColor = true;
+            // 
+            // cbWishlistSort
+            // 
+            this.cbWishlistSort.AutoSize = true;
+            this.cbWishlistSort.Location = new System.Drawing.Point(160, 117);
+            this.cbWishlistSort.Name = "cbWishlistSort";
+            this.cbWishlistSort.Size = new System.Drawing.Size(144, 30);
+            this.cbWishlistSort.TabIndex = 8;
+            this.cbWishlistSort.Text = "Не применять \r\nсортировку к вишлисту";
+            this.cbWishlistSort.UseVisualStyleBackColor = true;
             // 
             // btnDeleteCookies
             // 
@@ -561,6 +572,7 @@
             // 
             // tabPageSC
             // 
+            this.tabPageSC.Controls.Add(this.cbSCContributors);
             this.tabPageSC.Controls.Add(this.cbSCRegular);
             this.tabPageSC.Controls.Add(this.cbSCAutojoin);
             this.tabPageSC.Controls.Add(this.btnSCCookies);
@@ -590,7 +602,7 @@
             // cbSCAutojoin
             // 
             this.cbSCAutojoin.AutoSize = true;
-            this.cbSCAutojoin.Location = new System.Drawing.Point(6, 75);
+            this.cbSCAutojoin.Location = new System.Drawing.Point(6, 98);
             this.cbSCAutojoin.Name = "cbSCAutojoin";
             this.cbSCAutojoin.Size = new System.Drawing.Size(306, 17);
             this.cbSCAutojoin.TabIndex = 15;
@@ -609,7 +621,7 @@
             // 
             // tbSCReserv
             // 
-            this.tbSCReserv.Location = new System.Drawing.Point(246, 92);
+            this.tbSCReserv.Location = new System.Drawing.Point(246, 121);
             this.tbSCReserv.Name = "tbSCReserv";
             this.tbSCReserv.Size = new System.Drawing.Size(26, 20);
             this.tbSCReserv.TabIndex = 13;
@@ -618,7 +630,7 @@
             // 
             // tbSCMaxValue
             // 
-            this.tbSCMaxValue.Location = new System.Drawing.Point(130, 92);
+            this.tbSCMaxValue.Location = new System.Drawing.Point(130, 121);
             this.tbSCMaxValue.Name = "tbSCMaxValue";
             this.tbSCMaxValue.Size = new System.Drawing.Size(26, 20);
             this.tbSCMaxValue.TabIndex = 12;
@@ -628,7 +640,7 @@
             // lblSCReserv
             // 
             this.lblSCReserv.AutoSize = true;
-            this.lblSCReserv.Location = new System.Drawing.Point(162, 95);
+            this.lblSCReserv.Location = new System.Drawing.Point(162, 124);
             this.lblSCReserv.Name = "lblSCReserv";
             this.lblSCReserv.Size = new System.Drawing.Size(78, 13);
             this.lblSCReserv.TabIndex = 11;
@@ -637,7 +649,7 @@
             // lblSCMaxValue
             // 
             this.lblSCMaxValue.AutoSize = true;
-            this.lblSCMaxValue.Location = new System.Drawing.Point(3, 95);
+            this.lblSCMaxValue.Location = new System.Drawing.Point(3, 124);
             this.lblSCMaxValue.Name = "lblSCMaxValue";
             this.lblSCMaxValue.Size = new System.Drawing.Size(125, 13);
             this.lblSCMaxValue.TabIndex = 10;
@@ -646,7 +658,7 @@
             // cbSCGroup
             // 
             this.cbSCGroup.AutoSize = true;
-            this.cbSCGroup.Location = new System.Drawing.Point(6, 52);
+            this.cbSCGroup.Location = new System.Drawing.Point(6, 75);
             this.cbSCGroup.Name = "cbSCGroup";
             this.cbSCGroup.Size = new System.Drawing.Size(125, 17);
             this.cbSCGroup.TabIndex = 9;
@@ -842,15 +854,15 @@
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
-            // cbWishlistSort
+            // cbSCContributors
             // 
-            this.cbWishlistSort.AutoSize = true;
-            this.cbWishlistSort.Location = new System.Drawing.Point(160, 117);
-            this.cbWishlistSort.Name = "cbWishlistSort";
-            this.cbWishlistSort.Size = new System.Drawing.Size(144, 30);
-            this.cbWishlistSort.TabIndex = 8;
-            this.cbWishlistSort.Text = "Не применять \r\nсортировку к вишлисту";
-            this.cbWishlistSort.UseVisualStyleBackColor = true;
+            this.cbSCContributors.AutoSize = true;
+            this.cbSCContributors.Location = new System.Drawing.Point(6, 52);
+            this.cbSCContributors.Name = "cbSCContributors";
+            this.cbSCContributors.Size = new System.Drawing.Size(126, 17);
+            this.cbSCContributors.TabIndex = 17;
+            this.cbSCContributors.Text = "Contributors раздачи";
+            this.cbSCContributors.UseVisualStyleBackColor = true;
             // 
             // FormSettings
             // 
@@ -968,5 +980,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox cbWishlistSort;
+        private System.Windows.Forms.CheckBox cbSCContributors;
     }
 }

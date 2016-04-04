@@ -201,6 +201,9 @@
   <data name="ParseLoadGiveaways_WishListGiveAwaysIn" xml:space="preserve">
     <value>раздач из вишлиста на</value>
   </data>
+  <data name="ParseLoadGiveaways_ ContributorsIn" xml:space="preserve">
+    <value>contributors раздач на</value>
+  </data>
   <data name="ParseProfile_Coal" xml:space="preserve">
     <value>Угля</value>
   </data>

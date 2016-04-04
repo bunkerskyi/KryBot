@@ -56,6 +56,7 @@ namespace KryBot
             public bool SteamCompanionEnabled { get; set; }
             public bool SteamCompanionRegular { get; set; } = true;
             public bool SteamCompanionWishList { get; set; }
+            public bool SteamCompanionContributors { get; set; }
             public bool SteamCompanionGroup { get; set; }
             public bool SteamCompanionAutoJoin { get; set; }
             public string SteamCompanionPhpSessId { get; set; }

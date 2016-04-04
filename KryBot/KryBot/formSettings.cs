@@ -76,6 +76,7 @@ namespace KryBot
             tbSGReserv.Text = _bot.SteamGiftsPointsReserv.ToString();
 
             cbSCWishlist.Checked = _bot.SteamCompanionWishList;
+            cbSCContributors.Checked = _bot.SteamCompanionContributors;
             cbSCGroup.Checked = _bot.SteamCompanionGroup;
             cbSCRegular.Checked = _bot.SteamCompanionRegular;
             cbSCAutojoin.Enabled = _bot.SteamEnabled;
@@ -116,7 +117,7 @@ namespace KryBot
         {
             if(int.Parse(tbTimerInterval.Text) == 0)
             {
-                MessageBox.Show("Интервал таймера не может ровняться 0", strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"Интервал таймера не может ровняться 0", strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 tbTimerInterval.Text = Settings.Default.TimerInterval.ToString();
                 return;
             }
@@ -143,6 +144,7 @@ namespace KryBot
             _bot.SteamGiftsSortToLessLevel = cbSGSortTeLessLevel.Checked;
 
             _bot.SteamCompanionWishList = cbSCWishlist.Checked;
+            _bot.SteamCompanionContributors = cbSCContributors.Checked;
             _bot.SteamCompanionGroup = cbSCGroup.Checked;
             _bot.SteamCompanionRegular = cbSCRegular.Checked;
             _bot.SteamCompanionAutoJoin = cbSCAutojoin.Checked;
