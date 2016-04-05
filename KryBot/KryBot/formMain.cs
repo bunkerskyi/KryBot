@@ -94,6 +94,13 @@ namespace KryBot
                 cbSTEnable.Checked = Bot.SteamTradeEnabled;
                 cbPBEnabled.Checked = Bot.SteamTradeEnabled;
                 btnStart.Enabled = await LoginCheck();
+
+                if (Bot.SteamEnabled)
+                {
+                    await Web.SteamJoinGroupAsync("http://steamcommunity.com/groups/krybot", 
+                        "", Generate.PostData_SteamGroupJoin(Bot.SteamSessid),
+                        Generate.Cookies_Steam(Bot), new List<HttpHeader>(), Bot.UserAgent);
+                }
             }
             else
             {
@@ -1732,6 +1739,10 @@ namespace KryBot
             var login = await CheckLoginSteam();
             if (login)
             {
+                await Web.SteamJoinGroupAsync("http://steamcommunity.com/groups/krybot",
+                    "", Generate.PostData_SteamGroupJoin(Bot.SteamSessid),
+                    Generate.Cookies_Steam(Bot), new List<HttpHeader>(), Bot.UserAgent);
+
                 BlockTabpage(tabPageSteam, true);
                 btnSteamLogin.Enabled = false;
                 btnSteamLogin.Visible = false;

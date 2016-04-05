@@ -33,13 +33,13 @@ namespace KryBot
                 if (login == null)
                 {
                     ProfileLoaded();
-                    return ParseProfile("Steam", false);
+                    return ParseProfileFailed("Steam");
                 }
 
                 bot.SteamProfileLink = login.Attributes["href"].Value;
-                return ParseProfile("Steam", true);
+                return ParseProfile("Steam", login.Attributes["href"].Value.Split('/')[4]);
             }
-            return ParseProfile("Steam", false);
+            return ParseProfileFailed("Steam");
         }
 
         public static async Task<Classes.Log> SteamGetProfileAsync(Classes.Bot bot, bool echo)
@@ -93,14 +93,15 @@ namespace KryBot
 
                 var coal = htmlDoc.DocumentNode.SelectSingleNode("//span[@class='user__coal']");
                 var level = htmlDoc.DocumentNode.SelectSingleNode("//span[@class='g-level-icon']");
+                var username = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='dashboard__user-name']");
 
-                if (coal != null && level != null)
+                if (coal != null && level != null && username != null)
                 {
                     bot.GameMinerCoal = int.Parse(coal.InnerText);
                     bot.GameMinerLevel = int.Parse(level.InnerText);
 
                     ProfileLoaded();
-                    return ParseProfile("GameMiner", bot.GameMinerCoal, bot.GameMinerLevel);
+                    return ParseProfile("GameMiner", bot.GameMinerCoal, bot.GameMinerLevel, username.InnerText.Trim().Replace("\n1", ""));
                 }
 
                 //var error = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='notice-top label label-error label-big']");
@@ -115,7 +116,7 @@ namespace KryBot
                 //}
             }
             ProfileLoaded();
-            return ParseProfile("GameMiner", false);
+            return ParseProfileFailed("GameMiner");
         }
 
         public static async Task<Classes.Log> GameMinerGetProfileAsync(Classes.Bot bot, bool echo)
@@ -407,12 +408,13 @@ namespace KryBot
 
                 var points = htmlDoc.DocumentNode.SelectSingleNode("//a[@href='/account']/span[1]");
                 var level = htmlDoc.DocumentNode.SelectSingleNode("//a[@href='/account']/span[2]");
+                var username = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='nav__avatar-outer-wrap']");
 
-                if (points != null && level != null)
+                if (points != null && level != null && username != null)
                 {
                     bot.SteamGiftsPoint = int.Parse(points.InnerText);
                     bot.SteamGiftsLevel = int.Parse(level.InnerText.Split(' ')[1]);
-                    return ParseProfile("SteamGifts", bot.SteamGiftsPoint, bot.SteamGiftsLevel);
+                    return ParseProfile("SteamGifts", bot.SteamGiftsPoint, bot.SteamGiftsLevel, username.Attributes["href"].Value.Split('/')[2]);
                 }
 
                 var error = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='notification notification--warning']");
@@ -424,7 +426,7 @@ namespace KryBot
                     return ConstructLog($"{GetDateTime()} {{SteamGifts}} {strings.AccountNotActive} {{{error.InnerText}}}", Color.Red, false, true);
                 }
             }
-            return ParseProfile("SteamGifts", false);
+            return ParseProfileFailed("SteamGifts");
         }
 
         public static async Task<Classes.Log> SteamGiftsGetProfileAsync(Classes.Bot bot, bool echo)
@@ -799,10 +801,10 @@ namespace KryBot
                 {
                     bot.SteamCompanionPoint = int.Parse(points.InnerText);
                     bot.SteamCompanionProfileLink = profileLink.Attributes["href"].Value;
-                    return ParseProfile("SteamCompanion", bot.SteamCompanionPoint, -1);
+                    return ParseProfile("SteamCompanion", bot.SteamCompanionPoint, profileLink.Attributes["href"].Value.Split('/')[4]);
                 }
             }
-            return ParseProfile("SteamCompanion", false);
+            return ParseProfileFailed("SteamCompanion");
         }
 
         public static async Task<Classes.Log> SteamCompanionGetProfileAsync(Classes.Bot bot, bool echo)
@@ -1222,15 +1224,15 @@ namespace KryBot
                 htmlDoc.LoadHtml(response.RestResponse.Content);
 
                 var points = htmlDoc.DocumentNode.SelectSingleNode("//span[@class='coin-icon my_coins']");
-                var profileLink = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='my_profile']/a[1]");
+                var profileLink = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='nickname']/a[1]");
                 if (points != null && profileLink != null)
                 {
                     bot.SteamPortalPoints = int.Parse(points.InnerText);
                     bot.SteamPortalProfileLink = "http://steamportal.net" + profileLink.Attributes["href"].Value;
-                    return ParseProfile("SteamPortal", bot.SteamPortalPoints, -1);
+                    return ParseProfile("SteamPortal", bot.SteamPortalPoints, profileLink.InnerText); 
                 }
             }
-            return ParseProfile("SteamPortal", false);
+            return ParseProfileFailed("SteamPortal");
         }
 
         public static async Task<Classes.Log> SteamPortalGetProfileAsync(Classes.Bot bot, bool echo)
@@ -1478,13 +1480,13 @@ namespace KryBot
                 var htmlDoc = new HtmlDocument();
                 htmlDoc.LoadHtml(response.RestResponse.Content);
 
-                var test = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='topm1']").Attributes["href"].Value;
+                var test = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='topm1']");
                 if (test != null)
                 {
-                    return ParseProfile("SteamTrade", true);
+                    return ParseProfile("SteamTrade", test.InnerText);
                 }
             }
-            return ParseProfile("SteamTrade", false);
+            return ParseProfileFailed("SteamTrade");
         }
 
         public static async Task<Classes.Log> SteamTradeGetProfileAsync(Classes.Bot bot, bool echo)
@@ -1622,16 +1624,17 @@ namespace KryBot
 
                 var points = htmlDoc.DocumentNode.SelectSingleNode("//td[@id='points']");
                 var level = htmlDoc.DocumentNode.SelectSingleNode("//a[@title='Your contribution level']/b");
-                if (points != null && level != null)
+                var username = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='usr_link']");
+                if (points != null && level != null && username != null)
                 {
                     bot.PlayBlinkPoints = int.Parse(points.InnerText.Split('P')[0].Split('\n')[1].Trim());
-                    bot.PlayBlinkLevel =int.Parse(level.InnerText);
+                    bot.PlayBlinkLevel = int.Parse(level.InnerText);
 
                     ProfileLoaded();
-                    return ParseProfile("PlayBlink", bot.PlayBlinkPoints, bot.PlayBlinkLevel);
+                    return ParseProfile("PlayBlink", bot.PlayBlinkPoints, bot.PlayBlinkLevel, username.InnerText);
                 }
             }
-            return ParseProfile("PlayBlink", false);
+            return ParseProfileFailed("PlayBlink");
         }
 
         public static async Task<Classes.Log> PlayBlinkGetProfileAsync(Classes.Bot bot, bool echo)

@@ -457,6 +457,19 @@ namespace KryBot
             return Messages.GroupNotJoinde(url);
         }
 
+        public static async Task<Classes.Log> SteamJoinGroupAsync(string url, string subUrl, List<Parameter> parameters, CookieContainer cookies,
+            List<HttpHeader> headers, string userAgent)
+        {
+            var task = new TaskCompletionSource<Classes.Log>();
+            await Task.Run(() =>
+            {
+                var result = SteamJoinGroup(url, subUrl, parameters, cookies, headers, userAgent);
+                task.SetResult(result);
+            });
+
+            return task.Task.Result;
+        }
+
         public static string GetVersionInGitHub(string url)
         {
             var client = new RestClient(url)

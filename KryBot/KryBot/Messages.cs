@@ -131,7 +131,7 @@ namespace KryBot
             return ConstructLog($"{GetDateTime()} {{Steam}} {strings.SteamGroupAlreadyMember} {{{url}}}", Color.Yellow, false, true);
         }
 
-        public static Log ParseProfile(string site, int points, int level)
+        public static Log ParseProfile(string site, int points, int level, string username)
         {
             var str = $"{GetDateTime()} {{{site}}} {strings.LoginSuccess} {strings.ParseProfile_Points}: {points}";
 
@@ -139,19 +139,25 @@ namespace KryBot
             {
                 str += $" {strings.ParseProfile_Level}: {level}";
             }
+
+            str += $" ({username})";
+
             return ConstructLog(str, Color.Green, true, true);
         }
 
-        public static Log ParseProfile(string site, bool success)
+        public static Log ParseProfile(string site, int points, string username)
+        {                                                                                                    
+            return ConstructLog($"{GetDateTime()} {{{site}}} {strings.LoginSuccess} {strings.ParseProfile_Points}: {points} ({username})", Color.Green, true, true);
+        }
+
+        public static Log ParseProfile(string site, string username)
         {
-            if (!success)
-            {
-                return ConstructLog($"{GetDateTime()} {{{site}}} {strings.ParseProfile_LoginOrServerError}", Color.Red, false, true);
-            }
-            else
-            {
-                return ConstructLog($"{GetDateTime()} {{{site}}} {strings.LoginSuccess}", Color.Green, true, true);
-            }
+            return ConstructLog($"{GetDateTime()} {{{site}}} {strings.LoginSuccess} ({username})", Color.Green, true, true);
+        }
+
+        public static Log ParseProfileFailed(string site)
+        {
+            return ConstructLog($"{GetDateTime()} {{{site}}} {strings.ParseProfile_LoginOrServerError}", Color.Red, false, true);
         }
     }
 }
