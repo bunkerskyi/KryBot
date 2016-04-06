@@ -799,9 +799,9 @@ namespace KryBot
                 var profileLink = htmlDoc.DocumentNode.SelectSingleNode("//ul[@class='right']/li[1]/a[1]");
                 if (points != null && profileLink != null)
                 {
-                    bot.SteamCompanionPoint = int.Parse(points.InnerText);
+                    bot.SteamCompanionPoints = int.Parse(points.InnerText);
                     bot.SteamCompanionProfileLink = profileLink.Attributes["href"].Value;
-                    return ParseProfile("SteamCompanion", bot.SteamCompanionPoint, profileLink.Attributes["href"].Value.Split('/')[4]);
+                    return ParseProfile("SteamCompanion", bot.SteamCompanionPoints, profileLink.Attributes["href"].Value.Split('/')[4]);
                 }
             }
             return ParseProfileFailed("SteamCompanion");
@@ -1145,7 +1145,7 @@ namespace KryBot
                             scGiveaway.Region = true;
                         }
 
-                        if (scGiveaway.Price <= bot.SteamCompanionPoint &&
+                        if (scGiveaway.Price <= bot.SteamCompanionPoints &&
                             scGiveaway.Price <= bot.SteamCompanionJoinPointLimit)
                         {
                             giveaways?.Add(scGiveaway);

@@ -70,6 +70,24 @@ namespace KryBot.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to KryBot - Соглашение.
+        /// </summary>
+        internal static string Agreement {
+            get {
+                return ResourceManager.GetString("Agreement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Угля.
+        /// </summary>
+        internal static string Coal {
+            get {
+                return ResourceManager.GetString("Coal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Библиотека .
         /// </summary>
         internal static string DllNotLoad {
@@ -102,6 +120,105 @@ namespace KryBot.lang {
         internal static string Finish {
             get {
                 return ResourceManager.GetString("Finish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Фарм запущен....
+        /// </summary>
+        internal static string FormMain_btnStart_Click_FarmBegin {
+            get {
+                return ResourceManager.GetString("FormMain_btnStart_Click_FarmBegin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Фарм запущен с интервалом .
+        /// </summary>
+        internal static string FormMain_btnStart_Click_FarmBeginWithInterval {
+            get {
+                return ResourceManager.GetString("FormMain_btnStart_Click_FarmBeginWithInterval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Фарм завершен.
+        /// </summary>
+        internal static string FormMain_btnStart_Click_FarmFinish {
+            get {
+                return ResourceManager.GetString("FormMain_btnStart_Click_FarmFinish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Пропуск попытки фарма. Предыдущий цикл фарма еше не окончен..
+        /// </summary>
+        internal static string FormMain_btnStart_Click_FarmSkip {
+            get {
+                return ResourceManager.GetString("FormMain_btnStart_Click_FarmSkip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  циклов осталось).
+        /// </summary>
+        internal static string FormMain_btnStart_Click_LoopsLeft {
+            get {
+                return ResourceManager.GetString("FormMain_btnStart_Click_LoopsLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to м (.
+        /// </summary>
+        internal static string FormMain_btnStart_Click_M {
+            get {
+                return ResourceManager.GetString("FormMain_btnStart_Click_M", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Стоп.
+        /// </summary>
+        internal static string FormMain_btnStart_Click_Stop {
+            get {
+                return ResourceManager.GetString("FormMain_btnStart_Click_Stop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выполняется....
+        /// </summary>
+        internal static string FormMain_btnStart_Click_TaskBegin {
+            get {
+                return ResourceManager.GetString("FormMain_btnStart_Click_TaskBegin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Старт.
+        /// </summary>
+        internal static string FormMain_btnStart_Click_Старт {
+            get {
+                return ResourceManager.GetString("FormMain_btnStart_Click_Старт", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Фарм.
+        /// </summary>
+        internal static string FormMain_DoFarm_Farn {
+            get {
+                return ResourceManager.GetString("FormMain_DoFarm_Farn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Статус.
+        /// </summary>
+        internal static string FormMain_Label_Status {
+            get {
+                return ResourceManager.GetString("FormMain_Label_Status", resourceCulture);
             }
         }
         
@@ -187,6 +304,16 @@ namespace KryBot.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Уровень
+        ///.
+        /// </summary>
+        internal static string Level {
+            get {
+                return ResourceManager.GetString("Level", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Используя программу, вы соглашаетесь с тем, что разработчик не несет ответственности за ваши аккаунты. Все действия инициируются пользователем и только пользователь ответственен за них..
         /// </summary>
         internal static string Licens {
@@ -201,6 +328,15 @@ namespace KryBot.lang {
         internal static string LoadProfile_Load {
             get {
                 return ResourceManager.GetString("LoadProfile_Load", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Лог.
+        /// </summary>
+        internal static string Log {
+            get {
+                return ResourceManager.GetString("Log", resourceCulture);
             }
         }
         
@@ -227,7 +363,7 @@ namespace KryBot.lang {
         /// </summary>
         internal static string ParseLoadGiveaways__ContributorsIn {
             get {
-                return ResourceManager.GetString("ParseLoadGiveaways_ ContributorsIn", resourceCulture);
+                return ResourceManager.GetString("ParseLoadGiveaways__ContributorsIn", resourceCulture);
             }
         }
         
@@ -358,11 +494,38 @@ namespace KryBot.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Points.
+        /// </summary>
+        internal static string Points {
+            get {
+                return ResourceManager.GetString("Points", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Старт....
         /// </summary>
         internal static string Start {
             get {
                 return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Завершено.
+        /// </summary>
+        internal static string StatusBar_End {
+            get {
+                return ResourceManager.GetString("StatusBar_End", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Авторизация.
+        /// </summary>
+        internal static string StatusBar_Login {
+            get {
+                return ResourceManager.GetString("StatusBar_Login", resourceCulture);
             }
         }
         

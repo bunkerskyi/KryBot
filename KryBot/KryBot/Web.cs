@@ -218,7 +218,7 @@ namespace KryBot
 
 					if (response.RestResponse.Content.Split('"')[3].Split('"')[0] == "Success")
 					{
-						bot.SteamCompanionPoint = int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]);
+						bot.SteamCompanionPoints = int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]);
 						return Messages.GiveawayJoined("SteamCompanion", giveaway.Name, giveaway.Price,
 							int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]), 0);
 					}

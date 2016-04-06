@@ -201,9 +201,6 @@
   <data name="ParseLoadGiveaways_WishListGiveAwaysIn" xml:space="preserve">
     <value>раздач из вишлиста на</value>
   </data>
-  <data name="ParseLoadGiveaways_ ContributorsIn" xml:space="preserve">
-    <value>contributors раздач на</value>
-  </data>
   <data name="ParseProfile_Coal" xml:space="preserve">
     <value>Угля</value>
   </data>
@@ -230,5 +227,63 @@
   </data>
   <data name="TryLogin" xml:space="preserve">
     <value>Авторизация...</value>
+  </data>
+  <data name="FormMain_Label_Status" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="StatusBar_End" xml:space="preserve">
+    <value>Завершено</value>
+  </data>
+  <data name="StatusBar_Login" xml:space="preserve">
+    <value>Авторизация</value>
+  </data>
+  <data name="FormMain_btnStart_Click_Старт" xml:space="preserve">
+    <value>Старт</value>
+  </data>
+  <data name="FormMain_btnStart_Click_FarmFinish" xml:space="preserve">
+    <value>Фарм завершен</value>
+  </data>
+  <data name="FormMain_btnStart_Click_TaskBegin" xml:space="preserve">
+    <value>Выполняется...</value>
+  </data>
+  <data name="FormMain_btnStart_Click_FarmBegin" xml:space="preserve">
+    <value>Фарм запущен...</value>
+  </data>
+  <data name="FormMain_btnStart_Click_Stop" xml:space="preserve">
+    <value>Стоп</value>
+  </data>
+  <data name="FormMain_btnStart_Click_FarmBeginWithInterval" xml:space="preserve">
+    <value>Фарм запущен с интервалом </value>
+  </data>
+  <data name="FormMain_btnStart_Click_LoopsLeft" xml:space="preserve">
+    <value> циклов осталось)</value>
+  </data>
+  <data name="FormMain_btnStart_Click_M" xml:space="preserve">
+    <value>м (</value>
+  </data>
+  <data name="FormMain_btnStart_Click_FarmSkip" xml:space="preserve">
+    <value>Пропуск попытки фарма. Предыдущий цикл фарма еше не окончен.</value>
+  </data>
+  <data name="Log" xml:space="preserve">
+    <value>Лог</value>
+  </data>
+  <data name="FormMain_DoFarm_Farn" xml:space="preserve">
+    <value>Фарм</value>
+  </data>
+  <data name="Coal" xml:space="preserve">
+    <value>Угля</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>Уровень
+</value>
+  </data>
+  <data name="Points" xml:space="preserve">
+    <value>Points</value>
+  </data>
+  <data name="Agreement" xml:space="preserve">
+    <value>KryBot - Соглашение</value>
+  </data>
+  <data name="ParseLoadGiveaways__ContributorsIn" xml:space="preserve">
+    <value>contributors раздач на</value>
   </data>
 </root>

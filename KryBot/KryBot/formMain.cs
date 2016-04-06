@@ -65,7 +65,7 @@ namespace KryBot
         {
             if (Settings.Default.FirstExecute)
             {
-                var dr = MessageBox.Show(strings.Licens, @"KryBot- Соглашение", MessageBoxButtons.YesNo,
+                var dr = MessageBox.Show(strings.Licens, strings.Agreement, MessageBoxButtons.YesNo,
                     MessageBoxIcon.Information);
                 if (dr == DialogResult.No)
                 {
@@ -138,17 +138,20 @@ namespace KryBot
                             _timerTickCount.Tick += TimerTickCountOnTick;
                             _timer.Start();
                             _timerTickCount.Start();
-                            btnStart.Text = @"Стоп (" + TimeSpan.FromMilliseconds(_timer.Interval) + @")";
+                            btnStart.Text = $"{strings.FormMain_btnStart_Click_Stop} ({TimeSpan.FromMilliseconds(_timer.Interval)})";
+
                             if (Settings.Default.ShowFarmTip)
                             {
                                 ShowBaloolTip(
-                                    "Фарм запущен с интервалом " + _interval/60000 + "м (" + (Settings.Default.TimerLoops - i) +
-                                    " циклов осталось)", 5000, ToolTipIcon.Info, "");
+                                    $"{strings.FormMain_btnStart_Click_FarmBeginWithInterval} {_interval/60000} {strings.FormMain_btnStart_Click_M} " +
+                                    $"{Settings.Default.TimerLoops - i} {strings.FormMain_btnStart_Click_LoopsLeft}", 5000, ToolTipIcon.Info, "");
                             }
+
                             await DoFarm();
+
                             if (Settings.Default.ShowFarmTip)
                             {
-                                ShowBaloolTip("Фарм завершен", 5000, ToolTipIcon.Info, "");
+                                ShowBaloolTip(strings.FormMain_btnStart_Click_FarmFinish, 5000, ToolTipIcon.Info, "");
                             }
                         }
                     }
@@ -161,16 +164,16 @@ namespace KryBot
                         _timerTickCount.Tick += TimerTickCountOnTick;
                         _timer.Start();
                         _timerTickCount.Start();
-                        btnStart.Text = @"Стоп (" + TimeSpan.FromMilliseconds(_timer.Interval) + @")";
+                        btnStart.Text = $"{strings.FormMain_btnStart_Click_Stop} ({TimeSpan.FromMilliseconds(_timer.Interval)})";
                         if (Settings.Default.ShowFarmTip)
                         {
-                            ShowBaloolTip("Фарм запущен с интервалом " + _interval/60000 + "м", 5000, ToolTipIcon.Info,
-                                "");
+                            ShowBaloolTip($"{strings.FormMain_btnStart_Click_FarmBeginWithInterval} {_interval / 60000} {strings.FormMain_btnStart_Click_M}", 
+                                5000, ToolTipIcon.Info, "");
                         }
                         await DoFarm();
                         if (Settings.Default.ShowFarmTip)
                         {
-                            ShowBaloolTip("Фарм завершен", 5000, ToolTipIcon.Info, "");
+                            ShowBaloolTip(strings.FormMain_btnStart_Click_FarmFinish, 5000, ToolTipIcon.Info, "");
                         }
                     }
                 }
@@ -178,7 +181,7 @@ namespace KryBot
                 {
                     _timer.Stop();
                     _timerTickCount.Stop();
-                    btnStart.Text = @"Старт";
+                    btnStart.Text = strings.FormMain_btnStart_Click_Старт;
                     btnStart.Enabled = false;
                 }
             }
@@ -197,27 +200,25 @@ namespace KryBot
                 if (!_farming)
                 {
                     btnStart.Enabled = false;
-                    btnStart.Text = @"Выполняется...";
+                    btnStart.Text = strings.FormMain_btnStart_Click_TaskBegin;
                     if (Settings.Default.ShowFarmTip)
                     {
-                        ShowBaloolTip("Фарм запущен...", 5000, ToolTipIcon.Info, "");
+                        ShowBaloolTip(strings.FormMain_btnStart_Click_FarmBegin, 5000, ToolTipIcon.Info, "");
                     }
                     await DoFarm();
                     if (Settings.Default.ShowFarmTip)
                     {
-                        ShowBaloolTip("Фарм завершен", 5000, ToolTipIcon.Info, "");
+                        ShowBaloolTip(strings.FormMain_btnStart_Click_FarmFinish, 5000, ToolTipIcon.Info, "");
                     }
-                    btnStart.Text = @"Старт";
+                    btnStart.Text = strings.FormMain_btnStart_Click_Старт;
                     btnStart.Enabled = true;
                 }
                 else
                 {
-                    LogBuffer =
-                        Tools.ConstructLog(
-                            Messages.GetDateTime() + "Пропуск попытки фарма. Предыдущий цикл фарма еше не окончен.",
+                    LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} {strings.FormMain_btnStart_Click_FarmSkip}",
                             Color.Red, false, true);
                     LogChanged?.Invoke();
-                    btnStart.Text = @"Старт";
+                    btnStart.Text = strings.FormMain_btnStart_Click_Старт;
                 }
             }
         }
@@ -225,12 +226,12 @@ namespace KryBot
         private void TimerTickCountOnTick(object sender, EventArgs eventArgs)
         {
             _interval -= 1000;
-            btnStart.Text = @"Стоп (" + TimeSpan.FromMilliseconds(_interval) + @")";
+            btnStart.Text = $"{strings.FormMain_btnStart_Click_Stop} ({TimeSpan.FromMilliseconds(_timer.Interval)})";
         }
 
         private void Design()
         {
-            Text = Application.ProductName + @" [" + Application.ProductVersion + @"]";
+            Text = $"{Application.ProductName} [{Application.ProductVersion}]";
             Icon = Resources.KryBotPresent_256b;
 
             btnStart.Enabled = false;
@@ -283,7 +284,7 @@ namespace KryBot
                     LogBuffer = message;
                     LogChanged?.Invoke();
 
-                    MessageBox.Show(message.Content.Split(']')[1], @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(message.Content.Split(']')[1], strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
                 LogBuffer = Messages.ProfileLoaded();
@@ -305,7 +306,7 @@ namespace KryBot
 
         private void OpenLog()
         {
-            логToolStripMenuItem.Text = @"Лог <<";
+            логToolStripMenuItem.Text = $"{strings.Log} <<";
             var form = new FormLog(Location.X + Width - 15, Location.Y) {Owner = this};
 
             LogHide += form.FormHide;
@@ -321,14 +322,14 @@ namespace KryBot
         private void UnHideLog()
         {
             LogUnHide?.Invoke();
-            логToolStripMenuItem.Text = @"Лог <<";
+            логToolStripMenuItem.Text = $"{strings.Log} <<";
             LogActive = true;
         }
 
         private void HideLog()
         {
             LogHide?.Invoke();
-            логToolStripMenuItem.Text = @"Лог >>";
+            логToolStripMenuItem.Text = $"{strings.Log} >>";
             LogActive = false;
         }
 
@@ -351,7 +352,7 @@ namespace KryBot
             toolStripProgressBar1.Maximum = 5;
             toolStripProgressBar1.Visible = true;
             toolStripStatusLabel1.Image = Resources.load;
-            toolStripStatusLabel1.Text = @"Фарм";
+            toolStripStatusLabel1.Text = strings.FormMain_DoFarm_Farn;
 
             var stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -410,7 +411,7 @@ namespace KryBot
                     btnGMLogin.Enabled = true;
                     btnGMLogin.Visible = true;
                     linkLabel1.Enabled = true;
-                    lblGMStatus.Text = @"Статус: " + strings.LoginFaild;
+                    lblGMStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             toolStripProgressBar1.Value++;
@@ -508,7 +509,7 @@ namespace KryBot
                     btnSGLogin.Enabled = true;
                     btnSGLogin.Visible = true;
                     linkLabel2.Enabled = true;
-                    lblSGStatus.Text = @"Статус: " + strings.LoginFaild;
+                    lblSGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             toolStripProgressBar1.Value++;
@@ -604,7 +605,7 @@ namespace KryBot
                     btnSCLogin.Enabled = true;
                     btnSCLogin.Visible = true;
                     linkLabel3.Enabled = true;
-                    lblSCStatus.Text = @"Статус: " + strings.LoginFaild;
+                    lblSCStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
 
@@ -664,7 +665,7 @@ namespace KryBot
                     btnSPLogin.Enabled = true;
                     btnSPLogin.Visible = true;
                     linkLabel4.Enabled = true;
-                    lblSPStatus.Text = @"Статус: " + strings.LoginFaild;
+                    lblSPStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
 
@@ -704,7 +705,7 @@ namespace KryBot
                     btnSteamLogin.Enabled = true;
                     btnSteamLogin.Visible = true;
                     linkLabel6.Enabled = true;
-                    lblSteamStatus.Text = @"Статус: " + strings.LoginFaild;
+                    lblSteamStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
 
@@ -765,7 +766,7 @@ namespace KryBot
                     btnPBLogin.Enabled = true;
                     btnPBLogin.Visible = true;
                     linkLabel7.Enabled = true;
-                    lblPBStatus.Text = @"Статус: " + strings.LoginFaild;
+                    lblPBStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             toolStripProgressBar1.Value++;
@@ -779,7 +780,7 @@ namespace KryBot
 
             toolStripProgressBar1.Visible = false;
             toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = @"Завершено";
+            toolStripStatusLabel1.Text = strings.StatusBar_End;
             _farming = false;
             btnStart.Enabled = true;
 
@@ -792,23 +793,23 @@ namespace KryBot
 
         private void ShowProfileInfo()
         {
-            lblGMCoal.Text = @"Угля: " + Bot.GameMinerCoal;
-            lblGMLevel.Text = @"Уровень: " + Bot.GameMinerLevel;
+            lblGMCoal.Text = $"{strings.Coal}: {Bot.GameMinerCoal}";
+            lblGMLevel.Text = $"{strings.Level}: {Bot.GameMinerLevel}";
 
-            lblSGPoints.Text = @"Points: " + Bot.SteamGiftsPoint;
-            lblSGLevel.Text = @"Уровень: " + Bot.SteamGiftsLevel;
+            lblSGPoints.Text = $"{strings.Points}: {Bot.SteamGiftsPoint}";
+            lblSGLevel.Text = $"{strings.Level}: {Bot.SteamGiftsLevel}";
 
-            lblSCPoints.Text = @"Points: " + Bot.SteamCompanionPoint;
-            lblSCLevel.Text = @"Уровень: -";
+            lblSCPoints.Text = $"{strings.Points}: {Bot.SteamCompanionPoints}";
+            lblSCLevel.Text = $"{strings.Level}: -";
 
-            lblSPPoints.Text = @"Points: " + Bot.SteamPortalPoints;
-            lblSPLevel.Text = @"Уровень: -";
+            lblSPPoints.Text = $"{strings.Points}: {Bot.SteamPortalPoints}";
+            lblSPLevel.Text = $"{strings.Level}: -";
 
-            lblSTPoints.Text = @"Points: -";
-            lblSTLevel.Text = @"Уровень: -";
+            lblSTPoints.Text = $"{strings.Points}: -";
+            lblSTLevel.Text = $"{strings.Level}: -";
 
-            lblPBPoints.Text = @"Points: " + Bot.PlayBlinkPoints;
-            lblPBLevel.Text = @"Уровень: " + Bot.PlayBlinkLevel;
+            lblPBPoints.Text = $"{strings.Points}: {Bot.PlayBlinkPoints}";
+            lblPBLevel.Text = $"{strings.Level}: {Bot.PlayBlinkLevel}";
         }
 
         private async Task<bool> LoginCheck()
@@ -841,7 +842,7 @@ namespace KryBot
                     login = true;
                     btnGMLogin.Enabled = false;
                     btnGMLogin.Visible = false;
-                    lblGMStatus.Text = @"Статус: " + strings.LoginSuccess;
+                    lblGMStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                     LoadProfilesInfo?.Invoke();
                     pbGMReload.Visible = true;
                     btnGMExit.Visible = true;
@@ -851,7 +852,7 @@ namespace KryBot
                     BlockTabpage(tabPageGM, false);
                     btnGMLogin.Enabled = true;
                     btnGMLogin.Visible = true;
-                    lblGMStatus.Text = @"Статус: " + strings.LoginFaild;
+                    lblGMStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             else
@@ -882,7 +883,7 @@ namespace KryBot
                     login = true;
                     btnSGLogin.Enabled = false;
                     btnSGLogin.Visible = false;
-                    lblSGStatus.Text = @"Статус: " + strings.LoginSuccess;
+                    lblSGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                     pbSGReload.Visible = true;
                     btnSGExit.Visible = true;
                 }
@@ -891,7 +892,7 @@ namespace KryBot
                     BlockTabpage(tabPageSG, false);
                     btnSGLogin.Enabled = true;
                     btnSGLogin.Visible = true;
-                    lblSGStatus.Text = @"Статус: " + strings.LoginFaild;
+                    lblSGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             else
@@ -922,7 +923,7 @@ namespace KryBot
                     login = true;
                     btnSCLogin.Enabled = false;
                     btnSCLogin.Visible = false;
-                    lblSCStatus.Text = @"Статус: " + strings.LoginSuccess;
+                    lblSCStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                     pbSCReload.Visible = true;
                     btnSCExit.Visible = true;
                 }
@@ -931,7 +932,7 @@ namespace KryBot
                     BlockTabpage(tabPageSC, false);
                     btnSCLogin.Enabled = true;
                     btnSCLogin.Visible = true;
-                    lblSCStatus.Text = @"Статус: " + strings.LoginFaild;
+                    lblSCStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             else
@@ -961,7 +962,7 @@ namespace KryBot
                     login = true;
                     btnSPLogin.Enabled = false;
                     btnSPLogin.Visible = false;
-                    lblSPStatus.Text = @"Статус: " + strings.LoginSuccess;
+                    lblSPStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                     pbSPReload.Visible = true;
                     btnSPExit.Visible = true;
                 }
@@ -970,7 +971,7 @@ namespace KryBot
                     BlockTabpage(tabPageSP, false);
                     btnSPLogin.Enabled = true;
                     btnSPLogin.Visible = true;
-                    lblSPStatus.Text = @"Статус: " + strings.LoginFaild;
+                    lblSPStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             else
@@ -988,7 +989,7 @@ namespace KryBot
                     login = true;
                     btnSTLogin.Enabled = false;
                     btnSTLogin.Visible = false;
-                    lblSTStatus.Text = @"Статус: " + strings.LoginSuccess;
+                    lblSTStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                     pbSTreload.Visible = true;
                     btnSTExit.Visible = true;
                 }
@@ -997,7 +998,7 @@ namespace KryBot
                     BlockTabpage(tabPageST, false);
                     btnSTLogin.Enabled = true;
                     btnSTLogin.Visible = true;
-                    lblSTStatus.Text = @"Статус: " + strings.LoginFaild;
+                    lblSTStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             else
@@ -1029,7 +1030,7 @@ namespace KryBot
                     login = true;
                     btnPBLogin.Enabled = false;
                     btnPBLogin.Visible = false;
-                    lblPBStatus.Text = @"Статус: " + strings.LoginSuccess;
+                    lblPBStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                     LoadProfilesInfo?.Invoke();
                     pbPBRefresh.Visible = true;
                     btnPBExit.Visible = true;
@@ -1039,7 +1040,7 @@ namespace KryBot
                     BlockTabpage(tabPagePB, false);
                     btnPBLogin.Enabled = true;
                     btnPBLogin.Visible = true;
-                    lblPBStatus.Text = @"Статус: " + strings.LoginFaild;
+                    lblPBStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             else
@@ -1056,7 +1057,7 @@ namespace KryBot
                 {
                     btnSteamLogin.Enabled = false;
                     btnSteamLogin.Visible = false;
-                    lblSteamStatus.Text = @"Статус: " + strings.LoginSuccess;
+                    lblSteamStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                     btnSteamExit.Visible = true;
                 }
                 else
@@ -1064,7 +1065,7 @@ namespace KryBot
                     BlockTabpage(tabPageSteam, false);
                     btnSteamLogin.Enabled = true;
                     btnSteamLogin.Visible = true;
-                    lblSteamStatus.Text = @"Статус: " + strings.LoginFaild;
+                    lblSteamStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             else
@@ -1077,7 +1078,7 @@ namespace KryBot
 
             toolStripProgressBar1.Visible = false;
             toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = @"Завершено";
+            toolStripStatusLabel1.Text = strings.StatusBar_End;
             return login;
         }
 
@@ -1104,7 +1105,7 @@ namespace KryBot
             Tools.SaveProfile(Bot, "");
 
             toolStripStatusLabel1.Image = Resources.load;
-            toolStripStatusLabel1.Text = @"Авторизация";
+            toolStripStatusLabel1.Text = strings.StatusBar_Login;
             var login = await CheckLoginSt();
             if (login)
             {                                
@@ -1117,7 +1118,7 @@ namespace KryBot
                 BlockTabpage(tabPageST, true);
                 btnSTLogin.Enabled = false;
                 btnSTLogin.Visible = false;
-                lblSTStatus.Text = @"Статус: " + strings.LoginSuccess;
+                lblSTStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
                 btnStart.Enabled = true;
                 pbSTreload.Visible = true;
@@ -1128,13 +1129,13 @@ namespace KryBot
             }
             else
             {
-                lblSTStatus.Text = @"Статус: " + strings.LoginFaild;
+                lblSTStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 BlockTabpage(tabPageST, false);
                 btnSTLogin.Enabled = true;
                 btnSTLogin.Visible = true;
             }
             toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = @"Завершено";
+            toolStripStatusLabel1.Text = strings.StatusBar_End;
         }
 
         public static void BrowserStart(string startPage, string endPage, string title, string phpSessId,
@@ -1155,7 +1156,7 @@ namespace KryBot
             Tools.SaveProfile(Bot, "");
 
             toolStripStatusLabel1.Image = Resources.load;
-            toolStripStatusLabel1.Text = @"Авторизация";
+            toolStripStatusLabel1.Text = strings.StatusBar_Login;
             var login = await CheckLoginSp();
             if (login)
             {
@@ -1169,7 +1170,7 @@ namespace KryBot
                 BlockTabpage(tabPageSP, true);
                 btnSPLogin.Enabled = false;
                 btnSPLogin.Visible = false;
-                lblSPStatus.Text = @"Статус: " + strings.LoginSuccess;
+                lblSPStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
                 btnStart.Enabled = true;
                 pbSPReload.Visible = true;
@@ -1180,13 +1181,13 @@ namespace KryBot
             }
             else
             {
-                lblSPStatus.Text = @"Статус: " + strings.LoginFaild;
+                lblSPStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 BlockTabpage(tabPageSP, false);
                 btnSPLogin.Enabled = true;
                 btnSPLogin.Visible = true;
             }
             toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = @"Завершено";
+            toolStripStatusLabel1.Text = strings.StatusBar_End;
         }
 
         private async void btnSCLogin_Click(object sender, EventArgs e)
@@ -1197,7 +1198,7 @@ namespace KryBot
             Tools.SaveProfile(Bot, "");
 
             toolStripStatusLabel1.Image = Resources.load;
-            toolStripStatusLabel1.Text = @"Авторизация";
+            toolStripStatusLabel1.Text = strings.StatusBar_Login;
             var login = await CheckLoginSc();
             if (login)
             {
@@ -1210,7 +1211,7 @@ namespace KryBot
                 BlockTabpage(tabPageSC, true);
                 btnSCLogin.Enabled = false;
                 btnSCLogin.Visible = false;
-                lblSCStatus.Text = @"Статус: " + strings.LoginSuccess;
+                lblSCStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
                 btnStart.Enabled = true;
                 pbSCReload.Visible = true;
@@ -1221,13 +1222,13 @@ namespace KryBot
             }
             else
             {
-                lblSCStatus.Text = @"Статус: " + strings.LoginFaild;
+                lblSCStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 BlockTabpage(tabPageSC, false);
                 btnSCLogin.Enabled = true;
                 btnSCLogin.Visible = true;
             }
             toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = @"Завершено";
+            toolStripStatusLabel1.Text = strings.StatusBar_End;
         }
 
         private async void btnSGLogin_Click(object sender, EventArgs e)
@@ -1238,7 +1239,7 @@ namespace KryBot
             Tools.SaveProfile(Bot, "");
 
             toolStripStatusLabel1.Image = Resources.load;
-            toolStripStatusLabel1.Text = @"Авторизация";
+            toolStripStatusLabel1.Text = strings.StatusBar_Login;
             var login = await CheckLoginSg();
             if (login)
             {
@@ -1251,7 +1252,7 @@ namespace KryBot
                 BlockTabpage(tabPageSG, true);
                 btnSGLogin.Enabled = false;
                 btnSGLogin.Visible = false;
-                lblSGStatus.Text = @"Статус: " + strings.LoginSuccess;
+                lblSGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
                 btnStart.Enabled = true;
                 pbSGReload.Visible = true;
@@ -1262,13 +1263,13 @@ namespace KryBot
             }
             else
             {
-                lblSGStatus.Text = @"Статус: " + strings.LoginFaild;
+                lblSGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 BlockTabpage(tabPageSG, false);
                 btnSGLogin.Enabled = true;
                 btnSGLogin.Visible = true;
             }
             toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = @"Завершено";
+            toolStripStatusLabel1.Text = strings.StatusBar_End;
         }
 
         private async void btnGMLogin_Click(object sender, EventArgs e)
@@ -1284,7 +1285,7 @@ namespace KryBot
             Tools.SaveProfile(Bot, "");
 
             toolStripStatusLabel1.Image = Resources.load;
-            toolStripStatusLabel1.Text = @"Авторизация";
+            toolStripStatusLabel1.Text = strings.StatusBar_Login;
             var login = await CheckLoginGm();
             if (login)
             {
@@ -1297,7 +1298,7 @@ namespace KryBot
                 BlockTabpage(tabPageGM, true);
                 btnGMLogin.Enabled = false;
                 btnGMLogin.Visible = false;
-                lblGMStatus.Text = @"Статус: " + strings.LoginSuccess;
+                lblGMStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
                 btnStart.Enabled = true;
                 pbGMReload.Visible = true;
@@ -1308,13 +1309,13 @@ namespace KryBot
             }
             else
             {
-                lblGMStatus.Text = @"Статус: " + strings.LoginFaild;
+                lblGMStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 BlockTabpage(tabPageGM, false);
                 btnGMLogin.Enabled = true;
                 btnGMLogin.Visible = true;
             }
             toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = @"Завершено";
+            toolStripStatusLabel1.Text = strings.StatusBar_End;
         }
 
         private async Task<bool> CheckLoginGm()
@@ -1405,7 +1406,7 @@ namespace KryBot
 
                 btnGMLogin.Enabled = false;
                 btnGMLogin.Visible = false;
-                lblGMStatus.Text = @"Статус: " + strings.LoginSuccess;
+                lblGMStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
                 BlockTabpage(tabPageGM, true);
             }
@@ -1414,7 +1415,7 @@ namespace KryBot
                 BlockTabpage(tabPageGM, false);
                 btnGMLogin.Enabled = true;
                 btnGMLogin.Visible = true;
-                lblGMStatus.Text = @"Статус: " + strings.LoginFaild;
+                lblGMStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
             }
 
             SetStatusPanel(strings.Finish, null);
@@ -1447,7 +1448,7 @@ namespace KryBot
 
                 btnSGLogin.Enabled = false;
                 btnSGLogin.Visible = false;
-                lblSGStatus.Text = @"Статус: " + strings.LoginSuccess;
+                lblSGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 BlockTabpage(tabPageSG, true);
             }
             else
@@ -1455,7 +1456,7 @@ namespace KryBot
                 BlockTabpage(tabPageSG, false);
                 btnSGLogin.Enabled = true;
                 btnSGLogin.Visible = true;
-                lblSGStatus.Text = @"Статус: " + strings.LoginFaild;
+                lblSGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
             }
 
             SetStatusPanel(strings.Finish, null);
@@ -1480,7 +1481,7 @@ namespace KryBot
                 }
                 btnSCLogin.Enabled = false;
                 btnSCLogin.Visible = false;
-                lblSCStatus.Text = @"Статус: " + strings.LoginSuccess;
+                lblSCStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 BlockTabpage(tabPageSC, true);
 
                 var async = await Web.SteamCompanionSyncAccountAsync(Bot);
@@ -1495,7 +1496,7 @@ namespace KryBot
                 BlockTabpage(tabPageSC, false);
                 btnSCLogin.Enabled = true;
                 btnSCLogin.Visible = true;
-                lblSCStatus.Text = @"Статус: " + strings.LoginFaild;
+                lblSCStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
             }
 
             SetStatusPanel(strings.Finish, null);
@@ -1514,7 +1515,7 @@ namespace KryBot
                 LoadProfilesInfo?.Invoke();
                 btnSPLogin.Enabled = false;
                 btnSPLogin.Visible = false;
-                lblSPStatus.Text = @"Статус: " + strings.LoginSuccess;
+                lblSPStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 BlockTabpage(tabPageSP, true);
             }
             else
@@ -1522,7 +1523,7 @@ namespace KryBot
                 BlockTabpage(tabPageSP, false);
                 btnSPLogin.Enabled = true;
                 btnSPLogin.Visible = true;
-                lblSPStatus.Text = @"Статус: " + strings.LoginFaild;
+                lblSPStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
             }
 
             pbSPReload.Image = Resources.refresh;
@@ -1541,7 +1542,7 @@ namespace KryBot
                 LoadProfilesInfo?.Invoke();
                 btnSTLogin.Enabled = false;
                 btnSTLogin.Visible = false;
-                lblSTStatus.Text = @"Статус: " + strings.LoginSuccess;
+                lblSTStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 BlockTabpage(tabPageST, true);
             }
             else
@@ -1549,7 +1550,7 @@ namespace KryBot
                 BlockTabpage(tabPageST, false);
                 btnSTLogin.Enabled = true;
                 btnSTLogin.Visible = true;
-                lblSTStatus.Text = @"Статус: " + strings.LoginFaild;
+                lblSTStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
             }
 
             SetStatusPanel(strings.Finish, null);
@@ -1610,7 +1611,7 @@ namespace KryBot
         {
             if (Tools.SaveProfile(Bot, ""))
             {
-                LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + "Настройки сохранены в profile.xml", Color.White,
+                LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + " Настройки сохранены в profile.xml", Color.White,
                     true, true);
                 LogChanged?.Invoke();
             }
@@ -1631,13 +1632,13 @@ namespace KryBot
             {
                 if (Tools.SaveProfile(Bot, saveFileDialog1.FileName))
                 {
-                    LogBuffer = Tools.ConstructLog("Файл сохранен по пути " + saveFileDialog1.FileName, Color.Green,
+                    LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + " Файл сохранен по пути " + saveFileDialog1.FileName, Color.White,
                         true, true);
                     LogChanged?.Invoke();
                 }
                 else
                 {
-                    LogBuffer = Tools.ConstructLog("Файл НЕ сохранен", Color.Red, true, true);
+                    LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + " Файл НЕ сохранен", Color.Red, true, true);
                     LogChanged?.Invoke();
                 }
             }
@@ -1735,7 +1736,7 @@ namespace KryBot
             Tools.SaveProfile(Bot, "");
 
             toolStripStatusLabel1.Image = Resources.load;
-            toolStripStatusLabel1.Text = @"Авторизация";
+            toolStripStatusLabel1.Text = strings.StatusBar_Login;
             var login = await CheckLoginSteam();
             if (login)
             {
@@ -1749,18 +1750,18 @@ namespace KryBot
                 btnSteamExit.Enabled = true;
                 btnSteamExit.Visible = true;
 
-                lblSteamStatus.Text = @"Статус: " + strings.LoginSuccess;
+                lblSteamStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
             }
             else
             {
-                lblSteamStatus.Text = @"Статус: " + strings.LoginFaild;
+                lblSteamStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 BlockTabpage(tabPageSteam, false);
                 btnSteamLogin.Enabled = true;
                 btnSteamLogin.Visible = true;
             }
             toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = @"Завершено";
+            toolStripStatusLabel1.Text = strings.StatusBar_End;
         }
 
         private void FormMain_Resize(object sender, EventArgs e)
@@ -1990,7 +1991,7 @@ namespace KryBot
             Tools.SaveProfile(Bot, "");
 
             toolStripStatusLabel1.Image = Resources.load;
-            toolStripStatusLabel1.Text = @"Авторизация";
+            toolStripStatusLabel1.Text = strings.StatusBar_Login;
             var login = await CheckLoginPb();
             if (login)
             {
@@ -2003,7 +2004,7 @@ namespace KryBot
                 BlockTabpage(tabPagePB, true);
                 btnPBLogin.Enabled = false;
                 btnPBLogin.Visible = false;
-                lblPBStatus.Text = @"Статус: " + strings.LoginSuccess;
+                lblPBStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
                 btnStart.Enabled = true;
                 pbPBRefresh.Visible = true;
@@ -2014,13 +2015,13 @@ namespace KryBot
             }
             else
             {
-                lblPBStatus.Text = @"Статус: " + strings.LoginFaild;
+                lblPBStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 BlockTabpage(tabPagePB, false);
                 btnPBLogin.Enabled = true;
                 btnPBLogin.Visible = true;
             }
             toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = @"Завершено";
+            toolStripStatusLabel1.Text = strings.StatusBar_End;
         }
 
         private void btnPBExit_Click(object sender, EventArgs e)
@@ -2050,7 +2051,7 @@ namespace KryBot
                 LoadProfilesInfo?.Invoke();
                 btnPBLogin.Enabled = false;
                 btnPBLogin.Visible = false;
-                lblPBStatus.Text = @"Статус: " + strings.LoginSuccess;
+                lblPBStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 BlockTabpage(tabPagePB, true);
             }
             else
@@ -2058,7 +2059,7 @@ namespace KryBot
                 BlockTabpage(tabPagePB, false);
                 btnPBLogin.Enabled = true;
                 btnPBLogin.Visible = true;
-                lblPBStatus.Text = @"Статус: " + strings.LoginFaild;
+                lblPBStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
             }
 
             SetStatusPanel(strings.Finish, null);
@@ -2159,7 +2160,7 @@ namespace KryBot
             {
                 if (wishlist)
                 {
-                    if (giveaway.Price <= Bot.SteamCompanionPoint)
+                    if (giveaway.Price <= Bot.SteamCompanionPoints)
                     {
                         var data = await Web.SteamCompanionJoinGiveawayAsync(Bot, giveaway);
                         if (data != null && data.Content != "\n")
@@ -2182,8 +2183,8 @@ namespace KryBot
                 }
                 else
                 {
-                    if (giveaway.Price <= Bot.SteamCompanionPoint &&
-                    Bot.SteamCompanionPointsReserv <= Bot.SteamCompanionPoint - giveaway.Price)
+                    if (giveaway.Price <= Bot.SteamCompanionPoints &&
+                    Bot.SteamCompanionPointsReserv <= Bot.SteamCompanionPoints - giveaway.Price)
                     {
                         var data = await Web.SteamCompanionJoinGiveawayAsync(Bot, giveaway);
                         if (data != null && data.Content != "\n")

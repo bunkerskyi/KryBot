@@ -64,7 +64,7 @@ namespace KryBot
             public string SteamCompanionUserC { get; set; }
             public string SteamCompanionUserT { get; set; }
             public string SteamCompanionProfileLink { get; set; }
-            public int SteamCompanionPoint { get; set; }
+            public int SteamCompanionPoints { get; set; }
             public int SteamCompanionJoinPointLimit { get; set; } = 1500;
             public int SteamCompanionPointsReserv { get; set; }
             #endregion
