@@ -1,6 +1,7 @@
+sudo: false
 language: csharp
 solution: src\KryBot.sln
 
-script:
-  - ls
-  - ls src
+mono:
+  - weekly
+  - latest
