@@ -25,7 +25,14 @@ namespace KryBot
         private void formBlackList_Load(object sender, EventArgs e)
         {
             Design();
-            LoadBlackList();
+            var blacklist = Tools.LoadBlackList();
+
+            foreach (var item in blacklist.Items)
+            {
+                listView.Items.Add(item.Id).SubItems.Add(item.Name);
+            }
+
+            toolStripStatusLabel.Text = $"Количество: {listView.Items.Count}";
         }
 
         private void Design()
@@ -35,33 +42,6 @@ namespace KryBot
 
             listView.Columns.Add("ID");
             listView.Columns.Add("Name", Width - listView.Columns[0].Width);
-        }
-
-        private void LoadBlackList()
-        {
-            if (File.Exists("blacklist.xml"))
-            {
-                try
-                {
-                    using (var reader = new StreamReader("blacklist.xml"))
-                    {
-                        var serializer = new XmlSerializer(typeof(Classes.Blacklist));
-                        var blacklist = (Classes.Blacklist)serializer.Deserialize(reader);
-
-                        foreach (var item in blacklist.Items)
-                        {
-                            listView.Items.Add(item.Id).SubItems.Add(item.Name);
-                        }
-
-                        toolStripStatusLabel.Text = $"Количество: {listView.Items.Count}";
-                        reader.Close();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(@"Ошибка", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
         }
 
         private void SaveBlackList()
@@ -153,10 +133,10 @@ namespace KryBot
         {
             FormTextBox form = new FormTextBox("Enter id", true);
             form.ShowDialog();
-            if (Settings.Default._idCache != "")
+            if (Settings.Default._idCache != "0")
             {
                 listView.Items.Add(Settings.Default._idCache).SubItems.Add(await LoadName(Settings.Default._idCache));
-                Settings.Default._idCache = "";
+                Settings.Default._idCache = "0";
             }
             toolStripStatusLabel.Text = $"Количество: {listView.Items.Count}";
         }

@@ -26,7 +26,7 @@ namespace KryBot
         public static List<SteamPortal.SpGiveaway> SpGiveaways = new List<SteamPortal.SpGiveaway>();
         public static List<SteamTrade.StGiveaway> StGiveaways = new List<SteamTrade.StGiveaway>();
         public static List<PlayBlink.PbGiveaway> PbGiveaways = new List<PlayBlink.PbGiveaway>();
-        public static string[] BlackList;
+        public static Classes.Blacklist BlackList;
 
         public static bool Hided;
 

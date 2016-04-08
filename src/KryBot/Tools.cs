@@ -7,7 +7,6 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Security;
-using System.Security.Cryptography;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using KryBot.lang;
@@ -303,22 +302,26 @@ namespace KryBot
             }
         }
 
-        public static string[] LoadBlackList()
+        public static Classes.Blacklist LoadBlackList()
         {
-            if (File.Exists("blacklist.txt"))
+            if (File.Exists("blacklist.xml"))
             {
                 try
                 {
-                    return File.ReadAllLines("blacklist.txt");
-                            
+                    using (var reader = new StreamReader("blacklist.xml"))
+                    {
+                        var serializer = new XmlSerializer(typeof(Classes.Blacklist));
+                        var blacklist = (Classes.Blacklist)serializer.Deserialize(reader);
+                        return blacklist;
+                    }
                 }
-                catch (IOException ex)
+                catch (Exception ex)
                 {
-                    MessageBox.Show(strings.Error, ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return null;
+                    MessageBox.Show(@"Ошибка", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return new Classes.Blacklist();
                 }
             }
-            return null;
+            return new Classes.Blacklist();
         }
     }
 }
