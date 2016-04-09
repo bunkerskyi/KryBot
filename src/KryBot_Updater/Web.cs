@@ -1,6 +1,5 @@
 ﻿using RestSharp;
 
-
 namespace KryBot_Updater
 {
     internal class Web
@@ -9,7 +8,7 @@ namespace KryBot_Updater
         {
             var client = new RestClient(url)
             {
-                FollowRedirects = true,
+                FollowRedirects = true
             };
 
             var request = new RestRequest("", Method.GET);

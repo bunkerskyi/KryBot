@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using KryBot.lang;
 using static KryBot.Classes;
 using static KryBot.Tools;
+using Settings = KryBot.Properties.Settings;
 
 namespace KryBot
 {
@@ -23,7 +24,8 @@ namespace KryBot
         {
             var log = new Log
             {
-                Content = $"{GetDateTime()} {strings.GetBotInConfig_Config} \"{fileName}\" {strings.GetBotInConfig_NotLoaded}",
+                Content =
+                    $"{GetDateTime()} {strings.GetBotInConfig_Config} \"{fileName}\" {strings.GetBotInConfig_NotLoaded}",
                 Color = Color.Red
             };
             return log;
@@ -76,9 +78,9 @@ namespace KryBot
 
         public static Log GiveawayJoined(string site, string name, int price, int points, int level)
         {
-            Properties.Settings.Default.JoinsPerSession += 1;
-            Properties.Settings.Default.JoinsTotal += 1;
-            Properties.Settings.Default.Save();
+            Settings.Default.JoinsPerSession += 1;
+            Settings.Default.JoinsTotal += 1;
+            Settings.Default.Save();
 
             var log = new Log();
 
@@ -118,17 +120,20 @@ namespace KryBot
 
         public static Log GroupJoined(string url)
         {
-            return ConstructLog($"{GetDateTime()} {{Steam}} {strings.SteamGroupJoined} {{{url}}}", Color.Yellow, false, true);
+            return ConstructLog($"{GetDateTime()} {{Steam}} {strings.SteamGroupJoined} {{{url}}}", Color.Yellow, false,
+                true);
         }
 
         public static Log GroupNotJoinde(string url)
         {
-            return ConstructLog($"{GetDateTime()} {{Steam}} {strings.SteamGroupNotJoined} {{{url}}}", Color.Yellow, false, true);
+            return ConstructLog($"{GetDateTime()} {{Steam}} {strings.SteamGroupNotJoined} {{{url}}}", Color.Yellow,
+                false, true);
         }
 
         public static Log GroupAlreadyMember(string url)
         {
-            return ConstructLog($"{GetDateTime()} {{Steam}} {strings.SteamGroupAlreadyMember} {{{url}}}", Color.Yellow, false, true);
+            return ConstructLog($"{GetDateTime()} {{Steam}} {strings.SteamGroupAlreadyMember} {{{url}}}", Color.Yellow,
+                false, true);
         }
 
         public static Log ParseProfile(string site, int points, int level, string username)
@@ -146,18 +151,23 @@ namespace KryBot
         }
 
         public static Log ParseProfile(string site, int points, string username)
-        {                                                                                                    
-            return ConstructLog($"{GetDateTime()} {{{site}}} {strings.LoginSuccess} {strings.ParseProfile_Points}: {points} ({username})", Color.Green, true, true);
+        {
+            return
+                ConstructLog(
+                    $"{GetDateTime()} {{{site}}} {strings.LoginSuccess} {strings.ParseProfile_Points}: {points} ({username})",
+                    Color.Green, true, true);
         }
 
         public static Log ParseProfile(string site, string username)
         {
-            return ConstructLog($"{GetDateTime()} {{{site}}} {strings.LoginSuccess} ({username})", Color.Green, true, true);
+            return ConstructLog($"{GetDateTime()} {{{site}}} {strings.LoginSuccess} ({username})", Color.Green, true,
+                true);
         }
 
         public static Log ParseProfileFailed(string site)
         {
-            return ConstructLog($"{GetDateTime()} {{{site}}} {strings.ParseProfile_LoginOrServerError}", Color.Red, false, true);
+            return ConstructLog($"{GetDateTime()} {{{site}}} {strings.ParseProfile_LoginOrServerError}", Color.Red,
+                false, true);
         }
     }
 }

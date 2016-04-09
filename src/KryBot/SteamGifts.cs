@@ -1,5 +1,4 @@
-﻿
-namespace KryBot
+﻿namespace KryBot
 {
     public class SteamGifts
     {

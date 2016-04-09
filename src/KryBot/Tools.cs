@@ -10,6 +10,7 @@ using System.Security;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using KryBot.lang;
+using KryBot.Properties;
 using Microsoft.Win32;
 using RestSharp;
 
@@ -31,22 +32,6 @@ namespace KryBot
             {
                 var bot = new Classes.Bot();
                 return bot;
-            }
-        }
-
-        public static void CheckDlls()
-        {
-            if (!File.Exists(Application.StartupPath + "//HtmlAgilityPack.dll"))
-            {
-                CopyResource("KryBot.Resources.HtmlAgilityPack.dll", Application.StartupPath + "/HtmlAgilityPack.dll");
-            }
-            if (!File.Exists(Application.StartupPath + "//Newtonsoft.Json.dll"))
-            {
-                CopyResource("KryBot.Resources.Newtonsoft.Json.dll", Application.StartupPath + "/Newtonsoft.Json.dll");
-            }
-            if (!File.Exists(Application.StartupPath + "//RestSharp.dll"))
-            {
-                CopyResource("KryBot.Resources.RestSharp.dll", Application.StartupPath + "/RestSharp.dll");
             }
         }
 
@@ -88,7 +73,7 @@ namespace KryBot
             var js =
                 @"<script type='text/javascript'>function getUserAgent(){document.write(navigator.userAgent)}</script>";
 
-            var wb = new WebBrowser { Url = new Uri("about:blank") };
+            var wb = new WebBrowser {Url = new Uri("about:blank")};
             if (wb.Document != null)
             {
                 wb.Document.Write(js);
@@ -123,7 +108,8 @@ namespace KryBot
             {
                 var list = CookieContainer_ToList(cookies);
 
-                return (from cookie in list where cookie.Name == cookieName && cookie.Domain == domain select cookie.Value)
+                return
+                    (from cookie in list where cookie.Name == cookieName && cookie.Domain == domain select cookie.Value)
                         .FirstOrDefault();
             }
             return null;
@@ -188,8 +174,8 @@ namespace KryBot
             catch (UnauthorizedAccessException)
             {
                 MessageBox.Show(
-                   @"При записи в реестр произошла ошибка. Запись в реестр разрешена администратором?",
-                   strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    @"При записи в реестр произошла ошибка. Запись в реестр разрешена администратором?",
+                    strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }
@@ -212,8 +198,8 @@ namespace KryBot
             catch (UnauthorizedAccessException)
             {
                 MessageBox.Show(
-                   @"При записи в реестр произошла ошибка. Запись в реестр разрешена администратором?",
-                   strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    @"При записи в реестр произошла ошибка. Запись в реестр разрешена администратором?",
+                    strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             catch (ArgumentException)
@@ -224,8 +210,8 @@ namespace KryBot
 
         public static bool VersionCompare(string sClient, string sServer)
         {
-            Version vClient = new Version(sClient);
-            Version vServer = new Version(sServer);
+            var vClient = new Version(sClient);
+            var vServer = new Version(sServer);
             var compare = vClient.CompareTo(vServer);
 
             if (compare == -1)
@@ -237,28 +223,28 @@ namespace KryBot
 
         public static bool SaveSettings()
         {
-            Classes.Settings sets = new Classes.Settings
+            var sets = new Classes.Settings
             {
-                Lang = Properties.Settings.Default.Lang,
-                LogActive = Properties.Settings.Default.LogActive,
-                FullLog = Properties.Settings.Default.FullLog,
-                Timer = Properties.Settings.Default.Timer,
-                TimerInterval = Properties.Settings.Default.TimerInterval,
-                TimerLoops = Properties.Settings.Default.TimerLoops,
-                SortToLess = Properties.Settings.Default.SortToLess,
-                SortToMore = Properties.Settings.Default.SortToMore,
-                Sort = Properties.Settings.Default.Sort,
-                ShowFarmTip = Properties.Settings.Default.ShowFarmTip,
-                ShowWonTip = Properties.Settings.Default.ShowWonTip,
-                Autorun = Properties.Settings.Default.Autorun,
-                WishlistSort = Properties.Settings.Default.WishlistNotSort
+                Lang = Settings.Default.Lang,
+                LogActive = Settings.Default.LogActive,
+                FullLog = Settings.Default.FullLog,
+                Timer = Settings.Default.Timer,
+                TimerInterval = Settings.Default.TimerInterval,
+                TimerLoops = Settings.Default.TimerLoops,
+                SortToLess = Settings.Default.SortToLess,
+                SortToMore = Settings.Default.SortToMore,
+                Sort = Settings.Default.Sort,
+                ShowFarmTip = Settings.Default.ShowFarmTip,
+                ShowWonTip = Settings.Default.ShowWonTip,
+                Autorun = Settings.Default.Autorun,
+                WishlistSort = Settings.Default.WishlistNotSort
             };
 
             try
             {
                 using (var fs = new FileStream("settings.xml", FileMode.Create, FileAccess.Write))
                 {
-                    var serializer = new XmlSerializer(typeof(Classes.Settings));
+                    var serializer = new XmlSerializer(typeof (Classes.Settings));
                     serializer.Serialize(fs, sets);
                 }
                 return true;
@@ -274,25 +260,25 @@ namespace KryBot
         {
             try
             {
-                var serializer = new XmlSerializer(typeof(Classes.Settings));
+                var serializer = new XmlSerializer(typeof (Classes.Settings));
                 var reader = new StreamReader("settings.xml");
-                var sets = (Classes.Settings)serializer.Deserialize(reader);
+                var sets = (Classes.Settings) serializer.Deserialize(reader);
                 reader.Close();
 
-                Properties.Settings.Default.Autorun = sets.Autorun;
-                Properties.Settings.Default.Sort = sets.Sort;
-                Properties.Settings.Default.SortToLess = sets.SortToLess;
-                Properties.Settings.Default.SortToMore = sets.SortToMore;
-                Properties.Settings.Default.Timer = sets.Timer;
-                Properties.Settings.Default.TimerInterval = sets.TimerInterval;
-                Properties.Settings.Default.TimerLoops = sets.TimerLoops;
-                Properties.Settings.Default.LogActive = sets.LogActive;
-                Properties.Settings.Default.FullLog = sets.FullLog;
-                Properties.Settings.Default.WishlistNotSort = sets.WishlistSort;
-                Properties.Settings.Default.Lang = sets.Lang;
-                Properties.Settings.Default.ShowFarmTip = sets.ShowFarmTip;
-                Properties.Settings.Default.ShowWonTip = sets.ShowWonTip;
-                Properties.Settings.Default.Save();
+                Settings.Default.Autorun = sets.Autorun;
+                Settings.Default.Sort = sets.Sort;
+                Settings.Default.SortToLess = sets.SortToLess;
+                Settings.Default.SortToMore = sets.SortToMore;
+                Settings.Default.Timer = sets.Timer;
+                Settings.Default.TimerInterval = sets.TimerInterval;
+                Settings.Default.TimerLoops = sets.TimerLoops;
+                Settings.Default.LogActive = sets.LogActive;
+                Settings.Default.FullLog = sets.FullLog;
+                Settings.Default.WishlistNotSort = sets.WishlistSort;
+                Settings.Default.Lang = sets.Lang;
+                Settings.Default.ShowFarmTip = sets.ShowFarmTip;
+                Settings.Default.ShowWonTip = sets.ShowWonTip;
+                Settings.Default.Save();
 
                 return true;
             }
@@ -310,8 +296,8 @@ namespace KryBot
                 {
                     using (var reader = new StreamReader("blacklist.xml"))
                     {
-                        var serializer = new XmlSerializer(typeof(Classes.Blacklist));
-                        var blacklist = (Classes.Blacklist)serializer.Deserialize(reader);
+                        var serializer = new XmlSerializer(typeof (Classes.Blacklist));
+                        var blacklist = (Classes.Blacklist) serializer.Deserialize(reader);
                         return blacklist;
                     }
                 }

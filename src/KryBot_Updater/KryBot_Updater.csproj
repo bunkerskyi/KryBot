@@ -32,8 +32,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Exceptionless.Extras, Version=3.3.1590.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Exceptionless.Windows.3.3.1590\lib\net45\Exceptionless.Extras.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Exceptionless.Portable, Version=3.3.1590.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\KryBot\packages\Exceptionless.Portable.3.3.1590\lib\net45\Exceptionless.Portable.dll</HintPath>
+      <HintPath>..\packages\Exceptionless.Portable.3.3.1590\lib\net45\Exceptionless.Portable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Exceptionless.Windows, Version=3.3.1590.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Exceptionless.Windows.3.3.1590\lib\net45\Exceptionless.Windows.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -49,12 +57,6 @@
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes.cs" />

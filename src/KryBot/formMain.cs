@@ -77,7 +77,6 @@ namespace KryBot
                 }
             }
 
-            Tools.CheckDlls();
             Tools.LoadSettings();
             LoadProfilesInfo += ShowProfileInfo;
             LogActive = Settings.Default.LogActive;
@@ -97,7 +96,7 @@ namespace KryBot
 
                 if (Bot.SteamEnabled)
                 {
-                    await Web.SteamJoinGroupAsync("http://steamcommunity.com/groups/krybot", 
+                    await Web.SteamJoinGroupAsync("http://steamcommunity.com/groups/krybot",
                         "", Generate.PostData_SteamGroupJoin(Bot.SteamSessid),
                         Generate.Cookies_Steam(Bot), new List<HttpHeader>(), Bot.UserAgent);
                 }
@@ -114,7 +113,7 @@ namespace KryBot
                 btnSteamLogin.Visible = true;
                 btnStart.Enabled = false;
             }
-        }                                    
+        }
 
         private void FormMain_LocationChanged(object sender, EventArgs e)
         {
@@ -138,13 +137,15 @@ namespace KryBot
                             _timerTickCount.Tick += TimerTickCountOnTick;
                             _timer.Start();
                             _timerTickCount.Start();
-                            btnStart.Text = $"{strings.FormMain_btnStart_Click_Stop} ({TimeSpan.FromMilliseconds(_timer.Interval)})";
+                            btnStart.Text =
+                                $"{strings.FormMain_btnStart_Click_Stop} ({TimeSpan.FromMilliseconds(_timer.Interval)})";
 
                             if (Settings.Default.ShowFarmTip)
                             {
                                 ShowBaloolTip(
                                     $"{strings.FormMain_btnStart_Click_FarmBeginWithInterval} {_interval/60000} {strings.FormMain_btnStart_Click_M} " +
-                                    $"{Settings.Default.TimerLoops - i} {strings.FormMain_btnStart_Click_LoopsLeft}", 5000, ToolTipIcon.Info, "");
+                                    $"{Settings.Default.TimerLoops - i} {strings.FormMain_btnStart_Click_LoopsLeft}",
+                                    5000, ToolTipIcon.Info, "");
                             }
 
                             await DoFarm();
@@ -164,10 +165,12 @@ namespace KryBot
                         _timerTickCount.Tick += TimerTickCountOnTick;
                         _timer.Start();
                         _timerTickCount.Start();
-                        btnStart.Text = $"{strings.FormMain_btnStart_Click_Stop} ({TimeSpan.FromMilliseconds(_timer.Interval)})";
+                        btnStart.Text =
+                            $"{strings.FormMain_btnStart_Click_Stop} ({TimeSpan.FromMilliseconds(_timer.Interval)})";
                         if (Settings.Default.ShowFarmTip)
                         {
-                            ShowBaloolTip($"{strings.FormMain_btnStart_Click_FarmBeginWithInterval} {_interval / 60000} {strings.FormMain_btnStart_Click_M}", 
+                            ShowBaloolTip(
+                                $"{strings.FormMain_btnStart_Click_FarmBeginWithInterval} {_interval/60000} {strings.FormMain_btnStart_Click_M}",
                                 5000, ToolTipIcon.Info, "");
                         }
                         await DoFarm();
@@ -215,7 +218,8 @@ namespace KryBot
                 }
                 else
                 {
-                    LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} {strings.FormMain_btnStart_Click_FarmSkip}",
+                    LogBuffer =
+                        Tools.ConstructLog($"{Messages.GetDateTime()} {strings.FormMain_btnStart_Click_FarmSkip}",
                             Color.Red, false, true);
                     LogChanged?.Invoke();
                     btnStart.Text = strings.FormMain_btnStart_Click_Старт;
@@ -284,7 +288,8 @@ namespace KryBot
                     LogBuffer = message;
                     LogChanged?.Invoke();
 
-                    MessageBox.Show(message.Content.Split(']')[1], strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(message.Content.Split(']')[1], strings.Error, MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
                     return false;
                 }
                 LogBuffer = Messages.ProfileLoaded();
@@ -442,7 +447,8 @@ namespace KryBot
 
                     if (Bot.SteamGiftsPoint > 0)
                     {
-                        var giveaways = await Parse.SteamGiftsLoadGiveawaysAsync(Bot, SgGiveaways, SgWishListGiveaways, BlackList);
+                        var giveaways =
+                            await Parse.SteamGiftsLoadGiveawaysAsync(Bot, SgGiveaways, SgWishListGiveaways, BlackList);
                         if (giveaways != null && giveaways.Content != "\n")
                         {
                             LogBuffer = giveaways;
@@ -503,7 +509,7 @@ namespace KryBot
                         }
                     }
                 }
-                else         
+                else
                 {
                     BlockTabpage(tabPageSG, false);
                     btnSGLogin.Enabled = true;
@@ -537,7 +543,8 @@ namespace KryBot
                         }
                     }
 
-                    var giveaways = await Parse.SteamCompanionLoadGiveawaysAsync(Bot, ScGiveaways, ScWishListGiveaways, BlackList);
+                    var giveaways =
+                        await Parse.SteamCompanionLoadGiveawaysAsync(Bot, ScGiveaways, ScWishListGiveaways, BlackList);
                     if (giveaways != null && giveaways.Content != "\n")
                     {
                         LogBuffer = giveaways;
@@ -696,7 +703,7 @@ namespace KryBot
 
                     if (StGiveaways?.Count > 0)
                     {
-                        await JoinGiveaways(StGiveaways);    
+                        await JoinGiveaways(StGiveaways);
                     }
                 }
                 else
@@ -864,7 +871,7 @@ namespace KryBot
             toolStripProgressBar1.Value++;
 
             if (Bot.SteamGiftsEnabled)
-            {        
+            {
                 if (await CheckLoginSg())
                 {
                     var won = await Parse.SteamGiftsWonParseAsync(Bot);
@@ -1108,7 +1115,7 @@ namespace KryBot
             toolStripStatusLabel1.Text = strings.StatusBar_Login;
             var login = await CheckLoginSt();
             if (login)
-            {                                
+            {
                 //var won = await Parse.GameMinerSteamTradeWonParseAsync(Bot);
                 //if (won != null && won.Content != "\n")
                 //{
@@ -1275,7 +1282,9 @@ namespace KryBot
         private async void btnGMLogin_Click(object sender, EventArgs e)
         {
             btnGMLogin.Enabled = false;
-            BrowserStart("http://gameminer.net/login/steam?backurl=http%3A%2F%2Fgameminer.net%2F%3Flang%3D" + Settings.Default.Lang + @"&agree=True",
+            BrowserStart(
+                "http://gameminer.net/login/steam?backurl=http%3A%2F%2Fgameminer.net%2F%3Flang%3D" +
+                Settings.Default.Lang + @"&agree=True",
                 "http://gameminer.net/?lang=" + Settings.Default.Lang, "GameMiner - Login", "",
                 Bot.SteamEnabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
             if (string.IsNullOrEmpty(Bot.UserAgent))
@@ -1611,7 +1620,8 @@ namespace KryBot
         {
             if (Tools.SaveProfile(Bot, ""))
             {
-                LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + " Настройки сохранены в profile.xml", Color.White,
+                LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + " Настройки сохранены в profile.xml",
+                    Color.White,
                     true, true);
                 LogChanged?.Invoke();
             }
@@ -1632,8 +1642,10 @@ namespace KryBot
             {
                 if (Tools.SaveProfile(Bot, saveFileDialog1.FileName))
                 {
-                    LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + " Файл сохранен по пути " + saveFileDialog1.FileName, Color.White,
-                        true, true);
+                    LogBuffer =
+                        Tools.ConstructLog(
+                            Messages.GetDateTime() + " Файл сохранен по пути " + saveFileDialog1.FileName, Color.White,
+                            true, true);
                     LogChanged?.Invoke();
                 }
                 else
@@ -1830,7 +1842,7 @@ namespace KryBot
 
         private async Task<bool> CheckForUpdates()
         {
-            string json = await Web.GetVersionInGitHubAsync(Settings.Default.GitHubRepoReleaseUrl);
+            var json = await Web.GetVersionInGitHubAsync(Settings.Default.GitHubRepoReleaseUrl);
 
             if (json != "")
             {
@@ -1852,7 +1864,7 @@ namespace KryBot
                             Color.Green, true, true);
                     LogChanged?.Invoke();
 
-                    DialogResult dr =
+                    var dr =
                         MessageBox.Show($"Для скачивания доступна новая версия {release.tag_name}. Скачать?",
                             @"Обновление", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                     if (dr == DialogResult.Yes)
@@ -1864,11 +1876,11 @@ namespace KryBot
 
                         Tools.CopyResource("KryBot.Resources.KryBot_Updater.exe",
                             Application.StartupPath + "\\updater\\KryBot_Updater.exe");
-                        Tools.CopyResource("KryBot.Resources.HtmlAgilityPack.dll", 
+                        Tools.CopyResource("KryBot.Resources.HtmlAgilityPack.dll",
                             Application.StartupPath + "\\updater\\HtmlAgilityPack.dll");
-                        Tools.CopyResource("KryBot.Resources.Newtonsoft.Json.dll", 
+                        Tools.CopyResource("KryBot.Resources.Newtonsoft.Json.dll",
                             Application.StartupPath + "\\updater\\Newtonsoft.Json.dll");
-                        Tools.CopyResource("KryBot.Resources.RestSharp.dll", 
+                        Tools.CopyResource("KryBot.Resources.RestSharp.dll",
                             Application.StartupPath + "\\updater\\RestSharp.dll");
                         Process.Start(Application.StartupPath + "\\updater\\KryBot_Updater.exe",
                             $"{Application.ProductVersion} {Settings.Default.Lang} {Application.StartupPath}");
@@ -1967,7 +1979,7 @@ namespace KryBot
 
         private void черныйСписокToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormBlackList form = new FormBlackList(Bot);
+            var form = new FormBlackList(Bot);
             form.ShowDialog();
             BlackList = Tools.LoadBlackList();
         }
@@ -2129,7 +2141,7 @@ namespace KryBot
                 else
                 {
                     if (giveaway.Price <= Bot.SteamGiftsPoint &&
-                    Bot.SteamGiftsPointsReserv <= Bot.SteamGiftsPoint - giveaway.Price)
+                        Bot.SteamGiftsPointsReserv <= Bot.SteamGiftsPoint - giveaway.Price)
                     {
                         var data = await Web.SteamGiftsJoinGiveawayAsync(Bot, giveaway);
                         if (data != null && data.Content != "\n")
@@ -2184,7 +2196,7 @@ namespace KryBot
                 else
                 {
                     if (giveaway.Price <= Bot.SteamCompanionPoints &&
-                    Bot.SteamCompanionPointsReserv <= Bot.SteamCompanionPoints - giveaway.Price)
+                        Bot.SteamCompanionPointsReserv <= Bot.SteamCompanionPoints - giveaway.Price)
                     {
                         var data = await Web.SteamCompanionJoinGiveawayAsync(Bot, giveaway);
                         if (data != null && data.Content != "\n")
@@ -2304,7 +2316,8 @@ namespace KryBot
         {
             if (Settings.Default.FullLog)
             {
-                LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} {{{site}}} {strings.TryLogin}", Color.White, true, true);
+                LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} {{{site}}} {strings.TryLogin}", Color.White,
+                    true, true);
                 LogChanged?.Invoke();
             }
         }

@@ -13,14 +13,14 @@ using Newtonsoft.Json;
 
 namespace KryBot_Updater
 {
-    class Program
+    internal class Program
     {
         public static Classes.GitHubRelease Release = new Classes.GitHubRelease();
         public static int UpdatePosition;
         public static string Lang = "en-EN";
         public static string RootPath;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.Title = Application.ProductName + @" [" + Application.ProductVersion + @"]";
 
@@ -37,7 +37,7 @@ namespace KryBot_Updater
                 Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Lang);
             }
 
-            string version = GetRemoteVersion();
+            var version = GetRemoteVersion();
             if (version != null)
             {
                 if (Release.assets.Count != 0)
@@ -84,7 +84,7 @@ namespace KryBot_Updater
 
         private static string GetRemoteVersion()
         {
-            string json = Web.Get("https://api.github.com/repos/KriBetko/KryBot/releases/latest");
+            var json = Web.Get("https://api.github.com/repos/KriBetko/KryBot/releases/latest");
 
             Release = JsonConvert.DeserializeObject<Classes.GitHubRelease>(json);
 
@@ -98,19 +98,20 @@ namespace KryBot_Updater
 
         private static void GetRemoteFiles(string url)
         {
-            string remoteUri = url;
-            string fileName = "KryBot_Portable.zip";
-            WebClient myWebClient = new WebClient();
+            var remoteUri = url;
+            var fileName = "KryBot_Portable.zip";
+            var myWebClient = new WebClient();
             var myStringWebResource = remoteUri;
-            Console.WriteLine(strings.DownloadingFile + @" " + fileName + @" " + strings.From + @" " + myStringWebResource + @"...");
+            Console.WriteLine(strings.DownloadingFile + @" " + fileName + @" " + strings.From + @" " +
+                              myStringWebResource + @"...");
             myWebClient.DownloadFile(myStringWebResource, fileName);
             Console.WriteLine(strings.SuccessfullyDownloadedFile + @" " + fileName);
         }
 
         private static bool Unzip()
         {
-            List<string> filesToExtract = new List<string>();
-            string[] filesToUpdate = Directory.GetFiles(RootPath);
+            var filesToExtract = new List<string>();
+            var filesToUpdate = Directory.GetFiles(RootPath);
 
             Console.WriteLine(strings.UnzipingFile + @" KryBot_Portable.zip...");
 
@@ -123,7 +124,7 @@ namespace KryBot_Updater
             {
                 foreach (var fileToExtract in filesToExtract)
                 {
-                        if (fileToUpdate == RootPath + "\\" + fileToExtract)
+                    if (fileToUpdate == RootPath + "\\" + fileToExtract)
                     {
                         try
                         {
@@ -135,8 +136,8 @@ namespace KryBot_Updater
                                 MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return false;
                         }
-                    }      
-                }    
+                    }
+                }
             }
             ZipFile.ExtractToDirectory("KryBot_Portable.zip", RootPath);
             File.Delete("KryBot_Portable.zip");

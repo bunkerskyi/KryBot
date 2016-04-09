@@ -14,14 +14,14 @@ namespace KryBot
             var cookie = new CookieContainer();
             var target = new Uri("http://steamcommunity.com/");
 
-            if(bot.SteamSessid != null)
-                cookie.Add(new Cookie("sessionid", bot.SteamSessid) { Domain = target.Host });
+            if (bot.SteamSessid != null)
+                cookie.Add(new Cookie("sessionid", bot.SteamSessid) {Domain = target.Host});
 
             if (bot.SteamLogin != null)
-                cookie.Add(new Cookie("steamLogin", bot.SteamLogin) { Domain = target.Host });
+                cookie.Add(new Cookie("steamLogin", bot.SteamLogin) {Domain = target.Host});
 
             if (bot.SteamRememberLogin != null)
-                cookie.Add(new Cookie("steamRememberLogin", bot.SteamRememberLogin) { Domain = target.Host });
+                cookie.Add(new Cookie("steamRememberLogin", bot.SteamRememberLogin) {Domain = target.Host});
 
             return cookie;
         }
@@ -56,7 +56,7 @@ namespace KryBot
         {
             var cookie = new CookieContainer();
             var target = new Uri("http://gameminer.net/");
-            if(bot.GameMinerToken != null)
+            if (bot.GameMinerToken != null)
                 cookie.Add(new Cookie("token", bot.GameMinerToken) {Domain = target.Host});
 
             if (bot.GameMinerxsrf != null)
@@ -113,7 +113,7 @@ namespace KryBot
             var cookie = new CookieContainer();
             var target = new Uri("http://www.steamgifts.com/");
 
-            if(bot.SteamGiftsPhpSessId != null)
+            if (bot.SteamGiftsPhpSessId != null)
                 cookie.Add(new Cookie("PHPSESSID", bot.SteamGiftsPhpSessId) {Domain = target.Host});
 
             return cookie;
@@ -161,7 +161,7 @@ namespace KryBot
             var cookie = new CookieContainer();
             var target = new Uri("https://steamcompanion.com/");
 
-            if(bot.SteamCompanionPhpSessId !=null)
+            if (bot.SteamCompanionPhpSessId != null)
                 cookie.Add(new Cookie("PHPSESSID", bot.SteamCompanionPhpSessId) {Domain = target.Host});
 
             if (bot.SteamCompanionUserC != null)
@@ -375,12 +375,12 @@ namespace KryBot
             var target = new Uri("http://playblink.com/");
 
             if (bot.PlayBlinkPhpSessId != null)
-                cookie.Add(new Cookie("PHPSESSID", bot.PlayBlinkPhpSessId) { Domain = target.Host });
+                cookie.Add(new Cookie("PHPSESSID", bot.PlayBlinkPhpSessId) {Domain = target.Host});
 
-            cookie.Add(new Cookie("entry", "1") { Domain = target.Host });
-            cookie.Add(new Cookie("level", bot.PlayBlinkLevel.ToString()) { Domain = target.Host });
-            cookie.Add(new Cookie("order", "2") { Domain = target.Host });
-            cookie.Add(new Cookie("ppage", "100") { Domain = target.Host });
+            cookie.Add(new Cookie("entry", "1") {Domain = target.Host});
+            cookie.Add(new Cookie("level", bot.PlayBlinkLevel.ToString()) {Domain = target.Host});
+            cookie.Add(new Cookie("order", "2") {Domain = target.Host});
+            cookie.Add(new Cookie("ppage", "100") {Domain = target.Host});
 
             return cookie;
         }
@@ -407,6 +407,7 @@ namespace KryBot
 
             return list;
         }
+
         // PlayBlink //
     }
 }

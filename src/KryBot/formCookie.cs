@@ -136,7 +136,8 @@ namespace KryBot
 
         private void ShowMessage()
         {
-            MessageBox.Show(@"Для применения измененией нужен перезапуск приложения.", @"Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(@"Для применения измененией нужен перезапуск приложения.", @"Информация",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

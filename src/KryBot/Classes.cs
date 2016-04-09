@@ -15,14 +15,17 @@ namespace KryBot
             public string UserAgent { get; set; }
 
             #region Steam
+
             public bool SteamEnabled { get; set; }
             public string SteamSessid { get; set; }
             public string SteamLogin { get; set; }
             public string SteamRememberLogin { get; set; }
             public string SteamProfileLink { get; set; }
+
             #endregion
 
             #region GameMiner
+
             public bool GameMinerEnabled { get; set; }
             public string GameMinerToken { get; set; }
             public string GameMinerxsrf { get; set; }
@@ -35,9 +38,11 @@ namespace KryBot
             public bool GameMinerFreeGolden { get; set; } = true;
             public bool GameMinerOnlyGifts { get; set; }
             public bool GameMinerNoRegion { get; set; }
+
             #endregion
 
             #region SteamGifts
+
             public bool SteamGiftsEnabled { get; set; }
             public bool SteamGiftsGroup { get; set; }
             public bool SteamGiftsRegular { get; set; } = true;
@@ -50,9 +55,11 @@ namespace KryBot
             public int SteamGiftsJoinPointLimit { get; set; } = 300;
             public int SteamGiftsPointsReserv { get; set; }
             public int SteamGiftsMinLevel { get; set; }
+
             #endregion
 
             #region SteamCompanion
+
             public bool SteamCompanionEnabled { get; set; }
             public bool SteamCompanionRegular { get; set; } = true;
             public bool SteamCompanionWishList { get; set; }
@@ -67,18 +74,22 @@ namespace KryBot
             public int SteamCompanionPoints { get; set; }
             public int SteamCompanionJoinPointLimit { get; set; } = 1500;
             public int SteamCompanionPointsReserv { get; set; }
+
             #endregion
 
             #region SteamPortal
+
             public bool SteamPortalEnabled { get; set; }
             public string SteamPortalPhpSessId { get; set; }
             public string SteamPortalProfileLink { get; set; }
             public int SteamPortalPoints { get; set; }
             public int SteamPortalMaxJoinValue { get; set; } = 30;
             public int SteamPortalPointsReserv { get; set; }
+
             #endregion
 
             #region GameAways
+
             public bool GameAwaysEnabled { get; set; }
             public bool GameAwaysWishList { get; set; }
             public bool GameAwaysGroup { get; set; }
@@ -87,23 +98,28 @@ namespace KryBot
             public int GameAwaysPoints { get; set; }
             public int GameAwaysMaxJoinValue { get; set; } = 10000;
             public int GameAwaysPointsReserv { get; set; }
+
             #endregion
 
             #region SteamTrade
+
             public bool SteamTradeEnabled { get; set; }
             public string SteamTradePhpSessId { get; set; }
             public string SteamTradeDleUserId { get; set; }
             public string SteamTradeDlePassword { get; set; }
             public string SteamTradePassHash { get; set; }
+
             #endregion
 
             #region PlayBlink
+
             public bool PlayBlinkEnabled { get; set; }
             public string PlayBlinkPhpSessId { get; set; }
             public int PlayBlinkPoints { get; set; }
             public int PlayBlinkLevel { get; set; }
             public int PlayBlinkMaxJoinValue { get; set; } = 50;
             public int PlayBlinkPointReserv { get; set; } = 0;
+
             #endregion
         }
 
@@ -138,7 +154,19 @@ namespace KryBot
             public int TimerLoops { get; set; }
         }
 
+        #region SteamXmlUserId64
+
+        [XmlRoot(ElementName = "profile")]
+        public class Profile
+        {
+            [XmlElement(ElementName = "steamID64")]
+            public string SteamID64 { get; set; }
+        }
+
+        #endregion
+
         #region GitHub
+
         public class GitHubRelease
         {
             public string tag_name { get; set; }
@@ -153,24 +181,17 @@ namespace KryBot
             public int size { get; set; }
             public string browser_download_url { get; set; }
         }
-        #endregion
 
-        #region SteamXmlUserId64
-        [XmlRoot(ElementName = "profile")]
-        public class Profile
-        {
-            [XmlElement(ElementName = "steamID64")]
-            public string SteamID64 { get; set; }
-
-        }
         #endregion
 
         #region SteamXMLUserGames
+
         [XmlRoot(ElementName = "game")]
         public class ProfileGame
         {
             [XmlElement(ElementName = "appID")]
             public string AppID { get; set; }
+
             [XmlElement(ElementName = "name")]
             public string Name { get; set; }
         }
@@ -188,9 +209,11 @@ namespace KryBot
             [XmlElement(ElementName = "games")]
             public ProfileGames Games { get; set; }
         }
+
         #endregion
 
         #region SteamJsonGameDetail
+
         public class GameDetail
         {
             public bool success { get; set; }
@@ -201,9 +224,11 @@ namespace KryBot
         {
             public string name { get; set; }
         }
+
         #endregion
 
         #region Blacklist
+
         public class Blacklist
         {
             public List<BlacklistItem> Items;
@@ -214,6 +239,7 @@ namespace KryBot
             public string Id { get; set; }
             public string Name { get; set; }
         }
+
         #endregion
     }
 }

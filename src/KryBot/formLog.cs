@@ -8,8 +8,8 @@ namespace KryBot
 {
     public partial class FormLog : Form
     {
-        private int _x;
         private readonly int _y;
+        private int _x;
         public bool Win7;
 
         public FormLog(int x, int y)

@@ -2,7 +2,7 @@
 
 namespace KryBot_Updater
 {
-    class Classes
+    internal class Classes
     {
         public class GitHubRelease
         {

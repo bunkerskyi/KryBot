@@ -46,7 +46,7 @@ namespace KryBot
 
         private void SaveBlackList()
         {
-            var blacklist = new Classes.Blacklist { Items = new List<Classes.BlacklistItem>() };
+            var blacklist = new Classes.Blacklist {Items = new List<Classes.BlacklistItem>()};
 
             if (listView.Items.Count > 0)
             {
@@ -65,7 +65,7 @@ namespace KryBot
             {
                 using (var fs = new FileStream("blacklist.xml", FileMode.Create, FileAccess.Write))
                 {
-                    var serializer = new XmlSerializer(typeof(Classes.Blacklist));
+                    var serializer = new XmlSerializer(typeof (Classes.Blacklist));
                     serializer.Serialize(fs, blacklist);
                 }
             }
@@ -79,7 +79,7 @@ namespace KryBot
         {
             if (listView.SelectedItems.Count > 0)
             {
-                for (int i = 0; i < listView.SelectedItems.Count; i++)
+                for (var i = 0; i < listView.SelectedItems.Count; i++)
                 {
                     listView.Items.Remove(listView.Items[listView.SelectedItems[i].Index]);
                     i--;
@@ -99,13 +99,13 @@ namespace KryBot
                 {
                     foreach (ListViewItem item in listView.Items)
                     {
-                        for (int i = 0; i < list.Games.Game.Count; i++)
+                        for (var i = 0; i < list.Games.Game.Count; i++)
                         {
                             if (item.Text == list.Games.Game[i].AppID)
                             {
                                 list.Games.Game.Remove(list.Games.Game[i]);
                                 i--;
-                            }    
+                            }
                         }
                     }
 
@@ -131,7 +131,7 @@ namespace KryBot
 
         private async void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormTextBox form = new FormTextBox("Enter id", true);
+            var form = new FormTextBox("Enter id", true);
             form.ShowDialog();
             if (Settings.Default._idCache != "0")
             {
@@ -151,7 +151,7 @@ namespace KryBot
 
         private void listView_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            ListViewItemComparer comparer = (ListViewItemComparer)listView.ListViewItemSorter;
+            var comparer = (ListViewItemComparer) listView.ListViewItemSorter;
             comparer.Order = e.Column == comparer.Column ? comparer.Swap(comparer.Order) : SortOrder.Ascending;
             comparer.Column = e.Column;
             listView.Sort();
@@ -159,25 +159,27 @@ namespace KryBot
 
         private class ListViewItemComparer : IComparer
         {
-            public SortOrder Order;
             public int Column;
+            public SortOrder Order;
 
             public int Compare(object x, object y)
             {
                 if (Column == 0)
                 {
-                    var int1 = int.Parse(((ListViewItem)x).SubItems[Column].Text);
-                    var int2 = int.Parse(((ListViewItem)y).SubItems[Column].Text);
+                    var int1 = int.Parse(((ListViewItem) x).SubItems[Column].Text);
+                    var int2 = int.Parse(((ListViewItem) y).SubItems[Column].Text);
 
                     return Order == SortOrder.Ascending ? int1.CompareTo(int2) : int2.CompareTo(int1);
                 }
 
                 if (Column == 1)
                 {
-                    string str1 = ((ListViewItem)x).SubItems[Column].Text;
-                    string str2 = ((ListViewItem)y).SubItems[Column].Text;
+                    var str1 = ((ListViewItem) x).SubItems[Column].Text;
+                    var str2 = ((ListViewItem) y).SubItems[Column].Text;
 
-                    return Order == SortOrder.Ascending ? string.Compare(str1, str2, StringComparison.Ordinal) : string.Compare(str2, str1, StringComparison.Ordinal);
+                    return Order == SortOrder.Ascending
+                        ? string.Compare(str1, str2, StringComparison.Ordinal)
+                        : string.Compare(str2, str1, StringComparison.Ordinal);
                 }
 
                 return 0;

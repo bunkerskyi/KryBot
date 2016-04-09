@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Windows.Forms;
-using KryBot.Properties;
 using KryBot.lang;
+using KryBot.Properties;
 
 namespace KryBot
 {
@@ -96,12 +97,16 @@ namespace KryBot
             cbFarmTip.Checked = Settings.Default.ShowFarmTip;
             cbFullLog.Checked = Settings.Default.FullLog;
             cbWishlistSort.Checked = Settings.Default.WishlistNotSort;
-
         }
 
         private void btbGMCookies_Click(object sender, EventArgs e)
         {
-            var names = new List<string> {"token:" + _bot.GameMinerToken, "_xsrf:" + _bot.GameMinerxsrf, "UserAgent:" + _bot.UserAgent};
+            var names = new List<string>
+            {
+                "token:" + _bot.GameMinerToken,
+                "_xsrf:" + _bot.GameMinerxsrf,
+                "UserAgent:" + _bot.UserAgent
+            };
 
             var form = new FormCookie("GameMiner", names, _bot);
             form.ShowDialog();
@@ -115,9 +120,10 @@ namespace KryBot
 
         private void SaveSettings()
         {
-            if(int.Parse(tbTimerInterval.Text) == 0)
+            if (int.Parse(tbTimerInterval.Text) == 0)
             {
-                MessageBox.Show(@"Интервал таймера не может ровняться 0", strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(@"Интервал таймера не может ровняться 0", strings.Error, MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 tbTimerInterval.Text = Settings.Default.TimerInterval.ToString();
                 return;
             }
@@ -161,7 +167,7 @@ namespace KryBot
             Settings.Default.TimerInterval = int.Parse(tbTimerInterval.Text)*60000;
             Settings.Default.TimerLoops = int.Parse(tbTimerLoops.Text);
 
-            Settings.Default.Autorun = cbAutorun.Checked;                               
+            Settings.Default.Autorun = cbAutorun.Checked;
             Settings.Default.ShowWonTip = cbWonTip.Checked;
             Settings.Default.ShowFarmTip = cbFarmTip.Checked;
             Settings.Default.FullLog = cbFullLog.Checked;
@@ -329,8 +335,9 @@ namespace KryBot
         {
             try
             {
-                System.IO.Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.Cookies), true);
-                MessageBox.Show(@"Для применения изменений нужен перезапуск приложения", @"Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.Cookies), true);
+                MessageBox.Show(@"Для применения изменений нужен перезапуск приложения", @"Предупреждение",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception)
             {
@@ -350,7 +357,7 @@ namespace KryBot
 
         private void btnPBCookies_Click(object sender, EventArgs e)
         {
-            var names = new List<string> { "PHPSESSID:" + _bot.PlayBlinkPhpSessId };
+            var names = new List<string> {"PHPSESSID:" + _bot.PlayBlinkPhpSessId};
 
             var form = new FormCookie("PlayBlink", names, _bot);
             form.ShowDialog();
@@ -358,13 +365,13 @@ namespace KryBot
 
         private void tbPBMaxValue_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)Keys.Back))
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
                 e.Handled = true;
         }
 
         private void tbPBReserv_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)Keys.Back))
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
                 e.Handled = true;
         }
     }

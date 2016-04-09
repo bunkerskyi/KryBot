@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using KryBot.Properties;
 
 namespace KryBot
 {
@@ -19,7 +20,7 @@ namespace KryBot
         private void FormTextBox_Load(object sender, EventArgs e)
         {
             Text = _formTitle;
-            Icon = Icon.FromHandle(Properties.Resources.blocked.GetHicon());
+            Icon = Icon.FromHandle(Resources.blocked.GetHicon());
         }
 
         private void textBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -32,7 +33,7 @@ namespace KryBot
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            Properties.Settings.Default._idCache = textBox.Text;
+            Settings.Default._idCache = textBox.Text;
             Close();
         }
     }

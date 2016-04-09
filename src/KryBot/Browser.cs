@@ -123,7 +123,9 @@ namespace KryBot
                     }
                 }
             }
-            catch (ObjectDisposedException){}
+            catch (ObjectDisposedException)
+            {
+            }
         }
 
         private void SteamAuth()
@@ -287,7 +289,7 @@ namespace KryBot
         {
             if (webBrowser.DocumentText != "")
             {
-                HtmlDocument htmlDoc = new HtmlDocument();
+                var htmlDoc = new HtmlDocument();
                 htmlDoc.LoadHtml(webBrowser.DocumentText);
 
                 var node = htmlDoc.DocumentNode.SelectSingleNode("//a[@title='Your contribution level']");
