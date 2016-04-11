@@ -34,6 +34,7 @@ namespace KryBot
         private readonly Timer _timerTickCount = new Timer();
         private bool _farming;
         private int _interval;
+        private int _loopsLeft;
         public bool LogActive;
 
         public Classes.Log LogBuffer;
@@ -126,58 +127,26 @@ namespace KryBot
             {
                 if (!_farming)
                 {
-                    if (Settings.Default.TimerLoops > 0)
+                    _loopsLeft = Settings.Default.TimerLoops;
+                    _timer.Interval = Settings.Default.TimerInterval;
+                    _interval = _timer.Interval;
+                    _timerTickCount.Interval = 1000;
+                    _timer.Tick += timer_Tick;
+                    _timerTickCount.Tick += TimerTickCountOnTick;
+                    _timer.Start();
+                    _timerTickCount.Start();
+                    btnStart.Text =
+                        $"{strings.FormMain_btnStart_Click_Stop} ({TimeSpan.FromMilliseconds(_timer.Interval)})";
+                    if (Settings.Default.ShowFarmTip)
                     {
-                        for (var i = 0; i < Settings.Default.TimerLoops; i++)
-                        {
-                            _timer.Interval = Settings.Default.TimerInterval;
-                            _interval = _timer.Interval;
-                            _timerTickCount.Interval = 1000;
-                            _timer.Tick += timer_Tick;
-                            _timerTickCount.Tick += TimerTickCountOnTick;
-                            _timer.Start();
-                            _timerTickCount.Start();
-                            btnStart.Text =
-                                $"{strings.FormMain_btnStart_Click_Stop} ({TimeSpan.FromMilliseconds(_timer.Interval)})";
-
-                            if (Settings.Default.ShowFarmTip)
-                            {
-                                ShowBaloolTip(
-                                    $"{strings.FormMain_btnStart_Click_FarmBeginWithInterval} {_interval/60000} {strings.FormMain_btnStart_Click_M} " +
-                                    $"{Settings.Default.TimerLoops - i} {strings.FormMain_btnStart_Click_LoopsLeft}",
-                                    5000, ToolTipIcon.Info, "");
-                            }
-
-                            await DoFarm();
-
-                            if (Settings.Default.ShowFarmTip)
-                            {
-                                ShowBaloolTip(strings.FormMain_btnStart_Click_FarmFinish, 5000, ToolTipIcon.Info, "");
-                            }
-                        }
+                        ShowBaloolTip(
+                            $"{strings.FormMain_btnStart_Click_FarmBeginWithInterval} {_interval/60000} {strings.FormMain_btnStart_Click_M}",
+                            5000, ToolTipIcon.Info, "");
                     }
-                    else if (Settings.Default.TimerLoops == 0)
+                    await DoFarm();
+                    if (Settings.Default.ShowFarmTip)
                     {
-                        _timer.Interval = Settings.Default.TimerInterval;
-                        _interval = _timer.Interval;
-                        _timerTickCount.Interval = 1000;
-                        _timer.Tick += timer_Tick;
-                        _timerTickCount.Tick += TimerTickCountOnTick;
-                        _timer.Start();
-                        _timerTickCount.Start();
-                        btnStart.Text =
-                            $"{strings.FormMain_btnStart_Click_Stop} ({TimeSpan.FromMilliseconds(_timer.Interval)})";
-                        if (Settings.Default.ShowFarmTip)
-                        {
-                            ShowBaloolTip(
-                                $"{strings.FormMain_btnStart_Click_FarmBeginWithInterval} {_interval/60000} {strings.FormMain_btnStart_Click_M}",
-                                5000, ToolTipIcon.Info, "");
-                        }
-                        await DoFarm();
-                        if (Settings.Default.ShowFarmTip)
-                        {
-                            ShowBaloolTip(strings.FormMain_btnStart_Click_FarmFinish, 5000, ToolTipIcon.Info, "");
-                        }
+                        ShowBaloolTip(strings.FormMain_btnStart_Click_FarmFinish, 5000, ToolTipIcon.Info, "");
                     }
                 }
                 else
@@ -204,15 +173,19 @@ namespace KryBot
                 {
                     btnStart.Enabled = false;
                     btnStart.Text = strings.FormMain_btnStart_Click_TaskBegin;
+
                     if (Settings.Default.ShowFarmTip)
                     {
                         ShowBaloolTip(strings.FormMain_btnStart_Click_FarmBegin, 5000, ToolTipIcon.Info, "");
                     }
+
                     await DoFarm();
+
                     if (Settings.Default.ShowFarmTip)
                     {
                         ShowBaloolTip(strings.FormMain_btnStart_Click_FarmFinish, 5000, ToolTipIcon.Info, "");
                     }
+
                     btnStart.Text = strings.FormMain_btnStart_Click_Старт;
                     btnStart.Enabled = true;
                 }
@@ -229,8 +202,8 @@ namespace KryBot
 
         private void TimerTickCountOnTick(object sender, EventArgs eventArgs)
         {
-            _interval -= 1000;
-            btnStart.Text = $"{strings.FormMain_btnStart_Click_Stop} ({TimeSpan.FromMilliseconds(_timer.Interval)})";
+            _interval += -1000;
+            btnStart.Text = $"{strings.FormMain_btnStart_Click_Stop} ({TimeSpan.FromMilliseconds(_interval)})";
         }
 
         private void Design()
@@ -343,7 +316,15 @@ namespace KryBot
             _interval = _timer.Interval;
             if (!_farming)
             {
-                await DoFarm();
+                if (_loopsLeft > 0)
+                {;
+                    await DoFarm();
+                    _loopsLeft += -1;
+                }
+                else
+                {
+                    await DoFarm();
+                }
             }
         }
 
@@ -784,6 +765,15 @@ namespace KryBot
             LogBuffer = Messages.DoFarm_Finish(elapsedTime);
             LogChanged?.Invoke();
             LoadProfilesInfo?.Invoke();
+
+            if (_loopsLeft > 0)
+            {
+                LogBuffer =
+                    Tools.ConstructLog($"{Messages.GetDateTime()} {strings.FormMain_timer_Tick_LoopsLeft}: {_loopsLeft - 1}",
+                        Color.White, true, true);
+                LogChanged?.Invoke();
+                _loopsLeft += -1;
+            }
 
             toolStripProgressBar1.Visible = false;
             toolStripStatusLabel1.Image = null;

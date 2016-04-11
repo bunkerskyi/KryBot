@@ -223,6 +223,15 @@ namespace KryBot.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Осталось циклов.
+        /// </summary>
+        internal static string FormMain_timer_Tick_LoopsLeft {
+            get {
+                return ResourceManager.GetString("FormMain_timer_Tick_LoopsLeft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Конфигурация.
         /// </summary>
         internal static string GetBotInConfig_Config {

@@ -286,4 +286,7 @@
   <data name="ParseLoadGiveaways__ContributorsIn" xml:space="preserve">
     <value>contributors раздач на</value>
   </data>
+  <data name="FormMain_timer_Tick_LoopsLeft" xml:space="preserve">
+    <value>Осталось циклов</value>
+  </data>
 </root>
