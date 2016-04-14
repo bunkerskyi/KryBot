@@ -317,7 +317,7 @@ namespace KryBot
             if (!_farming)
             {
                 if (_loopsLeft > 0)
-                {;
+                {
                     await DoFarm();
                     _loopsLeft += -1;
                 }
@@ -769,7 +769,8 @@ namespace KryBot
             if (_loopsLeft > 0)
             {
                 LogBuffer =
-                    Tools.ConstructLog($"{Messages.GetDateTime()} {strings.FormMain_timer_Tick_LoopsLeft}: {_loopsLeft - 1}",
+                    Tools.ConstructLog(
+                        $"{Messages.GetDateTime()} {strings.FormMain_timer_Tick_LoopsLeft}: {_loopsLeft - 1}",
                         Color.White, true, true);
                 LogChanged?.Invoke();
                 _loopsLeft += -1;

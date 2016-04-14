@@ -33,7 +33,6 @@ namespace KryBot
                 {
                     listView.Items.Add(item.Id).SubItems.Add(item.Name);
                 }
-
             }
             toolStripStatusLabel.Text = $"Количество: {listView.Items.Count}";
         }
