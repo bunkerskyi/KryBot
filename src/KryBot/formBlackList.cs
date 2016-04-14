@@ -27,11 +27,14 @@ namespace KryBot
             Design();
             var blacklist = Tools.LoadBlackList();
 
-            foreach (var item in blacklist.Items)
+            if (blacklist.Items != null)
             {
-                listView.Items.Add(item.Id).SubItems.Add(item.Name);
-            }
+                foreach (var item in blacklist.Items)
+                {
+                    listView.Items.Add(item.Id).SubItems.Add(item.Name);
+                }
 
+            }
             toolStripStatusLabel.Text = $"Количество: {listView.Items.Count}";
         }
 
