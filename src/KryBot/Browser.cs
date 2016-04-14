@@ -92,7 +92,7 @@ namespace KryBot
                         GameMinerAuth();
                     }
 
-                    if (_endPage == "http://www.steamgifts.com/")
+                    if (_endPage == "https://www.steamgifts.com/")
                     {
                         SteamGiftsAuth();
                     }

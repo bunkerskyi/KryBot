@@ -1231,7 +1231,7 @@ namespace KryBot
         private async void btnSGLogin_Click(object sender, EventArgs e)
         {
             btnSGLogin.Enabled = false;
-            BrowserStart("http://www.steamgifts.com/?login", "http://www.steamgifts.com/", "SteamGifts - Login", "",
+            BrowserStart("http://www.steamgifts.com/?login", "https://www.steamgifts.com/", "SteamGifts - Login", "",
                 Bot.SteamEnabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
             Tools.SaveProfile(Bot, "");
 
