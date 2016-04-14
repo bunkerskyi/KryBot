@@ -422,7 +422,7 @@ namespace KryBot
                         if (Settings.Default.ShowWonTip)
                         {
                             ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info,
-                                "http://www.steamgifts.com/giveaways/won");
+                                "https://www.steamgifts.com/giveaways/won");
                         }
                     }
 
@@ -872,7 +872,7 @@ namespace KryBot
                         if (Settings.Default.ShowWonTip)
                         {
                             ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info,
-                                "http://www.steamgifts.com/giveaways/won");
+                                "https://www.steamgifts.com/giveaways/won");
                         }
                     }
                     LoadProfilesInfo?.Invoke();
@@ -1231,7 +1231,7 @@ namespace KryBot
         private async void btnSGLogin_Click(object sender, EventArgs e)
         {
             btnSGLogin.Enabled = false;
-            BrowserStart("http://www.steamgifts.com/?login", "https://www.steamgifts.com/", "SteamGifts - Login", "",
+            BrowserStart("https://www.steamgifts.com/?login", "https://www.steamgifts.com/", "SteamGifts - Login", "",
                 Bot.SteamEnabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
             Tools.SaveProfile(Bot, "");
 
@@ -1576,7 +1576,7 @@ namespace KryBot
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://www.steamgifts.com/");
+            Process.Start("https://www.steamgifts.com/");
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

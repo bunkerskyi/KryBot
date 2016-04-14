@@ -111,7 +111,7 @@ namespace KryBot
         public static CookieContainer Cookies_SteamGifts(Classes.Bot bot)
         {
             var cookie = new CookieContainer();
-            var target = new Uri("http://www.steamgifts.com/");
+            var target = new Uri("https://www.steamgifts.com/");
 
             if (bot.SteamGiftsPhpSessId != null)
                 cookie.Add(new Cookie("PHPSESSID", bot.SteamGiftsPhpSessId) {Domain = target.Host});
