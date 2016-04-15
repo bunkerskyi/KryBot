@@ -573,5 +573,23 @@ namespace KryBot.lang {
                 return ResourceManager.GetString("TryLogin", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Обновление завершено. Перезапуск....
+        /// </summary>
+        internal static string Updater_Update_UpdateDone {
+            get {
+                return ResourceManager.GetString("Updater_Update_UpdateDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to При обновлении произошла ошибка.
+        /// </summary>
+        internal static string Updater_Update_UpdateFailed {
+            get {
+                return ResourceManager.GetString("Updater_Update_UpdateFailed", resourceCulture);
+            }
+        }
     }
 }

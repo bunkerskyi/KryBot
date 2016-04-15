@@ -289,4 +289,10 @@
   <data name="FormMain_timer_Tick_LoopsLeft" xml:space="preserve">
     <value>Осталось циклов</value>
   </data>
+  <data name="Updater_Update_UpdateDone" xml:space="preserve">
+    <value>Обновление завершено. Перезапуск...</value>
+  </data>
+  <data name="Updater_Update_UpdateFailed" xml:space="preserve">
+    <value>При обновлении произошла ошибка</value>
+  </data>
 </root>

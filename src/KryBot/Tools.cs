@@ -208,19 +208,6 @@ namespace KryBot
             }
         }
 
-        public static bool VersionCompare(string sClient, string sServer)
-        {
-            var vClient = new Version(sClient);
-            var vServer = new Version(sServer);
-            var compare = vClient.CompareTo(vServer);
-
-            if (compare == -1)
-            {
-                return true;
-            }
-            return false;
-        }
-
         public static bool SaveSettings()
         {
             var sets = new Classes.Settings

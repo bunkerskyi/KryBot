@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using KryBot.lang;
 using KryBot.Properties;
-using Newtonsoft.Json;
 using RestSharp;
 
 namespace KryBot
@@ -84,9 +83,38 @@ namespace KryBot
             Design();
             BlackList = Tools.LoadBlackList();
 
+            var version = await Updater.CheckForUpdates();
+            LogBuffer = version;
+            LogChanged?.Invoke();
+
+            if (version.Success)
+            {
+                var dr = MessageBox.Show($"{version.Content.Replace("\n", "")}. Обновить?",
+                    @"Обновление", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (dr == DialogResult.Yes)
+                {
+                    LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} Обновление...", Color.White, true, true);
+                    LogChanged?.Invoke();
+
+                    toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
+                    toolStripProgressBar1.Visible = true;
+                    var log = await Updater.Update();
+                    LogBuffer = log;
+                    LogChanged?.Invoke();
+
+                    if (log.Success)
+                    {
+                        Process.Start("KryBot.exe");
+                        Application.Exit();
+                    }
+
+                    toolStripProgressBar1.Style = ProgressBarStyle.Blocks;
+                    toolStripProgressBar1.Visible = false;
+                }
+            }
+
             if (LoadProfile())
             {
-                await CheckForUpdates();
                 cbGMEnable.Checked = Bot.GameMinerEnabled;
                 cbSGEnable.Checked = Bot.SteamGiftsEnabled;
                 cbSCEnable.Checked = Bot.SteamCompanionEnabled;
@@ -104,7 +132,6 @@ namespace KryBot
             }
             else
             {
-                await CheckForUpdates();
                 btnGMLogin.Visible = true;
                 btnSGLogin.Visible = true;
                 btnSCLogin.Visible = true;
@@ -317,7 +344,7 @@ namespace KryBot
             if (!_farming)
             {
                 if (_loopsLeft > 0)
-                {;
+                {
                     await DoFarm();
                     _loopsLeft += -1;
                 }
@@ -1828,57 +1855,6 @@ namespace KryBot
         private void toolStripMenuItem_Exit_Click(object sender, EventArgs e)
         {
             Application.Exit();
-        }
-
-        private async Task<bool> CheckForUpdates()
-        {
-            var json = await Web.GetVersionInGitHubAsync(Settings.Default.GitHubRepoReleaseUrl);
-
-            if (json != "")
-            {
-                Classes.GitHubRelease release;
-                try
-                {
-                    release = JsonConvert.DeserializeObject<Classes.GitHubRelease>(json);
-                }
-                catch (JsonReaderException)
-                {
-                    return false;
-                }
-
-                if (release.tag_name != null && Tools.VersionCompare(Application.ProductVersion, release.tag_name))
-                {
-                    LogBuffer =
-                        Tools.ConstructLog(
-                            $"Для скачивания доступна новая версия [{release.tag_name}] {Settings.Default.GitHubRepoUrl}",
-                            Color.Green, true, true);
-                    LogChanged?.Invoke();
-
-                    var dr =
-                        MessageBox.Show($"Для скачивания доступна новая версия {release.tag_name}. Скачать?",
-                            @"Обновление", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                    if (dr == DialogResult.Yes)
-                    {
-                        if (!Directory.Exists("updater"))
-                        {
-                            Directory.CreateDirectory("updater");
-                        }
-
-                        Tools.CopyResource("KryBot.Resources.KryBot_Updater.exe",
-                            Application.StartupPath + "\\updater\\KryBot_Updater.exe");
-                        Tools.CopyResource("KryBot.Resources.HtmlAgilityPack.dll",
-                            Application.StartupPath + "\\updater\\HtmlAgilityPack.dll");
-                        Tools.CopyResource("KryBot.Resources.Newtonsoft.Json.dll",
-                            Application.StartupPath + "\\updater\\Newtonsoft.Json.dll");
-                        Tools.CopyResource("KryBot.Resources.RestSharp.dll",
-                            Application.StartupPath + "\\updater\\RestSharp.dll");
-                        Process.Start(Application.StartupPath + "\\updater\\KryBot_Updater.exe",
-                            $"{Application.ProductVersion} {Settings.Default.Lang} {Application.StartupPath}");
-                        Application.Exit();
-                    }
-                }
-            }
-            return true;
         }
 
         private void донатToolStripMenuItem_Click(object sender, EventArgs e)
