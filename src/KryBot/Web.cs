@@ -159,7 +159,7 @@ namespace KryBot
 
             if (giveaway.Token != null)
             {
-                var response = Post("http://www.steamgifts.com/", "/ajax.php",
+                var response = Post("https://www.steamgifts.com/", "/ajax.php",
                     Generate.PostData_SteamGifts(giveaway.Token, giveaway.Code, "entry_insert"), new List<HttpHeader>(),
                     Generate.Cookies_SteamGifts(bot), bot.UserAgent);
 
@@ -500,7 +500,7 @@ namespace KryBot
 
         public static Classes.Log SteamGiftsSyncAccount(Classes.Bot bot)
         {
-            var xsrf = Get("http://www.steamgifts.com/account/profile/sync", "",
+            var xsrf = Get("https://www.steamgifts.com/account/profile/sync", "",
                 new List<Parameter>(), Generate.Cookies_SteamGifts(bot), new List<HttpHeader>(), bot.UserAgent);
 
             if (xsrf.RestResponse.Content != null)
@@ -519,7 +519,7 @@ namespace KryBot
                     };
                     headers.Add(header);
 
-                    var response = Post("http://www.steamgifts.com/", "ajax.php",
+                    var response = Post("https://www.steamgifts.com/", "ajax.php",
                         Generate.PostData_SteamGifts(xsrfToken.Attributes["value"].Value, "", "sync"), headers,
                         Generate.Cookies_SteamGifts(bot), bot.UserAgent);
                     if (response != null)

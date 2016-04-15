@@ -85,14 +85,14 @@ namespace KryBot
                 }
 
                 if (webBrowser.Url.AbsoluteUri == _endPage ||
-                    webBrowser.Url.AbsoluteUri == "http://www.steamgifts.com/register")
+                    webBrowser.Url.AbsoluteUri == "https://www.steamgifts.com/register")
                 {
                     if (_endPage == "http://gameminer.net/?lang=ru_RU" || _endPage == "http://gameminer.net/?lang=en_US")
                     {
                         GameMinerAuth();
                     }
 
-                    if (_endPage == "http://www.steamgifts.com/")
+                    if (_endPage == "https://www.steamgifts.com/")
                     {
                         SteamGiftsAuth();
                     }

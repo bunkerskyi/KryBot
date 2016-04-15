@@ -358,15 +358,18 @@ namespace KryBot
                         Color.White, true, true);
             }
 
-            for (var i = 0; i < giveaways.Count; i++)
+            if (blackList.Items != null)
             {
-                foreach (var item in blackList.Items)
+                for (var i = 0; i < giveaways.Count; i++)
                 {
-                    if (giveaways[i].StoreId == item.Id)
+                    foreach (var item in blackList.Items)
                     {
-                        giveaways.Remove(giveaways[i]);
-                        i--;
-                        break;
+                        if (giveaways[i].StoreId == item.Id)
+                        {
+                            giveaways.Remove(giveaways[i]);
+                            i--;
+                            break;
+                        }
                     }
                 }
             }
@@ -439,7 +442,7 @@ namespace KryBot
 
         public static Classes.Log SteamGiftsGetProfile(Classes.Bot bot, bool echo)
         {
-            var response = Web.Get("http://www.steamgifts.com/", "", new List<Parameter>(),
+            var response = Web.Get("https://www.steamgifts.com/", "", new List<Parameter>(),
                 Generate.Cookies_SteamGifts(bot), new List<HttpHeader>(), bot.UserAgent);
 
             if (response.RestResponse.Content != "")
@@ -488,7 +491,7 @@ namespace KryBot
 
         public static Classes.Log SteamGiftsWonParse(Classes.Bot bot)
         {
-            var response = Web.Get("http://www.steamgifts.com/", "", new List<Parameter>(),
+            var response = Web.Get("https://www.steamgifts.com/", "", new List<Parameter>(),
                 Generate.Cookies_SteamGifts(bot), new List<HttpHeader>(), bot.UserAgent);
 
             if (response.RestResponse.Content != "")
@@ -502,7 +505,7 @@ namespace KryBot
                 if (nodes != null)
                 {
                     return GiveawayHaveWon("SteamGifts", int.Parse(nodes.InnerText),
-                        "http://www.steamgifts.com/giveaways/won");
+                        "https://www.steamgifts.com/giveaways/won");
                 }
             }
             return null;
@@ -538,7 +541,7 @@ namespace KryBot
 
             if (bot.SteamGiftsRegular)
             {
-                var response = Web.Get("http://www.steamgifts.com", "/giveaways/search?page=1",
+                var response = Web.Get("https://www.steamgifts.com", "/giveaways/search?page=1",
                     new List<Parameter>(), Generate.Cookies_SteamGifts(bot),
                     new List<HttpHeader>(),
                     bot.UserAgent);
@@ -565,7 +568,7 @@ namespace KryBot
                     {
                         for (var i = 1; i < pages + 1; i++)
                         {
-                            response = Web.Get("http://www.steamgifts.com", "/giveaways/search?page=" + (i + 1),
+                            response = Web.Get("https://www.steamgifts.com", "/giveaways/search?page=" + (i + 1),
                                 new List<Parameter>(), Generate.Cookies_SteamGifts(bot),
                                 new List<HttpHeader>(),
                                 bot.UserAgent);
@@ -605,14 +608,17 @@ namespace KryBot
                         Color.White, true, true);
             }
 
-            if (blackList != null)
+            if (blackList.Items != null)
             {
                 for (var i = 0; i < giveaways?.Count; i++)
                 {
-                    if (blackList.Items.Any(item => giveaways[i].StoreId == item.Id))
+                    foreach (var item in blackList.Items)
                     {
-                        giveaways.Remove(giveaways[i]);
-                        i--;
+                        if (giveaways[i].StoreId == item.Id)
+                        {
+                            giveaways.Remove(giveaways[i]);
+                            i--;
+                        }
                     }
                 }
             }
@@ -642,7 +648,7 @@ namespace KryBot
             var nodesCount = 0;
             var pages = 1;
 
-            var response = Web.Get("http://www.steamgifts.com", "/giveaways/search?type=wishlist",
+            var response = Web.Get("https://www.steamgifts.com", "/giveaways/search?type=wishlist",
                 new List<Parameter>(), Generate.Cookies_SteamGifts(bot), new List<HttpHeader>(),
                 bot.UserAgent);
 
@@ -701,7 +707,7 @@ namespace KryBot
         {
             var nodesCount = 0;
 
-            var response = Web.Get("http://www.steamgifts.com", "/giveaways/search?type=group",
+            var response = Web.Get("https://www.steamgifts.com", "/giveaways/search?type=group",
                 new List<Parameter>(), Generate.Cookies_SteamGifts(bot), new List<HttpHeader>(),
                 bot.UserAgent);
 
@@ -810,7 +816,7 @@ namespace KryBot
 
         public static SteamGifts.SgGiveaway SteamGiftsGetJoinData(SteamGifts.SgGiveaway giveaway, Classes.Bot bot)
         {
-            var response = Web.Get("http://www.steamgifts.com", giveaway.Link,
+            var response = Web.Get("https://www.steamgifts.com", giveaway.Link,
                 new List<Parameter>(), Generate.Cookies_SteamGifts(bot), new List<HttpHeader>(), bot.UserAgent);
 
             if (response.RestResponse.Content != "")
@@ -1414,7 +1420,7 @@ namespace KryBot
                         Color.White, true, true);
             }
 
-            if (blackList != null)
+            if (blackList.Items != null)
             {
                 for (var i = 0; i < giveaways.Count; i++)
                 {
@@ -1703,7 +1709,7 @@ namespace KryBot
                             Color.White, true, true);
                 }
 
-                if (blackList != null)
+                if (blackList.Items != null)
                 {
                     for (var i = 0; i < giveaways.Count; i++)
                     {
