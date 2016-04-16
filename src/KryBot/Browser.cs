@@ -292,7 +292,7 @@ namespace KryBot
                 var htmlDoc = new HtmlDocument();
                 htmlDoc.LoadHtml(webBrowser.DocumentText);
 
-                var node = htmlDoc.DocumentNode.SelectSingleNode("//a[@title='Your contribution level']");
+                var node = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='usr_link']");
                 if (node != null)
                 {
                     var container = GetUriCookieContainer(webBrowser.Url);
