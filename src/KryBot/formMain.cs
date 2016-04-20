@@ -17,14 +17,6 @@ namespace KryBot
         public delegate void SubscribesContainer();
 
         public static Bot Bot = new Bot();
-        public static List<GameMiner.GmGiveaway> GmGiveaways = new List<GameMiner.GmGiveaway>();
-        public static List<SteamGifts.SgGiveaway> SgGiveaways = new List<SteamGifts.SgGiveaway>();
-        public static List<SteamGifts.SgGiveaway> SgWishListGiveaways = new List<SteamGifts.SgGiveaway>();
-        public static List<SteamCompanion.ScGiveaway> ScGiveaways = new List<SteamCompanion.ScGiveaway>();
-        public static List<SteamCompanion.ScGiveaway> ScWishListGiveaways = new List<SteamCompanion.ScGiveaway>();
-        public static List<SteamPortal.SpGiveaway> SpGiveaways = new List<SteamPortal.SpGiveaway>();
-        public static List<SteamTrade.StGiveaway> StGiveaways = new List<SteamTrade.StGiveaway>();
-        public static List<PlayBlink.PbGiveaway> PbGiveaways = new List<PlayBlink.PbGiveaway>();
         public static Classes.Blacklist BlackList;
 
         public static bool Hided;
@@ -396,28 +388,28 @@ namespace KryBot
                         }
                     }
 
-                    var giveaways = await Parse.GameMinerLoadGiveawaysAsync(Bot, GmGiveaways, BlackList);
+                    var giveaways = await Parse.GameMinerLoadGiveawaysAsync(Bot, Bot.GameMiner.Giveaways, BlackList);
                     if (giveaways != null && giveaways.Content != "\n")
                     {
                         LogBuffer = giveaways;
                         LogChanged?.Invoke();
                     }
 
-                    if (GmGiveaways?.Count > 0)
+                    if (Bot.GameMiner.Giveaways?.Count > 0)
                     {
                         if (Settings.Default.Sort)
                         {
                             if (Settings.Default.SortToMore)
                             {
-                                GmGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+                                Bot.GameMiner.Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
                             }
                             else
                             {
-                                GmGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+                                Bot.GameMiner.Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
                             }
                         }
 
-                        await JoinGiveaways(GmGiveaways);
+                        await JoinGiveaways(Bot.GameMiner.Giveaways);
                     }
                 }
                 else
@@ -458,14 +450,14 @@ namespace KryBot
                     if (Bot.SteamGifts.Points > 0)
                     {
                         var giveaways =
-                            await Parse.SteamGiftsLoadGiveawaysAsync(Bot, SgGiveaways, SgWishListGiveaways, BlackList);
+                            await Parse.SteamGiftsLoadGiveawaysAsync(Bot, Bot.SteamGifts.Giveaways, Bot.SteamGifts.WishlistGiveaways, BlackList);
                         if (giveaways != null && giveaways.Content != "\n")
                         {
                             LogBuffer = giveaways;
                             LogChanged?.Invoke();
                         }
 
-                        if (SgWishListGiveaways.Count > 0)
+                        if (Bot.SteamGifts.WishlistGiveaways.Count > 0)
                         {
                             if (Settings.Default.Sort)
                             {
@@ -473,14 +465,14 @@ namespace KryBot
                                 {
                                     if (!Settings.Default.WishlistNotSort)
                                     {
-                                        SgWishListGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+                                        Bot.SteamGifts.WishlistGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
                                     }
                                 }
                                 else
                                 {
                                     if (!Settings.Default.WishlistNotSort)
                                     {
-                                        SgWishListGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+                                        Bot.SteamGifts.WishlistGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
                                     }
                                 }
                             }
@@ -489,33 +481,33 @@ namespace KryBot
                             {
                                 if (!Settings.Default.WishlistNotSort)
                                 {
-                                    SgWishListGiveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
+                                    Bot.SteamGifts.WishlistGiveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
                                 }
                             }
 
-                            await JoinGiveaways(SgWishListGiveaways, true);
+                            await JoinGiveaways(Bot.SteamGifts.WishlistGiveaways, true);
                         }
 
-                        if (SgGiveaways.Count > 0)
+                        if (Bot.SteamGifts.Giveaways.Count > 0)
                         {
                             if (Settings.Default.Sort)
                             {
                                 if (Settings.Default.SortToMore)
                                 {
-                                    SgGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+                                    Bot.SteamGifts.Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
                                 }
                                 else
                                 {
-                                    SgGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+                                    Bot.SteamGifts.Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
                                 }
                             }
 
                             if (Bot.SteamGifts.SortToLessLevel)
                             {
-                                SgGiveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
+                                Bot.SteamGifts.Giveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
                             }
 
-                            await JoinGiveaways(SgGiveaways, false);
+                            await JoinGiveaways(Bot.SteamGifts.Giveaways, false);
                         }
                     }
                 }
@@ -554,14 +546,14 @@ namespace KryBot
                     }
 
                     var giveaways =
-                        await Parse.SteamCompanionLoadGiveawaysAsync(Bot, ScGiveaways, ScWishListGiveaways, BlackList);
+                        await Parse.SteamCompanionLoadGiveawaysAsync(Bot, Bot.SteamCompanion.Giveaways, Bot.SteamCompanion.WishlistGiveaways, BlackList);
                     if (giveaways != null && giveaways.Content != "\n")
                     {
                         LogBuffer = giveaways;
                         LogChanged?.Invoke();
                     }
 
-                    if (ScWishListGiveaways.Count > 0)
+                    if (Bot.SteamCompanion.WishlistGiveaways.Count > 0)
                     {
                         if (Settings.Default.Sort)
                         {
@@ -569,45 +561,45 @@ namespace KryBot
                             {
                                 if (!Settings.Default.WishlistNotSort)
                                 {
-                                    ScWishListGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+                                    Bot.SteamCompanion.WishlistGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
                                 }
                             }
                             else
                             {
                                 if (!Settings.Default.WishlistNotSort)
                                 {
-                                    ScWishListGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+                                    Bot.SteamCompanion.WishlistGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
                                 }
                             }
                         }
 
-                        await JoinGiveaways(ScWishListGiveaways, true);
+                        await JoinGiveaways(Bot.SteamCompanion.WishlistGiveaways, true);
                     }
 
-                    if (ScGiveaways.Count > 0)
+                    if (Bot.SteamCompanion.Giveaways.Count > 0)
                     {
                         if (Settings.Default.Sort)
                         {
                             if (Settings.Default.SortToMore)
                             {
-                                ScGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+                                Bot.SteamCompanion.Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
                                 if (!Settings.Default.WishlistNotSort)
                                 {
-                                    ScWishListGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+                                    Bot.SteamCompanion.WishlistGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
                                 }
                             }
                             else
                             {
-                                ScGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+                                Bot.SteamCompanion.Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
                                 if (!Settings.Default.WishlistNotSort)
                                 {
-                                    ScWishListGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+                                    Bot.SteamCompanion.WishlistGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
                                 }
                             }
                         }
                     }
 
-                    await JoinGiveaways(ScGiveaways, false);
+                    await JoinGiveaways(Bot.SteamCompanion.Giveaways, false);
 
                     var async = await Web.SteamCompanionSyncAccountAsync(Bot);
                     if (async != null)
@@ -651,28 +643,28 @@ namespace KryBot
 
                     if (Bot.SteamPortal.Points > 0)
                     {
-                        var giveaways = await Parse.SteamPortalLoadGiveawaysAsync(Bot, SpGiveaways, BlackList);
+                        var giveaways = await Parse.SteamPortalLoadGiveawaysAsync(Bot, Bot.SteamPortal.Giveaways, BlackList);
                         if (giveaways != null && giveaways.Content != "\n")
                         {
                             LogBuffer = giveaways;
                             LogChanged?.Invoke();
                         }
 
-                        if (SpGiveaways?.Count > 0)
+                        if (Bot.SteamPortal.Giveaways?.Count > 0)
                         {
                             if (Settings.Default.Sort)
                             {
                                 if (Settings.Default.SortToMore)
                                 {
-                                    SpGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+                                    Bot.SteamPortal.Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
                                 }
                                 else
                                 {
-                                    SpGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+                                    Bot.SteamPortal.Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
                                 }
                             }
 
-                            await JoinGiveaways(SpGiveaways);
+                            await JoinGiveaways(Bot.SteamPortal.Giveaways);
                         }
                     }
                 }
@@ -697,16 +689,16 @@ namespace KryBot
                 LoadProfilesInfo?.Invoke();
                 if (profile.Success)
                 {
-                    var giveaways = await Parse.SteamTradeLoadGiveawaysAsync(Bot, StGiveaways, BlackList);
+                    var giveaways = await Parse.SteamTradeLoadGiveawaysAsync(Bot, Bot.SteamTrade.Giveaways, BlackList);
                     if (giveaways != null && giveaways.Content != "\n")
                     {
                         LogBuffer = giveaways;
                         LogChanged?.Invoke();
                     }
 
-                    if (StGiveaways?.Count > 0)
+                    if (Bot.SteamTrade.Giveaways?.Count > 0)
                     {
-                        await JoinGiveaways(StGiveaways);
+                        await JoinGiveaways(Bot.SteamTrade.Giveaways);
                     }
                 }
                 else
@@ -733,28 +725,28 @@ namespace KryBot
                 {
                     if (Bot.PlayBlink.Points > 0)
                     {
-                        var giveaways = await Parse.PlayBlinkLoadGiveawaysAsync(Bot, PbGiveaways, BlackList);
+                        var giveaways = await Parse.PlayBlinkLoadGiveawaysAsync(Bot, Bot.PlayBlink.Giveaways, BlackList);
                         if (giveaways != null && giveaways.Content != "\n")
                         {
                             LogBuffer = giveaways;
                             LogChanged?.Invoke();
                         }
 
-                        if (PbGiveaways?.Count > 0)
+                        if (Bot.PlayBlink.Giveaways?.Count > 0)
                         {
                             if (Settings.Default.Sort)
                             {
                                 if (Settings.Default.SortToMore)
                                 {
-                                    PbGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+                                    Bot.PlayBlink.Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
                                 }
                                 else
                                 {
-                                    PbGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+                                    Bot.PlayBlink.Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
                                 }
                             }
 
-                            await JoinGiveaways(PbGiveaways);
+                            await JoinGiveaways(Bot.PlayBlink.Giveaways);
                         }
                     }
                 }

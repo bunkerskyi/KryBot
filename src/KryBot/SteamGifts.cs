@@ -1,10 +1,14 @@
-﻿namespace KryBot
+﻿using System.Collections.Generic;
+
+namespace KryBot
 {
     public class SteamGifts
     {
         public SteamGifts()
         {
-            Cookies = new SgCookies();    
+            Cookies = new SgCookies();
+            Giveaways = new List<SgGiveaway>();
+            WishlistGiveaways = new List<SgGiveaway>();   
         }
 
         public bool Enabled { get; set; }
@@ -19,6 +23,8 @@
         public int PointsReserv { get; set; }
         public int MinLevel { get; set; }
         public SgCookies Cookies { get; set; }
+        public List<SgGiveaway> Giveaways { get; set; }
+        public List<SgGiveaway> WishlistGiveaways { get; set; }
 
         public class SgCookies
         {

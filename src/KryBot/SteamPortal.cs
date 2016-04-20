@@ -1,10 +1,13 @@
-﻿namespace KryBot
+﻿using System.Collections.Generic;
+
+namespace KryBot
 {
     public class SteamPortal
     {
         public SteamPortal()
         {
-            Cookies = new SpCookies();    
+            Cookies = new SpCookies(); 
+            Giveaways = new List<SpGiveaway>();   
         }
 
         public bool Enabled { get; set; }
@@ -13,6 +16,7 @@
         public int MaxJoinValue { get; set; } = 30;
         public int PointsReserv { get; set; }
         public SpCookies Cookies { get; set; }
+        public List<SpGiveaway> Giveaways { get; set; } 
         
         public class SpCookies
         {

@@ -6,7 +6,8 @@ namespace KryBot
     {
         public GameMiner()
         {
-            Cookies = new GmCookies();    
+            Cookies = new GmCookies();
+            Giveaways = new List<GmGiveaway>();    
         }
 
         public bool Enabled { get; set; }
@@ -20,6 +21,7 @@ namespace KryBot
         public bool OnlyGifts { get; set; }
         public bool NoRegion { get; set; }
         public GmCookies Cookies { get; set; }
+        public List<GmGiveaway> Giveaways { get; set; } 
 
         public class GmCookies
         {

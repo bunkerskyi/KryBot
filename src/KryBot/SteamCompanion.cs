@@ -6,7 +6,9 @@ namespace KryBot
     {
         public SteamCompanion()
         {
-            Cookies = new ScCookies();    
+            Cookies = new ScCookies();
+            Giveaways = new List<ScGiveaway>();
+            WishlistGiveaways = new List<ScGiveaway>();    
         }
 
         public bool Enabled { get; set; }
@@ -20,6 +22,8 @@ namespace KryBot
         public int JoinPointLimit { get; set; } = 1500;
         public int PointsReserv { get; set; }
         public ScCookies Cookies { get; set; }
+        public List<ScGiveaway> Giveaways { get; set; }
+        public List<ScGiveaway> WishlistGiveaways { get; set; }
 
         public class ScCookies
         {
