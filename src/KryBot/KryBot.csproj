@@ -121,6 +121,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bot.cs" />
     <Compile Include="Browser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -200,6 +201,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Steam.cs" />
     <Compile Include="SteamCompanion.cs" />
     <Compile Include="SteamGifts.cs" />
     <Compile Include="SteamPortal.cs" />

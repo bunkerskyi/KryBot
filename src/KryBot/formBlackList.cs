@@ -13,9 +13,9 @@ namespace KryBot
 {
     public partial class FormBlackList : Form
     {
-        private readonly Classes.Bot _bot;
+        private readonly Bot _bot;
 
-        public FormBlackList(Classes.Bot bot)
+        public FormBlackList(Bot bot)
         {
             _bot = bot;
             InitializeComponent();
@@ -92,10 +92,10 @@ namespace KryBot
 
         private async void профильSteamToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (_bot.SteamEnabled && _bot.SteamProfileLink != "")
+            if (_bot.Steam.Enabled && _bot.Steam.ProfileLink != "")
             {
                 toolStripStatusLabel.Image = Resources.load;
-                var list = await Parse.SteamGetUserGames(_bot.SteamProfileLink);
+                var list = await Parse.SteamGetUserGames(_bot.Steam.ProfileLink);
 
                 if (list.Games.Game.Count > 0)
                 {

@@ -16,7 +16,7 @@ namespace KryBot
     {
         public delegate void SubscribesContainer();
 
-        public static Classes.Bot Bot = new Classes.Bot();
+        public static Bot Bot = new Bot();
         public static List<GameMiner.GmGiveaway> GmGiveaways = new List<GameMiner.GmGiveaway>();
         public static List<SteamGifts.SgGiveaway> SgGiveaways = new List<SteamGifts.SgGiveaway>();
         public static List<SteamGifts.SgGiveaway> SgWishListGiveaways = new List<SteamGifts.SgGiveaway>();
@@ -115,18 +115,18 @@ namespace KryBot
 
             if (LoadProfile())
             {
-                cbGMEnable.Checked = Bot.GameMinerEnabled;
-                cbSGEnable.Checked = Bot.SteamGiftsEnabled;
-                cbSCEnable.Checked = Bot.SteamCompanionEnabled;
-                cbSPEnable.Checked = Bot.SteamPortalEnabled;
-                cbSTEnable.Checked = Bot.SteamTradeEnabled;
-                cbPBEnabled.Checked = Bot.SteamTradeEnabled;
+                cbGMEnable.Checked = Bot.GameMiner.Enabled;
+                cbSGEnable.Checked = Bot.SteamGifts.Enabled;
+                cbSCEnable.Checked = Bot.SteamCompanion.Enabled;
+                cbSPEnable.Checked = Bot.SteamPortal.Enabled;
+                cbSTEnable.Checked = Bot.SteamTrade.Enabled;
+                cbPBEnabled.Checked = Bot.SteamTrade.Enabled;
                 btnStart.Enabled = await LoginCheck();
 
-                if (Bot.SteamEnabled)
+                if (Bot.Steam.Enabled)
                 {
                     await Web.SteamJoinGroupAsync("http://steamcommunity.com/groups/krybot",
-                        "", Generate.PostData_SteamGroupJoin(Bot.SteamSessid),
+                        "", Generate.PostData_SteamGroupJoin(Bot.Steam.Cookies.Sessid),
                         Generate.Cookies_Steam(Bot), new List<HttpHeader>(), Bot.UserAgent);
                 }
             }
@@ -296,6 +296,8 @@ namespace KryBot
                 LogChanged?.Invoke();
                 return true;
             }
+
+            Bot = new Bot();
             return false;
         }
 
@@ -370,7 +372,7 @@ namespace KryBot
             var stopWatch = new Stopwatch();
             stopWatch.Start();
 
-            if (Bot.GameMinerEnabled)
+            if (Bot.GameMiner.Enabled)
             {
                 var profile = await Parse.GameMinerGetProfileAsync(Bot, true);
                 if (profile.Echo)
@@ -429,7 +431,7 @@ namespace KryBot
             }
             toolStripProgressBar1.Value++;
 
-            if (Bot.SteamGiftsEnabled)
+            if (Bot.SteamGifts.Enabled)
             {
                 var profile = await Parse.SteamGiftsGetProfileAsync(Bot, true);
                 if (profile.Echo)
@@ -453,7 +455,7 @@ namespace KryBot
                         }
                     }
 
-                    if (Bot.SteamGiftsPoint > 0)
+                    if (Bot.SteamGifts.Points > 0)
                     {
                         var giveaways =
                             await Parse.SteamGiftsLoadGiveawaysAsync(Bot, SgGiveaways, SgWishListGiveaways, BlackList);
@@ -483,7 +485,7 @@ namespace KryBot
                                 }
                             }
 
-                            if (Bot.SteamGiftsSortToLessLevel)
+                            if (Bot.SteamGifts.SortToLessLevel)
                             {
                                 if (!Settings.Default.WishlistNotSort)
                                 {
@@ -508,7 +510,7 @@ namespace KryBot
                                 }
                             }
 
-                            if (Bot.SteamGiftsSortToLessLevel)
+                            if (Bot.SteamGifts.SortToLessLevel)
                             {
                                 SgGiveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
                             }
@@ -528,7 +530,7 @@ namespace KryBot
             }
             toolStripProgressBar1.Value++;
 
-            if (Bot.SteamCompanionEnabled)
+            if (Bot.SteamCompanion.Enabled)
             {
                 var profile = await Parse.SteamCompanionGetProfileAsync(Bot, true);
                 if (profile.Echo)
@@ -624,7 +626,7 @@ namespace KryBot
                 }
             }
 
-            if (Bot.SteamPortalEnabled)
+            if (Bot.SteamPortal.Enabled)
             {
                 var profile = await Parse.SteamPortalGetProfileAsync(Bot, true);
                 if (profile.Echo)
@@ -647,7 +649,7 @@ namespace KryBot
                         }
                     }
 
-                    if (Bot.SteamPortalPoints > 0)
+                    if (Bot.SteamPortal.Points > 0)
                     {
                         var giveaways = await Parse.SteamPortalLoadGiveawaysAsync(Bot, SpGiveaways, BlackList);
                         if (giveaways != null && giveaways.Content != "\n")
@@ -684,7 +686,7 @@ namespace KryBot
                 }
             }
 
-            if (Bot.SteamTradeEnabled)
+            if (Bot.SteamTrade.Enabled)
             {
                 var profile = await Parse.SteamTradeGetProfileAsync(Bot, true);
                 if (profile.Echo)
@@ -695,13 +697,6 @@ namespace KryBot
                 LoadProfilesInfo?.Invoke();
                 if (profile.Success)
                 {
-                    //var won = await Parse.SteamPortalWonParsAsync(Bot);
-                    //if (won != null)
-                    //{
-                    //    LogBuffer = won;
-                    //    LogChanged?.Invoke();
-                    //}
-
                     var giveaways = await Parse.SteamTradeLoadGiveawaysAsync(Bot, StGiveaways, BlackList);
                     if (giveaways != null && giveaways.Content != "\n")
                     {
@@ -724,7 +719,7 @@ namespace KryBot
                 }
             }
 
-            if (Bot.PlayBlinkEnabled)
+            if (Bot.PlayBlink.Enabled)
             {
                 var profile = await Parse.PlayBlinkGetProfileAsync(Bot, true);
                 if (profile.Echo)
@@ -736,19 +731,7 @@ namespace KryBot
 
                 if (profile.Success)
                 {
-                    //var won = await Parse.PlayBlinkWonParseAsync(Bot);
-                    //if (won != null && won.Content != "\n")
-                    //{
-                    //    LogBuffer = won;
-                    //    LogChanged?.Invoke();
-                    //    if (Settings.Default.ShowWonTip)
-                    //    {
-                    //        ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info,
-                    //            "http://playblink.com/");
-                    //    }
-                    //}
-
-                    if (Bot.PlayBlinkPoints > 0)
+                    if (Bot.PlayBlink.Points > 0)
                     {
                         var giveaways = await Parse.PlayBlinkLoadGiveawaysAsync(Bot, PbGiveaways, BlackList);
                         if (giveaways != null && giveaways.Content != "\n")
@@ -818,23 +801,23 @@ namespace KryBot
 
         private void ShowProfileInfo()
         {
-            lblGMCoal.Text = $"{strings.Coal}: {Bot.GameMinerCoal}";
-            lblGMLevel.Text = $"{strings.Level}: {Bot.GameMinerLevel}";
+            lblGMCoal.Text = $"{strings.Coal}: {Bot.GameMiner.Coal}";
+            lblGMLevel.Text = $"{strings.Level}: {Bot.GameMiner.Level}";
 
-            lblSGPoints.Text = $"{strings.Points}: {Bot.SteamGiftsPoint}";
-            lblSGLevel.Text = $"{strings.Level}: {Bot.SteamGiftsLevel}";
+            lblSGPoints.Text = $"{strings.Points}: {Bot.SteamGifts.Points}";
+            lblSGLevel.Text = $"{strings.Level}: {Bot.SteamGifts.Level}";
 
-            lblSCPoints.Text = $"{strings.Points}: {Bot.SteamCompanionPoints}";
+            lblSCPoints.Text = $"{strings.Points}: {Bot.SteamCompanion.Points}";
             lblSCLevel.Text = $"{strings.Level}: -";
 
-            lblSPPoints.Text = $"{strings.Points}: {Bot.SteamPortalPoints}";
+            lblSPPoints.Text = $"{strings.Points}: {Bot.SteamPortal.Points}";
             lblSPLevel.Text = $"{strings.Level}: -";
 
             lblSTPoints.Text = $"{strings.Points}: -";
             lblSTLevel.Text = $"{strings.Level}: -";
 
-            lblPBPoints.Text = $"{strings.Points}: {Bot.PlayBlinkPoints}";
-            lblPBLevel.Text = $"{strings.Level}: {Bot.PlayBlinkLevel}";
+            lblPBPoints.Text = $"{strings.Points}: {Bot.PlayBlink.Points}";
+            lblPBLevel.Text = $"{strings.Level}: {Bot.PlayBlink.Level}";
         }
 
         private async Task<bool> LoginCheck()
@@ -846,7 +829,7 @@ namespace KryBot
             toolStripStatusLabel1.Text = strings.TryLogin;
             var login = false;
 
-            if (Bot.GameMinerEnabled)
+            if (Bot.GameMiner.Enabled)
             {
                 if (await CheckLoginGm())
                 {
@@ -888,7 +871,7 @@ namespace KryBot
             }
             toolStripProgressBar1.Value++;
 
-            if (Bot.SteamGiftsEnabled)
+            if (Bot.SteamGifts.Enabled)
             {
                 if (await CheckLoginSg())
                 {
@@ -928,7 +911,7 @@ namespace KryBot
             }
             toolStripProgressBar1.Value++;
 
-            if (Bot.SteamCompanionEnabled)
+            if (Bot.SteamCompanion.Enabled)
             {
                 if (await CheckLoginSc())
                 {
@@ -968,7 +951,7 @@ namespace KryBot
             }
             toolStripProgressBar1.Value++;
 
-            if (Bot.SteamPortalEnabled)
+            if (Bot.SteamPortal.Enabled)
             {
                 if (await CheckLoginSp())
                 {
@@ -1007,7 +990,7 @@ namespace KryBot
             }
             toolStripProgressBar1.Value++;
 
-            if (Bot.SteamTradeEnabled)
+            if (Bot.SteamTrade.Enabled)
             {
                 if (await CheckLoginSt())
                 {
@@ -1034,22 +1017,10 @@ namespace KryBot
             }
             toolStripProgressBar1.Value++;
 
-            if (Bot.PlayBlinkEnabled)
+            if (Bot.PlayBlink.Enabled)
             {
                 if (await CheckLoginPb())
                 {
-                    //var won = await Parse.PlayBlinkWonParseAsync(Bot);
-                    //if (won != null && won.Content != "\n")
-                    //{
-                    //    LogBuffer = won;
-                    //    LogChanged?.Invoke();
-                    //    if (Settings.Default.ShowWonTip)
-                    //    {
-                    //        ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info,
-                    //            "http://playblink.com/");
-                    //    }
-                    //}
-
                     LoadProfilesInfo?.Invoke();
 
                     login = true;
@@ -1076,7 +1047,7 @@ namespace KryBot
             }
             toolStripProgressBar1.Value++;
 
-            if (Bot.SteamEnabled)
+            if (Bot.Steam.Enabled)
             {
                 if (await CheckLoginSteam())
                 {
@@ -1126,7 +1097,7 @@ namespace KryBot
             var cookie = Tools.GetSessCookieInresponse(getLoginHref.Cookies, "steamtrade.info", "PHPSESSID");
 
             BrowserStart(location, "http://steamtrade.info/", "SteamTrade - Login", cookie,
-                Bot.SteamEnabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
+                Bot.Steam.Enabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
             Tools.SaveProfile(Bot, "");
 
             toolStripStatusLabel1.Image = Resources.load;
@@ -1150,7 +1121,7 @@ namespace KryBot
                 btnSTExit.Visible = true;
                 btnSTExit.Enabled = true;
                 cbSTEnable.Checked = true;
-                Bot.SteamTradeEnabled = true;
+                Bot.SteamTrade.Enabled = true;
             }
             else
             {
@@ -1177,7 +1148,7 @@ namespace KryBot
         {
             btnSPLogin.Enabled = false;
             BrowserStart("http://steamportal.net/page/steam", "http://steamportal.net/", "SteamPortal - Login", "",
-                Bot.SteamEnabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
+                Bot.Steam.Enabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
             Tools.SaveProfile(Bot, "");
 
             toolStripStatusLabel1.Image = Resources.load;
@@ -1202,7 +1173,7 @@ namespace KryBot
                 btnSPExit.Visible = true;
                 btnSPExit.Enabled = true;
                 cbSPEnable.Checked = true;
-                Bot.SteamPortalEnabled = true;
+                Bot.SteamPortal.Enabled = true;
             }
             else
             {
@@ -1219,7 +1190,7 @@ namespace KryBot
         {
             btnSCLogin.Enabled = false;
             BrowserStart("https://steamcompanion.com/login", "https://steamcompanion.com/", "SteamCompanion - Login", "",
-                Bot.SteamEnabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
+                Bot.Steam.Enabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
             Tools.SaveProfile(Bot, "");
 
             toolStripStatusLabel1.Image = Resources.load;
@@ -1243,7 +1214,7 @@ namespace KryBot
                 btnSCExit.Visible = true;
                 btnSCExit.Enabled = true;
                 cbSCEnable.Checked = true;
-                Bot.SteamCompanionEnabled = true;
+                Bot.SteamCompanion.Enabled = true;
             }
             else
             {
@@ -1260,7 +1231,7 @@ namespace KryBot
         {
             btnSGLogin.Enabled = false;
             BrowserStart("https://www.steamgifts.com/?login", "https://www.steamgifts.com/", "SteamGifts - Login", "",
-                Bot.SteamEnabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
+                Bot.Steam.Enabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
             Tools.SaveProfile(Bot, "");
 
             toolStripStatusLabel1.Image = Resources.load;
@@ -1284,7 +1255,7 @@ namespace KryBot
                 btnSGExit.Visible = true;
                 btnSGExit.Enabled = true;
                 cbSGEnable.Checked = true;
-                Bot.SteamGiftsEnabled = true;
+                Bot.SteamGifts.Enabled = true;
             }
             else
             {
@@ -1304,7 +1275,7 @@ namespace KryBot
                 "http://gameminer.net/login/steam?backurl=http%3A%2F%2Fgameminer.net%2F%3Flang%3D" +
                 Settings.Default.Lang + @"&agree=True",
                 "http://gameminer.net/?lang=" + Settings.Default.Lang, "GameMiner - Login", "",
-                Bot.SteamEnabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
+                Bot.Steam.Enabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
             if (string.IsNullOrEmpty(Bot.UserAgent))
             {
                 Bot.UserAgent = Tools.UserAgent();
@@ -1332,7 +1303,7 @@ namespace KryBot
                 btnGMExit.Visible = true;
                 btnGMExit.Enabled = true;
                 cbGMEnable.Checked = true;
-                Bot.GameMinerEnabled = true;
+                Bot.GameMiner.Enabled = true;
             }
             else
             {
@@ -1685,12 +1656,12 @@ namespace KryBot
             {
                 BlockTabpage(tabPageST, false);
                 cbSTEnable.Enabled = true;
-                Bot.SteamTradeEnabled = false;
+                Bot.SteamTrade.Enabled = false;
             }
             else
             {
                 BlockTabpage(tabPageST, true);
-                Bot.SteamTradeEnabled = true;
+                Bot.SteamTrade.Enabled = true;
             }
         }
 
@@ -1700,12 +1671,12 @@ namespace KryBot
             {
                 BlockTabpage(tabPageSG, false);
                 cbSGEnable.Enabled = true;
-                Bot.SteamGiftsEnabled = false;
+                Bot.SteamGifts.Enabled = false;
             }
             else
             {
                 BlockTabpage(tabPageSG, true);
-                Bot.SteamGiftsEnabled = true;
+                Bot.SteamGifts.Enabled = true;
             }
         }
 
@@ -1715,12 +1686,12 @@ namespace KryBot
             {
                 BlockTabpage(tabPageGM, false);
                 cbGMEnable.Enabled = true;
-                Bot.GameMinerEnabled = false;
+                Bot.GameMiner.Enabled = false;
             }
             else
             {
                 BlockTabpage(tabPageGM, true);
-                Bot.GameMinerEnabled = true;
+                Bot.GameMiner.Enabled = true;
             }
         }
 
@@ -1730,12 +1701,12 @@ namespace KryBot
             {
                 BlockTabpage(tabPageSP, false);
                 cbSPEnable.Enabled = true;
-                Bot.SteamPortalEnabled = false;
+                Bot.SteamPortal.Enabled = false;
             }
             else
             {
                 BlockTabpage(tabPageSP, true);
-                Bot.SteamPortalEnabled = true;
+                Bot.SteamPortal.Enabled = true;
             }
         }
 
@@ -1745,12 +1716,12 @@ namespace KryBot
             {
                 BlockTabpage(tabPageSC, false);
                 cbSCEnable.Enabled = true;
-                Bot.SteamCompanionEnabled = false;
+                Bot.SteamCompanion.Enabled = false;
             }
             else
             {
                 BlockTabpage(tabPageSC, true);
-                Bot.SteamCompanionEnabled = true;
+                Bot.SteamCompanion.Enabled = true;
             }
         }
 
@@ -1771,7 +1742,7 @@ namespace KryBot
             if (login)
             {
                 await Web.SteamJoinGroupAsync("http://steamcommunity.com/groups/krybot",
-                    "", Generate.PostData_SteamGroupJoin(Bot.SteamSessid),
+                    "", Generate.PostData_SteamGroupJoin(Bot.Steam.Cookies.Sessid),
                     Generate.Cookies_Steam(Bot), new List<HttpHeader>(), Bot.UserAgent);
 
                 BlockTabpage(tabPageSteam, true);
@@ -1866,10 +1837,10 @@ namespace KryBot
 
         private void btnSteamExit_Click(object sender, EventArgs e)
         {
-            Bot.SteamSessid = "";
-            Bot.SteamLogin = "";
-            Bot.SteamProfileLink = "";
-            Bot.SteamEnabled = false;
+            Bot.Steam.Cookies.Sessid = "";
+            Bot.Steam.Cookies.Login = "";
+            Bot.Steam.ProfileLink = "";
+            Bot.Steam.Enabled = false;
             BlockTabpage(tabPageSteam, false);
             btnSteamLogin.Visible = true;
             btnSteamLogin.Enabled = true;
@@ -1879,11 +1850,11 @@ namespace KryBot
 
         private void btnSTExit_Click(object sender, EventArgs e)
         {
-            Bot.SteamTradeDleUserId = "";
-            Bot.SteamTradeDlePassword = "";
-            Bot.SteamTradePassHash = "";
-            Bot.SteamTradePhpSessId = "";
-            Bot.SteamTradeEnabled = false;
+            Bot.SteamTrade.Cookies.DleUserId = "";
+            Bot.SteamTrade.Cookies.DlePassword = "";
+            Bot.SteamTrade.Cookies.PassHash = "";
+            Bot.SteamTrade.Cookies.PhpSessId = "";
+            Bot.SteamTrade.Enabled = false;
             BlockTabpage(tabPageST, false);
             btnSTLogin.Visible = true;
             btnSTExit.Visible = false;
@@ -1893,8 +1864,8 @@ namespace KryBot
 
         private void btnSPExit_Click(object sender, EventArgs e)
         {
-            Bot.SteamPortalPhpSessId = "";
-            Bot.SteamPortalEnabled = false;
+            Bot.SteamPortal.Cookies.PhpSessId = "";
+            Bot.SteamPortal.Enabled = false;
             BlockTabpage(tabPageSP, false);
             btnSPLogin.Visible = true;
             btnSPLogin.Enabled = true;
@@ -1904,11 +1875,11 @@ namespace KryBot
 
         private void btnSCExit_Click(object sender, EventArgs e)
         {
-            Bot.SteamCompanionPhpSessId = "";
-            Bot.SteamCompanionUserC = "";
-            Bot.SteamCompanionUserId = "";
-            Bot.SteamCompanionUserT = "";
-            Bot.SteamCompanionEnabled = false;
+            Bot.SteamCompanion.Cookies.PhpSessId = "";
+            Bot.SteamCompanion.Cookies.UserC = "";
+            Bot.SteamCompanion.Cookies.UserId = "";
+            Bot.SteamCompanion.Cookies.UserT = "";
+            Bot.SteamCompanion.Enabled = false;
             BlockTabpage(tabPageSC, false);
             btnSCLogin.Visible = true;
             btnSCLogin.Enabled = true;
@@ -1918,8 +1889,8 @@ namespace KryBot
 
         private void btnSGExit_Click(object sender, EventArgs e)
         {
-            Bot.SteamGiftsPhpSessId = "";
-            Bot.SteamGiftsEnabled = false;
+            Bot.SteamGifts.Cookies.PhpSessId = "";
+            Bot.SteamGifts.Enabled = false;
             BlockTabpage(tabPageSG, false);
             btnSGLogin.Visible = true;
             btnSGLogin.Enabled = true;
@@ -1929,9 +1900,9 @@ namespace KryBot
 
         private void btnGMExit_Click(object sender, EventArgs e)
         {
-            Bot.GameMinerToken = "";
-            Bot.GameMinerxsrf = "";
-            Bot.GameMinerEnabled = false;
+            Bot.GameMiner.Cookies.Token = "";
+            Bot.GameMiner.Cookies.Xsrf = "";
+            Bot.GameMiner.Enabled = false;
             BlockTabpage(tabPageGM, false);
             btnGMLogin.Enabled = true;
             btnGMLogin.Visible = true;
@@ -1962,7 +1933,7 @@ namespace KryBot
             btnPBLogin.Enabled = false;
             BrowserStart("http://playblink.com/?do=login&act=signin",
                 "http://playblink.com/", "PlayBlink - Login", "",
-                Bot.SteamEnabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
+                Bot.Steam.Enabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
             if (string.IsNullOrEmpty(Bot.UserAgent))
             {
                 Bot.UserAgent = Tools.UserAgent();
@@ -1990,7 +1961,7 @@ namespace KryBot
                 btnPBExit.Visible = true;
                 btnPBExit.Enabled = true;
                 cbPBEnabled.Checked = true;
-                Bot.PlayBlinkEnabled = true;
+                Bot.PlayBlink.Enabled = true;
             }
             else
             {
@@ -2005,8 +1976,8 @@ namespace KryBot
 
         private void btnPBExit_Click(object sender, EventArgs e)
         {
-            Bot.PlayBlinkPhpSessId = "";
-            Bot.PlayBlinkEnabled = false;
+            Bot.PlayBlink.Cookies.PhpSessId = "";
+            Bot.PlayBlink.Enabled = false;
             BlockTabpage(tabPagePB, false);
             btnPBLogin.Enabled = true;
             btnPBLogin.Visible = true;
@@ -2050,9 +2021,9 @@ namespace KryBot
         {
             foreach (var giveaway in giveaways)
             {
-                if (giveaway.Price <= Bot.GameMinerJoinCoalLimit && giveaway.Price <= Bot.GameMinerCoal)
+                if (giveaway.Price <= Bot.GameMiner.JoinCoalLimit && giveaway.Price <= Bot.GameMiner.Coal)
                 {
-                    if (Bot.GameMinerCoalReserv <= Bot.GameMinerCoal - giveaway.Price ||
+                    if (Bot.GameMiner.CoalReserv <= Bot.GameMiner.Coal - giveaway.Price ||
                         giveaway.Price == 0)
                     {
                         var data = await Web.GameMinerJoinGiveawayAsync(Bot, giveaway);
@@ -2084,7 +2055,7 @@ namespace KryBot
             {
                 if (wishlist)
                 {
-                    if (giveaway.Price <= Bot.SteamGiftsPoint)
+                    if (giveaway.Price <= Bot.SteamGifts.Points)
                     {
                         var data = await Web.SteamGiftsJoinGiveawayAsync(Bot, giveaway);
                         if (data != null && data.Content != "\n")
@@ -2107,8 +2078,8 @@ namespace KryBot
                 }
                 else
                 {
-                    if (giveaway.Price <= Bot.SteamGiftsPoint &&
-                        Bot.SteamGiftsPointsReserv <= Bot.SteamGiftsPoint - giveaway.Price)
+                    if (giveaway.Price <= Bot.SteamGifts.Points &&
+                        Bot.SteamGifts.PointsReserv <= Bot.SteamGifts.Points - giveaway.Price)
                     {
                         var data = await Web.SteamGiftsJoinGiveawayAsync(Bot, giveaway);
                         if (data != null && data.Content != "\n")
@@ -2139,7 +2110,7 @@ namespace KryBot
             {
                 if (wishlist)
                 {
-                    if (giveaway.Price <= Bot.SteamCompanionPoints)
+                    if (giveaway.Price <= Bot.SteamCompanion.Points)
                     {
                         var data = await Web.SteamCompanionJoinGiveawayAsync(Bot, giveaway);
                         if (data != null && data.Content != "\n")
@@ -2162,8 +2133,8 @@ namespace KryBot
                 }
                 else
                 {
-                    if (giveaway.Price <= Bot.SteamCompanionPoints &&
-                        Bot.SteamCompanionPointsReserv <= Bot.SteamCompanionPoints - giveaway.Price)
+                    if (giveaway.Price <= Bot.SteamCompanion.Points &&
+                        Bot.SteamCompanion.PointsReserv <= Bot.SteamCompanion.Points - giveaway.Price)
                     {
                         var data = await Web.SteamCompanionJoinGiveawayAsync(Bot, giveaway);
                         if (data != null && data.Content != "\n")
@@ -2192,8 +2163,8 @@ namespace KryBot
         {
             foreach (var giveaway in giveaways)
             {
-                if (giveaway.Price <= Bot.SteamPortalPoints &&
-                    Bot.SteamPortalPointsReserv <= Bot.SteamPortalPoints - giveaway.Price)
+                if (giveaway.Price <= Bot.SteamPortal.Points &&
+                    Bot.SteamPortal.PointsReserv <= Bot.SteamPortal.Points - giveaway.Price)
                 {
                     var data = await Web.SteamPortalJoinGiveawayAsync(Bot, giveaway);
                     if (data != null && data.Content != "\n")
@@ -2246,9 +2217,9 @@ namespace KryBot
         {
             foreach (var giveaway in giveaways)
             {
-                if (giveaway.Price <= Bot.PlayBlinkMaxJoinValue && giveaway.Price <= Bot.PlayBlinkPoints)
+                if (giveaway.Price <= Bot.PlayBlink.MaxJoinValue && giveaway.Price <= Bot.PlayBlink.Points)
                 {
-                    if (Bot.PlayBlinkPointReserv <= Bot.PlayBlinkPoints - giveaway.Price ||
+                    if (Bot.PlayBlink.PointReserv <= Bot.PlayBlink.Points - giveaway.Price ||
                         giveaway.Price == 0)
                     {
                         var data = await Web.PlayBlinkJoinGiveawayAsync(Bot, giveaway);
@@ -2301,12 +2272,12 @@ namespace KryBot
             {
                 BlockTabpage(tabPagePB, false);
                 cbPBEnabled.Enabled = true;
-                Bot.PlayBlinkEnabled = false;
+                Bot.PlayBlink.Enabled = false;
             }
             else
             {
                 BlockTabpage(tabPagePB, true);
-                Bot.PlayBlinkEnabled = true;
+                Bot.PlayBlink.Enabled = true;
             }
         }
     }

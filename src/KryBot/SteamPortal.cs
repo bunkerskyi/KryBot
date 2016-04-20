@@ -2,6 +2,23 @@
 {
     public class SteamPortal
     {
+        public SteamPortal()
+        {
+            Cookies = new SpCookies();    
+        }
+
+        public bool Enabled { get; set; }
+        public string ProfileLink { get; set; }
+        public int Points { get; set; }
+        public int MaxJoinValue { get; set; } = 30;
+        public int PointsReserv { get; set; }
+        public SpCookies Cookies { get; set; }
+        
+        public class SpCookies
+        {
+            public string PhpSessId { get; set; }
+        } 
+
         public class SpGiveaway
         {
             public string Name { get; set; }
@@ -13,7 +30,7 @@
 
         public class JsonJoin
         {
-            public int error { get; set; }
+            public int Error { get; set; }
             public TargetH target_h { get; set; }
         }
 

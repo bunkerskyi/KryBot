@@ -11,10 +11,10 @@ namespace KryBot
 {
     public partial class FormSettings : Form
     {
-        private readonly Classes.Bot _bot;
+        private readonly Bot _bot;
         private bool _userAutorun;
 
-        public FormSettings(Classes.Bot bot)
+        public FormSettings(Bot bot)
         {
             _bot = bot;
             InitializeComponent();
@@ -58,39 +58,39 @@ namespace KryBot
                 cbSortBy.Text = @"дешевые";
             }
 
-            cbGMRegular.Checked = _bot.GameMinerRegular;
-            chGMSandbox.Checked = _bot.GameMinerSandbox;
-            cbGMGolden.Checked = _bot.GameMinerFreeGolden;
-            cbGBOnlyGifts.Checked = _bot.GameMinerOnlyGifts;
-            cbGMRegional.Checked = _bot.GameMinerNoRegion;
-            tbGMMaxValue.Text = _bot.GameMinerJoinCoalLimit.ToString();
-            tbGMReserv.Text = _bot.GameMinerCoalReserv.ToString();
+            cbGMRegular.Checked = _bot.GameMiner.Regular;
+            chGMSandbox.Checked = _bot.GameMiner.Sandbox;
+            cbGMGolden.Checked = _bot.GameMiner.FreeGolden;
+            cbGBOnlyGifts.Checked = _bot.GameMiner.OnlyGifts;
+            cbGMRegional.Checked = _bot.GameMiner.NoRegion;
+            tbGMMaxValue.Text = _bot.GameMiner.JoinCoalLimit.ToString();
+            tbGMReserv.Text = _bot.GameMiner.CoalReserv.ToString();
 
-            cbSGWishlist.Checked = _bot.SteamGiftsWishList;
-            cbSGGroup.Checked = _bot.SteamGiftsGroup;
-            cbSGRegular.Checked = _bot.SteamGiftsRegular;
-            cbSGMinLevel.Checked = _bot.SteamGiftsSortLevel;
-            cbSGSortTeLessLevel.Checked = _bot.SteamGiftsSortToLessLevel;
-            numSGLevel.Enabled = _bot.SteamGiftsSortLevel;
-            numSGLevel.Value = _bot.SteamGiftsMinLevel;
-            tbSGMaxValue.Text = _bot.SteamGiftsJoinPointLimit.ToString();
-            tbSGReserv.Text = _bot.SteamGiftsPointsReserv.ToString();
+            cbSGWishlist.Checked = _bot.SteamGifts.WishList;
+            cbSGGroup.Checked = _bot.SteamGifts.Group;
+            cbSGRegular.Checked = _bot.SteamGifts.Regular;
+            cbSGMinLevel.Checked = _bot.SteamGifts.SortLevel;
+            cbSGSortTeLessLevel.Checked = _bot.SteamGifts.SortToLessLevel;
+            numSGLevel.Enabled = _bot.SteamGifts.SortLevel;
+            numSGLevel.Value = _bot.SteamGifts.MinLevel;
+            tbSGMaxValue.Text = _bot.SteamGifts.JoinPointLimit.ToString();
+            tbSGReserv.Text = _bot.SteamGifts.PointsReserv.ToString();
 
-            cbSCWishlist.Checked = _bot.SteamCompanionWishList;
-            cbSCContributors.Checked = _bot.SteamCompanionContributors;
-            cbSCGroup.Checked = _bot.SteamCompanionGroup;
-            cbSCRegular.Checked = _bot.SteamCompanionRegular;
-            cbSCAutojoin.Enabled = _bot.SteamEnabled;
+            cbSCWishlist.Checked = _bot.SteamCompanion.WishList;
+            cbSCContributors.Checked = _bot.SteamCompanion.Contributors;
+            cbSCGroup.Checked = _bot.SteamCompanion.Group;
+            cbSCRegular.Checked = _bot.SteamCompanion.Regular;
+            cbSCAutojoin.Enabled = _bot.Steam.Enabled;
             cbSCAutojoin.Enabled = cbSCGroup.Checked;
-            cbSCAutojoin.Checked = _bot.SteamCompanionAutoJoin;
-            tbSCMaxValue.Text = _bot.SteamCompanionJoinPointLimit.ToString();
-            tbSCReserv.Text = _bot.SteamCompanionPointsReserv.ToString();
+            cbSCAutojoin.Checked = _bot.SteamCompanion.AutoJoin;
+            tbSCMaxValue.Text = _bot.SteamCompanion.JoinPointLimit.ToString();
+            tbSCReserv.Text = _bot.SteamCompanion.PointsReserv.ToString();
 
-            tbPBMaxValue.Text = _bot.PlayBlinkMaxJoinValue.ToString();
-            tbPBReserv.Text = _bot.PlayBlinkPointReserv.ToString();
+            tbPBMaxValue.Text = _bot.PlayBlink.MaxJoinValue.ToString();
+            tbPBReserv.Text = _bot.PlayBlink.PointReserv.ToString();
 
-            tbSPMaxValue.Text = _bot.SteamPortalMaxJoinValue.ToString();
-            tbSPReserv.Text = _bot.SteamPortalPointsReserv.ToString();
+            tbSPMaxValue.Text = _bot.SteamPortal.MaxJoinValue.ToString();
+            tbSPReserv.Text = _bot.SteamPortal.PointsReserv.ToString();
 
             cbAutorun.Checked = Settings.Default.Autorun;
             cbWonTip.Checked = Settings.Default.ShowWonTip;
@@ -103,8 +103,8 @@ namespace KryBot
         {
             var names = new List<string>
             {
-                "token:" + _bot.GameMinerToken,
-                "_xsrf:" + _bot.GameMinerxsrf,
+                "token:" + _bot.GameMiner.Cookies.Token,
+                "_xsrf:" + _bot.GameMiner.Cookies.Xsrf,
                 "UserAgent:" + _bot.UserAgent
             };
 
@@ -132,36 +132,36 @@ namespace KryBot
             Settings.Default.SortToMore = cbSortBy.Text == @"дорогие";
             Settings.Default.SortToLess = cbSortBy.Text == @"дешевые";
 
-            _bot.GameMinerRegular = cbGMRegular.Checked;
-            _bot.GameMinerSandbox = chGMSandbox.Checked;
-            _bot.GameMinerFreeGolden = cbGMGolden.Checked;
-            _bot.GameMinerOnlyGifts = cbGBOnlyGifts.Checked;
-            _bot.GameMinerNoRegion = cbGMRegional.Checked;
-            _bot.GameMinerJoinCoalLimit = int.Parse(tbGMMaxValue.Text);
-            _bot.GameMinerCoalReserv = int.Parse(tbGMReserv.Text);
+            _bot.GameMiner.Regular = cbGMRegular.Checked;
+            _bot.GameMiner.Sandbox = chGMSandbox.Checked;
+            _bot.GameMiner.FreeGolden = cbGMGolden.Checked;
+            _bot.GameMiner.OnlyGifts = cbGBOnlyGifts.Checked;
+            _bot.GameMiner.NoRegion = cbGMRegional.Checked;
+            _bot.GameMiner.JoinCoalLimit = int.Parse(tbGMMaxValue.Text);
+            _bot.GameMiner.CoalReserv = int.Parse(tbGMReserv.Text);
 
-            _bot.SteamGiftsWishList = cbSGWishlist.Checked;
-            _bot.SteamGiftsGroup = cbSGGroup.Checked;
-            _bot.SteamGiftsRegular = cbSGRegular.Checked;
-            _bot.SteamGiftsJoinPointLimit = int.Parse(tbSGMaxValue.Text);
-            _bot.SteamGiftsPointsReserv = int.Parse(tbSGReserv.Text);
-            _bot.SteamGiftsMinLevel = int.Parse(numSGLevel.Value.ToString(CultureInfo.InvariantCulture));
-            _bot.SteamGiftsSortLevel = cbSGMinLevel.Checked;
-            _bot.SteamGiftsSortToLessLevel = cbSGSortTeLessLevel.Checked;
+            _bot.SteamGifts.WishList = cbSGWishlist.Checked;
+            _bot.SteamGifts.Group = cbSGGroup.Checked;
+            _bot.SteamGifts.Regular = cbSGRegular.Checked;
+            _bot.SteamGifts.JoinPointLimit = int.Parse(tbSGMaxValue.Text);
+            _bot.SteamGifts.PointsReserv = int.Parse(tbSGReserv.Text);
+            _bot.SteamGifts.MinLevel = int.Parse(numSGLevel.Value.ToString(CultureInfo.InvariantCulture));
+            _bot.SteamGifts.SortLevel = cbSGMinLevel.Checked;
+            _bot.SteamGifts.SortToLessLevel = cbSGSortTeLessLevel.Checked;
 
-            _bot.SteamCompanionWishList = cbSCWishlist.Checked;
-            _bot.SteamCompanionContributors = cbSCContributors.Checked;
-            _bot.SteamCompanionGroup = cbSCGroup.Checked;
-            _bot.SteamCompanionRegular = cbSCRegular.Checked;
-            _bot.SteamCompanionAutoJoin = cbSCAutojoin.Checked;
-            _bot.SteamCompanionJoinPointLimit = int.Parse(tbSCMaxValue.Text);
-            _bot.SteamCompanionPointsReserv = int.Parse(tbSCReserv.Text);
+            _bot.SteamCompanion.WishList = cbSCWishlist.Checked;
+            _bot.SteamCompanion.Contributors = cbSCContributors.Checked;
+            _bot.SteamCompanion.Group = cbSCGroup.Checked;
+            _bot.SteamCompanion.Regular = cbSCRegular.Checked;
+            _bot.SteamCompanion.AutoJoin = cbSCAutojoin.Checked;
+            _bot.SteamCompanion.JoinPointLimit = int.Parse(tbSCMaxValue.Text);
+            _bot.SteamCompanion.PointsReserv = int.Parse(tbSCReserv.Text);
 
-            _bot.SteamPortalMaxJoinValue = int.Parse(tbSPMaxValue.Text);
-            _bot.SteamPortalPointsReserv = int.Parse(tbSPReserv.Text);
+            _bot.SteamPortal.MaxJoinValue = int.Parse(tbSPMaxValue.Text);
+            _bot.SteamPortal.PointsReserv = int.Parse(tbSPReserv.Text);
 
-            _bot.PlayBlinkMaxJoinValue = int.Parse(tbPBMaxValue.Text);
-            _bot.PlayBlinkPointReserv = int.Parse(tbPBReserv.Text);
+            _bot.PlayBlink.MaxJoinValue = int.Parse(tbPBMaxValue.Text);
+            _bot.PlayBlink.PointReserv = int.Parse(tbPBReserv.Text);
 
             Settings.Default.Timer = cbTimerEnable.Checked;
             Settings.Default.TimerInterval = int.Parse(tbTimerInterval.Text)*60000;
@@ -179,7 +179,7 @@ namespace KryBot
 
         private void btnSGCookies_Click(object sender, EventArgs e)
         {
-            var names = new List<string> {"PHPSESSID:" + _bot.SteamGiftsPhpSessId};
+            var names = new List<string> {"PHPSESSID:" + _bot.SteamGifts.Cookies.PhpSessId };
 
             var form = new FormCookie("SteamGifts", names, _bot);
             form.ShowDialog();
@@ -189,10 +189,10 @@ namespace KryBot
         {
             var names = new List<string>
             {
-                "PHPSESSID:" + _bot.SteamCompanionPhpSessId,
-                "userc:" + _bot.SteamCompanionUserC,
-                "userid:" + _bot.SteamCompanionUserId,
-                "usert:" + _bot.SteamCompanionUserT
+                "PHPSESSID:" + _bot.SteamCompanion.Cookies.PhpSessId,
+                "userc:" + _bot.SteamCompanion.Cookies.UserC,
+                "userid:" + _bot.SteamCompanion.Cookies.UserId,
+                "usert:" + _bot.SteamCompanion.Cookies.UserT
             };
 
             var form = new FormCookie("SteamCompanion", names, _bot);
@@ -201,7 +201,7 @@ namespace KryBot
 
         private void btnSPCookies_Click(object sender, EventArgs e)
         {
-            var names = new List<string> {"PHPSESSID:" + _bot.SteamPortalPhpSessId};
+            var names = new List<string> {"PHPSESSID:" + _bot.SteamPortal.Cookies.PhpSessId };
 
             var form = new FormCookie("SteamPortal", names, _bot);
             form.ShowDialog();
@@ -211,10 +211,10 @@ namespace KryBot
         {
             var names = new List<string>
             {
-                "PHPSESSID:" + _bot.SteamTradePhpSessId,
-                "dle_user_id:" + _bot.SteamTradeDleUserId,
-                "dle_password:" + _bot.SteamTradeDlePassword,
-                "passhash:" + _bot.SteamTradePassHash
+                "PHPSESSID:" + _bot.SteamTrade.Cookies.PhpSessId,
+                "dle_user_id:" + _bot.SteamTrade.Cookies.DleUserId,
+                "dle_password:" + _bot.SteamTrade.Cookies.DlePassword,
+                "passhash:" + _bot.SteamTrade.Cookies.PassHash
             };
 
             var form = new FormCookie("SteamTrade", names, _bot);
@@ -322,9 +322,9 @@ namespace KryBot
         {
             var names = new List<string>
             {
-                "steamLogin:" + _bot.SteamLogin,
-                "sessionid:" + _bot.SteamSessid,
-                "steamRememberLogin:" + _bot.SteamRememberLogin
+                "steamLogin:" + _bot.Steam.Cookies.Login,
+                "sessionid:" + _bot.Steam.Cookies.Sessid,
+                "steamRememberLogin:" + _bot.Steam.Cookies.RememberLogin
             };
 
             var form = new FormCookie("Steam", names, _bot);
@@ -357,7 +357,7 @@ namespace KryBot
 
         private void btnPBCookies_Click(object sender, EventArgs e)
         {
-            var names = new List<string> {"PHPSESSID:" + _bot.PlayBlinkPhpSessId};
+            var names = new List<string> {"PHPSESSID:" + _bot.PlayBlink.Cookies.PhpSessId };
 
             var form = new FormCookie("PlayBlink", names, _bot);
             form.ShowDialog();

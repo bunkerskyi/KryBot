@@ -9,19 +9,19 @@ namespace KryBot
     internal class Generate
     {
         // Steam //
-        public static CookieContainer Cookies_Steam(Classes.Bot bot)
+        public static CookieContainer Cookies_Steam(Bot bot)
         {
             var cookie = new CookieContainer();
             var target = new Uri("http://steamcommunity.com/");
 
-            if (bot.SteamSessid != null)
-                cookie.Add(new Cookie("sessionid", bot.SteamSessid) {Domain = target.Host});
+            if (bot.Steam.Cookies.Sessid != null)
+                cookie.Add(new Cookie("sessionid", bot.Steam.Cookies.Sessid) {Domain = target.Host});
 
-            if (bot.SteamLogin != null)
-                cookie.Add(new Cookie("steamLogin", bot.SteamLogin) {Domain = target.Host});
+            if (bot.Steam.Cookies.Login != null)
+                cookie.Add(new Cookie("steamLogin", bot.Steam.Cookies.Login) {Domain = target.Host});
 
-            if (bot.SteamRememberLogin != null)
-                cookie.Add(new Cookie("steamRememberLogin", bot.SteamRememberLogin) {Domain = target.Host});
+            if (bot.Steam.Cookies.RememberLogin != null)
+                cookie.Add(new Cookie("steamRememberLogin", bot.Steam.Cookies.RememberLogin) {Domain = target.Host});
 
             return cookie;
         }
@@ -52,15 +52,15 @@ namespace KryBot
         // Steam //
 
         // GameMiner //
-        public static CookieContainer Cookies_GameMiner(Classes.Bot bot)
+        public static CookieContainer Cookies_GameMiner(Bot bot)
         {
             var cookie = new CookieContainer();
             var target = new Uri("http://gameminer.net/");
-            if (bot.GameMinerToken != null)
-                cookie.Add(new Cookie("token", bot.GameMinerToken) {Domain = target.Host});
+            if (bot.GameMiner.Cookies.Token != null)
+                cookie.Add(new Cookie("token", bot.GameMiner.Cookies.Token) {Domain = target.Host});
 
-            if (bot.GameMinerxsrf != null)
-                cookie.Add(new Cookie("_xsrf", bot.GameMinerxsrf) {Domain = target.Host});
+            if (bot.GameMiner.Cookies.Xsrf != null)
+                cookie.Add(new Cookie("_xsrf", bot.GameMiner.Cookies.Xsrf) {Domain = target.Host});
 
             if (Settings.Default.Lang != null)
                 cookie.Add(new Cookie("lang", Settings.Default.Lang) {Domain = target.Host});
@@ -108,13 +108,15 @@ namespace KryBot
         // GameMiner //
 
         // SteamGifts //
-        public static CookieContainer Cookies_SteamGifts(Classes.Bot bot)
+        public static CookieContainer Cookies_SteamGifts(Bot bot)
         {
             var cookie = new CookieContainer();
             var target = new Uri("https://www.steamgifts.com/");
 
-            if (bot.SteamGiftsPhpSessId != null)
-                cookie.Add(new Cookie("PHPSESSID", bot.SteamGiftsPhpSessId) {Domain = target.Host});
+            if (bot.SteamGifts.Cookies.PhpSessId != null)
+            {
+                cookie.Add(new Cookie("PHPSESSID", bot.SteamGifts.Cookies.PhpSessId) {Domain = target.Host});
+            }
 
             return cookie;
         }
@@ -156,22 +158,22 @@ namespace KryBot
         // SteamGifts //
 
         // SteamCompanion //
-        public static CookieContainer Cookies_SteamCompanion(Classes.Bot bot)
+        public static CookieContainer Cookies_SteamCompanion(Bot bot)
         {
             var cookie = new CookieContainer();
             var target = new Uri("https://steamcompanion.com/");
 
-            if (bot.SteamCompanionPhpSessId != null)
-                cookie.Add(new Cookie("PHPSESSID", bot.SteamCompanionPhpSessId) {Domain = target.Host});
+            if (bot.SteamCompanion.Cookies.PhpSessId != null)
+                cookie.Add(new Cookie("PHPSESSID", bot.SteamCompanion.Cookies.PhpSessId) {Domain = target.Host});
 
-            if (bot.SteamCompanionUserC != null)
-                cookie.Add(new Cookie("userc", bot.SteamCompanionUserC) {Domain = target.Host});
+            if (bot.SteamCompanion.Cookies.UserC != null)
+                cookie.Add(new Cookie("userc", bot.SteamCompanion.Cookies.UserC) {Domain = target.Host});
 
-            if (bot.SteamCompanionUserId != null)
-                cookie.Add(new Cookie("userid", bot.SteamCompanionUserId) {Domain = target.Host});
+            if (bot.SteamCompanion.Cookies.UserId != null)
+                cookie.Add(new Cookie("userid", bot.SteamCompanion.Cookies.UserId) {Domain = target.Host});
 
-            if (bot.SteamCompanionUserT != null)
-                cookie.Add(new Cookie("usert", bot.SteamCompanionUserT) {Domain = target.Host});
+            if (bot.SteamCompanion.Cookies.UserT != null)
+                cookie.Add(new Cookie("usert", bot.SteamCompanion.Cookies.UserT) {Domain = target.Host});
 
             return cookie;
         }
@@ -218,13 +220,13 @@ namespace KryBot
         // SteamCompanion //
 
         // SteamPortal //
-        public static CookieContainer Cookies_SteamPortal(Classes.Bot bot)
+        public static CookieContainer Cookies_SteamPortal(Bot bot)
         {
             var cookie = new CookieContainer();
             var target = new Uri("http://steamportal.net/");
 
-            if (bot.SteamPortalPhpSessId != null)
-                cookie.Add(new Cookie("PHPSESSID", bot.SteamPortalPhpSessId) {Domain = target.Host});
+            if (bot.SteamPortal.Cookies.PhpSessId != null)
+                cookie.Add(new Cookie("PHPSESSID", bot.SteamPortal.Cookies.PhpSessId) {Domain = target.Host});
 
             return cookie;
         }
@@ -269,75 +271,23 @@ namespace KryBot
 
         // Steamportal //
 
-        // GameAways //
-        public static CookieContainer Cookies_GameAways(Classes.Bot bot)
-        {
-            var cookie = new CookieContainer();
-            var target = new Uri("http://www.gameaways.com/");
-
-            if (bot.GameAwaysPhpSessId != null)
-                cookie.Add(new Cookie("ASP.NET_SessionId", bot.GameAwaysPhpSessId) {Domain = target.Host});
-
-            return cookie;
-        }
-
-        public static List<Parameter> GetData_GameAways(string id)
-        {
-            var list = new List<Parameter>();
-
-            var idParam = new Parameter
-            {
-                Type = ParameterType.GetOrPost,
-                Name = "_",
-                Value = id
-            };
-            list.Add(idParam);
-
-            return list;
-        }
-
-        public static List<Parameter> AuthData_GameAways(string token)
-        {
-            var list = new List<Parameter>();
-
-            var tokenParam = new Parameter
-            {
-                Type = ParameterType.GetOrPost,
-                Name = "__RequestVerificationToken",
-                Value = token
-            };
-            list.Add(tokenParam);
-
-            var providerParam = new Parameter
-            {
-                Type = ParameterType.GetOrPost,
-                Name = "provider",
-                Value = "Staem"
-            };
-            list.Add(providerParam);
-
-            return list;
-        }
-
-        // GameAways //
-
         // SteamTrade //
-        public static CookieContainer Cookies_SteamTrade(Classes.Bot bot)
+        public static CookieContainer Cookies_SteamTrade(Bot bot)
         {
             var cookie = new CookieContainer();
             var target = new Uri("http://steamtrade.info/");
 
-            if (bot.SteamTradePhpSessId != null)
-                cookie.Add(new Cookie("PHPSESSID", bot.SteamTradePhpSessId) {Domain = target.Host});
+            if (bot.SteamTrade.Cookies.PhpSessId != null)
+                cookie.Add(new Cookie("PHPSESSID", bot.SteamTrade.Cookies.PhpSessId) {Domain = target.Host});
 
-            if (bot.SteamTradeDleUserId != null)
-                cookie.Add(new Cookie("dle_user_id", bot.SteamTradeDleUserId) {Domain = target.Host});
+            if (bot.SteamTrade.Cookies.DleUserId != null)
+                cookie.Add(new Cookie("dle_user_id", bot.SteamTrade.Cookies.DleUserId) {Domain = target.Host});
 
-            if (bot.SteamTradeDlePassword != null)
-                cookie.Add(new Cookie("dle_password", bot.SteamTradeDlePassword) {Domain = target.Host});
+            if (bot.SteamTrade.Cookies.DlePassword != null)
+                cookie.Add(new Cookie("dle_password", bot.SteamTrade.Cookies.DlePassword) {Domain = target.Host});
 
-            if (bot.SteamTradePassHash != null)
-                cookie.Add(new Cookie("passhash", bot.SteamTradePassHash) {Domain = target.Host});
+            if (bot.SteamTrade.Cookies.PassHash != null)
+                cookie.Add(new Cookie("passhash", bot.SteamTrade.Cookies.PassHash) {Domain = target.Host});
 
             return cookie;
         }
@@ -369,18 +319,18 @@ namespace KryBot
         // Steamtrade //
 
         // PlayBlink //
-        public static CookieContainer Cookies_PlayBlink(Classes.Bot bot)
+        public static CookieContainer Cookies_PlayBlink(Bot bot)
         {
             var cookie = new CookieContainer();
             var target = new Uri("http://playblink.com/");
 
-            if (bot.PlayBlinkPhpSessId != null)
+            if (bot.PlayBlink.Cookies.PhpSessId != null)
             {
-                cookie.Add(new Cookie("PHPSESSID", bot.PlayBlinkPhpSessId) {Domain = target.Host});
+                cookie.Add(new Cookie("PHPSESSID", bot.PlayBlink.Cookies.PhpSessId) {Domain = target.Host});
             }
 
             cookie.Add(new Cookie("entry", "1") {Domain = target.Host});
-            cookie.Add(new Cookie("level", bot.PlayBlinkLevel.ToString()) {Domain = target.Host});
+            cookie.Add(new Cookie("level", bot.PlayBlink.Level.ToString()) {Domain = target.Host});
             cookie.Add(new Cookie("order", "2") {Domain = target.Host});
             cookie.Add(new Cookie("ppage", "100") {Domain = target.Host});
 

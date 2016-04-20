@@ -18,20 +18,19 @@ namespace KryBot
 {
     public class Tools
     {
-        public static Classes.Bot LoadProfile(string path)
+        public static Bot LoadProfile(string path)
         {
             try
             {
-                var serializer = new XmlSerializer(typeof (Classes.Bot));
+                var serializer = new XmlSerializer(typeof (Bot));
                 var reader = new StreamReader(path == "" ? "profile.xml" : path);
-                var bot = (Classes.Bot) serializer.Deserialize(reader);
+                var bot = (Bot) serializer.Deserialize(reader);
                 reader.Close();
                 return bot;
             }
             catch (Exception)
             {
-                var bot = new Classes.Bot();
-                return bot;
+                return new Bot();
             }
         }
 
@@ -50,18 +49,18 @@ namespace KryBot
             }
         }
 
-        public static bool SaveProfile(Classes.Bot bot, string path)
+        public static bool SaveProfile(Bot bot, string path)
         {
             try
             {
                 using (var fs = new FileStream(path == "" ? "profile.xml" : path, FileMode.Create, FileAccess.Write))
                 {
-                    var serializer = new XmlSerializer(typeof (Classes.Bot));
+                    var serializer = new XmlSerializer(typeof (Bot));
                     serializer.Serialize(fs, bot);
                 }
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // ignored todo сделать оповещение о фейле
                 return false;

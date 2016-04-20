@@ -4,6 +4,29 @@ namespace KryBot
 {
     public class GameMiner
     {
+        public GameMiner()
+        {
+            Cookies = new GmCookies();    
+        }
+
+        public bool Enabled { get; set; }
+        public int Coal { get; set; }
+        public int Level { get; set; }
+        public int JoinCoalLimit { get; set; } = 50;
+        public int CoalReserv { get; set; }
+        public bool Sandbox { get; set; } = true;
+        public bool Regular { get; set; } = true;
+        public bool FreeGolden { get; set; } = true;
+        public bool OnlyGifts { get; set; }
+        public bool NoRegion { get; set; }
+        public GmCookies Cookies { get; set; }
+
+        public class GmCookies
+        {
+            public string Token { get; set; }
+            public string Xsrf { get; set; }
+        }
+
         public class JsonProperties
         {
             public string RankColor { get; set; }
@@ -60,7 +83,7 @@ namespace KryBot
             public JsonGame Game { get; set; }
             public int Finish { get; set; }
             public JsonAward Award { get; set; }
-            public string regionlock_type_id { get; set; }
+            public string RegionlockTypeId { get; set; }
             public List<object> Regionlocks { get; set; }
             public int Entries { get; set; }
             public string GiveawayTypeId { get; set; }
@@ -73,7 +96,7 @@ namespace KryBot
             public int Count { get; set; }
             public int ServerTime { get; set; }
             public List<JsonGiveaway> Giveaways { get; set; }
-            public int Last_Page { get; set; }
+            public int LastPage { get; set; }
             public int Total { get; set; }
             public int Page { get; set; }
         }
