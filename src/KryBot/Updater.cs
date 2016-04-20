@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace KryBot
 {
-    class Updater
+    internal class Updater
     {
         public static async Task<Classes.Log> CheckForUpdates()
         {
@@ -92,7 +92,7 @@ namespace KryBot
 
             Classes.GitHunReleaseAssets binaryAsset = null;
             foreach (var asset in release.assets)
-            {                                                       
+            {
                 if (asset.name == "KryBot.exe")
                 {
                     binaryAsset = asset;
@@ -113,7 +113,7 @@ namespace KryBot
 
             try
             {
-                using (FileStream fileStream = File.Open("KryBot.exe.new", FileMode.Create))
+                using (var fileStream = File.Open("KryBot.exe.new", FileMode.Create))
                 {
                     await stream.CopyToAsync(fileStream);
                 }
