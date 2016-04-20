@@ -375,11 +375,10 @@ namespace KryBot
             var target = new Uri("http://playblink.com/");
 
             if (bot.PlayBlinkPhpSessId != null)
+            {
                 cookie.Add(new Cookie("PHPSESSID", bot.PlayBlinkPhpSessId) {Domain = target.Host});
+            }
 
-            cookie.Add(new Cookie("entry", "1") {Domain = target.Host});
-            cookie.Add(new Cookie("level", bot.PlayBlinkLevel.ToString()) {Domain = target.Host});
-            cookie.Add(new Cookie("order", "2") {Domain = target.Host});
             cookie.Add(new Cookie("ppage", "100") {Domain = target.Host});
 
             return cookie;
