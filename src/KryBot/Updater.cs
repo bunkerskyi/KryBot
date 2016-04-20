@@ -25,15 +25,16 @@ namespace KryBot
                 }
                 catch (JsonReaderException)
                 {
-                    return Tools.ConstructLog("", Color.Red, false, true);
+                    return Tools.ConstructLog("Updater: JsonReaderException", Color.Red, false, true);
                 }
 
                 if (release.tag_name != null && VersionCompare(Application.ProductVersion, release.tag_name))
                 {
                     return Tools.ConstructLog($"Доступно обновление {release.tag_name}", Color.Green, true, true);
                 }
+                return Tools.ConstructLog($"Актуальная версия {release.tag_name}", Color.White, false, true);
             }
-            return Tools.ConstructLog("", Color.Red, false, true);
+            return Tools.ConstructLog("Updater: Json is Empty", Color.Red, false, true);
         }
 
         private static bool VersionCompare(string sClient, string sServer)
