@@ -179,7 +179,7 @@ namespace KryBot
 
         private void btnSGCookies_Click(object sender, EventArgs e)
         {
-            var names = new List<string> {"PHPSESSID:" + _bot.SteamGifts.Cookies.PhpSessId };
+            var names = new List<string> {"PHPSESSID:" + _bot.SteamGifts.Cookies.PhpSessId};
 
             var form = new FormCookie("SteamGifts", names, _bot);
             form.ShowDialog();
@@ -201,7 +201,7 @@ namespace KryBot
 
         private void btnSPCookies_Click(object sender, EventArgs e)
         {
-            var names = new List<string> {"PHPSESSID:" + _bot.SteamPortal.Cookies.PhpSessId };
+            var names = new List<string> {"PHPSESSID:" + _bot.SteamPortal.Cookies.PhpSessId};
 
             var form = new FormCookie("SteamPortal", names, _bot);
             form.ShowDialog();
@@ -357,7 +357,7 @@ namespace KryBot
 
         private void btnPBCookies_Click(object sender, EventArgs e)
         {
-            var names = new List<string> {"PHPSESSID:" + _bot.PlayBlink.Cookies.PhpSessId };
+            var names = new List<string> {"PHPSESSID:" + _bot.PlayBlink.Cookies.PhpSessId};
 
             var form = new FormCookie("PlayBlink", names, _bot);
             form.ShowDialog();

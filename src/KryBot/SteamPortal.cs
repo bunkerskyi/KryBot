@@ -6,8 +6,8 @@ namespace KryBot
     {
         public SteamPortal()
         {
-            Cookies = new SpCookies(); 
-            Giveaways = new List<SpGiveaway>();   
+            Cookies = new SpCookies();
+            Giveaways = new List<SpGiveaway>();
         }
 
         public bool Enabled { get; set; }
@@ -16,12 +16,12 @@ namespace KryBot
         public int MaxJoinValue { get; set; } = 30;
         public int PointsReserv { get; set; }
         public SpCookies Cookies { get; set; }
-        public List<SpGiveaway> Giveaways { get; set; } 
-        
+        public List<SpGiveaway> Giveaways { get; set; }
+
         public class SpCookies
         {
             public string PhpSessId { get; set; }
-        } 
+        }
 
         public class SpGiveaway
         {

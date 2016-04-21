@@ -130,53 +130,53 @@
       <DependentUpon>Browser.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes.cs" />
-    <Compile Include="formAbout.cs">
+    <Compile Include="FormAbout.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formAbout.Designer.cs">
-      <DependentUpon>formAbout.cs</DependentUpon>
+    <Compile Include="FormAbout.Designer.cs">
+      <DependentUpon>FormAbout.cs</DependentUpon>
     </Compile>
-    <Compile Include="formBlackList.cs">
+    <Compile Include="FormBlackList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formBlackList.Designer.cs">
-      <DependentUpon>formBlackList.cs</DependentUpon>
+    <Compile Include="FormBlackList.Designer.cs">
+      <DependentUpon>FormBlackList.cs</DependentUpon>
     </Compile>
-    <Compile Include="formCookie.cs">
+    <Compile Include="FormCookie.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formCookie.Designer.cs">
-      <DependentUpon>formCookie.cs</DependentUpon>
+    <Compile Include="FormCookie.Designer.cs">
+      <DependentUpon>FormCookie.cs</DependentUpon>
     </Compile>
-    <Compile Include="formDonate.cs">
+    <Compile Include="FormDonate.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formDonate.Designer.cs">
-      <DependentUpon>formDonate.cs</DependentUpon>
+    <Compile Include="FormDonate.Designer.cs">
+      <DependentUpon>FormDonate.cs</DependentUpon>
     </Compile>
-    <Compile Include="formMain.cs">
+    <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formMain.Designer.cs">
-      <DependentUpon>formMain.cs</DependentUpon>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="formLog.cs">
+    <Compile Include="FormLog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formLog.Designer.cs">
-      <DependentUpon>formLog.cs</DependentUpon>
+    <Compile Include="FormLog.Designer.cs">
+      <DependentUpon>FormLog.cs</DependentUpon>
     </Compile>
-    <Compile Include="formSettings.cs">
+    <Compile Include="FormSettings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formSettings.Designer.cs">
-      <DependentUpon>formSettings.cs</DependentUpon>
+    <Compile Include="FormSettings.Designer.cs">
+      <DependentUpon>FormSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="formStatistic.cs">
+    <Compile Include="FormStatistic.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formStatistic.Designer.cs">
-      <DependentUpon>formStatistic.cs</DependentUpon>
+    <Compile Include="FormStatistic.Designer.cs">
+      <DependentUpon>FormStatistic.cs</DependentUpon>
     </Compile>
     <Compile Include="FormTextBox.cs">
       <SubType>Form</SubType>
@@ -214,30 +214,30 @@
       <DependentUpon>Browser.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="formAbout.resx">
-      <DependentUpon>formAbout.cs</DependentUpon>
+    <EmbeddedResource Include="FormAbout.resx">
+      <DependentUpon>FormAbout.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formBlackList.resx">
-      <DependentUpon>formBlackList.cs</DependentUpon>
+    <EmbeddedResource Include="FormBlackList.resx">
+      <DependentUpon>FormBlackList.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="formCookie.resx">
-      <DependentUpon>formCookie.cs</DependentUpon>
+    <EmbeddedResource Include="FormCookie.resx">
+      <DependentUpon>FormCookie.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formDonate.resx">
-      <DependentUpon>formDonate.cs</DependentUpon>
+    <EmbeddedResource Include="FormDonate.resx">
+      <DependentUpon>FormDonate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formMain.resx">
-      <DependentUpon>formMain.cs</DependentUpon>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formLog.resx">
-      <DependentUpon>formLog.cs</DependentUpon>
+    <EmbeddedResource Include="FormLog.resx">
+      <DependentUpon>FormLog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formSettings.resx">
-      <DependentUpon>formSettings.cs</DependentUpon>
+    <EmbeddedResource Include="FormSettings.resx">
+      <DependentUpon>FormSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formStatistic.resx">
-      <DependentUpon>formStatistic.cs</DependentUpon>
+    <EmbeddedResource Include="FormStatistic.resx">
+      <DependentUpon>FormStatistic.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="lang\strings.resx">
       <Generator>ResXFileCodeGenerator</Generator>

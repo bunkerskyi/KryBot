@@ -11,7 +11,6 @@ using KryBot.lang;
 using Newtonsoft.Json;
 using RestSharp;
 using static KryBot.Messages;
-using static KryBot.Tools;
 
 namespace KryBot
 {

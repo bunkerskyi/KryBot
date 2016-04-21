@@ -211,7 +211,7 @@ namespace KryBot
                 else
                 {
                     LogBuffer = new Log($"{Messages.GetDateTime()} {strings.FormMain_btnStart_Click_FarmSkip}",
-                            Color.Red, false, true);
+                        Color.Red, false, true);
                     LogChanged?.Invoke();
                     btnStart.Text = strings.FormMain_btnStart_Click_Старт;
                 }
@@ -449,7 +449,9 @@ namespace KryBot
                     if (Bot.SteamGifts.Points > 0)
                     {
                         var giveaways =
-                            await Parse.SteamGiftsLoadGiveawaysAsync(Bot, Bot.SteamGifts.Giveaways, Bot.SteamGifts.WishlistGiveaways, BlackList);
+                            await
+                                Parse.SteamGiftsLoadGiveawaysAsync(Bot, Bot.SteamGifts.Giveaways,
+                                    Bot.SteamGifts.WishlistGiveaways, BlackList);
                         if (giveaways != null && giveaways.Content != "\n")
                         {
                             LogBuffer = giveaways;
@@ -545,7 +547,9 @@ namespace KryBot
                     }
 
                     var giveaways =
-                        await Parse.SteamCompanionLoadGiveawaysAsync(Bot, Bot.SteamCompanion.Giveaways, Bot.SteamCompanion.WishlistGiveaways, BlackList);
+                        await
+                            Parse.SteamCompanionLoadGiveawaysAsync(Bot, Bot.SteamCompanion.Giveaways,
+                                Bot.SteamCompanion.WishlistGiveaways, BlackList);
                     if (giveaways != null && giveaways.Content != "\n")
                     {
                         LogBuffer = giveaways;
@@ -642,7 +646,8 @@ namespace KryBot
 
                     if (Bot.SteamPortal.Points > 0)
                     {
-                        var giveaways = await Parse.SteamPortalLoadGiveawaysAsync(Bot, Bot.SteamPortal.Giveaways, BlackList);
+                        var giveaways =
+                            await Parse.SteamPortalLoadGiveawaysAsync(Bot, Bot.SteamPortal.Giveaways, BlackList);
                         if (giveaways != null && giveaways.Content != "\n")
                         {
                             LogBuffer = giveaways;

@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using KryBot.lang;
-using Settings = KryBot.Properties.Settings;
+using KryBot.Properties;
 
 namespace KryBot
 {
@@ -15,7 +15,10 @@ namespace KryBot
 
         public static Log FileLoadFailed(string fileName)
         {
-            return new Log($"{GetDateTime()} {strings.GetBotInConfig_Config} \"{fileName}\" {strings.GetBotInConfig_NotLoaded}", Color.Red);
+            return
+                new Log(
+                    $"{GetDateTime()} {strings.GetBotInConfig_Config} \"{fileName}\" {strings.GetBotInConfig_NotLoaded}",
+                    Color.Red);
         }
 
         public static string GetDateTime()
@@ -51,19 +54,23 @@ namespace KryBot
 
             if (level > 0)
             {
-                return new Log($"{GetDateTime()} {{{site}}} {strings.GiveawayJoined_Join} \"{name}\" [{level}] {strings.GiveawayJoined_ConfirmedFor} {price} " +
-                    $"{strings.GiveawayJoined_Points} ({points})", Color.Green);
+                return
+                    new Log(
+                        $"{GetDateTime()} {{{site}}} {strings.GiveawayJoined_Join} \"{name}\" [{level}] {strings.GiveawayJoined_ConfirmedFor} {price} " +
+                        $"{strings.GiveawayJoined_Points} ({points})", Color.Green);
             }
-            else
-            {
-                return new Log($"{GetDateTime()} {{{site}}} {strings.GiveawayJoined_Join} \"{name}\" {strings.GiveawayJoined_ConfirmedFor} {price} " +
+            return
+                new Log(
+                    $"{GetDateTime()} {{{site}}} {strings.GiveawayJoined_Join} \"{name}\" {strings.GiveawayJoined_ConfirmedFor} {price} " +
                     $"{strings.GiveawayJoined_Points} ({points})", Color.Green);
-            }
         }
 
         public static Log GiveawayNotJoined(string site, string name, string message)
         {
-            return new Log($"{GetDateTime()} {{{site}}} {strings.GiveawayJoined_Join} \"{name}\" {strings.GiveawayNotJoined_NotConfirmed} {{{message}}}", Color.Red);
+            return
+                new Log(
+                    $"{GetDateTime()} {{{site}}} {strings.GiveawayJoined_Join} \"{name}\" {strings.GiveawayNotJoined_NotConfirmed} {{{message}}}",
+                    Color.Red);
         }
 
         public static Log GiveawayHaveWon(string site, int count, string url)

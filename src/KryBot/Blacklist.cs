@@ -10,16 +10,10 @@ namespace KryBot
     {
         public Blacklist()
         {
-            Items = new List<BlacklistItem>();    
+            Items = new List<BlacklistItem>();
         }
 
         public List<BlacklistItem> Items { get; set; }
-
-        public class BlacklistItem
-        {
-            public string Id { get; set; }
-            public string Name { get; set; }
-        }
 
         public bool Save()
         {
@@ -27,7 +21,7 @@ namespace KryBot
             {
                 using (var fs = new FileStream("blacklist.xml", FileMode.Create, FileAccess.Write))
                 {
-                    var serializer = new XmlSerializer(typeof(Blacklist));
+                    var serializer = new XmlSerializer(typeof (Blacklist));
                     serializer.Serialize(fs, this);
                 }
                 return true;
@@ -37,6 +31,12 @@ namespace KryBot
                 MessageBox.Show(@"Ошибка", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+        }
+
+        public class BlacklistItem
+        {
+            public string Id { get; set; }
+            public string Name { get; set; }
         }
     }
 }

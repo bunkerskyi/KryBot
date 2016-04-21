@@ -126,7 +126,8 @@ namespace KryBot
                     if (jsonresponse.Status == "ok")
                     {
                         bot.GameMiner.Coal = jsonresponse.Coal;
-                        return Messages.GiveawayJoined("GameMiner", gmGiveaway.Name, gmGiveaway.Price, jsonresponse.Coal, 0);
+                        return Messages.GiveawayJoined("GameMiner", gmGiveaway.Name, gmGiveaway.Price, jsonresponse.Coal,
+                            0);
                     }
                     var jresponse =
                         JsonConvert.DeserializeObject<GameMiner.JsonResponseError>(response.RestResponse.Content);
@@ -160,7 +161,8 @@ namespace KryBot
             if (sgGiveaway.Token != null)
             {
                 var response = Post("https://www.steamgifts.com/", "/ajax.php",
-                    Generate.PostData_SteamGifts(sgGiveaway.Token, sgGiveaway.Code, "entry_insert"), new List<HttpHeader>(),
+                    Generate.PostData_SteamGifts(sgGiveaway.Token, sgGiveaway.Code, "entry_insert"),
+                    new List<HttpHeader>(),
                     Generate.Cookies_SteamGifts(bot), bot.UserAgent);
 
                 if (response.RestResponse.Content != null)
@@ -170,7 +172,8 @@ namespace KryBot
                     if (jsonresponse.Type == "success")
                     {
                         bot.SteamGifts.Points = jsonresponse.Points;
-                        return Messages.GiveawayJoined("SteamGifts", sgGiveaway.Name, sgGiveaway.Price, jsonresponse.Points,
+                        return Messages.GiveawayJoined("SteamGifts", sgGiveaway.Name, sgGiveaway.Price,
+                            jsonresponse.Points,
                             sgGiveaway.Level);
                     }
 

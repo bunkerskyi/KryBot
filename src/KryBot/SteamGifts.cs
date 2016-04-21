@@ -8,7 +8,7 @@ namespace KryBot
         {
             Cookies = new SgCookies();
             Giveaways = new List<SgGiveaway>();
-            WishlistGiveaways = new List<SgGiveaway>();   
+            WishlistGiveaways = new List<SgGiveaway>();
         }
 
         public bool Enabled { get; set; }

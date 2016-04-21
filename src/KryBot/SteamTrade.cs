@@ -6,13 +6,13 @@ namespace KryBot
     {
         public SteamTrade()
         {
-            Cookies = new StCookies(); 
-            Giveaways = new List<StGiveaway>();   
+            Cookies = new StCookies();
+            Giveaways = new List<StGiveaway>();
         }
 
         public bool Enabled { get; set; }
         public StCookies Cookies { get; set; }
-        public List<StGiveaway> Giveaways { get; set; } 
+        public List<StGiveaway> Giveaways { get; set; }
 
         public class StCookies
         {
