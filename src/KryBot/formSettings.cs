@@ -32,28 +32,28 @@ namespace KryBot
 
             cbSortBy.Text = cbSortBy.Items[0].ToString();
 
-            if (Settings.Default.Timer)
+            if (Properties.Settings.Default.Timer)
             {
                 cbTimerEnable.Checked = true;
                 gbTimerSettings.Enabled = true;
-                tbTimerInterval.Text = (Settings.Default.TimerInterval/60000).ToString();
-                tbTimerLoops.Text = Settings.Default.TimerLoops.ToString();
+                tbTimerInterval.Text = (Properties.Settings.Default.TimerInterval/60000).ToString();
+                tbTimerLoops.Text = Properties.Settings.Default.TimerLoops.ToString();
             }
             else
             {
                 cbTimerEnable.Checked = false;
                 gbTimerSettings.Enabled = false;
-                tbTimerInterval.Text = (Settings.Default.TimerInterval/60000).ToString();
-                tbTimerLoops.Text = Settings.Default.TimerLoops.ToString();
+                tbTimerInterval.Text = (Properties.Settings.Default.TimerInterval/60000).ToString();
+                tbTimerLoops.Text = Properties.Settings.Default.TimerLoops.ToString();
             }
 
-            cbSort.Checked = Settings.Default.Sort;
-            if (Settings.Default.SortToMore)
+            cbSort.Checked = Properties.Settings.Default.Sort;
+            if (Properties.Settings.Default.SortToMore)
             {
                 cbSortBy.Text = @"дорогие";
             }
 
-            if (Settings.Default.SortToLess)
+            if (Properties.Settings.Default.SortToLess)
             {
                 cbSortBy.Text = @"дешевые";
             }
@@ -92,11 +92,11 @@ namespace KryBot
             tbSPMaxValue.Text = _bot.SteamPortal.MaxJoinValue.ToString();
             tbSPReserv.Text = _bot.SteamPortal.PointsReserv.ToString();
 
-            cbAutorun.Checked = Settings.Default.Autorun;
-            cbWonTip.Checked = Settings.Default.ShowWonTip;
-            cbFarmTip.Checked = Settings.Default.ShowFarmTip;
-            cbFullLog.Checked = Settings.Default.FullLog;
-            cbWishlistSort.Checked = Settings.Default.WishlistNotSort;
+            cbAutorun.Checked = Properties.Settings.Default.Autorun;
+            cbWonTip.Checked = Properties.Settings.Default.ShowWonTip;
+            cbFarmTip.Checked = Properties.Settings.Default.ShowFarmTip;
+            cbFullLog.Checked = Properties.Settings.Default.FullLog;
+            cbWishlistSort.Checked = Properties.Settings.Default.WishlistNotSort;
         }
 
         private void btbGMCookies_Click(object sender, EventArgs e)
@@ -124,13 +124,13 @@ namespace KryBot
             {
                 MessageBox.Show(@"Интервал таймера не может ровняться 0", strings.Error, MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
-                tbTimerInterval.Text = Settings.Default.TimerInterval.ToString();
+                tbTimerInterval.Text = Properties.Settings.Default.TimerInterval.ToString();
                 return;
             }
 
-            Settings.Default.Sort = cbSort.Checked;
-            Settings.Default.SortToMore = cbSortBy.Text == @"дорогие";
-            Settings.Default.SortToLess = cbSortBy.Text == @"дешевые";
+            Properties.Settings.Default.Sort = cbSort.Checked;
+            Properties.Settings.Default.SortToMore = cbSortBy.Text == @"дорогие";
+            Properties.Settings.Default.SortToLess = cbSortBy.Text == @"дешевые";
 
             _bot.GameMiner.Regular = cbGMRegular.Checked;
             _bot.GameMiner.Sandbox = chGMSandbox.Checked;
@@ -163,18 +163,18 @@ namespace KryBot
             _bot.PlayBlink.MaxJoinValue = int.Parse(tbPBMaxValue.Text);
             _bot.PlayBlink.PointReserv = int.Parse(tbPBReserv.Text);
 
-            Settings.Default.Timer = cbTimerEnable.Checked;
-            Settings.Default.TimerInterval = int.Parse(tbTimerInterval.Text)*60000;
-            Settings.Default.TimerLoops = int.Parse(tbTimerLoops.Text);
+            Properties.Settings.Default.Timer = cbTimerEnable.Checked;
+            Properties.Settings.Default.TimerInterval = int.Parse(tbTimerInterval.Text)*60000;
+            Properties.Settings.Default.TimerLoops = int.Parse(tbTimerLoops.Text);
 
-            Settings.Default.Autorun = cbAutorun.Checked;
-            Settings.Default.ShowWonTip = cbWonTip.Checked;
-            Settings.Default.ShowFarmTip = cbFarmTip.Checked;
-            Settings.Default.FullLog = cbFullLog.Checked;
-            Settings.Default.WishlistNotSort = cbWishlistSort.Checked;
+            Properties.Settings.Default.Autorun = cbAutorun.Checked;
+            Properties.Settings.Default.ShowWonTip = cbWonTip.Checked;
+            Properties.Settings.Default.ShowFarmTip = cbFarmTip.Checked;
+            Properties.Settings.Default.FullLog = cbFullLog.Checked;
+            Properties.Settings.Default.WishlistNotSort = cbWishlistSort.Checked;
 
             _bot.Save();
-            Settings.Default.Save();
+            Properties.Settings.Default.Save();
         }
 
         private void btnSGCookies_Click(object sender, EventArgs e)

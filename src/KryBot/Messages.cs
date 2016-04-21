@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Windows.Forms;
 using KryBot.lang;
-using KryBot.Properties;
 
 namespace KryBot
 {
@@ -48,9 +47,9 @@ namespace KryBot
 
         public static Log GiveawayJoined(string site, string name, int price, int points, int level)
         {
-            Settings.Default.JoinsPerSession += 1;
-            Settings.Default.JoinsTotal += 1;
-            Settings.Default.Save();
+            Properties.Settings.Default.JoinsPerSession += 1;
+            Properties.Settings.Default.JoinsTotal += 1;
+            Properties.Settings.Default.Save();
 
             if (level > 0)
             {

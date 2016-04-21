@@ -9,7 +9,6 @@ using System.Security;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using KryBot.lang;
-using KryBot.Properties;
 using Microsoft.Win32;
 using RestSharp;
 
@@ -156,73 +155,6 @@ namespace KryBot
                 return false;
             }
             catch (ArgumentException)
-            {
-                return false;
-            }
-        }
-
-        public static bool SaveSettings()
-        {
-            var sets = new Classes.Settings
-            {
-                Lang = Settings.Default.Lang,
-                LogActive = Settings.Default.LogActive,
-                FullLog = Settings.Default.FullLog,
-                Timer = Settings.Default.Timer,
-                TimerInterval = Settings.Default.TimerInterval,
-                TimerLoops = Settings.Default.TimerLoops,
-                SortToLess = Settings.Default.SortToLess,
-                SortToMore = Settings.Default.SortToMore,
-                Sort = Settings.Default.Sort,
-                ShowFarmTip = Settings.Default.ShowFarmTip,
-                ShowWonTip = Settings.Default.ShowWonTip,
-                Autorun = Settings.Default.Autorun,
-                WishlistSort = Settings.Default.WishlistNotSort
-            };
-
-            try
-            {
-                using (var fs = new FileStream("settings.xml", FileMode.Create, FileAccess.Write))
-                {
-                    var serializer = new XmlSerializer(typeof (Classes.Settings));
-                    serializer.Serialize(fs, sets);
-                }
-                return true;
-            }
-            catch (Exception)
-            {
-                // ignored todo сделать оповещение о фейле
-                return false;
-            }
-        }
-
-        public static bool LoadSettings()
-        {
-            try
-            {
-                var serializer = new XmlSerializer(typeof (Classes.Settings));
-                var reader = new StreamReader("settings.xml");
-                var sets = (Classes.Settings) serializer.Deserialize(reader);
-                reader.Close();
-
-                Settings.Default.Autorun = sets.Autorun;
-                Settings.Default.Sort = sets.Sort;
-                Settings.Default.SortToLess = sets.SortToLess;
-                Settings.Default.SortToMore = sets.SortToMore;
-                Settings.Default.Timer = sets.Timer;
-                Settings.Default.TimerInterval = sets.TimerInterval;
-                Settings.Default.TimerLoops = sets.TimerLoops;
-                Settings.Default.LogActive = sets.LogActive;
-                Settings.Default.FullLog = sets.FullLog;
-                Settings.Default.WishlistNotSort = sets.WishlistSort;
-                Settings.Default.Lang = sets.Lang;
-                Settings.Default.ShowFarmTip = sets.ShowFarmTip;
-                Settings.Default.ShowWonTip = sets.ShowWonTip;
-                Settings.Default.Save();
-
-                return true;
-            }
-            catch (Exception)
             {
                 return false;
             }

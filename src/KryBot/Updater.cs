@@ -5,7 +5,6 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KryBot.lang;
-using KryBot.Properties;
 using Newtonsoft.Json;
 
 namespace KryBot
@@ -14,7 +13,7 @@ namespace KryBot
     {
         public static async Task<Log> CheckForUpdates()
         {
-            var json = await Web.GetVersionInGitHubAsync(Settings.Default.GitHubRepoReleaseUrl);
+            var json = await Web.GetVersionInGitHubAsync(Properties.Settings.Default.GitHubRepoReleaseUrl);
 
             if (json != "")
             {
@@ -78,7 +77,7 @@ namespace KryBot
                 }
             }
 
-            var json = await Web.GetVersionInGitHubAsync(Settings.Default.GitHubRepoReleaseUrl);
+            var json = await Web.GetVersionInGitHubAsync(Properties.Settings.Default.GitHubRepoReleaseUrl);
 
             Classes.GitHubRelease release;
             try

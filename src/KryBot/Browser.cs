@@ -12,21 +12,18 @@ namespace KryBot
     {
         private const int InternetCookieHttponly = 0x2000;
         private readonly Bot _bot;
-        private readonly CookieContainer _cookies;
         private readonly string _endPage;
         private readonly string _phpSessId;
         private readonly string _startPage;
         private readonly string _title;
 
-        public Browser(Bot bot, string startPage, string endPage, string title, string phpSessId,
-            CookieContainer cookies)
+        public Browser(Bot bot, string startPage, string endPage, string title, string phpSessId)
         {
             _bot = bot;
             _startPage = startPage;
             _endPage = endPage;
             _title = title;
             _phpSessId = phpSessId;
-            _cookies = cookies;
             InitializeComponent();
         }
 
@@ -49,15 +46,6 @@ namespace KryBot
             toolStripStatusLabelIE.Text = $"IE: {webBrowser.Version}";
             webBrowser.ScriptErrorsSuppressed = true;
             webBrowser.DocumentCompleted += wb_DocumentCompleted;
-
-            if (_cookies != null && _cookies.Count > 0)
-            {
-                //var cookies = Tools.CookieContainer_ToList(_cookies);
-                //foreach (var cookie in cookies)
-                //{
-                //    InternetSetCookie("http://steamcommunity.com/", cookie.Name, cookie.Value);
-                //}
-            }
 
             if (_phpSessId != "")
             {
@@ -87,7 +75,7 @@ namespace KryBot
                 if (webBrowser.Url.AbsoluteUri == _endPage ||
                     webBrowser.Url.AbsoluteUri == "https://www.steamgifts.com/register")
                 {
-                    if (_endPage == "http://gameminer.net/?lang=ru_RU" || _endPage == "http://gameminer.net/?lang=en_US")
+                    if (_endPage.Contains("http://gameminer.net/?lang="))
                     {
                         GameMinerAuth();
                     }

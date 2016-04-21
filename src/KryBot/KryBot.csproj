@@ -202,6 +202,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="Steam.cs" />
     <Compile Include="SteamCompanion.cs" />
     <Compile Include="SteamGifts.cs" />

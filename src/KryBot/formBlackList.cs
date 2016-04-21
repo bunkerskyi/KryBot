@@ -121,10 +121,11 @@ namespace KryBot
         {
             var form = new FormTextBox("Enter id", true);
             form.ShowDialog();
-            if (Settings.Default._idCache != "0")
+            if (Properties.Settings.Default._idCache != "0")
             {
-                listView.Items.Add(Settings.Default._idCache).SubItems.Add(await LoadName(Settings.Default._idCache));
-                Settings.Default._idCache = "0";
+                listView.Items.Add(Properties.Settings.Default._idCache)
+                    .SubItems.Add(await LoadName(Properties.Settings.Default._idCache));
+                Properties.Settings.Default._idCache = "0";
             }
             toolStripStatusLabel.Text = $"Количество: {listView.Items.Count}";
         }
