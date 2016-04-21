@@ -296,7 +296,7 @@ namespace KryBot
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             Settings.Default.LogActive = LogActive;
-            Tools.SaveProfile(Bot, "");
+            Bot.Save();
             Tools.SaveSettings();
             Settings.Default.JoinsPerSession = 0;
             Settings.Default.JoinsLoops = 0;
@@ -778,6 +778,8 @@ namespace KryBot
                 _loopsLeft += -1;
             }
 
+            Bot.ClearGiveawayList();
+
             toolStripProgressBar1.Visible = false;
             toolStripStatusLabel1.Image = null;
             toolStripStatusLabel1.Text = strings.StatusBar_End;
@@ -1090,7 +1092,7 @@ namespace KryBot
 
             BrowserStart(location, "http://steamtrade.info/", "SteamTrade - Login", cookie,
                 Bot.Steam.Enabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
-            Tools.SaveProfile(Bot, "");
+            Bot.Save();
 
             toolStripStatusLabel1.Image = Resources.load;
             toolStripStatusLabel1.Text = strings.StatusBar_Login;
@@ -1141,7 +1143,7 @@ namespace KryBot
             btnSPLogin.Enabled = false;
             BrowserStart("http://steamportal.net/page/steam", "http://steamportal.net/", "SteamPortal - Login", "",
                 Bot.Steam.Enabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
-            Tools.SaveProfile(Bot, "");
+            Bot.Save();
 
             toolStripStatusLabel1.Image = Resources.load;
             toolStripStatusLabel1.Text = strings.StatusBar_Login;
@@ -1183,7 +1185,7 @@ namespace KryBot
             btnSCLogin.Enabled = false;
             BrowserStart("https://steamcompanion.com/login", "https://steamcompanion.com/", "SteamCompanion - Login", "",
                 Bot.Steam.Enabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
-            Tools.SaveProfile(Bot, "");
+            Bot.Save();
 
             toolStripStatusLabel1.Image = Resources.load;
             toolStripStatusLabel1.Text = strings.StatusBar_Login;
@@ -1224,7 +1226,7 @@ namespace KryBot
             btnSGLogin.Enabled = false;
             BrowserStart("https://www.steamgifts.com/?login", "https://www.steamgifts.com/", "SteamGifts - Login", "",
                 Bot.Steam.Enabled ? Generate.Cookies_Steam(Bot) : new CookieContainer());
-            Tools.SaveProfile(Bot, "");
+            Bot.Save();
 
             toolStripStatusLabel1.Image = Resources.load;
             toolStripStatusLabel1.Text = strings.StatusBar_Login;
@@ -1272,7 +1274,7 @@ namespace KryBot
             {
                 Bot.UserAgent = Tools.UserAgent();
             }
-            Tools.SaveProfile(Bot, "");
+            Bot.Save();
 
             toolStripStatusLabel1.Image = Resources.load;
             toolStripStatusLabel1.Text = strings.StatusBar_Login;
@@ -1599,7 +1601,7 @@ namespace KryBot
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Tools.SaveProfile(Bot, ""))
+            if (Bot.Save())
             {
                 LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + " Настройки сохранены в profile.xml",
                     Color.White,
@@ -1621,7 +1623,7 @@ namespace KryBot
 
             if (saveFileDialog1.FileName != "")
             {
-                if (Tools.SaveProfile(Bot, saveFileDialog1.FileName))
+                if (Bot.Save(saveFileDialog1.FileName))
                 {
                     LogBuffer =
                         Tools.ConstructLog(
@@ -1726,7 +1728,7 @@ namespace KryBot
         {
             BrowserStart("https://steamcommunity.com/login/home/?goto=0",
                 "http://steamcommunity.com/id/", "Steam - Login", "", new CookieContainer());
-            Tools.SaveProfile(Bot, "");
+            Bot.Save();
 
             toolStripStatusLabel1.Image = Resources.load;
             toolStripStatusLabel1.Text = strings.StatusBar_Login;
@@ -1837,7 +1839,7 @@ namespace KryBot
             btnSteamLogin.Visible = true;
             btnSteamLogin.Enabled = true;
             btnSteamExit.Visible = false;
-            Tools.SaveProfile(Bot, "");
+            Bot.Save();
         }
 
         private void btnSTExit_Click(object sender, EventArgs e)
@@ -1851,7 +1853,7 @@ namespace KryBot
             btnSTLogin.Visible = true;
             btnSTExit.Visible = false;
             btnSTLogin.Enabled = true;
-            Tools.SaveProfile(Bot, "");
+            Bot.Save();
         }
 
         private void btnSPExit_Click(object sender, EventArgs e)
@@ -1862,7 +1864,7 @@ namespace KryBot
             btnSPLogin.Visible = true;
             btnSPLogin.Enabled = true;
             btnSPExit.Visible = false;
-            Tools.SaveProfile(Bot, "");
+            Bot.Save();
         }
 
         private void btnSCExit_Click(object sender, EventArgs e)
@@ -1876,7 +1878,7 @@ namespace KryBot
             btnSCLogin.Visible = true;
             btnSCLogin.Enabled = true;
             btnSCExit.Visible = false;
-            Tools.SaveProfile(Bot, "");
+            Bot.Save();
         }
 
         private void btnSGExit_Click(object sender, EventArgs e)
@@ -1887,7 +1889,7 @@ namespace KryBot
             btnSGLogin.Visible = true;
             btnSGLogin.Enabled = true;
             btnSGExit.Visible = false;
-            Tools.SaveProfile(Bot, "");
+            Bot.Save();
         }
 
         private void btnGMExit_Click(object sender, EventArgs e)
@@ -1899,7 +1901,7 @@ namespace KryBot
             btnGMLogin.Enabled = true;
             btnGMLogin.Visible = true;
             btnGMExit.Visible = false;
-            Tools.SaveProfile(Bot, "");
+            Bot.Save();
         }
 
         private void вПапкуСБотомToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1930,7 +1932,7 @@ namespace KryBot
             {
                 Bot.UserAgent = Tools.UserAgent();
             }
-            Tools.SaveProfile(Bot, "");
+            Bot.Save();
 
             toolStripStatusLabel1.Image = Resources.load;
             toolStripStatusLabel1.Text = strings.StatusBar_Login;
@@ -1974,7 +1976,7 @@ namespace KryBot
             btnPBLogin.Enabled = true;
             btnPBLogin.Visible = true;
             btnPBExit.Visible = false;
-            Tools.SaveProfile(Bot, "");
+            Bot.Save();
         }
 
         private void linkLabel7_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

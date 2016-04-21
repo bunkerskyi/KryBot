@@ -67,7 +67,7 @@ namespace KryBot
                 _bot.GameMiner.Cookies.Xsrf = (Controls["_xsrf"] as TextBox)?.Text;
                 _bot.UserAgent = (Controls["UserAgent"] as TextBox)?.Text;
                 _bot.GameMiner.Enabled = true;
-                Tools.SaveProfile(_bot, "");
+                _bot.Save();
                 ShowMessage();
                 Close();
             }
@@ -76,7 +76,7 @@ namespace KryBot
             {
                 _bot.SteamGifts.Cookies.PhpSessId = (Controls["PHPSESSID"] as TextBox)?.Text;
                 _bot.SteamGifts.Enabled = true;
-                Tools.SaveProfile(_bot, "");
+                _bot.Save();
                 ShowMessage();
                 Close();
             }
@@ -88,7 +88,7 @@ namespace KryBot
                 _bot.SteamCompanion.Cookies.UserC = (Controls["userc"] as TextBox)?.Text;
                 _bot.SteamCompanion.Cookies.UserT = (Controls["usert"] as TextBox)?.Text;
                 _bot.SteamCompanion.Enabled = true;
-                Tools.SaveProfile(_bot, "");
+                _bot.Save();
                 ShowMessage();
                 Close();
             }
@@ -97,7 +97,7 @@ namespace KryBot
             {
                 _bot.SteamPortal.Cookies.PhpSessId = (Controls["PHPSESSID"] as TextBox)?.Text;
                 _bot.SteamPortal.Enabled = true;
-                Tools.SaveProfile(_bot, "");
+                _bot.Save();
                 ShowMessage();
                 Close();
             }
@@ -109,7 +109,7 @@ namespace KryBot
                 _bot.SteamTrade.Cookies.DleUserId = (Controls["dle_user_id"] as TextBox)?.Text;
                 _bot.SteamTrade.Cookies.PassHash = (Controls["passhash"] as TextBox)?.Text;
                 _bot.SteamTrade.Enabled = true;
-                Tools.SaveProfile(_bot, "");
+                _bot.Save();
                 ShowMessage();
                 Close();
             }
@@ -119,7 +119,7 @@ namespace KryBot
                 _bot.Steam.Cookies.Login = (Controls["steamLogin"] as TextBox)?.Text;
                 _bot.Steam.Cookies.Sessid = (Controls["sessionid"] as TextBox)?.Text;
                 _bot.Steam.Enabled = true;
-                Tools.SaveProfile(_bot, "");
+                _bot.Save();
                 ShowMessage();
                 Close();
             }
@@ -128,7 +128,7 @@ namespace KryBot
             {
                 _bot.PlayBlink.Cookies.PhpSessId = (Controls["PHPSESSID"] as TextBox)?.Text;
                 _bot.PlayBlink.Enabled = true;
-                Tools.SaveProfile(_bot, "");
+                _bot.Save();
                 ShowMessage();
                 Close();
             }

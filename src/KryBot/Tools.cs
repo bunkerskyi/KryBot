@@ -49,24 +49,6 @@ namespace KryBot
             }
         }
 
-        public static bool SaveProfile(Bot bot, string path)
-        {
-            try
-            {
-                using (var fs = new FileStream(path == "" ? "profile.xml" : path, FileMode.Create, FileAccess.Write))
-                {
-                    var serializer = new XmlSerializer(typeof (Bot));
-                    serializer.Serialize(fs, bot);
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                // ignored todo сделать оповещение о фейле
-                return false;
-            }
-        }
-
         public static string UserAgent()
         {
             var js =

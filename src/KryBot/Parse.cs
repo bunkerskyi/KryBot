@@ -426,7 +426,7 @@ namespace KryBot
                 {
                     bot.SteamGifts.Enabled = false;
                     bot.GameMiner.Cookies.Xsrf = "";
-                    SaveProfile(bot, "");
+                    bot.Save();
                     return
                         ConstructLog(
                             $"{GetDateTime()} {{SteamGifts}} {strings.AccountNotActive} {{{error.InnerText}}}",

@@ -173,7 +173,7 @@ namespace KryBot
             Settings.Default.FullLog = cbFullLog.Checked;
             Settings.Default.WishlistNotSort = cbWishlistSort.Checked;
 
-            Tools.SaveProfile(_bot, "");
+            _bot.Save();
             Settings.Default.Save();
         }
 
@@ -223,7 +223,7 @@ namespace KryBot
 
         private void FormSettings_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Tools.SaveProfile(_bot, "");
+            _bot.Save();
         }
 
         private void tbGMMaxValue_KeyPress(object sender, KeyPressEventArgs e)
