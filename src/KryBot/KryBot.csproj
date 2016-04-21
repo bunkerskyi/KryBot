@@ -121,6 +121,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blacklist.cs" />
     <Compile Include="Bot.cs" />
     <Compile Include="Browser.cs">
       <SubType>Form</SubType>
@@ -190,6 +191,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>strings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Log.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="Parse.cs" />
     <Compile Include="PlayBlink.cs" />
@@ -210,6 +212,7 @@
     <Compile Include="Web.cs" />
     <EmbeddedResource Include="Browser.resx">
       <DependentUpon>Browser.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="formAbout.resx">
       <DependentUpon>formAbout.cs</DependentUpon>

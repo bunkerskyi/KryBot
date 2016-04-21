@@ -34,21 +34,6 @@ namespace KryBot
             }
         }
 
-        public static void CopyResource(string resourceName, string file)
-        {
-            using (var resource = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName))
-            {
-                if (resource == null)
-                {
-                    return;
-                }
-                using (Stream output = File.OpenWrite(file))
-                {
-                    resource.CopyTo(output);
-                }
-            }
-        }
-
         public static string UserAgent()
         {
             var js =
@@ -62,18 +47,6 @@ namespace KryBot
             }
 
             return wb.DocumentText.Substring(js.Length);
-        }
-
-        public static Classes.Log ConstructLog(string content, Color color, bool success, bool echo)
-        {
-            var log = new Classes.Log
-            {
-                Content = content + "\n",
-                Color = color,
-                Success = success,
-                Echo = echo
-            };
-            return log;
         }
 
         public static string GetLocationInresponse(IRestResponse response)
@@ -256,7 +229,7 @@ namespace KryBot
             }
         }
 
-        public static Classes.Blacklist LoadBlackList()
+        public static Blacklist LoadBlackList()
         {
             if (File.Exists("blacklist.xml"))
             {
@@ -264,18 +237,18 @@ namespace KryBot
                 {
                     using (var reader = new StreamReader("blacklist.xml"))
                     {
-                        var serializer = new XmlSerializer(typeof (Classes.Blacklist));
-                        var blacklist = (Classes.Blacklist) serializer.Deserialize(reader);
+                        var serializer = new XmlSerializer(typeof (Blacklist));
+                        var blacklist = (Blacklist) serializer.Deserialize(reader);
                         return blacklist;
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(@"Ошибка", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return new Classes.Blacklist();
+                    return new Blacklist();
                 }
             }
-            return new Classes.Blacklist();
+            return new Blacklist();
         }
     }
 }

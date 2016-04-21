@@ -19,7 +19,7 @@ namespace KryBot
     {
         #region Steam
 
-        public static Classes.Log SteamGetProfile(Bot bot, bool echo)
+        public static Log SteamGetProfile(Bot bot, bool echo)
         {
             var response = Web.Get("http://steamcommunity.com/", "", new List<Parameter>(),
                 Generate.Cookies_Steam(bot), new List<HttpHeader>(),
@@ -45,9 +45,9 @@ namespace KryBot
             return ParseProfileFailed("Steam");
         }
 
-        public static async Task<Classes.Log> SteamGetProfileAsync(Bot bot, bool echo)
+        public static async Task<Log> SteamGetProfileAsync(Bot bot, bool echo)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = SteamGetProfile(bot, echo);
@@ -91,7 +91,7 @@ namespace KryBot
 
         #region GameMiner
 
-        public static Classes.Log GameMinerGetProfile(Bot bot, bool echo)
+        public static Log GameMinerGetProfile(Bot bot, bool echo)
         {
             var response = Web.Get("http://gameminer.net/", "", new List<Parameter>(),
                 Generate.Cookies_GameMiner(bot), new List<HttpHeader>(),
@@ -120,9 +120,9 @@ namespace KryBot
             return ParseProfileFailed("GameMiner");
         }
 
-        public static async Task<Classes.Log> GameMinerGetProfileAsync(Bot bot, bool echo)
+        public static async Task<Log> GameMinerGetProfileAsync(Bot bot, bool echo)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = GameMinerGetProfile(bot, echo);
@@ -132,7 +132,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log GameMinerWonParse(Bot bot)
+        public static Log GameMinerWonParse(Bot bot)
         {
             var response = Web.Get("http://gameminer.net/", "giveaways/won", new List<Parameter>(),
                 Generate.Cookies_GameMiner(bot), new List<HttpHeader>(),
@@ -168,9 +168,9 @@ namespace KryBot
             return null;
         }
 
-        public static async Task<Classes.Log> GameMinerWonParseAsync(Bot bot)
+        public static async Task<Log> GameMinerWonParseAsync(Bot bot)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = GameMinerWonParse(bot);
@@ -180,8 +180,8 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log GameMinerLoadGiveaways(Bot bot, List<GameMiner.GmGiveaway> giveaways,
-            Classes.Blacklist blackList)
+        public static Log GameMinerLoadGiveaways(Bot bot, List<GameMiner.GmGiveaway> giveaways,
+            Blacklist blackList)
         {
             var content = "";
             giveaways?.Clear();
@@ -312,7 +312,7 @@ namespace KryBot
             if (giveaways == null)
             {
                 return
-                    ConstructLog(
+                    new Log(
                         $"{content}{GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0",
                         Color.White, true, true);
             }
@@ -334,15 +334,15 @@ namespace KryBot
             }
 
             return
-                ConstructLog(
+                new Log(
                     $"{content}{GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {giveaways.Count}",
                     Color.White, true, true);
         }
 
-        public static async Task<Classes.Log> GameMinerLoadGiveawaysAsync(Bot bot,
-            List<GameMiner.GmGiveaway> giveaways, Classes.Blacklist blackList)
+        public static async Task<Log> GameMinerLoadGiveawaysAsync(Bot bot,
+            List<GameMiner.GmGiveaway> giveaways, Blacklist blackList)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = GameMinerLoadGiveaways(bot, giveaways, blackList);
@@ -399,7 +399,7 @@ namespace KryBot
 
         #region SteamGifts
 
-        public static Classes.Log SteamGiftsGetProfile(Bot bot, bool echo)
+        public static Log SteamGiftsGetProfile(Bot bot, bool echo)
         {
             var response = Web.Get("https://www.steamgifts.com/", "", new List<Parameter>(),
                 Generate.Cookies_SteamGifts(bot), new List<HttpHeader>(), bot.UserAgent);
@@ -428,7 +428,7 @@ namespace KryBot
                     bot.GameMiner.Cookies.Xsrf = "";
                     bot.Save();
                     return
-                        ConstructLog(
+                        new Log(
                             $"{GetDateTime()} {{SteamGifts}} {strings.AccountNotActive} {{{error.InnerText}}}",
                             Color.Red, false, true);
                 }
@@ -436,9 +436,9 @@ namespace KryBot
             return ParseProfileFailed("SteamGifts");
         }
 
-        public static async Task<Classes.Log> SteamGiftsGetProfileAsync(Bot bot, bool echo)
+        public static async Task<Log> SteamGiftsGetProfileAsync(Bot bot, bool echo)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = SteamGiftsGetProfile(bot, echo);
@@ -448,7 +448,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamGiftsWonParse(Bot bot)
+        public static Log SteamGiftsWonParse(Bot bot)
         {
             var response = Web.Get("https://www.steamgifts.com/", "", new List<Parameter>(),
                 Generate.Cookies_SteamGifts(bot), new List<HttpHeader>(), bot.UserAgent);
@@ -470,9 +470,9 @@ namespace KryBot
             return null;
         }
 
-        public static async Task<Classes.Log> SteamGiftsWonParseAsync(Bot bot)
+        public static async Task<Log> SteamGiftsWonParseAsync(Bot bot)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = SteamGiftsWonParse(bot);
@@ -482,8 +482,8 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamGiftsLoadGiveaways(Bot bot, List<SteamGifts.SgGiveaway> giveaways,
-            List<SteamGifts.SgGiveaway> wishlistGiveaways, Classes.Blacklist blackList)
+        public static Log SteamGiftsLoadGiveaways(Bot bot, List<SteamGifts.SgGiveaway> giveaways,
+            List<SteamGifts.SgGiveaway> wishlistGiveaways, Blacklist blackList)
         {
             var content = "";
             giveaways?.Clear();
@@ -562,7 +562,7 @@ namespace KryBot
             if (giveaways?.Count == 0 && wishlistGiveaways.Count == 0)
             {
                 return
-                    ConstructLog(
+                    new Log(
                         $"{content}{GetDateTime()} {{SteamGifts}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0",
                         Color.White, true, true);
             }
@@ -583,16 +583,16 @@ namespace KryBot
             }
 
             return
-                ConstructLog(
+                new Log(
                     $"{content}{GetDateTime()} {{SteamGifts}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {giveaways?.Count + wishlistGiveaways.Count}",
                     Color.White, true, true);
         }
 
-        public static async Task<Classes.Log> SteamGiftsLoadGiveawaysAsync(Bot bot,
+        public static async Task<Log> SteamGiftsLoadGiveawaysAsync(Bot bot,
             List<SteamGifts.SgGiveaway> giveaways, List<SteamGifts.SgGiveaway> wishlistGiveaways,
-            Classes.Blacklist blackList)
+            Blacklist blackList)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = SteamGiftsLoadGiveaways(bot, giveaways, wishlistGiveaways, blackList);
@@ -798,7 +798,7 @@ namespace KryBot
 
         #region SteamCompanion 
 
-        public static Classes.Log SteamCompanionGetProfile(Bot bot, bool echo)
+        public static Log SteamCompanionGetProfile(Bot bot, bool echo)
         {
             var response = Web.Get("https://steamcompanion.com", "/", new List<Parameter>(),
                 Generate.Cookies_SteamCompanion(bot),
@@ -821,9 +821,9 @@ namespace KryBot
             return ParseProfileFailed("SteamCompanion");
         }
 
-        public static async Task<Classes.Log> SteamCompanionGetProfileAsync(Bot bot, bool echo)
+        public static async Task<Log> SteamCompanionGetProfileAsync(Bot bot, bool echo)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = SteamCompanionGetProfile(bot, echo);
@@ -833,7 +833,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamCompanionWonParse(Bot bot)
+        public static Log SteamCompanionWonParse(Bot bot)
         {
             var response = Web.Get("https://steamcompanion.com/", "gifts/won", new List<Parameter>(),
                 Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(),
@@ -866,9 +866,9 @@ namespace KryBot
             return null;
         }
 
-        public static async Task<Classes.Log> SteamCompanionWonParseAsync(Bot bot)
+        public static async Task<Log> SteamCompanionWonParseAsync(Bot bot)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = SteamCompanionWonParse(bot);
@@ -878,8 +878,8 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamCompanionLoadGiveaways(Bot bot, List<SteamCompanion.ScGiveaway> giveaways,
-            List<SteamCompanion.ScGiveaway> wishlistGiveaways, Classes.Blacklist blackList)
+        public static Log SteamCompanionLoadGiveaways(Bot bot, List<SteamCompanion.ScGiveaway> giveaways,
+            List<SteamCompanion.ScGiveaway> wishlistGiveaways, Blacklist blackList)
         {
             var content = "";
             giveaways?.Clear();
@@ -952,22 +952,22 @@ namespace KryBot
             if (giveaways?.Count == 0 && wishlistGiveaways.Count == 0)
             {
                 return
-                    ConstructLog(
+                    new Log(
                         $"{content}{GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0",
                         Color.White, true, true);
             }
 
             return
-                ConstructLog(
+                new Log(
                     $"{content}{GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {giveaways?.Count + wishlistGiveaways.Count}",
                     Color.White, true, true);
         }
 
-        public static async Task<Classes.Log> SteamCompanionLoadGiveawaysAsync(Bot bot,
+        public static async Task<Log> SteamCompanionLoadGiveawaysAsync(Bot bot,
             List<SteamCompanion.ScGiveaway> giveaways, List<SteamCompanion.ScGiveaway> wishlistGiveaways,
-            Classes.Blacklist blackList)
+            Blacklist blackList)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = SteamCompanionLoadGiveaways(bot, giveaways, wishlistGiveaways, blackList);
@@ -1161,7 +1161,7 @@ namespace KryBot
             }
         }
 
-        public static Classes.Log SteamCompanionGetJoinData(SteamCompanion.ScGiveaway scGiveaway, Bot bot)
+        public static Log SteamCompanionGetJoinData(SteamCompanion.ScGiveaway scGiveaway, Bot bot)
         {
             var response = Web.Get(scGiveaway.Link, "",
                 new List<Parameter>(), Generate.Cookies_SteamCompanion(bot),
@@ -1179,7 +1179,7 @@ namespace KryBot
                 {
                     scGiveaway.StoreId = storId.Attributes["href"].Value.Split('/')[4];
                     scGiveaway.Code = code.Attributes["data-hashid"].Value;
-                    return ConstructLog("", Color.AliceBlue, true, false);
+                    return new Log("", Color.White, true, false);
                 }
 
                 var group =
@@ -1199,7 +1199,7 @@ namespace KryBot
                     var error =
                         htmlDoc.DocumentNode.SelectSingleNode("//a[@class='notification group-join regular-button qa']");
                     return
-                        ConstructLog(
+                        new Log(
                             $"{GetDateTime()} {{SteamCompanion}} {strings.GiveawayJoined_Join} \"{scGiveaway.Name}\" {strings.GiveawayNotJoined_NotConfirmed} " +
                             $"{strings.GiveawayNotJoined_YouMustEnteredToGroup} {{{(error == null ? "Error" : error.Attributes["href"].Value)}}}",
                             Color.Yellow, false, true);
@@ -1220,7 +1220,7 @@ namespace KryBot
 
         #region SteamPortal
 
-        public static Classes.Log SteamPortalGetProfile(Bot bot, bool echo)
+        public static Log SteamPortalGetProfile(Bot bot, bool echo)
         {
             var response = Web.Get("http://steamportal.net/", "", new List<Parameter>(),
                 Generate.Cookies_SteamPortal(bot),
@@ -1243,9 +1243,9 @@ namespace KryBot
             return ParseProfileFailed("SteamPortal");
         }
 
-        public static async Task<Classes.Log> SteamPortalGetProfileAsync(Bot bot, bool echo)
+        public static async Task<Log> SteamPortalGetProfileAsync(Bot bot, bool echo)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = SteamPortalGetProfile(bot, echo);
@@ -1255,7 +1255,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamPortalWonParse(Bot bot)
+        public static Log SteamPortalWonParse(Bot bot)
         {
             var response = Web.Get("http://steamportal.net/", "profile/logs", new List<Parameter>(),
                 Generate.Cookies_SteamPortal(bot), new List<HttpHeader>(), bot.UserAgent);
@@ -1283,9 +1283,9 @@ namespace KryBot
             return null;
         }
 
-        public static async Task<Classes.Log> SteamPortalWonParsAsync(Bot bot)
+        public static async Task<Log> SteamPortalWonParsAsync(Bot bot)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = SteamPortalWonParse(bot);
@@ -1295,8 +1295,8 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamPortalLoadGiveaways(Bot bot, List<SteamPortal.SpGiveaway> giveaways,
-            Classes.Blacklist blackList)
+        public static Log SteamPortalLoadGiveaways(Bot bot, List<SteamPortal.SpGiveaway> giveaways,
+            Blacklist blackList)
         {
             giveaways?.Clear();
 
@@ -1358,7 +1358,7 @@ namespace KryBot
             if (giveaways == null)
             {
                 return
-                    ConstructLog(
+                    new Log(
                         $"{GetDateTime()} {{SteamPortal}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0",
                         Color.White, true, true);
             }
@@ -1376,15 +1376,15 @@ namespace KryBot
             }
 
             return
-                ConstructLog(
+                new Log(
                     $"{GetDateTime()} {{SteamPortal}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {giveaways.Count}",
                     Color.White, true, true);
         }
 
-        public static async Task<Classes.Log> SteamPortalLoadGiveawaysAsync(Bot bot,
-            List<SteamPortal.SpGiveaway> giveaways, Classes.Blacklist blackList)
+        public static async Task<Log> SteamPortalLoadGiveawaysAsync(Bot bot,
+            List<SteamPortal.SpGiveaway> giveaways, Blacklist blackList)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = SteamPortalLoadGiveaways(bot, giveaways, blackList);
@@ -1446,7 +1446,7 @@ namespace KryBot
 
         #region SteamTrade
 
-        public static Classes.Log SteamTradeGetProfile(Bot bot, bool echo)
+        public static Log SteamTradeGetProfile(Bot bot, bool echo)
         {
             var response = Web.Get("http://steamtrade.info/", "", new List<Parameter>(),
                 Generate.Cookies_SteamTrade(bot),
@@ -1466,9 +1466,9 @@ namespace KryBot
             return ParseProfileFailed("SteamTrade");
         }
 
-        public static async Task<Classes.Log> SteamTradeGetProfileAsync(Bot bot, bool echo)
+        public static async Task<Log> SteamTradeGetProfileAsync(Bot bot, bool echo)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = SteamTradeGetProfile(bot, echo);
@@ -1478,8 +1478,8 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamTradeLoadGiveaways(Bot bot, List<SteamTrade.StGiveaway> giveaways,
-            Classes.Blacklist blackList)
+        public static Log SteamTradeLoadGiveaways(Bot bot, List<SteamTrade.StGiveaway> giveaways,
+            Blacklist blackList)
         {
             giveaways?.Clear();
 
@@ -1498,7 +1498,7 @@ namespace KryBot
                 if (giveaways == null)
                 {
                     return
-                        ConstructLog(
+                        new Log(
                             $"{GetDateTime()} {{SteamTrade}} {strings.ParseLoadGiveaways_FoundMatchGiveaways} : 0",
                             Color.White, true, true);
                 }
@@ -1516,17 +1516,17 @@ namespace KryBot
                 }
 
                 return
-                    ConstructLog(
+                    new Log(
                         $"{GetDateTime()} {{SteamTrade}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {giveaways.Count}",
                         Color.White, true, true);
             }
             return null;
         }
 
-        public static async Task<Classes.Log> SteamTradeLoadGiveawaysAsync(Bot bot,
-            List<SteamTrade.StGiveaway> giveaways, Classes.Blacklist blackList)
+        public static async Task<Log> SteamTradeLoadGiveawaysAsync(Bot bot,
+            List<SteamTrade.StGiveaway> giveaways, Blacklist blackList)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = SteamTradeLoadGiveaways(bot, giveaways, blackList);
@@ -1586,7 +1586,7 @@ namespace KryBot
 
         #region PlayBlink
 
-        public static Classes.Log PlayBlinkGetProfile(Bot bot, bool echo)
+        public static Log PlayBlinkGetProfile(Bot bot, bool echo)
         {
             var response = Web.Get("http://playblink.com/", "", new List<Parameter>(),
                 Generate.Cookies_PlayBlink(bot), new List<HttpHeader>(),
@@ -1612,9 +1612,9 @@ namespace KryBot
             return ParseProfileFailed("PlayBlink");
         }
 
-        public static async Task<Classes.Log> PlayBlinkGetProfileAsync(Bot bot, bool echo)
+        public static async Task<Log> PlayBlinkGetProfileAsync(Bot bot, bool echo)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = PlayBlinkGetProfile(bot, echo);
@@ -1624,8 +1624,8 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log PlayBlinkLoadGiveaways(Bot bot, List<PlayBlink.PbGiveaway> giveaways,
-            Classes.Blacklist blackList)
+        public static Log PlayBlinkLoadGiveaways(Bot bot, List<PlayBlink.PbGiveaway> giveaways,
+            Blacklist blackList)
         {
             giveaways?.Clear();
 
@@ -1647,7 +1647,7 @@ namespace KryBot
                 if (giveaways == null)
                 {
                     return
-                        ConstructLog(
+                        new Log(
                             $"{GetDateTime()} {{PlayBlink}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0",
                             Color.White, true, true);
                 }
@@ -1665,15 +1665,15 @@ namespace KryBot
                 }
             }
             return
-                ConstructLog(
+                new Log(
                     $"{GetDateTime()} {{PlayBlink}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {giveaways?.Count}",
                     Color.White, true, true);
         }
 
-        public static async Task<Classes.Log> PlayBlinkLoadGiveawaysAsync(Bot bot,
-            List<PlayBlink.PbGiveaway> giveaways, Classes.Blacklist blackList)
+        public static async Task<Log> PlayBlinkLoadGiveawaysAsync(Bot bot,
+            List<PlayBlink.PbGiveaway> giveaways, Blacklist blackList)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = PlayBlinkLoadGiveaways(bot, giveaways, blackList);

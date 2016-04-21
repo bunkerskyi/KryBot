@@ -17,7 +17,7 @@ namespace KryBot
         public delegate void SubscribesContainer();
 
         public static Bot Bot = new Bot();
-        public static Classes.Blacklist BlackList;
+        public static Blacklist BlackList;
 
         public static bool Hided;
 
@@ -28,7 +28,7 @@ namespace KryBot
         private int _loopsLeft;
         public bool LogActive;
 
-        public Classes.Log LogBuffer;
+        public Log LogBuffer;
 
         public FormMain()
         {
@@ -85,7 +85,7 @@ namespace KryBot
                     @"Обновление", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (dr == DialogResult.Yes)
                 {
-                    LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} Обновление...", Color.White, true, true);
+                    LogBuffer = new Log($"{Messages.GetDateTime()} Обновление...", Color.White, true, true);
                     LogChanged?.Invoke();
 
                     toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
@@ -210,8 +210,7 @@ namespace KryBot
                 }
                 else
                 {
-                    LogBuffer =
-                        Tools.ConstructLog($"{Messages.GetDateTime()} {strings.FormMain_btnStart_Click_FarmSkip}",
+                    LogBuffer = new Log($"{Messages.GetDateTime()} {strings.FormMain_btnStart_Click_FarmSkip}",
                             Color.Red, false, true);
                     LogChanged?.Invoke();
                     btnStart.Text = strings.FormMain_btnStart_Click_Старт;
@@ -771,7 +770,7 @@ namespace KryBot
             if (_loopsLeft > 0)
             {
                 LogBuffer =
-                    Tools.ConstructLog(
+                    new Log(
                         $"{Messages.GetDateTime()} {strings.FormMain_timer_Tick_LoopsLeft}: {_loopsLeft - 1}",
                         Color.White, true, true);
                 LogChanged?.Invoke();
@@ -1603,7 +1602,7 @@ namespace KryBot
         {
             if (Bot.Save())
             {
-                LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + " Настройки сохранены в profile.xml",
+                LogBuffer = new Log(Messages.GetDateTime() + " Настройки сохранены в profile.xml",
                     Color.White,
                     true, true);
                 LogChanged?.Invoke();
@@ -1626,14 +1625,14 @@ namespace KryBot
                 if (Bot.Save(saveFileDialog1.FileName))
                 {
                     LogBuffer =
-                        Tools.ConstructLog(
+                        new Log(
                             Messages.GetDateTime() + " Файл сохранен по пути " + saveFileDialog1.FileName, Color.White,
                             true, true);
                     LogChanged?.Invoke();
                 }
                 else
                 {
-                    LogBuffer = Tools.ConstructLog(Messages.GetDateTime() + " Файл НЕ сохранен", Color.Red, true, true);
+                    LogBuffer = new Log(Messages.GetDateTime() + " Файл НЕ сохранен", Color.Red, true, true);
                     LogChanged?.Invoke();
                 }
             }
@@ -2248,7 +2247,7 @@ namespace KryBot
         {
             if (Settings.Default.FullLog)
             {
-                LogBuffer = Tools.ConstructLog($"{Messages.GetDateTime()} {{{site}}} {strings.TryLogin}", Color.White,
+                LogBuffer = new Log($"{Messages.GetDateTime()} {{{site}}} {strings.TryLogin}", Color.White,
                     true, true);
                 LogChanged?.Invoke();
             }

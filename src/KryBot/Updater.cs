@@ -12,7 +12,7 @@ namespace KryBot
 {
     internal class Updater
     {
-        public static async Task<Classes.Log> CheckForUpdates()
+        public static async Task<Log> CheckForUpdates()
         {
             var json = await Web.GetVersionInGitHubAsync(Settings.Default.GitHubRepoReleaseUrl);
 
@@ -25,16 +25,16 @@ namespace KryBot
                 }
                 catch (JsonReaderException)
                 {
-                    return Tools.ConstructLog("Updater: JsonReaderException", Color.Red, false, true);
+                    return new Log("Updater: JsonReaderException", Color.Red, false, true);
                 }
 
                 if (release.tag_name != null && VersionCompare(Application.ProductVersion, release.tag_name))
                 {
-                    return Tools.ConstructLog($"Доступно обновление {release.tag_name}", Color.Green, true, true);
+                    return new Log($"Доступно обновление {release.tag_name}", Color.Green, true, true);
                 }
-                return Tools.ConstructLog($"Актуальная версия {release.tag_name}", Color.White, false, true);
+                return new Log($"Актуальная версия {release.tag_name}", Color.White, false, true);
             }
-            return Tools.ConstructLog("Updater: Json is Empty", Color.Red, false, true);
+            return new Log("Updater: Json is Empty", Color.Red, false, true);
         }
 
         private static bool VersionCompare(string sClient, string sServer)
@@ -50,7 +50,7 @@ namespace KryBot
             return false;
         }
 
-        public static async Task<Classes.Log> Update()
+        public static async Task<Log> Update()
         {
             if (File.Exists("KryBot.exe.old"))
             {
@@ -61,7 +61,7 @@ namespace KryBot
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return Tools.ConstructLog(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
+                    return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
                 }
             }
 
@@ -74,7 +74,7 @@ namespace KryBot
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return Tools.ConstructLog(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
+                    return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
                 }
             }
 
@@ -87,7 +87,7 @@ namespace KryBot
             }
             catch (JsonReaderException)
             {
-                return Tools.ConstructLog(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
+                return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
             }
 
             Classes.GitHunReleaseAssets binaryAsset = null;
@@ -102,13 +102,13 @@ namespace KryBot
 
             if (binaryAsset == null)
             {
-                return Tools.ConstructLog(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
+                return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
             }
 
             var stream = new WebClient().OpenRead(binaryAsset.browser_download_url);
             if (stream == null)
             {
-                return Tools.ConstructLog(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
+                return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
             }
 
             try
@@ -121,7 +121,7 @@ namespace KryBot
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return Tools.ConstructLog(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
+                return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
             }
 
             try
@@ -141,7 +141,7 @@ namespace KryBot
                     // ignored
                 }
 
-                return Tools.ConstructLog(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
+                return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
             }
 
             try
@@ -163,10 +163,10 @@ namespace KryBot
                     // ignored
                 }
 
-                return Tools.ConstructLog(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
+                return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
             }
 
-            return Tools.ConstructLog(strings.Updater_Update_UpdateDone, Color.Green, true, true);
+            return new Log(strings.Updater_Update_UpdateDone, Color.Green, true, true);
         }
     }
 }

@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 using KryBot.lang;
 using KryBot.Properties;
 
@@ -48,32 +45,21 @@ namespace KryBot
 
         private void SaveBlackList()
         {
-            var blacklist = new Classes.Blacklist {Items = new List<Classes.BlacklistItem>()};
-
             if (listView.Items.Count > 0)
             {
+                var blacklist = new Blacklist();
+
                 foreach (ListViewItem lvitem in listView.Items)
                 {
-                    var item = new Classes.BlacklistItem
+                    var item = new Blacklist.BlacklistItem
                     {
                         Id = lvitem.SubItems[0].Text,
                         Name = lvitem.SubItems[1].Text
                     };
                     blacklist.Items.Add(item);
                 }
-            }
 
-            try
-            {
-                using (var fs = new FileStream("blacklist.xml", FileMode.Create, FileAccess.Write))
-                {
-                    var serializer = new XmlSerializer(typeof (Classes.Blacklist));
-                    serializer.Serialize(fs, blacklist);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(@"Ошибка", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                blacklist.Save();
             }
         }
 

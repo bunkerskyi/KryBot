@@ -14,14 +14,6 @@ namespace KryBot
             public IRestResponse RestResponse { get; set; }
         }
 
-        public class Log
-        {
-            public string Content { get; set; }
-            public Color Color { get; set; }
-            public bool Success { get; set; }
-            public bool Echo { get; set; }
-        }
-
         public class Settings
         {
             public bool LogActive { get; set; }
@@ -108,21 +100,6 @@ namespace KryBot
         public class GameDetailData
         {
             public string name { get; set; }
-        }
-
-        #endregion
-
-        #region Blacklist
-
-        public class Blacklist
-        {
-            public List<BlacklistItem> Items;
-        }
-
-        public class BlacklistItem
-        {
-            public string Id { get; set; }
-            public string Name { get; set; }
         }
 
         #endregion

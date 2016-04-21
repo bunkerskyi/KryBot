@@ -109,7 +109,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log GameMinerJoinGiveaway(Bot bot, GameMiner.GmGiveaway gmGiveaway)
+        public static Log GameMinerJoinGiveaway(Bot bot, GameMiner.GmGiveaway gmGiveaway)
         {
             Thread.Sleep(requestInterval);
             var response = Post("http://gameminer.net/",
@@ -140,9 +140,9 @@ namespace KryBot
             return Messages.GiveawayNotJoined("GameMiner", gmGiveaway.Name, "Content is empty");
         }
 
-        public static async Task<Classes.Log> GameMinerJoinGiveawayAsync(Bot bot, GameMiner.GmGiveaway gmGiveaway)
+        public static async Task<Log> GameMinerJoinGiveawayAsync(Bot bot, GameMiner.GmGiveaway gmGiveaway)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = GameMinerJoinGiveaway(bot, gmGiveaway);
@@ -152,7 +152,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamGiftsJoinGiveaway(Bot bot, SteamGifts.SgGiveaway sgGiveaway)
+        public static Log SteamGiftsJoinGiveaway(Bot bot, SteamGifts.SgGiveaway sgGiveaway)
         {
             Thread.Sleep(requestInterval);
             sgGiveaway = Parse.SteamGiftsGetJoinData(sgGiveaway, bot);
@@ -182,10 +182,10 @@ namespace KryBot
             return null;
         }
 
-        public static async Task<Classes.Log> SteamGiftsJoinGiveawayAsync(Bot bot,
+        public static async Task<Log> SteamGiftsJoinGiveawayAsync(Bot bot,
             SteamGifts.SgGiveaway sgGiveaway)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = SteamGiftsJoinGiveaway(bot, sgGiveaway);
@@ -195,7 +195,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamCompanionJoinGiveaway(Bot bot, SteamCompanion.ScGiveaway scGiveaway)
+        public static Log SteamCompanionJoinGiveaway(Bot bot, SteamCompanion.ScGiveaway scGiveaway)
         {
             Thread.Sleep(requestInterval);
             var data = Parse.SteamCompanionGetJoinData(scGiveaway, bot);
@@ -228,10 +228,10 @@ namespace KryBot
             return data;
         }
 
-        public static async Task<Classes.Log> SteamCompanionJoinGiveawayAsync(Bot bot,
+        public static async Task<Log> SteamCompanionJoinGiveawayAsync(Bot bot,
             SteamCompanion.ScGiveaway scGiveaway)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = SteamCompanionJoinGiveaway(bot, scGiveaway);
@@ -241,7 +241,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamPortalJoinGiveaway(Bot bot, SteamPortal.SpGiveaway spGiveaway)
+        public static Log SteamPortalJoinGiveaway(Bot bot, SteamPortal.SpGiveaway spGiveaway)
         {
             Thread.Sleep(requestInterval);
             if (spGiveaway.Code != null)
@@ -270,10 +270,10 @@ namespace KryBot
             return null;
         }
 
-        public static async Task<Classes.Log> SteamPortalJoinGiveawayAsync(Bot bot,
+        public static async Task<Log> SteamPortalJoinGiveawayAsync(Bot bot,
             SteamPortal.SpGiveaway spGiveaway)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = SteamPortalJoinGiveaway(bot, spGiveaway);
@@ -283,7 +283,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamTradeJoinGiveaway(Bot bot, SteamTrade.StGiveaway stGiveaway)
+        public static Log SteamTradeJoinGiveaway(Bot bot, SteamTrade.StGiveaway stGiveaway)
         {
             Thread.Sleep(requestInterval);
             stGiveaway = Parse.SteamTradeGetJoinData(stGiveaway, bot);
@@ -302,10 +302,10 @@ namespace KryBot
             return null;
         }
 
-        public static async Task<Classes.Log> SteamTradeJoinGiveawayAsync(Bot bot,
+        public static async Task<Log> SteamTradeJoinGiveawayAsync(Bot bot,
             SteamTrade.StGiveaway stGiveaway)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = SteamTradeJoinGiveaway(bot, stGiveaway);
@@ -393,7 +393,7 @@ namespace KryBot
             return data;
         }
 
-        public static Classes.Log SteamJoinGroup(string url, string subUrl, List<Parameter> parameters,
+        public static Log SteamJoinGroup(string url, string subUrl, List<Parameter> parameters,
             CookieContainer cookies,
             List<HttpHeader> headers, string userAgent)
         {
@@ -418,11 +418,11 @@ namespace KryBot
             return Messages.GroupNotJoinde(url);
         }
 
-        public static async Task<Classes.Log> SteamJoinGroupAsync(string url, string subUrl, List<Parameter> parameters,
+        public static async Task<Log> SteamJoinGroupAsync(string url, string subUrl, List<Parameter> parameters,
             CookieContainer cookies,
             List<HttpHeader> headers, string userAgent)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = SteamJoinGroup(url, subUrl, parameters, cookies, headers, userAgent);
@@ -458,7 +458,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamGiftsSyncAccount(Bot bot)
+        public static Log SteamGiftsSyncAccount(Bot bot)
         {
             var xsrf = Get("https://www.steamgifts.com/account/profile/sync", "",
                 new List<Parameter>(), Generate.Cookies_SteamGifts(bot), new List<HttpHeader>(), bot.UserAgent);
@@ -489,11 +489,11 @@ namespace KryBot
                                 response.RestResponse.Content);
                         if (result.Type == "success")
                         {
-                            return Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamGifts}} {result.Msg}",
+                            return new Log($"{Messages.GetDateTime()} {{SteamGifts}} {result.Msg}",
                                 Color.Green,
                                 true, true);
                         }
-                        return Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamGifts}} {result.Msg}", Color.Red,
+                        return new Log($"{Messages.GetDateTime()} {{SteamGifts}} {result.Msg}", Color.Red,
                             false,
                             true);
                     }
@@ -502,9 +502,9 @@ namespace KryBot
             return null;
         }
 
-        public static async Task<Classes.Log> SteamGiftsSyncAccountAsync(Bot bot)
+        public static async Task<Log> SteamGiftsSyncAccountAsync(Bot bot)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = SteamGiftsSyncAccount(bot);
@@ -514,21 +514,21 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log SteamCompanionSyncAccount(Bot bot)
+        public static Log SteamCompanionSyncAccount(Bot bot)
         {
             var response = Get("https://steamcompanion.com//settings/resync&success=true", "", new List<Parameter>(),
                 Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(), bot.UserAgent);
             if (response.RestResponse.Content != "")
             {
-                return Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamCompanion}} Sync success!", Color.Green,
+                return new Log($"{Messages.GetDateTime()} {{SteamCompanion}} Sync success!", Color.Green,
                     true, true);
             }
-            return Tools.ConstructLog($"{Messages.GetDateTime()} {{SteamCompanion}} Sync failed", Color.Red, false, true);
+            return new Log($"{Messages.GetDateTime()} {{SteamCompanion}} Sync failed", Color.Red, false, true);
         }
 
-        public static async Task<Classes.Log> SteamCompanionSyncAccountAsync(Bot bot)
+        public static async Task<Log> SteamCompanionSyncAccountAsync(Bot bot)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = SteamCompanionSyncAccount(bot);
@@ -538,7 +538,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log GameMinerSyncAccount(Bot bot)
+        public static Log GameMinerSyncAccount(Bot bot)
         {
             var response = Post("http://gameminer.net/account/sync", "",
                 Generate.SyncPostData_GameMiner(bot.GameMiner.Cookies.Xsrf), new List<HttpHeader>(),
@@ -548,21 +548,21 @@ namespace KryBot
             {
                 if (response.RestResponse.StatusCode == HttpStatusCode.OK)
                 {
-                    return Tools.ConstructLog($"{Messages.GetDateTime()} {{GameMiner}} Sync success", Color.Green,
+                    return new Log($"{Messages.GetDateTime()} {{GameMiner}} Sync success", Color.Green,
                         true, true);
                 }
-                return Tools.ConstructLog($"{Messages.GetDateTime()} {{GameMiner}} Sync failed", Color.Red, false,
+                return new Log($"{Messages.GetDateTime()} {{GameMiner}} Sync failed", Color.Red, false,
                     true);
             }
             return
-                Tools.ConstructLog($"{Messages.GetDateTime()} {{GameMiner}} {strings.ParseProfile_LoginOrServerError}",
+                new Log($"{Messages.GetDateTime()} {{GameMiner}} {strings.ParseProfile_LoginOrServerError}",
                     Color.Red, false,
                     true);
         }
 
-        public static async Task<Classes.Log> GameMinerSyncAccountAsync(Bot bot)
+        public static async Task<Log> GameMinerSyncAccountAsync(Bot bot)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = GameMinerSyncAccount(bot);
@@ -572,7 +572,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Log PlayBlinkJoinGiveaway(Bot bot, PlayBlink.PbGiveaway pbGiveaway)
+        public static Log PlayBlinkJoinGiveaway(Bot bot, PlayBlink.PbGiveaway pbGiveaway)
         {
             Thread.Sleep(1000);
             if (pbGiveaway.Id != null)
@@ -619,9 +619,9 @@ namespace KryBot
             return null;
         }
 
-        public static async Task<Classes.Log> PlayBlinkJoinGiveawayAsync(Bot bot, PlayBlink.PbGiveaway pbGiveaway)
+        public static async Task<Log> PlayBlinkJoinGiveawayAsync(Bot bot, PlayBlink.PbGiveaway pbGiveaway)
         {
-            var task = new TaskCompletionSource<Classes.Log>();
+            var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
                 var result = PlayBlinkJoinGiveaway(bot, pbGiveaway);
