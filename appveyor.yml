@@ -1,7 +1,3 @@
 version: 1.0.{build}
 platform: Any CPU
 configuration: Release
-before_build:
-  - nuget restore
-build:
-  verbosity: normal
