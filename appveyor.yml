@@ -3,3 +3,6 @@ platform: Any CPU
 configuration: Release
 before_build:
   - nuget restore src\KryBot.sln
+branches:
+  only:
+    - master
