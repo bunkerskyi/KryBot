@@ -34,7 +34,7 @@ namespace KryBot
                         "//a[contains(@class, 'user_avatar') and contains(@class, 'playerAvatar')]");
                 if (login == null)
                 {
-                    ProfileLoaded();
+                    //ProfileLoaded();
                     return ParseProfileFailed("Steam");
                 }
 

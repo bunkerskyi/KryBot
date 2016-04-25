@@ -49,6 +49,40 @@ namespace KryBot
             return data;
         }
 
+        public static Classes.Response Get(string url, string subUrl, List<Parameter> parameters,
+            CookieContainer cookies, List<HttpHeader> headers)
+        {
+            var client = new RestClient(url)
+            {
+                FollowRedirects = true,
+                CookieContainer = cookies
+            };
+
+            var request = new RestRequest(subUrl, Method.GET);
+
+            foreach (var header in headers)
+            {
+                request.AddHeader(header.Name, header.Value);
+            }
+
+            foreach (var param in parameters)
+            {
+                request.AddParameter(param);
+            }
+
+            var response = client.Execute(request);
+
+            var data = new Classes.Response
+            {
+                Cookies = client.CookieContainer,
+                RestResponse = response
+            };
+
+            Thread.Sleep(requestInterval);
+
+            return data;
+        }
+
         public static async Task<Classes.Response> GetAsync(string url, string subUrl, List<Parameter> parameters,
             CookieContainer cookies, List<HttpHeader> headers, string userAgent)
         {
@@ -56,6 +90,19 @@ namespace KryBot
             await Task.Run(() =>
             {
                 var result = Get(url, subUrl, parameters, cookies, headers, userAgent);
+                task.SetResult(result);
+            });
+
+            return task.Task.Result;
+        }
+
+        public static async Task<Classes.Response> GetAsync(string url, string subUrl, List<Parameter> parameters,
+            CookieContainer cookies, List<HttpHeader> headers)
+        {
+            var task = new TaskCompletionSource<Classes.Response>();
+            await Task.Run(() =>
+            {
+                var result = Get(url, subUrl, parameters, cookies, headers);
                 task.SetResult(result);
             });
 
@@ -319,45 +366,6 @@ namespace KryBot
         }
 
         public static Classes.Response SteamTradeDoAuth(string url, string subUrl, List<Parameter> parameters,
-            CookieContainer cookies, List<HttpHeader> headers, string userAgent, string proxy)
-        {
-            var client = new RestClient(url)
-            {
-                UserAgent = userAgent == "" ? Tools.UserAgent() : userAgent,
-                FollowRedirects = false,
-                CookieContainer = cookies
-            };
-
-            if (proxy != "")
-            {
-                client.Proxy = new WebProxy(proxy);
-            }
-
-            var request = new RestRequest(subUrl, Method.POST);
-
-            foreach (var header in headers)
-            {
-                request.AddHeader(header.Name, header.Value);
-            }
-
-            foreach (var param in parameters)
-            {
-                request.AddParameter(param);
-            }
-
-            var response = client.Execute(request);
-            var data = new Classes.Response
-            {
-                Cookies = client.CookieContainer,
-                RestResponse = response
-            };
-
-            Thread.Sleep(requestInterval);
-
-            return data;
-        }
-
-        public static Classes.Response GameAwaysDoAuth(string url, string subUrl, List<Parameter> parameters,
             CookieContainer cookies, List<HttpHeader> headers, string userAgent, string proxy)
         {
             var client = new RestClient(url)

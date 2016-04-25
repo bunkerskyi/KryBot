@@ -184,6 +184,7 @@
     <Compile Include="FormTextBox.Designer.cs">
       <DependentUpon>FormTextBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="GameAways.cs" />
     <Compile Include="GameMiner.cs" />
     <Compile Include="Generate.cs" />
     <Compile Include="lang\strings.Designer.cs">

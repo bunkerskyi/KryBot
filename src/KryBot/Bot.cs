@@ -17,6 +17,7 @@ namespace KryBot
             SteamTrade = new SteamTrade();
             PlayBlink = new PlayBlink();
             Steam = new Steam();
+            GameAways = new GameAways();
         }
 
         public bool Enabled { get; set; }
@@ -29,6 +30,7 @@ namespace KryBot
         public SteamTrade SteamTrade { get; set; }
         public PlayBlink PlayBlink { get; set; }
         public Steam Steam { get; set; }
+        public GameAways GameAways { get; set; }
 
         public void ClearGiveawayList()
         {
