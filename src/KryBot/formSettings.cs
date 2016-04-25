@@ -120,9 +120,9 @@ namespace KryBot
 
         private void SaveSettings()
         {
-            if (int.Parse(tbTimerInterval.Text) == 0)
+            if (cbTimerEnable.Checked && int.Parse(tbTimerInterval.Text) == 0)
             {
-                MessageBox.Show(@"Интервал таймера не может ровняться 0", strings.Error, MessageBoxButtons.OK,
+                MessageBox.Show(@"Интервал таймера не может равняться 0", strings.Error, MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 tbTimerInterval.Text = Properties.Settings.Default.TimerInterval.ToString();
                 return;
