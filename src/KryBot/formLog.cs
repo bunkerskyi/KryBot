@@ -70,8 +70,8 @@ namespace KryBot
         {
             Text = @"Лог";
             Icon = Icon.FromHandle(Resources.log.GetHicon());
-            Height = Settings.Default.LogHeight;
-            Width = Settings.Default.LogWidth;
+            Height = Properties.Settings.Default.LogHeight;
+            Width = Properties.Settings.Default.LogWidth;
         }
 
         public static void AppendText(RichTextBox box, string text, Color color)
@@ -97,9 +97,9 @@ namespace KryBot
 
         private void FormLog_ResizeEnd(object sender, EventArgs e)
         {
-            Settings.Default.LogHeight = Height;
-            Settings.Default.LogWidth = Width;
-            Settings.Default.Save();
+            Properties.Settings.Default.LogHeight = Height;
+            Properties.Settings.Default.LogWidth = Width;
+            Properties.Settings.Default.Save();
         }
     }
 }

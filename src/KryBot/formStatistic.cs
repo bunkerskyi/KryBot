@@ -22,11 +22,11 @@ namespace KryBot
             Icon = Icon.FromHandle(Resources.statistic1.GetHicon());
             Text = @"Статистика";
 
-            lblSessionJoins.Text += Settings.Default.JoinsPerSession;
-            lblSessionLoops.Text += Settings.Default.JoinsLoops;
+            lblSessionJoins.Text += Properties.Settings.Default.JoinsPerSession;
+            lblSessionLoops.Text += Properties.Settings.Default.JoinsLoops;
 
-            lblTotalJoins.Text += Settings.Default.JoinsTotal;
-            lblTotalLoops.Text += Settings.Default.JoinsLoopsTotal;
+            lblTotalJoins.Text += Properties.Settings.Default.JoinsTotal;
+            lblTotalLoops.Text += Properties.Settings.Default.JoinsLoopsTotal;
         }
     }
 }

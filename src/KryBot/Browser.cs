@@ -11,22 +11,19 @@ namespace KryBot
     public partial class Browser : Form
     {
         private const int InternetCookieHttponly = 0x2000;
-        private readonly Classes.Bot _bot;
-        private readonly CookieContainer _cookies;
+        private readonly Bot _bot;
         private readonly string _endPage;
         private readonly string _phpSessId;
         private readonly string _startPage;
         private readonly string _title;
 
-        public Browser(Classes.Bot bot, string startPage, string endPage, string title, string phpSessId,
-            CookieContainer cookies)
+        public Browser(Bot bot, string startPage, string endPage, string title, string phpSessId)
         {
             _bot = bot;
             _startPage = startPage;
             _endPage = endPage;
             _title = title;
             _phpSessId = phpSessId;
-            _cookies = cookies;
             InitializeComponent();
         }
 
@@ -49,15 +46,6 @@ namespace KryBot
             toolStripStatusLabelIE.Text = $"IE: {webBrowser.Version}";
             webBrowser.ScriptErrorsSuppressed = true;
             webBrowser.DocumentCompleted += wb_DocumentCompleted;
-
-            if (_cookies != null && _cookies.Count > 0)
-            {
-                //var cookies = Tools.CookieContainer_ToList(_cookies);
-                //foreach (var cookie in cookies)
-                //{
-                //    InternetSetCookie("http://steamcommunity.com/", cookie.Name, cookie.Value);
-                //}
-            }
 
             if (_phpSessId != "")
             {
@@ -87,7 +75,7 @@ namespace KryBot
                 if (webBrowser.Url.AbsoluteUri == _endPage ||
                     webBrowser.Url.AbsoluteUri == "https://www.steamgifts.com/register")
                 {
-                    if (_endPage == "http://gameminer.net/?lang=ru_RU" || _endPage == "http://gameminer.net/?lang=en_US")
+                    if (_endPage.Contains("http://gameminer.net/?lang="))
                     {
                         GameMinerAuth();
                     }
@@ -105,11 +93,6 @@ namespace KryBot
                     if (_endPage == "http://steamportal.net/")
                     {
                         SteamPortalAuth();
-                    }
-
-                    if (_endPage == "http://www.gameaways.com/")
-                    {
-                        GameAwaysAuth();
                     }
 
                     if (_endPage == "http://steamtrade.info/")
@@ -136,20 +119,20 @@ namespace KryBot
             {
                 if (cookie.Name == "sessionid")
                 {
-                    _bot.SteamSessid = cookie.Value;
+                    _bot.Steam.Cookies.Sessid = cookie.Value;
                 }
 
                 if (cookie.Name == "steamLogin")
                 {
-                    _bot.SteamLogin = cookie.Value;
+                    _bot.Steam.Cookies.Login = cookie.Value;
                 }
 
                 if (cookie.Name == "steamRememberLogin")
                 {
-                    _bot.SteamRememberLogin = cookie.Value;
+                    _bot.Steam.Cookies.RememberLogin = cookie.Value;
                 }
             }
-            _bot.SteamEnabled = true;
+            _bot.Steam.Enabled = true;
             webBrowser.Dispose();
             Close();
         }
@@ -162,15 +145,15 @@ namespace KryBot
             {
                 if (cookie.Name == "token")
                 {
-                    _bot.GameMinerToken = cookie.Value;
+                    _bot.GameMiner.Cookies.Token = cookie.Value;
                 }
 
                 if (cookie.Name == "_xsrf")
                 {
-                    _bot.GameMinerxsrf = cookie.Value;
+                    _bot.GameMiner.Cookies.Xsrf = cookie.Value;
                 }
             }
-            _bot.GameMinerEnabled = true;
+            _bot.GameMiner.Enabled = true;
             webBrowser.Dispose();
             Close();
         }
@@ -183,10 +166,10 @@ namespace KryBot
             {
                 if (cookie.Name == "PHPSESSID")
                 {
-                    _bot.SteamGiftsPhpSessId = cookie.Value;
+                    _bot.SteamGifts.Cookies.PhpSessId = cookie.Value;
                 }
             }
-            _bot.SteamGiftsEnabled = true;
+            _bot.SteamGifts.Enabled = true;
             webBrowser.Dispose();
             Close();
         }
@@ -199,25 +182,25 @@ namespace KryBot
             {
                 if (cookie.Name == "PHPSESSID")
                 {
-                    _bot.SteamCompanionPhpSessId = cookie.Value;
+                    _bot.SteamCompanion.Cookies.PhpSessId = cookie.Value;
                 }
 
                 if (cookie.Name == "userc")
                 {
-                    _bot.SteamCompanionUserC = cookie.Value;
+                    _bot.SteamCompanion.Cookies.UserC = cookie.Value;
                 }
 
                 if (cookie.Name == "userid")
                 {
-                    _bot.SteamCompanionUserId = cookie.Value;
+                    _bot.SteamCompanion.Cookies.UserId = cookie.Value;
                 }
 
                 if (cookie.Name == "usert")
                 {
-                    _bot.SteamCompanionUserT = cookie.Value;
+                    _bot.SteamCompanion.Cookies.UserT = cookie.Value;
                 }
             }
-            _bot.SteamCompanionEnabled = true;
+            _bot.SteamCompanion.Enabled = true;
             webBrowser.Dispose();
             Close();
         }
@@ -230,26 +213,10 @@ namespace KryBot
             {
                 if (cookie.Name == "PHPSESSID")
                 {
-                    _bot.SteamPortalPhpSessId = cookie.Value;
+                    _bot.SteamPortal.Cookies.PhpSessId = cookie.Value;
                 }
             }
-            _bot.SteamPortalEnabled = true;
-            webBrowser.Dispose();
-            Close();
-        }
-
-        private void GameAwaysAuth()
-        {
-            var container = GetUriCookieContainer(webBrowser.Url);
-            var cookies = container.GetCookies(webBrowser.Url);
-            foreach (Cookie cookie in cookies)
-            {
-                if (cookie.Name == "ASP.NET_SessionId")
-                {
-                    _bot.GameAwaysPhpSessId = cookie.Value;
-                }
-            }
-            _bot.GameAwaysEnabled = true;
+            _bot.SteamPortal.Enabled = true;
             webBrowser.Dispose();
             Close();
         }
@@ -262,25 +229,25 @@ namespace KryBot
             {
                 if (cookie.Name == "PHPSESSID")
                 {
-                    _bot.SteamTradePhpSessId = cookie.Value;
+                    _bot.SteamTrade.Cookies.PhpSessId = cookie.Value;
                 }
 
                 if (cookie.Name == "dle_user_id")
                 {
-                    _bot.SteamTradeDleUserId = cookie.Value;
+                    _bot.SteamTrade.Cookies.DleUserId = cookie.Value;
                 }
 
                 if (cookie.Name == "dle_password")
                 {
-                    _bot.SteamTradeDlePassword = cookie.Value;
+                    _bot.SteamTrade.Cookies.DlePassword = cookie.Value;
                 }
 
                 if (cookie.Name == "passhash")
                 {
-                    _bot.SteamTradePassHash = cookie.Value;
+                    _bot.SteamTrade.Cookies.PassHash = cookie.Value;
                 }
             }
-            _bot.SteamTradeEnabled = true;
+            _bot.SteamTrade.Enabled = true;
             webBrowser.Dispose();
             Close();
         }
@@ -301,10 +268,10 @@ namespace KryBot
                     {
                         if (cookie.Name == "PHPSESSID")
                         {
-                            _bot.PlayBlinkPhpSessId = cookie.Value;
+                            _bot.PlayBlink.Cookies.PhpSessId = cookie.Value;
                         }
                     }
-                    _bot.PlayBlinkEnabled = true;
+                    _bot.PlayBlink.Enabled = true;
                     webBrowser.Dispose();
                     Close();
                 }

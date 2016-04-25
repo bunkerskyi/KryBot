@@ -33,7 +33,7 @@ namespace KryBot
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            Settings.Default._idCache = textBox.Text;
+            Properties.Settings.Default._idCache = textBox.Text;
             Close();
         }
     }

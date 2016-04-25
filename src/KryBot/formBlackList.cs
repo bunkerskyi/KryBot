@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 using KryBot.lang;
 using KryBot.Properties;
 
@@ -13,9 +10,9 @@ namespace KryBot
 {
     public partial class FormBlackList : Form
     {
-        private readonly Classes.Bot _bot;
+        private readonly Bot _bot;
 
-        public FormBlackList(Classes.Bot bot)
+        public FormBlackList(Bot bot)
         {
             _bot = bot;
             InitializeComponent();
@@ -48,32 +45,21 @@ namespace KryBot
 
         private void SaveBlackList()
         {
-            var blacklist = new Classes.Blacklist {Items = new List<Classes.BlacklistItem>()};
-
             if (listView.Items.Count > 0)
             {
+                var blacklist = new Blacklist();
+
                 foreach (ListViewItem lvitem in listView.Items)
                 {
-                    var item = new Classes.BlacklistItem
+                    var item = new Blacklist.BlacklistItem
                     {
                         Id = lvitem.SubItems[0].Text,
                         Name = lvitem.SubItems[1].Text
                     };
                     blacklist.Items.Add(item);
                 }
-            }
 
-            try
-            {
-                using (var fs = new FileStream("blacklist.xml", FileMode.Create, FileAccess.Write))
-                {
-                    var serializer = new XmlSerializer(typeof (Classes.Blacklist));
-                    serializer.Serialize(fs, blacklist);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(@"Ошибка", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                blacklist.Save();
             }
         }
 
@@ -92,10 +78,10 @@ namespace KryBot
 
         private async void профильSteamToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (_bot.SteamEnabled && _bot.SteamProfileLink != "")
+            if (_bot.Steam.Enabled && _bot.Steam.ProfileLink != "")
             {
                 toolStripStatusLabel.Image = Resources.load;
-                var list = await Parse.SteamGetUserGames(_bot.SteamProfileLink);
+                var list = await Parse.SteamGetUserGames(_bot.Steam.ProfileLink);
 
                 if (list.Games.Game.Count > 0)
                 {
@@ -135,10 +121,11 @@ namespace KryBot
         {
             var form = new FormTextBox("Enter id", true);
             form.ShowDialog();
-            if (Settings.Default._idCache != "0")
+            if (Properties.Settings.Default._idCache != "0")
             {
-                listView.Items.Add(Settings.Default._idCache).SubItems.Add(await LoadName(Settings.Default._idCache));
-                Settings.Default._idCache = "0";
+                listView.Items.Add(Properties.Settings.Default._idCache)
+                    .SubItems.Add(await LoadName(Properties.Settings.Default._idCache));
+                Properties.Settings.Default._idCache = "0";
             }
             toolStripStatusLabel.Text = $"Количество: {listView.Items.Count}";
         }
