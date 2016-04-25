@@ -926,7 +926,7 @@ namespace KryBot
                             }
                         }
 
-                        var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/a");
+                        var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/div");
                         if (nodes != null)
                         {
                             for (var j = 0; j < nodes.Count; j++)
@@ -999,7 +999,7 @@ namespace KryBot
                         pages = int.Parse(pageNode.Attributes["href"].Value.Split('=')[1]);
                     }
 
-                    var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/a");
+                    var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/div");
                     if (nodes != null)
                     {
                         for (var j = 0; j < nodes.Count; j++)
@@ -1043,7 +1043,7 @@ namespace KryBot
                         pages = int.Parse(pageNode.Attributes["href"].Value.Split('=')[1]);
                     }
 
-                    var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/a");
+                    var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/div");
                     if (nodes != null)
                     {
                         for (var j = 0; j < nodes.Count; j++)
@@ -1093,7 +1093,7 @@ namespace KryBot
                         }
                     }
 
-                    var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/a");
+                    var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/div");
                     if (nodes != null)
                     {
                         for (var j = 0; j < nodes.Count; j++)
@@ -1126,10 +1126,10 @@ namespace KryBot
             {
                 foreach (var node in nodes)
                 {
-                    var name = node.SelectNodes(".//p[@class='game-name']/span").Count > 1
-                        ? node.SelectSingleNode(".//p[@class='game-name']/span[2]")
-                        : node.SelectSingleNode(".//p[@class='game-name']/span[1]");
-                    var price = node.SelectSingleNode(".//p[@class='game-name']");
+                    var name = node.SelectNodes(".//p[@class='game-name']/a/span").Count > 1
+                        ? node.SelectSingleNode(".//p[@class='game-name']/a/span[2]")
+                        : node.SelectSingleNode(".//p[@class='game-name']/a/span[1]");
+                    var price = node.SelectSingleNode(".//p[@class='game-name']/a");
 
                     if (price != null && name != null)
                     {
@@ -1141,7 +1141,7 @@ namespace KryBot
                                     .InnerText.Replace("p)", "")
                                     .Split('(')
                                     .Length - 1]),
-                            Link = node.Attributes["href"].Value
+                            Link = node.SelectSingleNode(".//p[@class='game-name']/a").Attributes["href"].Value
                         };
 
                         var region = node.SelectSingleNode(".//span[@class='icon-region']");
