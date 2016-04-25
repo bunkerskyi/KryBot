@@ -607,19 +607,24 @@ namespace KryBot
                         var htmldoc = new HtmlDocument();
                         htmldoc.LoadHtml(response.RestResponse.Content);
 
-                        var message =
-                            htmldoc.DocumentNode.SelectSingleNode("//div[@class='msgbox success']");
+                        bot.PlayBlink.Points = bot.PlayBlink.Points - pbGiveaway.Price;
+
+                        var message = htmldoc.DocumentNode.SelectSingleNode("//div[@class='msgbox success']");
                         if (message != null)
                         {
-                            bot.PlayBlink.Points = bot.PlayBlink.Points - pbGiveaway.Price;
                             return Messages.GiveawayJoined("PlayBlink", pbGiveaway.Name, pbGiveaway.Price,
                                 bot.PlayBlink.Points, 0);
+                        }
+
+                        var error = htmldoc.DocumentNode.SelectSingleNode("//div[@class='msgbox error']");
+                        if (error != null)
+                        {
+                            return Messages.GiveawayNotJoined("PlayBlink", pbGiveaway.Name, error.InnerText);
                         }
 
                         var captcha = htmldoc.DocumentNode.SelectSingleNode("//div[@class='flash_rules']");
                         if (captcha != null)
                         {
-                            bot.PlayBlink.Points = bot.PlayBlink.Points - pbGiveaway.Price;
                             return Messages.GiveawayNotJoined("PlayBlink", pbGiveaway.Name, "Captcha");
                         }
                     }
