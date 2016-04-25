@@ -1,3 +1,6 @@
 # KryBot
 
-[![Build status](https://ci.appveyor.com/api/projects/status/01vpmhw11qbv42j9?svg=true)](https://ci.appveyor.com/project/KriBetko/krybot)
+[![Build status](https://ci.appveyor.com/api/projects/status/01vpmhw11qbv42j9/branch/master?svg=true&passingText=master%20-%20OK&failingText=master%20-%20Fails)](https://ci.appveyor.com/project/KriBetko/krybot/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/01vpmhw11qbv42j9/branch/master?svg=true&passingText=dev%20-%20OK&failingText=dev%20-%20Fails)](https://ci.appveyor.com/project/KriBetko/krybot/branch/dev)
+[![GitHub Release](https://img.shields.io/github/release/KriBetko/KryBot.svg?label=Latest)](https://github.com/JustArchi/ArchiSteamFarm/releases/latest)
+[![Github All Releases](https://img.shields.io/github/downloads/KriBetko/KryBot/total.svg?label=Downloads)](https://github.com/JustArchi/ArchiSteamFarm/releases)
