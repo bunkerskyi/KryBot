@@ -739,7 +739,7 @@ namespace KryBot
 
             stopWatch.Stop();
             var ts = stopWatch.Elapsed;
-            string elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds/10:00}";
+            string elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}";
             WriteLog(Messages.DoFarm_Finish(elapsedTime));
             LoadProfilesInfo?.Invoke();
 
