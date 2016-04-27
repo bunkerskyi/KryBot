@@ -1699,7 +1699,7 @@ namespace KryBot
                                 node.SelectSingleNode(".//div[@class='stats']/table/tr[3]");
 
                             pbGiveaway.Price =
-                                int.Parse(price.InnerText.Replace("Points(s)", "").Replace("Entrance Fee:", "").Trim());
+                                int.Parse(price.InnerText.Replace("Point(s)", "").Replace("Entrance Fee:", "").Trim());
                             giveaways?.Add(pbGiveaway);
                         }
                     }
