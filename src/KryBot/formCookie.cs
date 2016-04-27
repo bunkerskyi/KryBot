@@ -65,7 +65,7 @@ namespace KryBot
             {
                 _bot.GameMiner.Cookies.Token = (Controls["token"] as TextBox)?.Text;
                 _bot.GameMiner.Cookies.Xsrf = (Controls["_xsrf"] as TextBox)?.Text;
-                _bot.UserAgent = (Controls["UserAgent"] as TextBox)?.Text;
+                _bot.GameMiner.UserAgent = (Controls["UserAgent"] as TextBox)?.Text;
                 _bot.GameMiner.Enabled = true;
                 _bot.Save();
                 ShowMessage();

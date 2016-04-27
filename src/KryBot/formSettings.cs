@@ -105,7 +105,7 @@ namespace KryBot
             {
                 "token:" + _bot.GameMiner.Cookies.Token,
                 "_xsrf:" + _bot.GameMiner.Cookies.Xsrf,
-                "UserAgent:" + _bot.UserAgent
+                "UserAgent:" + _bot.GameMiner.UserAgent
             };
 
             var form = new FormCookie("GameMiner", names, _bot);

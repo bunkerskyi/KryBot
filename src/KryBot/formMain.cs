@@ -116,7 +116,7 @@ namespace KryBot
                 {
                     await Web.SteamJoinGroupAsync("http://steamcommunity.com/groups/krybot",
                         "", Generate.PostData_SteamGroupJoin(Bot.Steam.Cookies.Sessid),
-                        Generate.Cookies_Steam(Bot), new List<HttpHeader>(), Bot.UserAgent);
+                        Generate.Cookies_Steam(Bot), new List<HttpHeader>());
                 }
             }
             else
@@ -1048,9 +1048,9 @@ namespace KryBot
         {
             btnSTLogin.Enabled = false;
             var first = Web.Get("http://steamtrade.info/", "", new List<Parameter>(), new CookieContainer(),
-                new List<HttpHeader>(), Bot.UserAgent);
+                new List<HttpHeader>());
             var getLoginHref = Web.SteamTradeDoAuth("http://steamtrade.info/", "reg.php?login",
-                Generate.LoginData_SteamTrade(), first.Cookies, new List<HttpHeader>(), Bot.UserAgent, "");
+                Generate.LoginData_SteamTrade(), first.Cookies, new List<HttpHeader>());
             var location = Tools.GetLocationInresponse(getLoginHref.RestResponse);
             var cookie = Tools.GetSessCookieInresponse(getLoginHref.Cookies, "steamtrade.info", "PHPSESSID");
 
@@ -1220,9 +1220,10 @@ namespace KryBot
                 "http://gameminer.net/login/steam?backurl=http%3A%2F%2Fgameminer.net%2F%3Flang%3D" +
                 Properties.Settings.Default.Lang + @"&agree=True",
                 "http://gameminer.net/?lang=" + Properties.Settings.Default.Lang, "GameMiner - Login", "");
-            if (string.IsNullOrEmpty(Bot.UserAgent))
+
+            if (string.IsNullOrEmpty(Bot.GameMiner.UserAgent))
             {
-                Bot.UserAgent = Tools.UserAgent();
+                Bot.GameMiner.UserAgent = Tools.UserAgent();
             }
             Bot.Save();
 
@@ -1666,7 +1667,7 @@ namespace KryBot
             {
                 await Web.SteamJoinGroupAsync("http://steamcommunity.com/groups/krybot",
                     "", Generate.PostData_SteamGroupJoin(Bot.Steam.Cookies.Sessid),
-                    Generate.Cookies_Steam(Bot), new List<HttpHeader>(), Bot.UserAgent);
+                    Generate.Cookies_Steam(Bot), new List<HttpHeader>());
 
                 BlockTabpage(tabPageSteam, true);
                 btnSteamLogin.Enabled = false;
@@ -1856,10 +1857,6 @@ namespace KryBot
             btnPBLogin.Enabled = false;
             BrowserStart("http://playblink.com/?do=login&act=signin",
                 "http://playblink.com/", "PlayBlink - Login", "");
-            if (string.IsNullOrEmpty(Bot.UserAgent))
-            {
-                Bot.UserAgent = Tools.UserAgent();
-            }
             Bot.Save();
 
             toolStripStatusLabel1.Image = Resources.load;

@@ -21,7 +21,6 @@ namespace KryBot
         }
 
         public bool Enabled { get; set; }
-        public string UserAgent { get; set; }
 
         public GameMiner GameMiner { get; set; }
         public SteamGifts SteamGifts { get; set; }
