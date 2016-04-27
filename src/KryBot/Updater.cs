@@ -134,6 +134,7 @@ namespace KryBot
                 try
                 {
                     File.Delete("KryBot.exe.new");
+                    File.Delete("KryBot.exe.old");
                 }
                 catch
                 {
