@@ -28,7 +28,7 @@ namespace KryBot
             {
                 using (var reader = new StreamReader("settings.xml"))
                 {
-                    var serializer = new XmlSerializer(typeof (Settings));
+                    var serializer = new XmlSerializer(typeof(Settings));
                     settings = (Settings) serializer.Deserialize(reader);
                 }
             }
@@ -76,7 +76,7 @@ namespace KryBot
             {
                 using (var fs = new FileStream("settings.xml", FileMode.Create, FileAccess.Write))
                 {
-                    var serializer = new XmlSerializer(typeof (Settings));
+                    var serializer = new XmlSerializer(typeof(Settings));
                     serializer.Serialize(fs, settings);
                 }
                 return true;

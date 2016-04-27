@@ -57,23 +57,23 @@ namespace KryBot
         {
             if (Properties.Settings.Default.FirstExecute)
             {
-                var dr = MessageBox.Show(strings.Licens, strings.Agreement, MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Information);
-                if (dr == DialogResult.No)
+                switch (MessageBox.Show(strings.Licens, strings.Agreement, MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Information))
                 {
-                    Application.Exit();
-                }
-                else if (dr == DialogResult.Yes)
-                {
-                    Properties.Settings.Default.FirstExecute = false;
+                    case DialogResult.Yes:
+                        Properties.Settings.Default.FirstExecute = false;
+                        break;
+                    case DialogResult.No:
+                        Application.Exit();
+                        break;
                 }
             }
-                                     
+
             if (Tools.CheckIeVersion(9))
             {
-                var dr = MessageBox.Show(strings.IECheck, strings.Warning, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
-
-                switch (dr)
+                switch (
+                    MessageBox.Show(strings.IECheck, strings.Warning, MessageBoxButtons.YesNoCancel,
+                        MessageBoxIcon.Warning))
                 {
                     case DialogResult.Yes:
                         Process.Start("http://windows.microsoft.com/ru-ru/internet-explorer/download-ie");
@@ -96,14 +96,15 @@ namespace KryBot
 
             if (version.Success)
             {
-                var dr = MessageBox.Show($"{version.Content.Replace("\n", "")}. Обновить?",
-                    @"Обновление", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                var dr = MessageBox.Show($"{version.Content.Replace("\n", "")}. Обновить?", @"Обновление",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (dr == DialogResult.Yes)
                 {
                     WriteLog(new Log($"{Messages.GetDateTime()} Обновление...", Color.White, true, true));
 
                     toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
                     toolStripProgressBar1.Visible = true;
+
                     var log = await Updater.Update();
                     WriteLog(log);
 
@@ -130,9 +131,10 @@ namespace KryBot
 
                 if (Bot.Steam.Enabled)
                 {
-                    await Web.SteamJoinGroupAsync("http://steamcommunity.com/groups/krybot",
-                        "", Generate.PostData_SteamGroupJoin(Bot.Steam.Cookies.Sessid),
-                        Generate.Cookies_Steam(Bot), new List<HttpHeader>());
+                    await
+                        Web.SteamJoinGroupAsync("http://steamcommunity.com/groups/krybot", "",
+                            Generate.PostData_SteamGroupJoin(Bot.Steam.Cookies.Sessid), Generate.Cookies_Steam(Bot),
+                            new List<HttpHeader>());
                 }
             }
             else
@@ -1672,8 +1674,8 @@ namespace KryBot
 
         private async void btnSteamLogin_Click(object sender, EventArgs e)
         {
-            BrowserStart("https://steamcommunity.com/login/home/?goto=0",
-                "http://steamcommunity.com/id/", "Steam - Login", "");
+            BrowserStart("https://steamcommunity.com/login/home/?goto=0", "http://steamcommunity.com/id/",
+                "Steam - Login", "");
             Bot.Save();
 
             toolStripStatusLabel1.Image = Resources.load;
@@ -1681,9 +1683,10 @@ namespace KryBot
             var login = await CheckLoginSteam();
             if (login)
             {
-                await Web.SteamJoinGroupAsync("http://steamcommunity.com/groups/krybot",
-                    "", Generate.PostData_SteamGroupJoin(Bot.Steam.Cookies.Sessid),
-                    Generate.Cookies_Steam(Bot), new List<HttpHeader>());
+                await
+                    Web.SteamJoinGroupAsync("http://steamcommunity.com/groups/krybot", "",
+                        Generate.PostData_SteamGroupJoin(Bot.Steam.Cookies.Sessid), Generate.Cookies_Steam(Bot),
+                        new List<HttpHeader>());
 
                 BlockTabpage(tabPageSteam, true);
                 btnSteamLogin.Enabled = false;
@@ -1864,8 +1867,7 @@ namespace KryBot
         private async void btnPBLogin_Click(object sender, EventArgs e)
         {
             btnPBLogin.Enabled = false;
-            BrowserStart("http://playblink.com/?do=login&act=signin",
-                "http://playblink.com/", "PlayBlink - Login", "");
+            BrowserStart("http://playblink.com/?do=login&act=signin", "http://playblink.com/", "PlayBlink - Login", "");
             Bot.Save();
 
             toolStripStatusLabel1.Image = Resources.load;
@@ -1945,8 +1947,7 @@ namespace KryBot
             {
                 if (giveaway.Price <= Bot.GameMiner.JoinCoalLimit && giveaway.Price <= Bot.GameMiner.Coal)
                 {
-                    if (Bot.GameMiner.CoalReserv <= Bot.GameMiner.Coal - giveaway.Price ||
-                        giveaway.Price == 0)
+                    if (Bot.GameMiner.CoalReserv <= Bot.GameMiner.Coal - giveaway.Price || giveaway.Price == 0)
                     {
                         var data = await Web.GameMinerJoinGiveawayAsync(Bot, giveaway);
                         if (data != null && data.Content != "\n")
@@ -2127,8 +2128,7 @@ namespace KryBot
             {
                 if (giveaway.Price <= Bot.PlayBlink.MaxJoinValue && giveaway.Price <= Bot.PlayBlink.Points)
                 {
-                    if (Bot.PlayBlink.PointReserv <= Bot.PlayBlink.Points - giveaway.Price ||
-                        giveaway.Price == 0)
+                    if (Bot.PlayBlink.PointReserv <= Bot.PlayBlink.Points - giveaway.Price || giveaway.Price == 0)
                     {
                         var data = await Web.PlayBlinkJoinGiveawayAsync(Bot, giveaway);
                         if (data != null && data.Content != "\n")

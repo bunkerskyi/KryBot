@@ -51,7 +51,7 @@ namespace KryBot
             {
                 using (var fileStream = new FileStream("profile.xml", FileMode.Create, FileAccess.Write))
                 {
-                    var serializer = new XmlSerializer(typeof (Bot));
+                    var serializer = new XmlSerializer(typeof(Bot));
                     serializer.Serialize(fileStream, this);
                 }
                 return true;
@@ -71,7 +71,7 @@ namespace KryBot
             {
                 using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
                 {
-                    var serializer = new XmlSerializer(typeof (Bot));
+                    var serializer = new XmlSerializer(typeof(Bot));
                     serializer.Serialize(fileStream, this);
                 }
                 return true;

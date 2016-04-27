@@ -61,7 +61,7 @@ namespace KryBot
                 await
                     Web.GetAsync($"{profileLink}games?tab=all&xml=1", "", new List<Parameter>(), new CookieContainer(),
                         new List<HttpHeader>(), "");
-            var serializer = new XmlSerializer(typeof (Classes.ProfileGamesList));
+            var serializer = new XmlSerializer(typeof(Classes.ProfileGamesList));
             TextReader reader = new StringReader(responseXmlProfile.RestResponse.Content);
             var games = (Classes.ProfileGamesList) serializer.Deserialize(reader);
             return games;
@@ -1175,11 +1175,11 @@ namespace KryBot
 
                 var group =
                     htmlDoc.DocumentNode.SelectSingleNode("//a[@class='notification group-join regular-button qa']");
-                if (@group != null)
+                if (group != null)
                 {
                     if (bot.SteamCompanion.AutoJoin)
                     {
-                        var trueGroupUrl = Web.Get(@group.Attributes["href"].Value, "", new List<Parameter>(),
+                        var trueGroupUrl = Web.Get(group.Attributes["href"].Value, "", new List<Parameter>(),
                             Generate.Cookies_Steam(bot),
                             new List<HttpHeader>());
 

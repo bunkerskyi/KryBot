@@ -20,7 +20,7 @@ namespace KryBot
         {
             try
             {
-                var serializer = new XmlSerializer(typeof (Bot));
+                var serializer = new XmlSerializer(typeof(Bot));
                 var reader = new StreamReader(path == "" ? "profile.xml" : path);
                 var bot = (Bot) serializer.Deserialize(reader);
                 reader.Close();
@@ -168,7 +168,7 @@ namespace KryBot
                 {
                     using (var reader = new StreamReader("blacklist.xml"))
                     {
-                        var serializer = new XmlSerializer(typeof (Blacklist));
+                        var serializer = new XmlSerializer(typeof(Blacklist));
                         var blacklist = (Blacklist) serializer.Deserialize(reader);
                         return blacklist;
                     }
