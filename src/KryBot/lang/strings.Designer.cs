@@ -313,6 +313,15 @@ namespace KryBot.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to У вас устаревшая версия Internet Explorer. Чтобы избежать проблем с работой программы, рекомендуется обновить. Перейти на сайт Microsoft для скачивания обновления?.
+        /// </summary>
+        internal static string IECheck {
+            get {
+                return ResourceManager.GetString("IECheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Уровень
         ///.
         /// </summary>
@@ -589,6 +598,15 @@ namespace KryBot.lang {
         internal static string Updater_Update_UpdateFailed {
             get {
                 return ResourceManager.GetString("Updater_Update_UpdateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Предупреждение.
+        /// </summary>
+        internal static string Warning {
+            get {
+                return ResourceManager.GetString("Warning", resourceCulture);
             }
         }
     }

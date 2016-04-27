@@ -68,6 +68,22 @@ namespace KryBot
                     Properties.Settings.Default.FirstExecute = false;
                 }
             }
+                                     
+            if (Tools.CheckIeVersion(9))
+            {
+                var dr = MessageBox.Show(strings.IECheck, strings.Warning, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+
+                switch (dr)
+                {
+                    case DialogResult.Yes:
+                        Process.Start("http://windows.microsoft.com/ru-ru/internet-explorer/download-ie");
+                        Application.Exit();
+                        break;
+                    case DialogResult.Cancel:
+                        Application.Exit();
+                        break;
+                }
+            }
 
             new Settings().Load();
             LoadProfilesInfo += ShowProfileInfo;

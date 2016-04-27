@@ -181,5 +181,15 @@ namespace KryBot
             }
             return new Blacklist();
         }
+
+        public static string GetIeVersion()
+        {
+            return new WebBrowser().Version.ToString();
+        }
+
+        public static bool CheckIeVersion(int minIeVersion)
+        {
+            return int.Parse(GetIeVersion().Split('.')[0]) < minIeVersion;
+        }
     }
 }
