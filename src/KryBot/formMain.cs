@@ -1761,8 +1761,7 @@ namespace KryBot
 
         private void btnSteamExit_Click(object sender, EventArgs e)
         {
-            Bot.Steam.Cookies.Sessid = "";
-            Bot.Steam.Cookies.Login = "";
+            Bot.Steam.Cookies = new Steam.SteamCookies();
             Bot.Steam.ProfileLink = "";
             Bot.Steam.Enabled = false;
             BlockTabpage(tabPageSteam, false);
@@ -1774,10 +1773,7 @@ namespace KryBot
 
         private void btnSTExit_Click(object sender, EventArgs e)
         {
-            Bot.SteamTrade.Cookies.DleUserId = "";
-            Bot.SteamTrade.Cookies.DlePassword = "";
-            Bot.SteamTrade.Cookies.PassHash = "";
-            Bot.SteamTrade.Cookies.PhpSessId = "";
+            Bot.SteamTrade.Cookies = new SteamTrade.StCookies();
             Bot.SteamTrade.Enabled = false;
             BlockTabpage(tabPageST, false);
             btnSTLogin.Visible = true;
@@ -1788,7 +1784,7 @@ namespace KryBot
 
         private void btnSPExit_Click(object sender, EventArgs e)
         {
-            Bot.SteamPortal.Cookies.PhpSessId = "";
+            Bot.SteamPortal.Cookies = new SteamPortal.SpCookies();
             Bot.SteamPortal.Enabled = false;
             BlockTabpage(tabPageSP, false);
             btnSPLogin.Visible = true;
@@ -1799,10 +1795,7 @@ namespace KryBot
 
         private void btnSCExit_Click(object sender, EventArgs e)
         {
-            Bot.SteamCompanion.Cookies.PhpSessId = "";
-            Bot.SteamCompanion.Cookies.UserC = "";
-            Bot.SteamCompanion.Cookies.UserId = "";
-            Bot.SteamCompanion.Cookies.UserT = "";
+            Bot.SteamCompanion.Cookies = new SteamCompanion.ScCookies();
             Bot.SteamCompanion.Enabled = false;
             BlockTabpage(tabPageSC, false);
             btnSCLogin.Visible = true;
@@ -1813,7 +1806,7 @@ namespace KryBot
 
         private void btnSGExit_Click(object sender, EventArgs e)
         {
-            Bot.SteamGifts.Cookies.PhpSessId = "";
+            Bot.SteamGifts.Cookies = new SteamGifts.SgCookies();
             Bot.SteamGifts.Enabled = false;
             BlockTabpage(tabPageSG, false);
             btnSGLogin.Visible = true;
@@ -1824,8 +1817,8 @@ namespace KryBot
 
         private void btnGMExit_Click(object sender, EventArgs e)
         {
-            Bot.GameMiner.Cookies.Token = "";
-            Bot.GameMiner.Cookies.Xsrf = "";
+            Bot.GameMiner.Cookies = new GameMiner.GmCookies();
+            Bot.GameMiner.UserAgent = "";
             Bot.GameMiner.Enabled = false;
             BlockTabpage(tabPageGM, false);
             btnGMLogin.Enabled = true;
@@ -1889,7 +1882,7 @@ namespace KryBot
 
         private void btnPBExit_Click(object sender, EventArgs e)
         {
-            Bot.PlayBlink.Cookies.PhpSessId = "";
+            Bot.PlayBlink.Cookies = new PlayBlink.PbCookies();
             Bot.PlayBlink.Enabled = false;
             BlockTabpage(tabPagePB, false);
             btnPBLogin.Enabled = true;
