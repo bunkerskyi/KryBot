@@ -71,6 +71,7 @@
             this.cbSGGroup = new System.Windows.Forms.CheckBox();
             this.cbSGWishlist = new System.Windows.Forms.CheckBox();
             this.tabPageSC = new System.Windows.Forms.TabPage();
+            this.cbSCContributors = new System.Windows.Forms.CheckBox();
             this.cbSCRegular = new System.Windows.Forms.CheckBox();
             this.cbSCAutojoin = new System.Windows.Forms.CheckBox();
             this.btnSCCookies = new System.Windows.Forms.Button();
@@ -98,7 +99,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cbSCContributors = new System.Windows.Forms.CheckBox();
             this.tabControl1.SuspendLayout();
             this.tabPageCommun.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -406,18 +406,18 @@
             // 
             // tbGMReserv
             // 
-            this.tbGMReserv.Location = new System.Drawing.Point(238, 115);
+            this.tbGMReserv.Location = new System.Drawing.Point(248, 115);
             this.tbGMReserv.Name = "tbGMReserv";
-            this.tbGMReserv.Size = new System.Drawing.Size(26, 20);
+            this.tbGMReserv.Size = new System.Drawing.Size(30, 20);
             this.tbGMReserv.TabIndex = 3;
             this.tbGMReserv.Text = "0";
             this.tbGMReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbGMReserv_KeyPress);
             // 
             // tbGMMaxValue
             // 
-            this.tbGMMaxValue.Location = new System.Drawing.Point(130, 115);
+            this.tbGMMaxValue.Location = new System.Drawing.Point(134, 115);
             this.tbGMMaxValue.Name = "tbGMMaxValue";
-            this.tbGMMaxValue.Size = new System.Drawing.Size(26, 20);
+            this.tbGMMaxValue.Size = new System.Drawing.Size(30, 20);
             this.tbGMMaxValue.TabIndex = 2;
             this.tbGMMaxValue.Text = "50";
             this.tbGMMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbGMMaxValue_KeyPress);
@@ -425,7 +425,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(160, 118);
+            this.label2.Location = new System.Drawing.Point(170, 118);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(72, 13);
             this.label2.TabIndex = 1;
@@ -516,18 +516,18 @@
             // 
             // tbSGReserv
             // 
-            this.tbSGReserv.Location = new System.Drawing.Point(243, 115);
+            this.tbSGReserv.Location = new System.Drawing.Point(254, 115);
             this.tbSGReserv.Name = "tbSGReserv";
-            this.tbSGReserv.Size = new System.Drawing.Size(26, 20);
+            this.tbSGReserv.Size = new System.Drawing.Size(30, 20);
             this.tbSGReserv.TabIndex = 7;
             this.tbSGReserv.Text = "0";
             this.tbSGReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSGReserv_KeyPress);
             // 
             // tbSGMaxValue
             // 
-            this.tbSGMaxValue.Location = new System.Drawing.Point(127, 115);
+            this.tbSGMaxValue.Location = new System.Drawing.Point(134, 115);
             this.tbSGMaxValue.Name = "tbSGMaxValue";
-            this.tbSGMaxValue.Size = new System.Drawing.Size(26, 20);
+            this.tbSGMaxValue.Size = new System.Drawing.Size(30, 20);
             this.tbSGMaxValue.TabIndex = 6;
             this.tbSGMaxValue.Text = "300";
             this.tbSGMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSGMaxValue_KeyPress);
@@ -535,7 +535,7 @@
             // lblSGReserv
             // 
             this.lblSGReserv.AutoSize = true;
-            this.lblSGReserv.Location = new System.Drawing.Point(159, 118);
+            this.lblSGReserv.Location = new System.Drawing.Point(170, 118);
             this.lblSGReserv.Name = "lblSGReserv";
             this.lblSGReserv.Size = new System.Drawing.Size(78, 13);
             this.lblSGReserv.TabIndex = 5;
@@ -589,6 +589,16 @@
             this.tabPageSC.Text = "SC";
             this.tabPageSC.UseVisualStyleBackColor = true;
             // 
+            // cbSCContributors
+            // 
+            this.cbSCContributors.AutoSize = true;
+            this.cbSCContributors.Location = new System.Drawing.Point(6, 52);
+            this.cbSCContributors.Name = "cbSCContributors";
+            this.cbSCContributors.Size = new System.Drawing.Size(126, 17);
+            this.cbSCContributors.TabIndex = 17;
+            this.cbSCContributors.Text = "Contributors раздачи";
+            this.cbSCContributors.UseVisualStyleBackColor = true;
+            // 
             // cbSCRegular
             // 
             this.cbSCRegular.AutoSize = true;
@@ -621,18 +631,18 @@
             // 
             // tbSCReserv
             // 
-            this.tbSCReserv.Location = new System.Drawing.Point(246, 121);
+            this.tbSCReserv.Location = new System.Drawing.Point(254, 121);
             this.tbSCReserv.Name = "tbSCReserv";
-            this.tbSCReserv.Size = new System.Drawing.Size(26, 20);
+            this.tbSCReserv.Size = new System.Drawing.Size(30, 20);
             this.tbSCReserv.TabIndex = 13;
             this.tbSCReserv.Text = "0";
             this.tbSCReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSCReserv_KeyPress);
             // 
             // tbSCMaxValue
             // 
-            this.tbSCMaxValue.Location = new System.Drawing.Point(130, 121);
+            this.tbSCMaxValue.Location = new System.Drawing.Point(134, 121);
             this.tbSCMaxValue.Name = "tbSCMaxValue";
-            this.tbSCMaxValue.Size = new System.Drawing.Size(26, 20);
+            this.tbSCMaxValue.Size = new System.Drawing.Size(30, 20);
             this.tbSCMaxValue.TabIndex = 12;
             this.tbSCMaxValue.Text = "1500";
             this.tbSCMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSCMaxValue_KeyPress);
@@ -640,7 +650,7 @@
             // lblSCReserv
             // 
             this.lblSCReserv.AutoSize = true;
-            this.lblSCReserv.Location = new System.Drawing.Point(162, 124);
+            this.lblSCReserv.Location = new System.Drawing.Point(170, 124);
             this.lblSCReserv.Name = "lblSCReserv";
             this.lblSCReserv.Size = new System.Drawing.Size(78, 13);
             this.lblSCReserv.TabIndex = 11;
@@ -702,18 +712,18 @@
             // 
             // tbSPReserv
             // 
-            this.tbSPReserv.Location = new System.Drawing.Point(244, 3);
+            this.tbSPReserv.Location = new System.Drawing.Point(242, 3);
             this.tbSPReserv.Name = "tbSPReserv";
-            this.tbSPReserv.Size = new System.Drawing.Size(26, 20);
+            this.tbSPReserv.Size = new System.Drawing.Size(30, 20);
             this.tbSPReserv.TabIndex = 17;
             this.tbSPReserv.Text = "0";
             this.tbSPReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSPReserv_KeyPress);
             // 
             // tbSPMaxValue
             // 
-            this.tbSPMaxValue.Location = new System.Drawing.Point(128, 3);
+            this.tbSPMaxValue.Location = new System.Drawing.Point(134, 3);
             this.tbSPMaxValue.Name = "tbSPMaxValue";
-            this.tbSPMaxValue.Size = new System.Drawing.Size(26, 20);
+            this.tbSPMaxValue.Size = new System.Drawing.Size(30, 20);
             this.tbSPMaxValue.TabIndex = 16;
             this.tbSPMaxValue.Text = "30";
             this.tbSPMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSPMaxValue_KeyPress);
@@ -721,7 +731,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(160, 6);
+            this.label3.Location = new System.Drawing.Point(170, 6);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(78, 13);
             this.label3.TabIndex = 15;
@@ -774,7 +784,7 @@
             // 
             this.tbPBReserv.Location = new System.Drawing.Point(244, 3);
             this.tbPBReserv.Name = "tbPBReserv";
-            this.tbPBReserv.Size = new System.Drawing.Size(26, 20);
+            this.tbPBReserv.Size = new System.Drawing.Size(30, 20);
             this.tbPBReserv.TabIndex = 24;
             this.tbPBReserv.Text = "0";
             this.tbPBReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPBReserv_KeyPress);
@@ -783,7 +793,7 @@
             // 
             this.tbPBMaxValue.Location = new System.Drawing.Point(128, 3);
             this.tbPBMaxValue.Name = "tbPBMaxValue";
-            this.tbPBMaxValue.Size = new System.Drawing.Size(26, 20);
+            this.tbPBMaxValue.Size = new System.Drawing.Size(30, 20);
             this.tbPBMaxValue.TabIndex = 23;
             this.tbPBMaxValue.Text = "30";
             this.tbPBMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPBMaxValue_KeyPress);
@@ -853,16 +863,6 @@
             this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
-            // 
-            // cbSCContributors
-            // 
-            this.cbSCContributors.AutoSize = true;
-            this.cbSCContributors.Location = new System.Drawing.Point(6, 52);
-            this.cbSCContributors.Name = "cbSCContributors";
-            this.cbSCContributors.Size = new System.Drawing.Size(126, 17);
-            this.cbSCContributors.TabIndex = 17;
-            this.cbSCContributors.Text = "Contributors раздачи";
-            this.cbSCContributors.UseVisualStyleBackColor = true;
             // 
             // FormSettings
             // 
