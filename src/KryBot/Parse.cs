@@ -988,7 +988,7 @@ namespace KryBot
                     var pageNode = htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]");
                     if (pageNode != null)
                     {
-                        pages = int.Parse(pageNode.Attributes["href"].Value.Split('=')[1]);
+                        pages = int.Parse(pageNode.Attributes["href"].Value.Split('=')[2]);
                     }
 
                     var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/div");
