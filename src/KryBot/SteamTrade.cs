@@ -29,5 +29,11 @@ namespace KryBot
             public string LinkJoin { get; set; }
             public string Link { get; set; }
         }
+
+        public void Logout()
+        {
+            Cookies = new StCookies();
+            Enabled = false;
+        }
     }
 }

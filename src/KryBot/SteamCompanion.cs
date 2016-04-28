@@ -42,5 +42,11 @@ namespace KryBot
             public string Link { get; set; }
             public bool Region { get; set; }
         }
+
+        public void Logout()
+        {
+            Cookies = new ScCookies();
+            Enabled = false;
+        }
     }
 }

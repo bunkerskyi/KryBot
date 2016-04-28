@@ -55,5 +55,11 @@ namespace KryBot
             public string Type { get; set; }
             public string Msg { get; set; }
         }
+
+        public void Logout()
+        {
+            Cookies = new SgCookies();
+            Enabled = false;
+        }
     }
 }

@@ -134,5 +134,12 @@ namespace KryBot
         {
             public JsonResponseErrorDetail Error { get; set; }
         }
+
+        public void Logout()
+        {
+            Cookies = new GmCookies();
+            UserAgent = "";
+            Enabled = false;
+        }
     }
 }

@@ -1780,9 +1780,7 @@ namespace KryBot
 
         private void btnSteamExit_Click(object sender, EventArgs e)
         {
-            Bot.Steam.Cookies = new Steam.SteamCookies();
-            Bot.Steam.ProfileLink = "";
-            Bot.Steam.Enabled = false;
+            Bot.Steam.Logout();
             BlockTabpage(tabPageSteam, false);
             btnSteamLogin.Visible = true;
             btnSteamLogin.Enabled = true;
@@ -1792,8 +1790,7 @@ namespace KryBot
 
         private void btnSTExit_Click(object sender, EventArgs e)
         {
-            Bot.SteamTrade.Cookies = new SteamTrade.StCookies();
-            Bot.SteamTrade.Enabled = false;
+            Bot.SteamTrade.Logout();
             BlockTabpage(tabPageST, false);
             btnSTLogin.Visible = true;
             btnSTExit.Visible = false;
@@ -1803,8 +1800,7 @@ namespace KryBot
 
         private void btnSPExit_Click(object sender, EventArgs e)
         {
-            Bot.SteamPortal.Cookies = new SteamPortal.SpCookies();
-            Bot.SteamPortal.Enabled = false;
+            Bot.SteamPortal.Logout();
             BlockTabpage(tabPageSP, false);
             btnSPLogin.Visible = true;
             btnSPLogin.Enabled = true;
@@ -1814,8 +1810,7 @@ namespace KryBot
 
         private void btnSCExit_Click(object sender, EventArgs e)
         {
-            Bot.SteamCompanion.Cookies = new SteamCompanion.ScCookies();
-            Bot.SteamCompanion.Enabled = false;
+            Bot.SteamCompanion.Logout();
             BlockTabpage(tabPageSC, false);
             btnSCLogin.Visible = true;
             btnSCLogin.Enabled = true;
@@ -1825,8 +1820,7 @@ namespace KryBot
 
         private void btnSGExit_Click(object sender, EventArgs e)
         {
-            Bot.SteamGifts.Cookies = new SteamGifts.SgCookies();
-            Bot.SteamGifts.Enabled = false;
+            Bot.SteamGifts.Logout();
             BlockTabpage(tabPageSG, false);
             btnSGLogin.Visible = true;
             btnSGLogin.Enabled = true;
@@ -1836,9 +1830,7 @@ namespace KryBot
 
         private void btnGMExit_Click(object sender, EventArgs e)
         {
-            Bot.GameMiner.Cookies = new GameMiner.GmCookies();
-            Bot.GameMiner.UserAgent = "";
-            Bot.GameMiner.Enabled = false;
+            Bot.GameMiner.Logout();
             BlockTabpage(tabPageGM, false);
             btnGMLogin.Enabled = true;
             btnGMLogin.Visible = true;
@@ -1900,8 +1892,7 @@ namespace KryBot
 
         private void btnPBExit_Click(object sender, EventArgs e)
         {
-            Bot.PlayBlink.Cookies = new PlayBlink.PbCookies();
-            Bot.PlayBlink.Enabled = false;
+            Bot.PlayBlink.Logout();
             BlockTabpage(tabPagePB, false);
             btnPBLogin.Enabled = true;
             btnPBLogin.Visible = true;
