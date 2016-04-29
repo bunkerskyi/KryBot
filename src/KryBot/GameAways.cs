@@ -21,20 +21,6 @@ namespace KryBot
         public GaCookies Cookies { get; set; }
         public List<GaGiveaway> Giveaways { get; set; }
 
-        public class GaCookies
-        {
-            public string SessionId { get; set; }
-        }
-
-        public class GaGiveaway
-        {
-            public string Name { get; set; }
-            public string StoreId { get; set; }
-            public string Id { get; set; }
-            public int Price { get; set; }
-            public bool IsGroup { get; set; }
-        }
-
         public Log CheckLogin()
         {
             return new Log("");
@@ -44,7 +30,8 @@ namespace KryBot
 
         public static Log SteamGetProfile(Bot bot, bool echo)
         {
-            var response = Web.Get("http://www.gameaways.com/", "", new List<Parameter>(), Generate.Cookies_Steam(bot), new List<HttpHeader>());
+            var response = Web.Get("http://www.gameaways.com/", "", new List<Parameter>(), Generate.Cookies_Steam(bot),
+                new List<HttpHeader>());
 
             if (response.RestResponse.Content != "")
             {
@@ -65,8 +52,21 @@ namespace KryBot
 
         #endregion
 
-        #region Web
+        public class GaCookies
+        {
+            public string SessionId { get; set; }
+        }
 
+        public class GaGiveaway
+        {
+            public string Name { get; set; }
+            public string StoreId { get; set; }
+            public string Id { get; set; }
+            public int Price { get; set; }
+            public bool IsGroup { get; set; }
+        }
+
+        #region Web
 
         #endregion
 

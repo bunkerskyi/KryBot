@@ -17,5 +17,11 @@
             public string Login { get; set; }
             public string RememberLogin { get; set; }
         }
+
+        public void Logout()
+        {
+            Cookies = new SteamCookies();
+            Enabled = false;
+        }
     }
 }

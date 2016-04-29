@@ -42,5 +42,11 @@ namespace KryBot
         {
             public int my_coins { get; set; }
         }
+
+        public void Logout()
+        {
+            Cookies = new SpCookies();
+            Enabled = false;
+        }
     }
 }

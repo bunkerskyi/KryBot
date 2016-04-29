@@ -31,5 +31,11 @@ namespace KryBot
             public int Level { get; set; }
             public string Id { get; set; }
         }
+
+        public void Logout()
+        {
+            Cookies = new PbCookies();
+            Enabled = false;
+        }
     }
 }

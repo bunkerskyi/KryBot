@@ -8,9 +8,11 @@ using System.Reflection;
 using System.Security;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using IWshRuntimeLibrary;
 using KryBot.lang;
 using Microsoft.Win32;
 using RestSharp;
+using File = System.IO.File;
 
 namespace KryBot
 {
@@ -20,7 +22,7 @@ namespace KryBot
         {
             try
             {
-                var serializer = new XmlSerializer(typeof (Bot));
+                var serializer = new XmlSerializer(typeof(Bot));
                 var reader = new StreamReader(path == "" ? "profile.xml" : path);
                 var bot = (Bot) serializer.Deserialize(reader);
                 reader.Close();
@@ -168,7 +170,7 @@ namespace KryBot
                 {
                     using (var reader = new StreamReader("blacklist.xml"))
                     {
-                        var serializer = new XmlSerializer(typeof (Blacklist));
+                        var serializer = new XmlSerializer(typeof(Blacklist));
                         var blacklist = (Blacklist) serializer.Deserialize(reader);
                         return blacklist;
                     }
@@ -180,6 +182,27 @@ namespace KryBot
                 }
             }
             return new Blacklist();
+        }
+
+        public static string GetIeVersion()
+        {
+            return new WebBrowser().Version.ToString();
+        }
+
+        public static bool CheckIeVersion(int minIeVersion)
+        {
+            return int.Parse(GetIeVersion().Split('.')[0]) < minIeVersion;
+        }
+
+        public static void CreateShortcut()
+        {
+            string shortcutTarget = Path.Combine(Application.StartupPath, "KryBot.exe");
+            WshShell myShell = new WshShell();
+            WshShortcut myShortcut = (WshShortcut) myShell.CreateShortcut(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+            myShortcut.TargetPath = shortcutTarget;
+            myShortcut.IconLocation = shortcutTarget + ",0";
+            myShortcut.WorkingDirectory = Application.StartupPath;
+            myShortcut.Save();
         }
     }
 }

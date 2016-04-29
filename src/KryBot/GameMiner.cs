@@ -20,6 +20,7 @@ namespace KryBot
         public bool FreeGolden { get; set; } = true;
         public bool OnlyGifts { get; set; }
         public bool NoRegion { get; set; }
+        public string UserAgent { get; set; }
         public GmCookies Cookies { get; set; }
         public List<GmGiveaway> Giveaways { get; set; }
 
@@ -132,6 +133,13 @@ namespace KryBot
         public class JsonResponseError
         {
             public JsonResponseErrorDetail Error { get; set; }
+        }
+
+        public void Logout()
+        {
+            Cookies = new GmCookies();
+            UserAgent = "";
+            Enabled = false;
         }
     }
 }

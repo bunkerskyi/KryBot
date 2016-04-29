@@ -295,4 +295,10 @@
   <data name="Updater_Update_UpdateFailed" xml:space="preserve">
     <value>При обновлении произошла ошибка</value>
   </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Предупреждение</value>
+  </data>
+  <data name="IECheck" xml:space="preserve">
+    <value>У вас устаревшая версия Internet Explorer. Чтобы избежать проблем с работой программы, рекомендуется обновить. Перейти на сайт Microsoft для скачивания обновления?</value>
+  </data>
 </root>
