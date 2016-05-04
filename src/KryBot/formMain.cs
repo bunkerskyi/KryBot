@@ -126,7 +126,7 @@ namespace KryBot
                 cbSCEnable.Checked = Bot.SteamCompanion.Enabled;
                 cbSPEnable.Checked = Bot.SteamPortal.Enabled;
                 cbSTEnable.Checked = Bot.SteamTrade.Enabled;
-                cbPBEnabled.Checked = Bot.SteamTrade.Enabled;
+                cbPBEnabled.Checked = Bot.PlayBlink.Enabled;
                 btnStart.Enabled = await LoginCheck();
 
                 if (Bot.Steam.Enabled)
