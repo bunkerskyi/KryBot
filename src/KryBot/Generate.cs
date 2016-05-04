@@ -329,7 +329,7 @@ namespace KryBot
             }
 
             cookie.Add(new Cookie("entry", "1") {Domain = target.Host});
-            cookie.Add(new Cookie("level", bot.PlayBlink.Level.ToString()) {Domain = target.Host});
+            cookie.Add(new Cookie("level", (bot.PlayBlink.Level-1).ToString()) {Domain = target.Host});
             cookie.Add(new Cookie("order", "2") {Domain = target.Host});
             cookie.Add(new Cookie("ppage", "100") {Domain = target.Host});
 

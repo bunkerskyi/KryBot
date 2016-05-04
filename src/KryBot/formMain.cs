@@ -2117,7 +2117,7 @@ namespace KryBot
         {
             foreach (var giveaway in giveaways)
             {
-                if (giveaway.Price <= Bot.PlayBlink.MaxJoinValue && giveaway.Price <= Bot.PlayBlink.Points)
+                if (giveaway.Price <= Bot.PlayBlink.MaxJoinValue && giveaway.Price <= Bot.PlayBlink.Points && Bot.PlayBlink.Level >= giveaway.Level)
                 {
                     if (Bot.PlayBlink.PointReserv <= Bot.PlayBlink.Points - giveaway.Price || giveaway.Price == 0)
                     {
