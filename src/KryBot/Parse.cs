@@ -1320,7 +1320,7 @@ namespace KryBot
                 }
                 else
                 {
-                    var response = Web.Get("http://steamportal.net/", "",
+                    var response = Web.Get("http://steamportal.net/", "page",
                         new List<Parameter>(), Generate.Cookies_SteamPortal(bot),
                         new List<HttpHeader>());
 
