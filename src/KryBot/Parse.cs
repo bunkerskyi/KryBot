@@ -1222,8 +1222,8 @@ namespace KryBot
                 var htmlDoc = new HtmlDocument();
                 htmlDoc.LoadHtml(response.RestResponse.Content);
 
-                var points = htmlDoc.DocumentNode.SelectSingleNode("//span[@class='coin-icon my_coins']");
-                var profileLink = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='nickname']/a[1]");
+                var points = htmlDoc.DocumentNode.SelectSingleNode("//span[@class='my_coins']");
+                var profileLink = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='mp-wrap']/a[1]");
                 if (points != null && profileLink != null)
                 {
                     bot.SteamPortal.Points = int.Parse(points.InnerText);
