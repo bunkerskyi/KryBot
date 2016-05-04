@@ -24,6 +24,13 @@ namespace KryBot
         public GmCookies Cookies { get; set; }
         public List<GmGiveaway> Giveaways { get; set; }
 
+        public void Logout()
+        {
+            Cookies = new GmCookies();
+            UserAgent = "";
+            Enabled = false;
+        }
+
         public class GmCookies
         {
             public string Token { get; set; }
@@ -131,13 +138,6 @@ namespace KryBot
         public class JsonResponseError
         {
             public JsonResponseErrorDetail Error { get; set; }
-        }
-
-        public void Logout()
-        {
-            Cookies = new GmCookies();
-            UserAgent = "";
-            Enabled = false;
         }
     }
 }

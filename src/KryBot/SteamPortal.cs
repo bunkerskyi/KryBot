@@ -18,6 +18,12 @@ namespace KryBot
         public SpCookies Cookies { get; set; }
         public List<SpGiveaway> Giveaways { get; set; }
 
+        public void Logout()
+        {
+            Cookies = new SpCookies();
+            Enabled = false;
+        }
+
         public class SpCookies
         {
             public string PhpSessId { get; set; }
@@ -41,12 +47,6 @@ namespace KryBot
         public class TargetH
         {
             public int my_coins { get; set; }
-        }
-
-        public void Logout()
-        {
-            Cookies = new SpCookies();
-            Enabled = false;
         }
     }
 }

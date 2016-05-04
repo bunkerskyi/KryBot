@@ -196,9 +196,10 @@ namespace KryBot
 
         public static void CreateShortcut()
         {
-            string shortcutTarget = Path.Combine(Application.StartupPath, "KryBot.exe");
-            WshShell myShell = new WshShell();
-            WshShortcut myShortcut = (WshShortcut) myShell.CreateShortcut(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+            var shortcutTarget = Path.Combine(Application.StartupPath, "KryBot.exe");
+            var myShell = new WshShell();
+            var myShortcut =
+                (WshShortcut) myShell.CreateShortcut(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
             myShortcut.TargetPath = shortcutTarget;
             myShortcut.IconLocation = shortcutTarget + ",0";
             myShortcut.WorkingDirectory = Application.StartupPath;

@@ -18,6 +18,12 @@ namespace KryBot
         public PbCookies Cookies { get; set; }
         public List<PbGiveaway> Giveaways { get; set; }
 
+        public void Logout()
+        {
+            Cookies = new PbCookies();
+            Enabled = false;
+        }
+
         public class PbCookies
         {
             public string PhpSessId { get; set; }
@@ -30,12 +36,6 @@ namespace KryBot
             public int Price { get; set; }
             public int Level { get; set; }
             public string Id { get; set; }
-        }
-
-        public void Logout()
-        {
-            Cookies = new PbCookies();
-            Enabled = false;
         }
     }
 }
