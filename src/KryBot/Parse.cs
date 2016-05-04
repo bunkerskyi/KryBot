@@ -199,10 +199,10 @@ namespace KryBot
                     GameMinerAddGiveaways(goldenFreeJsonResponse, bot, giveaways);
 
                     content +=
-                        $"{GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {goldenFreeJsonResponse.Total} " +
-                        $"{strings.ParseLoadGiveaways_FreeGoldenGiveawaysIn} {goldenFreeJsonResponse.LastPage} {strings.ParseLoadGiveaways_Pages}\n";
+                        $"{GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {goldenFreeJsonResponse.total} " +
+                        $"{strings.ParseLoadGiveaways_FreeGoldenGiveawaysIn} {goldenFreeJsonResponse.last_page} {strings.ParseLoadGiveaways_Pages}\n";
 
-                    pages = goldenFreeJsonResponse.LastPage;
+                    pages = goldenFreeJsonResponse.last_page;
 
                     if (pages > 1)
                     {
@@ -237,10 +237,10 @@ namespace KryBot
                         regularResponse.RestResponse.Content);
                 GameMinerAddGiveaways(regularJsonResponse, bot, giveaways);
                 content +=
-                    $"{GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {regularJsonResponse.Total} " +
-                    $"{strings.ParseLoadGiveaways_RegularGiveawaysIn} {regularJsonResponse.LastPage} {strings.ParseLoadGiveaways_Pages}\n";
+                    $"{GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {regularJsonResponse.total} " +
+                    $"{strings.ParseLoadGiveaways_RegularGiveawaysIn} {regularJsonResponse.last_page} {strings.ParseLoadGiveaways_Pages}\n";
 
-                pages = regularJsonResponse.LastPage;
+                pages = regularJsonResponse.last_page;
 
                 if (pages > 1)
                 {
@@ -277,10 +277,10 @@ namespace KryBot
                     GameMinerAddGiveaways(sandboxGiftJsonResponse, bot, giveaways);
 
                     content +=
-                        $"{GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {sandboxGiftJsonResponse.Total} " +
-                        $"{strings.ParseLoadGiveaways_RegularGiveawaysIn} {sandboxGiftJsonResponse.LastPage} {strings.ParseLoadGiveaways_Pages}\n";
+                        $"{GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {sandboxGiftJsonResponse.total} " +
+                        $"{strings.ParseLoadGiveaways_RegularGiveawaysIn} {sandboxGiftJsonResponse.last_page} {strings.ParseLoadGiveaways_Pages}\n";
 
-                    pages = sandboxGiftJsonResponse.LastPage;
+                    pages = sandboxGiftJsonResponse.last_page;
                 }
 
                 if (pages > 1)
@@ -352,10 +352,10 @@ namespace KryBot
             List<GameMiner.GmGiveaway> giveaways)
         {
             if (json != null)
-                foreach (var giveaway in json.Giveaways)
+                foreach (var giveaway in json.giveaways)
                 {
                     var lot = new GameMiner.GmGiveaway();
-                    if (giveaway.Golden && giveaway.Price != 0)
+                    if (giveaway.golden && giveaway.price != 0)
                     {
                         break;
                     }
@@ -365,22 +365,22 @@ namespace KryBot
                         break;
                     }
 
-                    lot.Name = giveaway.Game.Name;
-                    lot.Id = giveaway.Code;
-                    lot.IsRegular = giveaway.Sandbox == null;
-                    lot.IsSandbox = giveaway.Sandbox != null;
-                    lot.IsGolden = giveaway.Golden;
-                    lot.Page = json.Page;
-                    lot.Price = giveaway.Price;
+                    lot.Name = giveaway.game.name;
+                    lot.Id = giveaway.code;
+                    lot.IsRegular = giveaway.sandbox == null;
+                    lot.IsSandbox = giveaway.sandbox != null;
+                    lot.IsGolden = giveaway.golden;
+                    lot.Page = json.page;
+                    lot.Price = giveaway.price;
 
-                    if (giveaway.RegionlockTypeId != null)
+                    if (giveaway.regionlock_type_id != null)
                     {
-                        lot.Region = giveaway.RegionlockTypeId;
+                        lot.Region = giveaway.regionlock_type_id;
                     }
 
-                    if (giveaway.Game.Url != "javascript:void(0);")
+                    if (giveaway.game.url != "javascript:void(0);")
                     {
-                        lot.StoreId = giveaway.Game.Url.Split('/')[4];
+                        lot.StoreId = giveaway.game.url.Split('/')[4];
                     }
                     else
                     {
