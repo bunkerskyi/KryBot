@@ -9,7 +9,7 @@
 
         public bool Enabled { get; set; }
         public string ProfileLink { get; set; }
-        public SteamCookies Cookies { get; private set; }
+        public SteamCookies Cookies { get; set; }
 
         public void Logout()
         {

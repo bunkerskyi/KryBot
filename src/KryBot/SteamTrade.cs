@@ -11,7 +11,7 @@ namespace KryBot
         }
 
         public bool Enabled { get; set; }
-        public StCookies Cookies { get; private set; }
+        public StCookies Cookies { get; set; }
         public List<StGiveaway> Giveaways { get; set; }
 
         public void Logout()

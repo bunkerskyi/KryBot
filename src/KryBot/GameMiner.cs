@@ -21,7 +21,7 @@ namespace KryBot
         public bool OnlyGifts { get; set; }
         public bool NoRegion { get; set; }
         public string UserAgent { get; set; }
-        public GmCookies Cookies { get; private set; }
+        public GmCookies Cookies { get; set; }
         public List<GmGiveaway> Giveaways { get; set; }
 
         public void Logout()
@@ -37,6 +37,12 @@ namespace KryBot
             public string Xsrf { get; set; }
         }
 
+        public class Properties
+        {
+            public string hat { get; set; }
+            public string nick_color { get; set; }
+        }
+
         public class Account
         {
             public string name { get; set; }
@@ -45,6 +51,7 @@ namespace KryBot
             public string avatar { get; set; }
             public bool active { get; set; }
             public string role_id { get; set; }
+            public Properties properties { get; set; }
         }
 
         public class Game

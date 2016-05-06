@@ -13,9 +13,9 @@ namespace KryBot
             Items = new List<BlacklistItem>();
         }
 
-        public List<BlacklistItem> Items { get; }
+        public List<BlacklistItem> Items { get; set; }
 
-        public void Save()
+        public bool Save()
         {
             try
             {
@@ -24,10 +24,12 @@ namespace KryBot
                     var serializer = new XmlSerializer(typeof(Blacklist));
                     serializer.Serialize(fs, this);
                 }
+                return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(@"Ошибка", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
             }
         }
 

@@ -18,8 +18,8 @@ namespace KryBot
         public int Points { get; set; }
         public int JoinPointsLimit { get; set; } = 10000;
         public int PointsReserv { get; set; }
-        private GaCookies Cookies { get; set; }
-        private List<GaGiveaway> Giveaways { get; set; }
+        public GaCookies Cookies { get; set; }
+        public List<GaGiveaway> Giveaways { get; set; }
 
         public Log CheckLogin()
         {
@@ -57,7 +57,7 @@ namespace KryBot
             public string SessionId { get; set; }
         }
 
-        private class GaGiveaway
+        public class GaGiveaway
         {
             public string Name { get; set; }
             public string StoreId { get; set; }

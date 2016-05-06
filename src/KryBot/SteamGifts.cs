@@ -22,7 +22,7 @@ namespace KryBot
         public int JoinPointLimit { get; set; } = 300;
         public int PointsReserv { get; set; }
         public int MinLevel { get; set; }
-        public SgCookies Cookies { get; private set; }
+        public SgCookies Cookies { get; set; }
         public List<SgGiveaway> Giveaways { get; set; }
         public List<SgGiveaway> WishlistGiveaways { get; set; }
 

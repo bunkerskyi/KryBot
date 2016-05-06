@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace KryBot
 {
-    internal static class Updater
+    internal class Updater
     {
         public static async Task<Log> CheckForUpdates()
         {

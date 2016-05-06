@@ -11,10 +11,11 @@ namespace KryBot
         }
 
         public bool Enabled { get; set; }
+        public string ProfileLink { get; set; }
         public int Points { get; set; }
         public int MaxJoinValue { get; set; } = 30;
         public int PointsReserv { get; set; }
-        public SpCookies Cookies { get; private set; }
+        public SpCookies Cookies { get; set; }
         public List<SpGiveaway> Giveaways { get; set; }
 
         public void Logout()

@@ -5,7 +5,7 @@ using KryBot.lang;
 
 namespace KryBot
 {
-    public static class Messages
+    public class Messages
     {
         public static Log Start()
         {
@@ -28,6 +28,11 @@ namespace KryBot
         public static Log ProfileLoaded()
         {
             return new Log($"{GetDateTime()} {strings.LoadProfile_Load}");
+        }
+
+        public static Log DllNotFount(string name)
+        {
+            return new Log($"{GetDateTime()} {strings.DllNotLoad} \"{name}\" {strings.DllNotLoad_1}");
         }
 
         public static Log DoFarm_Start()

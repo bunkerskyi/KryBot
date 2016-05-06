@@ -10,7 +10,7 @@ namespace KryBot
     {
         private readonly int _y;
         private int _x;
-        private bool _win7;
+        public bool Win7;
 
         public FormLog(int x, int y)
         {
@@ -23,10 +23,10 @@ namespace KryBot
         {
             if (Environment.OSVersion.Version.ToString().Split('.')[1] == "1")
             {
-                _win7 = true;
+                Win7 = true;
             }
 
-            if (_win7)
+            if (Win7)
             {
                 _x = _x + 15;
             }
@@ -50,7 +50,7 @@ namespace KryBot
         public void FormChangeLocation()
         {
             var owner = Owner as FormMain;
-            if (_win7)
+            if (Win7)
             {
                 if (owner != null) Location = new Point(owner.Location.X + owner.Width, owner.Location.Y);
             }
@@ -74,7 +74,7 @@ namespace KryBot
             Width = Properties.Settings.Default.LogWidth;
         }
 
-        private static void AppendText(RichTextBox box, string text, Color color)
+        public static void AppendText(RichTextBox box, string text, Color color)
         {
             box.SelectionStart = box.TextLength;
             box.SelectionLength = 0;

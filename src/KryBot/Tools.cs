@@ -16,7 +16,7 @@ using File = System.IO.File;
 
 namespace KryBot
 {
-    public static class Tools
+    public class Tools
     {
         public static Bot LoadProfile(string path)
         {
@@ -69,7 +69,7 @@ namespace KryBot
             return null;
         }
 
-        private static List<Cookie> CookieContainer_ToList(CookieContainer container)
+        public static List<Cookie> CookieContainer_ToList(CookieContainer container)
         {
             var cookies = new List<Cookie>();
 
@@ -184,7 +184,7 @@ namespace KryBot
             return new Blacklist();
         }
 
-        private static string GetIeVersion()
+        public static string GetIeVersion()
         {
             return new WebBrowser().Version.ToString();
         }
