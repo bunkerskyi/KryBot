@@ -6,7 +6,6 @@ using System.Xml.Serialization;
 
 namespace KryBot
 {
-    [Serializable]
     public class Bot
     {
         public Bot()

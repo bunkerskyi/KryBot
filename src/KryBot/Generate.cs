@@ -8,6 +8,22 @@ namespace KryBot
     internal static class Generate
     {
         // Steam //
+        public static CookieContainer Cookies_Steam(Bot bot)
+        {
+            var cookie = new CookieContainer();
+            var target = new Uri("http://steamcommunity.com/");
+
+            if (bot.Steam.Cookies.Sessid != null)
+                cookie.Add(new Cookie("sessionid", bot.Steam.Cookies.Sessid) {Domain = target.Host});
+
+            if (bot.Steam.Cookies.Login != null)
+                cookie.Add(new Cookie("steamLogin", bot.Steam.Cookies.Login) {Domain = target.Host});
+
+            if (bot.Steam.Cookies.RememberLogin != null)
+                cookie.Add(new Cookie("steamRememberLogin", bot.Steam.Cookies.RememberLogin) {Domain = target.Host});
+
+            return cookie;
+        }
 
         public static List<Parameter> PostData_SteamGroupJoin(string sessid)
         {

@@ -133,7 +133,7 @@ namespace KryBot
                 {
                     await
                         Web.SteamJoinGroupAsync("http://steamcommunity.com/groups/krybot", "",
-                            Generate.PostData_SteamGroupJoin(_bot.Steam.Cookies.Sessid), _bot.Steam.GenerateCookies());
+                            Generate.PostData_SteamGroupJoin(_bot.Steam.Cookies.Sessid), Generate.Cookies_Steam(_bot));
                 }
             }
             else
@@ -1320,7 +1320,7 @@ namespace KryBot
         private async Task<bool> CheckLoginSteam()
         {
             Message_TryLogin("Steam");
-            var login = await _bot.Steam.GetProfile();
+            var login = await Parse.SteamGetProfileAsync(_bot);
             WriteLog(login);
             return login.Success;
         }
@@ -1684,7 +1684,7 @@ namespace KryBot
             {
                 await
                     Web.SteamJoinGroupAsync("http://steamcommunity.com/groups/krybot", "",
-                        Generate.PostData_SteamGroupJoin(_bot.Steam.Cookies.Sessid), _bot.Steam.GenerateCookies());
+                        Generate.PostData_SteamGroupJoin(_bot.Steam.Cookies.Sessid), Generate.Cookies_Steam(_bot));
 
                 BlockTabpage(tabPageSteam, true);
                 btnSteamLogin.Enabled = false;
