@@ -17,11 +17,10 @@ namespace KryBot
         public bool Contributors { get; set; }
         public bool Group { get; set; }
         public bool AutoJoin { get; set; }
-        public string ProfileLink { get; set; }
         public int Points { get; set; }
         public int JoinPointLimit { get; set; } = 1500;
         public int PointsReserv { get; set; }
-        public ScCookies Cookies { get; set; }
+        public ScCookies Cookies { get; private set; }
         public List<ScGiveaway> Giveaways { get; set; }
         public List<ScGiveaway> WishlistGiveaways { get; set; }
 
@@ -42,11 +41,9 @@ namespace KryBot
         public class ScGiveaway
         {
             public string Name { get; set; }
-            public string StoreId { get; set; }
             public int Price { get; set; }
             public string Code { get; set; }
             public string Link { get; set; }
-            public bool Region { get; set; }
         }
     }
 }

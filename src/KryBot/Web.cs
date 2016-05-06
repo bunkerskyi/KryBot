@@ -10,12 +10,12 @@ using RestSharp;
 
 namespace KryBot
 {
-    internal class Web
+    internal static class Web
     {
-        private static readonly int requestInterval = 400;
+        private const int RequestInterval = 400;
 
         public static Classes.Response Get(string url, string subUrl, List<Parameter> parameters,
-            CookieContainer cookies, List<HttpHeader> headers, string userAgent)
+            CookieContainer cookies, IEnumerable<HttpHeader> headers, string userAgent)
         {
             var client = new RestClient(url)
             {
@@ -44,7 +44,7 @@ namespace KryBot
                 RestResponse = response
             };
 
-            Thread.Sleep(requestInterval);
+            Thread.Sleep(RequestInterval);
 
             return data;
         }
@@ -78,7 +78,7 @@ namespace KryBot
                 RestResponse = response
             };
 
-            Thread.Sleep(requestInterval);
+            Thread.Sleep(RequestInterval);
 
             return data;
         }
@@ -109,7 +109,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Classes.Response Post(string url, string subUrl, List<Parameter> parameters,
+        private static Classes.Response Post(string url, string subUrl, List<Parameter> parameters,
             List<HttpHeader> headers, CookieContainer cookies, string userAgent)
         {
             var client = new RestClient(url)
@@ -138,7 +138,7 @@ namespace KryBot
                 RestResponse = response
             };
 
-            Thread.Sleep(requestInterval);
+            Thread.Sleep(RequestInterval);
 
             return data;
         }
@@ -184,7 +184,7 @@ namespace KryBot
                 RestResponse = response
             };
 
-            Thread.Sleep(requestInterval);
+            Thread.Sleep(RequestInterval);
 
             return data;
         }
@@ -202,9 +202,9 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Log GameMinerJoinGiveaway(Bot bot, GameMiner.GmGiveaway gmGiveaway)
+        private static Log GameMinerJoinGiveaway(Bot bot, GameMiner.GmGiveaway gmGiveaway)
         {
-            Thread.Sleep(requestInterval);
+            Thread.Sleep(RequestInterval);
             var response = Post("http://gameminer.net/",
                 "/giveaway/enter/" + gmGiveaway.Id + "?" + (gmGiveaway.IsSandbox ? "sandbox" : "coal") + "_page=" +
                 gmGiveaway.Page, Generate.PostData_GameMiner(bot.GameMiner.Cookies.Xsrf), new List<HttpHeader>(),
@@ -246,9 +246,9 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Log SteamGiftsJoinGiveaway(Bot bot, SteamGifts.SgGiveaway sgGiveaway)
+        private static Log SteamGiftsJoinGiveaway(Bot bot, SteamGifts.SgGiveaway sgGiveaway)
         {
-            Thread.Sleep(requestInterval);
+            Thread.Sleep(RequestInterval);
             sgGiveaway = Parse.SteamGiftsGetJoinData(sgGiveaway, bot);
 
             if (sgGiveaway.Token != null)
@@ -291,9 +291,9 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Log SteamCompanionJoinGiveaway(Bot bot, SteamCompanion.ScGiveaway scGiveaway)
+        private static Log SteamCompanionJoinGiveaway(Bot bot, SteamCompanion.ScGiveaway scGiveaway)
         {
-            Thread.Sleep(requestInterval);
+            Thread.Sleep(RequestInterval);
             var data = Parse.SteamCompanionGetJoinData(scGiveaway, bot);
             if (data != null && data.Success)
             {
@@ -337,9 +337,9 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Log SteamPortalJoinGiveaway(Bot bot, SteamPortal.SpGiveaway spGiveaway)
+        private static Log SteamPortalJoinGiveaway(Bot bot, SteamPortal.SpGiveaway spGiveaway)
         {
-            Thread.Sleep(requestInterval);
+            Thread.Sleep(RequestInterval);
             if (spGiveaway.Code != null)
             {
                 var list = new List<HttpHeader>();
@@ -379,9 +379,9 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Log SteamTradeJoinGiveaway(Bot bot, SteamTrade.StGiveaway stGiveaway)
+        private static Log SteamTradeJoinGiveaway(Bot bot, SteamTrade.StGiveaway stGiveaway)
         {
-            Thread.Sleep(requestInterval);
+            Thread.Sleep(RequestInterval);
             stGiveaway = Parse.SteamTradeGetJoinData(stGiveaway, bot);
             if (stGiveaway.LinkJoin != null)
             {
@@ -439,13 +439,13 @@ namespace KryBot
                 RestResponse = response
             };
 
-            Thread.Sleep(requestInterval);
+            Thread.Sleep(RequestInterval);
 
             return data;
         }
 
         public static Log SteamJoinGroup(string url, string subUrl, List<Parameter> parameters,
-            CookieContainer cookies, List<HttpHeader> headers)
+            CookieContainer cookies)
         {
             var response = Post(url, subUrl, parameters, new List<HttpHeader>(), cookies);
             if (response.RestResponse.Content != "")
@@ -469,19 +469,19 @@ namespace KryBot
         }
 
         public static async Task<Log> SteamJoinGroupAsync(string url, string subUrl, List<Parameter> parameters,
-            CookieContainer cookies, List<HttpHeader> headers)
+            CookieContainer cookies)
         {
             var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
-                var result = SteamJoinGroup(url, subUrl, parameters, cookies, headers);
+                var result = SteamJoinGroup(url, subUrl, parameters, cookies);
                 task.SetResult(result);
             });
 
             return task.Task.Result;
         }
 
-        public static string GetVersionInGitHub(string url)
+        private static string GetVersionInGitHub(string url)
         {
             var client = new RestClient(url)
             {
@@ -507,7 +507,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Log SteamGiftsSyncAccount(Bot bot)
+        private static Log SteamGiftsSyncAccount(Bot bot)
         {
             var xsrf = Get("https://www.steamgifts.com/account/profile/sync", "",
                 new List<Parameter>(), Generate.Cookies_SteamGifts(bot), new List<HttpHeader>());
@@ -563,7 +563,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Log SteamCompanionSyncAccount(Bot bot)
+        private static Log SteamCompanionSyncAccount(Bot bot)
         {
             var response = Get("https://steamcompanion.com//settings/resync&success=true", "", new List<Parameter>(),
                 Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>());
@@ -587,7 +587,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Log GameMinerSyncAccount(Bot bot)
+        private static Log GameMinerSyncAccount(Bot bot)
         {
             var response = Post("http://gameminer.net/account/sync", "",
                 Generate.SyncPostData_GameMiner(bot.GameMiner.Cookies.Xsrf), new List<HttpHeader>(),
@@ -621,7 +621,7 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Log PlayBlinkJoinGiveaway(Bot bot, PlayBlink.PbGiveaway pbGiveaway)
+        private static Log PlayBlinkJoinGiveaway(Bot bot, PlayBlink.PbGiveaway pbGiveaway)
         {
             Thread.Sleep(1000);
             if (pbGiveaway.Id != null)

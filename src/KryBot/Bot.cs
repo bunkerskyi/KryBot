@@ -20,16 +20,14 @@ namespace KryBot
             GameAways = new GameAways();
         }
 
-        public bool Enabled { get; set; }
-
-        public GameMiner GameMiner { get; set; }
-        public SteamGifts SteamGifts { get; set; }
-        public SteamCompanion SteamCompanion { get; set; }
-        public SteamPortal SteamPortal { get; set; }
-        public SteamTrade SteamTrade { get; set; }
-        public PlayBlink PlayBlink { get; set; }
-        public Steam Steam { get; set; }
-        public GameAways GameAways { get; set; }
+        public GameMiner GameMiner { get; }
+        public SteamGifts SteamGifts { get; }
+        public SteamCompanion SteamCompanion { get; }
+        public SteamPortal SteamPortal { get; }
+        public SteamTrade SteamTrade { get; }
+        public PlayBlink PlayBlink { get; }
+        public Steam Steam { get; }
+        public GameAways GameAways { get; }
 
         public void ClearGiveawayList()
         {
