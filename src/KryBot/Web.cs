@@ -14,6 +14,8 @@ namespace KryBot
     {
         private const int RequestInterval = 400;
 
+        #region Get
+
         public static Classes.Response Get(string url, string subUrl, List<Parameter> parameters,
             CookieContainer cookies, IEnumerable<HttpHeader> headers, string userAgent)
         {
@@ -84,19 +86,6 @@ namespace KryBot
         }
 
         public static async Task<Classes.Response> GetAsync(string url, string subUrl, List<Parameter> parameters,
-            CookieContainer cookies, List<HttpHeader> headers, string userAgent)
-        {
-            var task = new TaskCompletionSource<Classes.Response>();
-            await Task.Run(() =>
-            {
-                var result = Get(url, subUrl, parameters, cookies, headers, userAgent);
-                task.SetResult(result);
-            });
-
-            return task.Task.Result;
-        }
-
-        public static async Task<Classes.Response> GetAsync(string url, string subUrl, List<Parameter> parameters,
             CookieContainer cookies, List<HttpHeader> headers)
         {
             var task = new TaskCompletionSource<Classes.Response>();
@@ -108,6 +97,44 @@ namespace KryBot
 
             return task.Task.Result;
         }
+
+        private static Classes.Response Get(string url)
+        {
+            var client = new RestClient(url)
+            {
+                FollowRedirects = true
+            };
+
+            var request = new RestRequest("", Method.GET);
+
+            var response = client.Execute(request);
+
+            var data = new Classes.Response
+            {
+                Cookies = client.CookieContainer,
+                RestResponse = response
+            };
+
+            Thread.Sleep(RequestInterval);
+
+            return data;
+        }
+
+        public static async Task<Classes.Response> GetAsync(string url)
+        {
+            var task = new TaskCompletionSource<Classes.Response>();
+            await Task.Run(() =>
+            {
+                var result = Get(url);
+                task.SetResult(result);
+            });
+
+            return task.Task.Result;
+        }
+
+        #endregion
+
+        #region Post
 
         private static Classes.Response Post(string url, string subUrl, List<Parameter> parameters,
             List<HttpHeader> headers, CookieContainer cookies, string userAgent)
@@ -143,19 +170,6 @@ namespace KryBot
             return data;
         }
 
-        public static async Task<Classes.Response> PostAsync(string url, string subUrl, List<Parameter> parameters,
-            List<HttpHeader> headers, CookieContainer cookie, string userAgent)
-        {
-            var task = new TaskCompletionSource<Classes.Response>();
-            await Task.Run(() =>
-            {
-                var result = Post(url, subUrl, parameters, headers, cookie, userAgent);
-                task.SetResult(result);
-            });
-
-            return task.Task.Result;
-        }
-
         public static Classes.Response Post(string url, string subUrl, List<Parameter> parameters,
             List<HttpHeader> headers, CookieContainer cookies)
         {
@@ -189,18 +203,7 @@ namespace KryBot
             return data;
         }
 
-        public static async Task<Classes.Response> PostAsync(string url, string subUrl, List<Parameter> parameters,
-            List<HttpHeader> headers, CookieContainer cookie)
-        {
-            var task = new TaskCompletionSource<Classes.Response>();
-            await Task.Run(() =>
-            {
-                var result = Post(url, subUrl, parameters, headers, cookie);
-                task.SetResult(result);
-            });
-
-            return task.Task.Result;
-        }
+        #endregion
 
         private static Log GameMinerJoinGiveaway(Bot bot, GameMiner.GmGiveaway gmGiveaway)
         {

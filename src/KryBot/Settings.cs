@@ -26,10 +26,10 @@ namespace KryBot
             Settings settings;
             try
             {
-                using (var reader = new StreamReader("settings.xml"))
+                using (var streamReader = new StreamReader("settings.xml"))
                 {
                     var serializer = new XmlSerializer(typeof(Settings));
-                    settings = (Settings) serializer.Deserialize(reader);
+                    settings = (Settings) serializer.Deserialize(streamReader);
                 }
             }
             catch (Exception)
@@ -74,10 +74,10 @@ namespace KryBot
 
             try
             {
-                using (var fs = new FileStream("settings.xml", FileMode.Create, FileAccess.Write))
+                using (var fileStream = new FileStream("settings.xml", FileMode.Create, FileAccess.Write))
                 {
                     var serializer = new XmlSerializer(typeof(Settings));
-                    serializer.Serialize(fs, settings);
+                    serializer.Serialize(fileStream, settings);
                 }
             }
             catch (Exception ex)

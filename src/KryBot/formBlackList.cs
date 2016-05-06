@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Drawing;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using KryBot.lang;
 using KryBot.Properties;
@@ -81,7 +80,7 @@ namespace KryBot
             if (_bot.Steam.Enabled && _bot.Steam.ProfileLink != "")
             {
                 toolStripStatusLabel.Image = Resources.load;
-                var list = await Parse.SteamGetUserGames(_bot.Steam.ProfileLink);
+                var list = await _bot.Steam.GetUserGames();
 
                 if (list.Games.Game.Count > 0)
                 {
@@ -117,23 +116,23 @@ namespace KryBot
             SaveBlackList();
         }
 
-        private async void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
+        private void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = new FormTextBox("Enter id", true);
             form.ShowDialog();
             if (Properties.Settings.Default._idCache != "0")
             {
                 listView.Items.Add(Properties.Settings.Default._idCache)
-                    .SubItems.Add(await LoadName(Properties.Settings.Default._idCache));
+                    .SubItems.Add(LoadName(Properties.Settings.Default._idCache));
                 Properties.Settings.Default._idCache = "0";
             }
             toolStripStatusLabel.Text = $"Количество: {listView.Items.Count}";
         }
 
-        private async Task<string> LoadName(string id)
+        private string LoadName(string id)
         {
             toolStripStatusLabel.Image = Resources.load;
-            var name = await Parse.SteamGetGameName(id) ?? "";
+            var name = _bot.Steam.GetGameName(id) ?? "";
             toolStripStatusLabel.Image = null;
             return name;
         }

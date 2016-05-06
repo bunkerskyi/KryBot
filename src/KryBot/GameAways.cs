@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
-using HtmlAgilityPack;
 using RestSharp;
 
 namespace KryBot
@@ -28,31 +27,9 @@ namespace KryBot
 
         #region Parse
 
-        public static Log SteamGetProfile(Bot bot, bool echo)
-        {
-            var response = Web.Get("http://www.gameaways.com/", "", new List<Parameter>(), Generate.Cookies_Steam(bot),
-                new List<HttpHeader>());
-
-            if (response.RestResponse.Content != "")
-            {
-                var htmlDoc = new HtmlDocument();
-                htmlDoc.LoadHtml(response.RestResponse.Content);
-
-                var login = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='username']");
-                if (login == null)
-                {
-                    return Messages.ParseProfileFailed("GameAways");
-                }
-
-                bot.Steam.ProfileLink = login.Attributes["href"].Value;
-                return Messages.ParseProfile("GameAways", login.InnerText);
-            }
-            return Messages.ParseProfileFailed("GameAways");
-        }
-
         #endregion
 
-        public class GaCookies
+        private class GaCookies
         {
             public string SessionId { get; set; }
         }

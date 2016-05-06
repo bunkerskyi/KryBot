@@ -8,7 +8,6 @@ using System.Reflection;
 using System.Security;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using IWshRuntimeLibrary;
 using KryBot.lang;
 using Microsoft.Win32;
 using RestSharp;
@@ -194,6 +193,7 @@ namespace KryBot
             return int.Parse(GetIeVersion().Split('.')[0]) < minIeVersion;
         }
 
+/*
         public static void CreateShortcut()
         {
             var shortcutTarget = Path.Combine(Application.StartupPath, "KryBot.exe");
@@ -205,5 +205,6 @@ namespace KryBot
             myShortcut.WorkingDirectory = Application.StartupPath;
             myShortcut.Save();
         }
+*/
     }
 }

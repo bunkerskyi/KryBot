@@ -174,6 +174,7 @@ namespace KryBot
             Properties.Settings.Default.WishlistNotSort = cbWishlistSort.Checked;
 
             _bot.Save();
+            new Settings().Save();
             Properties.Settings.Default.Save();
         }
 

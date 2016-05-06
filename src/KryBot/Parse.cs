@@ -16,77 +16,6 @@ namespace KryBot
 {
     public static class Parse
     {
-        #region Steam
-
-        private static Log SteamGetProfile(Bot bot)
-        {
-            var response = Web.Get("http://steamcommunity.com/", "", new List<Parameter>(),
-                Generate.Cookies_Steam(bot), new List<HttpHeader>());
-
-            if (response.RestResponse.Content != "")
-            {
-                var htmlDoc = new HtmlDocument();
-                htmlDoc.LoadHtml(response.RestResponse.Content);
-
-                var login =
-                    htmlDoc.DocumentNode.SelectSingleNode(
-                        "//a[contains(@class, 'user_avatar') and contains(@class, 'playerAvatar')]");
-                if (login == null)
-                {
-                    //ProfileLoaded();
-                    return ParseProfileFailed("Steam");
-                }
-
-                bot.Steam.ProfileLink = login.Attributes["href"].Value;
-                return ParseProfile("Steam", login.Attributes["href"].Value.Split('/')[4]);
-            }
-            return ParseProfileFailed("Steam");
-        }
-
-        public static async Task<Log> SteamGetProfileAsync(Bot bot)
-        {
-            var task = new TaskCompletionSource<Log>();
-            await Task.Run(() =>
-            {
-                var result = SteamGetProfile(bot);
-                task.SetResult(result);
-            });
-
-            return task.Task.Result;
-        }
-
-        public static async Task<Classes.ProfileGamesList> SteamGetUserGames(string profileLink)
-        {
-            var responseXmlProfile =
-                await
-                    Web.GetAsync($"{profileLink}games?tab=all&xml=1", "", new List<Parameter>(), new CookieContainer(),
-                        new List<HttpHeader>(), "");
-            var serializer = new XmlSerializer(typeof(Classes.ProfileGamesList));
-            TextReader reader = new StringReader(responseXmlProfile.RestResponse.Content);
-            var games = (Classes.ProfileGamesList) serializer.Deserialize(reader);
-            return games;
-        }
-
-        public static async Task<string> SteamGetGameName(string appId)
-        {
-            var responseJsonDetail =
-                await
-                    Web.GetAsync($"http://store.steampowered.com/api/appdetails?appids={appId}", "",
-                        new List<Parameter>(),
-                        new CookieContainer(), new List<HttpHeader>(), "");
-
-            if (responseJsonDetail.RestResponse.Content == "null" || responseJsonDetail.RestResponse.Content == "")
-            {
-                return null;
-            }
-
-            var json = responseJsonDetail.RestResponse.Content.Replace($"{{\"{appId}\":", "");
-            var gameDetail = JsonConvert.DeserializeObject<Classes.GameDetail>(json.Substring(0, json.Length - 1));
-            return gameDetail.success ? gameDetail.data.name : null;
-        }
-
-        #endregion
-
         #region GameMiner
 
         private static Log GameMinerGetProfile(Bot bot)
@@ -1175,13 +1104,12 @@ namespace KryBot
                 {
                     if (bot.SteamCompanion.AutoJoin)
                     {
-                        var trueGroupUrl = Web.Get(group.Attributes["href"].Value, "", new List<Parameter>(),
-                            Generate.Cookies_Steam(bot),
+                        var trueGroupUrl = Web.Get(group.Attributes["href"].Value, "", new List<Parameter>(), bot.Steam.GenerateCookies(),
                             new List<HttpHeader>());
 
                         return Web.SteamJoinGroup(trueGroupUrl.RestResponse.ResponseUri.AbsoluteUri, "",
                             Generate.PostData_SteamGroupJoin(bot.Steam.Cookies.Sessid),
-                            Generate.Cookies_Steam(bot));
+                            bot.Steam.GenerateCookies());
                     }
                     var error =
                         htmlDoc.DocumentNode.SelectSingleNode("//a[@class='notification group-join regular-button qa']");
