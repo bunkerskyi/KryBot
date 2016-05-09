@@ -1117,6 +1117,7 @@
         private System.Windows.Forms.Label lblPBStatus;
         private System.Windows.Forms.Label lblPBPoints;
         private System.Windows.Forms.Label lblPBLevel;
+        private static bool _hided;
     }
 }
 

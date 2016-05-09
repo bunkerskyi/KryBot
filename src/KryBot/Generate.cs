@@ -5,7 +5,7 @@ using RestSharp;
 
 namespace KryBot
 {
-    internal class Generate
+    internal static class Generate
     {
         // Steam //
         public static CookieContainer Cookies_Steam(Bot bot)

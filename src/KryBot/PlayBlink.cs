@@ -14,7 +14,7 @@ namespace KryBot
         public int Points { get; set; }
         public int Level { get; set; }
         public int MaxJoinValue { get; set; } = 50;
-        public int PointReserv { get; set; } = 0;
+        public int PointReserv { get; set; }
         public PbCookies Cookies { get; set; }
         public List<PbGiveaway> Giveaways { get; set; }
 

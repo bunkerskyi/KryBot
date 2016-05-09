@@ -132,7 +132,6 @@ namespace KryBot
                     _bot.Steam.Cookies.RememberLogin = cookie.Value;
                 }
             }
-            _bot.Enabled = true;
             _bot.Steam.Enabled = true;
             webBrowser.Dispose();
             Close();
@@ -154,7 +153,6 @@ namespace KryBot
                     _bot.GameMiner.Cookies.Xsrf = cookie.Value;
                 }
             }
-            _bot.Enabled = true;
             _bot.GameMiner.Enabled = true;
             webBrowser.Dispose();
             Close();
@@ -171,7 +169,6 @@ namespace KryBot
                     _bot.SteamGifts.Cookies.PhpSessId = cookie.Value;
                 }
             }
-            _bot.Enabled = true;
             _bot.SteamGifts.Enabled = true;
             webBrowser.Dispose();
             Close();
@@ -203,7 +200,6 @@ namespace KryBot
                     _bot.SteamCompanion.Cookies.UserT = cookie.Value;
                 }
             }
-            _bot.Enabled = true;
             _bot.SteamCompanion.Enabled = true;
             webBrowser.Dispose();
             Close();
@@ -220,7 +216,6 @@ namespace KryBot
                     _bot.UseGamble.Cookies.PhpSessId = cookie.Value;
                 }
             }
-            _bot.Enabled = true;
             _bot.UseGamble.Enabled = true;
             webBrowser.Dispose();
             Close();
@@ -252,7 +247,6 @@ namespace KryBot
                     _bot.SteamTrade.Cookies.PassHash = cookie.Value;
                 }
             }
-            _bot.Enabled = true;
             _bot.SteamTrade.Enabled = true;
             webBrowser.Dispose();
             Close();
@@ -277,7 +271,6 @@ namespace KryBot
                             _bot.PlayBlink.Cookies.PhpSessId = cookie.Value;
                         }
                     }
-                    _bot.Enabled = true;
                     _bot.PlayBlink.Enabled = true;
                     webBrowser.Dispose();
                     Close();
@@ -285,7 +278,7 @@ namespace KryBot
             }
         }
 
-        public static CookieContainer GetUriCookieContainer(Uri uri)
+        private static CookieContainer GetUriCookieContainer(Uri uri)
         {
             // First, create a null cookie container
             CookieContainer cookies = null;

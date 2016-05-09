@@ -20,8 +20,6 @@ namespace KryBot
             GameAways = new GameAways();
         }
 
-        public bool Enabled { get; set; }
-
         public GameMiner GameMiner { get; set; }
         public SteamGifts SteamGifts { get; set; }
         public SteamCompanion SteamCompanion { get; set; }

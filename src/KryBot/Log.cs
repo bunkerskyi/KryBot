@@ -25,8 +25,8 @@ namespace KryBot
         }
 
         public string Content { get; set; }
-        public Color Color { get; set; }
-        public bool Success { get; set; }
-        public bool Echo { get; set; }
+        public Color Color { get; private set; }
+        public bool Success { get; private set; }
+        public bool Echo { get; private set; }
     }
 }
