@@ -24,9 +24,10 @@ namespace KryBot
             }
         }
 
-        public static void FormMain_UIThreadException(object sender, ThreadExceptionEventArgs t)
+        private static void FormMain_UIThreadException(object sender, ThreadExceptionEventArgs t)
         {
-            MessageBox.Show($"[{t.Exception.TargetSite}] {{{t.Exception.Message}}}", strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show($"[{t.Exception.TargetSite}] {{{t.Exception.Message}}}", strings.Error, MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
             t.Exception.ToExceptionless().Submit();
             Environment.Exit(0);
         }

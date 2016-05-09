@@ -75,15 +75,15 @@
             this.lblSCPoints = new System.Windows.Forms.Label();
             this.lblSCLevel = new System.Windows.Forms.Label();
             this.btnSCLogin = new System.Windows.Forms.Button();
-            this.tabPageSP = new System.Windows.Forms.TabPage();
-            this.btnSPExit = new System.Windows.Forms.Button();
-            this.cbSPEnable = new System.Windows.Forms.CheckBox();
+            this.tabPageUG = new System.Windows.Forms.TabPage();
+            this.btnUGExit = new System.Windows.Forms.Button();
+            this.cbUGEnable = new System.Windows.Forms.CheckBox();
             this.linkLabel4 = new System.Windows.Forms.LinkLabel();
-            this.pbSPReload = new System.Windows.Forms.PictureBox();
-            this.lblSPStatus = new System.Windows.Forms.Label();
-            this.lblSPPoints = new System.Windows.Forms.Label();
-            this.lblSPLevel = new System.Windows.Forms.Label();
-            this.btnSPLogin = new System.Windows.Forms.Button();
+            this.pbUGReload = new System.Windows.Forms.PictureBox();
+            this.lblUGStatus = new System.Windows.Forms.Label();
+            this.lblUGPoints = new System.Windows.Forms.Label();
+            this.lblUGLevel = new System.Windows.Forms.Label();
+            this.btnUGLogin = new System.Windows.Forms.Button();
             this.tabPageST = new System.Windows.Forms.TabPage();
             this.btnSTExit = new System.Windows.Forms.Button();
             this.cbSTEnable = new System.Windows.Forms.CheckBox();
@@ -122,8 +122,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbSGReload)).BeginInit();
             this.tabPageSC.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSCReload)).BeginInit();
-            this.tabPageSP.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSPReload)).BeginInit();
+            this.tabPageUG.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbUGReload)).BeginInit();
             this.tabPageST.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSTreload)).BeginInit();
             this.tabPagePB.SuspendLayout();
@@ -287,7 +287,7 @@
             this.tabControl1.Controls.Add(this.tabPageGM);
             this.tabControl1.Controls.Add(this.tabPageSG);
             this.tabControl1.Controls.Add(this.tabPageSC);
-            this.tabControl1.Controls.Add(this.tabPageSP);
+            this.tabControl1.Controls.Add(this.tabPageUG);
             this.tabControl1.Controls.Add(this.tabPageST);
             this.tabControl1.Controls.Add(this.tabPagePB);
             this.tabControl1.Controls.Add(this.tabPageSteam);
@@ -591,44 +591,44 @@
             this.btnSCLogin.UseVisualStyleBackColor = true;
             this.btnSCLogin.Click += new System.EventHandler(this.btnSCLogin_Click);
             // 
-            // tabPageSP
+            // tabPageUG
             // 
-            this.tabPageSP.Controls.Add(this.btnSPExit);
-            this.tabPageSP.Controls.Add(this.cbSPEnable);
-            this.tabPageSP.Controls.Add(this.linkLabel4);
-            this.tabPageSP.Controls.Add(this.pbSPReload);
-            this.tabPageSP.Controls.Add(this.lblSPStatus);
-            this.tabPageSP.Controls.Add(this.lblSPPoints);
-            this.tabPageSP.Controls.Add(this.lblSPLevel);
-            this.tabPageSP.Controls.Add(this.btnSPLogin);
-            this.tabPageSP.Location = new System.Drawing.Point(4, 22);
-            this.tabPageSP.Name = "tabPageSP";
-            this.tabPageSP.Size = new System.Drawing.Size(334, 61);
-            this.tabPageSP.TabIndex = 4;
-            this.tabPageSP.Text = "SP";
-            this.tabPageSP.UseVisualStyleBackColor = true;
+            this.tabPageUG.Controls.Add(this.btnUGExit);
+            this.tabPageUG.Controls.Add(this.cbUGEnable);
+            this.tabPageUG.Controls.Add(this.linkLabel4);
+            this.tabPageUG.Controls.Add(this.pbUGReload);
+            this.tabPageUG.Controls.Add(this.lblUGStatus);
+            this.tabPageUG.Controls.Add(this.lblUGPoints);
+            this.tabPageUG.Controls.Add(this.lblUGLevel);
+            this.tabPageUG.Controls.Add(this.btnUGLogin);
+            this.tabPageUG.Location = new System.Drawing.Point(4, 22);
+            this.tabPageUG.Name = "tabPageUG";
+            this.tabPageUG.Size = new System.Drawing.Size(334, 61);
+            this.tabPageUG.TabIndex = 4;
+            this.tabPageUG.Text = "UG";
+            this.tabPageUG.UseVisualStyleBackColor = true;
             // 
-            // btnSPExit
+            // btnUGExit
             // 
-            this.btnSPExit.Location = new System.Drawing.Point(134, 19);
-            this.btnSPExit.Name = "btnSPExit";
-            this.btnSPExit.Size = new System.Drawing.Size(75, 23);
-            this.btnSPExit.TabIndex = 29;
-            this.btnSPExit.Text = "Выход";
-            this.btnSPExit.UseVisualStyleBackColor = true;
-            this.btnSPExit.Click += new System.EventHandler(this.btnSPExit_Click);
+            this.btnUGExit.Location = new System.Drawing.Point(134, 19);
+            this.btnUGExit.Name = "btnUGExit";
+            this.btnUGExit.Size = new System.Drawing.Size(75, 23);
+            this.btnUGExit.TabIndex = 29;
+            this.btnUGExit.Text = "Выход";
+            this.btnUGExit.UseVisualStyleBackColor = true;
+            this.btnUGExit.Click += new System.EventHandler(this.btnUGExit_Click);
             // 
-            // cbSPEnable
+            // cbUGEnable
             // 
-            this.cbSPEnable.AutoSize = true;
-            this.cbSPEnable.Checked = true;
-            this.cbSPEnable.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbSPEnable.Location = new System.Drawing.Point(315, 3);
-            this.cbSPEnable.Name = "cbSPEnable";
-            this.cbSPEnable.Size = new System.Drawing.Size(15, 14);
-            this.cbSPEnable.TabIndex = 26;
-            this.cbSPEnable.UseVisualStyleBackColor = true;
-            this.cbSPEnable.CheckedChanged += new System.EventHandler(this.cbSPEnable_CheckedChanged);
+            this.cbUGEnable.AutoSize = true;
+            this.cbUGEnable.Checked = true;
+            this.cbUGEnable.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbUGEnable.Location = new System.Drawing.Point(315, 3);
+            this.cbUGEnable.Name = "cbUGEnable";
+            this.cbUGEnable.Size = new System.Drawing.Size(15, 14);
+            this.cbUGEnable.TabIndex = 26;
+            this.cbUGEnable.UseVisualStyleBackColor = true;
+            this.cbUGEnable.CheckedChanged += new System.EventHandler(this.cbUGEnable_CheckedChanged);
             // 
             // linkLabel4
             // 
@@ -641,52 +641,52 @@
             this.linkLabel4.Text = "На сайт";
             this.linkLabel4.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel4_LinkClicked);
             // 
-            // pbSPReload
+            // pbUGReload
             // 
-            this.pbSPReload.Image = global::KryBot.Properties.Resources.refresh;
-            this.pbSPReload.Location = new System.Drawing.Point(314, 42);
-            this.pbSPReload.Name = "pbSPReload";
-            this.pbSPReload.Size = new System.Drawing.Size(16, 16);
-            this.pbSPReload.TabIndex = 19;
-            this.pbSPReload.TabStop = false;
-            this.pbSPReload.Click += new System.EventHandler(this.pbSPReload_Click);
+            this.pbUGReload.Image = global::KryBot.Properties.Resources.refresh;
+            this.pbUGReload.Location = new System.Drawing.Point(314, 42);
+            this.pbUGReload.Name = "pbUGReload";
+            this.pbUGReload.Size = new System.Drawing.Size(16, 16);
+            this.pbUGReload.TabIndex = 19;
+            this.pbUGReload.TabStop = false;
+            this.pbUGReload.Click += new System.EventHandler(this.pbUGReload_Click);
             // 
-            // lblSPStatus
+            // lblUGStatus
             // 
-            this.lblSPStatus.AutoSize = true;
-            this.lblSPStatus.Location = new System.Drawing.Point(6, 3);
-            this.lblSPStatus.Name = "lblSPStatus";
-            this.lblSPStatus.Size = new System.Drawing.Size(129, 13);
-            this.lblSPStatus.TabIndex = 17;
-            this.lblSPStatus.Text = "Статус: Не авторизован";
+            this.lblUGStatus.AutoSize = true;
+            this.lblUGStatus.Location = new System.Drawing.Point(6, 3);
+            this.lblUGStatus.Name = "lblUGStatus";
+            this.lblUGStatus.Size = new System.Drawing.Size(129, 13);
+            this.lblUGStatus.TabIndex = 17;
+            this.lblUGStatus.Text = "Статус: Не авторизован";
             // 
-            // lblSPPoints
+            // lblUGPoints
             // 
-            this.lblSPPoints.AutoSize = true;
-            this.lblSPPoints.Location = new System.Drawing.Point(6, 29);
-            this.lblSPPoints.Name = "lblSPPoints";
-            this.lblSPPoints.Size = new System.Drawing.Size(42, 13);
-            this.lblSPPoints.TabIndex = 16;
-            this.lblSPPoints.Text = "Points: ";
+            this.lblUGPoints.AutoSize = true;
+            this.lblUGPoints.Location = new System.Drawing.Point(6, 29);
+            this.lblUGPoints.Name = "lblUGPoints";
+            this.lblUGPoints.Size = new System.Drawing.Size(42, 13);
+            this.lblUGPoints.TabIndex = 16;
+            this.lblUGPoints.Text = "Points: ";
             // 
-            // lblSPLevel
+            // lblUGLevel
             // 
-            this.lblSPLevel.AutoSize = true;
-            this.lblSPLevel.Location = new System.Drawing.Point(6, 16);
-            this.lblSPLevel.Name = "lblSPLevel";
-            this.lblSPLevel.Size = new System.Drawing.Size(57, 13);
-            this.lblSPLevel.TabIndex = 15;
-            this.lblSPLevel.Text = "Уровень: ";
+            this.lblUGLevel.AutoSize = true;
+            this.lblUGLevel.Location = new System.Drawing.Point(6, 16);
+            this.lblUGLevel.Name = "lblUGLevel";
+            this.lblUGLevel.Size = new System.Drawing.Size(57, 13);
+            this.lblUGLevel.TabIndex = 15;
+            this.lblUGLevel.Text = "Уровень: ";
             // 
-            // btnSPLogin
+            // btnUGLogin
             // 
-            this.btnSPLogin.Location = new System.Drawing.Point(134, 19);
-            this.btnSPLogin.Name = "btnSPLogin";
-            this.btnSPLogin.Size = new System.Drawing.Size(75, 23);
-            this.btnSPLogin.TabIndex = 9;
-            this.btnSPLogin.Text = "Логин";
-            this.btnSPLogin.UseVisualStyleBackColor = true;
-            this.btnSPLogin.Click += new System.EventHandler(this.btnSPLogin_Click);
+            this.btnUGLogin.Location = new System.Drawing.Point(134, 19);
+            this.btnUGLogin.Name = "btnUGLogin";
+            this.btnUGLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnUGLogin.TabIndex = 9;
+            this.btnUGLogin.Text = "Логин";
+            this.btnUGLogin.UseVisualStyleBackColor = true;
+            this.btnUGLogin.Click += new System.EventHandler(this.btnUGLogin_Click);
             // 
             // tabPageST
             // 
@@ -1015,9 +1015,9 @@
             this.tabPageSC.ResumeLayout(false);
             this.tabPageSC.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSCReload)).EndInit();
-            this.tabPageSP.ResumeLayout(false);
-            this.tabPageSP.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbSPReload)).EndInit();
+            this.tabPageUG.ResumeLayout(false);
+            this.tabPageUG.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbUGReload)).EndInit();
             this.tabPageST.ResumeLayout(false);
             this.tabPageST.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSTreload)).EndInit();
@@ -1045,7 +1045,7 @@
         private System.Windows.Forms.TabPage tabPageSG;
         private System.Windows.Forms.TabPage tabPageSC;
         private System.Windows.Forms.TabPage tabPageST;
-        private System.Windows.Forms.TabPage tabPageSP;
+        private System.Windows.Forms.TabPage tabPageUG;
         private System.Windows.Forms.ToolStripMenuItem логToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
         private System.Windows.Forms.Label lblGMStatus;
@@ -1057,23 +1057,23 @@
         private System.Windows.Forms.Button btnSGLogin;
         private System.Windows.Forms.Button btnSCLogin;
         private System.Windows.Forms.Button btnSTLogin;
-        private System.Windows.Forms.Button btnSPLogin;
+        private System.Windows.Forms.Button btnUGLogin;
         private System.Windows.Forms.Label lblSGStatus;
         private System.Windows.Forms.Label lblSGPoints;
         private System.Windows.Forms.Label lblSGLevel;
         private System.Windows.Forms.Label lblSCStatus;
         private System.Windows.Forms.Label lblSCPoints;
         private System.Windows.Forms.Label lblSCLevel;
-        private System.Windows.Forms.Label lblSPStatus;
-        private System.Windows.Forms.Label lblSPPoints;
-        private System.Windows.Forms.Label lblSPLevel;
+        private System.Windows.Forms.Label lblUGStatus;
+        private System.Windows.Forms.Label lblUGPoints;
+        private System.Windows.Forms.Label lblUGLevel;
         private System.Windows.Forms.Label lblSTStatus;
         private System.Windows.Forms.Label lblSTPoints;
         private System.Windows.Forms.Label lblSTLevel;
         private System.Windows.Forms.PictureBox pbGMReload;
         private System.Windows.Forms.PictureBox pbSGReload;
         private System.Windows.Forms.PictureBox pbSCReload;
-        private System.Windows.Forms.PictureBox pbSPReload;
+        private System.Windows.Forms.PictureBox pbUGReload;
         private System.Windows.Forms.PictureBox pbSTreload;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.LinkLabel linkLabel1;
@@ -1089,7 +1089,7 @@
         private System.Windows.Forms.CheckBox cbGMEnable;
         private System.Windows.Forms.CheckBox cbSGEnable;
         private System.Windows.Forms.CheckBox cbSCEnable;
-        private System.Windows.Forms.CheckBox cbSPEnable;
+        private System.Windows.Forms.CheckBox cbUGEnable;
         private System.Windows.Forms.TabPage tabPageSteam;
         private System.Windows.Forms.LinkLabel linkLabel6;
         private System.Windows.Forms.Label lblSteamStatus;
@@ -1102,7 +1102,7 @@
         private System.Windows.Forms.Button btnGMExit;
         private System.Windows.Forms.Button btnSGExit;
         private System.Windows.Forms.Button btnSCExit;
-        private System.Windows.Forms.Button btnSPExit;
+        private System.Windows.Forms.Button btnUGExit;
         private System.Windows.Forms.Button btnSTExit;
         private System.Windows.Forms.Button btnSteamExit;
         private System.Windows.Forms.ToolStripMenuItem вПапкуСБотомToolStripMenuItem;
@@ -1117,6 +1117,7 @@
         private System.Windows.Forms.Label lblPBStatus;
         private System.Windows.Forms.Label lblPBPoints;
         private System.Windows.Forms.Label lblPBLevel;
+        private static bool _hided;
     }
 }
 

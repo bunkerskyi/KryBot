@@ -16,7 +16,7 @@ using File = System.IO.File;
 
 namespace KryBot
 {
-    public class Tools
+    public static class Tools
     {
         public static Bot LoadProfile(string path)
         {
@@ -69,7 +69,7 @@ namespace KryBot
             return null;
         }
 
-        public static List<Cookie> CookieContainer_ToList(CookieContainer container)
+        private static List<Cookie> CookieContainer_ToList(CookieContainer container)
         {
             var cookies = new List<Cookie>();
 
@@ -184,7 +184,7 @@ namespace KryBot
             return new Blacklist();
         }
 
-        public static string GetIeVersion()
+        private static string GetIeVersion()
         {
             return new WebBrowser().Version.ToString();
         }
@@ -196,9 +196,10 @@ namespace KryBot
 
         public static void CreateShortcut()
         {
-            string shortcutTarget = Path.Combine(Application.StartupPath, "KryBot.exe");
-            WshShell myShell = new WshShell();
-            WshShortcut myShortcut = (WshShortcut) myShell.CreateShortcut(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+            var shortcutTarget = Path.Combine(Application.StartupPath, "KryBot.exe");
+            var myShell = new WshShell();
+            var myShortcut =
+                (WshShortcut) myShell.CreateShortcut(Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
             myShortcut.TargetPath = shortcutTarget;
             myShortcut.IconLocation = shortcutTarget + ",0";
             myShortcut.WorkingDirectory = Application.StartupPath;

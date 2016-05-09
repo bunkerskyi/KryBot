@@ -5,7 +5,7 @@ using RestSharp;
 
 namespace KryBot
 {
-    internal class Generate
+    internal static class Generate
     {
         // Steam //
         public static CookieContainer Cookies_Steam(Bot bot)
@@ -218,19 +218,19 @@ namespace KryBot
 
         // SteamCompanion //
 
-        // SteamPortal //
-        public static CookieContainer Cookies_SteamPortal(Bot bot)
+        // UseGamble //
+        public static CookieContainer Cookies_UseGamble(Bot bot)
         {
             var cookie = new CookieContainer();
-            var target = new Uri("http://steamportal.net/");
+            var target = new Uri("http://usegamble.com/");
 
-            if (bot.SteamPortal.Cookies.PhpSessId != null)
-                cookie.Add(new Cookie("PHPSESSID", bot.SteamPortal.Cookies.PhpSessId) {Domain = target.Host});
+            if (bot.UseGamble.Cookies.PhpSessId != null)
+                cookie.Add(new Cookie("PHPSESSID", bot.UseGamble.Cookies.PhpSessId) {Domain = target.Host});
 
             return cookie;
         }
 
-        public static List<Parameter> PostData_SteamPortal(string ga)
+        public static List<Parameter> PostData_UseGamble(string ga)
         {
             var list = new List<Parameter>();
 
@@ -245,7 +245,7 @@ namespace KryBot
             return list;
         }
 
-        public static List<Parameter> PageData_SteamPortal(int page)
+        public static List<Parameter> PageData_UseGamble(int page)
         {
             var list = new List<Parameter>();
 
@@ -268,7 +268,7 @@ namespace KryBot
             return list;
         }
 
-        // Steamportal //
+        // UseGamble //
 
         // SteamTrade //
         public static CookieContainer Cookies_SteamTrade(Bot bot)
@@ -329,7 +329,7 @@ namespace KryBot
             }
 
             cookie.Add(new Cookie("entry", "1") {Domain = target.Host});
-            cookie.Add(new Cookie("level", bot.PlayBlink.Level.ToString()) {Domain = target.Host});
+            cookie.Add(new Cookie("level", (bot.PlayBlink.Level-1).ToString()) {Domain = target.Host});
             cookie.Add(new Cookie("order", "2") {Domain = target.Host});
             cookie.Add(new Cookie("ppage", "100") {Domain = target.Host});
 

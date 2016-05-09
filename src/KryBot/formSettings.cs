@@ -89,8 +89,8 @@ namespace KryBot
             tbPBMaxValue.Text = _bot.PlayBlink.MaxJoinValue.ToString();
             tbPBReserv.Text = _bot.PlayBlink.PointReserv.ToString();
 
-            tbSPMaxValue.Text = _bot.SteamPortal.MaxJoinValue.ToString();
-            tbSPReserv.Text = _bot.SteamPortal.PointsReserv.ToString();
+            tbUGMaxValue.Text = _bot.UseGamble.MaxJoinValue.ToString();
+            tbUGReserv.Text = _bot.UseGamble.PointsReserv.ToString();
 
             cbAutorun.Checked = Properties.Settings.Default.Autorun;
             cbWonTip.Checked = Properties.Settings.Default.ShowWonTip;
@@ -157,8 +157,8 @@ namespace KryBot
             _bot.SteamCompanion.JoinPointLimit = int.Parse(tbSCMaxValue.Text);
             _bot.SteamCompanion.PointsReserv = int.Parse(tbSCReserv.Text);
 
-            _bot.SteamPortal.MaxJoinValue = int.Parse(tbSPMaxValue.Text);
-            _bot.SteamPortal.PointsReserv = int.Parse(tbSPReserv.Text);
+            _bot.UseGamble.MaxJoinValue = int.Parse(tbUGMaxValue.Text);
+            _bot.UseGamble.PointsReserv = int.Parse(tbUGReserv.Text);
 
             _bot.PlayBlink.MaxJoinValue = int.Parse(tbPBMaxValue.Text);
             _bot.PlayBlink.PointReserv = int.Parse(tbPBReserv.Text);
@@ -199,11 +199,11 @@ namespace KryBot
             form.ShowDialog();
         }
 
-        private void btnSPCookies_Click(object sender, EventArgs e)
+        private void btnUGCookies_Click(object sender, EventArgs e)
         {
-            var names = new List<string> {"PHPSESSID:" + _bot.SteamPortal.Cookies.PhpSessId};
+            var names = new List<string> {"PHPSESSID:" + _bot.UseGamble.Cookies.PhpSessId};
 
-            var form = new FormCookie("SteamPortal", names, _bot);
+            var form = new FormCookie("UseGamble", names, _bot);
             form.ShowDialog();
         }
 
@@ -262,13 +262,13 @@ namespace KryBot
                 e.Handled = true;
         }
 
-        private void tbSPMaxValue_KeyPress(object sender, KeyPressEventArgs e)
+        private void tbUGMaxValue_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
                 e.Handled = true;
         }
 
-        private void tbSPReserv_KeyPress(object sender, KeyPressEventArgs e)
+        private void tbUGReserv_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
                 e.Handled = true;

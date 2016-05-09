@@ -2,12 +2,12 @@
 
 namespace KryBot
 {
-    public class SteamPortal
+    public class UseGamble
     {
-        public SteamPortal()
+        public UseGamble()
         {
-            Cookies = new SpCookies();
-            Giveaways = new List<SpGiveaway>();
+            Cookies = new UgCookies();
+            Giveaways = new List<UgGiveaway>();
         }
 
         public bool Enabled { get; set; }
@@ -15,15 +15,21 @@ namespace KryBot
         public int Points { get; set; }
         public int MaxJoinValue { get; set; } = 30;
         public int PointsReserv { get; set; }
-        public SpCookies Cookies { get; set; }
-        public List<SpGiveaway> Giveaways { get; set; }
+        public UgCookies Cookies { get; set; }
+        public List<UgGiveaway> Giveaways { get; set; }
 
-        public class SpCookies
+        public void Logout()
+        {
+            Cookies = new UgCookies();
+            Enabled = false;
+        }
+
+        public class UgCookies
         {
             public string PhpSessId { get; set; }
         }
 
-        public class SpGiveaway
+        public class UgGiveaway
         {
             public string Name { get; set; }
             public string StoreId { get; set; }
@@ -41,12 +47,6 @@ namespace KryBot
         public class TargetH
         {
             public int my_coins { get; set; }
-        }
-
-        public void Logout()
-        {
-            Cookies = new SpCookies();
-            Enabled = false;
         }
     }
 }

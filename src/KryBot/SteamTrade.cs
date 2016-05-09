@@ -14,6 +14,12 @@ namespace KryBot
         public StCookies Cookies { get; set; }
         public List<StGiveaway> Giveaways { get; set; }
 
+        public void Logout()
+        {
+            Cookies = new StCookies();
+            Enabled = false;
+        }
+
         public class StCookies
         {
             public string PhpSessId { get; set; }
@@ -28,12 +34,6 @@ namespace KryBot
             public string StoreId { get; set; }
             public string LinkJoin { get; set; }
             public string Link { get; set; }
-        }
-
-        public void Logout()
-        {
-            Cookies = new StCookies();
-            Enabled = false;
         }
     }
 }

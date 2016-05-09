@@ -11,17 +11,17 @@
         public string ProfileLink { get; set; }
         public SteamCookies Cookies { get; set; }
 
+        public void Logout()
+        {
+            Cookies = new SteamCookies();
+            Enabled = false;
+        }
+
         public class SteamCookies
         {
             public string Sessid { get; set; }
             public string Login { get; set; }
             public string RememberLogin { get; set; }
-        }
-
-        public void Logout()
-        {
-            Cookies = new SteamCookies();
-            Enabled = false;
         }
     }
 }

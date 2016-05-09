@@ -25,6 +25,12 @@ namespace KryBot
         public List<ScGiveaway> Giveaways { get; set; }
         public List<ScGiveaway> WishlistGiveaways { get; set; }
 
+        public void Logout()
+        {
+            Cookies = new ScCookies();
+            Enabled = false;
+        }
+
         public class ScCookies
         {
             public string PhpSessId { get; set; }
@@ -41,12 +47,6 @@ namespace KryBot
             public string Code { get; set; }
             public string Link { get; set; }
             public bool Region { get; set; }
-        }
-
-        public void Logout()
-        {
-            Cookies = new ScCookies();
-            Enabled = false;
         }
     }
 }

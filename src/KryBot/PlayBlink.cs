@@ -14,9 +14,15 @@ namespace KryBot
         public int Points { get; set; }
         public int Level { get; set; }
         public int MaxJoinValue { get; set; } = 50;
-        public int PointReserv { get; set; } = 0;
+        public int PointReserv { get; set; }
         public PbCookies Cookies { get; set; }
         public List<PbGiveaway> Giveaways { get; set; }
+
+        public void Logout()
+        {
+            Cookies = new PbCookies();
+            Enabled = false;
+        }
 
         public class PbCookies
         {
@@ -30,12 +36,6 @@ namespace KryBot
             public int Price { get; set; }
             public int Level { get; set; }
             public string Id { get; set; }
-        }
-
-        public void Logout()
-        {
-            Cookies = new PbCookies();
-            Enabled = false;
         }
     }
 }
