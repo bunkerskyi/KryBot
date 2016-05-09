@@ -337,10 +337,10 @@ namespace KryBot
             return task.Task.Result;
         }
 
-        public static Log SteamPortalJoinGiveaway(Bot bot, SteamPortal.SpGiveaway spGiveaway)
+        public static Log UseGamblelJoinGiveaway(Bot bot, UseGamble.UgGiveaway ugGiveaway)
         {
             Thread.Sleep(requestInterval);
-            if (spGiveaway.Code != null)
+            if (ugGiveaway.Code != null)
             {
                 var list = new List<HttpHeader>();
                 var header = new HttpHeader
@@ -350,29 +350,29 @@ namespace KryBot
                 };
                 list.Add(header);
 
-                var response = Post("http://steamportal.net/", "page/join",
-                    Generate.PostData_SteamPortal(spGiveaway.Code), list,
-                    Generate.Cookies_SteamPortal(bot));
+                var response = Post("http://usegamble.com/", "page/join",
+                    Generate.PostData_UseGamble(ugGiveaway.Code), list,
+                    Generate.Cookies_UseGamble(bot));
                 var jresponse =
-                    JsonConvert.DeserializeObject<SteamPortal.JsonJoin>(response.RestResponse.Content.Replace(".", ""));
+                    JsonConvert.DeserializeObject<UseGamble.JsonJoin>(response.RestResponse.Content.Replace(".", ""));
                 if (jresponse.Error == 0)
                 {
-                    bot.SteamPortal.Points = jresponse.target_h.my_coins;
-                    return Messages.GiveawayJoined("SteamPortal", spGiveaway.Name, spGiveaway.Price,
+                    bot.UseGamble.Points = jresponse.target_h.my_coins;
+                    return Messages.GiveawayJoined("UseGamble", ugGiveaway.Name, ugGiveaway.Price,
                         jresponse.target_h.my_coins, 0);
                 }
-                return Messages.GiveawayNotJoined("SteamPortal", spGiveaway.Name, "Error");
+                return Messages.GiveawayNotJoined("UseGamble", ugGiveaway.Name, "Error");
             }
             return null;
         }
 
-        public static async Task<Log> SteamPortalJoinGiveawayAsync(Bot bot,
-            SteamPortal.SpGiveaway spGiveaway)
+        public static async Task<Log> UseGambleJoinGiveawayAsync(Bot bot,
+            UseGamble.UgGiveaway ugGiveaway)
         {
             var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
-                var result = SteamPortalJoinGiveaway(bot, spGiveaway);
+                var result = UseGamblelJoinGiveaway(bot, ugGiveaway);
                 task.SetResult(result);
             });
 

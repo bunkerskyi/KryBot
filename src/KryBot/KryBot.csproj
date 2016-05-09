@@ -208,7 +208,7 @@
     <Compile Include="Steam.cs" />
     <Compile Include="SteamCompanion.cs" />
     <Compile Include="SteamGifts.cs" />
-    <Compile Include="SteamPortal.cs" />
+    <Compile Include="UseGamble.cs" />
     <Compile Include="SteamTrade.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="Updater.cs" />

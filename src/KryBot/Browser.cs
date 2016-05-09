@@ -90,9 +90,9 @@ namespace KryBot
                         SteamCompanionAuth();
                     }
 
-                    if (_endPage == "http://steamportal.net/")
+                    if (_endPage == "http://usegamble.com/")
                     {
-                        SteamPortalAuth();
+                        UseGamblelAuth();
                     }
 
                     if (_endPage == "http://steamtrade.info/")
@@ -209,7 +209,7 @@ namespace KryBot
             Close();
         }
 
-        private void SteamPortalAuth()
+        private void UseGamblelAuth()
         {
             var container = GetUriCookieContainer(webBrowser.Url);
             var cookies = container.GetCookies(webBrowser.Url);
@@ -217,11 +217,11 @@ namespace KryBot
             {
                 if (cookie.Name == "PHPSESSID")
                 {
-                    _bot.SteamPortal.Cookies.PhpSessId = cookie.Value;
+                    _bot.UseGamble.Cookies.PhpSessId = cookie.Value;
                 }
             }
             _bot.Enabled = true;
-            _bot.SteamPortal.Enabled = true;
+            _bot.UseGamble.Enabled = true;
             webBrowser.Dispose();
             Close();
         }

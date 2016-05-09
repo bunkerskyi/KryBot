@@ -1209,12 +1209,12 @@ namespace KryBot
 
         #endregion
 
-        #region SteamPortal
+        #region UseGamble
 
-        public static Log SteamPortalGetProfile(Bot bot, bool echo)
+        public static Log UseGambleGetProfile(Bot bot, bool echo)
         {
-            var response = Web.Get("http://steamportal.net/", "", new List<Parameter>(),
-                Generate.Cookies_SteamPortal(bot),
+            var response = Web.Get("http://usegamble.com/", "", new List<Parameter>(),
+                Generate.Cookies_UseGamble(bot),
                 new List<HttpHeader>());
 
             if (response.RestResponse.Content != "")
@@ -1226,30 +1226,30 @@ namespace KryBot
                 var profileLink = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='mp-wrap']/a[1]");
                 if (points != null && profileLink != null)
                 {
-                    bot.SteamPortal.Points = int.Parse(points.InnerText);
-                    bot.SteamPortal.ProfileLink = "http://steamportal.net" + profileLink.Attributes["href"].Value;
-                    return ParseProfile("SteamPortal", bot.SteamPortal.Points, profileLink.InnerText);
+                    bot.UseGamble.Points = int.Parse(points.InnerText);
+                    bot.UseGamble.ProfileLink = "http://usegamble.com" + profileLink.Attributes["href"].Value;
+                    return ParseProfile("UseGamble", bot.UseGamble.Points, profileLink.InnerText);
                 }
             }
-            return ParseProfileFailed("SteamPortal");
+            return ParseProfileFailed("UseGamble");
         }
 
-        public static async Task<Log> SteamPortalGetProfileAsync(Bot bot, bool echo)
+        public static async Task<Log> UseGambleGetProfileAsync(Bot bot, bool echo)
         {
             var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
-                var result = SteamPortalGetProfile(bot, echo);
+                var result = UseGambleGetProfile(bot, echo);
                 task.SetResult(result);
             });
 
             return task.Task.Result;
         }
 
-        public static Log SteamPortalWonParse(Bot bot)
+        public static Log UsegambleWonParse(Bot bot)
         {
-            var response = Web.Get("http://steamportal.net/", "profile/logs", new List<Parameter>(),
-                Generate.Cookies_SteamPortal(bot), new List<HttpHeader>());
+            var response = Web.Get("http://usegamble.com/", "profile/logs", new List<Parameter>(),
+                Generate.Cookies_UseGamble(bot), new List<HttpHeader>());
 
             if (response.RestResponse.Content != "")
             {
@@ -1268,25 +1268,25 @@ namespace KryBot
                             i--;
                         }
                     }
-                    return GiveawayHaveWon("SteamPortal", nodes.Count, "http://steamportal.net/profile/logs");
+                    return GiveawayHaveWon("UseGamble", nodes.Count, "http://usegamble.com/profile/logs");
                 }
             }
             return null;
         }
 
-        public static async Task<Log> SteamPortalWonParsAsync(Bot bot)
+        public static async Task<Log> UseGambleWonParsAsync(Bot bot)
         {
             var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
-                var result = SteamPortalWonParse(bot);
+                var result = UsegambleWonParse(bot);
                 task.SetResult(result);
             });
 
             return task.Task.Result;
         }
 
-        public static Log SteamPortalLoadGiveaways(Bot bot, List<SteamPortal.SpGiveaway> giveaways,
+        public static Log UseGambleLoadGiveaways(Bot bot, List<UseGamble.UgGiveaway> giveaways,
             Blacklist blackList)
         {
             giveaways?.Clear();
@@ -1305,9 +1305,9 @@ namespace KryBot
                     };
                     headerList.Add(header);
 
-                    var jsonresponse = Web.Post("http://steamportal.net/", "page/ga_page",
-                        Generate.PageData_SteamPortal(i + 1), headerList,
-                        Generate.Cookies_SteamPortal(bot));
+                    var jsonresponse = Web.Post("http://usegamble.com/", "page/ga_page",
+                        Generate.PageData_UseGamble(i + 1), headerList,
+                        Generate.Cookies_UseGamble(bot));
                     if (jsonresponse.RestResponse.Content != "")
                     {
                         var data = jsonresponse.RestResponse.Content.Replace("\\", "");
@@ -1315,13 +1315,13 @@ namespace KryBot
                         htmlDoc.LoadHtml(data);
 
                         var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class='giveaway_container']");
-                        SteamPortalAddGiveaways(nodes, bot, giveaways);
+                        UseGambleAddGiveaways(nodes, bot, giveaways);
                     }
                 }
                 else
                 {
-                    var response = Web.Get("http://steamportal.net/", "page",
-                        new List<Parameter>(), Generate.Cookies_SteamPortal(bot),
+                    var response = Web.Get("http://usegamble.com/", "page",
+                        new List<Parameter>(), Generate.Cookies_UseGamble(bot),
                         new List<HttpHeader>());
 
                     if (response.RestResponse.Content != "")
@@ -1340,7 +1340,7 @@ namespace KryBot
 
                         var nodes =
                             htmlDoc.DocumentNode.SelectNodes("//div[@id='normal']/div[@class='giveaway_container']");
-                        SteamPortalAddGiveaways(nodes, bot, giveaways);
+                        UseGambleAddGiveaways(nodes, bot, giveaways);
                     }
                 }
             }
@@ -1349,7 +1349,7 @@ namespace KryBot
             {
                 return
                     new Log(
-                        $"{GetDateTime()} {{SteamPortal}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0",
+                        $"{GetDateTime()} {{UseGamble}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0",
                         Color.White, true, true);
             }
 
@@ -1367,25 +1367,25 @@ namespace KryBot
 
             return
                 new Log(
-                    $"{GetDateTime()} {{SteamPortal}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {giveaways.Count}",
+                    $"{GetDateTime()} {{UseGamble}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {giveaways.Count}",
                     Color.White, true, true);
         }
 
-        public static async Task<Log> SteamPortalLoadGiveawaysAsync(Bot bot,
-            List<SteamPortal.SpGiveaway> giveaways, Blacklist blackList)
+        public static async Task<Log> UseGambleLoadGiveawaysAsync(Bot bot,
+            List<UseGamble.UgGiveaway> giveaways, Blacklist blackList)
         {
             var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
-                var result = SteamPortalLoadGiveaways(bot, giveaways, blackList);
+                var result = UseGambleLoadGiveaways(bot, giveaways, blackList);
                 task.SetResult(result);
             });
 
             return task.Task.Result;
         }
 
-        private static void SteamPortalAddGiveaways(HtmlNodeCollection nodes, Bot bot,
-            List<SteamPortal.SpGiveaway> giveaways)
+        private static void UseGambleAddGiveaways(HtmlNodeCollection nodes, Bot bot,
+            List<UseGamble.UgGiveaway> giveaways)
         {
             if (nodes != null)
             {
@@ -1395,7 +1395,7 @@ namespace KryBot
                     var storeId = node.SelectSingleNode(".//a[@class='steam-icon']");
                     if (name != null && storeId != null)
                     {
-                        var spGiveaway = new SteamPortal.SpGiveaway
+                        var spGiveaway = new UseGamble.UgGiveaway
                         {
                             Name = name.InnerText,
                             StoreId = storeId.Attributes["href"].Value.Split('/')[4]
@@ -1421,8 +1421,8 @@ namespace KryBot
                                 }
                             }
 
-                            if (spGiveaway.Price <= bot.SteamPortal.Points &&
-                                spGiveaway.Price <= bot.SteamPortal.MaxJoinValue)
+                            if (spGiveaway.Price <= bot.UseGamble.Points &&
+                                spGiveaway.Price <= bot.UseGamble.MaxJoinValue)
                             {
                                 giveaways?.Add(spGiveaway);
                             }

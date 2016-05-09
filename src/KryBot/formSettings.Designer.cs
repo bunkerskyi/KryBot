@@ -81,10 +81,10 @@
             this.lblSCMaxValue = new System.Windows.Forms.Label();
             this.cbSCGroup = new System.Windows.Forms.CheckBox();
             this.cbSCWishlist = new System.Windows.Forms.CheckBox();
-            this.tabPageSP = new System.Windows.Forms.TabPage();
-            this.btnSPCookies = new System.Windows.Forms.Button();
-            this.tbSPReserv = new System.Windows.Forms.TextBox();
-            this.tbSPMaxValue = new System.Windows.Forms.TextBox();
+            this.tabPageUG = new System.Windows.Forms.TabPage();
+            this.btnUGCookies = new System.Windows.Forms.Button();
+            this.tbUGReserv = new System.Windows.Forms.TextBox();
+            this.tbUGMaxValue = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.tabPageST = new System.Windows.Forms.TabPage();
@@ -107,7 +107,7 @@
             this.tabPageSG.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSGLevel)).BeginInit();
             this.tabPageSC.SuspendLayout();
-            this.tabPageSP.SuspendLayout();
+            this.tabPageUG.SuspendLayout();
             this.tabPageST.SuspendLayout();
             this.tabPagePB.SuspendLayout();
             this.tabPageSteam.SuspendLayout();
@@ -120,7 +120,7 @@
             this.tabControl1.Controls.Add(this.tabPageGM);
             this.tabControl1.Controls.Add(this.tabPageSG);
             this.tabControl1.Controls.Add(this.tabPageSC);
-            this.tabControl1.Controls.Add(this.tabPageSP);
+            this.tabControl1.Controls.Add(this.tabPageUG);
             this.tabControl1.Controls.Add(this.tabPageST);
             this.tabControl1.Controls.Add(this.tabPagePB);
             this.tabControl1.Controls.Add(this.tabPageSteam);
@@ -686,47 +686,47 @@
             this.cbSCWishlist.Text = "Wishlist";
             this.cbSCWishlist.UseVisualStyleBackColor = true;
             // 
-            // tabPageSP
+            // tabPageUG
             // 
-            this.tabPageSP.Controls.Add(this.btnSPCookies);
-            this.tabPageSP.Controls.Add(this.tbSPReserv);
-            this.tabPageSP.Controls.Add(this.tbSPMaxValue);
-            this.tabPageSP.Controls.Add(this.label3);
-            this.tabPageSP.Controls.Add(this.label4);
-            this.tabPageSP.Location = new System.Drawing.Point(4, 22);
-            this.tabPageSP.Name = "tabPageSP";
-            this.tabPageSP.Size = new System.Drawing.Size(309, 155);
-            this.tabPageSP.TabIndex = 4;
-            this.tabPageSP.Text = "SP";
-            this.tabPageSP.UseVisualStyleBackColor = true;
+            this.tabPageUG.Controls.Add(this.btnUGCookies);
+            this.tabPageUG.Controls.Add(this.tbUGReserv);
+            this.tabPageUG.Controls.Add(this.tbUGMaxValue);
+            this.tabPageUG.Controls.Add(this.label3);
+            this.tabPageUG.Controls.Add(this.label4);
+            this.tabPageUG.Location = new System.Drawing.Point(4, 22);
+            this.tabPageUG.Name = "tabPageUG";
+            this.tabPageUG.Size = new System.Drawing.Size(309, 155);
+            this.tabPageUG.TabIndex = 4;
+            this.tabPageUG.Text = "UG";
+            this.tabPageUG.UseVisualStyleBackColor = true;
             // 
-            // btnSPCookies
+            // btnUGCookies
             // 
-            this.btnSPCookies.Image = global::KryBot.Properties.Resources.locked1;
-            this.btnSPCookies.Location = new System.Drawing.Point(278, 6);
-            this.btnSPCookies.Name = "btnSPCookies";
-            this.btnSPCookies.Size = new System.Drawing.Size(23, 23);
-            this.btnSPCookies.TabIndex = 18;
-            this.btnSPCookies.UseVisualStyleBackColor = true;
-            this.btnSPCookies.Click += new System.EventHandler(this.btnSPCookies_Click);
+            this.btnUGCookies.Image = global::KryBot.Properties.Resources.locked1;
+            this.btnUGCookies.Location = new System.Drawing.Point(278, 6);
+            this.btnUGCookies.Name = "btnUGCookies";
+            this.btnUGCookies.Size = new System.Drawing.Size(23, 23);
+            this.btnUGCookies.TabIndex = 18;
+            this.btnUGCookies.UseVisualStyleBackColor = true;
+            this.btnUGCookies.Click += new System.EventHandler(this.btnUGCookies_Click);
             // 
-            // tbSPReserv
+            // tbUGReserv
             // 
-            this.tbSPReserv.Location = new System.Drawing.Point(242, 3);
-            this.tbSPReserv.Name = "tbSPReserv";
-            this.tbSPReserv.Size = new System.Drawing.Size(30, 20);
-            this.tbSPReserv.TabIndex = 17;
-            this.tbSPReserv.Text = "0";
-            this.tbSPReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSPReserv_KeyPress);
+            this.tbUGReserv.Location = new System.Drawing.Point(242, 3);
+            this.tbUGReserv.Name = "tbUGReserv";
+            this.tbUGReserv.Size = new System.Drawing.Size(30, 20);
+            this.tbUGReserv.TabIndex = 17;
+            this.tbUGReserv.Text = "0";
+            this.tbUGReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbUGReserv_KeyPress);
             // 
-            // tbSPMaxValue
+            // tbUGMaxValue
             // 
-            this.tbSPMaxValue.Location = new System.Drawing.Point(134, 3);
-            this.tbSPMaxValue.Name = "tbSPMaxValue";
-            this.tbSPMaxValue.Size = new System.Drawing.Size(30, 20);
-            this.tbSPMaxValue.TabIndex = 16;
-            this.tbSPMaxValue.Text = "30";
-            this.tbSPMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSPMaxValue_KeyPress);
+            this.tbUGMaxValue.Location = new System.Drawing.Point(134, 3);
+            this.tbUGMaxValue.Name = "tbUGMaxValue";
+            this.tbUGMaxValue.Size = new System.Drawing.Size(30, 20);
+            this.tbUGMaxValue.TabIndex = 16;
+            this.tbUGMaxValue.Text = "30";
+            this.tbUGMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbUGMaxValue_KeyPress);
             // 
             // label3
             // 
@@ -895,8 +895,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numSGLevel)).EndInit();
             this.tabPageSC.ResumeLayout(false);
             this.tabPageSC.PerformLayout();
-            this.tabPageSP.ResumeLayout(false);
-            this.tabPageSP.PerformLayout();
+            this.tabPageUG.ResumeLayout(false);
+            this.tabPageUG.PerformLayout();
             this.tabPageST.ResumeLayout(false);
             this.tabPagePB.ResumeLayout(false);
             this.tabPagePB.PerformLayout();
@@ -917,7 +917,7 @@
         private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
         private System.Windows.Forms.TabPage tabPageSC;
         private System.Windows.Forms.TabPage tabPageST;
-        private System.Windows.Forms.TabPage tabPageSP;
+        private System.Windows.Forms.TabPage tabPageUG;
         private System.Windows.Forms.TabPage tabPageCommun;
         private System.Windows.Forms.ComboBox cbSortBy;
         private System.Windows.Forms.CheckBox cbSort;
@@ -942,14 +942,14 @@
         private System.Windows.Forms.Label lblSCMaxValue;
         private System.Windows.Forms.CheckBox cbSCGroup;
         private System.Windows.Forms.CheckBox cbSCWishlist;
-        private System.Windows.Forms.TextBox tbSPReserv;
-        private System.Windows.Forms.TextBox tbSPMaxValue;
+        private System.Windows.Forms.TextBox tbUGReserv;
+        private System.Windows.Forms.TextBox tbUGMaxValue;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btbGMCookies;
         private System.Windows.Forms.Button btnSGCookies;
         private System.Windows.Forms.Button btnSCCookies;
-        private System.Windows.Forms.Button btnSPCookies;
+        private System.Windows.Forms.Button btnUGCookies;
         private System.Windows.Forms.Button btnSTCookies;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox cbTimerEnable;
