@@ -494,6 +494,16 @@ namespace KryBot
                 content += SteamGiftsLoadGroupGiveaways(bot, giveaways);
             }
 
+            if (bot.SteamGifts.Region)
+            {
+                content += SteamGiftsLoadRegionGiveaways(bot, giveaways);
+            }
+
+            if (bot.SteamGifts.MinNumberCopies)
+            {
+                content += SteamGiftsLoadMinNumberCopiesGiveaways(bot, giveaways);
+            }
+
             if (bot.SteamGifts.Regular)
             {
                 var response = Web.Get("https://www.steamgifts.com", "/giveaways/search?page=1",
@@ -715,6 +725,130 @@ namespace KryBot
                 }
             }
             return $"{GetDateTime()} {{SteamGifts}} {strings.ParseLoadGiveaways_FoundGiveAwaysInGroup}: {nodesCount}\n";
+        }
+
+        private static string SteamGiftsLoadRegionGiveaways(Bot bot, List<SteamGifts.SgGiveaway> giveaways)
+        {
+            var nodesCount = 0;
+
+            var response = Web.Get("https://www.steamgifts.com", "/giveaways/search?region_restricted=true",
+                new List<Parameter>(), Generate.Cookies_SteamGifts(bot), new List<HttpHeader>());
+
+            if (response.RestResponse.Content != "")
+            {
+                var htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(response.RestResponse.Content);
+
+                var pages = 1;
+
+                var pageNodeCounter = htmlDoc.DocumentNode.SelectNodes("//div[@class='pagination__navigation']/a");
+                if (pageNodeCounter != null)
+                {
+                    var pageNode =
+                        htmlDoc.DocumentNode.SelectSingleNode(
+                            $"//div[@class='pagination__navigation']/a[{pageNodeCounter.Count - 1}]");
+                    if (pageNode != null)
+                    {
+                        pages = int.Parse(pageNode.Attributes["data-page-number"].Value);
+                    }
+                }
+
+                if (pages != 1)
+                {
+                    for (var i = 1; i < pages + 1; i++)
+                    {
+                        var nodes =
+                            htmlDoc.DocumentNode.SelectNodes(
+                                "//div[@class='widget-container']//div[2]//div[3]//div[@class='giveaway__row-outer-wrap']//div[@class='giveaway__row-inner-wrap']");
+
+
+                        pageNodeCounter = htmlDoc.DocumentNode.SelectNodes("//div[@class='pagination__navigation']/a");
+                        if (pageNodeCounter != null)
+                        {
+                            var pageNode =
+                                htmlDoc.DocumentNode.SelectSingleNode(
+                                    $"//div[@class='pagination__navigation']/a[{pageNodeCounter.Count - 1}]");
+                            if (pageNode != null)
+                            {
+                                pages = int.Parse(pageNode.Attributes["data-page-number"].Value);
+                            }
+                        }
+
+                        nodesCount += nodes?.Count ?? 0;
+                        SteamGiftsAddGiveaways(nodes, bot, giveaways);
+                    }
+                }
+                else
+                {
+                    var nodes =
+                        htmlDoc.DocumentNode.SelectNodes(
+                            "//div[@class='widget-container']//div[2]//div[3]//div[@class='giveaway__row-outer-wrap']//div[@class='giveaway__row-inner-wrap']");
+                    SteamGiftsAddGiveaways(nodes, bot, giveaways);
+                }
+            }
+            return $"{GetDateTime()} {{SteamGifts}} {strings.ParseLoadGiveaways_FoundGiveAwaysInRegion}: {nodesCount}\n";
+        }
+
+        private static string SteamGiftsLoadMinNumberCopiesGiveaways(Bot bot, List<SteamGifts.SgGiveaway> giveaways)
+        {
+            var nodesCount = 0;
+
+            var response = Web.Get("https://www.steamgifts.com", "/giveaways/search?copy_min=" + bot.SteamGifts.NumberCopies,
+                new List<Parameter>(), Generate.Cookies_SteamGifts(bot), new List<HttpHeader>());
+
+            if (response.RestResponse.Content != "")
+            {
+                var htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(response.RestResponse.Content);
+
+                var pages = 1;
+
+                var pageNodeCounter = htmlDoc.DocumentNode.SelectNodes("//div[@class='pagination__navigation']/a");
+                if (pageNodeCounter != null)
+                {
+                    var pageNode =
+                        htmlDoc.DocumentNode.SelectSingleNode(
+                            $"//div[@class='pagination__navigation']/a[{pageNodeCounter.Count - 1}]");
+                    if (pageNode != null)
+                    {
+                        pages = int.Parse(pageNode.Attributes["data-page-number"].Value);
+                    }
+                }
+
+                if (pages != 1)
+                {
+                    for (var i = 1; i < pages + 1; i++)
+                    {
+                        var nodes =
+                            htmlDoc.DocumentNode.SelectNodes(
+                                "//div[@class='widget-container']//div[2]//div[3]//div[@class='giveaway__row-outer-wrap']//div[@class='giveaway__row-inner-wrap']");
+
+
+                        pageNodeCounter = htmlDoc.DocumentNode.SelectNodes("//div[@class='pagination__navigation']/a");
+                        if (pageNodeCounter != null)
+                        {
+                            var pageNode =
+                                htmlDoc.DocumentNode.SelectSingleNode(
+                                    $"//div[@class='pagination__navigation']/a[{pageNodeCounter.Count - 1}]");
+                            if (pageNode != null)
+                            {
+                                pages = int.Parse(pageNode.Attributes["data-page-number"].Value);
+                            }
+                        }
+
+                        nodesCount += nodes?.Count ?? 0;
+                        SteamGiftsAddGiveaways(nodes, bot, giveaways);
+                    }
+                }
+                else
+                {
+                    var nodes =
+                        htmlDoc.DocumentNode.SelectNodes(
+                            "//div[@class='widget-container']//div[2]//div[3]//div[@class='giveaway__row-outer-wrap']//div[@class='giveaway__row-inner-wrap']");
+                    SteamGiftsAddGiveaways(nodes, bot, giveaways);
+                }
+            }
+            return $"{GetDateTime()} {{SteamGifts}} {strings.ParseLoadGiveaways_FoundGiveAwaysInMinNumberCopies} {bot.SteamGifts.NumberCopies}: {nodesCount}\n";
         }
 
         private static void SteamGiftsAddGiveaways(HtmlNodeCollection nodes, Bot bot,

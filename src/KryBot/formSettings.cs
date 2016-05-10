@@ -68,6 +68,8 @@ namespace KryBot
 
             cbSGWishlist.Checked = _bot.SteamGifts.WishList;
             cbSGGroup.Checked = _bot.SteamGifts.Group;
+            cbSGRegionLocked.Checked = _bot.SteamGifts.Region;
+            cbSGMinNumberCopies.Checked = _bot.SteamGifts.MinNumberCopies;
             cbSGRegular.Checked = _bot.SteamGifts.Regular;
             cbSGMinLevel.Checked = _bot.SteamGifts.SortLevel;
             cbSGSortTeLessLevel.Checked = _bot.SteamGifts.SortToLessLevel;
@@ -75,6 +77,7 @@ namespace KryBot
             numSGLevel.Value = _bot.SteamGifts.MinLevel;
             tbSGMaxValue.Text = _bot.SteamGifts.JoinPointLimit.ToString();
             tbSGReserv.Text = _bot.SteamGifts.PointsReserv.ToString();
+            tbMinNumberCopies.Text = _bot.SteamGifts.NumberCopies.ToString();
 
             cbSCWishlist.Checked = _bot.SteamCompanion.WishList;
             cbSCContributors.Checked = _bot.SteamCompanion.Contributors;
@@ -143,6 +146,9 @@ namespace KryBot
             _bot.SteamGifts.WishList = cbSGWishlist.Checked;
             _bot.SteamGifts.Group = cbSGGroup.Checked;
             _bot.SteamGifts.Regular = cbSGRegular.Checked;
+            _bot.SteamGifts.Region = cbSGRegionLocked.Checked;
+            _bot.SteamGifts.MinNumberCopies = cbSGMinNumberCopies.Checked;
+            _bot.SteamGifts.NumberCopies = int.Parse(tbMinNumberCopies.Text);
             _bot.SteamGifts.JoinPointLimit = int.Parse(tbSGMaxValue.Text);
             _bot.SteamGifts.PointsReserv = int.Parse(tbSGReserv.Text);
             _bot.SteamGifts.MinLevel = int.Parse(numSGLevel.Value.ToString(CultureInfo.InvariantCulture));
@@ -374,5 +380,22 @@ namespace KryBot
             if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
                 e.Handled = true;
         }
+
+        private void cbSGRegionLocked_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbSGMinNumberCopies_CheckedChanged(object sender, EventArgs e)
+        {
+            tbMinNumberCopies.Enabled = cbSGMinNumberCopies.Checked;
+        }
+
+        private void tbMinNumberCopies_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)Keys.Back))
+                e.Handled = true;
+        }
+
     }
 }
