@@ -130,7 +130,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(317, 244);
+            this.tabControl1.Size = new System.Drawing.Size(317, 225);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPageCommun
@@ -146,7 +146,7 @@
             this.tabPageCommun.Controls.Add(this.cbSort);
             this.tabPageCommun.Location = new System.Drawing.Point(4, 22);
             this.tabPageCommun.Name = "tabPageCommun";
-            this.tabPageCommun.Size = new System.Drawing.Size(309, 218);
+            this.tabPageCommun.Size = new System.Drawing.Size(309, 200);
             this.tabPageCommun.TabIndex = 5;
             this.tabPageCommun.Text = "Общие";
             this.tabPageCommun.UseVisualStyleBackColor = true;
@@ -342,7 +342,7 @@
             this.tabPageGM.Location = new System.Drawing.Point(4, 22);
             this.tabPageGM.Name = "tabPageGM";
             this.tabPageGM.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGM.Size = new System.Drawing.Size(309, 218);
+            this.tabPageGM.Size = new System.Drawing.Size(309, 200);
             this.tabPageGM.TabIndex = 0;
             this.tabPageGM.Text = "GM";
             this.tabPageGM.UseVisualStyleBackColor = true;
@@ -462,7 +462,7 @@
             this.tabPageSG.Location = new System.Drawing.Point(4, 22);
             this.tabPageSG.Name = "tabPageSG";
             this.tabPageSG.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSG.Size = new System.Drawing.Size(309, 218);
+            this.tabPageSG.Size = new System.Drawing.Size(309, 200);
             this.tabPageSG.TabIndex = 1;
             this.tabPageSG.Text = "SG";
             this.tabPageSG.UseVisualStyleBackColor = true;
@@ -621,7 +621,7 @@
             this.tabPageSC.Controls.Add(this.cbSCWishlist);
             this.tabPageSC.Location = new System.Drawing.Point(4, 22);
             this.tabPageSC.Name = "tabPageSC";
-            this.tabPageSC.Size = new System.Drawing.Size(309, 218);
+            this.tabPageSC.Size = new System.Drawing.Size(309, 200);
             this.tabPageSC.TabIndex = 2;
             this.tabPageSC.Text = "SC";
             this.tabPageSC.UseVisualStyleBackColor = true;
@@ -732,7 +732,7 @@
             this.tabPageUG.Controls.Add(this.label4);
             this.tabPageUG.Location = new System.Drawing.Point(4, 22);
             this.tabPageUG.Name = "tabPageUG";
-            this.tabPageUG.Size = new System.Drawing.Size(309, 218);
+            this.tabPageUG.Size = new System.Drawing.Size(309, 200);
             this.tabPageUG.TabIndex = 4;
             this.tabPageUG.Text = "UG";
             this.tabPageUG.UseVisualStyleBackColor = true;
@@ -788,7 +788,7 @@
             this.tabPageST.Controls.Add(this.btnSTCookies);
             this.tabPageST.Location = new System.Drawing.Point(4, 22);
             this.tabPageST.Name = "tabPageST";
-            this.tabPageST.Size = new System.Drawing.Size(309, 218);
+            this.tabPageST.Size = new System.Drawing.Size(309, 200);
             this.tabPageST.TabIndex = 3;
             this.tabPageST.Text = "ST";
             this.tabPageST.UseVisualStyleBackColor = true;
@@ -812,7 +812,7 @@
             this.tabPagePB.Controls.Add(this.btnPBCookies);
             this.tabPagePB.Location = new System.Drawing.Point(4, 22);
             this.tabPagePB.Name = "tabPagePB";
-            this.tabPagePB.Size = new System.Drawing.Size(309, 218);
+            this.tabPagePB.Size = new System.Drawing.Size(309, 200);
             this.tabPagePB.TabIndex = 7;
             this.tabPagePB.Text = "PB";
             this.tabPagePB.UseVisualStyleBackColor = true;
@@ -868,7 +868,7 @@
             this.tabPageSteam.Controls.Add(this.button1);
             this.tabPageSteam.Location = new System.Drawing.Point(4, 22);
             this.tabPageSteam.Name = "tabPageSteam";
-            this.tabPageSteam.Size = new System.Drawing.Size(309, 218);
+            this.tabPageSteam.Size = new System.Drawing.Size(309, 200);
             this.tabPageSteam.TabIndex = 6;
             this.tabPageSteam.Text = "Steam";
             this.tabPageSteam.UseVisualStyleBackColor = true;
@@ -905,7 +905,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(317, 269);
+            this.ClientSize = new System.Drawing.Size(317, 252);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
