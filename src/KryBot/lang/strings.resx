@@ -181,7 +181,7 @@
     <value>Найдено раздач в вишлисте</value>
   </data>
   <data name="ParseLoadGiveaways_FoundGiveAwaysInRegion" xml:space="preserve">
-    <value>Найдено region locked раздач</value>
+    <value>Найдено раздач с региональными ограничениями</value>
   </data>
   <data name="ParseLoadGiveaways_FoundGiveAwaysInMinNumberCopies" xml:space="preserve">
     <value>Найдено раздач с минимальным количеством копий</value>

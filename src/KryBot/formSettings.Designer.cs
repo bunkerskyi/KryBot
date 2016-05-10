@@ -59,6 +59,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPageSG = new System.Windows.Forms.TabPage();
+            this.tbMinNumberCopies = new System.Windows.Forms.TextBox();
             this.cbSGRegionLocked = new System.Windows.Forms.CheckBox();
             this.cbSGMinNumberCopies = new System.Windows.Forms.CheckBox();
             this.cbSGSortTeLessLevel = new System.Windows.Forms.CheckBox();
@@ -101,7 +102,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tbMinNumberCopies = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPageCommun.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -467,14 +467,23 @@
             this.tabPageSG.Text = "SG";
             this.tabPageSG.UseVisualStyleBackColor = true;
             // 
+            // tbMinNumberCopies
+            // 
+            this.tbMinNumberCopies.Location = new System.Drawing.Point(203, 165);
+            this.tbMinNumberCopies.Name = "tbMinNumberCopies";
+            this.tbMinNumberCopies.Size = new System.Drawing.Size(30, 20);
+            this.tbMinNumberCopies.TabIndex = 17;
+            this.tbMinNumberCopies.Text = "5";
+            this.tbMinNumberCopies.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbMinNumberCopies_KeyPress);
+            // 
             // cbSGRegionLocked
             // 
             this.cbSGRegionLocked.AutoSize = true;
             this.cbSGRegionLocked.Location = new System.Drawing.Point(6, 144);
             this.cbSGRegionLocked.Name = "cbSGRegionLocked";
-            this.cbSGRegionLocked.Size = new System.Drawing.Size(99, 17);
+            this.cbSGRegionLocked.Size = new System.Drawing.Size(242, 17);
             this.cbSGRegionLocked.TabIndex = 15;
-            this.cbSGRegionLocked.Text = "Region Locked";
+            this.cbSGRegionLocked.Text = "Раздачи с региональными ограничениями";
             this.cbSGRegionLocked.UseVisualStyleBackColor = true;
             this.cbSGRegionLocked.CheckedChanged += new System.EventHandler(this.cbSGRegionLocked_CheckedChanged);
             // 
@@ -723,7 +732,7 @@
             this.tabPageUG.Controls.Add(this.label4);
             this.tabPageUG.Location = new System.Drawing.Point(4, 22);
             this.tabPageUG.Name = "tabPageUG";
-            this.tabPageUG.Size = new System.Drawing.Size(309, 155);
+            this.tabPageUG.Size = new System.Drawing.Size(309, 218);
             this.tabPageUG.TabIndex = 4;
             this.tabPageUG.Text = "UG";
             this.tabPageUG.UseVisualStyleBackColor = true;
@@ -892,20 +901,11 @@
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
-            // tbMinNumberCopies
-            // 
-            this.tbMinNumberCopies.Location = new System.Drawing.Point(203, 165);
-            this.tbMinNumberCopies.Name = "tbMinNumberCopies";
-            this.tbMinNumberCopies.Size = new System.Drawing.Size(30, 20);
-            this.tbMinNumberCopies.TabIndex = 17;
-            this.tbMinNumberCopies.Text = "4";
-            this.tbMinNumberCopies.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbMinNumberCopies_KeyPress);
-            // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(317, 275);
+            this.ClientSize = new System.Drawing.Size(317, 269);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;

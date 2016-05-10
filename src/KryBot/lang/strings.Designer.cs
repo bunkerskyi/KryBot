@@ -413,7 +413,7 @@ namespace KryBot.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Найдено region locked раздач.
+        ///   Looks up a localized string similar to Найдено раздач с региональными ограничениями.
         /// </summary>
         internal static string ParseLoadGiveaways_FoundGiveAwaysInRegion {
             get {
