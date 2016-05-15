@@ -6,9 +6,10 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using KryBot.lang;
+using KryBot.CommonResources.lang;
+using KryBot.Functional;
+using KryBot.Functional.Sites;
 using KryBot.Properties;
-using KryBot.Sites;
 using RestSharp;
 
 namespace KryBot.Forms

@@ -4,7 +4,8 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
-using KryBot.lang;
+using KryBot.CommonResources.lang;
+using KryBot.Functional;
 using KryBot.Properties;
 
 namespace KryBot.Forms
@@ -297,7 +298,7 @@ namespace KryBot.Forms
             {
                 if (cbAutorun.Checked)
                 {
-                    if (!Tools.SetAutorun())
+                    if (!Tools.SetAutorun(Application.ExecutablePath))
                     {
                         _userAutorun = false;
                         cbAutorun.Checked = false;

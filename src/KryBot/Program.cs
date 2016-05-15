@@ -2,12 +2,12 @@
 using System.Threading;
 using System.Windows.Forms;
 using Exceptionless;
+using KryBot.CommonResources.lang;
 using KryBot.Forms;
-using KryBot.lang;
 
 namespace KryBot
 {
-	internal static class Program
+	public static class Program
 	{
 		/// <summary>
 		///     Главная точка входа для приложения.

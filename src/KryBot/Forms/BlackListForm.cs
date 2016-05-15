@@ -3,7 +3,8 @@ using System.Collections;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using KryBot.lang;
+using KryBot.CommonResources.lang;
+using KryBot.Functional;
 using KryBot.Properties;
 
 namespace KryBot.Forms
