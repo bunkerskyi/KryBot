@@ -1,6 +1,6 @@
-﻿namespace KryBot
+﻿namespace KryBot.Forms
 {
-    partial class FormTextBox
+    partial class TextBoxForm
     {
         /// <summary>
         /// Required designer variable.

@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Windows.Forms;
 using Exceptionless;
+using KryBot.Forms;
 using KryBot.lang;
 
 namespace KryBot

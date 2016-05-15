@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using HtmlAgilityPack;
 using KryBot.lang;
+using KryBot.Sites;
 using Newtonsoft.Json;
 using RestSharp;
 using static KryBot.Messages;

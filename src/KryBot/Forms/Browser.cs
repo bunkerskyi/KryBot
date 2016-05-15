@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using KryBot.Properties;
 using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
-namespace KryBot
+namespace KryBot.Forms
 {
     public partial class Browser : Form
     {

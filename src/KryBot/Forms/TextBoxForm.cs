@@ -3,14 +3,14 @@ using System.Drawing;
 using System.Windows.Forms;
 using KryBot.Properties;
 
-namespace KryBot
+namespace KryBot.Forms
 {
-    public partial class FormTextBox : Form
+    public partial class TextBoxForm : Form
     {
         private readonly string _formTitle;
         private readonly bool _isInteger;
 
-        public FormTextBox(string formTitle, bool isInteger)
+        public TextBoxForm(string formTitle, bool isInteger)
         {
             _isInteger = isInteger;
             _formTitle = formTitle;

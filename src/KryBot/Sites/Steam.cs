@@ -1,4 +1,4 @@
-﻿namespace KryBot
+﻿namespace KryBot.Sites
 {
     public class Steam
     {

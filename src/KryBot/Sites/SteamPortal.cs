@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace KryBot
+namespace KryBot.Sites
 {
     public class SteamPortal
     {

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using KryBot.lang;
 using KryBot.Properties;
 
-namespace KryBot
+namespace KryBot.Forms
 {
     public partial class FormBlackList : Form
     {
@@ -119,7 +119,7 @@ namespace KryBot
 
         private async void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new FormTextBox("Enter id", true);
+            var form = new TextBoxForm("Enter id", true);
             form.ShowDialog();
             if (Properties.Settings.Default._idCache != "0")
             {

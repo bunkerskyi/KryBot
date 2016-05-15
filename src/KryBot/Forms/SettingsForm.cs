@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using KryBot.lang;
 using KryBot.Properties;
 
-namespace KryBot
+namespace KryBot.Forms
 {
     public partial class FormSettings : Form
     {

@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using KryBot.lang;
 using KryBot.Properties;
+using KryBot.Sites;
 using RestSharp;
 
-namespace KryBot
+namespace KryBot.Forms
 {
     public partial class FormMain : Form
     {

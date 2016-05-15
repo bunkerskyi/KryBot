@@ -4,7 +4,7 @@ using System.Net;
 using HtmlAgilityPack;
 using RestSharp;
 
-namespace KryBot
+namespace KryBot.Sites
 {
     public class GameAways
     {

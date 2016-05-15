@@ -1,4 +1,4 @@
-﻿namespace KryBot
+﻿namespace KryBot.Forms
 {
     partial class FormStatistic
     {

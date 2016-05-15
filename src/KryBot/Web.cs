@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 using KryBot.lang;
+using KryBot.Sites;
 using Newtonsoft.Json;
 using RestSharp;
 

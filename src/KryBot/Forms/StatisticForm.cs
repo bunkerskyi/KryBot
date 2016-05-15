@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using KryBot.Properties;
 
-namespace KryBot
+namespace KryBot.Forms
 {
     public partial class FormStatistic : Form
     {
