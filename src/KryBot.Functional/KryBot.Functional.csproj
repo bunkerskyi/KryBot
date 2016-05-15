@@ -92,7 +92,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\KryBot.Resources\KryBot.CommonResources.csproj">
+    <ProjectReference Include="..\KryBot.CommonResources\KryBot.CommonResources.csproj">
       <Project>{8fd581bc-1678-4559-86f8-9c100c863c10}</Project>
       <Name>KryBot.CommonResources</Name>
     </ProjectReference>

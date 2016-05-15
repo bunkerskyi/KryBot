@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KryBot.Gui", "KryBot.Gui", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFGui", "WPFGui\WPFGui.csproj", "{958F05FC-7B3D-4219-B64C-0BCE2F6A4D18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KryBot.CommonResources", "KryBot.Resources\KryBot.CommonResources.csproj", "{8FD581BC-1678-4559-86F8-9C100C863C10}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KryBot.CommonResources", "KryBot.CommonResources\KryBot.CommonResources.csproj", "{8FD581BC-1678-4559-86F8-9C100C863C10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
