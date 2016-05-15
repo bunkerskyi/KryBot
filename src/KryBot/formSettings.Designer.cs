@@ -59,6 +59,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPageSG = new System.Windows.Forms.TabPage();
+            this.tbMinNumberCopies = new System.Windows.Forms.TextBox();
+            this.cbSGRegionLocked = new System.Windows.Forms.CheckBox();
+            this.cbSGMinNumberCopies = new System.Windows.Forms.CheckBox();
             this.cbSGSortTeLessLevel = new System.Windows.Forms.CheckBox();
             this.numSGLevel = new System.Windows.Forms.NumericUpDown();
             this.cbSGMinLevel = new System.Windows.Forms.CheckBox();
@@ -127,7 +130,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(317, 181);
+            this.tabControl1.Size = new System.Drawing.Size(317, 225);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPageCommun
@@ -143,7 +146,7 @@
             this.tabPageCommun.Controls.Add(this.cbSort);
             this.tabPageCommun.Location = new System.Drawing.Point(4, 22);
             this.tabPageCommun.Name = "tabPageCommun";
-            this.tabPageCommun.Size = new System.Drawing.Size(309, 155);
+            this.tabPageCommun.Size = new System.Drawing.Size(309, 200);
             this.tabPageCommun.TabIndex = 5;
             this.tabPageCommun.Text = "Общие";
             this.tabPageCommun.UseVisualStyleBackColor = true;
@@ -339,7 +342,7 @@
             this.tabPageGM.Location = new System.Drawing.Point(4, 22);
             this.tabPageGM.Name = "tabPageGM";
             this.tabPageGM.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGM.Size = new System.Drawing.Size(309, 155);
+            this.tabPageGM.Size = new System.Drawing.Size(309, 200);
             this.tabPageGM.TabIndex = 0;
             this.tabPageGM.Text = "GM";
             this.tabPageGM.UseVisualStyleBackColor = true;
@@ -442,6 +445,9 @@
             // 
             // tabPageSG
             // 
+            this.tabPageSG.Controls.Add(this.tbMinNumberCopies);
+            this.tabPageSG.Controls.Add(this.cbSGRegionLocked);
+            this.tabPageSG.Controls.Add(this.cbSGMinNumberCopies);
             this.tabPageSG.Controls.Add(this.cbSGSortTeLessLevel);
             this.tabPageSG.Controls.Add(this.numSGLevel);
             this.tabPageSG.Controls.Add(this.cbSGMinLevel);
@@ -456,10 +462,41 @@
             this.tabPageSG.Location = new System.Drawing.Point(4, 22);
             this.tabPageSG.Name = "tabPageSG";
             this.tabPageSG.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSG.Size = new System.Drawing.Size(309, 155);
+            this.tabPageSG.Size = new System.Drawing.Size(309, 200);
             this.tabPageSG.TabIndex = 1;
             this.tabPageSG.Text = "SG";
             this.tabPageSG.UseVisualStyleBackColor = true;
+            // 
+            // tbMinNumberCopies
+            // 
+            this.tbMinNumberCopies.Location = new System.Drawing.Point(203, 165);
+            this.tbMinNumberCopies.Name = "tbMinNumberCopies";
+            this.tbMinNumberCopies.Size = new System.Drawing.Size(30, 20);
+            this.tbMinNumberCopies.TabIndex = 17;
+            this.tbMinNumberCopies.Text = "5";
+            this.tbMinNumberCopies.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbMinNumberCopies_KeyPress);
+            // 
+            // cbSGRegionLocked
+            // 
+            this.cbSGRegionLocked.AutoSize = true;
+            this.cbSGRegionLocked.Location = new System.Drawing.Point(6, 144);
+            this.cbSGRegionLocked.Name = "cbSGRegionLocked";
+            this.cbSGRegionLocked.Size = new System.Drawing.Size(242, 17);
+            this.cbSGRegionLocked.TabIndex = 15;
+            this.cbSGRegionLocked.Text = "Раздачи с региональными ограничениями";
+            this.cbSGRegionLocked.UseVisualStyleBackColor = true;
+            this.cbSGRegionLocked.CheckedChanged += new System.EventHandler(this.cbSGRegionLocked_CheckedChanged);
+            // 
+            // cbSGMinNumberCopies
+            // 
+            this.cbSGMinNumberCopies.AutoSize = true;
+            this.cbSGMinNumberCopies.Location = new System.Drawing.Point(6, 167);
+            this.cbSGMinNumberCopies.Name = "cbSGMinNumberCopies";
+            this.cbSGMinNumberCopies.Size = new System.Drawing.Size(194, 17);
+            this.cbSGMinNumberCopies.TabIndex = 16;
+            this.cbSGMinNumberCopies.Text = "Минимальное количество копий:";
+            this.cbSGMinNumberCopies.UseVisualStyleBackColor = true;
+            this.cbSGMinNumberCopies.CheckedChanged += new System.EventHandler(this.cbSGMinNumberCopies_CheckedChanged);
             // 
             // cbSGSortTeLessLevel
             // 
@@ -584,7 +621,7 @@
             this.tabPageSC.Controls.Add(this.cbSCWishlist);
             this.tabPageSC.Location = new System.Drawing.Point(4, 22);
             this.tabPageSC.Name = "tabPageSC";
-            this.tabPageSC.Size = new System.Drawing.Size(309, 155);
+            this.tabPageSC.Size = new System.Drawing.Size(309, 200);
             this.tabPageSC.TabIndex = 2;
             this.tabPageSC.Text = "SC";
             this.tabPageSC.UseVisualStyleBackColor = true;
@@ -695,7 +732,7 @@
             this.tabPageUG.Controls.Add(this.label4);
             this.tabPageUG.Location = new System.Drawing.Point(4, 22);
             this.tabPageUG.Name = "tabPageUG";
-            this.tabPageUG.Size = new System.Drawing.Size(309, 155);
+            this.tabPageUG.Size = new System.Drawing.Size(309, 200);
             this.tabPageUG.TabIndex = 4;
             this.tabPageUG.Text = "UG";
             this.tabPageUG.UseVisualStyleBackColor = true;
@@ -751,7 +788,7 @@
             this.tabPageST.Controls.Add(this.btnSTCookies);
             this.tabPageST.Location = new System.Drawing.Point(4, 22);
             this.tabPageST.Name = "tabPageST";
-            this.tabPageST.Size = new System.Drawing.Size(309, 155);
+            this.tabPageST.Size = new System.Drawing.Size(309, 200);
             this.tabPageST.TabIndex = 3;
             this.tabPageST.Text = "ST";
             this.tabPageST.UseVisualStyleBackColor = true;
@@ -775,7 +812,7 @@
             this.tabPagePB.Controls.Add(this.btnPBCookies);
             this.tabPagePB.Location = new System.Drawing.Point(4, 22);
             this.tabPagePB.Name = "tabPagePB";
-            this.tabPagePB.Size = new System.Drawing.Size(309, 155);
+            this.tabPagePB.Size = new System.Drawing.Size(309, 200);
             this.tabPagePB.TabIndex = 7;
             this.tabPagePB.Text = "PB";
             this.tabPagePB.UseVisualStyleBackColor = true;
@@ -831,7 +868,7 @@
             this.tabPageSteam.Controls.Add(this.button1);
             this.tabPageSteam.Location = new System.Drawing.Point(4, 22);
             this.tabPageSteam.Name = "tabPageSteam";
-            this.tabPageSteam.Size = new System.Drawing.Size(309, 155);
+            this.tabPageSteam.Size = new System.Drawing.Size(309, 200);
             this.tabPageSteam.TabIndex = 6;
             this.tabPageSteam.Text = "Steam";
             this.tabPageSteam.UseVisualStyleBackColor = true;
@@ -868,7 +905,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(317, 208);
+            this.ClientSize = new System.Drawing.Size(317, 252);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -981,5 +1018,8 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.CheckBox cbWishlistSort;
         private System.Windows.Forms.CheckBox cbSCContributors;
+        private System.Windows.Forms.CheckBox cbSGRegionLocked;
+        private System.Windows.Forms.CheckBox cbSGMinNumberCopies;
+        private System.Windows.Forms.TextBox tbMinNumberCopies;
     }
 }

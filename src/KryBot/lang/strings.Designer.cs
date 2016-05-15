@@ -404,6 +404,24 @@ namespace KryBot.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Найдено раздач с минимальным количеством копий.
+        /// </summary>
+        internal static string ParseLoadGiveaways_FoundGiveAwaysInMinNumberCopies {
+            get {
+                return ResourceManager.GetString("ParseLoadGiveaways_FoundGiveAwaysInMinNumberCopies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Найдено раздач с региональными ограничениями.
+        /// </summary>
+        internal static string ParseLoadGiveaways_FoundGiveAwaysInRegion {
+            get {
+                return ResourceManager.GetString("ParseLoadGiveaways_FoundGiveAwaysInRegion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Найдено раздач в вишлисте.
         /// </summary>
         internal static string ParseLoadGiveaways_FoundGiveAwaysInWishList {

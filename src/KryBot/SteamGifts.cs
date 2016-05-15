@@ -9,10 +9,14 @@ namespace KryBot
             Cookies = new SgCookies();
             Giveaways = new List<SgGiveaway>();
             WishlistGiveaways = new List<SgGiveaway>();
+            RegionGiveaways = new List<SgGiveaway>();
+            MinNumberCopiesGiveaways = new List<SgGiveaway>();
         }
 
         public bool Enabled { get; set; }
         public bool Group { get; set; }
+        public bool Region { get; set; }
+        public bool MinNumberCopies { get; set; }
         public bool Regular { get; set; } = true;
         public bool WishList { get; set; }
         public bool SortLevel { get; set; }
@@ -21,9 +25,12 @@ namespace KryBot
         public int Level { get; set; }
         public int JoinPointLimit { get; set; } = 300;
         public int PointsReserv { get; set; }
+        public int NumberCopies { get; set; }
         public int MinLevel { get; set; }
         public SgCookies Cookies { get; set; }
         public List<SgGiveaway> Giveaways { get; set; }
+        public List<SgGiveaway> RegionGiveaways { get; set; }
+        public List<SgGiveaway> MinNumberCopiesGiveaways { get; set; }
         public List<SgGiveaway> WishlistGiveaways { get; set; }
 
         public void Logout()
@@ -47,6 +54,7 @@ namespace KryBot
             public string Token { get; set; }
             public string Link { get; set; }
             public string Region { get; set; }
+            public string MinNumberCopies { get; set; }
         }
 
         public class JsonResponseJoin
