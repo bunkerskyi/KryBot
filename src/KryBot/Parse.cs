@@ -398,7 +398,7 @@ namespace KryBot
         private static Log SteamGiftsGetProfile(Bot bot)
         {
             var response = Web.Get("https://www.steamgifts.com/", "", new List<Parameter>(),
-                Generate.Cookies_SteamGifts(bot), new List<HttpHeader>());
+                Generate.Cookies_SteamGifts(bot), new List<HttpHeader>(), bot.GameMiner.UserAgent);
 
             if (response.RestResponse.Content != "")
             {
