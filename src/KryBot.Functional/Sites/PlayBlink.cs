@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using KryBot.Functional.Cookies;
 using KryBot.Functional.Giveaways;
 
 namespace KryBot.Functional.Sites
@@ -7,7 +8,7 @@ namespace KryBot.Functional.Sites
 	{
 		public PlayBlink()
 		{
-			Cookies = new PbCookies();
+			Cookies = new PlayBlinkCookie();
 			Giveaways = new List<PlayBlinkGiveaway>();
 		}
 
@@ -16,18 +17,12 @@ namespace KryBot.Functional.Sites
 		public int Level { get; set; }
 		public int MaxJoinValue { get; set; } = 50;
 		public int PointReserv { get; set; } = 0;
-		public PbCookies Cookies { get; set; }
+		public PlayBlinkCookie Cookies { get; set; }
 		public List<PlayBlinkGiveaway> Giveaways { get; set; }
-
-		public class PbCookies
-		{
-			public string PhpSessId { get; set; }
-		}
-
 
 		public void Logout()
 		{
-			Cookies = new PbCookies();
+			Cookies = new PlayBlinkCookie();
 			Enabled = false;
 		}
 	}

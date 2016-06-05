@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using KryBot.Functional.Cookies;
 using KryBot.Functional.Giveaways;
 
 namespace KryBot.Functional.Sites
@@ -7,7 +8,7 @@ namespace KryBot.Functional.Sites
 	{
 		public SteamGifts()
 		{
-			Cookies = new SgCookies();
+			Cookies = new SteamGiftsCookie();
 			Giveaways = new List<SteamGiftsGiveaway>();
 			WishlistGiveaways = new List<SteamGiftsGiveaway>();
 		}
@@ -23,15 +24,9 @@ namespace KryBot.Functional.Sites
 		public int JoinPointLimit { get; set; } = 300;
 		public int PointsReserv { get; set; }
 		public int MinLevel { get; set; }
-		public SgCookies Cookies { get; set; }
+		public SteamGiftsCookie Cookies { get; set; }
 		public List<SteamGiftsGiveaway> Giveaways { get; set; }
 		public List<SteamGiftsGiveaway> WishlistGiveaways { get; set; }
-
-		public class SgCookies
-		{
-			public string PhpSessId { get; set; }
-		}
-
 
 		public class JsonResponseJoin
 		{
@@ -48,7 +43,7 @@ namespace KryBot.Functional.Sites
 
 		public void Logout()
 		{
-			Cookies = new SgCookies();
+			Cookies = new SteamGiftsCookie();
 			Enabled = false;
 		}
 	}

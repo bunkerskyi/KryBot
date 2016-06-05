@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using KryBot.Functional.Cookies;
 using KryBot.Functional.Giveaways;
 
 namespace KryBot.Functional.Sites
@@ -7,7 +8,7 @@ namespace KryBot.Functional.Sites
 	{
 		public GameMiner()
 		{
-			Cookies = new GmCookies();
+			Cookies = new GameMinerCookie();
 			Giveaways = new List<GameMinerGiveaway>();
 		}
 
@@ -22,14 +23,8 @@ namespace KryBot.Functional.Sites
 		public bool OnlyGifts { get; set; }
 		public bool NoRegion { get; set; }
 		public string UserAgent { get; set; }
-		public GmCookies Cookies { get; set; }
+		public GameMinerCookie Cookies { get; set; }
 		public List<GameMinerGiveaway> Giveaways { get; set; }
-
-		public class GmCookies
-		{
-			public string Token { get; set; }
-			public string Xsrf { get; set; }
-		}
 
 		public class JsonProperties
 		{
@@ -125,7 +120,7 @@ namespace KryBot.Functional.Sites
 
 		public void Logout()
 		{
-			Cookies = new GmCookies();
+			Cookies = new GameMinerCookie();
 			UserAgent = "";
 			Enabled = false;
 		}

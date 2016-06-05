@@ -1,26 +1,21 @@
-﻿namespace KryBot.Functional.Sites
+﻿using KryBot.Functional.Cookies;
+
+namespace KryBot.Functional.Sites
 {
 	public class Steam
 	{
 		public Steam()
 		{
-			Cookies = new SteamCookies();
+			Cookies = new SteamCookie();
 		}
 
 		public bool Enabled { get; set; }
 		public string ProfileLink { get; set; }
-		public SteamCookies Cookies { get; set; }
-
-		public class SteamCookies
-		{
-			public string Sessid { get; set; }
-			public string Login { get; set; }
-			public string RememberLogin { get; set; }
-		}
+		public SteamCookie Cookies { get; set; }
 
 		public void Logout()
 		{
-			Cookies = new SteamCookies();
+			Cookies = new SteamCookie();
 			Enabled = false;
 		}
 	}

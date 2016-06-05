@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using KryBot.Functional.Cookies;
 using KryBot.Functional.Giveaways;
 
 namespace KryBot.Functional.Sites
@@ -7,25 +8,17 @@ namespace KryBot.Functional.Sites
 	{
 		public SteamTrade()
 		{
-			Cookies = new StCookies();
+			Cookies = new SteamTradeCookie();
 			Giveaways = new List<SteamTradeGiveaway>();
 		}
 
 		public bool Enabled { get; set; }
-		public StCookies Cookies { get; set; }
+		public SteamTradeCookie Cookies { get; set; }
 		public List<SteamTradeGiveaway> Giveaways { get; set; }
-
-		public class StCookies
-		{
-			public string PhpSessId { get; set; }
-			public string DleUserId { get; set; }
-			public string DlePassword { get; set; }
-			public string PassHash { get; set; }
-		}
 
 		public void Logout()
 		{
-			Cookies = new StCookies();
+			Cookies = new SteamTradeCookie();
 			Enabled = false;
 		}
 	}
