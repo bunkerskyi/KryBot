@@ -50,7 +50,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
             if (_phpSessId != "")
             {
-                InternetSetCookie("http://steamtrade.info/", "PHPSESSID", _phpSessId);
+                InternetSetCookie(Links.SteamTrade, "PHPSESSID", _phpSessId);
             }
             toolStripStatusLabelURL.Text = @"URL: " + _startPage;
             webBrowser.Navigate(_startPage);
@@ -81,27 +81,27 @@ namespace KryBot.Gui.WinFormsGui.Forms
                         GameMinerAuth();
                     }
 
-                    if (_endPage == "https://www.steamgifts.com/")
+                    if (_endPage == Links.SteamGifts)
                     {
                         SteamGiftsAuth();
                     }
 
-                    if (_endPage == "https://steamcompanion.com/")
+                    if (_endPage == Links.SteamCompanion)
                     {
                         SteamCompanionAuth();
                     }
 
-                    if (_endPage == "http://steamportal.net/")
+                    if (_endPage == Links.SteamPortal)
                     {
                         SteamPortalAuth();
                     }
 
-                    if (_endPage == "http://steamtrade.info/")
+                    if (_endPage == Links.SteamTrade)
                     {
                         SteamTradeAuth();
                     }
 
-                    if (_endPage == "http://playblink.com/")
+                    if (_endPage == Links.PlayBlink)
                     {
                         PlayBlinkAuth();
                     }

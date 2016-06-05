@@ -89,6 +89,7 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Links.cs" />
     <Compile Include="Sites\GameAways.cs" />
     <Compile Include="Sites\GameMiner.cs" />
     <Compile Include="Sites\PlayBlink.cs" />

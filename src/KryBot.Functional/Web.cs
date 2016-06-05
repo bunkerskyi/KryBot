@@ -51,8 +51,7 @@ namespace KryBot.Functional
 			return data;
 		}
 
-		public static Classes.Response Get(string url, string subUrl, List<Parameter> parameters,
-			CookieContainer cookies, List<HttpHeader> headers)
+		public static Classes.Response Get(string url, List<Parameter> parameters, CookieContainer cookies, List<HttpHeader> headers, string subUrl = null)
 		{
 			var client = new RestClient(url)
 			{
@@ -104,7 +103,7 @@ namespace KryBot.Functional
 			var task = new TaskCompletionSource<Classes.Response>();
 			await Task.Run(() =>
 			{
-				var result = Get(url, subUrl, parameters, cookies, headers);
+				var result = Get(url, parameters, cookies, headers, subUrl);
 				task.SetResult(result);
 			});
 
@@ -207,7 +206,7 @@ namespace KryBot.Functional
 		public static Log GameMinerJoinGiveaway(Bot bot, GameMinerGiveaway gmGiveaway)
 		{
 			Thread.Sleep(requestInterval);
-			var response = Post("http://gameminer.net/",
+			var response = Post(Links.GameMiner,
 				"/giveaway/enter/" + gmGiveaway.Id + "?" + (gmGiveaway.IsSandbox ? "sandbox" : "coal") + "_page=" +
 				gmGiveaway.Page, Generate.PostData_GameMiner(bot.GameMiner.Cookies.Xsrf), new List<HttpHeader>(),
 				Generate.Cookies_GameMiner(bot), bot.GameMiner.UserAgent);
@@ -255,7 +254,7 @@ namespace KryBot.Functional
 
 			if (sgGiveaway.Token != null)
 			{
-				var response = Post("https://www.steamgifts.com/", "/ajax.php",
+				var response = Post(Links.SteamGifts, "/ajax.php",
 					Generate.PostData_SteamGifts(sgGiveaway.Token, sgGiveaway.Code, "entry_insert"),
 					new List<HttpHeader>(),
 					Generate.Cookies_SteamGifts(bot), bot.GameMiner.UserAgent);
@@ -309,7 +308,7 @@ namespace KryBot.Functional
 					};
 					list.Add(header);
 
-					var response = Post("https://steamcompanion.com", "/gifts/steamcompanion.php",
+					var response = Post(Links.SteamCompanion, "/gifts/steamcompanion.php",
 						Generate.PostData_SteamCompanion(scGiveaway.Code), list,
 						Generate.Cookies_SteamCompanion(bot));
 
@@ -352,7 +351,7 @@ namespace KryBot.Functional
 				};
 				list.Add(header);
 
-				var response = Post("http://steamportal.net/", "page/join",
+				var response = Post(Links.SteamPortal, "page/join",
 					Generate.PostData_SteamPortal(spGiveaway.Code), list,
 					Generate.Cookies_SteamPortal(bot));
 				var jresponse =
@@ -387,9 +386,9 @@ namespace KryBot.Functional
 			stGiveaway = Parse.SteamTradeGetJoinData(stGiveaway, bot);
 			if (stGiveaway.LinkJoin != null)
 			{
-				var response = Get("http://steamtrade.info", stGiveaway.LinkJoin, new List<Parameter>(),
+				var response = Get("http://steamtrade.info", new List<Parameter>(),
 					Generate.Cookies_SteamTrade(bot),
-					new List<HttpHeader>());
+					new List<HttpHeader>(), stGiveaway.LinkJoin);
 				if (response.RestResponse.StatusCode == HttpStatusCode.OK)
 				{
 					return Messages.GiveawayJoined("SteamTrade", stGiveaway.Name.Trim(), 0, 0, 0);
@@ -511,8 +510,8 @@ namespace KryBot.Functional
 
 		public static Log SteamGiftsSyncAccount(Bot bot)
 		{
-			var xsrf = Get("https://www.steamgifts.com/account/profile/sync", "",
-				new List<Parameter>(), Generate.Cookies_SteamGifts(bot), new List<HttpHeader>());
+			var xsrf = Get("https://www.steamgifts.com/account/profile/sync",
+				new List<Parameter>(), Generate.Cookies_SteamGifts(bot), new List<HttpHeader>(), "");
 
 			if (xsrf.RestResponse.Content != null)
 			{
@@ -530,7 +529,7 @@ namespace KryBot.Functional
 					};
 					headers.Add(header);
 
-					var response = Post("https://www.steamgifts.com/", "ajax.php",
+					var response = Post(Links.SteamGifts, "ajax.php",
 						Generate.PostData_SteamGifts(xsrfToken.Attributes["value"].Value, "", "sync"), headers,
 						Generate.Cookies_SteamGifts(bot), bot.GameMiner.UserAgent);
 					if (response != null)
@@ -567,8 +566,8 @@ namespace KryBot.Functional
 
 		public static Log SteamCompanionSyncAccount(Bot bot)
 		{
-			var response = Get("https://steamcompanion.com//settings/resync&success=true", "", new List<Parameter>(),
-				Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>());
+			var response = Get("https://steamcompanion.com//settings/resync&success=true", new List<Parameter>(),
+				Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(), "");
 			if (response.RestResponse.Content != "")
 			{
 				return new Log($"{Messages.GetDateTime()} {{SteamCompanion}} Sync success!", Color.Green,
@@ -636,7 +635,7 @@ namespace KryBot.Functional
 				};
 				list.Add(header);
 
-				var response = Post("http://playblink.com/", $"?do=blink&game={pbGiveaway.Id}&captcha=1",
+				var response = Post(Links.PlayBlink, $"?do=blink&game={pbGiveaway.Id}&captcha=1",
 					Generate.PostData_PlayBlink(pbGiveaway.Id), list,
 					Generate.Cookies_PlayBlink(bot));
 

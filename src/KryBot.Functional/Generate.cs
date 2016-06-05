@@ -11,7 +11,7 @@ namespace KryBot.Functional
 		public static CookieContainer Cookies_Steam(Bot bot)
 		{
 			var cookie = new CookieContainer();
-			var target = new Uri("http://steamcommunity.com/");
+			var target = new Uri(Links.Steam);
 
 			if (bot.Steam.Cookies.Sessid != null)
 				cookie.Add(new Cookie("sessionid", bot.Steam.Cookies.Sessid) {Domain = target.Host});
@@ -54,7 +54,7 @@ namespace KryBot.Functional
 		public static CookieContainer Cookies_GameMiner(Bot bot)
 		{
 			var cookie = new CookieContainer();
-			var target = new Uri("http://gameminer.net/");
+			var target = new Uri(Links.GameMiner);
 			if (bot.GameMiner.Cookies.Token != null)
 				cookie.Add(new Cookie("token", bot.GameMiner.Cookies.Token) {Domain = target.Host});
 
@@ -110,7 +110,7 @@ namespace KryBot.Functional
 		public static CookieContainer Cookies_SteamGifts(Bot bot)
 		{
 			var cookie = new CookieContainer();
-			var target = new Uri("https://www.steamgifts.com/");
+			var target = new Uri(Links.SteamGifts);
 
 			if (bot.SteamGifts.Cookies.PhpSessId != null)
 			{
@@ -160,7 +160,7 @@ namespace KryBot.Functional
 		public static CookieContainer Cookies_SteamCompanion(Bot bot)
 		{
 			var cookie = new CookieContainer();
-			var target = new Uri("https://steamcompanion.com/");
+			var target = new Uri(Links.SteamCompanion);
 
 			if (bot.SteamCompanion.Cookies.PhpSessId != null)
 				cookie.Add(new Cookie("PHPSESSID", bot.SteamCompanion.Cookies.PhpSessId) {Domain = target.Host});
@@ -222,7 +222,7 @@ namespace KryBot.Functional
 		public static CookieContainer Cookies_SteamPortal(Bot bot)
 		{
 			var cookie = new CookieContainer();
-			var target = new Uri("http://steamportal.net/");
+			var target = new Uri(Links.SteamPortal);
 
 			if (bot.SteamPortal.Cookies.PhpSessId != null)
 				cookie.Add(new Cookie("PHPSESSID", bot.SteamPortal.Cookies.PhpSessId) {Domain = target.Host});
@@ -274,7 +274,7 @@ namespace KryBot.Functional
 		public static CookieContainer Cookies_SteamTrade(Bot bot)
 		{
 			var cookie = new CookieContainer();
-			var target = new Uri("http://steamtrade.info/");
+			var target = new Uri(Links.SteamTrade);
 
 			if (bot.SteamTrade.Cookies.PhpSessId != null)
 				cookie.Add(new Cookie("PHPSESSID", bot.SteamTrade.Cookies.PhpSessId) {Domain = target.Host});
@@ -321,7 +321,7 @@ namespace KryBot.Functional
 		public static CookieContainer Cookies_PlayBlink(Bot bot)
 		{
 			var cookie = new CookieContainer();
-			var target = new Uri("http://playblink.com/");
+			var target = new Uri(Links.PlayBlink);
 
 			if (bot.PlayBlink.Cookies.PhpSessId != null)
 			{

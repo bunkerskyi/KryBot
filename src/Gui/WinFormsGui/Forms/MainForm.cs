@@ -1068,14 +1068,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnSTLogin_Click(object sender, EventArgs e)
         {
             btnSTLogin.Enabled = false;
-            var first = Web.Get("http://steamtrade.info/", "", new List<Parameter>(), new CookieContainer(),
-                new List<HttpHeader>());
-            var getLoginHref = Web.SteamTradeDoAuth("http://steamtrade.info/", "reg.php?login",
+            var first = Web.Get(Links.SteamTrade, "", new List<Parameter>(), new CookieContainer(),
+                new List<HttpHeader>(), "");
+            var getLoginHref = Web.SteamTradeDoAuth(Links.SteamTrade, "reg.php?login",
                 Generate.LoginData_SteamTrade(), first.Cookies, new List<HttpHeader>());
             var location = Tools.GetLocationInresponse(getLoginHref.RestResponse);
             var cookie = Tools.GetSessCookieInresponse(getLoginHref.Cookies, "steamtrade.info", "PHPSESSID");
 
-            BrowserStart(location, "http://steamtrade.info/", "SteamTrade - Login", cookie);
+            BrowserStart(location, Links.SteamTrade, "SteamTrade - Login", cookie);
             Bot.Save();
 
             toolStripStatusLabel1.Image = Resources.load;
@@ -1118,7 +1118,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnSPLogin_Click(object sender, EventArgs e)
         {
             btnSPLogin.Enabled = false;
-            BrowserStart("http://steamportal.net/page/steam", "http://steamportal.net/", "SteamPortal - Login", "");
+            BrowserStart("http://steamportal.net/page/steam", Links.SteamPortal, "SteamPortal - Login", "");
             Bot.Save();
 
             toolStripStatusLabel1.Image = Resources.load;
@@ -1158,7 +1158,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnSCLogin_Click(object sender, EventArgs e)
         {
             btnSCLogin.Enabled = false;
-            BrowserStart("https://steamcompanion.com/login", "https://steamcompanion.com/", "SteamCompanion - Login", "");
+            BrowserStart("https://steamcompanion.com/login", Links.SteamCompanion, "SteamCompanion - Login", "");
             Bot.Save();
 
             toolStripStatusLabel1.Image = Resources.load;
@@ -1198,7 +1198,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnSGLogin_Click(object sender, EventArgs e)
         {
             btnSGLogin.Enabled = false;
-            BrowserStart("https://www.steamgifts.com/?login", "https://www.steamgifts.com/", "SteamGifts - Login", "");
+            BrowserStart("https://www.steamgifts.com/?login", Links.SteamGifts, "SteamGifts - Login", "");
             Bot.Save();
 
             toolStripStatusLabel1.Image = Resources.load;
@@ -1522,27 +1522,27 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://gameminer.net/");
+            Process.Start(Links.GameMiner);
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://www.steamgifts.com/");
+            Process.Start(Links.SteamGifts);
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://steamcompanion.com/");
+            Process.Start(Links.SteamCompanion);
         }
 
         private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://steamportal.net/");
+            Process.Start(Links.SteamPortal);
         }
 
         private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://steamtrade.info/");
+            Process.Start(Links.SteamTrade);
         }
 
         private void статстикаToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1672,7 +1672,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
         private void linkLabel6_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://steamcommunity.com/");
+            Process.Start(Links.Steam);
         }
 
         private async void btnSteamLogin_Click(object sender, EventArgs e)
@@ -1862,7 +1862,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnPBLogin_Click(object sender, EventArgs e)
         {
             btnPBLogin.Enabled = false;
-            BrowserStart("http://playblink.com/?do=login&act=signin", "http://playblink.com/", "PlayBlink - Login", "");
+            BrowserStart("http://playblink.com/?do=login&act=signin", Links.PlayBlink, "PlayBlink - Login", "");
             Bot.Save();
 
             toolStripStatusLabel1.Image = Resources.load;
@@ -1905,7 +1905,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
         private void linkLabel7_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("http://playblink.com/");
+            Process.Start(Links.PlayBlink);
         }
 
         private async void pbPBRefresh_Click(object sender, EventArgs e)

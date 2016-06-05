@@ -32,8 +32,8 @@ namespace KryBot.Functional.Sites
 
 		public static Log SteamGetProfile(Bot bot, bool echo)
 		{
-			var response = Web.Get("http://www.gameaways.com/", "", new List<Parameter>(), Generate.Cookies_Steam(bot),
-				new List<HttpHeader>());
+			var response = Web.Get(Links.GameAways, new List<Parameter>(), Generate.Cookies_Steam(bot),
+				new List<HttpHeader>(), string.Empty);
 
 			if (response.RestResponse.Content != "")
 			{
@@ -59,7 +59,7 @@ namespace KryBot.Functional.Sites
 		public CookieContainer GenerateCookies(Bot bot)
 		{
 			var cookie = new CookieContainer();
-			var target = new Uri("http://www.gameaways.com/");
+			var target = new Uri(Links.GameAways);
 
 			if (bot.Steam.Cookies.Sessid != null)
 			{
