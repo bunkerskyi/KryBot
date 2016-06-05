@@ -316,21 +316,7 @@ namespace KryBot.Functional
 						Color.White, true, true);
 			}
 
-			if (blackList.Items != null)
-			{
-				for (var i = 0; i < giveaways.Count; i++)
-				{
-					foreach (var item in blackList.Items)
-					{
-						if (giveaways[i].StoreId == item.Id)
-						{
-							giveaways.Remove(giveaways[i]);
-							i--;
-							break;
-						}
-					}
-				}
-			}
+			RemoveBlacklistedGames(giveaways, blackList);
 
 			return
 				new Log(
@@ -564,20 +550,7 @@ namespace KryBot.Functional
 						Color.White, true, true);
 			}
 
-			if (blackList.Items != null)
-			{
-				for (var i = 0; i < giveaways?.Count; i++)
-				{
-					foreach (var item in blackList.Items)
-					{
-						if (giveaways[i].StoreId == item.Id)
-						{
-							giveaways.Remove(giveaways[i]);
-							i--;
-						}
-					}
-				}
-			}
+			RemoveBlacklistedGames(giveaways, blackList);
 
 			return
 				new Log(
@@ -1356,17 +1329,7 @@ namespace KryBot.Functional
 						Color.White, true, true);
 			}
 
-			if (blackList.Items != null)
-			{
-				for (var i = 0; i < giveaways.Count; i++)
-				{
-					if (blackList.Items.Any(item => giveaways[i].StoreId == item.Id))
-					{
-						giveaways.Remove(giveaways[i]);
-						i--;
-					}
-				}
-			}
+			RemoveBlacklistedGames(giveaways, blackList);
 
 			return
 				new Log(
@@ -1644,22 +1607,31 @@ namespace KryBot.Functional
 							Color.White, true, true);
 				}
 
-				if (blackList.Items != null)
-				{
-					for (var i = 0; i < giveaways.Count; i++)
-					{
-						if (blackList.Items.Any(item => giveaways[i].StoreId == item.Id))
-						{
-							giveaways.Remove(giveaways[i]);
-							i--;
-						}
-					}
-				}
+				RemoveBlacklistedGames(giveaways, blackList);
+
 			}
 			return
 				new Log(
 					$"{GetDateTime()} {{PlayBlink}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {giveaways?.Count}",
 					Color.White, true, true);
+		}
+
+		/// <summary>
+		/// Remove all blacklisted games from list of <paramref name="giveaways"/>.
+		/// </summary>
+		/// <param name="giveaways"> List of Giweways. </param>
+		/// <param name="blackList"> Blacklisted games. </param>
+		private static void RemoveBlacklistedGames<T>(IList<T> giveaways, Blacklist blackList) where T : BaseGiveaway
+		{
+			if (blackList.Items == null) return;
+			for (var i = 0; i < giveaways.Count; i++)
+			{
+				if (blackList.Items.Any(item => giveaways[i].StoreId == item.Id))
+				{
+					giveaways.Remove(giveaways[i]);
+					i--;
+				}
+			}
 		}
 
 		public static async Task<Log> PlayBlinkLoadGiveawaysAsync(Bot bot,

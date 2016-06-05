@@ -2,6 +2,8 @@
 {
 	public class GameMinerGiveaway : BaseGiveaway
 	{
+		public int Price { get; set; }
+
 		public int Page { get; set; }
 
 		public string Region { get; set; }

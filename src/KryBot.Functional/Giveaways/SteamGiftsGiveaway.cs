@@ -2,6 +2,8 @@
 {
 	public class SteamGiftsGiveaway : BaseGiveaway
 	{
+		public int Price { get; set; }
+
 		public int Level { get; set; }
 
 		public string Code { get; set; }
