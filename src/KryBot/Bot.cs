@@ -32,7 +32,6 @@ namespace KryBot
 
 		public void ClearGiveawayList()
 		{
-			UserAgent = "";
 			GameMiner.Giveaways = new List<GameMiner.GmGiveaway>();
 			SteamGifts.Giveaways = new List<SteamGifts.SgGiveaway>();
 			SteamGifts.WishlistGiveaways = new List<SteamGifts.SgGiveaway>();
