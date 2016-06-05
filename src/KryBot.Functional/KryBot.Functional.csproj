@@ -62,6 +62,15 @@
     <Compile Include="Blacklist.cs" />
     <Compile Include="Bot.cs" />
     <Compile Include="Classes.cs" />
+    <Compile Include="Cookies\BaseCookie.cs" />
+    <Compile Include="Cookies\GameAwaysCookie.cs" />
+    <Compile Include="Cookies\GameMinerCookie.cs" />
+    <Compile Include="Cookies\PlayBlinkCookie.cs" />
+    <Compile Include="Cookies\SteamCompanionCookie.cs" />
+    <Compile Include="Cookies\SteamCookie.cs" />
+    <Compile Include="Cookies\SteamGiftsCookie.cs" />
+    <Compile Include="Cookies\SteamPortalCookie.cs" />
+    <Compile Include="Cookies\SteamTradeCookie.cs" />
     <Compile Include="Generate.cs" />
     <Compile Include="Giveaways\BaseGiveaway.cs" />
     <Compile Include="Giveaways\GameAwaysGiveaway.cs" />
