@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Exceptionless.Json;
 using KryBot.CommonResources.lang;
+using KryBot.Functional.Giveaways;
 using KryBot.Functional.Sites;
 using RestSharp;
 using HtmlDocument = HtmlAgilityPack.HtmlDocument;
@@ -203,7 +204,7 @@ namespace KryBot.Functional
 			return task.Task.Result;
 		}
 
-		public static Log GameMinerJoinGiveaway(Bot bot, GameMiner.GmGiveaway gmGiveaway)
+		public static Log GameMinerJoinGiveaway(Bot bot, GameMinerGiveaway gmGiveaway)
 		{
 			Thread.Sleep(requestInterval);
 			var response = Post("http://gameminer.net/",
@@ -235,7 +236,7 @@ namespace KryBot.Functional
 			return Messages.GiveawayNotJoined("GameMiner", gmGiveaway.Name, "Content is empty");
 		}
 
-		public static async Task<Log> GameMinerJoinGiveawayAsync(Bot bot, GameMiner.GmGiveaway gmGiveaway)
+		public static async Task<Log> GameMinerJoinGiveawayAsync(Bot bot, GameMinerGiveaway gmGiveaway)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -247,7 +248,7 @@ namespace KryBot.Functional
 			return task.Task.Result;
 		}
 
-		public static Log SteamGiftsJoinGiveaway(Bot bot, SteamGifts.SgGiveaway sgGiveaway)
+		public static Log SteamGiftsJoinGiveaway(Bot bot, SteamGiftsGiveaway sgGiveaway)
 		{
 			Thread.Sleep(requestInterval);
 			sgGiveaway = Parse.SteamGiftsGetJoinData(sgGiveaway, bot);
@@ -280,7 +281,7 @@ namespace KryBot.Functional
 		}
 
 		public static async Task<Log> SteamGiftsJoinGiveawayAsync(Bot bot,
-			SteamGifts.SgGiveaway sgGiveaway)
+			SteamGiftsGiveaway sgGiveaway)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -292,7 +293,7 @@ namespace KryBot.Functional
 			return task.Task.Result;
 		}
 
-		public static Log SteamCompanionJoinGiveaway(Bot bot, SteamCompanion.ScGiveaway scGiveaway)
+		public static Log SteamCompanionJoinGiveaway(Bot bot, SteamCompanionGiveaway scGiveaway)
 		{
 			Thread.Sleep(requestInterval);
 			var data = Parse.SteamCompanionGetJoinData(scGiveaway, bot);
@@ -326,7 +327,7 @@ namespace KryBot.Functional
 		}
 
 		public static async Task<Log> SteamCompanionJoinGiveawayAsync(Bot bot,
-			SteamCompanion.ScGiveaway scGiveaway)
+			SteamCompanionGiveaway scGiveaway)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -338,7 +339,7 @@ namespace KryBot.Functional
 			return task.Task.Result;
 		}
 
-		public static Log SteamPortalJoinGiveaway(Bot bot, SteamPortal.SpGiveaway spGiveaway)
+		public static Log SteamPortalJoinGiveaway(Bot bot, SteamPortalGiveaway spGiveaway)
 		{
 			Thread.Sleep(requestInterval);
 			if (spGiveaway.Code != null)
@@ -368,7 +369,7 @@ namespace KryBot.Functional
 		}
 
 		public static async Task<Log> SteamPortalJoinGiveawayAsync(Bot bot,
-			SteamPortal.SpGiveaway spGiveaway)
+			SteamPortalGiveaway spGiveaway)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -380,7 +381,7 @@ namespace KryBot.Functional
 			return task.Task.Result;
 		}
 
-		public static Log SteamTradeJoinGiveaway(Bot bot, SteamTrade.StGiveaway stGiveaway)
+		public static Log SteamTradeJoinGiveaway(Bot bot, SteamTradeGiveaway stGiveaway)
 		{
 			Thread.Sleep(requestInterval);
 			stGiveaway = Parse.SteamTradeGetJoinData(stGiveaway, bot);
@@ -400,7 +401,7 @@ namespace KryBot.Functional
 		}
 
 		public static async Task<Log> SteamTradeJoinGiveawayAsync(Bot bot,
-			SteamTrade.StGiveaway stGiveaway)
+			SteamTradeGiveaway stGiveaway)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -622,7 +623,7 @@ namespace KryBot.Functional
 			return task.Task.Result;
 		}
 
-		public static Log PlayBlinkJoinGiveaway(Bot bot, PlayBlink.PbGiveaway pbGiveaway)
+		public static Log PlayBlinkJoinGiveaway(Bot bot, PlayBlinkGiveaway pbGiveaway)
 		{
 			Thread.Sleep(1000);
 			if (pbGiveaway.Id != null)
@@ -674,7 +675,7 @@ namespace KryBot.Functional
 			return null;
 		}
 
-		public static async Task<Log> PlayBlinkJoinGiveawayAsync(Bot bot, PlayBlink.PbGiveaway pbGiveaway)
+		public static async Task<Log> PlayBlinkJoinGiveawayAsync(Bot bot, PlayBlinkGiveaway pbGiveaway)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>

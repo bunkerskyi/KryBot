@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using KryBot.Functional.Giveaways;
 using KryBot.Functional.Sites;
 
 namespace KryBot.Functional
@@ -34,14 +35,14 @@ namespace KryBot.Functional
 
 		public void ClearGiveawayList()
 		{
-			GameMiner.Giveaways = new List<GameMiner.GmGiveaway>();
-			SteamGifts.Giveaways = new List<SteamGifts.SgGiveaway>();
-			SteamGifts.WishlistGiveaways = new List<SteamGifts.SgGiveaway>();
-			SteamCompanion.Giveaways = new List<SteamCompanion.ScGiveaway>();
-			SteamCompanion.WishlistGiveaways = new List<SteamCompanion.ScGiveaway>();
-			SteamPortal.Giveaways = new List<SteamPortal.SpGiveaway>();
-			SteamTrade.Giveaways = new List<SteamTrade.StGiveaway>();
-			PlayBlink.Giveaways = new List<PlayBlink.PbGiveaway>();
+			GameMiner.Giveaways = new List<GameMinerGiveaway>();
+			SteamGifts.Giveaways = new List<SteamGiftsGiveaway>();
+			SteamGifts.WishlistGiveaways = new List<SteamGiftsGiveaway>();
+			SteamCompanion.Giveaways = new List<SteamCompanionGiveaway>();
+			SteamCompanion.WishlistGiveaways = new List<SteamCompanionGiveaway>();
+			SteamPortal.Giveaways = new List<SteamPortalGiveaway>();
+			SteamTrade.Giveaways = new List<SteamTradeGiveaway>();
+			PlayBlink.Giveaways = new List<PlayBlinkGiveaway>();
 		}
 
 		public bool Save()

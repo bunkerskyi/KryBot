@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using KryBot.Functional.Giveaways;
 
 namespace KryBot.Functional.Sites
 {
@@ -7,7 +8,7 @@ namespace KryBot.Functional.Sites
 		public SteamPortal()
 		{
 			Cookies = new SpCookies();
-			Giveaways = new List<SpGiveaway>();
+			Giveaways = new List<SteamPortalGiveaway>();
 		}
 
 		public bool Enabled { get; set; }
@@ -16,20 +17,11 @@ namespace KryBot.Functional.Sites
 		public int MaxJoinValue { get; set; } = 30;
 		public int PointsReserv { get; set; }
 		public SpCookies Cookies { get; set; }
-		public List<SpGiveaway> Giveaways { get; set; }
+		public List<SteamPortalGiveaway> Giveaways { get; set; }
 
 		public class SpCookies
 		{
 			public string PhpSessId { get; set; }
-		}
-
-		public class SpGiveaway
-		{
-			public string Name { get; set; }
-			public string StoreId { get; set; }
-			public int Price { get; set; }
-			public string Code { get; set; }
-			public string Region { get; set; }
 		}
 
 		public class JsonJoin

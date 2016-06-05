@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using KryBot.CommonResources.lang;
 using KryBot.Functional;
+using KryBot.Functional.Giveaways;
 using KryBot.Functional.Sites;
 using KryBot.Gui.WinFormsGui.Properties;
 using RestSharp;
@@ -1934,7 +1935,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             btnPBExit.Enabled = true;
         }
 
-        private async Task<bool> JoinGiveaways(List<GameMiner.GmGiveaway> giveaways)
+        private async Task<bool> JoinGiveaways(List<GameMinerGiveaway> giveaways)
         {
             foreach (var giveaway in giveaways)
             {
@@ -1963,7 +1964,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             return true;
         }
 
-        private async Task<bool> JoinGiveaways(List<SteamGifts.SgGiveaway> giveaways, bool wishlist)
+        private async Task<bool> JoinGiveaways(List<SteamGiftsGiveaway> giveaways, bool wishlist)
         {
             foreach (var giveaway in giveaways)
             {
@@ -2014,7 +2015,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             return true;
         }
 
-        private async Task<bool> JoinGiveaways(List<SteamCompanion.ScGiveaway> giveaways, bool wishlist)
+        private async Task<bool> JoinGiveaways(List<SteamCompanionGiveaway> giveaways, bool wishlist)
         {
             foreach (var giveaway in giveaways)
             {
@@ -2065,7 +2066,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             return true;
         }
 
-        private async Task<bool> JoinGiveaways(List<SteamPortal.SpGiveaway> giveaways)
+        private async Task<bool> JoinGiveaways(List<SteamPortalGiveaway> giveaways)
         {
             foreach (var giveaway in giveaways)
             {
@@ -2092,7 +2093,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             return true;
         }
 
-        private async Task<bool> JoinGiveaways(List<SteamTrade.StGiveaway> giveaways)
+        private async Task<bool> JoinGiveaways(List<SteamTradeGiveaway> giveaways)
         {
             foreach (var giveaway in giveaways)
             {
@@ -2115,7 +2116,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             return true;
         }
 
-        private async Task<bool> JoinGiveaways(List<PlayBlink.PbGiveaway> giveaways)
+        private async Task<bool> JoinGiveaways(List<PlayBlinkGiveaway> giveaways)
         {
             foreach (var giveaway in giveaways)
             {

@@ -9,6 +9,7 @@ using System.Xml.Serialization;
 using Exceptionless.Json;
 using HtmlAgilityPack;
 using KryBot.CommonResources.lang;
+using KryBot.Functional.Giveaways;
 using KryBot.Functional.Sites;
 using RestSharp;
 using HtmlDocument = HtmlAgilityPack.HtmlDocument;
@@ -178,7 +179,7 @@ namespace KryBot.Functional
 			return task.Task.Result;
 		}
 
-		public static Log GameMinerLoadGiveaways(Bot bot, List<GameMiner.GmGiveaway> giveaways,
+		public static Log GameMinerLoadGiveaways(Bot bot, List<GameMinerGiveaway> giveaways,
 			Blacklist blackList)
 		{
 			var content = "";
@@ -338,7 +339,7 @@ namespace KryBot.Functional
 		}
 
 		public static async Task<Log> GameMinerLoadGiveawaysAsync(Bot bot,
-			List<GameMiner.GmGiveaway> giveaways, Blacklist blackList)
+			List<GameMinerGiveaway> giveaways, Blacklist blackList)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -351,12 +352,12 @@ namespace KryBot.Functional
 		}
 
 		private static void GameMinerAddGiveaways(GameMiner.JsonRootObject json, Bot bot,
-			List<GameMiner.GmGiveaway> giveaways)
+			List<GameMinerGiveaway> giveaways)
 		{
 			if (json != null)
 				foreach (var giveaway in json.Giveaways)
 				{
-					var lot = new GameMiner.GmGiveaway();
+					var lot = new GameMinerGiveaway();
 					if (giveaway.Golden && giveaway.Price != 0)
 					{
 						break;
@@ -480,8 +481,8 @@ namespace KryBot.Functional
 			return task.Task.Result;
 		}
 
-		public static Log SteamGiftsLoadGiveaways(Bot bot, List<SteamGifts.SgGiveaway> giveaways,
-			List<SteamGifts.SgGiveaway> wishlistGiveaways, Blacklist blackList)
+		public static Log SteamGiftsLoadGiveaways(Bot bot, List<SteamGiftsGiveaway> giveaways,
+			List<SteamGiftsGiveaway> wishlistGiveaways, Blacklist blackList)
 		{
 			var content = "";
 			giveaways?.Clear();
@@ -585,7 +586,7 @@ namespace KryBot.Functional
 		}
 
 		public static async Task<Log> SteamGiftsLoadGiveawaysAsync(Bot bot,
-			List<SteamGifts.SgGiveaway> giveaways, List<SteamGifts.SgGiveaway> wishlistGiveaways,
+			List<SteamGiftsGiveaway> giveaways, List<SteamGiftsGiveaway> wishlistGiveaways,
 			Blacklist blackList)
 		{
 			var task = new TaskCompletionSource<Log>();
@@ -598,7 +599,7 @@ namespace KryBot.Functional
 			return task.Task.Result;
 		}
 
-		public static string SteamGiftsLoadWishListGiveaways(Bot bot, List<SteamGifts.SgGiveaway> giveaways)
+		public static string SteamGiftsLoadWishListGiveaways(Bot bot, List<SteamGiftsGiveaway> giveaways)
 		{
 			var nodesCount = 0;
 			var pages = 1;
@@ -657,7 +658,7 @@ namespace KryBot.Functional
 				$"{GetDateTime()} {{SteamGifts}} {strings.ParseLoadGiveaways_FoundGiveAwaysInWishList}: {nodesCount}\n";
 		}
 
-		public static string SteamGiftsLoadGroupGiveaways(Bot bot, List<SteamGifts.SgGiveaway> giveaways)
+		public static string SteamGiftsLoadGroupGiveaways(Bot bot, List<SteamGiftsGiveaway> giveaways)
 		{
 			var nodesCount = 0;
 
@@ -720,7 +721,7 @@ namespace KryBot.Functional
 		}
 
 		private static void SteamGiftsAddGiveaways(HtmlNodeCollection nodes, Bot bot,
-			List<SteamGifts.SgGiveaway> giveaways)
+			List<SteamGiftsGiveaway> giveaways)
 		{
 			if (nodes != null)
 			{
@@ -731,7 +732,7 @@ namespace KryBot.Functional
 					var storeId = node.SelectSingleNode(".//a[@class='giveaway__icon']");
 					if (name != null && link != null && storeId != null)
 					{
-						var sgGiveaway = new SteamGifts.SgGiveaway
+						var sgGiveaway = new SteamGiftsGiveaway
 						{
 							Name = name.InnerText,
 							Link = link.Attributes["href"].Value,
@@ -767,7 +768,7 @@ namespace KryBot.Functional
 			}
 		}
 
-		public static SteamGifts.SgGiveaway SteamGiftsGetJoinData(SteamGifts.SgGiveaway sgGiveaway, Bot bot)
+		public static SteamGiftsGiveaway SteamGiftsGetJoinData(SteamGiftsGiveaway sgGiveaway, Bot bot)
 		{
 			var response = Web.Get("https://www.steamgifts.com", sgGiveaway.Link,
 				new List<Parameter>(), Generate.Cookies_SteamGifts(bot), new List<HttpHeader>());
@@ -871,8 +872,8 @@ namespace KryBot.Functional
 			return task.Task.Result;
 		}
 
-		public static Log SteamCompanionLoadGiveaways(Bot bot, List<SteamCompanion.ScGiveaway> giveaways,
-			List<SteamCompanion.ScGiveaway> wishlistGiveaways, Blacklist blackList)
+		public static Log SteamCompanionLoadGiveaways(Bot bot, List<SteamCompanionGiveaway> giveaways,
+			List<SteamCompanionGiveaway> wishlistGiveaways, Blacklist blackList)
 		{
 			var content = "";
 			giveaways?.Clear();
@@ -957,7 +958,7 @@ namespace KryBot.Functional
 		}
 
 		public static async Task<Log> SteamCompanionLoadGiveawaysAsync(Bot bot,
-			List<SteamCompanion.ScGiveaway> giveaways, List<SteamCompanion.ScGiveaway> wishlistGiveaways,
+			List<SteamCompanionGiveaway> giveaways, List<SteamCompanionGiveaway> wishlistGiveaways,
 			Blacklist blackList)
 		{
 			var task = new TaskCompletionSource<Log>();
@@ -971,7 +972,7 @@ namespace KryBot.Functional
 		}
 
 		public static string SteamCompanionLoadWishListGiveaways(Bot bot,
-			List<SteamCompanion.ScGiveaway> giveaways)
+			List<SteamCompanionGiveaway> giveaways)
 		{
 			var count = 0;
 			var pages = 1;
@@ -1015,7 +1016,7 @@ namespace KryBot.Functional
 		}
 
 		public static string SteamCompanionLoadContributorsGiveaways(Bot bot,
-			List<SteamCompanion.ScGiveaway> giveaways)
+			List<SteamCompanionGiveaway> giveaways)
 		{
 			var count = 0;
 			var pages = 1;
@@ -1058,7 +1059,7 @@ namespace KryBot.Functional
 				$"{GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_Found} {(giveaways.Count == 0 ? 0 : count)} {strings.ParseLoadGiveaways__ContributorsIn} {pages} {strings.ParseLoadGiveaways_Pages}\n";
 		}
 
-		public static string SteamCompanionLoadGroupGiveaways(Bot bot, List<SteamCompanion.ScGiveaway> giveaways)
+		public static string SteamCompanionLoadGroupGiveaways(Bot bot, List<SteamCompanionGiveaway> giveaways)
 		{
 			var count = 0;
 			var pages = 1;
@@ -1114,7 +1115,7 @@ namespace KryBot.Functional
 		}
 
 		private static void SteamCompanionAddGiveaways(HtmlNodeCollection nodes, Bot bot,
-			List<SteamCompanion.ScGiveaway> giveaways)
+			List<SteamCompanionGiveaway> giveaways)
 		{
 			if (nodes != null)
 			{
@@ -1127,7 +1128,7 @@ namespace KryBot.Functional
 
 					if (price != null && name != null)
 					{
-						var scGiveaway = new SteamCompanion.ScGiveaway
+						var scGiveaway = new SteamCompanionGiveaway
 						{
 							Name = name.InnerText,
 							Price = int.Parse(price.InnerText.Replace("p)", "").Split('(')[
@@ -1154,7 +1155,7 @@ namespace KryBot.Functional
 			}
 		}
 
-		public static Log SteamCompanionGetJoinData(SteamCompanion.ScGiveaway scGiveaway, Bot bot)
+		public static Log SteamCompanionGetJoinData(SteamCompanionGiveaway scGiveaway, Bot bot)
 		{
 			var response = Web.Get(scGiveaway.Link, "",
 				new List<Parameter>(), Generate.Cookies_SteamCompanion(bot),
@@ -1288,7 +1289,7 @@ namespace KryBot.Functional
 			return task.Task.Result;
 		}
 
-		public static Log SteamPortalLoadGiveaways(Bot bot, List<SteamPortal.SpGiveaway> giveaways,
+		public static Log SteamPortalLoadGiveaways(Bot bot, List<SteamPortalGiveaway> giveaways,
 			Blacklist blackList)
 		{
 			giveaways?.Clear();
@@ -1374,7 +1375,7 @@ namespace KryBot.Functional
 		}
 
 		public static async Task<Log> SteamPortalLoadGiveawaysAsync(Bot bot,
-			List<SteamPortal.SpGiveaway> giveaways, Blacklist blackList)
+			List<SteamPortalGiveaway> giveaways, Blacklist blackList)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -1387,7 +1388,7 @@ namespace KryBot.Functional
 		}
 
 		private static void SteamPortalAddGiveaways(HtmlNodeCollection nodes, Bot bot,
-			List<SteamPortal.SpGiveaway> giveaways)
+			List<SteamPortalGiveaway> giveaways)
 		{
 			if (nodes != null)
 			{
@@ -1397,7 +1398,7 @@ namespace KryBot.Functional
 					var storeId = node.SelectSingleNode(".//a[@class='steam-icon']");
 					if (name != null && storeId != null)
 					{
-						var spGiveaway = new SteamPortal.SpGiveaway
+						var spGiveaway = new SteamPortalGiveaway
 						{
 							Name = name.InnerText,
 							StoreId = storeId.Attributes["href"].Value.Split('/')[4]
@@ -1470,7 +1471,7 @@ namespace KryBot.Functional
 			return task.Task.Result;
 		}
 
-		public static Log SteamTradeLoadGiveaways(Bot bot, List<SteamTrade.StGiveaway> giveaways,
+		public static Log SteamTradeLoadGiveaways(Bot bot, List<SteamTradeGiveaway> giveaways,
 			Blacklist blackList)
 		{
 			giveaways?.Clear();
@@ -1516,7 +1517,7 @@ namespace KryBot.Functional
 		}
 
 		public static async Task<Log> SteamTradeLoadGiveawaysAsync(Bot bot,
-			List<SteamTrade.StGiveaway> giveaways, Blacklist blackList)
+			List<SteamTradeGiveaway> giveaways, Blacklist blackList)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -1528,7 +1529,7 @@ namespace KryBot.Functional
 			return task.Task.Result;
 		}
 
-		private static void SteamTradeAddGiveaways(HtmlNodeCollection nodes, List<SteamTrade.StGiveaway> giveaways)
+		private static void SteamTradeAddGiveaways(HtmlNodeCollection nodes, List<SteamTradeGiveaway> giveaways)
 		{
 			if (nodes != null)
 			{
@@ -1541,7 +1542,7 @@ namespace KryBot.Functional
 						var storeId = node.SelectSingleNode(".//td[1]/a[1]");
 						if (name != null && link != null && storeId != null)
 						{
-							var spGiveaway = new SteamTrade.StGiveaway
+							var spGiveaway = new SteamTradeGiveaway
 							{
 								Name = node.SelectSingleNode(".//td[1]/a[2]").InnerText,
 								Link = node.SelectSingleNode(".//td[1]/a[2]").Attributes["href"].Value,
@@ -1554,7 +1555,7 @@ namespace KryBot.Functional
 			}
 		}
 
-		public static SteamTrade.StGiveaway SteamTradeGetJoinData(SteamTrade.StGiveaway stGiveaway, Bot bot)
+		public static SteamTradeGiveaway SteamTradeGetJoinData(SteamTradeGiveaway stGiveaway, Bot bot)
 		{
 			var response = Web.Get("http://steamtrade.info", stGiveaway.Link,
 				new List<Parameter>(), Generate.Cookies_SteamTrade(bot),
@@ -1615,7 +1616,7 @@ namespace KryBot.Functional
 			return task.Task.Result;
 		}
 
-		public static Log PlayBlinkLoadGiveaways(Bot bot, List<PlayBlink.PbGiveaway> giveaways,
+		public static Log PlayBlinkLoadGiveaways(Bot bot, List<PlayBlinkGiveaway> giveaways,
 			Blacklist blackList)
 		{
 			giveaways?.Clear();
@@ -1662,7 +1663,7 @@ namespace KryBot.Functional
 		}
 
 		public static async Task<Log> PlayBlinkLoadGiveawaysAsync(Bot bot,
-			List<PlayBlink.PbGiveaway> giveaways, Blacklist blackList)
+			List<PlayBlinkGiveaway> giveaways, Blacklist blackList)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -1674,7 +1675,7 @@ namespace KryBot.Functional
 			return task.Task.Result;
 		}
 
-		private static void PlayBlinkAddGiveaways(HtmlNodeCollection nodes, List<PlayBlink.PbGiveaway> giveaways)
+		private static void PlayBlinkAddGiveaways(HtmlNodeCollection nodes, List<PlayBlinkGiveaway> giveaways)
 		{
 			if (nodes != null)
 			{
@@ -1688,7 +1689,7 @@ namespace KryBot.Functional
 						var id = node.SelectSingleNode(".//a[@class='blink button blue']");
 						if (level != null && name != null && storeId != null && id != null)
 						{
-							var pbGiveaway = new PlayBlink.PbGiveaway
+							var pbGiveaway = new PlayBlinkGiveaway
 							{
 								Level = int.Parse(level.InnerText.Replace("L", "")),
 								Name = name.InnerText,

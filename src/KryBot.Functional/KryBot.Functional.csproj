@@ -63,6 +63,14 @@
     <Compile Include="Bot.cs" />
     <Compile Include="Classes.cs" />
     <Compile Include="Generate.cs" />
+    <Compile Include="Giveaways\BaseGiveaway.cs" />
+    <Compile Include="Giveaways\GameAwaysGiveaway.cs" />
+    <Compile Include="Giveaways\GameMinerGiveaway.cs" />
+    <Compile Include="Giveaways\PlayBlinkGiveaway.cs" />
+    <Compile Include="Giveaways\SteamCompanionGiveaway.cs" />
+    <Compile Include="Giveaways\SteamGiftsGiveaway.cs" />
+    <Compile Include="Giveaways\SteamPortalGiveaway.cs" />
+    <Compile Include="Giveaways\SteamTradeGiveaway.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="Parse.cs" />

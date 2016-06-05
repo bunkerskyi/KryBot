@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using KryBot.Functional.Giveaways;
 using RestSharp;
 using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
@@ -11,7 +12,7 @@ namespace KryBot.Functional.Sites
 		public GameAways()
 		{
 			Cookies = new GaCookies();
-			Giveaways = new List<GaGiveaway>();
+			Giveaways = new List<GameAwaysGiveaway>();
 		}
 
 		public bool Enabled { get; set; }
@@ -19,7 +20,7 @@ namespace KryBot.Functional.Sites
 		public int JoinPointsLimit { get; set; } = 10000;
 		public int PointsReserv { get; set; }
 		public GaCookies Cookies { get; set; }
-		public List<GaGiveaway> Giveaways { get; set; }
+		public List<GameAwaysGiveaway> Giveaways { get; set; }
 
 		public Log CheckLogin()
 		{
@@ -57,14 +58,6 @@ namespace KryBot.Functional.Sites
 			public string SessionId { get; set; }
 		}
 
-		public class GaGiveaway
-		{
-			public string Name { get; set; }
-			public string StoreId { get; set; }
-			public string Id { get; set; }
-			public int Price { get; set; }
-			public bool IsGroup { get; set; }
-		}
 
 		#region Web
 

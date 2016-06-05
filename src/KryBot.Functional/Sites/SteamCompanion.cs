@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using KryBot.Functional.Giveaways;
 
 namespace KryBot.Functional.Sites
 {
@@ -7,8 +8,8 @@ namespace KryBot.Functional.Sites
 		public SteamCompanion()
 		{
 			Cookies = new ScCookies();
-			Giveaways = new List<ScGiveaway>();
-			WishlistGiveaways = new List<ScGiveaway>();
+			Giveaways = new List<SteamCompanionGiveaway>();
+			WishlistGiveaways = new List<SteamCompanionGiveaway>();
 		}
 
 		public bool Enabled { get; set; }
@@ -22,8 +23,8 @@ namespace KryBot.Functional.Sites
 		public int JoinPointLimit { get; set; } = 1500;
 		public int PointsReserv { get; set; }
 		public ScCookies Cookies { get; set; }
-		public List<ScGiveaway> Giveaways { get; set; }
-		public List<ScGiveaway> WishlistGiveaways { get; set; }
+		public List<SteamCompanionGiveaway> Giveaways { get; set; }
+		public List<SteamCompanionGiveaway> WishlistGiveaways { get; set; }
 
 		public class ScCookies
 		{
@@ -31,16 +32,6 @@ namespace KryBot.Functional.Sites
 			public string UserId { get; set; }
 			public string UserC { get; set; }
 			public string UserT { get; set; }
-		}
-
-		public class ScGiveaway
-		{
-			public string Name { get; set; }
-			public string StoreId { get; set; }
-			public int Price { get; set; }
-			public string Code { get; set; }
-			public string Link { get; set; }
-			public bool Region { get; set; }
 		}
 
 		public void Logout()
