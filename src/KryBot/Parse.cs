@@ -92,7 +92,7 @@ namespace KryBot
         private static Log GameMinerGetProfile(Bot bot)
         {
             var response = Web.Get("http://gameminer.net/", "", new List<Parameter>(),
-                Generate.Cookies_GameMiner(bot), new List<HttpHeader>(), bot.GameMiner.UserAgent);
+                Generate.Cookies_GameMiner(bot), new List<HttpHeader>(), bot.UserAgent);
 
             if (response.RestResponse.Content != "")
             {
@@ -132,7 +132,7 @@ namespace KryBot
         private static Log GameMinerWonParse(Bot bot)
         {
             var response = Web.Get("http://gameminer.net/", "giveaways/won", new List<Parameter>(),
-                Generate.Cookies_GameMiner(bot), new List<HttpHeader>(), bot.GameMiner.UserAgent);
+                Generate.Cookies_GameMiner(bot), new List<HttpHeader>(), bot.UserAgent);
 
             if (response.RestResponse.Content != "")
             {
@@ -189,7 +189,7 @@ namespace KryBot
                     "/api/giveaways/golden?page=1&count=10&q=&type=regular&enter_price=on&sortby=finish&order=asc&filter_entered=on",
                     new List<Parameter>(),
                     Generate.Cookies_GameMiner(bot),
-                    new List<HttpHeader>(), bot.GameMiner.UserAgent);
+                    new List<HttpHeader>(), bot.UserAgent);
 
                 if (goldenFreesResponse.RestResponse.Content != "")
                 {
@@ -213,7 +213,7 @@ namespace KryBot
                                 new List<Parameter>(),
                                 Generate.Cookies_GameMiner(bot),
                                 new List<HttpHeader>(),
-                                bot.GameMiner.UserAgent);
+                                bot.UserAgent);
                             goldenFreeJsonResponse =
                                 JsonConvert.DeserializeObject<GameMiner.JsonRootObject>(
                                     goldenFreesResponse.RestResponse.Content);
@@ -230,7 +230,7 @@ namespace KryBot
                     $"/api/giveaways/coal?page=1&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
                     new List<Parameter>(),
                     Generate.Cookies_GameMiner(bot),
-                    new List<HttpHeader>(), bot.GameMiner.UserAgent);
+                    new List<HttpHeader>(), bot.UserAgent);
 
                 var regularJsonResponse =
                     JsonConvert.DeserializeObject<GameMiner.JsonRootObject>(
@@ -250,7 +250,7 @@ namespace KryBot
                             $"/api/giveaways/coal?page={i + 1}&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
                             new List<Parameter>(),
                             Generate.Cookies_GameMiner(bot),
-                            new List<HttpHeader>(), bot.GameMiner.UserAgent);
+                            new List<HttpHeader>(), bot.UserAgent);
 
                         var regularGiftJsonResponse =
                             JsonConvert.DeserializeObject<GameMiner.JsonRootObject>(
@@ -267,7 +267,7 @@ namespace KryBot
                     $"/api/giveaways/sandbox?page=1&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
                     new List<Parameter>(),
                     Generate.Cookies_GameMiner(bot),
-                    new List<HttpHeader>(), bot.GameMiner.UserAgent);
+                    new List<HttpHeader>(), bot.UserAgent);
 
                 if (sandboxGiftsResponse.RestResponse.Content != "")
                 {
@@ -291,7 +291,7 @@ namespace KryBot
                             $"/api/giveaways/sandbox?page={i + 1}&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
                             new List<Parameter>(),
                             Generate.Cookies_GameMiner(bot),
-                            new List<HttpHeader>(), bot.GameMiner.UserAgent);
+                            new List<HttpHeader>(), bot.UserAgent);
 
                         if (regularGiftsResponse.RestResponse.Content != "")
                         {
@@ -398,7 +398,7 @@ namespace KryBot
         private static Log SteamGiftsGetProfile(Bot bot)
         {
             var response = Web.Get("https://www.steamgifts.com/", "", new List<Parameter>(),
-                Generate.Cookies_SteamGifts(bot), new List<HttpHeader>());
+                Generate.Cookies_SteamGifts(bot), new List<HttpHeader>(), bot.UserAgent);
 
             if (response.RestResponse.Content != "")
             {

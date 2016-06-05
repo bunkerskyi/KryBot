@@ -208,7 +208,7 @@ namespace KryBot
             var response = Post("http://gameminer.net/",
                 "/giveaway/enter/" + gmGiveaway.Id + "?" + (gmGiveaway.IsSandbox ? "sandbox" : "coal") + "_page=" +
                 gmGiveaway.Page, Generate.PostData_GameMiner(bot.GameMiner.Cookies.Xsrf), new List<HttpHeader>(),
-                Generate.Cookies_GameMiner(bot), bot.GameMiner.UserAgent);
+                Generate.Cookies_GameMiner(bot), bot.UserAgent);
 
             if (response.RestResponse.Content != "")
             {
@@ -591,7 +591,7 @@ namespace KryBot
         {
             var response = Post("http://gameminer.net/account/sync", "",
                 Generate.SyncPostData_GameMiner(bot.GameMiner.Cookies.Xsrf), new List<HttpHeader>(),
-                Generate.Cookies_GameMiner(bot), bot.GameMiner.UserAgent);
+                Generate.Cookies_GameMiner(bot), bot.UserAgent);
 
             if (response.RestResponse.Content != "")
             {
