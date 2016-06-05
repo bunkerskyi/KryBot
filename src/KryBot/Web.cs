@@ -256,7 +256,7 @@ namespace KryBot
                 var response = Post("https://www.steamgifts.com/", "/ajax.php",
                     Generate.PostData_SteamGifts(sgGiveaway.Token, sgGiveaway.Code, "entry_insert"),
                     new List<HttpHeader>(),
-                    Generate.Cookies_SteamGifts(bot));
+                    Generate.Cookies_SteamGifts(bot), bot.UserAgent);
 
                 if (response.RestResponse.Content != null)
                 {
@@ -530,7 +530,7 @@ namespace KryBot
 
                     var response = Post("https://www.steamgifts.com/", "ajax.php",
                         Generate.PostData_SteamGifts(xsrfToken.Attributes["value"].Value, "", "sync"), headers,
-                        Generate.Cookies_SteamGifts(bot));
+                        Generate.Cookies_SteamGifts(bot), bot.UserAgent);
                     if (response != null)
                     {
                         var result =
