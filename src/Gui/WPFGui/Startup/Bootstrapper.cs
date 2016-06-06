@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Threading;
 using System.Windows;
-using System.Windows.Markup;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using Prism.Events;
-using Prism.Logging;
 using Prism.Modularity;
 using Prism.Regions;
 using Prism.Unity;
