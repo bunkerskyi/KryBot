@@ -205,18 +205,6 @@ namespace KryBot.Gui.WinFormsGui.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool FullLog {
-            get {
-                return ((bool)(this["FullLog"]));
-            }
-            set {
-                this["FullLog"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("600000")]
         public int TimerInterval {
             get {

@@ -32,7 +32,6 @@
 			this.tabPageCommun = new System.Windows.Forms.TabPage();
 			this.cbWishlistSort = new System.Windows.Forms.CheckBox();
 			this.btnDeleteCookies = new System.Windows.Forms.Button();
-			this.cbFullLog = new System.Windows.Forms.CheckBox();
 			this.cbFarmTip = new System.Windows.Forms.CheckBox();
 			this.cbWonTip = new System.Windows.Forms.CheckBox();
 			this.cbAutorun = new System.Windows.Forms.CheckBox();
@@ -134,7 +133,6 @@
 			// 
 			this.tabPageCommun.Controls.Add(this.cbWishlistSort);
 			this.tabPageCommun.Controls.Add(this.btnDeleteCookies);
-			this.tabPageCommun.Controls.Add(this.cbFullLog);
 			this.tabPageCommun.Controls.Add(this.cbFarmTip);
 			this.tabPageCommun.Controls.Add(this.cbWonTip);
 			this.tabPageCommun.Controls.Add(this.cbAutorun);
@@ -151,7 +149,7 @@
 			// cbWishlistSort
 			// 
 			this.cbWishlistSort.AutoSize = true;
-			this.cbWishlistSort.Location = new System.Drawing.Point(160, 117);
+			this.cbWishlistSort.Location = new System.Drawing.Point(160, 97);
 			this.cbWishlistSort.Name = "cbWishlistSort";
 			this.cbWishlistSort.Size = new System.Drawing.Size(144, 30);
 			this.cbWishlistSort.TabIndex = 8;
@@ -167,16 +165,6 @@
 			this.btnDeleteCookies.Text = "Удалить куки браузера";
 			this.btnDeleteCookies.UseVisualStyleBackColor = true;
 			this.btnDeleteCookies.Click += new System.EventHandler(this.btnDeleteCookies_Click);
-			// 
-			// cbFullLog
-			// 
-			this.cbFullLog.AutoSize = true;
-			this.cbFullLog.Location = new System.Drawing.Point(160, 97);
-			this.cbFullLog.Name = "cbFullLog";
-			this.cbFullLog.Size = new System.Drawing.Size(104, 17);
-			this.cbFullLog.TabIndex = 6;
-			this.cbFullLog.Text = "Подробный лог";
-			this.cbFullLog.UseVisualStyleBackColor = true;
 			// 
 			// cbFarmTip
 			// 
@@ -307,8 +295,8 @@
 			this.cbSortBy.FormattingEnabled = true;
 			this.cbSortBy.ItemHeight = 13;
 			this.cbSortBy.Items.AddRange(new object[] {
-			"дешевые",
-			"дорогие"});
+            "дешевые",
+            "дорогие"});
 			this.cbSortBy.Location = new System.Drawing.Point(225, 3);
 			this.cbSortBy.Name = "cbSortBy";
 			this.cbSortBy.Size = new System.Drawing.Size(79, 21);
@@ -475,10 +463,10 @@
 			// 
 			this.numSGLevel.Location = new System.Drawing.Point(183, 74);
 			this.numSGLevel.Maximum = new decimal(new int[] {
-			10,
-			0,
-			0,
-			0});
+            10,
+            0,
+            0,
+            0});
 			this.numSGLevel.Name = "numSGLevel";
 			this.numSGLevel.Size = new System.Drawing.Size(27, 20);
 			this.numSGLevel.TabIndex = 13;
@@ -849,7 +837,7 @@
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.сохранитьToolStripMenuItem});
+            this.сохранитьToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(317, 24);
@@ -964,7 +952,6 @@
 		private System.Windows.Forms.CheckBox cbSCAutojoin;
 		private System.Windows.Forms.CheckBox cbWonTip;
 		private System.Windows.Forms.CheckBox cbFarmTip;
-		private System.Windows.Forms.CheckBox cbFullLog;
 		private System.Windows.Forms.TabPage tabPageSteam;
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.CheckBox cbSGRegular;

@@ -1948,17 +1948,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                         var data = await Web.GameMinerJoinGiveawayAsync(Bot, giveaway);
                         if (data != null && data.Content != "\n")
                         {
-                            if (Properties.Settings.Default.FullLog)
-                            {
-                                WriteLog(data);
-                            }
-                            else
-                            {
-                                if (data.Color != Color.Yellow && data.Color != Color.Red)
-                                {
-                                    WriteLog(data);
-                                }
-                            }
+                            WriteLog(data);
                         }
                     }
                 }
@@ -1977,17 +1967,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                         var data = await Web.SteamGiftsJoinGiveawayAsync(Bot, giveaway);
                         if (data != null && data.Content != "\n")
                         {
-                            if (Properties.Settings.Default.FullLog)
-                            {
-                                WriteLog(data);
-                            }
-                            else
-                            {
-                                if (data.Color != Color.Yellow && data.Color != Color.Red)
-                                {
-                                    WriteLog(data);
-                                }
-                            }
+                            WriteLog(data);
                         }
                     }
                 }
@@ -1999,17 +1979,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                         var data = await Web.SteamGiftsJoinGiveawayAsync(Bot, giveaway);
                         if (data != null && data.Content != "\n")
                         {
-                            if (Properties.Settings.Default.FullLog)
-                            {
-                                WriteLog(data);
-                            }
-                            else
-                            {
-                                if (data.Color != Color.Yellow && data.Color != Color.Red)
-                                {
-                                    WriteLog(data);
-                                }
-                            }
+                            WriteLog(data);
                         }
                     }
                 }
@@ -2028,17 +1998,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                         var data = await Web.SteamCompanionJoinGiveawayAsync(Bot, giveaway);
                         if (data != null && data.Content != "\n")
                         {
-                            if (Properties.Settings.Default.FullLog)
-                            {
-                                WriteLog(data);
-                            }
-                            else
-                            {
-                                if (data.Color != Color.Yellow && data.Color != Color.Red)
-                                {
-                                    WriteLog(data);
-                                }
-                            }
+                            WriteLog(data);
                         }
                     }
                 }
@@ -2050,17 +2010,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                         var data = await Web.SteamCompanionJoinGiveawayAsync(Bot, giveaway);
                         if (data != null && data.Content != "\n")
                         {
-                            if (Properties.Settings.Default.FullLog)
-                            {
-                                WriteLog(data);
-                            }
-                            else
-                            {
-                                if (data.Color != Color.Yellow && data.Color != Color.Red)
-                                {
-                                    WriteLog(data);
-                                }
-                            }
+                            WriteLog(data);
                         }
                     }
                 }
@@ -2078,17 +2028,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     var data = await Web.SteamPortalJoinGiveawayAsync(Bot, giveaway);
                     if (data != null && data.Content != "\n")
                     {
-                        if (Properties.Settings.Default.FullLog)
-                        {
-                            WriteLog(data);
-                        }
-                        else
-                        {
-                            if (data.Color != Color.Yellow && data.Color != Color.Red)
-                            {
-                                WriteLog(data);
-                            }
-                        }
+                        WriteLog(data);
                     }
                 }
             }
@@ -2102,17 +2042,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 var data = await Web.SteamTradeJoinGiveawayAsync(Bot, giveaway);
                 if (data != null && data.Content != "\n")
                 {
-                    if (Properties.Settings.Default.FullLog)
-                    {
-                        WriteLog(data);
-                    }
-                    else
-                    {
-                        if (data.Color != Color.Yellow && data.Color != Color.Red)
-                        {
-                            WriteLog(data);
-                        }
-                    }
+                    WriteLog(data);
                 }
             }
             return true;
@@ -2129,22 +2059,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                         var data = await Web.PlayBlinkJoinGiveawayAsync(Bot, giveaway);
                         if (data != null && data.Content != "\n")
                         {
-                            if (Properties.Settings.Default.FullLog)
-                            {
-                                WriteLog(data);
-                            }
-                            else
-                            {
-                                if (data.Color != Color.Yellow && data.Color != Color.Red)
-                                {
-                                    WriteLog(data);
-                                }
-                            }
-
-                            //if (data.Content.Contains("Captcha"))
-                            //{
-                            //    break;
-                            //}
+                            WriteLog(data);
                         }
                     }
                 }
@@ -2154,10 +2069,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
         private void Message_TryLogin(string site)
         {
-            if (Properties.Settings.Default.FullLog)
-            {
-                WriteLog(new Log($"{Messages.GetDateTime()} {{{site}}} {strings.TryLogin}", Color.White, true, true));
-            }
+            WriteLog(new Log($"{Messages.GetDateTime()} {{{site}}} {strings.TryLogin}", Color.White, true, true));
         }
 
         private void SetStatusPanel(string text, Image image)

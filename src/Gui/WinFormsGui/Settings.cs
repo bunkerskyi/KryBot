@@ -25,8 +25,6 @@ namespace KryBot.Gui.WinFormsGui
 
 		public bool ShowFarmTip { get; set; }
 
-		public bool FullLog { get; set; }
-
 		public bool WishlistSort { get; set; }
 
 		public int TimerInterval { get; set; }
@@ -57,7 +55,6 @@ namespace KryBot.Gui.WinFormsGui
 			Properties.Settings.Default.TimerInterval = settings.TimerInterval;
 			Properties.Settings.Default.TimerLoops = settings.TimerLoops;
 			Properties.Settings.Default.LogActive = settings.IsLogActive;
-			Properties.Settings.Default.FullLog = settings.FullLog;
 			Properties.Settings.Default.WishlistNotSort = settings.WishlistSort;
 			Properties.Settings.Default.Lang = settings.Lang;
 			Properties.Settings.Default.ShowFarmTip = settings.ShowFarmTip;
@@ -71,7 +68,6 @@ namespace KryBot.Gui.WinFormsGui
 			{
 				Lang = Properties.Settings.Default.Lang,
 				IsLogActive = Properties.Settings.Default.LogActive,
-				FullLog = Properties.Settings.Default.FullLog,
 				Timer = Properties.Settings.Default.Timer,
 				TimerInterval = Properties.Settings.Default.TimerInterval,
 				TimerLoops = Properties.Settings.Default.TimerLoops,

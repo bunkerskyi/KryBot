@@ -96,7 +96,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             cbAutorun.Checked = Properties.Settings.Default.Autorun;
             cbWonTip.Checked = Properties.Settings.Default.ShowWonTip;
             cbFarmTip.Checked = Properties.Settings.Default.ShowFarmTip;
-            cbFullLog.Checked = Properties.Settings.Default.FullLog;
             cbWishlistSort.Checked = Properties.Settings.Default.WishlistNotSort;
         }
 
@@ -171,7 +170,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             Properties.Settings.Default.Autorun = cbAutorun.Checked;
             Properties.Settings.Default.ShowWonTip = cbWonTip.Checked;
             Properties.Settings.Default.ShowFarmTip = cbFarmTip.Checked;
-            Properties.Settings.Default.FullLog = cbFullLog.Checked;
             Properties.Settings.Default.WishlistNotSort = cbWishlistSort.Checked;
 
             _bot.Save();
