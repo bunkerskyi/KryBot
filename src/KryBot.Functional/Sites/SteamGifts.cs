@@ -28,6 +28,12 @@ namespace KryBot.Functional.Sites
 		public List<SteamGiftsGiveaway> Giveaways { get; set; }
 		public List<SteamGiftsGiveaway> WishlistGiveaways { get; set; }
 
+		public void Logout()
+		{
+			Cookies = new SteamGiftsCookie();
+			Enabled = false;
+		}
+
 		public class JsonResponseJoin
 		{
 			public string Type { get; set; }
@@ -39,12 +45,6 @@ namespace KryBot.Functional.Sites
 		{
 			public string Type { get; set; }
 			public string Msg { get; set; }
-		}
-
-		public void Logout()
-		{
-			Cookies = new SteamGiftsCookie();
-			Enabled = false;
 		}
 	}
 }

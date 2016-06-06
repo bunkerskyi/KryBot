@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using KryBot.Functional.Properties;
 using RestSharp;
 
 namespace KryBot.Functional
 {
-	public class Generate
+	public static class Generate
 	{
 		// Steam //
 		public static CookieContainer Cookies_Steam(Bot bot)
@@ -61,8 +62,8 @@ namespace KryBot.Functional
 			if (bot.GameMiner.Cookies.Xsrf != null)
 				cookie.Add(new Cookie("_xsrf", bot.GameMiner.Cookies.Xsrf) {Domain = target.Host});
 
-			if (Properties.Settings.Default.Lang != null)
-				cookie.Add(new Cookie("lang", Properties.Settings.Default.Lang) {Domain = target.Host});
+			if (Settings.Default.Lang != null)
+				cookie.Add(new Cookie("lang", Settings.Default.Lang) {Domain = target.Host});
 			return cookie;
 		}
 

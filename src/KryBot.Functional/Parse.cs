@@ -12,14 +12,12 @@ using KryBot.CommonResources.lang;
 using KryBot.Functional.Giveaways;
 using KryBot.Functional.Sites;
 using RestSharp;
-using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 using static KryBot.Functional.Messages;
 
 namespace KryBot.Functional
 {
 	public static class Parse
 	{
-
 		#region Steam
 
 		private static Log SteamGetProfile(Bot bot)
@@ -65,7 +63,7 @@ namespace KryBot.Functional
 				await
 					Web.GetAsync($"{profileLink}games?tab=all&xml=1", new List<Parameter>(), new CookieContainer(),
 						new List<HttpHeader>(), "");
-			var serializer = new XmlSerializer(typeof (Classes.ProfileGamesList));
+			var serializer = new XmlSerializer(typeof(Classes.ProfileGamesList));
 			TextReader reader = new StringReader(responseXmlProfile.RestResponse.Content);
 			var games = (Classes.ProfileGamesList) serializer.Deserialize(reader);
 			return games;
@@ -190,7 +188,7 @@ namespace KryBot.Functional
 			if (bot.GameMiner.FreeGolden)
 			{
 				var goldenFreesResponse = Web.Get($"{Links.GameMiner}" +
-					"api/giveaways/golden?page=1&count=10&q=&type=regular&enter_price=on&sortby=finish&order=asc&filter_entered=on",
+				                                  "api/giveaways/golden?page=1&count=10&q=&type=regular&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 					new List<Parameter>(),
 					Generate.Cookies_GameMiner(bot),
 					new List<HttpHeader>(), bot.GameMiner.UserAgent);
@@ -213,7 +211,7 @@ namespace KryBot.Functional
 						for (var i = 1; i < pages + 1; i++)
 						{
 							goldenFreesResponse = Web.Get($"{Links.GameMiner}" +
-								$"/api/giveaways/golden?page={i + 1}&count=10&q=&type=regular&enter_price=on&sortby=finish&order=asc&filter_entered=on",
+							                              $"/api/giveaways/golden?page={i + 1}&count=10&q=&type=regular&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 								new List<Parameter>(),
 								Generate.Cookies_GameMiner(bot),
 								new List<HttpHeader>(),
@@ -231,7 +229,7 @@ namespace KryBot.Functional
 			if (bot.GameMiner.Regular)
 			{
 				var regularResponse = Web.Get($"{Links.GameMiner}" +
-					$"api/giveaways/coal?page=1&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
+				                              $"api/giveaways/coal?page=1&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 					new List<Parameter>(),
 					Generate.Cookies_GameMiner(bot),
 					new List<HttpHeader>(), bot.GameMiner.UserAgent);
@@ -251,7 +249,7 @@ namespace KryBot.Functional
 					for (var i = 1; i < pages + 1; i++)
 					{
 						var regularGiftsResponse = Web.Get($"{Links.GameMiner}" +
-							$"api/giveaways/coal?page={i + 1}&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
+						                                   $"api/giveaways/coal?page={i + 1}&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 							new List<Parameter>(),
 							Generate.Cookies_GameMiner(bot),
 							new List<HttpHeader>(), bot.GameMiner.UserAgent);
@@ -268,7 +266,7 @@ namespace KryBot.Functional
 			if (bot.GameMiner.Sandbox)
 			{
 				var sandboxGiftsResponse = Web.Get($"{Links.GameMiner}" +
-					$"api/giveaways/sandbox?page=1&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
+				                                   $"api/giveaways/sandbox?page=1&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 					new List<Parameter>(),
 					Generate.Cookies_GameMiner(bot),
 					new List<HttpHeader>(), bot.GameMiner.UserAgent);
@@ -292,7 +290,7 @@ namespace KryBot.Functional
 					for (var i = 1; i < pages + 1; i++)
 					{
 						var regularGiftsResponse = Web.Get($"{Links.GameMiner}" +
-							$"api/giveaways/sandbox?page={i + 1}&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
+						                                   $"api/giveaways/sandbox?page={i + 1}&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 							new List<Parameter>(),
 							Generate.Cookies_GameMiner(bot),
 							new List<HttpHeader>(), bot.GameMiner.UserAgent);
@@ -874,7 +872,8 @@ namespace KryBot.Functional
 				{
 					var response = Web.Get(Links.SteamCompanion,
 						new List<Parameter>(),
-						Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(), i == 0 ? "/gifts/search/?type=public" : "/gifts/search.php?page=" + (i + 1) + "&type=public");
+						Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(),
+						i == 0 ? "/gifts/search/?type=public" : "/gifts/search.php?page=" + (i + 1) + "&type=public");
 
 					if (response.RestResponse.Content != null)
 					{
@@ -952,7 +951,8 @@ namespace KryBot.Functional
 			{
 				var response = Web.Get(Links.SteamCompanion,
 					new List<Parameter>(),
-					Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(), i == 0 ? "/gifts/search/?wishlist=true" : "/gifts/search/?wishlist=true&page=" + (i + 1));
+					Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(),
+					i == 0 ? "/gifts/search/?wishlist=true" : "/gifts/search/?wishlist=true&page=" + (i + 1));
 
 				if (response.RestResponse.Content != null)
 				{
@@ -995,7 +995,8 @@ namespace KryBot.Functional
 			{
 				var response = Web.Get(Links.SteamCompanion,
 					new List<Parameter>(),
-					Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(), i == 0 ? "/gifts/search/?type=contributor" : "/gifts/search/?type=contributor&page=" + (i + 1));
+					Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(),
+					i == 0 ? "/gifts/search/?type=contributor" : "/gifts/search/?type=contributor&page=" + (i + 1));
 
 				if (response.RestResponse.Content != null)
 				{
@@ -1037,7 +1038,8 @@ namespace KryBot.Functional
 			{
 				var response = Web.Get(Links.SteamCompanion,
 					new List<Parameter>(),
-					Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(), i == 0 ? "/gifts/search/?type=group" : "/gifts/search/?type=group&page=" + (i + 1));
+					Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(),
+					i == 0 ? "/gifts/search/?type=group" : "/gifts/search/?type=group&page=" + (i + 1));
 
 				if (response.RestResponse.Content != null)
 				{
@@ -1603,7 +1605,6 @@ namespace KryBot.Functional
 				}
 
 				RemoveBlacklistedGames(giveaways, blackList);
-
 			}
 			return
 				new Log(
@@ -1612,7 +1613,7 @@ namespace KryBot.Functional
 		}
 
 		/// <summary>
-		/// Remove all blacklisted games from list of <paramref name="giveaways"/>.
+		///     Remove all blacklisted games from list of <paramref name="giveaways" />.
 		/// </summary>
 		/// <param name="giveaways"> List of Giweways. </param>
 		/// <param name="blackList"> Blacklisted games. </param>

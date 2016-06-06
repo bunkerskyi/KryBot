@@ -4,11 +4,11 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Exceptionless.Json;
+using HtmlAgilityPack;
 using KryBot.CommonResources.lang;
 using KryBot.Functional.Giveaways;
 using KryBot.Functional.Sites;
 using RestSharp;
-using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 namespace KryBot.Functional
 {
@@ -134,9 +134,11 @@ namespace KryBot.Functional
 		private static Log GameMinerJoinGiveaway(Bot bot, GameMinerGiveaway gmGiveaway)
 		{
 			Thread.Sleep(requestInterval);
-			var response = Post($"{Links.GameMiner}giveaway/enter/{gmGiveaway.Id}?{(gmGiveaway.IsSandbox ? "sandbox" : "coal")}_page={gmGiveaway.Page}", 
-				Generate.PostData_GameMiner(bot.GameMiner.Cookies.Xsrf), new List<HttpHeader>(),
-				Generate.Cookies_GameMiner(bot), bot.GameMiner.UserAgent);
+			var response =
+				Post(
+					$"{Links.GameMiner}giveaway/enter/{gmGiveaway.Id}?{(gmGiveaway.IsSandbox ? "sandbox" : "coal")}_page={gmGiveaway.Page}",
+					Generate.PostData_GameMiner(bot.GameMiner.Cookies.Xsrf), new List<HttpHeader>(),
+					Generate.Cookies_GameMiner(bot), bot.GameMiner.UserAgent);
 
 			if (response.RestResponse.Content != "")
 			{

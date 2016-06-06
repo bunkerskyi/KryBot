@@ -20,6 +20,12 @@ namespace KryBot.Functional.Sites
 		public SteamPortalCookie Cookies { get; set; }
 		public List<SteamPortalGiveaway> Giveaways { get; set; }
 
+		public void Logout()
+		{
+			Cookies = new SteamPortalCookie();
+			Enabled = false;
+		}
+
 		public class JsonJoin
 		{
 			public int Error { get; set; }
@@ -29,12 +35,6 @@ namespace KryBot.Functional.Sites
 		public class TargetH
 		{
 			public int my_coins { get; set; }
-		}
-
-		public void Logout()
-		{
-			Cookies = new SteamPortalCookie();
-			Enabled = false;
 		}
 	}
 }

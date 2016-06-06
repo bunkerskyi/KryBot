@@ -26,6 +26,13 @@ namespace KryBot.Functional.Sites
 		public GameMinerCookie Cookies { get; set; }
 		public List<GameMinerGiveaway> Giveaways { get; set; }
 
+		public void Logout()
+		{
+			Cookies = new GameMinerCookie();
+			UserAgent = "";
+			Enabled = false;
+		}
+
 		public class JsonProperties
 		{
 			public string RankColor { get; set; }
@@ -116,13 +123,6 @@ namespace KryBot.Functional.Sites
 		public class JsonResponseError
 		{
 			public JsonResponseErrorDetail Error { get; set; }
-		}
-
-		public void Logout()
-		{
-			Cookies = new GameMinerCookie();
-			UserAgent = "";
-			Enabled = false;
 		}
 	}
 }

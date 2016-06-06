@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Exceptionless.Json;
 using KryBot.CommonResources.lang;
+using KryBot.Functional.Properties;
 
 namespace KryBot.Functional
 {
-	public class Updater
+	public static class Updater
 	{
 		public static async Task<Log> CheckForUpdates()
 		{
-			var json = await Web.GetVersionInGitHubAsync(Properties.Settings.Default.GitHubRepoReleaseUrl);
+			var json = await Web.GetVersionInGitHubAsync(Settings.Default.GitHubRepoReleaseUrl);
 
 			if (json != "")
 			{
@@ -77,7 +78,7 @@ namespace KryBot.Functional
 				}
 			}
 
-			var json = await Web.GetVersionInGitHubAsync(Properties.Settings.Default.GitHubRepoReleaseUrl);
+			var json = await Web.GetVersionInGitHubAsync(Settings.Default.GitHubRepoReleaseUrl);
 
 			Classes.GitHubRelease release;
 			try

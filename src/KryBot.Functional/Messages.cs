@@ -2,10 +2,11 @@
 using System.Drawing;
 using System.Windows.Forms;
 using KryBot.CommonResources.lang;
+using KryBot.Functional.Properties;
 
 namespace KryBot.Functional
 {
-	public class Messages
+	public static class Messages
 	{
 		public static Log Start()
 		{
@@ -30,11 +31,6 @@ namespace KryBot.Functional
 			return new Log($"{GetDateTime()} {strings.LoadProfile_Load}");
 		}
 
-		public static Log DllNotFount(string name)
-		{
-			return new Log($"{GetDateTime()} {strings.DllNotLoad} \"{name}\" {strings.DllNotLoad_1}");
-		}
-
 		public static Log DoFarm_Start()
 		{
 			return new Log($"{GetDateTime()} {strings.Start}");
@@ -47,9 +43,9 @@ namespace KryBot.Functional
 
 		public static Log GiveawayJoined(string site, string name, int price, int points, int level)
 		{
-			Properties.Settings.Default.JoinsPerSession += 1;
-			Properties.Settings.Default.JoinsTotal += 1;
-			Properties.Settings.Default.Save();
+			Settings.Default.JoinsPerSession += 1;
+			Settings.Default.JoinsTotal += 1;
+			Settings.Default.Save();
 
 			if (level > 0)
 			{

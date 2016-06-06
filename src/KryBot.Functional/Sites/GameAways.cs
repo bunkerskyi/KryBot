@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using HtmlAgilityPack;
 using KryBot.Functional.Cookies;
 using KryBot.Functional.Giveaways;
 using RestSharp;
-using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 namespace KryBot.Functional.Sites
 {
