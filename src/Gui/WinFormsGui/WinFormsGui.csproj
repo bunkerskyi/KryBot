@@ -269,13 +269,13 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\KryBot.Functional\KryBot.Functional.csproj">
-      <Project>{f7d47659-0a64-4b26-9e93-45fdea8ecb07}</Project>
-      <Name>KryBot.Functional</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\KryBot.CommonResources\KryBot.CommonResources.csproj">
       <Project>{8fd581bc-1678-4559-86f8-9c100c863c10}</Project>
       <Name>KryBot.CommonResources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\KryBot.Core\KryBot.Core.csproj">
+      <Project>{f7d47659-0a64-4b26-9e93-45fdea8ecb07}</Project>
+      <Name>KryBot.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

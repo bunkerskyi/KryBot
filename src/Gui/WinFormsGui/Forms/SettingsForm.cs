@@ -5,7 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 using KryBot.CommonResources.lang;
-using KryBot.Functional;
+using KryBot.Core;
 using KryBot.Gui.WinFormsGui.Properties;
 
 namespace KryBot.Gui.WinFormsGui.Forms

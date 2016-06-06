@@ -3,7 +3,7 @@ using System.Net;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using KryBot.Functional;
+using KryBot.Core;
 using KryBot.Gui.WinFormsGui.Properties;
 using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 

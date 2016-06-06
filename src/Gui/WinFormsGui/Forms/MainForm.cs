@@ -7,8 +7,8 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KryBot.CommonResources.lang;
-using KryBot.Functional;
-using KryBot.Functional.Giveaways;
+using KryBot.Core;
+using KryBot.Core.Giveaways;
 using KryBot.Gui.WinFormsGui.Properties;
 using RestSharp;
 

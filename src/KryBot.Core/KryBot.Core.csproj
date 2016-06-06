@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F7D47659-0A64-4B26-9E93-45FDEA8ECB07}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KryBot.Core</RootNamespace>
+    <AssemblyName>KryBot.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Exceptionless.Portable, Version=3.5.1738.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Exceptionless.Portable.3.5.1738\lib\net45\Exceptionless.Portable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Interop.IWshRuntimeLibrary">
+      <HintPath>..\KryBot\obj\Debug\Interop.IWshRuntimeLibrary.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net45\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Blacklist.cs" />
+    <Compile Include="Bot.cs" />
+    <Compile Include="Classes.cs" />
+    <Compile Include="Cookies\BaseCookie.cs" />
+    <Compile Include="Cookies\GameAwaysCookie.cs" />
+    <Compile Include="Cookies\GameMinerCookie.cs" />
+    <Compile Include="Cookies\PlayBlinkCookie.cs" />
+    <Compile Include="Cookies\SteamCompanionCookie.cs" />
+    <Compile Include="Cookies\SteamCookie.cs" />
+    <Compile Include="Cookies\SteamGiftsCookie.cs" />
+    <Compile Include="Cookies\SteamPortalCookie.cs" />
+    <Compile Include="Cookies\SteamTradeCookie.cs" />
+    <Compile Include="Generate.cs" />
+    <Compile Include="Giveaways\BaseGiveaway.cs" />
+    <Compile Include="Giveaways\GameAwaysGiveaway.cs" />
+    <Compile Include="Giveaways\GameMinerGiveaway.cs" />
+    <Compile Include="Giveaways\PlayBlinkGiveaway.cs" />
+    <Compile Include="Giveaways\SteamCompanionGiveaway.cs" />
+    <Compile Include="Giveaways\SteamGiftsGiveaway.cs" />
+    <Compile Include="Giveaways\SteamPortalGiveaway.cs" />
+    <Compile Include="Giveaways\SteamTradeGiveaway.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="Messages.cs" />
+    <Compile Include="Parse.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <DependentUpon>Settings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Links.cs" />
+    <Compile Include="Sites\GameAways.cs" />
+    <Compile Include="Sites\GameMiner.cs" />
+    <Compile Include="Sites\PlayBlink.cs" />
+    <Compile Include="Sites\Steam.cs" />
+    <Compile Include="Sites\SteamCompanion.cs" />
+    <Compile Include="Sites\SteamGifts.cs" />
+    <Compile Include="Sites\SteamPortal.cs" />
+    <Compile Include="Sites\SteamTrade.cs" />
+    <Compile Include="Tools.cs" />
+    <Compile Include="Updater.cs" />
+    <Compile Include="Web.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KryBot.CommonResources\KryBot.CommonResources.csproj">
+      <Project>{8fd581bc-1678-4559-86f8-9c100c863c10}</Project>
+      <Name>KryBot.CommonResources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
