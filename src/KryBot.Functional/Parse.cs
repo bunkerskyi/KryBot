@@ -63,7 +63,7 @@ namespace KryBot.Functional
 		{
 			var responseXmlProfile =
 				await
-					Web.GetAsync($"{profileLink}games?tab=all&xml=1", "", new List<Parameter>(), new CookieContainer(),
+					Web.GetAsync($"{profileLink}games?tab=all&xml=1", new List<Parameter>(), new CookieContainer(),
 						new List<HttpHeader>(), "");
 			var serializer = new XmlSerializer(typeof (Classes.ProfileGamesList));
 			TextReader reader = new StringReader(responseXmlProfile.RestResponse.Content);
@@ -75,7 +75,7 @@ namespace KryBot.Functional
 		{
 			var responseJsonDetail =
 				await
-					Web.GetAsync($"http://store.steampowered.com/api/appdetails?appids={appId}", "",
+					Web.GetAsync($"http://store.steampowered.com/api/appdetails?appids={appId}",
 						new List<Parameter>(),
 						new CookieContainer(), new List<HttpHeader>(), "");
 
@@ -95,7 +95,7 @@ namespace KryBot.Functional
 
 		public static Log GameMinerGetProfile(Bot bot, bool echo)
 		{
-			var response = Web.Get(Links.GameMiner, string.Empty, new List<Parameter>(),
+			var response = Web.Get(Links.GameMiner, new List<Parameter>(),
 				Generate.Cookies_GameMiner(bot), new List<HttpHeader>(), bot.GameMiner.UserAgent);
 
 			if (response.RestResponse.Content != string.Empty)
@@ -135,7 +135,7 @@ namespace KryBot.Functional
 
 		public static Log GameMinerWonParse(Bot bot)
 		{
-			var response = Web.Get(Links.GameMiner, "giveaways/won", new List<Parameter>(),
+			var response = Web.Get($"{Links.GameMiner}giveaways/won", new List<Parameter>(),
 				Generate.Cookies_GameMiner(bot), new List<HttpHeader>(), bot.GameMiner.UserAgent);
 
 			if (response.RestResponse.Content != "")
@@ -189,8 +189,8 @@ namespace KryBot.Functional
 
 			if (bot.GameMiner.FreeGolden)
 			{
-				var goldenFreesResponse = Web.Get(Links.GameMiner,
-					"/api/giveaways/golden?page=1&count=10&q=&type=regular&enter_price=on&sortby=finish&order=asc&filter_entered=on",
+				var goldenFreesResponse = Web.Get($"{Links.GameMiner}" +
+					"api/giveaways/golden?page=1&count=10&q=&type=regular&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 					new List<Parameter>(),
 					Generate.Cookies_GameMiner(bot),
 					new List<HttpHeader>(), bot.GameMiner.UserAgent);
@@ -212,7 +212,7 @@ namespace KryBot.Functional
 					{
 						for (var i = 1; i < pages + 1; i++)
 						{
-							goldenFreesResponse = Web.Get(Links.GameMiner,
+							goldenFreesResponse = Web.Get($"{Links.GameMiner}" +
 								$"/api/giveaways/golden?page={i + 1}&count=10&q=&type=regular&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 								new List<Parameter>(),
 								Generate.Cookies_GameMiner(bot),
@@ -230,8 +230,8 @@ namespace KryBot.Functional
 
 			if (bot.GameMiner.Regular)
 			{
-				var regularResponse = Web.Get(Links.GameMiner,
-					$"/api/giveaways/coal?page=1&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
+				var regularResponse = Web.Get($"{Links.GameMiner}" +
+					$"api/giveaways/coal?page=1&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 					new List<Parameter>(),
 					Generate.Cookies_GameMiner(bot),
 					new List<HttpHeader>(), bot.GameMiner.UserAgent);
@@ -250,8 +250,8 @@ namespace KryBot.Functional
 				{
 					for (var i = 1; i < pages + 1; i++)
 					{
-						var regularGiftsResponse = Web.Get(Links.GameMiner,
-							$"/api/giveaways/coal?page={i + 1}&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
+						var regularGiftsResponse = Web.Get($"{Links.GameMiner}" +
+							$"api/giveaways/coal?page={i + 1}&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 							new List<Parameter>(),
 							Generate.Cookies_GameMiner(bot),
 							new List<HttpHeader>(), bot.GameMiner.UserAgent);
@@ -267,8 +267,8 @@ namespace KryBot.Functional
 
 			if (bot.GameMiner.Sandbox)
 			{
-				var sandboxGiftsResponse = Web.Get(Links.GameMiner,
-					$"/api/giveaways/sandbox?page=1&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
+				var sandboxGiftsResponse = Web.Get($"{Links.GameMiner}" +
+					$"api/giveaways/sandbox?page=1&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 					new List<Parameter>(),
 					Generate.Cookies_GameMiner(bot),
 					new List<HttpHeader>(), bot.GameMiner.UserAgent);
@@ -291,8 +291,8 @@ namespace KryBot.Functional
 				{
 					for (var i = 1; i < pages + 1; i++)
 					{
-						var regularGiftsResponse = Web.Get(Links.GameMiner,
-							$"/api/giveaways/sandbox?page={i + 1}&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
+						var regularGiftsResponse = Web.Get($"{Links.GameMiner}" +
+							$"api/giveaways/sandbox?page={i + 1}&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 							new List<Parameter>(),
 							Generate.Cookies_GameMiner(bot),
 							new List<HttpHeader>(), bot.GameMiner.UserAgent);
@@ -1156,9 +1156,8 @@ namespace KryBot.Functional
 							Generate.Cookies_Steam(bot),
 							new List<HttpHeader>(), string.Empty);
 
-						return Web.SteamJoinGroup(trueGroupUrl.RestResponse.ResponseUri.AbsoluteUri, "",
-							Generate.PostData_SteamGroupJoin(bot.Steam.Cookies.Sessid),
-							Generate.Cookies_Steam(bot), new List<HttpHeader>());
+						return Web.SteamJoinGroup(trueGroupUrl.RestResponse.ResponseUri.AbsoluteUri,
+							Generate.PostData_SteamGroupJoin(bot.Steam.Cookies.Sessid), Generate.Cookies_Steam(bot));
 					}
 					var error =
 						htmlDoc.DocumentNode.SelectSingleNode("//a[@class='notification group-join regular-button qa']");
@@ -1278,7 +1277,7 @@ namespace KryBot.Functional
 					};
 					headerList.Add(header);
 
-					var jsonresponse = Web.Post(Links.SteamPortal, "page/ga_page",
+					var jsonresponse = Web.Post($"{Links.SteamPortal}page/ga_page",
 						Generate.PageData_SteamPortal(i + 1), headerList,
 						Generate.Cookies_SteamPortal(bot));
 					if (jsonresponse.RestResponse.Content != "")

@@ -135,9 +135,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 if (Bot.Steam.Enabled)
                 {
                     await
-                        Web.SteamJoinGroupAsync("http://steamcommunity.com/groups/krybot", "",
-                            Generate.PostData_SteamGroupJoin(Bot.Steam.Cookies.Sessid), Generate.Cookies_Steam(Bot),
-                            new List<HttpHeader>());
+                        Web.SteamJoinGroupAsync("http://steamcommunity.com/groups/krybot",
+                            Generate.PostData_SteamGroupJoin(Bot.Steam.Cookies.Sessid), Generate.Cookies_Steam(Bot));
                 }
             }
             else
@@ -1068,9 +1067,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnSTLogin_Click(object sender, EventArgs e)
         {
             btnSTLogin.Enabled = false;
-            var first = Web.Get(Links.SteamTrade, "", new List<Parameter>(), new CookieContainer(),
+            var first = Web.Get(Links.SteamTrade, new List<Parameter>(), new CookieContainer(),
                 new List<HttpHeader>(), "");
-            var getLoginHref = Web.SteamTradeDoAuth(Links.SteamTrade, "reg.php?login",
+            var getLoginHref = Web.SteamTradeDoAuth($"{Links.SteamTrade}reg.php?login",
                 Generate.LoginData_SteamTrade(), first.Cookies, new List<HttpHeader>());
             var location = Tools.GetLocationInresponse(getLoginHref.RestResponse);
             var cookie = Tools.GetSessCookieInresponse(getLoginHref.Cookies, "steamtrade.info", "PHPSESSID");
@@ -1158,7 +1157,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnSCLogin_Click(object sender, EventArgs e)
         {
             btnSCLogin.Enabled = false;
-            BrowserStart("https://steamcompanion.com/login", Links.SteamCompanion, "SteamCompanion - Login", "");
+            BrowserStart($"{Links.SteamCompanion}login", Links.SteamCompanion, "SteamCompanion - Login", "");
             Bot.Save();
 
             toolStripStatusLabel1.Image = Resources.load;
@@ -1198,7 +1197,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnSGLogin_Click(object sender, EventArgs e)
         {
             btnSGLogin.Enabled = false;
-            BrowserStart("https://www.steamgifts.com/?login", Links.SteamGifts, "SteamGifts - Login", "");
+            BrowserStart($"{Links.SteamGifts}?login", Links.SteamGifts, "SteamGifts - Login", "");
             Bot.Save();
 
             toolStripStatusLabel1.Image = Resources.load;
@@ -1237,8 +1236,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnGMLogin_Click(object sender, EventArgs e)
         {
             btnGMLogin.Enabled = false;
-            BrowserStart(
-                "http://gameminer.net/login/steam?backurl=http%3A%2F%2Fgameminer.net%2F%3Flang%3D" +
+            BrowserStart($"{Links.GameMiner}login/steam?backurl=http%3A%2F%2Fgameminer.net%2F%3Flang%3D" +
                 Properties.Settings.Default.Lang + @"&agree=True",
                 "http://gameminer.net/?lang=" + Properties.Settings.Default.Lang, "GameMiner - Login", "");
 
@@ -1687,9 +1685,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             if (login)
             {
                 await
-                    Web.SteamJoinGroupAsync("http://steamcommunity.com/groups/krybot", "",
-                        Generate.PostData_SteamGroupJoin(Bot.Steam.Cookies.Sessid), Generate.Cookies_Steam(Bot),
-                        new List<HttpHeader>());
+                    Web.SteamJoinGroupAsync("http://steamcommunity.com/groups/krybot",
+                        Generate.PostData_SteamGroupJoin(Bot.Steam.Cookies.Sessid), Generate.Cookies_Steam(Bot));
 
                 BlockTabpage(tabPageSteam, true);
                 btnSteamLogin.Enabled = false;
