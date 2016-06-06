@@ -95,10 +95,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 Close();
             }
 
-            if (_site == "SteamPortal")
+            if (_site == "UseGamble")
             {
-                _bot.SteamPortal.Cookies.PhpSessId = (Controls["PHPSESSID"] as TextBox)?.Text;
-                _bot.SteamPortal.Enabled = true;
+                _bot.UseGamble.Cookies.PhpSessId = (Controls["PHPSESSID"] as TextBox)?.Text;
+                _bot.UseGamble.Enabled = true;
                 _bot.Save();
                 ShowMessage();
                 Close();

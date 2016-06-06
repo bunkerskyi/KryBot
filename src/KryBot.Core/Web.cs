@@ -267,7 +267,7 @@ namespace KryBot.Core
 			return task.Task.Result;
 		}
 
-		private static Log SteamPortalJoinGiveaway(Bot bot, SteamPortalGiveaway spGiveaway)
+		private static Log UseGambleJoinGiveaway(Bot bot, UseGambleGiveaway spGiveaway)
 		{
 			Thread.Sleep(requestInterval);
 			if (spGiveaway.Code != null)
@@ -280,29 +280,29 @@ namespace KryBot.Core
 				};
 				list.Add(header);
 
-				var response = Post($"{Links.SteamPortal}page/join",
-					Generate.PostData_SteamPortal(spGiveaway.Code), list,
-					Generate.Cookies_SteamPortal(bot));
+				var response = Post($"{Links.UseGamble}page/join",
+					Generate.PostData_UseGamble(spGiveaway.Code), list,
+					Generate.Cookies_UseGamble(bot));
 				var jresponse =
-					JsonConvert.DeserializeObject<SteamPortal.JsonJoin>(response.RestResponse.Content.Replace(".", ""));
+					JsonConvert.DeserializeObject<UseGamble.JsonJoin>(response.RestResponse.Content.Replace(".", ""));
 				if (jresponse.Error == 0)
 				{
-					bot.SteamPortal.Points = jresponse.target_h.my_coins;
-					return Messages.GiveawayJoined("SteamPortal", spGiveaway.Name, spGiveaway.Price,
+					bot.UseGamble.Points = jresponse.target_h.my_coins;
+					return Messages.GiveawayJoined("UseGamble", spGiveaway.Name, spGiveaway.Price,
 						jresponse.target_h.my_coins, 0);
 				}
-				return Messages.GiveawayNotJoined("SteamPortal", spGiveaway.Name, "Error");
+				return Messages.GiveawayNotJoined("UseGamble", spGiveaway.Name, "Error");
 			}
 			return null;
 		}
 
-		public static async Task<Log> SteamPortalJoinGiveawayAsync(Bot bot,
-			SteamPortalGiveaway spGiveaway)
+		public static async Task<Log> UseGambleJoinGiveawayAsync(Bot bot,
+			UseGambleGiveaway spGiveaway)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = SteamPortalJoinGiveaway(bot, spGiveaway);
+				var result = UseGambleJoinGiveaway(bot, spGiveaway);
 				task.SetResult(result);
 			});
 

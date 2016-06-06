@@ -91,9 +91,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
                         SteamCompanionAuth();
                     }
 
-                    if (_endPage == Links.SteamPortal)
+                    if (_endPage == Links.UseGamble)
                     {
-                        SteamPortalAuth();
+                        UseGambleAuth();
                     }
 
                     if (_endPage == Links.SteamTrade)
@@ -206,7 +206,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             Close();
         }
 
-        private void SteamPortalAuth()
+        private void UseGambleAuth()
         {
             var container = GetUriCookieContainer(webBrowser.Url);
             var cookies = container.GetCookies(webBrowser.Url);
@@ -214,10 +214,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
             {
                 if (cookie.Name == "PHPSESSID")
                 {
-                    _bot.SteamPortal.Cookies.PhpSessId = cookie.Value;
+                    _bot.UseGamble.Cookies.PhpSessId = cookie.Value;
                 }
             }
-            _bot.SteamPortal.Enabled = true;
+            _bot.UseGamble.Enabled = true;
             webBrowser.Dispose();
             Close();
         }

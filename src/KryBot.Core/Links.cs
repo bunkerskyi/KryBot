@@ -7,7 +7,7 @@
 		public const string GameMiner = "http://gameminer.net/";
 		public const string SteamTrade = "http://steamtrade.info/";
 		public const string PlayBlink = "http://playblink.com/";
-		public const string SteamPortal = "http://steamportal.net/";
+		public const string UseGamble = "http://usegamble.com/";
 		public const string SteamCompanion = "https://steamcompanion.com";
 		public const string GameAways = "http://www.gameaways.com/";
 	}

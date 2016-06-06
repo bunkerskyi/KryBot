@@ -90,8 +90,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             tbPBMaxValue.Text = _bot.PlayBlink.MaxJoinValue.ToString();
             tbPBReserv.Text = _bot.PlayBlink.PointReserv.ToString();
 
-            tbSPMaxValue.Text = _bot.SteamPortal.MaxJoinValue.ToString();
-            tbSPReserv.Text = _bot.SteamPortal.PointsReserv.ToString();
+            tbSPMaxValue.Text = _bot.UseGamble.MaxJoinValue.ToString();
+            tbSPReserv.Text = _bot.UseGamble.PointsReserv.ToString();
 
             cbAutorun.Checked = Properties.Settings.Default.Autorun;
             cbWonTip.Checked = Properties.Settings.Default.ShowWonTip;
@@ -157,8 +157,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             _bot.SteamCompanion.JoinPointLimit = int.Parse(tbSCMaxValue.Text);
             _bot.SteamCompanion.PointsReserv = int.Parse(tbSCReserv.Text);
 
-            _bot.SteamPortal.MaxJoinValue = int.Parse(tbSPMaxValue.Text);
-            _bot.SteamPortal.PointsReserv = int.Parse(tbSPReserv.Text);
+            _bot.UseGamble.MaxJoinValue = int.Parse(tbSPMaxValue.Text);
+            _bot.UseGamble.PointsReserv = int.Parse(tbSPReserv.Text);
 
             _bot.PlayBlink.MaxJoinValue = int.Parse(tbPBMaxValue.Text);
             _bot.PlayBlink.PointReserv = int.Parse(tbPBReserv.Text);
@@ -204,9 +204,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
         private void btnSPCookies_Click(object sender, EventArgs e)
         {
-            var names = new List<string> {"PHPSESSID:" + _bot.SteamPortal.Cookies.PhpSessId};
+            var names = new List<string> {"PHPSESSID:" + _bot.UseGamble.Cookies.PhpSessId};
 
-            var form = new FormCookie("SteamPortal", names, _bot);
+            var form = new FormCookie("UseGamble", names, _bot);
             form.ShowDialog();
         }
 

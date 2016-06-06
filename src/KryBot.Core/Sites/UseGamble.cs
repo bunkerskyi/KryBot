@@ -4,12 +4,12 @@ using KryBot.Core.Giveaways;
 
 namespace KryBot.Core.Sites
 {
-	public class SteamPortal
+	public class UseGamble
 	{
-		public SteamPortal()
+		public UseGamble()
 		{
-			Cookies = new SteamPortalCookie();
-			Giveaways = new List<SteamPortalGiveaway>();
+			Cookies = new UseGambleCookie();
+			Giveaways = new List<UseGambleGiveaway>();
 		}
 
 		public bool Enabled { get; set; }
@@ -17,12 +17,12 @@ namespace KryBot.Core.Sites
 		public int Points { get; set; }
 		public int MaxJoinValue { get; set; } = 30;
 		public int PointsReserv { get; set; }
-		public SteamPortalCookie Cookies { get; set; }
-		public List<SteamPortalGiveaway> Giveaways { get; set; }
+		public UseGambleCookie Cookies { get; set; }
+		public List<UseGambleGiveaway> Giveaways { get; set; }
 
 		public void Logout()
 		{
-			Cookies = new SteamPortalCookie();
+			Cookies = new UseGambleCookie();
 			Enabled = false;
 		}
 

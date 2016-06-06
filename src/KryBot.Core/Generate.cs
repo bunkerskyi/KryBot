@@ -219,19 +219,19 @@ namespace KryBot.Core
 
 		// SteamCompanion //
 
-		// SteamPortal //
-		public static CookieContainer Cookies_SteamPortal(Bot bot)
+		// UseGamble //
+		public static CookieContainer Cookies_UseGamble(Bot bot)
 		{
 			var cookie = new CookieContainer();
-			var target = new Uri(Links.SteamPortal);
+			var target = new Uri(Links.UseGamble);
 
-			if (bot.SteamPortal.Cookies.PhpSessId != null)
-				cookie.Add(new Cookie("PHPSESSID", bot.SteamPortal.Cookies.PhpSessId) {Domain = target.Host});
+			if (bot.UseGamble.Cookies.PhpSessId != null)
+				cookie.Add(new Cookie("PHPSESSID", bot.UseGamble.Cookies.PhpSessId) {Domain = target.Host});
 
 			return cookie;
 		}
 
-		public static List<Parameter> PostData_SteamPortal(string ga)
+		public static List<Parameter> PostData_UseGamble(string ga)
 		{
 			var list = new List<Parameter>();
 
@@ -246,7 +246,7 @@ namespace KryBot.Core
 			return list;
 		}
 
-		public static List<Parameter> PageData_SteamPortal(int page)
+		public static List<Parameter> PageData_UseGamble(int page)
 		{
 			var list = new List<Parameter>();
 
@@ -266,10 +266,12 @@ namespace KryBot.Core
 			};
 			list.Add(pageParam);
 
+			//TODO Добавить параметр AjaxToken, находится на странице 
+
 			return list;
 		}
 
-		// Steamportal //
+		// UseGamble //
 
 		// SteamTrade //
 		public static CookieContainer Cookies_SteamTrade(Bot bot)

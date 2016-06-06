@@ -15,7 +15,7 @@ namespace KryBot.Core
 			GameMiner = new GameMiner();
 			SteamGifts = new SteamGifts();
 			SteamCompanion = new SteamCompanion();
-			SteamPortal = new SteamPortal();
+			UseGamble = new UseGamble();
 			SteamTrade = new SteamTrade();
 			PlayBlink = new PlayBlink();
 			Steam = new Steam();
@@ -27,7 +27,7 @@ namespace KryBot.Core
 		public GameMiner GameMiner { get; }
 		public SteamGifts SteamGifts { get; }
 		public SteamCompanion SteamCompanion { get; }
-		public SteamPortal SteamPortal { get; }
+		public UseGamble UseGamble { get; }
 		public SteamTrade SteamTrade { get; }
 		public PlayBlink PlayBlink { get; }
 		public Steam Steam { get; }
@@ -40,7 +40,7 @@ namespace KryBot.Core
 			SteamGifts.WishlistGiveaways = new List<SteamGiftsGiveaway>();
 			SteamCompanion.Giveaways = new List<SteamCompanionGiveaway>();
 			SteamCompanion.WishlistGiveaways = new List<SteamCompanionGiveaway>();
-			SteamPortal.Giveaways = new List<SteamPortalGiveaway>();
+			UseGamble.Giveaways = new List<UseGambleGiveaway>();
 			SteamTrade.Giveaways = new List<SteamTradeGiveaway>();
 			PlayBlink.Giveaways = new List<PlayBlinkGiveaway>();
 		}

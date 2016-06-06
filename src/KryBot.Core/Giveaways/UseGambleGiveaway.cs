@@ -1,6 +1,6 @@
 ﻿namespace KryBot.Core.Giveaways
 {
-	public class SteamPortalGiveaway : BaseGiveaway
+	public class UseGambleGiveaway : BaseGiveaway
 	{
 		public int Price { get; set; }
 

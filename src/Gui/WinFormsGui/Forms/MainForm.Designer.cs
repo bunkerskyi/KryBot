@@ -75,7 +75,7 @@
 			this.lblSCPoints = new System.Windows.Forms.Label();
 			this.lblSCLevel = new System.Windows.Forms.Label();
 			this.btnSCLogin = new System.Windows.Forms.Button();
-			this.tabPageSP = new System.Windows.Forms.TabPage();
+			this.tabPageUG = new System.Windows.Forms.TabPage();
 			this.btnSPExit = new System.Windows.Forms.Button();
 			this.cbSPEnable = new System.Windows.Forms.CheckBox();
 			this.linkLabel4 = new System.Windows.Forms.LinkLabel();
@@ -122,7 +122,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.pbSGReload)).BeginInit();
 			this.tabPageSC.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbSCReload)).BeginInit();
-			this.tabPageSP.SuspendLayout();
+			this.tabPageUG.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbSPReload)).BeginInit();
 			this.tabPageST.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbSTreload)).BeginInit();
@@ -135,8 +135,8 @@
 			// statusStrip1
 			// 
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.toolStripStatusLabel1,
-			this.toolStripProgressBar1});
+            this.toolStripStatusLabel1,
+            this.toolStripProgressBar1});
 			this.statusStrip1.Location = new System.Drawing.Point(0, 186);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.Size = new System.Drawing.Size(350, 22);
@@ -158,10 +158,10 @@
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.файлToolStripMenuItem,
-			this.настройкиToolStripMenuItem,
-			this.оПрограммеToolStripMenuItem,
-			this.логToolStripMenuItem});
+            this.файлToolStripMenuItem,
+            this.настройкиToolStripMenuItem,
+            this.оПрограммеToolStripMenuItem,
+            this.логToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(350, 24);
@@ -171,10 +171,10 @@
 			// файлToolStripMenuItem
 			// 
 			this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.вПапкуСБотомToolStripMenuItem,
-			this.сохранитьToolStripMenuItem,
-			this.сохранитьКакToolStripMenuItem,
-			this.загрузитьToolStripMenuItem});
+            this.вПапкуСБотомToolStripMenuItem,
+            this.сохранитьToolStripMenuItem,
+            this.сохранитьКакToolStripMenuItem,
+            this.загрузитьToolStripMenuItem});
 			this.файлToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.file;
 			this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
 			this.файлToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
@@ -215,8 +215,8 @@
 			// настройкиToolStripMenuItem
 			// 
 			this.настройкиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.настройкиToolStripMenuItem1,
-			this.черныйСписокToolStripMenuItem});
+            this.настройкиToolStripMenuItem1,
+            this.черныйСписокToolStripMenuItem});
 			this.настройкиToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("настройкиToolStripMenuItem.Image")));
 			this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
 			this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
@@ -241,9 +241,9 @@
 			// оПрограммеToolStripMenuItem
 			// 
 			this.оПрограммеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.статстикаToolStripMenuItem,
-			this.оПрограммеToolStripMenuItem1,
-			this.донатToolStripMenuItem});
+            this.статстикаToolStripMenuItem,
+            this.оПрограммеToolStripMenuItem1,
+            this.донатToolStripMenuItem});
 			this.оПрограммеToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.info;
 			this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
 			this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
@@ -287,7 +287,7 @@
 			this.tabControl1.Controls.Add(this.tabPageGM);
 			this.tabControl1.Controls.Add(this.tabPageSG);
 			this.tabControl1.Controls.Add(this.tabPageSC);
-			this.tabControl1.Controls.Add(this.tabPageSP);
+			this.tabControl1.Controls.Add(this.tabPageUG);
 			this.tabControl1.Controls.Add(this.tabPageST);
 			this.tabControl1.Controls.Add(this.tabPagePB);
 			this.tabControl1.Controls.Add(this.tabPageSteam);
@@ -591,22 +591,22 @@
 			this.btnSCLogin.UseVisualStyleBackColor = true;
 			this.btnSCLogin.Click += new System.EventHandler(this.btnSCLogin_Click);
 			// 
-			// tabPageSP
+			// tabPageUG
 			// 
-			this.tabPageSP.Controls.Add(this.btnSPExit);
-			this.tabPageSP.Controls.Add(this.cbSPEnable);
-			this.tabPageSP.Controls.Add(this.linkLabel4);
-			this.tabPageSP.Controls.Add(this.pbSPReload);
-			this.tabPageSP.Controls.Add(this.lblSPStatus);
-			this.tabPageSP.Controls.Add(this.lblSPPoints);
-			this.tabPageSP.Controls.Add(this.lblSPLevel);
-			this.tabPageSP.Controls.Add(this.btnSPLogin);
-			this.tabPageSP.Location = new System.Drawing.Point(4, 22);
-			this.tabPageSP.Name = "tabPageSP";
-			this.tabPageSP.Size = new System.Drawing.Size(334, 61);
-			this.tabPageSP.TabIndex = 4;
-			this.tabPageSP.Text = "SP";
-			this.tabPageSP.UseVisualStyleBackColor = true;
+			this.tabPageUG.Controls.Add(this.btnSPExit);
+			this.tabPageUG.Controls.Add(this.cbSPEnable);
+			this.tabPageUG.Controls.Add(this.linkLabel4);
+			this.tabPageUG.Controls.Add(this.pbSPReload);
+			this.tabPageUG.Controls.Add(this.lblSPStatus);
+			this.tabPageUG.Controls.Add(this.lblSPPoints);
+			this.tabPageUG.Controls.Add(this.lblSPLevel);
+			this.tabPageUG.Controls.Add(this.btnSPLogin);
+			this.tabPageUG.Location = new System.Drawing.Point(4, 22);
+			this.tabPageUG.Name = "tabPageUG";
+			this.tabPageUG.Size = new System.Drawing.Size(334, 61);
+			this.tabPageUG.TabIndex = 4;
+			this.tabPageUG.Text = "UG";
+			this.tabPageUG.UseVisualStyleBackColor = true;
 			// 
 			// btnSPExit
 			// 
@@ -954,9 +954,9 @@
 			// toolStripMenuItem_Main
 			// 
 			this.toolStripMenuItem_Main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.toolStripMenuItem_Show,
-			this.toolStripMenuItem_Farm,
-			this.toolStripMenuItem_Exit});
+            this.toolStripMenuItem_Show,
+            this.toolStripMenuItem_Farm,
+            this.toolStripMenuItem_Exit});
 			this.toolStripMenuItem_Main.Name = "toolStripMenuItem_Main";
 			this.toolStripMenuItem_Main.Size = new System.Drawing.Size(136, 70);
 			// 
@@ -1015,8 +1015,8 @@
 			this.tabPageSC.ResumeLayout(false);
 			this.tabPageSC.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbSCReload)).EndInit();
-			this.tabPageSP.ResumeLayout(false);
-			this.tabPageSP.PerformLayout();
+			this.tabPageUG.ResumeLayout(false);
+			this.tabPageUG.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbSPReload)).EndInit();
 			this.tabPageST.ResumeLayout(false);
 			this.tabPageST.PerformLayout();
@@ -1045,7 +1045,7 @@
 		private System.Windows.Forms.TabPage tabPageSG;
 		private System.Windows.Forms.TabPage tabPageSC;
 		private System.Windows.Forms.TabPage tabPageST;
-		private System.Windows.Forms.TabPage tabPageSP;
+		private System.Windows.Forms.TabPage tabPageUG;
 		private System.Windows.Forms.ToolStripMenuItem логToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
 		private System.Windows.Forms.Label lblGMStatus;

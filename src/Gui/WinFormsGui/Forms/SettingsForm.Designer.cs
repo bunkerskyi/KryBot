@@ -80,7 +80,7 @@
 			this.lblSCMaxValue = new System.Windows.Forms.Label();
 			this.cbSCGroup = new System.Windows.Forms.CheckBox();
 			this.cbSCWishlist = new System.Windows.Forms.CheckBox();
-			this.tabPageSP = new System.Windows.Forms.TabPage();
+			this.tabPageUG = new System.Windows.Forms.TabPage();
 			this.btnSPCookies = new System.Windows.Forms.Button();
 			this.tbSPReserv = new System.Windows.Forms.TextBox();
 			this.tbSPMaxValue = new System.Windows.Forms.TextBox();
@@ -106,7 +106,7 @@
 			this.tabPageSG.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.numSGLevel)).BeginInit();
 			this.tabPageSC.SuspendLayout();
-			this.tabPageSP.SuspendLayout();
+			this.tabPageUG.SuspendLayout();
 			this.tabPageST.SuspendLayout();
 			this.tabPagePB.SuspendLayout();
 			this.tabPageSteam.SuspendLayout();
@@ -119,7 +119,7 @@
 			this.tabControl1.Controls.Add(this.tabPageGM);
 			this.tabControl1.Controls.Add(this.tabPageSG);
 			this.tabControl1.Controls.Add(this.tabPageSC);
-			this.tabControl1.Controls.Add(this.tabPageSP);
+			this.tabControl1.Controls.Add(this.tabPageUG);
 			this.tabControl1.Controls.Add(this.tabPageST);
 			this.tabControl1.Controls.Add(this.tabPagePB);
 			this.tabControl1.Controls.Add(this.tabPageSteam);
@@ -674,19 +674,19 @@
 			this.cbSCWishlist.Text = "Wishlist";
 			this.cbSCWishlist.UseVisualStyleBackColor = true;
 			// 
-			// tabPageSP
+			// tabPageUG
 			// 
-			this.tabPageSP.Controls.Add(this.btnSPCookies);
-			this.tabPageSP.Controls.Add(this.tbSPReserv);
-			this.tabPageSP.Controls.Add(this.tbSPMaxValue);
-			this.tabPageSP.Controls.Add(this.label3);
-			this.tabPageSP.Controls.Add(this.label4);
-			this.tabPageSP.Location = new System.Drawing.Point(4, 22);
-			this.tabPageSP.Name = "tabPageSP";
-			this.tabPageSP.Size = new System.Drawing.Size(309, 155);
-			this.tabPageSP.TabIndex = 4;
-			this.tabPageSP.Text = "SP";
-			this.tabPageSP.UseVisualStyleBackColor = true;
+			this.tabPageUG.Controls.Add(this.btnSPCookies);
+			this.tabPageUG.Controls.Add(this.tbSPReserv);
+			this.tabPageUG.Controls.Add(this.tbSPMaxValue);
+			this.tabPageUG.Controls.Add(this.label3);
+			this.tabPageUG.Controls.Add(this.label4);
+			this.tabPageUG.Location = new System.Drawing.Point(4, 22);
+			this.tabPageUG.Name = "tabPageUG";
+			this.tabPageUG.Size = new System.Drawing.Size(309, 155);
+			this.tabPageUG.TabIndex = 4;
+			this.tabPageUG.Text = "UG";
+			this.tabPageUG.UseVisualStyleBackColor = true;
 			// 
 			// btnSPCookies
 			// 
@@ -883,8 +883,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.numSGLevel)).EndInit();
 			this.tabPageSC.ResumeLayout(false);
 			this.tabPageSC.PerformLayout();
-			this.tabPageSP.ResumeLayout(false);
-			this.tabPageSP.PerformLayout();
+			this.tabPageUG.ResumeLayout(false);
+			this.tabPageUG.PerformLayout();
 			this.tabPageST.ResumeLayout(false);
 			this.tabPagePB.ResumeLayout(false);
 			this.tabPagePB.PerformLayout();
@@ -905,7 +905,7 @@
 		private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
 		private System.Windows.Forms.TabPage tabPageSC;
 		private System.Windows.Forms.TabPage tabPageST;
-		private System.Windows.Forms.TabPage tabPageSP;
+		private System.Windows.Forms.TabPage tabPageUG;
 		private System.Windows.Forms.TabPage tabPageCommun;
 		private System.Windows.Forms.ComboBox cbSortBy;
 		private System.Windows.Forms.CheckBox cbSort;

@@ -64,7 +64,7 @@
     <Compile Include="Cookies\SteamCompanionCookie.cs" />
     <Compile Include="Cookies\SteamCookie.cs" />
     <Compile Include="Cookies\SteamGiftsCookie.cs" />
-    <Compile Include="Cookies\SteamPortalCookie.cs" />
+    <Compile Include="Cookies\UseGambleCookie.cs" />
     <Compile Include="Cookies\SteamTradeCookie.cs" />
     <Compile Include="Generate.cs" />
     <Compile Include="Giveaways\BaseGiveaway.cs" />
@@ -73,7 +73,7 @@
     <Compile Include="Giveaways\PlayBlinkGiveaway.cs" />
     <Compile Include="Giveaways\SteamCompanionGiveaway.cs" />
     <Compile Include="Giveaways\SteamGiftsGiveaway.cs" />
-    <Compile Include="Giveaways\SteamPortalGiveaway.cs" />
+    <Compile Include="Giveaways\UseGambleGiveaway.cs" />
     <Compile Include="Giveaways\SteamTradeGiveaway.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Messages.cs" />
@@ -91,7 +91,7 @@
     <Compile Include="Sites\Steam.cs" />
     <Compile Include="Sites\SteamCompanion.cs" />
     <Compile Include="Sites\SteamGifts.cs" />
-    <Compile Include="Sites\SteamPortal.cs" />
+    <Compile Include="Sites\UseGamble.cs" />
     <Compile Include="Sites\SteamTrade.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="Updater.cs" />
