@@ -135,7 +135,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 {
                     await
                         Web.SteamJoinGroupAsync("http://steamcommunity.com/groups/krybot",
-                            Generate.PostData_SteamGroupJoin(_bot.Steam.Cookies.Sessid), Generate.Cookies_Steam(_bot));
+                            Generate.PostData_SteamGroupJoin(_bot.Steam.Cookies.Sessid), _bot.Steam.Cookies.Generate());
                 }
             }
             else
@@ -1690,7 +1690,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             {
                 await
                     Web.SteamJoinGroupAsync("http://steamcommunity.com/groups/krybot",
-                        Generate.PostData_SteamGroupJoin(_bot.Steam.Cookies.Sessid), Generate.Cookies_Steam(_bot));
+                        Generate.PostData_SteamGroupJoin(_bot.Steam.Cookies.Sessid), _bot.Steam.Cookies.Generate());
 
                 BlockTabpage(tabPageSteam, true);
                 btnSteamLogin.Enabled = false;

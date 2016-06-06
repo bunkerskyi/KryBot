@@ -23,7 +23,7 @@ namespace KryBot.Core
 		private static Log SteamGetProfile(Bot bot)
 		{
 			var response = Web.Get(Links.Steam, new List<Parameter>(),
-				Generate.Cookies_Steam(bot), new List<HttpHeader>(), string.Empty);
+				bot.Steam.Cookies.Generate(), new List<HttpHeader>(), string.Empty);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -94,7 +94,7 @@ namespace KryBot.Core
 		private static Log GameMinerGetProfile(Bot bot)
 		{
 			var response = Web.Get(Links.GameMiner, new List<Parameter>(),
-				Generate.Cookies_GameMiner(bot), new List<HttpHeader>(), bot.UserAgent);
+				bot.GameMiner.Cookies.Generate(), new List<HttpHeader>(), bot.UserAgent);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -134,7 +134,7 @@ namespace KryBot.Core
 		private static Log GameMinerWonParse(Bot bot)
 		{
 			var response = Web.Get($"{Links.GameMiner}giveaways/won", new List<Parameter>(),
-				Generate.Cookies_GameMiner(bot), new List<HttpHeader>(), bot.UserAgent);
+				bot.GameMiner.Cookies.Generate(), new List<HttpHeader>(), bot.UserAgent);
 
 			if (response.RestResponse.Content != "")
 			{
@@ -190,7 +190,7 @@ namespace KryBot.Core
 				var goldenFreesResponse = Web.Get($"{Links.GameMiner}" +
 				                                  "api/giveaways/golden?page=1&count=10&q=&type=regular&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 					new List<Parameter>(),
-					Generate.Cookies_GameMiner(bot),
+					bot.GameMiner.Cookies.Generate(),
 					new List<HttpHeader>(), bot.UserAgent);
 
 				if (goldenFreesResponse.RestResponse.Content != "")
@@ -213,7 +213,7 @@ namespace KryBot.Core
 							goldenFreesResponse = Web.Get($"{Links.GameMiner}" +
 							                              $"/api/giveaways/golden?page={i + 1}&count=10&q=&type=regular&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 								new List<Parameter>(),
-								Generate.Cookies_GameMiner(bot),
+								bot.GameMiner.Cookies.Generate(),
 								new List<HttpHeader>(),
 								bot.UserAgent);
 							goldenFreeJsonResponse =
@@ -231,7 +231,7 @@ namespace KryBot.Core
 				var regularResponse = Web.Get($"{Links.GameMiner}" +
 				                              $"api/giveaways/coal?page=1&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 					new List<Parameter>(),
-					Generate.Cookies_GameMiner(bot),
+					bot.GameMiner.Cookies.Generate(),
 					new List<HttpHeader>(), bot.UserAgent);
 
 				var regularJsonResponse =
@@ -251,7 +251,7 @@ namespace KryBot.Core
 						var regularGiftsResponse = Web.Get($"{Links.GameMiner}" +
 						                                   $"api/giveaways/coal?page={i + 1}&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 							new List<Parameter>(),
-							Generate.Cookies_GameMiner(bot),
+							bot.GameMiner.Cookies.Generate(),
 							new List<HttpHeader>(), bot.UserAgent);
 
 						var regularGiftJsonResponse =
@@ -268,7 +268,7 @@ namespace KryBot.Core
 				var sandboxGiftsResponse = Web.Get($"{Links.GameMiner}" +
 				                                   $"api/giveaways/sandbox?page=1&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 					new List<Parameter>(),
-					Generate.Cookies_GameMiner(bot),
+					bot.GameMiner.Cookies.Generate(),
 					new List<HttpHeader>(), bot.UserAgent);
 
 				if (sandboxGiftsResponse.RestResponse.Content != "")
@@ -292,7 +292,7 @@ namespace KryBot.Core
 						var regularGiftsResponse = Web.Get($"{Links.GameMiner}" +
 						                                   $"api/giveaways/sandbox?page={i + 1}&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 							new List<Parameter>(),
-							Generate.Cookies_GameMiner(bot),
+							bot.GameMiner.Cookies.Generate(),
 							new List<HttpHeader>(), bot.UserAgent);
 
 						if (regularGiftsResponse.RestResponse.Content != "")
@@ -386,7 +386,7 @@ namespace KryBot.Core
 		private static Log SteamGiftsGetProfile(Bot bot)
 		{
 			var response = Web.Get(Links.SteamGifts, new List<Parameter>(),
-				Generate.Cookies_SteamGifts(bot), new List<HttpHeader>(), string.Empty);
+				bot.SteamGifts.Cookies.Generate(), new List<HttpHeader>(), bot.UserAgent);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -434,8 +434,8 @@ namespace KryBot.Core
 
 		private static Log SteamGiftsWonParse(Bot bot)
 		{
-			var response = Web.Get(Links.SteamGifts, new List<Parameter>(),
-				Generate.Cookies_SteamGifts(bot), new List<HttpHeader>(), string.Empty);
+			var response = Web.Get($"{Links.SteamGifts}giveaways/won", new List<Parameter>(),
+				bot.SteamGifts.Cookies.Generate(), new List<HttpHeader>(), string.Empty);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -448,7 +448,7 @@ namespace KryBot.Core
 				if (nodes != null)
 				{
 					return GiveawayHaveWon("SteamGifts", int.Parse(nodes.InnerText),
-						"https://www.steamgifts.com/giveaways/won");
+						$"{Links.SteamGifts}giveaways/won");
 				}
 			}
 			return null;
@@ -484,9 +484,9 @@ namespace KryBot.Core
 
 			if (bot.SteamGifts.Regular)
 			{
-				var response = Web.Get(Links.SteamGifts,
-					new List<Parameter>(), Generate.Cookies_SteamGifts(bot),
-					new List<HttpHeader>(), "/giveaways/search?page=1");
+				var response = Web.Get($"{Links.SteamGifts}giveaways/search?page=1",
+					new List<Parameter>(), bot.SteamGifts.Cookies.Generate(),
+					new List<HttpHeader>(), bot.UserAgent);
 
 				if (response.RestResponse.Content != string.Empty)
 				{
@@ -510,9 +510,9 @@ namespace KryBot.Core
 					{
 						for (var i = 1; i < pages + 1; i++)
 						{
-							response = Web.Get(Links.SteamGifts,
-								new List<Parameter>(), Generate.Cookies_SteamGifts(bot),
-								new List<HttpHeader>(), "/giveaways/search?page=" + (i + 1));
+							response = Web.Get($"{Links.SteamGifts}giveaways/search?page={(i + 1)}",
+								new List<Parameter>(), bot.SteamGifts.Cookies.Generate(),
+								new List<HttpHeader>(), bot.UserAgent);
 
 							if (response.RestResponse.Content != string.Empty)
 							{
@@ -576,8 +576,8 @@ namespace KryBot.Core
 			var nodesCount = 0;
 			var pages = 1;
 
-			var response = Web.Get(Links.SteamGifts,
-				new List<Parameter>(), Generate.Cookies_SteamGifts(bot), new List<HttpHeader>(), "/giveaways/search?type=wishlist");
+			var response = Web.Get($"{Links.SteamGifts}giveaways/search?type=wishlist",
+				new List<Parameter>(), bot.SteamGifts.Cookies.Generate(), new List<HttpHeader>(), bot.UserAgent);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -634,8 +634,8 @@ namespace KryBot.Core
 		{
 			var nodesCount = 0;
 
-			var response = Web.Get(Links.SteamGifts,
-				new List<Parameter>(), Generate.Cookies_SteamGifts(bot), new List<HttpHeader>(), "/giveaways/search?type=group");
+			var response = Web.Get($"{Links.SteamGifts}giveaways/search?type=group",
+				new List<Parameter>(), bot.SteamGifts.Cookies.Generate(), new List<HttpHeader>(), bot.UserAgent);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -742,8 +742,8 @@ namespace KryBot.Core
 
 		public static SteamGiftsGiveaway SteamGiftsGetJoinData(SteamGiftsGiveaway sgGiveaway, Bot bot)
 		{
-			var response = Web.Get(Links.SteamGifts,
-				new List<Parameter>(), Generate.Cookies_SteamGifts(bot), new List<HttpHeader>(), sgGiveaway.Link);
+			var response = Web.Get($"{Links.SteamGifts}{sgGiveaway.Link}",
+				new List<Parameter>(), bot.SteamGifts.Cookies.Generate(), new List<HttpHeader>(), bot.UserAgent);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -768,7 +768,7 @@ namespace KryBot.Core
 		private static Log SteamCompanionGetProfile(Bot bot)
 		{
 			var response = Web.Get(Links.SteamCompanion, new List<Parameter>(),
-				Generate.Cookies_SteamCompanion(bot),
+				bot.SteamCompanion.Cookies.Generate(),
 				new List<HttpHeader>(), "/");
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -803,7 +803,7 @@ namespace KryBot.Core
 		private static Log SteamCompanionWonParse(Bot bot)
 		{
 			var response = Web.Get(Links.SteamCompanion, new List<Parameter>(),
-				Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(), "gifts/won");
+				bot.SteamCompanion.Cookies.Generate(), new List<HttpHeader>(), "gifts/won");
 			if (response.RestResponse.Content != string.Empty)
 			{
 				var htmlDoc = new HtmlDocument();
@@ -872,7 +872,7 @@ namespace KryBot.Core
 				{
 					var response = Web.Get(Links.SteamCompanion,
 						new List<Parameter>(),
-						Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(),
+						bot.SteamCompanion.Cookies.Generate(), new List<HttpHeader>(),
 						i == 0 ? "/gifts/search/?type=public" : "/gifts/search.php?page=" + (i + 1) + "&type=public");
 
 					if (response.RestResponse.Content != null)
@@ -951,7 +951,7 @@ namespace KryBot.Core
 			{
 				var response = Web.Get(Links.SteamCompanion,
 					new List<Parameter>(),
-					Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(),
+					bot.SteamCompanion.Cookies.Generate(), new List<HttpHeader>(),
 					i == 0 ? "/gifts/search/?wishlist=true" : "/gifts/search/?wishlist=true&page=" + (i + 1));
 
 				if (response.RestResponse.Content != null)
@@ -995,7 +995,7 @@ namespace KryBot.Core
 			{
 				var response = Web.Get(Links.SteamCompanion,
 					new List<Parameter>(),
-					Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(),
+					bot.SteamCompanion.Cookies.Generate(), new List<HttpHeader>(),
 					i == 0 ? "/gifts/search/?type=contributor" : "/gifts/search/?type=contributor&page=" + (i + 1));
 
 				if (response.RestResponse.Content != null)
@@ -1038,7 +1038,7 @@ namespace KryBot.Core
 			{
 				var response = Web.Get(Links.SteamCompanion,
 					new List<Parameter>(),
-					Generate.Cookies_SteamCompanion(bot), new List<HttpHeader>(),
+					bot.SteamCompanion.Cookies.Generate(), new List<HttpHeader>(),
 					i == 0 ? "/gifts/search/?type=group" : "/gifts/search/?type=group&page=" + (i + 1));
 
 				if (response.RestResponse.Content != null)
@@ -1129,7 +1129,7 @@ namespace KryBot.Core
 		public static Log SteamCompanionGetJoinData(SteamCompanionGiveaway scGiveaway, Bot bot)
 		{
 			var response = Web.Get(scGiveaway.Link,
-				new List<Parameter>(), Generate.Cookies_SteamCompanion(bot),
+				new List<Parameter>(), bot.SteamCompanion.Cookies.Generate(),
 				new List<HttpHeader>(), string.Empty);
 
 			if (response.RestResponse.Content != null)
@@ -1154,11 +1154,11 @@ namespace KryBot.Core
 					if (bot.SteamCompanion.AutoJoin)
 					{
 						var trueGroupUrl = Web.Get(group.Attributes["href"].Value, new List<Parameter>(),
-							Generate.Cookies_Steam(bot),
+							bot.Steam.Cookies.Generate(),
 							new List<HttpHeader>(), string.Empty);
 
 						return Web.SteamJoinGroup(trueGroupUrl.RestResponse.ResponseUri.AbsoluteUri,
-							Generate.PostData_SteamGroupJoin(bot.Steam.Cookies.Sessid), Generate.Cookies_Steam(bot));
+							Generate.PostData_SteamGroupJoin(bot.Steam.Cookies.Sessid), bot.Steam.Cookies.Generate());
 					}
 					var error =
 						htmlDoc.DocumentNode.SelectSingleNode("//a[@class='notification group-join regular-button qa']");
@@ -1187,7 +1187,7 @@ namespace KryBot.Core
 		private static Log UseGambleGetProfile(Bot bot)
 		{
 			var response = Web.Get(Links.UseGamble, new List<Parameter>(),
-				Generate.Cookies_UseGamble(bot),
+				bot.UseGamble.Cookies.Generate(),
 				new List<HttpHeader>(), string.Empty);
 
 			if (response.RestResponse.Content != string.Empty)
@@ -1222,7 +1222,7 @@ namespace KryBot.Core
 		private static Log UseGambleWonParse(Bot bot)
 		{
 			var response = Web.Get(Links.UseGamble, new List<Parameter>(),
-				Generate.Cookies_UseGamble(bot), new List<HttpHeader>(), "profile/logs");
+				bot.UseGamble.Cookies.Generate(), new List<HttpHeader>(), "profile/logs");
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -1280,7 +1280,7 @@ namespace KryBot.Core
 
 					var jsonresponse = Web.Post($"{Links.UseGamble}page/ga_page",
 						Generate.PageData_UseGamble(i + 1), headerList,
-						Generate.Cookies_UseGamble(bot));
+						bot.UseGamble.Cookies.Generate());
 					if (jsonresponse.RestResponse.Content != string.Empty)
 					{
 						var data = jsonresponse.RestResponse.Content.Replace("\\", "");
@@ -1294,7 +1294,7 @@ namespace KryBot.Core
 				else
 				{
 					var response = Web.Get(Links.UseGamble,
-						new List<Parameter>(), Generate.Cookies_UseGamble(bot),
+						new List<Parameter>(), bot.UseGamble.Cookies.Generate(),
 						new List<HttpHeader>(), string.Empty);
 
 					if (response.RestResponse.Content != string.Empty)
@@ -1402,7 +1402,7 @@ namespace KryBot.Core
 		private static Log SteamTradeGetProfile(Bot bot)
 		{
 			var response = Web.Get(Links.SteamTrade, new List<Parameter>(),
-				Generate.Cookies_SteamTrade(bot),
+				bot.SteamTrade.Cookies.Generate(),
 				new List<HttpHeader>(), string.Empty);
 
 			if (response.RestResponse.Content != string.Empty)
@@ -1437,7 +1437,7 @@ namespace KryBot.Core
 			giveaways?.Clear();
 
 			var response = Web.Get(Links.SteamTrade, new List<Parameter>(),
-				Generate.Cookies_SteamTrade(bot),
+				bot.SteamTrade.Cookies.Generate(),
 				new List<HttpHeader>(), "awards/");
 
 			if (response.RestResponse.Content != string.Empty)
@@ -1518,7 +1518,7 @@ namespace KryBot.Core
 		public static SteamTradeGiveaway SteamTradeGetJoinData(SteamTradeGiveaway stGiveaway, Bot bot)
 		{
 			var response = Web.Get(Links.SteamTrade,
-				new List<Parameter>(), Generate.Cookies_SteamTrade(bot),
+				new List<Parameter>(), bot.SteamTrade.Cookies.Generate(),
 				new List<HttpHeader>(), stGiveaway.Link);
 
 			if (response.RestResponse.Content != string.Empty)
@@ -1542,7 +1542,7 @@ namespace KryBot.Core
 		private static Log PlayBlinkGetProfile(Bot bot)
 		{
 			var response = Web.Get(Links.PlayBlink, new List<Parameter>(),
-				Generate.Cookies_PlayBlink(bot), new List<HttpHeader>(), string.Empty);
+				bot.PlayBlink.Cookies.Generate(bot.PlayBlink.Level), new List<HttpHeader>(), string.Empty);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -1582,7 +1582,7 @@ namespace KryBot.Core
 			giveaways?.Clear();
 
 			var response = Web.Get(Links.PlayBlink, new List<Parameter>(),
-				Generate.Cookies_PlayBlink(bot),
+				bot.PlayBlink.Cookies.Generate(bot.PlayBlink.Level),
 				new List<HttpHeader>(), string.Empty);
 
 			if (response.RestResponse.Content != string.Empty)
