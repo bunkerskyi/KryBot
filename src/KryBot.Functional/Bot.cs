@@ -22,6 +22,8 @@ namespace KryBot.Functional
 			GameAways = new GameAways();
 		}
 
+		public string UserAgent { get; set; }
+
 		public GameMiner GameMiner { get; }
 		public SteamGifts SteamGifts { get; }
 		public SteamCompanion SteamCompanion { get; }

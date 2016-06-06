@@ -94,7 +94,7 @@ namespace KryBot.Functional
 		private static Log GameMinerGetProfile(Bot bot)
 		{
 			var response = Web.Get(Links.GameMiner, new List<Parameter>(),
-				Generate.Cookies_GameMiner(bot), new List<HttpHeader>(), bot.GameMiner.UserAgent);
+				Generate.Cookies_GameMiner(bot), new List<HttpHeader>(), bot.UserAgent);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -134,7 +134,7 @@ namespace KryBot.Functional
 		private static Log GameMinerWonParse(Bot bot)
 		{
 			var response = Web.Get($"{Links.GameMiner}giveaways/won", new List<Parameter>(),
-				Generate.Cookies_GameMiner(bot), new List<HttpHeader>(), bot.GameMiner.UserAgent);
+				Generate.Cookies_GameMiner(bot), new List<HttpHeader>(), bot.UserAgent);
 
 			if (response.RestResponse.Content != "")
 			{
@@ -191,7 +191,7 @@ namespace KryBot.Functional
 				                                  "api/giveaways/golden?page=1&count=10&q=&type=regular&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 					new List<Parameter>(),
 					Generate.Cookies_GameMiner(bot),
-					new List<HttpHeader>(), bot.GameMiner.UserAgent);
+					new List<HttpHeader>(), bot.UserAgent);
 
 				if (goldenFreesResponse.RestResponse.Content != "")
 				{
@@ -215,7 +215,7 @@ namespace KryBot.Functional
 								new List<Parameter>(),
 								Generate.Cookies_GameMiner(bot),
 								new List<HttpHeader>(),
-								bot.GameMiner.UserAgent);
+								bot.UserAgent);
 							goldenFreeJsonResponse =
 								JsonConvert.DeserializeObject<GameMiner.JsonRootObject>(
 									goldenFreesResponse.RestResponse.Content);
@@ -232,7 +232,7 @@ namespace KryBot.Functional
 				                              $"api/giveaways/coal?page=1&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 					new List<Parameter>(),
 					Generate.Cookies_GameMiner(bot),
-					new List<HttpHeader>(), bot.GameMiner.UserAgent);
+					new List<HttpHeader>(), bot.UserAgent);
 
 				var regularJsonResponse =
 					JsonConvert.DeserializeObject<GameMiner.JsonRootObject>(
@@ -252,7 +252,7 @@ namespace KryBot.Functional
 						                                   $"api/giveaways/coal?page={i + 1}&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 							new List<Parameter>(),
 							Generate.Cookies_GameMiner(bot),
-							new List<HttpHeader>(), bot.GameMiner.UserAgent);
+							new List<HttpHeader>(), bot.UserAgent);
 
 						var regularGiftJsonResponse =
 							JsonConvert.DeserializeObject<GameMiner.JsonRootObject>(
@@ -269,7 +269,7 @@ namespace KryBot.Functional
 				                                   $"api/giveaways/sandbox?page=1&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 					new List<Parameter>(),
 					Generate.Cookies_GameMiner(bot),
-					new List<HttpHeader>(), bot.GameMiner.UserAgent);
+					new List<HttpHeader>(), bot.UserAgent);
 
 				if (sandboxGiftsResponse.RestResponse.Content != "")
 				{
@@ -293,7 +293,7 @@ namespace KryBot.Functional
 						                                   $"api/giveaways/sandbox?page={i + 1}&count=10&q=&type={(bot.GameMiner.OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
 							new List<Parameter>(),
 							Generate.Cookies_GameMiner(bot),
-							new List<HttpHeader>(), bot.GameMiner.UserAgent);
+							new List<HttpHeader>(), bot.UserAgent);
 
 						if (regularGiftsResponse.RestResponse.Content != "")
 						{

@@ -1198,9 +1198,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
         {
             btnSGLogin.Enabled = false;
             BrowserStart($"{Links.SteamGifts}?login", Links.SteamGifts, "SteamGifts - Login", "");
-            Bot.Save();
 
-            toolStripStatusLabel1.Image = Resources.load;
+			if(string.IsNullOrEmpty(Bot.UserAgent))
+			{
+				Bot.UserAgent = Tools.UserAgent();
+			}
+			Bot.Save();
+
+			toolStripStatusLabel1.Image = Resources.load;
             toolStripStatusLabel1.Text = strings.StatusBar_Login;
             var login = await CheckLoginSg();
             if (login)
@@ -1240,9 +1245,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 Properties.Settings.Default.Lang + @"&agree=True",
                 "http://gameminer.net/?lang=" + Properties.Settings.Default.Lang, "GameMiner - Login", "");
 
-            if (string.IsNullOrEmpty(Bot.GameMiner.UserAgent))
+            if (string.IsNullOrEmpty(Bot.UserAgent))
             {
-                Bot.GameMiner.UserAgent = Tools.UserAgent();
+                Bot.UserAgent = Tools.UserAgent();
             }
             Bot.Save();
 

@@ -22,14 +22,12 @@ namespace KryBot.Functional.Sites
 		public bool FreeGolden { get; set; } = true;
 		public bool OnlyGifts { get; set; }
 		public bool NoRegion { get; set; }
-		public string UserAgent { get; set; }
 		public GameMinerCookie Cookies { get; set; }
 		public List<GameMinerGiveaway> Giveaways { get; set; }
 
 		public void Logout()
 		{
 			Cookies = new GameMinerCookie();
-			UserAgent = "";
 			Enabled = false;
 		}
 
