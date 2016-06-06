@@ -24,14 +24,16 @@ namespace KryBot.Core
 
 		public string UserAgent { get; set; }
 
-		public GameMiner GameMiner { get; }
-		public SteamGifts SteamGifts { get; }
-		public SteamCompanion SteamCompanion { get; }
-		public UseGamble UseGamble { get; }
-		public SteamTrade SteamTrade { get; }
-		public PlayBlink PlayBlink { get; }
-		public Steam Steam { get; }
-		public GameAways GameAways { get; }
+		// НЕ ЗАБИРАТЬ У ПОЛЕЙ SET
+		public GameMiner GameMiner { get; set; }
+		public SteamGifts SteamGifts { get; set; }
+		public SteamCompanion SteamCompanion { get; set; }
+		public UseGamble UseGamble { get; set; }
+		public SteamTrade SteamTrade { get; set; }
+		public PlayBlink PlayBlink { get; set; }
+		public Steam Steam { get; set; }
+		public GameAways GameAways { get; set; }
+		// НЕ ЗАБИРАТЬ У ПОЛЕЙ SET
 
 		public void ClearGiveawayList()
 		{
@@ -60,7 +62,7 @@ namespace KryBot.Core
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(@"Ошибка", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(ex.Message, @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return false;
 			}
 		}
@@ -80,7 +82,7 @@ namespace KryBot.Core
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(@"Ошибка", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(ex.Message, @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return false;
 			}
 		}

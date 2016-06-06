@@ -7,29 +7,31 @@ namespace KryBot.Gui.WinFormsGui
 {
 	public class Settings
 	{
-		private bool IsLogActive { get; set; }
+		// НЕ ДЕЛАТЬ ПОЛЯ ПРИВАТНЫМИ
+		public bool IsLogActive { get; set; }
 
-		private string Lang { get; set; }
+		public string Lang { get; set; }
 
-		private bool Sort { get; set; }
+		public bool Sort { get; set; }
 
-		private bool SortToMore { get; set; }
+		public bool SortToMore { get; set; }
 
-		private bool SortToLess { get; set; }
+		public bool SortToLess { get; set; }
 
-		private bool Timer { get; set; }
+		public bool Timer { get; set; }
 
-		private bool Autorun { get; set; }
+		public bool Autorun { get; set; }
 
-		private bool ShowWonTip { get; set; }
+		public bool ShowWonTip { get; set; }
 
-		private bool ShowFarmTip { get; set; }
+		public bool ShowFarmTip { get; set; }
 
-		private bool WishlistSort { get; set; }
+		public bool WishlistSort { get; set; }
 
-		private int TimerInterval { get; set; }
+		public int TimerInterval { get; set; }
 
-		private int TimerLoops { get; set; }
+		public int TimerLoops { get; set; }
+		// НЕ ДЕЛАТЬ ПОЛЯ ПРИВАТНЫМИ
 
 		public void Load()
 		{
