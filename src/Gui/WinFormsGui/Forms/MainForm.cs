@@ -378,7 +378,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
             if (Bot.GameMiner.Enabled)
             {
-                var profile = await Parse.GameMinerGetProfileAsync(Bot, true);
+                var profile = await Parse.GameMinerGetProfileAsync(Bot);
                 if (profile.Echo)
                 {
                     WriteLog(profile);
@@ -433,7 +433,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
             if (Bot.SteamGifts.Enabled)
             {
-                var profile = await Parse.SteamGiftsGetProfileAsync(Bot, true);
+                var profile = await Parse.SteamGiftsGetProfileAsync(Bot);
                 if (profile.Echo)
                 {
                     WriteLog(profile);
@@ -530,7 +530,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
             if (Bot.SteamCompanion.Enabled)
             {
-                var profile = await Parse.SteamCompanionGetProfileAsync(Bot, true);
+                var profile = await Parse.SteamCompanionGetProfileAsync(Bot);
                 if (profile.Echo)
                 {
                     WriteLog(profile);
@@ -551,7 +551,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     var giveaways =
                         await
                             Parse.SteamCompanionLoadGiveawaysAsync(Bot, Bot.SteamCompanion.Giveaways,
-                                Bot.SteamCompanion.WishlistGiveaways, BlackList);
+                                Bot.SteamCompanion.WishlistGiveaways);
                     if (giveaways != null && giveaways.Content != "\n")
                     {
                         WriteLog(giveaways);
@@ -623,7 +623,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
             if (Bot.SteamPortal.Enabled)
             {
-                var profile = await Parse.SteamPortalGetProfileAsync(Bot, true);
+                var profile = await Parse.SteamPortalGetProfileAsync(Bot);
                 if (profile.Echo)
                 {
                     WriteLog(profile);
@@ -680,7 +680,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
             if (Bot.SteamTrade.Enabled)
             {
-                var profile = await Parse.SteamTradeGetProfileAsync(Bot, true);
+                var profile = await Parse.SteamTradeGetProfileAsync(Bot);
                 if (profile.Echo)
                 {
                     WriteLog(profile);
@@ -711,7 +711,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
             if (Bot.PlayBlink.Enabled)
             {
-                var profile = await Parse.PlayBlinkGetProfileAsync(Bot, true);
+                var profile = await Parse.PlayBlinkGetProfileAsync(Bot);
                 if (profile.Echo)
                 {
                     WriteLog(profile);
@@ -1282,7 +1282,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async Task<bool> CheckLoginGm()
         {
             Message_TryLogin("GameMiner");
-            var login = await Parse.GameMinerGetProfileAsync(Bot, false);
+            var login = await Parse.GameMinerGetProfileAsync(Bot);
             WriteLog(login);
             return login.Success;
         }
@@ -1290,7 +1290,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async Task<bool> CheckLoginSg()
         {
             Message_TryLogin("SteamGifts");
-            var login = await Parse.SteamGiftsGetProfileAsync(Bot, false);
+            var login = await Parse.SteamGiftsGetProfileAsync(Bot);
             WriteLog(login);
             return login.Success;
         }
@@ -1298,7 +1298,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async Task<bool> CheckLoginSc()
         {
             Message_TryLogin("SteamCompanion");
-            var login = await Parse.SteamCompanionGetProfileAsync(Bot, false);
+            var login = await Parse.SteamCompanionGetProfileAsync(Bot);
             WriteLog(login);
             return login.Success;
         }
@@ -1306,7 +1306,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async Task<bool> CheckLoginSp()
         {
             Message_TryLogin("SteamPortal");
-            var login = await Parse.SteamPortalGetProfileAsync(Bot, false);
+            var login = await Parse.SteamPortalGetProfileAsync(Bot);
             WriteLog(login);
             return login.Success;
         }
@@ -1314,7 +1314,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async Task<bool> CheckLoginSt()
         {
             Message_TryLogin("SteamTrade");
-            var login = await Parse.SteamTradeGetProfileAsync(Bot, false);
+            var login = await Parse.SteamTradeGetProfileAsync(Bot);
             WriteLog(login);
             return login.Success;
         }
@@ -1322,7 +1322,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async Task<bool> CheckLoginSteam()
         {
             Message_TryLogin("Steam");
-            var login = await Parse.SteamGetProfileAsync(Bot, false);
+            var login = await Parse.SteamGetProfileAsync(Bot);
             WriteLog(login);
             return login.Success;
         }
@@ -1330,7 +1330,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async Task<bool> CheckLoginPb()
         {
             Message_TryLogin("PlayBlink");
-            var login = await Parse.PlayBlinkGetProfileAsync(Bot, false);
+            var login = await Parse.PlayBlinkGetProfileAsync(Bot);
             WriteLog(login);
             return login.Success;
         }
