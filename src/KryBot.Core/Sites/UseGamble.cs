@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
@@ -34,11 +33,23 @@ namespace KryBot.Core.Sites
 			Enabled = false;
 		}
 
+		private class JsonJoin
+		{
+			public int Error { get; set; }
+			public TargetH target_h { get; set; }
+		}
+
+		private class TargetH
+		{
+			public int my_coins { get; set; }
+		}
+
 		#region JoinGiveaway
+
 		private Log JoinGiveaway(UseGambleGiveaway giveaway)
 		{
 			Thread.Sleep(400);
-			if(giveaway.Code != null)
+			if (giveaway.Code != null)
 			{
 				var list = new List<HttpHeader>();
 				var header = new HttpHeader
@@ -53,7 +64,7 @@ namespace KryBot.Core.Sites
 					Cookies.Generate());
 				var jresponse =
 					JsonConvert.DeserializeObject<JsonJoin>(response.RestResponse.Content.Replace(".", ""));
-				if(jresponse.Error == 0)
+				if (jresponse.Error == 0)
 				{
 					Points = jresponse.target_h.my_coins;
 					return Messages.GiveawayJoined("UseGamble", giveaway.Name, giveaway.Price,
@@ -75,6 +86,7 @@ namespace KryBot.Core.Sites
 
 			return task.Task.Result;
 		}
+
 		#endregion
 
 		#region Parse
@@ -83,18 +95,18 @@ namespace KryBot.Core.Sites
 		{
 			var response = Web.Get(Links.UseGamble, new List<Parameter>(),
 				Cookies.Generate(),
-				new List<HttpHeader>(), String.Empty);
+				new List<HttpHeader>(), string.Empty);
 
-			if(response.RestResponse.Content != String.Empty)
+			if (response.RestResponse.Content != string.Empty)
 			{
 				var htmlDoc = new HtmlDocument();
 				htmlDoc.LoadHtml(response.RestResponse.Content);
 
 				var points = htmlDoc.DocumentNode.SelectSingleNode("//span[@class='my_coins']");
 				var profileLink = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='mp-wrap']/a[1]");
-				if(points != null && profileLink != null)
+				if (points != null && profileLink != null)
 				{
-					Points = Int32.Parse(points.InnerText);
+					Points = int.Parse(points.InnerText);
 					ProfileLink = Links.UseGamble + profileLink.Attributes["href"].Value.Replace("/", "");
 					return Messages.ParseProfile("UseGamble", Points, profileLink.InnerText);
 				}
@@ -119,18 +131,18 @@ namespace KryBot.Core.Sites
 			var response = Web.Get(Links.UseGamble, new List<Parameter>(),
 				Cookies.Generate(), new List<HttpHeader>(), "profile/logs");
 
-			if(response.RestResponse.Content != String.Empty)
+			if (response.RestResponse.Content != string.Empty)
 			{
 				var htmlDoc = new HtmlDocument();
 				htmlDoc.LoadHtml(response.RestResponse.Content);
 
 				var nodes = htmlDoc.DocumentNode.SelectNodes("//tr[@class='gray']");
-				if(nodes != null)
+				if (nodes != null)
 				{
-					for(var i = 0; i < nodes.Count; i++)
+					for (var i = 0; i < nodes.Count; i++)
 					{
 						var content = nodes[i].SelectSingleNode("//tr/td[2]").InnerText;
-						if(!content.Contains("you've won the Giveaway"))
+						if (!content.Contains("you've won the Giveaway"))
 						{
 							nodes.Remove(nodes[i]);
 							i--;
@@ -160,9 +172,9 @@ namespace KryBot.Core.Sites
 
 			var pages = 1;
 
-			for(var i = 0; i < pages; i++)
+			for (var i = 0; i < pages; i++)
 			{
-				if(pages != 1)
+				if (pages != 1)
 				{
 					var headerList = new List<HttpHeader>();
 					var header = new HttpHeader
@@ -175,7 +187,7 @@ namespace KryBot.Core.Sites
 					var jsonresponse = Web.Post($"{Links.UseGamble}page/ga_page",
 						Generate.PageData_UseGamble(i + 1), headerList,
 						Cookies.Generate());
-					if(jsonresponse.RestResponse.Content != String.Empty)
+					if (jsonresponse.RestResponse.Content != string.Empty)
 					{
 						var data = jsonresponse.RestResponse.Content.Replace("\\", "");
 						var htmlDoc = new HtmlDocument();
@@ -189,18 +201,18 @@ namespace KryBot.Core.Sites
 				{
 					var response = Web.Get(Links.UseGamble,
 						new List<Parameter>(), Cookies.Generate(),
-						new List<HttpHeader>(), String.Empty);
+						new List<HttpHeader>(), string.Empty);
 
-					if(response.RestResponse.Content != String.Empty)
+					if (response.RestResponse.Content != string.Empty)
 					{
 						var htmlDoc = new HtmlDocument();
 						htmlDoc.LoadHtml(response.RestResponse.Content);
 
 						var count =
 							htmlDoc.DocumentNode.SelectNodes("//div[@class='nPagin']//div[@class='pagin']/span");
-						if(count != null)
+						if (count != null)
 						{
-							pages = Int32.Parse(htmlDoc.DocumentNode.
+							pages = int.Parse(htmlDoc.DocumentNode.
 								SelectSingleNode($"//div[@class='nPagin']//div[@class='pagin']/span[{count.Count - 1}]")
 								.InnerText);
 						}
@@ -212,7 +224,7 @@ namespace KryBot.Core.Sites
 				}
 			}
 
-			if(Giveaways == null)
+			if (Giveaways == null)
 			{
 				return
 					new Log(
@@ -242,13 +254,13 @@ namespace KryBot.Core.Sites
 
 		private void AddGiveaways(HtmlNodeCollection nodes)
 		{
-			if(nodes != null)
+			if (nodes != null)
 			{
-				foreach(var node in nodes)
+				foreach (var node in nodes)
 				{
 					var name = node.SelectSingleNode(".//div[@class='giveaway_name']");
 					var storeId = node.SelectSingleNode(".//a[@class='steam-icon']");
-					if(name != null && storeId != null)
+					if (name != null && storeId != null)
 					{
 						var spGiveaway = new UseGambleGiveaway
 						{
@@ -258,26 +270,26 @@ namespace KryBot.Core.Sites
 
 						var price = node.SelectSingleNode(".//span[@class='coin-white-icon']");
 						var code = node.SelectSingleNode(".//div[@class='ga_join_btn ga_coin_join']");
-						if(price != null && code != null)
+						if (price != null && code != null)
 						{
-							spGiveaway.Price = Int32.Parse(price.InnerText);
+							spGiveaway.Price = int.Parse(price.InnerText);
 							spGiveaway.Code = code.Attributes["onclick"].Value.Split('\'')[5].Replace("ga:", "");
 
 							var iconsBlock = node.SelectSingleNode(".//div[@class='giveaway_iconbar']");
 							var icons = iconsBlock?.SelectNodes(".//span");
-							if(icons != null)
+							if (icons != null)
 							{
-								foreach(var icon in icons)
+								foreach (var icon in icons)
 								{
-									if(icon.Attributes["class"].Value.Contains("region"))
+									if (icon.Attributes["class"].Value.Contains("region"))
 									{
 										spGiveaway.Region = icon.Attributes["class"].Value.Split('-')[1];
 									}
 								}
 							}
 
-							if(spGiveaway.Price <= Points &&
-							   spGiveaway.Price <= MaxJoinValue)
+							if (spGiveaway.Price <= Points &&
+							    spGiveaway.Price <= MaxJoinValue)
 							{
 								Giveaways?.Add(spGiveaway);
 							}
@@ -288,16 +300,5 @@ namespace KryBot.Core.Sites
 		}
 
 		#endregion
-
-		private class JsonJoin
-		{
-			public int Error { get; set; }
-			public TargetH target_h { get; set; }
-		}
-
-		private class TargetH
-		{
-			public int my_coins { get; set; }
-		}
 	}
 }

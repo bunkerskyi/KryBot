@@ -15,7 +15,7 @@ using RestSharp;
 
 namespace KryBot.Core
 {
-	public class Tools
+	public static class Tools
 	{
 		public static Bot LoadProfile(string path)
 		{
@@ -214,10 +214,10 @@ namespace KryBot.Core
 		/// <param name="blackList"> Blacklisted games. </param>
 		public static void RemoveBlacklistedGames<T>(IList<T> giveaways, Blacklist blackList) where T : BaseGiveaway
 		{
-			if(blackList.Items == null) return;
-			for(var i = 0; i < giveaways.Count; i++)
+			if (blackList.Items == null) return;
+			for (var i = 0; i < giveaways.Count; i++)
 			{
-				if(blackList.Items.Any(item => giveaways[i].StoreId == item.Id))
+				if (blackList.Items.Any(item => giveaways[i].StoreId == item.Id))
 				{
 					giveaways.Remove(giveaways[i]);
 					i--;

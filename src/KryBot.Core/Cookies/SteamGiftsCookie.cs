@@ -10,9 +10,9 @@ namespace KryBot.Core.Cookies
 			var cookie = new CookieContainer();
 			var target = new Uri(Links.SteamGifts);
 
-			if(PhpSessId != null)
+			if (PhpSessId != null)
 			{
-				cookie.Add(new Cookie("PHPSESSID", PhpSessId) { Domain = target.Host });
+				cookie.Add(new Cookie("PHPSESSID", PhpSessId) {Domain = target.Host});
 			}
 
 			return cookie;

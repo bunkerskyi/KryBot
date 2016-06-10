@@ -25,7 +25,5 @@ namespace WPFGui.ViewModels
 		}
 
 		#endregion
-
-
 	}
 }

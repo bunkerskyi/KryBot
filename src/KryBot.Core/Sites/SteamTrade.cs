@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Net;
@@ -37,12 +36,12 @@ namespace KryBot.Core.Sites
 		{
 			Thread.Sleep(400);
 			giveaway = GetJoinData(giveaway);
-			if(giveaway.LinkJoin != null)
+			if (giveaway.LinkJoin != null)
 			{
 				var response = Web.Get("http://steamtrade.info", new List<Parameter>(),
 					Cookies.Generate(),
 					new List<HttpHeader>(), giveaway.LinkJoin);
-				if(response.RestResponse.StatusCode == HttpStatusCode.OK)
+				if (response.RestResponse.StatusCode == HttpStatusCode.OK)
 				{
 					return Messages.GiveawayJoined("SteamTrade", giveaway.Name.Trim(), 0, 0, 0);
 				}
@@ -74,13 +73,13 @@ namespace KryBot.Core.Sites
 				Cookies.Generate(),
 				new List<HttpHeader>(), string.Empty);
 
-			if(response.RestResponse.Content != string.Empty)
+			if (response.RestResponse.Content != string.Empty)
 			{
 				var htmlDoc = new HtmlDocument();
 				htmlDoc.LoadHtml(response.RestResponse.Content);
 
 				var test = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='topm1']");
-				if(test != null)
+				if (test != null)
 				{
 					return Messages.ParseProfile("SteamTrade", test.InnerText);
 				}
@@ -108,7 +107,7 @@ namespace KryBot.Core.Sites
 				Cookies.Generate(),
 				new List<HttpHeader>(), "awards/");
 
-			if(response.RestResponse.Content != String.Empty)
+			if (response.RestResponse.Content != string.Empty)
 			{
 				var htmlDoc = new HtmlDocument();
 				htmlDoc.LoadHtml(response.RestResponse.Content);
@@ -116,7 +115,7 @@ namespace KryBot.Core.Sites
 				var nodes = htmlDoc.DocumentNode.SelectNodes("//tbody[@bgcolor='#F3F5F7']/tr");
 				SteamTradeAddGiveaways(nodes);
 
-				if(Giveaways == null)
+				if (Giveaways == null)
 				{
 					return
 						new Log(
@@ -124,11 +123,11 @@ namespace KryBot.Core.Sites
 							Color.White, true, true);
 				}
 
-				if(blackList != null)
+				if (blackList != null)
 				{
-					for(var i = 0; i < Giveaways.Count; i++)
+					for (var i = 0; i < Giveaways.Count; i++)
 					{
-						if(blackList.Items.Any(item => Giveaways[i].StoreId == item.Id))
+						if (blackList.Items.Any(item => Giveaways[i].StoreId == item.Id))
 						{
 							Giveaways.Remove(Giveaways[i]);
 							i--;
@@ -158,16 +157,16 @@ namespace KryBot.Core.Sites
 
 		private void SteamTradeAddGiveaways(HtmlNodeCollection nodes)
 		{
-			if(nodes != null)
+			if (nodes != null)
 			{
-				foreach(var node in nodes)
+				foreach (var node in nodes)
 				{
-					if(node.SelectSingleNode(".//span[@class='status1']") == null)
+					if (node.SelectSingleNode(".//span[@class='status1']") == null)
 					{
 						var name = node.SelectSingleNode(".//td[1]/a[2]");
 						var link = node.SelectSingleNode(".//td[1]/a[2]");
 						var storeId = node.SelectSingleNode(".//td[1]/a[1]");
-						if(name != null && link != null && storeId != null)
+						if (name != null && link != null && storeId != null)
 						{
 							var spGiveaway = new SteamTradeGiveaway
 							{
@@ -188,13 +187,13 @@ namespace KryBot.Core.Sites
 				new List<Parameter>(), Cookies.Generate(),
 				new List<HttpHeader>(), stGiveaway.Link);
 
-			if(response.RestResponse.Content != String.Empty)
+			if (response.RestResponse.Content != string.Empty)
 			{
 				var htmlDoc = new HtmlDocument();
 				htmlDoc.LoadHtml(response.RestResponse.Content);
 
 				var linkJoin = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='inv_join']");
-				if(linkJoin != null)
+				if (linkJoin != null)
 				{
 					stGiveaway.LinkJoin = linkJoin.Attributes["href"].Value.Trim();
 				}

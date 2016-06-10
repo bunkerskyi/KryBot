@@ -4,7 +4,7 @@ using Prism.Regions;
 namespace WPFGui.Modules
 {
 	/// <summary>
-	/// Модуль меню.
+	///     Модуль меню.
 	/// </summary>
 	[Module(ModuleName = "MenuModule")]
 	public class MenuModule : IModule

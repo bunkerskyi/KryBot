@@ -16,17 +16,17 @@ namespace KryBot.Core.Cookies
 			var cookie = new CookieContainer();
 			var target = new Uri(Links.SteamCompanion);
 
-			if(PhpSessId != null)
-				cookie.Add(new Cookie("PHPSESSID", PhpSessId) { Domain = target.Host });
+			if (PhpSessId != null)
+				cookie.Add(new Cookie("PHPSESSID", PhpSessId) {Domain = target.Host});
 
-			if(UserC != null)
-				cookie.Add(new Cookie("userc", UserC) { Domain = target.Host });
+			if (UserC != null)
+				cookie.Add(new Cookie("userc", UserC) {Domain = target.Host});
 
-			if(UserId != null)
-				cookie.Add(new Cookie("userid", UserId) { Domain = target.Host });
+			if (UserId != null)
+				cookie.Add(new Cookie("userid", UserId) {Domain = target.Host});
 
-			if(UserT != null)
-				cookie.Add(new Cookie("usert", UserT) { Domain = target.Host });
+			if (UserT != null)
+				cookie.Add(new Cookie("usert", UserT) {Domain = target.Host});
 
 			return cookie;
 		}

@@ -46,9 +46,9 @@ namespace KryBot.Core.Sites
 		{
 			Thread.Sleep(400);
 			var data = GetJoinData(giveaway, steamCookie, steam);
-			if(data != null && data.Success)
+			if (data != null && data.Success)
 			{
-				if(giveaway.Code != null)
+				if (giveaway.Code != null)
 				{
 					var list = new List<HttpHeader>();
 					var header = new HttpHeader
@@ -62,11 +62,11 @@ namespace KryBot.Core.Sites
 						Generate.PostData_SteamCompanion(giveaway.Code), list,
 						Cookies.Generate());
 
-					if(response.RestResponse.Content.Split('"')[3].Split('"')[0] == "Success")
+					if (response.RestResponse.Content.Split('"')[3].Split('"')[0] == "Success")
 					{
-						Points = Int32.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]);
+						Points = int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]);
 						return Messages.GiveawayJoined("SteamCompanion", giveaway.Name, giveaway.Price,
-							Int32.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]), 0);
+							int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]), 0);
 					}
 
 					return Messages.GiveawayNotJoined("SteamCompanion", giveaway.Name, response.RestResponse.Content);
@@ -96,14 +96,14 @@ namespace KryBot.Core.Sites
 			var response = Web.Get(Links.SteamCompanion, new List<Parameter>(),
 				Cookies.Generate(),
 				new List<HttpHeader>(), "/");
-			if(response.RestResponse.Content != string.Empty)
+			if (response.RestResponse.Content != string.Empty)
 			{
 				var htmlDoc = new HtmlDocument();
 				htmlDoc.LoadHtml(response.RestResponse.Content);
 
 				var points = htmlDoc.DocumentNode.SelectSingleNode("//span[@class='points']");
 				var profileLink = htmlDoc.DocumentNode.SelectSingleNode("//ul[@class='right']/li[1]/a[1]");
-				if(points != null && profileLink != null)
+				if (points != null && profileLink != null)
 				{
 					Points = int.Parse(points.InnerText);
 					ProfileLink = profileLink.Attributes["href"].Value;
@@ -130,26 +130,26 @@ namespace KryBot.Core.Sites
 		{
 			var response = Web.Get(Links.SteamCompanion, new List<Parameter>(),
 				Cookies.Generate(), new List<HttpHeader>(), "gifts/won");
-			if(response.RestResponse.Content != string.Empty)
+			if (response.RestResponse.Content != string.Empty)
 			{
 				var htmlDoc = new HtmlDocument();
 				htmlDoc.LoadHtml(response.RestResponse.Content);
 
 				var nodes = htmlDoc.DocumentNode.SelectNodes("//table[@id='created_giveaway']/tbody/tr");
 
-				if(nodes != null)
+				if (nodes != null)
 				{
-					for(var i = 0; i < nodes.Count; i++)
+					for (var i = 0; i < nodes.Count; i++)
 					{
 						var test = nodes[i].SelectSingleNode(".//input[@checked]");
-						if(test != null)
+						if (test != null)
 						{
 							nodes.Remove(nodes[i]);
 							i--;
 						}
 					}
 
-					if(nodes.Count > 0)
+					if (nodes.Count > 0)
 					{
 						return Messages.GiveawayHaveWon("SteamCompanion", nodes.Count, "https://steamcompanion.com/gifts/won");
 					}
@@ -175,63 +175,63 @@ namespace KryBot.Core.Sites
 			var content = string.Empty;
 			Giveaways?.Clear();
 
-			if(WishList)
+			if (WishList)
 			{
 				content += LoadWishListGiveaways();
 			}
 
-			if(Contributors)
+			if (Contributors)
 			{
 				content += LoadContributorsGiveaways();
 			}
 
-			if(Group)
+			if (Group)
 			{
 				content += LoadGroupGiveaways();
 			}
 
-			if(Regular)
+			if (Regular)
 			{
 				var pages = 1;
-				for(var i = 0; i < pages; i++)
+				for (var i = 0; i < pages; i++)
 				{
 					var response = Web.Get(Links.SteamCompanion,
 						new List<Parameter>(),
 						Cookies.Generate(), new List<HttpHeader>(),
 						i == 0 ? "/gifts/search/?type=public" : "/gifts/search.php?page=" + (i + 1) + "&type=public");
 
-					if(response.RestResponse.Content != null)
+					if (response.RestResponse.Content != null)
 					{
 						var htmlDoc = new HtmlDocument();
 						htmlDoc.LoadHtml(response.RestResponse.Content);
 
 						var pageNode = htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]");
-						if(pageNode != null)
+						if (pageNode != null)
 						{
 							try
 							{
-								pages = Int32.Parse(pageNode.Attributes["href"].Value.Split('=')[1].Split('&')[0]);
+								pages = int.Parse(pageNode.Attributes["href"].Value.Split('=')[1].Split('&')[0]);
 							}
-							catch(FormatException)
+							catch (FormatException)
 							{
-								pages = Int32.Parse(pageNode.Attributes["href"].Value.Split('=')[2]);
+								pages = int.Parse(pageNode.Attributes["href"].Value.Split('=')[2]);
 							}
 						}
 
 						var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/div");
-						if(nodes != null)
+						if (nodes != null)
 						{
-							for(var j = 0; j < nodes.Count; j++)
+							for (var j = 0; j < nodes.Count; j++)
 							{
-								if(nodes[j].Attributes["style"] != null &&
-								   nodes[j].Attributes["style"].Value == "opacity: 0.5;")
+								if (nodes[j].Attributes["style"] != null &&
+								    nodes[j].Attributes["style"].Value == "opacity: 0.5;")
 								{
 									nodes.Remove(nodes[j]);
 									j--;
 								}
 							}
 
-							if(nodes.Count > 0)
+							if (nodes.Count > 0)
 							{
 								AddGiveaways(nodes, Giveaways);
 							}
@@ -240,7 +240,7 @@ namespace KryBot.Core.Sites
 				}
 			}
 
-			if(Giveaways?.Count == 0 && WishlistGiveaways.Count == 0)
+			if (Giveaways?.Count == 0 && WishlistGiveaways.Count == 0)
 			{
 				return
 					new Log(
@@ -270,31 +270,31 @@ namespace KryBot.Core.Sites
 		{
 			var count = 0;
 			var pages = 1;
-			for(var i = 0; i < pages; i++)
+			for (var i = 0; i < pages; i++)
 			{
 				var response = Web.Get(Links.SteamCompanion,
 					new List<Parameter>(),
 					Cookies.Generate(), new List<HttpHeader>(),
 					i == 0 ? "/gifts/search/?wishlist=true" : "/gifts/search/?wishlist=true&page=" + (i + 1));
 
-				if(response.RestResponse.Content != null)
+				if (response.RestResponse.Content != null)
 				{
 					var htmlDoc = new HtmlDocument();
 					htmlDoc.LoadHtml(response.RestResponse.Content);
 
 					var pageNode = htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]");
-					if(pageNode != null)
+					if (pageNode != null)
 					{
-						pages = Int32.Parse(pageNode.Attributes["href"].Value.Split('=')[2]);
+						pages = int.Parse(pageNode.Attributes["href"].Value.Split('=')[2]);
 					}
 
 					var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/div");
-					if(nodes != null)
+					if (nodes != null)
 					{
-						for(var j = 0; j < nodes.Count; j++)
+						for (var j = 0; j < nodes.Count; j++)
 						{
-							if(nodes[j].Attributes["style"] != null &&
-							   nodes[j].Attributes["style"].Value == "opacity: 0.5;")
+							if (nodes[j].Attributes["style"] != null &&
+							    nodes[j].Attributes["style"].Value == "opacity: 0.5;")
 							{
 								nodes.Remove(nodes[j]);
 								j--;
@@ -313,31 +313,31 @@ namespace KryBot.Core.Sites
 		{
 			var count = 0;
 			var pages = 1;
-			for(var i = 0; i < pages; i++)
+			for (var i = 0; i < pages; i++)
 			{
 				var response = Web.Get(Links.SteamCompanion,
 					new List<Parameter>(),
 					Cookies.Generate(), new List<HttpHeader>(),
 					i == 0 ? "/gifts/search/?type=contributor" : "/gifts/search/?type=contributor&page=" + (i + 1));
 
-				if(response.RestResponse.Content != null)
+				if (response.RestResponse.Content != null)
 				{
 					var htmlDoc = new HtmlDocument();
 					htmlDoc.LoadHtml(response.RestResponse.Content);
 
 					var pageNode = htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]");
-					if(pageNode != null)
+					if (pageNode != null)
 					{
 						pages = int.Parse(pageNode.Attributes["href"].Value.Split('=')[1]);
 					}
 
 					var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/div");
-					if(nodes != null)
+					if (nodes != null)
 					{
-						for(var j = 0; j < nodes.Count; j++)
+						for (var j = 0; j < nodes.Count; j++)
 						{
-							if(nodes[j].Attributes["style"] != null &&
-							   nodes[j].Attributes["style"].Value == "opacity: 0.5;")
+							if (nodes[j].Attributes["style"] != null &&
+							    nodes[j].Attributes["style"].Value == "opacity: 0.5;")
 							{
 								nodes.Remove(nodes[j]);
 								j--;
@@ -356,45 +356,45 @@ namespace KryBot.Core.Sites
 		{
 			var count = 0;
 			var pages = 1;
-			for(var i = 0; i < pages; i++)
+			for (var i = 0; i < pages; i++)
 			{
 				var response = Web.Get(Links.SteamCompanion,
 					new List<Parameter>(),
 					Cookies.Generate(), new List<HttpHeader>(),
 					i == 0 ? "/gifts/search/?type=group" : "/gifts/search/?type=group&page=" + (i + 1));
 
-				if(response.RestResponse.Content != null)
+				if (response.RestResponse.Content != null)
 				{
 					var htmlDoc = new HtmlDocument();
 					htmlDoc.LoadHtml(response.RestResponse.Content);
 
 					var pageNode = htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]");
-					if(pageNode != null)
+					if (pageNode != null)
 					{
 						try
 						{
 							pages = int.Parse(pageNode.Attributes["href"].Value.Split('=')[1].Split('&')[0]);
 						}
-						catch(FormatException)
+						catch (FormatException)
 						{
 							pages = int.Parse(pageNode.Attributes["href"].Value.Split('=')[2].Split('&')[0]);
 						}
 					}
 
 					var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/div");
-					if(nodes != null)
+					if (nodes != null)
 					{
-						for(var j = 0; j < nodes.Count; j++)
+						for (var j = 0; j < nodes.Count; j++)
 						{
-							if(nodes[j].Attributes["style"] != null &&
-							   nodes[j].Attributes["style"].Value == "opacity: 0.5;")
+							if (nodes[j].Attributes["style"] != null &&
+							    nodes[j].Attributes["style"].Value == "opacity: 0.5;")
 							{
 								nodes.Remove(nodes[j]);
 								j--;
 							}
 						}
 						count += nodes.Count;
-						if(nodes.Count > 0)
+						if (nodes.Count > 0)
 						{
 							AddGiveaways(nodes, Giveaways);
 						}
@@ -409,21 +409,21 @@ namespace KryBot.Core.Sites
 
 		private void AddGiveaways(HtmlNodeCollection nodes, List<SteamCompanionGiveaway> giveaways)
 		{
-			if(nodes != null)
+			if (nodes != null)
 			{
-				foreach(var node in nodes)
+				foreach (var node in nodes)
 				{
 					var name = node.SelectNodes(".//p[@class='game-name']/a/span").Count > 1
 						? node.SelectSingleNode(".//p[@class='game-name']/a/span[2]")
 						: node.SelectSingleNode(".//p[@class='game-name']/a/span[1]");
 					var price = node.SelectSingleNode(".//p[@class='game-name']/a");
 
-					if(price != null && name != null)
+					if (price != null && name != null)
 					{
 						var scGiveaway = new SteamCompanionGiveaway
 						{
 							Name = name.InnerText,
-							Price = Int32.Parse(price.InnerText.Replace("p)", "").Split('(')[
+							Price = int.Parse(price.InnerText.Replace("p)", "").Split('(')[
 								node.SelectSingleNode(".//p[@class='game-name']")
 									.InnerText.Replace("p)", "")
 									.Split('(')
@@ -432,13 +432,13 @@ namespace KryBot.Core.Sites
 						};
 
 						var region = node.SelectSingleNode(".//span[@class='icon-region']");
-						if(region != null)
+						if (region != null)
 						{
 							scGiveaway.Region = true;
 						}
 
-						if(scGiveaway.Price <= Points &&
-						   scGiveaway.Price <= JoinPointLimit)
+						if (scGiveaway.Price <= Points &&
+						    scGiveaway.Price <= JoinPointLimit)
 						{
 							giveaways?.Add(scGiveaway);
 						}
@@ -451,9 +451,9 @@ namespace KryBot.Core.Sites
 		{
 			var response = Web.Get(scGiveaway.Link,
 				new List<Parameter>(), Cookies.Generate(),
-				new List<HttpHeader>(), String.Empty);
+				new List<HttpHeader>(), string.Empty);
 
-			if(response.RestResponse.Content != null)
+			if (response.RestResponse.Content != null)
 			{
 				var htmlDoc = new HtmlDocument();
 				htmlDoc.LoadHtml(response.RestResponse.Content);
@@ -461,7 +461,7 @@ namespace KryBot.Core.Sites
 				var storId = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='banner large-5 columns']");
 				var code = htmlDoc.DocumentNode.SelectSingleNode($"//div[@data-points='{scGiveaway.Price}']");
 				var giftId = htmlDoc.DocumentNode.SelectSingleNode("//input[@name='giftID']");
-				if(storId != null && code != null && giftId != null)
+				if (storId != null && code != null && giftId != null)
 				{
 					scGiveaway.StoreId = storId.Attributes["href"].Value.Split('/')[4];
 					scGiveaway.Code = code.Attributes["data-hashid"].Value;
@@ -470,13 +470,13 @@ namespace KryBot.Core.Sites
 
 				var group =
 					htmlDoc.DocumentNode.SelectSingleNode("//a[@class='notification group-join regular-button qa']");
-				if(group != null)
+				if (group != null)
 				{
-					if(AutoJoin)
+					if (AutoJoin)
 					{
 						var trueGroupUrl = Web.Get(group.Attributes["href"].Value, new List<Parameter>(),
 							Cookies.Generate(),
-							new List<HttpHeader>(), String.Empty);
+							new List<HttpHeader>(), string.Empty);
 
 						return steam.JoinGroup(trueGroupUrl.RestResponse.ResponseUri.AbsoluteUri,
 							Generate.PostData_SteamGroupJoin(steamCookie));
@@ -493,7 +493,7 @@ namespace KryBot.Core.Sites
 				var exception =
 					htmlDoc.DocumentNode.SelectSingleNode("//a[@class='notification regular-button']").InnerText;
 
-				if(exception != null)
+				if (exception != null)
 				{
 					return Messages.GiveawayNotJoined("SteamCompanion", scGiveaway.Name, exception);
 				}
@@ -509,7 +509,7 @@ namespace KryBot.Core.Sites
 		{
 			var response = Web.Get("https://steamcompanion.com//settings/resync&success=true", new List<Parameter>(),
 				Cookies.Generate(), new List<HttpHeader>(), "");
-			if(response.RestResponse.Content != "")
+			if (response.RestResponse.Content != "")
 			{
 				return new Log($"{Messages.GetDateTime()} {{SteamCompanion}} Sync success!", Color.Green,
 					true, true);

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net;
-using KryBot.Core.Properties;
 using RestSharp;
 
 namespace KryBot.Core

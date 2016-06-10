@@ -24,7 +24,7 @@ namespace KryBot.Core
 
 		public string UserAgent { get; set; }
 
-		// НЕ ЗАБИРАТЬ У ПОЛЕЙ SET
+		// НЕ ИЗМЕНЯТЬ У ПОЛЕЙ SET
 		public GameMiner GameMiner { get; set; }
 		public SteamGifts SteamGifts { get; set; }
 		public SteamCompanion SteamCompanion { get; set; }
@@ -33,7 +33,7 @@ namespace KryBot.Core
 		public PlayBlink PlayBlink { get; set; }
 		public Steam Steam { get; set; }
 		public GameAways GameAways { get; set; }
-		// НЕ ЗАБИРАТЬ У ПОЛЕЙ SET
+		// НЕ ИЗМЕНЯТЬ У ПОЛЕЙ SET
 
 		public void ClearGiveawayList()
 		{

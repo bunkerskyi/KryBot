@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
@@ -33,19 +32,19 @@ namespace KryBot.Core.Sites
 		public Log JoinGroup(string url, List<Parameter> parameters)
 		{
 			var response = Web.Post(url, parameters, new List<HttpHeader>(), Cookies.Generate());
-			if(response.RestResponse.Content != "")
+			if (response.RestResponse.Content != "")
 			{
 				var htmlDoc = new HtmlDocument();
 				htmlDoc.LoadHtml(response.RestResponse.Content);
 
 				var node = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='btn_blue_white_innerfade btn_medium']");
-				if(node != null)
+				if (node != null)
 				{
 					return Messages.GroupJoined(url);
 				}
 
 				var error = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='error_ctn']");
-				if(error != null && error.InnerText.Contains("You are already a member of this group."))
+				if (error != null && error.InnerText.Contains("You are already a member of this group."))
 				{
 					return Messages.GroupAlreadyMember(url);
 				}
@@ -72,9 +71,9 @@ namespace KryBot.Core.Sites
 		private Log GetProfile()
 		{
 			var response = Web.Get(Links.Steam, new List<Parameter>(),
-				Cookies.Generate(), new List<HttpHeader>(), String.Empty);
+				Cookies.Generate(), new List<HttpHeader>(), string.Empty);
 
-			if(response.RestResponse.Content != String.Empty)
+			if (response.RestResponse.Content != string.Empty)
 			{
 				var htmlDoc = new HtmlDocument();
 				htmlDoc.LoadHtml(response.RestResponse.Content);
@@ -82,7 +81,7 @@ namespace KryBot.Core.Sites
 				var login =
 					htmlDoc.DocumentNode.SelectSingleNode(
 						"//a[contains(@class, 'user_avatar') and contains(@class, 'playerAvatar')]");
-				if(login == null)
+				if (login == null)
 				{
 					//ProfileLoaded();
 					return Messages.ParseProfileFailed("Steam");
@@ -114,7 +113,7 @@ namespace KryBot.Core.Sites
 						new List<HttpHeader>(), "");
 			var serializer = new XmlSerializer(typeof(Classes.ProfileGamesList));
 			TextReader reader = new StringReader(responseXmlProfile.RestResponse.Content);
-			var games = (Classes.ProfileGamesList)serializer.Deserialize(reader);
+			var games = (Classes.ProfileGamesList) serializer.Deserialize(reader);
 			return games;
 		}
 
@@ -126,7 +125,7 @@ namespace KryBot.Core.Sites
 						new List<Parameter>(),
 						new CookieContainer(), new List<HttpHeader>(), "");
 
-			if(responseJsonDetail.RestResponse.Content == "null" || responseJsonDetail.RestResponse.Content == "")
+			if (responseJsonDetail.RestResponse.Content == "null" || responseJsonDetail.RestResponse.Content == "")
 			{
 				return null;
 			}

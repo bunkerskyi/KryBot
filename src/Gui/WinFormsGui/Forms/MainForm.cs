@@ -27,8 +27,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private readonly Timer _timerTickCount = new Timer();
 		private bool _farming;
 		private int _interval;
-		private int _loopsLeft;
 		private bool _logActive;
+		private int _loopsLeft;
 
 		public Log LogBuffer;
 
@@ -1196,7 +1196,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			btnSGLogin.Enabled = false;
 			BrowserStart($"{Links.SteamGifts}?login", Links.SteamGifts, "SteamGifts - Login", "");
 
-			if(string.IsNullOrEmpty(_bot.UserAgent))
+			if (string.IsNullOrEmpty(_bot.UserAgent))
 			{
 				_bot.UserAgent = Tools.UserAgent();
 			}
@@ -1239,7 +1239,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			btnGMLogin.Enabled = false;
 			BrowserStart($"{Links.GameMiner}login/steam?backurl=http%3A%2F%2Fgameminer.net%2F%3Flang%3D" +
-				Properties.Settings.Default.Lang + @"&agree=True",
+			             Properties.Settings.Default.Lang + @"&agree=True",
 				"http://gameminer.net/?lang=" + Properties.Settings.Default.Lang, "GameMiner - Login", "");
 
 			if (string.IsNullOrEmpty(_bot.UserAgent))
@@ -1687,7 +1687,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			if (login)
 			{
 				await _bot.Steam.JoinGroupAsync("http://steamcommunity.com/groups/krybot",
-						Generate.PostData_SteamGroupJoin(_bot.Steam.Cookies.Sessid));
+					Generate.PostData_SteamGroupJoin(_bot.Steam.Cookies.Sessid));
 
 				BlockTabpage(tabPageSteam, true);
 				btnSteamLogin.Enabled = false;
@@ -1970,7 +1970,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				else
 				{
 					if (giveaway.Price <= _bot.SteamGifts.Points &&
-						_bot.SteamGifts.PointsReserv <= _bot.SteamGifts.Points - giveaway.Price)
+					    _bot.SteamGifts.PointsReserv <= _bot.SteamGifts.Points - giveaway.Price)
 					{
 						var data = await _bot.SteamGifts.JoinGiveawayAsync(giveaways.IndexOf(giveaway), _bot.UserAgent);
 						if (data != null && data.Content != "\n")
@@ -1991,7 +1991,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				{
 					if (giveaway.Price <= _bot.SteamCompanion.Points)
 					{
-						var data = await _bot.SteamCompanion.JoinGiveawayAsync(giveaways.IndexOf(giveaway), _bot.Steam.Cookies.Sessid, _bot.Steam);
+						var data =
+							await _bot.SteamCompanion.JoinGiveawayAsync(giveaways.IndexOf(giveaway), _bot.Steam.Cookies.Sessid, _bot.Steam);
 						if (data != null && data.Content != "\n")
 						{
 							WriteLog(data);
@@ -2001,9 +2002,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				else
 				{
 					if (giveaway.Price <= _bot.SteamCompanion.Points &&
-						_bot.SteamCompanion.PointsReserv <= _bot.SteamCompanion.Points - giveaway.Price)
+					    _bot.SteamCompanion.PointsReserv <= _bot.SteamCompanion.Points - giveaway.Price)
 					{
-						var data = await _bot.SteamCompanion.JoinGiveawayAsync(giveaways.IndexOf(giveaway), _bot.Steam.Cookies.Sessid, _bot.Steam);
+						var data =
+							await _bot.SteamCompanion.JoinGiveawayAsync(giveaways.IndexOf(giveaway), _bot.Steam.Cookies.Sessid, _bot.Steam);
 						if (data != null && data.Content != "\n")
 						{
 							WriteLog(data);
@@ -2019,7 +2021,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			foreach (var giveaway in giveaways)
 			{
 				if (giveaway.Price <= _bot.UseGamble.Points &&
-					_bot.UseGamble.PointsReserv <= _bot.UseGamble.Points - giveaway.Price)
+				    _bot.UseGamble.PointsReserv <= _bot.UseGamble.Points - giveaway.Price)
 				{
 					var data = await _bot.UseGamble.JoinGiveawayAsync(giveaways.IndexOf(giveaway));
 					if (data != null && data.Content != "\n")

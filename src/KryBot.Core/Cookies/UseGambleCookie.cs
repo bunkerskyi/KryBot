@@ -10,11 +10,10 @@ namespace KryBot.Core.Cookies
 			var cookie = new CookieContainer();
 			var target = new Uri(Links.UseGamble);
 
-			if(PhpSessId != null)
-				cookie.Add(new Cookie("PHPSESSID", PhpSessId) { Domain = target.Host });
+			if (PhpSessId != null)
+				cookie.Add(new Cookie("PHPSESSID", PhpSessId) {Domain = target.Host});
 
 			return cookie;
 		}
-
 	}
 }
