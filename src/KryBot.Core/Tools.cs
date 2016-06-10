@@ -9,12 +9,13 @@ using System.Security;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using KryBot.CommonResources.lang;
+using KryBot.Core.Giveaways;
 using Microsoft.Win32;
 using RestSharp;
 
 namespace KryBot.Core
 {
-	public static class Tools
+	public class Tools
 	{
 		public static Bot LoadProfile(string path)
 		{
@@ -205,5 +206,23 @@ namespace KryBot.Core
 		// TODO Перенести
 		//	myShortcut.Save();
 		//}
+
+		/// <summary>
+		///     Remove all blacklisted games from list of <paramref name="giveaways" />.
+		/// </summary>
+		/// <param name="giveaways"> List of Giweways. </param>
+		/// <param name="blackList"> Blacklisted games. </param>
+		public static void RemoveBlacklistedGames<T>(IList<T> giveaways, Blacklist blackList) where T : BaseGiveaway
+		{
+			if(blackList.Items == null) return;
+			for(var i = 0; i < giveaways.Count; i++)
+			{
+				if(blackList.Items.Any(item => giveaways[i].StoreId == item.Id))
+				{
+					giveaways.Remove(giveaways[i]);
+					i--;
+				}
+			}
+		}
 	}
 }

@@ -82,7 +82,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             if (_bot.Steam.Enabled && _bot.Steam.ProfileLink != "")
             {
                 toolStripStatusLabel.Image = Resources.load;
-                var list = await Parse.SteamGetUserGames(_bot.Steam.ProfileLink);
+                var list = await _bot.Steam.GetUserGames();
 
                 if (list.Games.Game.Count > 0)
                 {
@@ -134,7 +134,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async Task<string> LoadName(string id)
         {
             toolStripStatusLabel.Image = Resources.load;
-            var name = await Parse.SteamGetGameName(id) ?? "";
+            var name = await _bot.Steam.GetGameName(id) ?? "";
             toolStripStatusLabel.Image = null;
             return name;
         }
