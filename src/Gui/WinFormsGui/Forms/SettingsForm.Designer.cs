@@ -86,16 +86,12 @@
 			this.tbSPMaxValue = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
-			this.tabPageST = new System.Windows.Forms.TabPage();
-			this.btnSTCookies = new System.Windows.Forms.Button();
 			this.tabPagePB = new System.Windows.Forms.TabPage();
 			this.tbPBReserv = new System.Windows.Forms.TextBox();
 			this.tbPBMaxValue = new System.Windows.Forms.TextBox();
 			this.label9 = new System.Windows.Forms.Label();
 			this.label10 = new System.Windows.Forms.Label();
 			this.btnPBCookies = new System.Windows.Forms.Button();
-			this.tabPageSteam = new System.Windows.Forms.TabPage();
-			this.button1 = new System.Windows.Forms.Button();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.tabControl1.SuspendLayout();
@@ -107,9 +103,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.numSGLevel)).BeginInit();
 			this.tabPageSC.SuspendLayout();
 			this.tabPageUG.SuspendLayout();
-			this.tabPageST.SuspendLayout();
 			this.tabPagePB.SuspendLayout();
-			this.tabPageSteam.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -120,9 +114,7 @@
 			this.tabControl1.Controls.Add(this.tabPageSG);
 			this.tabControl1.Controls.Add(this.tabPageSC);
 			this.tabControl1.Controls.Add(this.tabPageUG);
-			this.tabControl1.Controls.Add(this.tabPageST);
 			this.tabControl1.Controls.Add(this.tabPagePB);
-			this.tabControl1.Controls.Add(this.tabPageSteam);
 			this.tabControl1.Location = new System.Drawing.Point(0, 27);
 			this.tabControl1.Name = "tabControl1";
 			this.tabControl1.SelectedIndex = 0;
@@ -734,26 +726,6 @@
 			this.label4.TabIndex = 14;
 			this.label4.Text = "Максимальная ставка:";
 			// 
-			// tabPageST
-			// 
-			this.tabPageST.Controls.Add(this.btnSTCookies);
-			this.tabPageST.Location = new System.Drawing.Point(4, 22);
-			this.tabPageST.Name = "tabPageST";
-			this.tabPageST.Size = new System.Drawing.Size(309, 155);
-			this.tabPageST.TabIndex = 3;
-			this.tabPageST.Text = "ST";
-			this.tabPageST.UseVisualStyleBackColor = true;
-			// 
-			// btnSTCookies
-			// 
-			this.btnSTCookies.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.locked1;
-			this.btnSTCookies.Location = new System.Drawing.Point(278, 6);
-			this.btnSTCookies.Name = "btnSTCookies";
-			this.btnSTCookies.Size = new System.Drawing.Size(23, 23);
-			this.btnSTCookies.TabIndex = 19;
-			this.btnSTCookies.UseVisualStyleBackColor = true;
-			this.btnSTCookies.Click += new System.EventHandler(this.btnSTCookies_Click);
-			// 
 			// tabPagePB
 			// 
 			this.tabPagePB.Controls.Add(this.tbPBReserv);
@@ -814,26 +786,6 @@
 			this.btnPBCookies.UseVisualStyleBackColor = true;
 			this.btnPBCookies.Click += new System.EventHandler(this.btnPBCookies_Click);
 			// 
-			// tabPageSteam
-			// 
-			this.tabPageSteam.Controls.Add(this.button1);
-			this.tabPageSteam.Location = new System.Drawing.Point(4, 22);
-			this.tabPageSteam.Name = "tabPageSteam";
-			this.tabPageSteam.Size = new System.Drawing.Size(309, 155);
-			this.tabPageSteam.TabIndex = 6;
-			this.tabPageSteam.Text = "Steam";
-			this.tabPageSteam.UseVisualStyleBackColor = true;
-			// 
-			// button1
-			// 
-			this.button1.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.locked1;
-			this.button1.Location = new System.Drawing.Point(278, 6);
-			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(23, 23);
-			this.button1.TabIndex = 20;
-			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
-			// 
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -885,10 +837,8 @@
 			this.tabPageSC.PerformLayout();
 			this.tabPageUG.ResumeLayout(false);
 			this.tabPageUG.PerformLayout();
-			this.tabPageST.ResumeLayout(false);
 			this.tabPagePB.ResumeLayout(false);
 			this.tabPagePB.PerformLayout();
-			this.tabPageSteam.ResumeLayout(false);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.ResumeLayout(false);
@@ -904,7 +854,6 @@
 		private System.Windows.Forms.MenuStrip menuStrip1;
 		private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
 		private System.Windows.Forms.TabPage tabPageSC;
-		private System.Windows.Forms.TabPage tabPageST;
 		private System.Windows.Forms.TabPage tabPageUG;
 		private System.Windows.Forms.TabPage tabPageCommun;
 		private System.Windows.Forms.ComboBox cbSortBy;
@@ -938,7 +887,6 @@
 		private System.Windows.Forms.Button btnSGCookies;
 		private System.Windows.Forms.Button btnSCCookies;
 		private System.Windows.Forms.Button btnSPCookies;
-		private System.Windows.Forms.Button btnSTCookies;
 		private System.Windows.Forms.GroupBox groupBox1;
 		private System.Windows.Forms.CheckBox cbTimerEnable;
 		private System.Windows.Forms.GroupBox gbTimerSettings;
@@ -952,8 +900,6 @@
 		private System.Windows.Forms.CheckBox cbSCAutojoin;
 		private System.Windows.Forms.CheckBox cbWonTip;
 		private System.Windows.Forms.CheckBox cbFarmTip;
-		private System.Windows.Forms.TabPage tabPageSteam;
-		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.CheckBox cbSGRegular;
 		private System.Windows.Forms.CheckBox cbSCRegular;
 		private System.Windows.Forms.Button btnDeleteCookies;
