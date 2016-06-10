@@ -22,7 +22,7 @@ namespace KryBot.Core.Sites
 		}
 
 		public bool Enabled { get; set; }
-		public SteamTradeCookie Cookies { get; private set; }
+		public SteamTradeCookie Cookies { get; set; }
 		public List<SteamTradeGiveaway> Giveaways { get; set; }
 
 		public void Logout()

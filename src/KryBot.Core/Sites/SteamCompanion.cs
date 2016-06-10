@@ -27,10 +27,10 @@ namespace KryBot.Core.Sites
 		public bool Group { get; set; }
 		public bool AutoJoin { get; set; }
 		private string ProfileLink { get; set; }
-		public int Points { get; private set; }
+		public int Points { get; set; }
 		public int JoinPointLimit { get; set; } = 1500;
 		public int PointsReserv { get; set; }
-		public SteamCompanionCookie Cookies { get; private set; }
+		public SteamCompanionCookie Cookies { get; set; }
 		public List<SteamCompanionGiveaway> Giveaways { get; set; }
 		public List<SteamCompanionGiveaway> WishlistGiveaways { get; set; }
 

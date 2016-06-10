@@ -22,10 +22,10 @@ namespace KryBot.Core.Sites
 
 		public bool Enabled { get; set; }
 		private string ProfileLink { get; set; }
-		public int Points { get; private set; }
+		public int Points { get; set; }
 		public int MaxJoinValue { get; set; } = 30;
 		public int PointsReserv { get; set; }
-		public UseGambleCookie Cookies { get; private set; }
+		public UseGambleCookie Cookies { get; set; }
 		public List<UseGambleGiveaway> Giveaways { get; set; }
 
 		public void Logout()

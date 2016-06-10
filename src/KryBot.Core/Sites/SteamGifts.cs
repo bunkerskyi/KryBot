@@ -27,12 +27,12 @@ namespace KryBot.Core.Sites
 		public bool WishList { get; set; }
 		public bool SortLevel { get; set; }
 		public bool SortToLessLevel { get; set; }
-		public int Points { get; private set; }
-		public int Level { get; private set; }
+		public int Points { get; set; }
+		public int Level { get; set; }
 		public int JoinPointLimit { get; set; } = 300;
 		public int PointsReserv { get; set; }
 		public int MinLevel { get; set; }
-		public SteamGiftsCookie Cookies { get; private set; }
+		public SteamGiftsCookie Cookies { get; set; }
 		public List<SteamGiftsGiveaway> Giveaways { get; set; }
 		public List<SteamGiftsGiveaway> WishlistGiveaways { get; set; }
 

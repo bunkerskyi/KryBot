@@ -22,8 +22,8 @@ namespace KryBot.Core.Sites
 		}
 
 		public bool Enabled { get; set; }
-		public int Coal { get; private set; }
-		public int Level { get; private set; }
+		public int Coal { get; set; }
+		public int Level { get; set; }
 		public int JoinCoalLimit { get; set; } = 50;
 		public int CoalReserv { get; set; }
 		public bool Sandbox { get; set; } = true;
@@ -31,7 +31,7 @@ namespace KryBot.Core.Sites
 		public bool FreeGolden { get; set; } = true;
 		public bool OnlyGifts { get; set; }
 		public bool NoRegion { get; set; }
-		public GameMinerCookie Cookies { get; private set; }
+		public GameMinerCookie Cookies { get; set; }
 		public List<GameMinerGiveaway> Giveaways { get; set; }
 
 		public void Logout()

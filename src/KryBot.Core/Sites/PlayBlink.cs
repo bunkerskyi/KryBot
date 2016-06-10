@@ -21,11 +21,11 @@ namespace KryBot.Core.Sites
 		}
 
 		public bool Enabled { get; set; }
-		public int Points { get; private set; }
-		public int Level { get; private set; }
+		public int Points { get; set; }
+		public int Level { get; set; }
 		public int MaxJoinValue { get; set; } = 50;
 		public int PointReserv { get; set; }
-		public PlayBlinkCookie Cookies { get; private set; }
+		public PlayBlinkCookie Cookies { get; set; }
 		public List<PlayBlinkGiveaway> Giveaways { get; set; }
 
 		public void Logout()

@@ -20,7 +20,7 @@ namespace KryBot.Core.Sites
 
 		public bool Enabled { get; set; }
 		public string ProfileLink { get; set; }
-		public SteamCookie Cookies { get; private set; }
+		public SteamCookie Cookies { get; set; }
 
 		public void Logout()
 		{
