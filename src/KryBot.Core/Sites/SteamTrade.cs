@@ -46,7 +46,7 @@ namespace KryBot.Core.Sites
 			return null;
 		}
 
-		public async Task<Log> JoinGiveawayAsync(int index)
+		public async Task<Log> Join(int index)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -62,7 +62,7 @@ namespace KryBot.Core.Sites
 
 		#region Parse
 
-		private Log SteamTradeGetProfile()
+		private Log GetProfile()
 		{
 			var response = Web.Get(Links.SteamTrade, Cookies.Generate());
 
@@ -80,19 +80,19 @@ namespace KryBot.Core.Sites
 			return Messages.ParseProfileFailed("SteamTrade");
 		}
 
-		public async Task<Log> SteamTradeGetProfileAsync()
+		public async Task<Log> CheckLogin()
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = SteamTradeGetProfile();
+				var result = GetProfile();
 				task.SetResult(result);
 			});
 
 			return task.Task.Result;
 		}
 
-		private Log SteamTradeLoadGiveaways(Blacklist blackList)
+		private Log LoadGiveaways(Blacklist blackList)
 		{
 			Giveaways?.Clear();
 
@@ -104,7 +104,7 @@ namespace KryBot.Core.Sites
 				htmlDoc.LoadHtml(response.RestResponse.Content);
 
 				var nodes = htmlDoc.DocumentNode.SelectNodes("//tbody[@bgcolor='#F3F5F7']/tr");
-				SteamTradeAddGiveaways(nodes);
+				AddGiveaways(nodes);
 
 				if (Giveaways == null)
 				{
@@ -128,19 +128,19 @@ namespace KryBot.Core.Sites
 			return null;
 		}
 
-		public async Task<Log> SteamTradeLoadGiveawaysAsync(Blacklist blackList)
+		public async Task<Log> LoadGiveawaysAsync(Blacklist blackList)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = SteamTradeLoadGiveaways(blackList);
+				var result = LoadGiveaways(blackList);
 				task.SetResult(result);
 			});
 
 			return task.Task.Result;
 		}
 
-		private void SteamTradeAddGiveaways(HtmlNodeCollection nodes)
+		private void AddGiveaways(HtmlNodeCollection nodes)
 		{
 			if (nodes != null)
 			{

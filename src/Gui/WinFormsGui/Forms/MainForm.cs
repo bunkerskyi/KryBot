@@ -132,7 +132,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				if (_bot.Steam.Enabled)
 				{
 					await
-						_bot.Steam.JoinGroupAsync("http://steamcommunity.com/groups/krybot",
+						_bot.Steam.Join("http://steamcommunity.com/groups/krybot",
 							Generate.PostData_SteamGroupJoin(_bot.Steam.Cookies.Sessid));
 				}
 			}
@@ -375,7 +375,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 			if (_bot.GameMiner.Enabled)
 			{
-				var profile = await _bot.GameMiner.GetProfileAsync();
+				var profile = await _bot.GameMiner.CheckLogin();
 				if (profile.Echo)
 				{
 					WriteLog(profile);
@@ -384,7 +384,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 				if (profile.Success)
 				{
-					var won = await _bot.GameMiner.WonParseAsync();
+					var won = await _bot.GameMiner.CheckWon();
 					if (won != null && won.Content != "\n")
 					{
 						WriteLog(won);
@@ -430,7 +430,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 			if (_bot.SteamGifts.Enabled)
 			{
-				var profile = await _bot.SteamGifts.GetProfileAsync();
+				var profile = await _bot.SteamGifts.CheckLogin();
 				if (profile.Echo)
 				{
 					WriteLog(profile);
@@ -439,7 +439,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 				if (profile.Success)
 				{
-					var won = await _bot.SteamGifts.WonParseAsync();
+					var won = await _bot.SteamGifts.CheckWon();
 					if (won != null && won.Content != "\n")
 					{
 						WriteLog(won);
@@ -526,7 +526,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 			if (_bot.SteamCompanion.Enabled)
 			{
-				var profile = await _bot.SteamCompanion.GetProfileAsync();
+				var profile = await _bot.SteamCompanion.CheckLogin();
 				if (profile.Echo)
 				{
 					WriteLog(profile);
@@ -534,7 +534,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				LoadProfilesInfo?.Invoke();
 				if (profile.Success)
 				{
-					var won = await _bot.SteamCompanion.WonParseAsync();
+					var won = await _bot.SteamCompanion.CheckWon();
 					if (won != null)
 					{
 						WriteLog(won);
@@ -599,7 +599,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 					await JoinGiveaways(_bot.SteamCompanion.Giveaways, false);
 
-					var async = await _bot.SteamCompanion.SyncAccountAsync();
+					var async = await _bot.SteamCompanion.Sync();
 					if (async != null)
 					{
 						WriteLog(async);
@@ -617,7 +617,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 			if (_bot.UseGamble.Enabled)
 			{
-				var profile = await _bot.UseGamble.GetProfileAsync();
+				var profile = await _bot.UseGamble.CheckLogin();
 				if (profile.Echo)
 				{
 					WriteLog(profile);
@@ -625,7 +625,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				LoadProfilesInfo?.Invoke();
 				if (profile.Success)
 				{
-					var won = await _bot.UseGamble.WonParsAsync();
+					var won = await _bot.UseGamble.CheckWon();
 					if (won != null)
 					{
 						WriteLog(won);
@@ -672,7 +672,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 			if (_bot.SteamTrade.Enabled)
 			{
-				var profile = await _bot.SteamTrade.SteamTradeGetProfileAsync();
+				var profile = await _bot.SteamTrade.CheckLogin();
 				if (profile.Echo)
 				{
 					WriteLog(profile);
@@ -680,7 +680,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				LoadProfilesInfo?.Invoke();
 				if (profile.Success)
 				{
-					var giveaways = await _bot.SteamTrade.SteamTradeLoadGiveawaysAsync(_blackList);
+					var giveaways = await _bot.SteamTrade.LoadGiveawaysAsync(_blackList);
 					if (giveaways != null && giveaways.Content != "\n")
 					{
 						WriteLog(giveaways);
@@ -811,7 +811,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			{
 				if (await CheckLoginGm())
 				{
-					var won = await _bot.GameMiner.WonParseAsync();
+					var won = await _bot.GameMiner.CheckWon();
 					if (won != null && won.Content != "\n")
 					{
 						WriteLog(won);
@@ -851,7 +851,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			{
 				if (await CheckLoginSg())
 				{
-					var won = await _bot.SteamGifts.WonParseAsync();
+					var won = await _bot.SteamGifts.CheckWon();
 					if (won != null && won.Content != "\n")
 					{
 						WriteLog(won);
@@ -889,7 +889,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			{
 				if (await CheckLoginSc())
 				{
-					var won = await _bot.SteamCompanion.WonParseAsync();
+					var won = await _bot.SteamCompanion.CheckWon();
 					if (won != null && won.Content != "\n")
 					{
 						WriteLog(won);
@@ -927,7 +927,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			{
 				if (await CheckLoginSp())
 				{
-					var won = await _bot.UseGamble.WonParsAsync();
+					var won = await _bot.UseGamble.CheckWon();
 					if (won != null)
 					{
 						WriteLog(won);
@@ -1116,7 +1116,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			var login = await CheckLoginSp();
 			if (login)
 			{
-				var won = await _bot.UseGamble.WonParsAsync();
+				var won = await _bot.UseGamble.CheckWon();
 				if (won != null && won.Content != "\n")
 				{
 					WriteLog(won);
@@ -1156,7 +1156,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			var login = await CheckLoginSc();
 			if (login)
 			{
-				var won = await _bot.SteamCompanion.WonParseAsync();
+				var won = await _bot.SteamCompanion.CheckWon();
 				if (won != null && won.Content != "\n")
 				{
 					WriteLog(won);
@@ -1201,7 +1201,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			var login = await CheckLoginSg();
 			if (login)
 			{
-				var won = await _bot.SteamGifts.WonParseAsync();
+				var won = await _bot.SteamGifts.CheckWon();
 				if (won != null && won.Content != "\n")
 				{
 					WriteLog(won);
@@ -1247,7 +1247,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			var login = await CheckLoginGm();
 			if (login)
 			{
-				var won = await _bot.GameMiner.WonParseAsync();
+				var won = await _bot.GameMiner.CheckWon();
 				if (won != null && won.Content != "\n")
 				{
 					WriteLog(won);
@@ -1278,7 +1278,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private async Task<bool> CheckLoginGm()
 		{
 			Message_TryLogin("GameMiner");
-			var login = await _bot.GameMiner.GetProfileAsync();
+			var login = await _bot.GameMiner.CheckLogin();
 			WriteLog(login);
 			return login.Success;
 		}
@@ -1286,7 +1286,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private async Task<bool> CheckLoginSg()
 		{
 			Message_TryLogin("SteamGifts");
-			var login = await _bot.SteamGifts.GetProfileAsync();
+			var login = await _bot.SteamGifts.CheckLogin();
 			WriteLog(login);
 			return login.Success;
 		}
@@ -1294,7 +1294,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private async Task<bool> CheckLoginSc()
 		{
 			Message_TryLogin("SteamCompanion");
-			var login = await _bot.SteamCompanion.GetProfileAsync();
+			var login = await _bot.SteamCompanion.CheckLogin();
 			WriteLog(login);
 			return login.Success;
 		}
@@ -1302,7 +1302,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private async Task<bool> CheckLoginSp()
 		{
 			Message_TryLogin("UseGamble");
-			var login = await _bot.UseGamble.GetProfileAsync();
+			var login = await _bot.UseGamble.CheckLogin();
 			WriteLog(login);
 			return login.Success;
 		}
@@ -1310,7 +1310,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private async Task<bool> CheckLoginSt()
 		{
 			Message_TryLogin("SteamTrade");
-			var login = await _bot.SteamTrade.SteamTradeGetProfileAsync();
+			var login = await _bot.SteamTrade.CheckLogin();
 			WriteLog(login);
 			return login.Success;
 		}
@@ -1318,7 +1318,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private async Task<bool> CheckLoginSteam()
 		{
 			Message_TryLogin("Steam");
-			var login = await _bot.Steam.GetProfileAsync();
+			var login = await _bot.Steam.CheckLogin();
 			WriteLog(login);
 			return login.Success;
 		}
@@ -1340,13 +1340,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			if (await CheckLoginGm())
 			{
 				LoadProfilesInfo?.Invoke();
-				var won = await _bot.GameMiner.WonParseAsync();
+				var won = await _bot.GameMiner.CheckWon();
 				if (won != null && won.Content != "\n")
 				{
 					WriteLog(won);
 				}
 
-				var async = await _bot.GameMiner.SyncAccountAsync();
+				var async = await _bot.GameMiner.Sync();
 				if (async != null)
 				{
 					WriteLog(async);
@@ -1380,13 +1380,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			if (await CheckLoginSg())
 			{
 				LoadProfilesInfo?.Invoke();
-				var won = await _bot.SteamGifts.WonParseAsync();
+				var won = await _bot.SteamGifts.CheckWon();
 				if (won != null)
 				{
 					WriteLog(won);
 				}
 
-				var async = await _bot.SteamGifts.SyncAccountAsync();
+				var async = await _bot.SteamGifts.Sync();
 				if (async != null)
 				{
 					WriteLog(async);
@@ -1419,7 +1419,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			if (await CheckLoginSc())
 			{
 				LoadProfilesInfo?.Invoke();
-				var won = await _bot.SteamCompanion.WonParseAsync();
+				var won = await _bot.SteamCompanion.CheckWon();
 				if (won != null)
 				{
 					WriteLog(won);
@@ -1429,7 +1429,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				lblSCStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
 				BlockTabpage(tabPageSC, true);
 
-				var async = await _bot.SteamCompanion.SyncAccountAsync();
+				var async = await _bot.SteamCompanion.Sync();
 				if (async != null)
 				{
 					WriteLog(async);
@@ -1679,7 +1679,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			var login = await CheckLoginSteam();
 			if (login)
 			{
-				await _bot.Steam.JoinGroupAsync("http://steamcommunity.com/groups/krybot",
+				await _bot.Steam.Join("http://steamcommunity.com/groups/krybot",
 					Generate.PostData_SteamGroupJoin(_bot.Steam.Cookies.Sessid));
 
 				BlockTabpage(tabPageSteam, true);
@@ -1931,7 +1931,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				{
 					if (_bot.GameMiner.CoalReserv <= _bot.GameMiner.Coal - giveaway.Price || giveaway.Price == 0)
 					{
-						var data = await _bot.GameMiner.JoinGiveawayAsync(giveaways.IndexOf(giveaway));
+						var data = await _bot.GameMiner.Join(giveaways.IndexOf(giveaway));
 						if (data != null && data.Content != "\n")
 						{
 							WriteLog(data);
@@ -1950,7 +1950,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				{
 					if (giveaway.Price <= _bot.SteamGifts.Points)
 					{
-						var data = await _bot.SteamGifts.JoinGiveawayAsync(giveaways.IndexOf(giveaway));
+						var data = await _bot.SteamGifts.Join(giveaways.IndexOf(giveaway));
 						if (data != null && data.Content != "\n")
 						{
 							WriteLog(data);
@@ -1962,7 +1962,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					if (giveaway.Price <= _bot.SteamGifts.Points &&
 					    _bot.SteamGifts.PointsReserv <= _bot.SteamGifts.Points - giveaway.Price)
 					{
-						var data = await _bot.SteamGifts.JoinGiveawayAsync(giveaways.IndexOf(giveaway));
+						var data = await _bot.SteamGifts.Join(giveaways.IndexOf(giveaway));
 						if (data != null && data.Content != "\n")
 						{
 							WriteLog(data);
@@ -1982,7 +1982,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					if (giveaway.Price <= _bot.SteamCompanion.Points)
 					{
 						var data =
-							await _bot.SteamCompanion.JoinGiveawayAsync(giveaways.IndexOf(giveaway), _bot.Steam.Cookies.Sessid, _bot.Steam);
+							await _bot.SteamCompanion.Join(giveaways.IndexOf(giveaway), _bot.Steam.Cookies.Sessid, _bot.Steam);
 						if (data != null && data.Content != "\n")
 						{
 							WriteLog(data);
@@ -1995,7 +1995,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					    _bot.SteamCompanion.PointsReserv <= _bot.SteamCompanion.Points - giveaway.Price)
 					{
 						var data =
-							await _bot.SteamCompanion.JoinGiveawayAsync(giveaways.IndexOf(giveaway), _bot.Steam.Cookies.Sessid, _bot.Steam);
+							await _bot.SteamCompanion.Join(giveaways.IndexOf(giveaway), _bot.Steam.Cookies.Sessid, _bot.Steam);
 						if (data != null && data.Content != "\n")
 						{
 							WriteLog(data);
@@ -2013,7 +2013,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				if (giveaway.Price <= _bot.UseGamble.Points &&
 				    _bot.UseGamble.PointsReserv <= _bot.UseGamble.Points - giveaway.Price)
 				{
-					var data = await _bot.UseGamble.JoinGiveawayAsync(giveaways.IndexOf(giveaway));
+					var data = await _bot.UseGamble.Join(giveaways.IndexOf(giveaway));
 					if (data != null && data.Content != "\n")
 					{
 						WriteLog(data);
@@ -2027,7 +2027,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			foreach (var giveaway in giveaways)
 			{
-				var data = await _bot.SteamTrade.JoinGiveawayAsync(giveaways.IndexOf(giveaway));
+				var data = await _bot.SteamTrade.Join(giveaways.IndexOf(giveaway));
 				if (data != null && data.Content != "\n")
 				{
 					WriteLog(data);

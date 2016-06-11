@@ -74,7 +74,7 @@ namespace KryBot.Core.Sites
 			return data;
 		}
 
-		public async Task<Log> JoinGiveawayAsync(int index, string steamCookie, Steam steam)
+		public async Task<Log> Join(int index, string steamCookie, Steam steam)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -110,7 +110,7 @@ namespace KryBot.Core.Sites
 			return Messages.ParseProfileFailed("SteamCompanion");
 		}
 
-		public async Task<Log> GetProfileAsync()
+		public async Task<Log> CheckLogin()
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -153,7 +153,7 @@ namespace KryBot.Core.Sites
 			return null;
 		}
 
-		public async Task<Log> WonParseAsync()
+		public async Task<Log> CheckWon()
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -370,7 +370,7 @@ namespace KryBot.Core.Sites
 			return new Log($"{Messages.GetDateTime()} {{SteamCompanion}} Sync failed", Color.Red, false, true);
 		}
 
-		public async Task<Log> SyncAccountAsync()
+		public async Task<Log> Sync()
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>

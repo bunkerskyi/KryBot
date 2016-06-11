@@ -51,7 +51,7 @@ namespace KryBot.Core.Sites
 			return Messages.GroupNotJoinde(url);
 		}
 
-		public async Task<Log> JoinGroupAsync(string url, List<Parameter> parameters)
+		public async Task<Log> Join(string url, List<Parameter> parameters)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -90,7 +90,7 @@ namespace KryBot.Core.Sites
 			return Messages.ParseProfileFailed("Steam");
 		}
 
-		public async Task<Log> GetProfileAsync()
+		public async Task<Log> CheckLogin()
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>

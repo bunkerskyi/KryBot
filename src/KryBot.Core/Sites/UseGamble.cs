@@ -62,7 +62,7 @@ namespace KryBot.Core.Sites
 			return null;
 		}
 
-		public async Task<Log> JoinGiveawayAsync(int index)
+		public async Task<Log> Join(int index)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -98,7 +98,7 @@ namespace KryBot.Core.Sites
 			return Messages.ParseProfileFailed("UseGamble");
 		}
 
-		public async Task<Log> GetProfileAsync()
+		public async Task<Log> CheckLogin()
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -137,7 +137,7 @@ namespace KryBot.Core.Sites
 			return null;
 		}
 
-		public async Task<Log> WonParsAsync()
+		public async Task<Log> CheckWon()
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
