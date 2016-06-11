@@ -455,8 +455,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					{
 						var giveaways =
 							await
-								_bot.SteamGifts.LoadGiveawaysAsync(_bot.SteamGifts.Giveaways,
-									_bot.SteamGifts.WishlistGiveaways, _blackList, _bot.UserAgent);
+								_bot.SteamGifts.LoadGiveawaysAsync(_blackList, _bot.UserAgent);
 						if (giveaways != null && giveaways.Content != "\n")
 						{
 							WriteLog(giveaways);
