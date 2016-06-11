@@ -57,7 +57,7 @@ namespace KryBot.Core.Sites
 				};
 				list.Add(header);
 
-				var response = Web.Post($"{Links.UseGamble}page/join",
+				var response = Web.Post(Links.UseGambleJoin,
 					Generate.PostData_UseGamble(giveaway.Code), list,
 					Cookies.Generate());
 				var jresponse =
@@ -124,7 +124,7 @@ namespace KryBot.Core.Sites
 
 		private Log WonParse()
 		{
-			var response = Web.Get($"{Links.UseGamble}profile/logs", Cookies.Generate());
+			var response = Web.Get(Links.UseGambleWon, Cookies.Generate());
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -143,7 +143,7 @@ namespace KryBot.Core.Sites
 							i--;
 						}
 					}
-					return Messages.GiveawayHaveWon("UseGamble", nodes.Count, $"{Links.UseGamble}profile/logs");
+					return Messages.GiveawayHaveWon("UseGamble", nodes.Count, Links.UseGambleWon);
 				}
 			}
 			return null;
@@ -179,7 +179,7 @@ namespace KryBot.Core.Sites
 					};
 					headerList.Add(header);
 
-					var jsonresponse = Web.Post($"{Links.UseGamble}page/ga_page",
+					var jsonresponse = Web.Post(Links.UseGambleGaPage,
 						Generate.PageData_UseGamble(i + 1), headerList,
 						Cookies.Generate());
 					if (jsonresponse.RestResponse.Content != string.Empty)
@@ -194,7 +194,7 @@ namespace KryBot.Core.Sites
 				}
 				else
 				{
-					var response = Web.Get($"{Links.UseGamble}page", Cookies.Generate());
+					var response = Web.Get(Links.UseGambleGiveaways, Cookies.Generate());
 
 					if (response.RestResponse.Content != string.Empty)
 					{

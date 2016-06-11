@@ -96,7 +96,7 @@ namespace KryBot.Core.Sites
 		{
 			Giveaways?.Clear();
 
-			var response = Web.Get($"{Links.SteamTrade}awards/", Cookies.Generate());
+			var response = Web.Get(Links.SteamTradeWon, Cookies.Generate());
 
 			if (response.RestResponse.Content != string.Empty)
 			{

@@ -19,7 +19,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private static Bot _bot = new Bot();
 		private static Blacklist _blackList;
 
-		private static bool _hided;
+		
 
 		private readonly Timer _timer = new Timer();
 		private readonly Timer _timerTickCount = new Timer();
@@ -635,31 +635,29 @@ namespace KryBot.Gui.WinFormsGui.Forms
 						}
 					}
 
-					if (_bot.UseGamble.Points > 0)
+					
+					var giveaways =
+						await _bot.UseGamble.LoadGiveawaysAsync(_blackList);
+					if (giveaways != null && giveaways.Content != "\n")
 					{
-						var giveaways =
-							await _bot.UseGamble.LoadGiveawaysAsync(_blackList);
-						if (giveaways != null && giveaways.Content != "\n")
-						{
-							WriteLog(giveaways);
-						}
+						WriteLog(giveaways);
+					}
 
-						if (_bot.UseGamble.Giveaways?.Count > 0)
+					if (_bot.UseGamble.Giveaways?.Count > 0)
+					{
+						if (Properties.Settings.Default.Sort)
 						{
-							if (Properties.Settings.Default.Sort)
+							if (Properties.Settings.Default.SortToMore)
 							{
-								if (Properties.Settings.Default.SortToMore)
-								{
-									_bot.UseGamble.Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
-								}
-								else
-								{
-									_bot.UseGamble.Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
-								}
+								_bot.UseGamble.Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
 							}
-
-							await JoinGiveaways(_bot.UseGamble.Giveaways);
+							else
+							{
+								_bot.UseGamble.Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+							}
 						}
+
+						await JoinGiveaways(_bot.UseGamble.Giveaways);
 					}
 				}
 				else
@@ -1509,7 +1507,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			notifyIcon.Visible = false;
 			Show();
 			WindowState = FormWindowState.Normal;
-			_hided = false;
 			if (_logActive)
 			{
 				LogUnHide?.Invoke();
@@ -1711,7 +1708,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			{
 				notifyIcon.Icon = Resources.KryBotPresent_256b;
 				notifyIcon.Visible = true;
-				_hided = true;
 				if (_logActive)
 				{
 					LogHide?.Invoke();
@@ -1738,7 +1734,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				notifyIcon.Visible = false;
 				Show();
 				WindowState = FormWindowState.Normal;
-				_hided = false;
 			}
 			else
 			{
@@ -1751,7 +1746,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			notifyIcon.Visible = false;
 			Show();
 			WindowState = FormWindowState.Normal;
-			_hided = false;
 
 			if (_logActive)
 			{

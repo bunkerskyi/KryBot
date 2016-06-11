@@ -62,7 +62,7 @@ namespace KryBot.Core.Sites
 
 			if (giveaway.Token != null)
 			{
-				var response = Web.Post($"{Links.SteamGifts}ajax.php",
+				var response = Web.Post(Links.SteamGiftsAjax,
 					Generate.PostData_SteamGifts(giveaway.Token, giveaway.Code, "entry_insert"),
 					Cookies.Generate(), userAgent);
 
@@ -147,7 +147,7 @@ namespace KryBot.Core.Sites
 
 		private Log WonParse(string userAgent)
 		{
-			var response = Web.Get($"{Links.SteamGifts}giveaways/won", Cookies.Generate(), userAgent);
+			var response = Web.Get(Links.SteamGiftsWon, Cookies.Generate(), userAgent);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -159,8 +159,7 @@ namespace KryBot.Core.Sites
 
 				if (nodes != null)
 				{
-					return Messages.GiveawayHaveWon("SteamGifts", int.Parse(nodes.InnerText),
-						$"{Links.SteamGifts}giveaways/won");
+					return Messages.GiveawayHaveWon("SteamGifts", int.Parse(nodes.InnerText), Links.SteamGiftsWon);
 				}
 			}
 			return null;
@@ -187,27 +186,27 @@ namespace KryBot.Core.Sites
 			if (WishList)
 			{
 				content += LoadGiveawaysByUrl(
-					$"{Links.SteamGifts}giveaways/search?type=wishlist",
+					$"{Links.SteamGiftsSearch}?type=wishlist",
 					userAgent,
-					strings.ParseLoadGiveaways_FoundGiveAwaysInWishList,
+					strings.ParseLoadGiveaways_WishListGiveAwaysIn,
 					WishlistGiveaways);
 			}
 
 			if (Group)
 			{
 				content += LoadGiveawaysByUrl(
-					$"{Links.SteamGifts}giveaways/search?type=group",
+					$"{Links.SteamGiftsSearch}?type=group",
 					userAgent,
-					strings.ParseLoadGiveaways_FoundGiveAwaysInGroup,
+					strings.ParseLoadGiveaways_GroupGiveAwaysIn,
 					Giveaways);
 			}
 
 			if (Regular)
 			{
 				LoadGiveawaysByUrl(
-					$"{Links.SteamGifts}giveaways/search?page=1",
+					$"{Links.SteamGiftsSearch}",
 					userAgent,
-					string.Empty,
+					strings.ParseLoadGiveaways_RegularGiveawaysIn,
 					Giveaways);
 			}
 
@@ -272,7 +271,7 @@ namespace KryBot.Core.Sites
 				}
 			}
 
-			return $"{Messages.GetDateTime()} {{SteamGifts}} {message}: {count}\n";
+			return $"{Messages.GetDateTime()} {{SteamGifts}} {strings.ParseLoadGiveaways_Found} {count} {message} {pages} {strings.ParseLoadGiveaways_Pages}\n";
 		}
 
 		private void AddGiveaways(HtmlNodeCollection nodes, List<SteamGiftsGiveaway> giveawaysList)
@@ -348,7 +347,7 @@ namespace KryBot.Core.Sites
 
 		private Log SyncAccount(string userAgent)
 		{
-			var xsrf = Web.Get("https://www.steamgifts.com/account/profile/sync", Cookies.Generate(), userAgent);
+			var xsrf = Web.Get(Links.SteamGiftsSync, Cookies.Generate(), userAgent);
 
 			if (xsrf.RestResponse.Content != null)
 			{
@@ -366,23 +365,19 @@ namespace KryBot.Core.Sites
 					};
 					headers.Add(header);
 
-					var response = Web.Post($"{Links.SteamGifts}ajax.php",
+					var response = Web.Post(Links.SteamGiftsAjax,
 						Generate.PostData_SteamGifts(xsrfToken.Attributes["value"].Value, "", "sync"), headers,
 						Cookies.Generate(), userAgent);
 					if (response != null)
 					{
-						var result =
-							JsonConvert.DeserializeObject<JsonResponseSyncAccount>(
-								response.RestResponse.Content);
+						var result = JsonConvert.DeserializeObject<JsonResponseSyncAccount>(response.RestResponse.Content);
 						if (result.Type == "success")
 						{
-							return new Log($"{Messages.GetDateTime()} {{SteamGifts}} {result.Msg}",
-								Color.Green,
+							return new Log($"{Messages.GetDateTime()} {{SteamGifts}} {result.Msg}", Color.Green,
 								true, true);
 						}
 						return new Log($"{Messages.GetDateTime()} {{SteamGifts}} {result.Msg}", Color.Red,
-							false,
-							true);
+							false, true);
 					}
 				}
 			}

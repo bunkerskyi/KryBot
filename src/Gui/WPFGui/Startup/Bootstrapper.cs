@@ -2,7 +2,6 @@
 using System.Windows;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
-using Prism.Events;
 using Prism.Modularity;
 using Prism.Regions;
 using Prism.Unity;
@@ -13,8 +12,6 @@ namespace WPFGui.Startup
 	public class Bootstrapper : UnityBootstrapper, IDisposable
 	{
 		#region data
-
-		private IEventAggregator _eventAggregator;
 
 		#endregion
 

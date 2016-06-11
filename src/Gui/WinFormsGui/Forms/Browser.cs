@@ -28,18 +28,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			InitializeComponent();
 		}
 
-		[DllImport("wininet.dll", CharSet = CharSet.Auto, SetLastError = true)]
-		private static extern bool InternetSetCookie(string lpszUrlName, string lbszCookieName, string lpszCookieData);
-
-		[DllImport("wininet.dll", SetLastError = true)]
-		private static extern bool InternetGetCookieEx(
-			string url,
-			string cookieName,
-			StringBuilder cookieData,
-			ref int size,
-			int dwFlags,
-			IntPtr lpReserved);
-
 		private void Browser_Load(object sender, EventArgs e)
 		{
 			Text = _title;
@@ -50,7 +38,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 			if (_phpSessId != "")
 			{
-				InternetSetCookie(Links.SteamTrade, "PHPSESSID", _phpSessId);
+				NativeMethods.InternetSetCookie(Links.SteamTrade, "PHPSESSID", _phpSessId);
 			}
 			toolStripStatusLabelURL.Text = @"URL: " + _startPage;
 			webBrowser.Navigate(_startPage);
@@ -279,7 +267,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			}
 		}
 
-		public static CookieContainer GetUriCookieContainer(Uri uri)
+		private static CookieContainer GetUriCookieContainer(Uri uri)
 		{
 			// First, create a null cookie container
 			CookieContainer cookies = null;
@@ -290,13 +278,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 			// Call InternetGetCookieEx from wininet.dll
 			if (
-				!InternetGetCookieEx(uri.ToString(), null, cookieData, ref datasize, InternetCookieHttponly, IntPtr.Zero))
+				!NativeMethods.InternetGetCookieEx(uri.ToString(), null, cookieData, ref datasize, InternetCookieHttponly, IntPtr.Zero))
 			{
 				if (datasize < 0)
 					return null;
 				// Allocate stringbuilder large enough to hold the cookie
 				cookieData = new StringBuilder(datasize);
-				if (!InternetGetCookieEx(
+				if (!NativeMethods.InternetGetCookieEx(
 					uri.ToString(),
 					null, cookieData,
 					ref datasize,
@@ -327,6 +315,21 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			toolStripStatusLabelLoad.Image = null;
 			toolStripStatusLabelURL.Text = @"URL: " + webBrowser.Url?.AbsoluteUri;
+		}
+
+		private static class NativeMethods
+		{
+			[DllImport("wininet.dll", CharSet = CharSet.Auto, SetLastError = true, BestFitMapping = false, ThrowOnUnmappableChar = true)]
+			public static extern bool InternetSetCookie(string lpszUrlName, string lbszCookieName, string lpszCookieData);
+
+			[DllImport("wininet.dll", SetLastError = true, BestFitMapping = false, ThrowOnUnmappableChar = true)]
+			public static extern bool InternetGetCookieEx(
+				string url,
+				string cookieName,
+				StringBuilder cookieData,
+				ref int size,
+				int dwFlags,
+				IntPtr lpReserved);
 		}
 	}
 }

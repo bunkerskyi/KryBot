@@ -62,78 +62,69 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void ButtonOnClick(object sender, EventArgs eventArgs)
 		{
-			if (_site == "GameMiner")
+			switch (_site)
 			{
-				_bot.GameMiner.Cookies.Token = (Controls["token"] as TextBox)?.Text;
-				_bot.GameMiner.Cookies.Xsrf = (Controls["_xsrf"] as TextBox)?.Text;
-				_bot.UserAgent = (Controls["UserAgent"] as TextBox)?.Text;
-				_bot.GameMiner.Enabled = true;
-				_bot.Save();
-				ShowMessage();
-				Close();
+				case "GameMiner":
+					_bot.GameMiner.Cookies.Token = (Controls["token"] as TextBox)?.Text;
+					_bot.GameMiner.Cookies.Xsrf = (Controls["_xsrf"] as TextBox)?.Text;
+					_bot.UserAgent = (Controls["UserAgent"] as TextBox)?.Text;
+					_bot.GameMiner.Enabled = true;
+					_bot.Save();
+					ShowMessage();
+					break;
+
+				case "SteamGifts":
+					_bot.SteamGifts.Cookies.PhpSessId = (Controls["PHPSESSID"] as TextBox)?.Text;
+					_bot.UserAgent = (Controls["UserAgent"] as TextBox)?.Text;
+					_bot.SteamGifts.Enabled = true;
+					_bot.Save();
+					ShowMessage();
+					break;
+
+				case "SteamCompanion":
+					_bot.SteamCompanion.Cookies.PhpSessId = (Controls["PHPSESSID"] as TextBox)?.Text;
+					_bot.SteamCompanion.Cookies.UserId = (Controls["userid"] as TextBox)?.Text;
+					_bot.SteamCompanion.Cookies.UserC = (Controls["userc"] as TextBox)?.Text;
+					_bot.SteamCompanion.Cookies.UserT = (Controls["usert"] as TextBox)?.Text;
+					_bot.SteamCompanion.Enabled = true;
+					_bot.Save();
+					ShowMessage();
+					break;
+
+				case "UseGamble":
+					_bot.UseGamble.Cookies.PhpSessId = (Controls["PHPSESSID"] as TextBox)?.Text;
+					_bot.UseGamble.Enabled = true;
+					_bot.Save();
+					ShowMessage();
+					break;
+
+				case "Steamtrade":
+					_bot.SteamTrade.Cookies.PhpSessId = (Controls["PHPSESSID"] as TextBox)?.Text;
+					_bot.SteamTrade.Cookies.DlePassword = (Controls["dle_password"] as TextBox)?.Text;
+					_bot.SteamTrade.Cookies.DleUserId = (Controls["dle_user_id"] as TextBox)?.Text;
+					_bot.SteamTrade.Cookies.PassHash = (Controls["passhash"] as TextBox)?.Text;
+					_bot.SteamTrade.Enabled = true;
+					_bot.Save();
+					ShowMessage();
+					break;
+
+				case "Steam":
+					_bot.Steam.Cookies.Login = (Controls["steamLogin"] as TextBox)?.Text;
+					_bot.Steam.Cookies.Sessid = (Controls["sessionid"] as TextBox)?.Text;
+					_bot.Steam.Enabled = true;
+					_bot.Save();
+					ShowMessage();
+					break;
+
+				case "PlayBlink":
+					_bot.PlayBlink.Cookies.PhpSessId = (Controls["PHPSESSID"] as TextBox)?.Text;
+					_bot.PlayBlink.Enabled = true;
+					_bot.Save();
+					ShowMessage();
+					break;
 			}
 
-			if (_site == "SteamGifts")
-			{
-				_bot.SteamGifts.Cookies.PhpSessId = (Controls["PHPSESSID"] as TextBox)?.Text;
-				_bot.UserAgent = (Controls["UserAgent"] as TextBox)?.Text;
-				_bot.SteamGifts.Enabled = true;
-				_bot.Save();
-				ShowMessage();
-				Close();
-			}
-
-			if (_site == "SteamCompanion")
-			{
-				_bot.SteamCompanion.Cookies.PhpSessId = (Controls["PHPSESSID"] as TextBox)?.Text;
-				_bot.SteamCompanion.Cookies.UserId = (Controls["userid"] as TextBox)?.Text;
-				_bot.SteamCompanion.Cookies.UserC = (Controls["userc"] as TextBox)?.Text;
-				_bot.SteamCompanion.Cookies.UserT = (Controls["usert"] as TextBox)?.Text;
-				_bot.SteamCompanion.Enabled = true;
-				_bot.Save();
-				ShowMessage();
-				Close();
-			}
-
-			if (_site == "UseGamble")
-			{
-				_bot.UseGamble.Cookies.PhpSessId = (Controls["PHPSESSID"] as TextBox)?.Text;
-				_bot.UseGamble.Enabled = true;
-				_bot.Save();
-				ShowMessage();
-				Close();
-			}
-
-			if (_site == "SteamTrade")
-			{
-				_bot.SteamTrade.Cookies.PhpSessId = (Controls["PHPSESSID"] as TextBox)?.Text;
-				_bot.SteamTrade.Cookies.DlePassword = (Controls["dle_password"] as TextBox)?.Text;
-				_bot.SteamTrade.Cookies.DleUserId = (Controls["dle_user_id"] as TextBox)?.Text;
-				_bot.SteamTrade.Cookies.PassHash = (Controls["passhash"] as TextBox)?.Text;
-				_bot.SteamTrade.Enabled = true;
-				_bot.Save();
-				ShowMessage();
-				Close();
-			}
-
-			if (_site == "Steam")
-			{
-				_bot.Steam.Cookies.Login = (Controls["steamLogin"] as TextBox)?.Text;
-				_bot.Steam.Cookies.Sessid = (Controls["sessionid"] as TextBox)?.Text;
-				_bot.Steam.Enabled = true;
-				_bot.Save();
-				ShowMessage();
-				Close();
-			}
-
-			if (_site == "PlayBlink")
-			{
-				_bot.PlayBlink.Cookies.PhpSessId = (Controls["PHPSESSID"] as TextBox)?.Text;
-				_bot.PlayBlink.Enabled = true;
-				_bot.Save();
-				ShowMessage();
-				Close();
-			}
+			Close();
 		}
 
 		private void ShowMessage()

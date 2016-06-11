@@ -48,7 +48,7 @@ namespace KryBot.Core.Sites
 				};
 				list.Add(header);
 
-				var response = Web.Post($"{Links.PlayBlink}?do=blink&game={pbGiveaway.Id}&captcha=1",
+				var response = Web.Post($"{Links.PlayBlinkJoin}&game={pbGiveaway.Id}",
 					Generate.PostData_PlayBlink(pbGiveaway.Id), list,
 					Cookies.Generate(Level));
 

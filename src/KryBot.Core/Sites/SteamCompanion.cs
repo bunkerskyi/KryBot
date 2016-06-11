@@ -58,7 +58,7 @@ namespace KryBot.Core.Sites
 					};
 					list.Add(header);
 
-					var response = Web.Post($"{Links.SteamCompanion}/gifts/steamcompanion.php",
+					var response = Web.Post(Links.SteamCompanionJoin,
 						Generate.PostData_SteamCompanion(giveaway.Code), list,
 						Cookies.Generate());
 
@@ -126,7 +126,7 @@ namespace KryBot.Core.Sites
 
 		private Log WonParse()
 		{
-			var response = Web.Get($"{Links.SteamCompanion}gifts/won", Cookies.Generate());
+			var response = Web.Get(Links.SteamCompanionWon, Cookies.Generate());
 			if (response.RestResponse.Content != string.Empty)
 			{
 				var htmlDoc = new HtmlDocument();
@@ -148,7 +148,7 @@ namespace KryBot.Core.Sites
 
 					if (nodes.Count > 0)
 					{
-						return Messages.GiveawayHaveWon("SteamCompanion", nodes.Count, "https://steamcompanion.com/gifts/won");
+						return Messages.GiveawayHaveWon("SteamCompanion", nodes.Count, Links.SteamCompanionWon);
 					}
 				}
 			}
@@ -176,32 +176,32 @@ namespace KryBot.Core.Sites
 			if (WishList)
 			{
 				content += LoadGiveawaysByUrl(
-					$"{Links.SteamCompanion}gifts/search/?wishlist=true",
-					strings.ParseLoadGiveaways_FoundGiveAwaysInWishList,
+					$"{Links.SteamCompanionSearch}?wishlist=true",
+					strings.ParseLoadGiveaways_WishListGiveAwaysIn,
 					WishlistGiveaways);
 			}
 
 			if (Contributors)
 			{
 				content += LoadGiveawaysByUrl(
-					$"{Links.SteamCompanion}gifts/search/?type=contributor",
-					strings.ParseLoadGiveaways_FoundGiveAwaysInWishList,
+					$"{Links.SteamCompanionSearch}?type=contributor",
+					strings.ParseLoadGiveaways__ContributorsIn,
 					Giveaways);
 			}
 
 			if (Group)
 			{
 				content += LoadGiveawaysByUrl(
-					$"{Links.SteamCompanion}gifts/search/?type=group",
-					strings.ParseLoadGiveaways_FoundGiveAwaysInWishList,
+					$"{Links.SteamCompanionSearch}?type=group",
+					strings.ParseLoadGiveaways_GroupGiveAwaysIn,
 					Giveaways);
 			}
 
 			if (Regular)
 			{
 				content += LoadGiveawaysByUrl(
-					$"{Links.SteamCompanion}gifts/search/?type=public",
-					strings.ParseLoadGiveaways_FoundGiveAwaysInWishList,
+					$"{Links.SteamCompanionSearch}?type=public",
+					strings.ParseLoadGiveaways_RegularGiveawaysIn,
 					Giveaways);
 			}
 
@@ -264,7 +264,7 @@ namespace KryBot.Core.Sites
 				}
 			}
 			return
-				$"{Messages.GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_Found} {(Giveaways.Count == 0 ? 0 : count)} {message} {pages} {strings.ParseLoadGiveaways_Pages}\n";
+				$"{Messages.GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_Found} {count} {message} {pages} {strings.ParseLoadGiveaways_Pages}\n";
 		}
 
 		private void AddGiveaways(HtmlNodeCollection nodes, List<SteamCompanionGiveaway> giveaways)

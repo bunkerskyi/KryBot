@@ -262,17 +262,20 @@ namespace KryBot.Core.Sites
 
 			if (FreeGolden)
 			{
-				content += LoadGiveawaysByUrl(Links.GameMinerGoldenGiveaways, strings.ParseLoadGiveaways_FreeGoldenGiveawaysIn, userAgent);
+				content += LoadGiveawaysByUrl(Links.GameMinerGoldenGiveaways, strings.ParseLoadGiveaways_FreeGoldenGiveawaysIn,
+					userAgent);
 			}
 
 			if (Regular)
 			{
-				content += LoadGiveawaysByUrl(Links.GameMinerRegularGiveaways, strings.ParseLoadGiveaways_RegularGiveawaysIn, userAgent);
+				content += LoadGiveawaysByUrl(Links.GameMinerRegularGiveaways, strings.ParseLoadGiveaways_RegularGiveawaysIn,
+					userAgent);
 			}
 
 			if (Sandbox)
 			{
-				content += LoadGiveawaysByUrl(Links.GameMinerSandboxGiveaways, strings.ParseLoadGiveaways_SandboxGiveawaysIn, userAgent);
+				content += LoadGiveawaysByUrl(Links.GameMinerSandboxGiveaways, strings.ParseLoadGiveaways_SandboxGiveawaysIn,
+					userAgent);
 			}
 
 			if (Giveaways == null)
@@ -301,14 +304,14 @@ namespace KryBot.Core.Sites
 		{
 			var response = Web.Get(url, Cookies.Generate(), userAgent);
 
-			if(response.RestResponse.Content != string.Empty)
+			if (response.RestResponse.Content != string.Empty)
 			{
 				var jsonResponse = JsonConvert.DeserializeObject<JsonRootObject>(response.RestResponse.Content);
 				AddGiveaways(jsonResponse);
 
-				if(jsonResponse.last_page > 1)
+				if (jsonResponse.last_page > 1)
 				{
-					for(var i = 1; i < jsonResponse.last_page + 1; i++)
+					for (var i = 1; i < jsonResponse.last_page + 1; i++)
 					{
 						response = Web.Get($"{url}&page={i + 1}", Cookies.Generate(), userAgent);
 						jsonResponse = JsonConvert.DeserializeObject<JsonRootObject>(response.RestResponse.Content);
@@ -317,7 +320,7 @@ namespace KryBot.Core.Sites
 				}
 
 				return $"{Messages.GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {jsonResponse.Total} " +
-					$"{message} {jsonResponse.last_page} {strings.ParseLoadGiveaways_Pages}\n";
+				       $"{message} {jsonResponse.last_page} {strings.ParseLoadGiveaways_Pages}\n";
 			}
 
 			return string.Empty;

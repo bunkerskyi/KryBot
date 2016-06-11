@@ -57,7 +57,7 @@ namespace KryBot.Core
 
 		public static string GetSessCookieInresponse(CookieContainer cookies, string domain, string cookieName)
 		{
-			if (cookies.Count > 0)
+			if (cookies?.Count > 0)
 			{
 				var list = CookieContainer_ToList(cookies);
 

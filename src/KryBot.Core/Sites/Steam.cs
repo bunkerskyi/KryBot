@@ -104,9 +104,7 @@ namespace KryBot.Core.Sites
 
 		public async Task<Classes.ProfileGamesList> GetUserGames()
 		{
-			var responseXmlProfile =
-				await
-					Web.GetAsync($"{ProfileLink}games?tab=all&xml=1");
+			var responseXmlProfile = await Web.GetAsync($"{ProfileLink}games?tab=all&xml=1");
 			var serializer = new XmlSerializer(typeof(Classes.ProfileGamesList));
 			TextReader reader = new StringReader(responseXmlProfile.RestResponse.Content);
 			var games = (Classes.ProfileGamesList) serializer.Deserialize(reader);
@@ -115,7 +113,7 @@ namespace KryBot.Core.Sites
 
 		public async Task<string> GetGameName(string appId)
 		{
-			var responseJsonDetail = await Web.GetAsync($"http://store.steampowered.com/api/appdetails?appids={appId}");
+			var responseJsonDetail = await Web.GetAsync($"{Links.SteamGameInfo}{appId}");
 
 			if (responseJsonDetail.RestResponse.Content == "null" || responseJsonDetail.RestResponse.Content == "")
 			{
