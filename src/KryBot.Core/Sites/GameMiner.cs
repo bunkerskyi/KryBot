@@ -8,6 +8,7 @@ using HtmlAgilityPack;
 using KryBot.CommonResources.lang;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
+using KryBot.Core.Json.GameMiner;
 
 namespace KryBot.Core.Sites
 {
@@ -30,6 +31,7 @@ namespace KryBot.Core.Sites
 		public bool NoRegion { get; set; }
 		public GameMinerCookie Cookies { get; set; }
 		public List<GameMinerGiveaway> Giveaways { get; set; }
+		public string UserAgent { get; set; }
 
 		public void Logout()
 		{
@@ -81,56 +83,16 @@ namespace KryBot.Core.Sites
 			}
 		}
 
-		private class JsonGame
-		{
-			public string Name { get; set; }
-			public string Url { get; set; }
-		}
-
-		private class JsonGiveaway
-		{
-			public bool Golden { get; set; }
-			public string Code { get; set; }
-			public int Price { get; set; }
-			public object Sandbox { get; set; }
-			public JsonGame Game { get; set; }
-			public string RegionlockTypeId { get; set; }
-		}
-
-		private class JsonRootObject
-		{
-			public List<JsonGiveaway> Giveaways { get; set; }
-			public int last_page { get; set; }
-			public int Total { get; set; }
-			public int Page { get; set; }
-		}
-
-		private class JsonResponse
-		{
-			public string Status { get; set; }
-			public int Coal { get; set; }
-		}
-
-		public class JsonResponseErrorDetail
-		{
-			public string Message { get; set; }
-		}
-
-		public class JsonResponseError
-		{
-			public JsonResponseErrorDetail Error { get; set; }
-		}
-
 		#region JoinGivaway
 
-		private Log JoinGiveaway(GameMinerGiveaway giveaway, string userAgent)
+		private Log JoinGiveaway(GameMinerGiveaway giveaway)
 		{
 			Thread.Sleep(400);
 
 			var response =
 				Web.Post(
 					$"{Links.GameMiner}giveaway/enter/{giveaway.Id}?{(giveaway.IsSandbox ? "sandbox" : "coal")}_page={giveaway.Page}",
-					Generate.PostData_GameMiner(Cookies.Xsrf), Cookies.Generate(), userAgent);
+					Generate.PostData_GameMiner(Cookies.Xsrf), Cookies.Generate(), UserAgent);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -155,12 +117,12 @@ namespace KryBot.Core.Sites
 			return Messages.GiveawayNotJoined("GameMiner", giveaway.Name, "Content is empty");
 		}
 
-		public async Task<Log> JoinGiveawayAsync(int index, string userAgent)
+		public async Task<Log> JoinGiveawayAsync(int index)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = JoinGiveaway(Giveaways[index], userAgent);
+				var result = JoinGiveaway(Giveaways[index]);
 				task.SetResult(result);
 			});
 
@@ -171,9 +133,9 @@ namespace KryBot.Core.Sites
 
 		#region Parse
 
-		private Log GetProfile(string userAgent)
+		private Log GetProfile()
 		{
-			var response = Web.Get(Links.GameMiner, Cookies.Generate(), userAgent);
+			var response = Web.Get(Links.GameMiner, Cookies.Generate(), UserAgent);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -196,21 +158,21 @@ namespace KryBot.Core.Sites
 			return Messages.ParseProfileFailed("GameMiner");
 		}
 
-		public async Task<Log> GetProfileAsync(string userAgent)
+		public async Task<Log> GetProfileAsync()
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = GetProfile(userAgent);
+				var result = GetProfile();
 				task.SetResult(result);
 			});
 
 			return task.Task.Result;
 		}
 
-		private Log WonParse(string userAgent)
+		private Log WonParse()
 		{
-			var response = Web.Get(Links.GameMinerWon, Cookies.Generate(), userAgent);
+			var response = Web.Get(Links.GameMinerWon, Cookies.Generate(), UserAgent);
 
 			if (response.RestResponse.Content != "")
 			{
@@ -235,26 +197,26 @@ namespace KryBot.Core.Sites
 
 					if (nodes.Count > 0)
 					{
-						return Messages.GiveawayHaveWon("GameMiner", nodes.Count, "http://gameminer.net/giveaways/won");
+						return Messages.GiveawayHaveWon("GameMiner", nodes.Count, Links.GameMinerWon);
 					}
 				}
 			}
 			return null;
 		}
 
-		public async Task<Log> WonParseAsync(string userAgent)
+		public async Task<Log> WonParseAsync()
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = WonParse(userAgent);
+				var result = WonParse();
 				task.SetResult(result);
 			});
 
 			return task.Task.Result;
 		}
 
-		private Log LoadGiveaways(Blacklist blackList, string userAgent)
+		private Log LoadGiveaways(Blacklist blackList)
 		{
 			var content = string.Empty;
 
@@ -262,20 +224,17 @@ namespace KryBot.Core.Sites
 
 			if (FreeGolden)
 			{
-				content += LoadGiveawaysByUrl(Links.GameMinerGoldenGiveaways, strings.ParseLoadGiveaways_FreeGoldenGiveawaysIn,
-					userAgent);
+				content += LoadGiveawaysByUrl(Links.GameMinerGoldenGiveaways, strings.ParseLoadGiveaways_FreeGoldenGiveawaysIn);
 			}
 
 			if (Regular)
 			{
-				content += LoadGiveawaysByUrl(Links.GameMinerRegularGiveaways, strings.ParseLoadGiveaways_RegularGiveawaysIn,
-					userAgent);
+				content += LoadGiveawaysByUrl(Links.GameMinerRegularGiveaways, strings.ParseLoadGiveaways_RegularGiveawaysIn);
 			}
 
 			if (Sandbox)
 			{
-				content += LoadGiveawaysByUrl(Links.GameMinerSandboxGiveaways, strings.ParseLoadGiveaways_SandboxGiveawaysIn,
-					userAgent);
+				content += LoadGiveawaysByUrl(Links.GameMinerSandboxGiveaways, strings.ParseLoadGiveaways_SandboxGiveawaysIn);
 			}
 
 			if (Giveaways == null)
@@ -288,21 +247,21 @@ namespace KryBot.Core.Sites
 			return Messages.ParseGiveawaysFoundMatchGiveaways(content, "GameMiner", Giveaways.Count.ToString());
 		}
 
-		public async Task<Log> LoadGiveawaysAsync(Blacklist blackList, string userAgent)
+		public async Task<Log> LoadGiveawaysAsync(Blacklist blackList)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = LoadGiveaways(blackList, userAgent);
+				var result = LoadGiveaways(blackList);
 				task.SetResult(result);
 			});
 
 			return task.Task.Result;
 		}
 
-		private string LoadGiveawaysByUrl(string url, string message, string userAgent)
+		private string LoadGiveawaysByUrl(string url, string message)
 		{
-			var response = Web.Get(url, Cookies.Generate(), userAgent);
+			var response = Web.Get(url, Cookies.Generate(), UserAgent);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -313,7 +272,7 @@ namespace KryBot.Core.Sites
 				{
 					for (var i = 1; i < jsonResponse.last_page + 1; i++)
 					{
-						response = Web.Get($"{url}&page={i + 1}", Cookies.Generate(), userAgent);
+						response = Web.Get($"{url}&page={i + 1}", Cookies.Generate(), UserAgent);
 						jsonResponse = JsonConvert.DeserializeObject<JsonRootObject>(response.RestResponse.Content);
 						AddGiveaways(jsonResponse);
 					}
@@ -330,10 +289,10 @@ namespace KryBot.Core.Sites
 
 		#region Sync
 
-		private Log SyncAccount(string userAgent)
+		private Log SyncAccount()
 		{
 			var response = Web.Post("http://gameminer.net/account/sync",
-				Generate.SyncPostData_GameMiner(Cookies.Xsrf), Cookies.Generate(), userAgent);
+				Generate.SyncPostData_GameMiner(Cookies.Xsrf), Cookies.Generate(), UserAgent);
 
 			if (response.RestResponse.Content != "")
 			{
@@ -351,12 +310,12 @@ namespace KryBot.Core.Sites
 					true);
 		}
 
-		public async Task<Log> SyncAccountAsync(string userAgent)
+		public async Task<Log> SyncAccountAsync()
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = SyncAccount(userAgent);
+				var result = SyncAccount();
 				task.SetResult(result);
 			});
 

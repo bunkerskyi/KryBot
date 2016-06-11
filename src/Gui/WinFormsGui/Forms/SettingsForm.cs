@@ -104,7 +104,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			{
 				"token:" + _bot.GameMiner.Cookies.Token,
 				"_xsrf:" + _bot.GameMiner.Cookies.Xsrf,
-				"UserAgent:" + _bot.UserAgent
+				"UserAgent:" + _bot.GameMiner.UserAgent
 			};
 
 			var form = new FormCookie("GameMiner", names, _bot);
@@ -179,7 +179,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			var names = new List<string>
 			{
 				"PHPSESSID:" + _bot.SteamGifts.Cookies.PhpSessId,
-				"UserAgent:" + _bot.UserAgent
+				"UserAgent:" + _bot.SteamGifts.UserAgent
 			};
 
 			var form = new FormCookie("SteamGifts", names, _bot);

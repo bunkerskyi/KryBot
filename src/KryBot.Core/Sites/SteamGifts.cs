@@ -8,6 +8,7 @@ using KryBot.CommonResources.lang;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
 using RestSharp;
+using KryBot.Core.Json.SteamGifts;
 
 namespace KryBot.Core.Sites
 {
@@ -34,6 +35,7 @@ namespace KryBot.Core.Sites
 		public SteamGiftsCookie Cookies { get; set; }
 		public List<SteamGiftsGiveaway> Giveaways { get; set; }
 		public List<SteamGiftsGiveaway> WishlistGiveaways { get; set; }
+		public string UserAgent { get; set; }
 
 		public void Logout()
 		{
@@ -41,30 +43,18 @@ namespace KryBot.Core.Sites
 			Enabled = false;
 		}
 
-		private class JsonResponseJoin
-		{
-			public string Type { get; set; }
-			public int Points { get; set; }
-		}
-
-		private class JsonResponseSyncAccount
-		{
-			public string Type { get; set; }
-			public string Msg { get; set; }
-		}
-
 		#region JoinGiveaway
 
-		private Log JoinGiveaway(SteamGiftsGiveaway giveaway, string userAgent)
+		private Log JoinGiveaway(SteamGiftsGiveaway giveaway)
 		{
 			Thread.Sleep(400);
-			giveaway = GetJoinData(giveaway, userAgent);
+			giveaway = GetJoinData(giveaway);
 
 			if (giveaway.Token != null)
 			{
 				var response = Web.Post(Links.SteamGiftsAjax,
 					Generate.PostData_SteamGifts(giveaway.Token, giveaway.Code, "entry_insert"),
-					Cookies.Generate(), userAgent);
+					Cookies.Generate(), UserAgent);
 
 				if (response.RestResponse.Content != null)
 				{
@@ -79,19 +69,19 @@ namespace KryBot.Core.Sites
 					}
 
 					var jresponse =
-						JsonConvert.DeserializeObject<GameMiner.JsonResponseError>(response.RestResponse.Content);
+						JsonConvert.DeserializeObject<Json.GameMiner.JsonResponseError>(response.RestResponse.Content);
 					return Messages.GiveawayNotJoined("SteamGifts", giveaway.Name, jresponse.Error?.Message);
 				}
 			}
 			return null;
 		}
 
-		public async Task<Log> JoinGiveawayAsync(int index, string userAgent)
+		public async Task<Log> JoinGiveawayAsync(int index)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = JoinGiveaway(Giveaways[index], userAgent);
+				var result = JoinGiveaway(Giveaways[index]);
 				task.SetResult(result);
 			});
 
@@ -102,9 +92,9 @@ namespace KryBot.Core.Sites
 
 		#region Parse
 
-		private Log GetProfile(string userAgent)
+		private Log GetProfile()
 		{
-			var response = Web.Get(Links.SteamGifts, Cookies.Generate(), userAgent);
+			var response = Web.Get(Links.SteamGifts, Cookies.Generate(), UserAgent);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -133,21 +123,21 @@ namespace KryBot.Core.Sites
 			return Messages.ParseProfileFailed("SteamGifts");
 		}
 
-		public async Task<Log> GetProfileAsync(string userAgent)
+		public async Task<Log> GetProfileAsync()
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = GetProfile(userAgent);
+				var result = GetProfile();
 				task.SetResult(result);
 			});
 
 			return task.Task.Result;
 		}
 
-		private Log WonParse(string userAgent)
+		private Log WonParse()
 		{
-			var response = Web.Get(Links.SteamGiftsWon, Cookies.Generate(), userAgent);
+			var response = Web.Get(Links.SteamGiftsWon, Cookies.Generate(), UserAgent);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -165,19 +155,19 @@ namespace KryBot.Core.Sites
 			return null;
 		}
 
-		public async Task<Log> WonParseAsync(string userAgent)
+		public async Task<Log> WonParseAsync()
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = WonParse(userAgent);
+				var result = WonParse();
 				task.SetResult(result);
 			});
 
 			return task.Task.Result;
 		}
 
-		private Log LoadGiveaways(Blacklist blackList, string userAgent)
+		private Log LoadGiveaways(Blacklist blackList)
 		{
 			var content = string.Empty;
 			Giveaways?.Clear();
@@ -187,7 +177,6 @@ namespace KryBot.Core.Sites
 			{
 				content += LoadGiveawaysByUrl(
 					$"{Links.SteamGiftsSearch}?type=wishlist",
-					userAgent,
 					strings.ParseLoadGiveaways_WishListGiveAwaysIn,
 					WishlistGiveaways);
 			}
@@ -196,7 +185,6 @@ namespace KryBot.Core.Sites
 			{
 				content += LoadGiveawaysByUrl(
 					$"{Links.SteamGiftsSearch}?type=group",
-					userAgent,
 					strings.ParseLoadGiveaways_GroupGiveAwaysIn,
 					Giveaways);
 			}
@@ -205,7 +193,6 @@ namespace KryBot.Core.Sites
 			{
 				LoadGiveawaysByUrl(
 					$"{Links.SteamGiftsSearch}",
-					userAgent,
 					strings.ParseLoadGiveaways_RegularGiveawaysIn,
 					Giveaways);
 			}
@@ -222,19 +209,19 @@ namespace KryBot.Core.Sites
 				(Giveaways?.Count + WishlistGiveaways?.Count).ToString());
 		}
 
-		public async Task<Log> LoadGiveawaysAsync(Blacklist blackList, string userAgent)
+		public async Task<Log> LoadGiveawaysAsync(Blacklist blackList)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = LoadGiveaways(blackList, userAgent);
+				var result = LoadGiveaways(blackList);
 				task.SetResult(result);
 			});
 
 			return task.Task.Result;
 		}
 
-		private string LoadGiveawaysByUrl(string url, string userAgent, string message, List<SteamGiftsGiveaway> giveawaysList)
+		private string LoadGiveawaysByUrl(string url, string message, List<SteamGiftsGiveaway> giveawaysList)
 		{
 			var count = 0;
 			var pages = 1;
@@ -244,7 +231,7 @@ namespace KryBot.Core.Sites
 			{
 				var response = Web.Get(
 					$"{url}{(i > 0 ? $"&page={i + 1}" : string.Empty)}",
-					Cookies.Generate(), userAgent);
+					Cookies.Generate(), UserAgent);
 
 				if (response.RestResponse.Content != string.Empty)
 				{
@@ -321,9 +308,9 @@ namespace KryBot.Core.Sites
 			}
 		}
 
-		private SteamGiftsGiveaway GetJoinData(SteamGiftsGiveaway sgGiveaway, string userAgent)
+		private SteamGiftsGiveaway GetJoinData(SteamGiftsGiveaway sgGiveaway)
 		{
-			var response = Web.Get($"{Links.SteamGifts}{sgGiveaway.Link}", Cookies.Generate(), userAgent);
+			var response = Web.Get($"{Links.SteamGifts}{sgGiveaway.Link}", Cookies.Generate(), UserAgent);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -345,9 +332,9 @@ namespace KryBot.Core.Sites
 
 		#region Sync
 
-		private Log SyncAccount(string userAgent)
+		private Log SyncAccount()
 		{
-			var xsrf = Web.Get(Links.SteamGiftsSync, Cookies.Generate(), userAgent);
+			var xsrf = Web.Get(Links.SteamGiftsSync, Cookies.Generate());
 
 			if (xsrf.RestResponse.Content != null)
 			{
@@ -367,7 +354,7 @@ namespace KryBot.Core.Sites
 
 					var response = Web.Post(Links.SteamGiftsAjax,
 						Generate.PostData_SteamGifts(xsrfToken.Attributes["value"].Value, "", "sync"), headers,
-						Cookies.Generate(), userAgent);
+						Cookies.Generate(), UserAgent);
 					if (response != null)
 					{
 						var result = JsonConvert.DeserializeObject<JsonResponseSyncAccount>(response.RestResponse.Content);
@@ -384,12 +371,12 @@ namespace KryBot.Core.Sites
 			return null;
 		}
 
-		public async Task<Log> SyncAccountAsync(string userAgent)
+		public async Task<Log> SyncAccountAsync()
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = SyncAccount(userAgent);
+				var result = SyncAccount();
 				task.SetResult(result);
 			});
 

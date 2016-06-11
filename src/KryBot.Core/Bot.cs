@@ -22,8 +22,6 @@ namespace KryBot.Core
 			GameAways = new GameAways();
 		}
 
-		public string UserAgent { get; set; }
-
 		// НЕ ИЗМЕНЯТЬ У ПОЛЕЙ SET
 		public GameMiner GameMiner { get; set; }
 		public SteamGifts SteamGifts { get; set; }

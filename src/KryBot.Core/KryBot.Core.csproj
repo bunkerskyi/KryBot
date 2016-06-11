@@ -71,6 +71,16 @@
     <Compile Include="Giveaways\SteamGiftsGiveaway.cs" />
     <Compile Include="Giveaways\UseGambleGiveaway.cs" />
     <Compile Include="Giveaways\SteamTradeGiveaway.cs" />
+    <Compile Include="Json\GameMiner\JsonGame.cs" />
+    <Compile Include="Json\GameMiner\JsonGiveaway.cs" />
+    <Compile Include="Json\GameMiner\JsonResponse.cs" />
+    <Compile Include="Json\GameMiner\JsonResponseError.cs" />
+    <Compile Include="Json\GameMiner\JsonResponseErrorDetail.cs" />
+    <Compile Include="Json\GameMiner\JsonRootObject.cs" />
+    <Compile Include="Json\SteamGifts\JsonResponseJoin.cs" />
+    <Compile Include="Json\SteamGifts\JsonResponseSyncAccount.cs" />
+    <Compile Include="Json\UseGamble\JsonJoin.cs" />
+    <Compile Include="Json\UseGamble\TargetH.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

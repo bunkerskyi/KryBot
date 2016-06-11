@@ -5,7 +5,8 @@ using Exceptionless.Json;
 using HtmlAgilityPack;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
-using RestSharp;
+using RestSharp;  
+using KryBot.Core.Json.UseGamble;
 
 namespace KryBot.Core.Sites
 {
@@ -18,7 +19,6 @@ namespace KryBot.Core.Sites
 		}
 
 		public bool Enabled { get; set; }
-		private string ProfileLink { get; set; }
 		public int Points { get; set; }
 		public int MaxJoinValue { get; set; } = 30;
 		public int PointsReserv { get; set; }
@@ -29,17 +29,6 @@ namespace KryBot.Core.Sites
 		{
 			Cookies = new UseGambleCookie();
 			Enabled = false;
-		}
-
-		private class JsonJoin
-		{
-			public int Error { get; set; }
-			public TargetH target_h { get; set; }
-		}
-
-		private class TargetH
-		{
-			public int my_coins { get; set; }
 		}
 
 		#region JoinGiveaway
@@ -103,7 +92,6 @@ namespace KryBot.Core.Sites
 				if (points != null && profileLink != null)
 				{
 					Points = int.Parse(points.InnerText);
-					ProfileLink = Links.UseGamble + profileLink.Attributes["href"].Value.Replace("/", "");
 					return Messages.ParseProfile("UseGamble", Points, profileLink.InnerText);
 				}
 			}

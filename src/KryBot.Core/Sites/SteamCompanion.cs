@@ -26,7 +26,6 @@ namespace KryBot.Core.Sites
 		public bool Contributors { get; set; }
 		public bool Group { get; set; }
 		public bool AutoJoin { get; set; }
-		private string ProfileLink { get; set; }
 		public int Points { get; set; }
 		public int JoinPointLimit { get; set; } = 1500;
 		public int PointsReserv { get; set; }
@@ -104,7 +103,6 @@ namespace KryBot.Core.Sites
 				if (points != null && profileLink != null)
 				{
 					Points = int.Parse(points.InnerText);
-					ProfileLink = profileLink.Attributes["href"].Value;
 					return Messages.ParseProfile("SteamCompanion", Points,
 						profileLink.Attributes["href"].Value.Split('/')[4]);
 				}
