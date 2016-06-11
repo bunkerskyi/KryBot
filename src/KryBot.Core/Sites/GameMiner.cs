@@ -27,7 +27,6 @@ namespace KryBot.Core.Sites
 		public bool Sandbox { get; set; } = true;
 		public bool Regular { get; set; } = true;
 		public bool FreeGolden { get; set; } = true;
-		public bool OnlyGifts { get; set; }
 		public bool NoRegion { get; set; }
 		public GameMinerCookie Cookies { get; set; }
 		public List<GameMinerGiveaway> Giveaways { get; set; }
@@ -82,76 +81,26 @@ namespace KryBot.Core.Sites
 			}
 		}
 
-		public class JsonProperties
-		{
-			public string RankColor { get; set; }
-			public string Hat { get; set; }
-			public string Rank { get; set; }
-			public string NickColor { get; set; }
-		}
-
-		public class JsonAccount
+		private class JsonGame
 		{
 			public string Name { get; set; }
-			public int Level { get; set; }
-			public int Id { get; set; }
-			public string Avatar { get; set; }
-			public bool Active { get; set; }
-			public string RoleId { get; set; }
-			public JsonProperties Properties { get; set; }
-		}
-
-		public class JsonGame
-		{
-			public int Updated { get; set; }
-			public string Name { get; set; }
-			public string Img { get; set; }
 			public string Url { get; set; }
-			public string Image { get; set; }
-			public object SteamApp { get; set; }
-			public string GameAppTypeId { get; set; }
-			public string GameClassId { get; set; }
-			public string ForeignId { get; set; }
-			public int Id { get; set; }
-		}
-
-		public class JsonAward
-		{
-			public int Res { get; set; }
-			public int Exp { get; set; }
 		}
 
 		private class JsonGiveaway
 		{
-			public string State { get; set; }
 			public bool Golden { get; set; }
-			public JsonAccount Account { get; set; }
 			public string Code { get; set; }
-			public object GiftAsKey { get; set; }
-			public int Created { get; set; }
-			public bool IsMember { get; set; }
 			public int Price { get; set; }
-			public object Winner { get; set; }
 			public object Sandbox { get; set; }
-			public int KeyStat { get; set; }
-			public bool ConstraintCheck { get; set; }
 			public JsonGame Game { get; set; }
-			public int Finish { get; set; }
-			public JsonAward Award { get; set; }
 			public string RegionlockTypeId { get; set; }
-			public List<object> Regionlocks { get; set; }
-			public int Entries { get; set; }
-			public string GiveawayTypeId { get; set; }
-			public object Entered { get; set; }
-			public List<object> Constraints { get; set; }
 		}
 
 		private class JsonRootObject
 		{
-			public int Count { get; set; }
-			public int ServerTime { get; set; }
 			public List<JsonGiveaway> Giveaways { get; set; }
-			public int LastPage { get; set; }
+			public int last_page { get; set; }
 			public int Total { get; set; }
 			public int Page { get; set; }
 		}
@@ -160,13 +109,11 @@ namespace KryBot.Core.Sites
 		{
 			public string Status { get; set; }
 			public int Coal { get; set; }
-			public int Gold { get; set; }
 		}
 
 		public class JsonResponseErrorDetail
 		{
 			public string Message { get; set; }
-			public string Code { get; set; }
 		}
 
 		public class JsonResponseError
@@ -194,8 +141,7 @@ namespace KryBot.Core.Sites
 					if (jsonresponse.Status == "ok")
 					{
 						Coal = jsonresponse.Coal;
-						return Messages.GiveawayJoined("GameMiner", giveaway.Name, giveaway.Price, jsonresponse.Coal,
-							0);
+						return Messages.GiveawayJoined("GameMiner", giveaway.Name, giveaway.Price, jsonresponse.Coal);
 					}
 					var jresponse =
 						JsonConvert.DeserializeObject<JsonResponseError>(response.RestResponse.Content);
@@ -264,7 +210,7 @@ namespace KryBot.Core.Sites
 
 		private Log WonParse(string userAgent)
 		{
-			var response = Web.Get($"{Links.GameMiner}giveaways/won", Cookies.Generate(), userAgent);
+			var response = Web.Get(Links.GameMinerWon, Cookies.Generate(), userAgent);
 
 			if (response.RestResponse.Content != "")
 			{
@@ -311,132 +257,32 @@ namespace KryBot.Core.Sites
 		private Log LoadGiveaways(Blacklist blackList, string userAgent)
 		{
 			var content = string.Empty;
+
 			Giveaways?.Clear();
-			var pages = 0;
 
 			if (FreeGolden)
 			{
-				var goldenFreesResponse = Web.Get($"{Links.GameMiner}" +
-				                                  "api/giveaways/golden?page=1&count=10&q=&type=regular&enter_price=on&sortby=finish&order=asc&filter_entered=on",
-					Cookies.Generate(), userAgent);
-
-				if (goldenFreesResponse.RestResponse.Content != "")
-				{
-					var goldenFreeJsonResponse =
-						JsonConvert.DeserializeObject<JsonRootObject>(
-							goldenFreesResponse.RestResponse.Content);
-					AddGiveaways(goldenFreeJsonResponse);
-
-					content +=
-						$"{Messages.GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {goldenFreeJsonResponse.Total} " +
-						$"{strings.ParseLoadGiveaways_FreeGoldenGiveawaysIn} {goldenFreeJsonResponse.LastPage} {strings.ParseLoadGiveaways_Pages}\n";
-
-					pages = goldenFreeJsonResponse.LastPage;
-
-					if (pages > 1)
-					{
-						for (var i = 1; i < pages + 1; i++)
-						{
-							goldenFreesResponse = Web.Get($"{Links.GameMiner}" +
-							                              $"/api/giveaways/golden?page={i + 1}&count=10&q=&type=regular&enter_price=on&sortby=finish&order=asc&filter_entered=on",
-								Cookies.Generate(), userAgent);
-							goldenFreeJsonResponse =
-								JsonConvert.DeserializeObject<JsonRootObject>(
-									goldenFreesResponse.RestResponse.Content);
-
-							AddGiveaways(goldenFreeJsonResponse);
-						}
-					}
-				}
+				content += LoadGiveawaysByUrl(Links.GameMinerGoldenGiveaways, strings.ParseLoadGiveaways_FreeGoldenGiveawaysIn, userAgent);
 			}
 
 			if (Regular)
 			{
-				var regularResponse = Web.Get($"{Links.GameMiner}" +
-				                              $"api/giveaways/coal?page=1&count=10&q=&type={(OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
-					Cookies.Generate(), userAgent);
-
-				var regularJsonResponse =
-					JsonConvert.DeserializeObject<JsonRootObject>(
-						regularResponse.RestResponse.Content);
-				AddGiveaways(regularJsonResponse);
-				content +=
-					$"{Messages.GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {regularJsonResponse.Total} " +
-					$"{strings.ParseLoadGiveaways_RegularGiveawaysIn} {regularJsonResponse.LastPage} {strings.ParseLoadGiveaways_Pages}\n";
-
-				pages = regularJsonResponse.LastPage;
-
-				if (pages > 1)
-				{
-					for (var i = 1; i < pages + 1; i++)
-					{
-						var regularGiftsResponse = Web.Get($"{Links.GameMiner}" +
-						                                   $"api/giveaways/coal?page={i + 1}&count=10&q=&type={(OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
-							Cookies.Generate(), userAgent);
-
-						var regularGiftJsonResponse =
-							JsonConvert.DeserializeObject<JsonRootObject>(
-								regularGiftsResponse.RestResponse.Content);
-
-						AddGiveaways(regularGiftJsonResponse);
-					}
-				}
+				content += LoadGiveawaysByUrl(Links.GameMinerRegularGiveaways, strings.ParseLoadGiveaways_RegularGiveawaysIn, userAgent);
 			}
 
 			if (Sandbox)
 			{
-				var sandboxGiftsResponse = Web.Get($"{Links.GameMiner}" +
-				                                   $"api/giveaways/sandbox?page=1&count=10&q=&type={(OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
-					Cookies.Generate(), userAgent);
-
-				if (sandboxGiftsResponse.RestResponse.Content != "")
-				{
-					var sandboxGiftJsonResponse =
-						JsonConvert.DeserializeObject<JsonRootObject>(
-							sandboxGiftsResponse.RestResponse.Content);
-					AddGiveaways(sandboxGiftJsonResponse);
-
-					content +=
-						$"{Messages.GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {sandboxGiftJsonResponse.Total} " +
-						$"{strings.ParseLoadGiveaways_RegularGiveawaysIn} {sandboxGiftJsonResponse.LastPage} {strings.ParseLoadGiveaways_Pages}\n";
-
-					pages = sandboxGiftJsonResponse.LastPage;
-				}
-
-				if (pages > 1)
-				{
-					for (var i = 1; i < pages + 1; i++)
-					{
-						var regularGiftsResponse = Web.Get($"{Links.GameMiner}" +
-						                                   $"api/giveaways/sandbox?page={i + 1}&count=10&q=&type={(OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
-							Cookies.Generate(), userAgent);
-
-						if (regularGiftsResponse.RestResponse.Content != "")
-						{
-							var regularGiftJsonResponse =
-								JsonConvert.DeserializeObject<JsonRootObject>(
-									regularGiftsResponse.RestResponse.Content);
-
-							AddGiveaways(regularGiftJsonResponse);
-						}
-					}
-				}
+				content += LoadGiveawaysByUrl(Links.GameMinerSandboxGiveaways, strings.ParseLoadGiveaways_SandboxGiveawaysIn, userAgent);
 			}
 
 			if (Giveaways == null)
 			{
-				return
-					new Log(
-						$"{content}{Messages.GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0",
-						Color.White, true, true);
+				return Messages.ParseGiveawaysEmpty(content, "GameMiner");
 			}
 
 			Tools.RemoveBlacklistedGames(Giveaways, blackList);
 
-			return
-				new Log(
-					$"{content}{Messages.GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {Giveaways.Count}",
-					Color.White, true, true);
+			return Messages.ParseGiveawaysFoundMatchGiveaways(content, "GameMiner", Giveaways.Count.ToString());
 		}
 
 		public async Task<Log> LoadGiveawaysAsync(Blacklist blackList, string userAgent)
@@ -449,6 +295,32 @@ namespace KryBot.Core.Sites
 			});
 
 			return task.Task.Result;
+		}
+
+		private string LoadGiveawaysByUrl(string url, string message, string userAgent)
+		{
+			var response = Web.Get(url, Cookies.Generate(), userAgent);
+
+			if(response.RestResponse.Content != string.Empty)
+			{
+				var jsonResponse = JsonConvert.DeserializeObject<JsonRootObject>(response.RestResponse.Content);
+				AddGiveaways(jsonResponse);
+
+				if(jsonResponse.last_page > 1)
+				{
+					for(var i = 1; i < jsonResponse.last_page + 1; i++)
+					{
+						response = Web.Get($"{url}&page={i + 1}", Cookies.Generate(), userAgent);
+						jsonResponse = JsonConvert.DeserializeObject<JsonRootObject>(response.RestResponse.Content);
+						AddGiveaways(jsonResponse);
+					}
+				}
+
+				return $"{Messages.GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {jsonResponse.Total} " +
+					$"{message} {jsonResponse.last_page} {strings.ParseLoadGiveaways_Pages}\n";
+			}
+
+			return string.Empty;
 		}
 
 		#endregion

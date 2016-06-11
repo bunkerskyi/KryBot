@@ -64,7 +64,7 @@ namespace KryBot.Core.Sites
 						var message = htmldoc.DocumentNode.SelectSingleNode("//div[@class='msgbox success']");
 						if (message != null)
 						{
-							return Messages.GiveawayJoined("PlayBlink", pbGiveaway.Name, pbGiveaway.Price, Points, 0);
+							return Messages.GiveawayJoined("PlayBlink", pbGiveaway.Name, pbGiveaway.Price, Points);
 						}
 
 						var error = htmldoc.DocumentNode.SelectSingleNode("//div[@class='msgbox error']");

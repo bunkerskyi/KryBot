@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
 using Exceptionless.Json;
 using HtmlAgilityPack;
-using KryBot.CommonResources.lang;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
 using RestSharp;
@@ -68,7 +66,7 @@ namespace KryBot.Core.Sites
 				{
 					Points = jresponse.target_h.my_coins;
 					return Messages.GiveawayJoined("UseGamble", giveaway.Name, giveaway.Price,
-						jresponse.target_h.my_coins, 0);
+						jresponse.target_h.my_coins);
 				}
 				return Messages.GiveawayNotJoined("UseGamble", giveaway.Name, "Error");
 			}
@@ -196,7 +194,7 @@ namespace KryBot.Core.Sites
 				}
 				else
 				{
-					var response = Web.Get(Links.UseGamble, Cookies.Generate());
+					var response = Web.Get($"{Links.UseGamble}page", Cookies.Generate());
 
 					if (response.RestResponse.Content != string.Empty)
 					{
@@ -221,18 +219,12 @@ namespace KryBot.Core.Sites
 
 			if (Giveaways == null)
 			{
-				return
-					new Log(
-						$"{Messages.GetDateTime()} {{UseGamble}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0",
-						Color.White, true, true);
+				return Messages.ParseGiveawaysEmpty("UseGamble");
 			}
 
 			Tools.RemoveBlacklistedGames(Giveaways, blackList);
 
-			return
-				new Log(
-					$"{Messages.GetDateTime()} {{UseGamble}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {Giveaways.Count}",
-					Color.White, true, true);
+			return Messages.ParseGiveawaysFoundMatchGiveaways("UseGamble", Giveaways.Count.ToString());
 		}
 
 		public async Task<Log> LoadGiveawaysAsync(Blacklist blackList)

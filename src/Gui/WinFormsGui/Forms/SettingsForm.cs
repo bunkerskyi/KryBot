@@ -62,7 +62,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			cbGMRegular.Checked = _bot.GameMiner.Regular;
 			chGMSandbox.Checked = _bot.GameMiner.Sandbox;
 			cbGMGolden.Checked = _bot.GameMiner.FreeGolden;
-			cbGBOnlyGifts.Checked = _bot.GameMiner.OnlyGifts;
 			cbGMRegional.Checked = _bot.GameMiner.NoRegion;
 			tbGMMaxValue.Text = _bot.GameMiner.JoinCoalLimit.ToString();
 			tbGMReserv.Text = _bot.GameMiner.CoalReserv.ToString();
@@ -135,7 +134,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			_bot.GameMiner.Regular = cbGMRegular.Checked;
 			_bot.GameMiner.Sandbox = chGMSandbox.Checked;
 			_bot.GameMiner.FreeGolden = cbGMGolden.Checked;
-			_bot.GameMiner.OnlyGifts = cbGBOnlyGifts.Checked;
 			_bot.GameMiner.NoRegion = cbGMRegional.Checked;
 			_bot.GameMiner.JoinCoalLimit = int.Parse(tbGMMaxValue.Text);
 			_bot.GameMiner.CoalReserv = int.Parse(tbGMReserv.Text);
@@ -207,20 +205,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			var names = new List<string> {"PHPSESSID:" + _bot.UseGamble.Cookies.PhpSessId};
 
 			var form = new FormCookie("UseGamble", names, _bot);
-			form.ShowDialog();
-		}
-
-		private void btnSTCookies_Click(object sender, EventArgs e)
-		{
-			var names = new List<string>
-			{
-				"PHPSESSID:" + _bot.SteamTrade.Cookies.PhpSessId,
-				"dle_user_id:" + _bot.SteamTrade.Cookies.DleUserId,
-				"dle_password:" + _bot.SteamTrade.Cookies.DlePassword,
-				"passhash:" + _bot.SteamTrade.Cookies.PassHash
-			};
-
-			var form = new FormCookie("SteamTrade", names, _bot);
 			form.ShowDialog();
 		}
 
@@ -319,19 +303,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			{
 				_userAutorun = true;
 			}
-		}
-
-		private void button1_Click(object sender, EventArgs e)
-		{
-			var names = new List<string>
-			{
-				"steamLogin:" + _bot.Steam.Cookies.Login,
-				"sessionid:" + _bot.Steam.Cookies.Sessid,
-				"steamRememberLogin:" + _bot.Steam.Cookies.RememberLogin
-			};
-
-			var form = new FormCookie("Steam", names, _bot);
-			form.ShowDialog();
 		}
 
 		private void btnDeleteCookies_Click(object sender, EventArgs e)

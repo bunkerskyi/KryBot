@@ -81,7 +81,6 @@ namespace KryBot.Core.Sites
 						"//a[contains(@class, 'user_avatar') and contains(@class, 'playerAvatar')]");
 				if (login == null)
 				{
-					//ProfileLoaded();
 					return Messages.ParseProfileFailed("Steam");
 				}
 

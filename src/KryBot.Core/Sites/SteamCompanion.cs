@@ -66,7 +66,7 @@ namespace KryBot.Core.Sites
 					{
 						Points = int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]);
 						return Messages.GiveawayJoined("SteamCompanion", giveaway.Name, giveaway.Price,
-							int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]), 0);
+							int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]));
 					}
 
 					return Messages.GiveawayNotJoined("SteamCompanion", giveaway.Name, response.RestResponse.Content);

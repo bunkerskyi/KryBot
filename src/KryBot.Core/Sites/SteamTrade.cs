@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
-using KryBot.CommonResources.lang;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
 
@@ -40,7 +38,7 @@ namespace KryBot.Core.Sites
 				var response = Web.Get($"{Links.SteamTrade}{giveaway.LinkJoin}", Cookies.Generate());
 				if (response.RestResponse.StatusCode == HttpStatusCode.OK)
 				{
-					return Messages.GiveawayJoined("SteamTrade", giveaway.Name.Trim(), 0, 0, 0);
+					return Messages.GiveawayJoined("SteamTrade", giveaway.Name.Trim(), 0, 0);
 				}
 				return Messages.GiveawayNotJoined("SteamTrade", giveaway.Name,
 					response.RestResponse.StatusCode.ToString());
@@ -110,10 +108,7 @@ namespace KryBot.Core.Sites
 
 				if (Giveaways == null)
 				{
-					return
-						new Log(
-							$"{Messages.GetDateTime()} {{SteamTrade}} {strings.ParseLoadGiveaways_FoundMatchGiveaways} : 0",
-							Color.White, true, true);
+					return Messages.ParseGiveawaysEmpty("SteamTrade");
 				}
 
 				if (blackList != null)
@@ -128,10 +123,7 @@ namespace KryBot.Core.Sites
 					}
 				}
 
-				return
-					new Log(
-						$"{Messages.GetDateTime()} {{SteamTrade}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {Giveaways.Count}",
-						Color.White, true, true);
+				return Messages.ParseGiveawaysFoundMatchGiveaways("SteamTrade", Giveaways.Count.ToString());
 			}
 			return null;
 		}

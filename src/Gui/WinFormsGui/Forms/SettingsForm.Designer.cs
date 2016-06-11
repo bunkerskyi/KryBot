@@ -49,7 +49,6 @@
 			this.tabPageGM = new System.Windows.Forms.TabPage();
 			this.btbGMCookies = new System.Windows.Forms.Button();
 			this.cbGMRegional = new System.Windows.Forms.CheckBox();
-			this.cbGBOnlyGifts = new System.Windows.Forms.CheckBox();
 			this.cbGMGolden = new System.Windows.Forms.CheckBox();
 			this.chGMSandbox = new System.Windows.Forms.CheckBox();
 			this.cbGMRegular = new System.Windows.Forms.CheckBox();
@@ -308,7 +307,6 @@
 			// 
 			this.tabPageGM.Controls.Add(this.btbGMCookies);
 			this.tabPageGM.Controls.Add(this.cbGMRegional);
-			this.tabPageGM.Controls.Add(this.cbGBOnlyGifts);
 			this.tabPageGM.Controls.Add(this.cbGMGolden);
 			this.tabPageGM.Controls.Add(this.chGMSandbox);
 			this.tabPageGM.Controls.Add(this.cbGMRegular);
@@ -337,22 +335,12 @@
 			// cbGMRegional
 			// 
 			this.cbGMRegional.AutoSize = true;
-			this.cbGMRegional.Location = new System.Drawing.Point(6, 98);
+			this.cbGMRegional.Location = new System.Drawing.Point(6, 75);
 			this.cbGMRegional.Name = "cbGMRegional";
 			this.cbGMRegional.Size = new System.Drawing.Size(187, 17);
 			this.cbGMRegional.TabIndex = 8;
 			this.cbGMRegional.Text = "Без региональных ограничений";
 			this.cbGMRegional.UseVisualStyleBackColor = true;
-			// 
-			// cbGBOnlyGifts
-			// 
-			this.cbGBOnlyGifts.AutoSize = true;
-			this.cbGBOnlyGifts.Location = new System.Drawing.Point(6, 75);
-			this.cbGBOnlyGifts.Name = "cbGBOnlyGifts";
-			this.cbGBOnlyGifts.Size = new System.Drawing.Size(98, 17);
-			this.cbGBOnlyGifts.TabIndex = 7;
-			this.cbGBOnlyGifts.Text = "Только гифты";
-			this.cbGBOnlyGifts.UseVisualStyleBackColor = true;
 			// 
 			// cbGMGolden
 			// 
@@ -386,7 +374,7 @@
 			// 
 			// tbGMReserv
 			// 
-			this.tbGMReserv.Location = new System.Drawing.Point(248, 115);
+			this.tbGMReserv.Location = new System.Drawing.Point(248, 98);
 			this.tbGMReserv.Name = "tbGMReserv";
 			this.tbGMReserv.Size = new System.Drawing.Size(30, 20);
 			this.tbGMReserv.TabIndex = 3;
@@ -395,7 +383,7 @@
 			// 
 			// tbGMMaxValue
 			// 
-			this.tbGMMaxValue.Location = new System.Drawing.Point(134, 115);
+			this.tbGMMaxValue.Location = new System.Drawing.Point(134, 98);
 			this.tbGMMaxValue.Name = "tbGMMaxValue";
 			this.tbGMMaxValue.Size = new System.Drawing.Size(30, 20);
 			this.tbGMMaxValue.TabIndex = 2;
@@ -405,7 +393,7 @@
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(170, 118);
+			this.label2.Location = new System.Drawing.Point(170, 101);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(72, 13);
 			this.label2.TabIndex = 1;
@@ -414,7 +402,7 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(3, 118);
+			this.label1.Location = new System.Drawing.Point(3, 101);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(125, 13);
 			this.label1.TabIndex = 0;
@@ -859,7 +847,6 @@
 		private System.Windows.Forms.ComboBox cbSortBy;
 		private System.Windows.Forms.CheckBox cbSort;
 		private System.Windows.Forms.CheckBox cbGMRegional;
-		private System.Windows.Forms.CheckBox cbGBOnlyGifts;
 		private System.Windows.Forms.CheckBox cbGMGolden;
 		private System.Windows.Forms.CheckBox chGMSandbox;
 		private System.Windows.Forms.CheckBox cbGMRegular;

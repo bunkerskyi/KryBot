@@ -47,13 +47,18 @@ namespace KryBot.Core
 			Settings.Default.JoinsTotal += 1;
 			Settings.Default.Save();
 
-			if (level > 0)
-			{
-				return
-					new Log(
-						$"{GetDateTime()} {{{site}}} {strings.GiveawayJoined_Join} \"{name}\" [{level}] {strings.GiveawayJoined_ConfirmedFor} {price} " +
-						$"{strings.GiveawayJoined_Points} ({points})", Color.Green);
-			}
+			return
+				new Log(
+					$"{GetDateTime()} {{{site}}} {strings.GiveawayJoined_Join} \"{name}\" [{level}] {strings.GiveawayJoined_ConfirmedFor} {price} " +
+					$"{strings.GiveawayJoined_Points} ({points})", Color.Green);
+		}
+
+		public static Log GiveawayJoined(string site, string name, int price, int points)
+		{
+			Settings.Default.JoinsPerSession += 1;
+			Settings.Default.JoinsTotal += 1;
+			Settings.Default.Save();
+
 			return
 				new Log(
 					$"{GetDateTime()} {{{site}}} {strings.GiveawayJoined_Join} \"{name}\" {strings.GiveawayJoined_ConfirmedFor} {price} " +
@@ -136,10 +141,23 @@ namespace KryBot.Core
 				Color.White, true, true);
 		}
 
+		public static Log ParseGiveawaysEmpty(string site)
+		{
+			return new Log($"{GetDateTime()} {{{site}}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0",
+				Color.White, true, true);
+		}
+
 		public static Log ParseGiveawaysFoundMatchGiveaways(string content, string site, string count)
 		{
 			return new Log(
 				$"{content}{GetDateTime()} {{{site}}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {count}",
+				Color.White, true, true);
+		}
+
+		public static Log ParseGiveawaysFoundMatchGiveaways(string site, string count)
+		{
+			return new Log(
+				$"{GetDateTime()} {{{site}}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {count}",
 				Color.White, true, true);
 		}
 	}
