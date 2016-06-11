@@ -9,6 +9,7 @@ using KryBot.CommonResources.lang;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
 using KryBot.Core.Json.GameMiner;
+using RestSharp;
 
 namespace KryBot.Core.Sites
 {
@@ -92,7 +93,7 @@ namespace KryBot.Core.Sites
 			var response =
 				Web.Post(
 					$"{Links.GameMiner}giveaway/enter/{giveaway.Id}?{(giveaway.IsSandbox ? "sandbox" : "coal")}_page={giveaway.Page}",
-					Generate.PostData_GameMiner(Cookies.Xsrf), Cookies.Generate(), UserAgent);
+					GenerateJoinData(), Cookies.Generate(), UserAgent);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -127,6 +128,29 @@ namespace KryBot.Core.Sites
 			});
 
 			return task.Task.Result;
+		}
+
+		private List<Parameter> GenerateJoinData()
+		{
+			var list = new List<Parameter>();
+
+			var xsrfParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "_xsrf",
+				Value = Cookies.Xsrf
+			};
+			list.Add(xsrfParam);
+
+			var jsonParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "json",
+				Value = "true"
+			};
+			list.Add(jsonParam);
+
+			return list;
 		}
 
 		#endregion
@@ -292,7 +316,7 @@ namespace KryBot.Core.Sites
 		private Log SyncAccount()
 		{
 			var response = Web.Post("http://gameminer.net/account/sync",
-				Generate.SyncPostData_GameMiner(Cookies.Xsrf), Cookies.Generate(), UserAgent);
+				GenerateSyncData(), Cookies.Generate(), UserAgent);
 
 			if (response.RestResponse.Content != "")
 			{
@@ -320,6 +344,21 @@ namespace KryBot.Core.Sites
 			});
 
 			return task.Task.Result;
+		}
+
+		private List<Parameter> GenerateSyncData()
+		{
+			var list = new List<Parameter>();
+
+			var xsrfParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "_xsrf",
+				Value = Cookies.Xsrf
+			};
+			list.Add(xsrfParam);
+
+			return list;
 		}
 
 		#endregion

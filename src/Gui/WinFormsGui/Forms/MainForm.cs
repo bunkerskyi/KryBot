@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KryBot.CommonResources.lang;
@@ -19,7 +20,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private static Bot _bot = new Bot();
 		private static Blacklist _blackList;
 
-		
 
 		private readonly Timer _timer = new Timer();
 		private readonly Timer _timerTickCount = new Timer();
@@ -132,8 +132,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				if (_bot.Steam.Enabled)
 				{
 					await
-						_bot.Steam.Join("http://steamcommunity.com/groups/krybot",
-							Generate.PostData_SteamGroupJoin(_bot.Steam.Cookies.Sessid));
+						_bot.Steam.Join("http://steamcommunity.com/groups/krybot");
 				}
 			}
 			else
@@ -635,7 +634,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 						}
 					}
 
-					
+
 					var giveaways =
 						await _bot.UseGamble.LoadGiveawaysAsync(_blackList);
 					if (giveaways != null && giveaways.Content != "\n")
@@ -1059,10 +1058,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private async void btnSTLogin_Click(object sender, EventArgs e)
 		{
 			btnSTLogin.Enabled = false;
-			var first = Web.Get(Links.SteamTrade);
-			var getLoginHref = Web.SteamTradeDoAuth($"{Links.SteamTrade}reg.php?login",
-				Generate.LoginData_SteamTrade(), first.Cookies);
-			var location = Tools.GetLocationInresponse(getLoginHref.RestResponse);
+			var first = await Web.GetAsync(Links.SteamTrade, new CookieContainer());
+			var getLoginHref = await _bot.SteamTrade.DoAuth(first.Cookies);
+			var location = getLoginHref.RestResponse.ResponseUri.ToString();
 			var cookie = Tools.GetSessCookieInresponse(getLoginHref.Cookies, "steamtrade.info", "PHPSESSID");
 
 			BrowserStart(location, Links.SteamTrade, "SteamTrade - Login", cookie);
@@ -1679,8 +1677,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			var login = await CheckLoginSteam();
 			if (login)
 			{
-				await _bot.Steam.Join("http://steamcommunity.com/groups/krybot",
-					Generate.PostData_SteamGroupJoin(_bot.Steam.Cookies.Sessid));
+				await _bot.Steam.Join("http://steamcommunity.com/groups/krybot");
 
 				BlockTabpage(tabPageSteam, true);
 				btnSteamLogin.Enabled = false;

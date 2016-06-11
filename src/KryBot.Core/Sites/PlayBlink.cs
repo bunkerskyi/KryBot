@@ -49,7 +49,7 @@ namespace KryBot.Core.Sites
 				list.Add(header);
 
 				var response = Web.Post($"{Links.PlayBlinkJoin}&game={pbGiveaway.Id}",
-					Generate.PostData_PlayBlink(pbGiveaway.Id), list,
+					GenerateJoinData(pbGiveaway.Id), list,
 					Cookies.Generate(Level));
 
 				if (response.RestResponse.StatusCode == HttpStatusCode.OK)
@@ -96,6 +96,29 @@ namespace KryBot.Core.Sites
 			});
 
 			return task.Task.Result;
+		}
+
+		public static List<Parameter> GenerateJoinData(string game)
+		{
+			var list = new List<Parameter>();
+
+			var doParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "do",
+				Value = "blink"
+			};
+			list.Add(doParam);
+
+			var gameParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "game",
+				Value = game
+			};
+			list.Add(gameParam);
+
+			return list;
 		}
 
 		#endregion

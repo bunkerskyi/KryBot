@@ -11,10 +11,6 @@ namespace WPFGui.Startup
 {
 	public class Bootstrapper : UnityBootstrapper, IDisposable
 	{
-		#region data
-
-		#endregion
-
 		#region IDisposable Members
 
 		public void Dispose()
@@ -29,6 +25,10 @@ namespace WPFGui.Startup
 		{
 			// TODO Обработка "необработанных" исключений.
 		}
+
+		#endregion
+
+		#region data
 
 		#endregion
 

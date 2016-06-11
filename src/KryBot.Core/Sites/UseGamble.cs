@@ -5,8 +5,8 @@ using Exceptionless.Json;
 using HtmlAgilityPack;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
-using RestSharp;  
 using KryBot.Core.Json.UseGamble;
+using RestSharp;
 
 namespace KryBot.Core.Sites
 {
@@ -47,7 +47,7 @@ namespace KryBot.Core.Sites
 				list.Add(header);
 
 				var response = Web.Post(Links.UseGambleJoin,
-					Generate.PostData_UseGamble(giveaway.Code), list,
+					GenerateJoinData(giveaway.Code), list,
 					Cookies.Generate());
 				var jresponse =
 					JsonConvert.DeserializeObject<JsonJoin>(response.RestResponse.Content.Replace(".", ""));
@@ -72,6 +72,21 @@ namespace KryBot.Core.Sites
 			});
 
 			return task.Task.Result;
+		}
+
+		private static List<Parameter> GenerateJoinData(string ga)
+		{
+			var list = new List<Parameter>();
+
+			var gaParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "ga",
+				Value = ga
+			};
+			list.Add(gaParam);
+
+			return list;
 		}
 
 		#endregion
@@ -168,7 +183,7 @@ namespace KryBot.Core.Sites
 					headerList.Add(header);
 
 					var jsonresponse = Web.Post(Links.UseGambleGaPage,
-						Generate.PageData_UseGamble(i + 1), headerList,
+						GeneratePageData(i + 1), headerList,
 						Cookies.Generate());
 					if (jsonresponse.RestResponse.Content != string.Empty)
 					{
@@ -272,6 +287,31 @@ namespace KryBot.Core.Sites
 					}
 				}
 			}
+		}
+
+		public static List<Parameter> GeneratePageData(int page)
+		{
+			var list = new List<Parameter>();
+
+			var typeParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "type",
+				Value = 1
+			};
+			list.Add(typeParam);
+
+			var pageParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "page",
+				Value = page
+			};
+			list.Add(pageParam);
+
+			//TODO Добавить параметр AjaxToken, находится на странице 
+
+			return list;
 		}
 
 		#endregion

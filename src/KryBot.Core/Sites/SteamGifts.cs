@@ -7,8 +7,9 @@ using HtmlAgilityPack;
 using KryBot.CommonResources.lang;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
-using RestSharp;
+using KryBot.Core.Json.GameMiner;
 using KryBot.Core.Json.SteamGifts;
+using RestSharp;
 
 namespace KryBot.Core.Sites
 {
@@ -53,7 +54,7 @@ namespace KryBot.Core.Sites
 			if (giveaway.Token != null)
 			{
 				var response = Web.Post(Links.SteamGiftsAjax,
-					Generate.PostData_SteamGifts(giveaway.Token, giveaway.Code, "entry_insert"),
+					GenerateJoinParams(giveaway.Token, giveaway.Code, "entry_insert"),
 					Cookies.Generate(), UserAgent);
 
 				if (response.RestResponse.Content != null)
@@ -69,7 +70,7 @@ namespace KryBot.Core.Sites
 					}
 
 					var jresponse =
-						JsonConvert.DeserializeObject<Json.GameMiner.JsonResponseError>(response.RestResponse.Content);
+						JsonConvert.DeserializeObject<JsonResponseError>(response.RestResponse.Content);
 					return Messages.GiveawayNotJoined("SteamGifts", giveaway.Name, jresponse.Error?.Message);
 				}
 			}
@@ -86,6 +87,40 @@ namespace KryBot.Core.Sites
 			});
 
 			return task.Task.Result;
+		}
+
+		private static List<Parameter> GenerateJoinParams(string xsrfToken, string code, string action)
+		{
+			var list = new List<Parameter>();
+
+			var xsrfParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "xsrf_token",
+				Value = xsrfToken
+			};
+			list.Add(xsrfParam);
+
+			var doParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "do",
+				Value = action
+			};
+			list.Add(doParam);
+
+			if (code != "")
+			{
+				var codeParam = new Parameter
+				{
+					Type = ParameterType.GetOrPost,
+					Name = "code",
+					Value = code
+				};
+				list.Add(codeParam);
+			}
+
+			return list;
 		}
 
 		#endregion
@@ -258,7 +293,8 @@ namespace KryBot.Core.Sites
 				}
 			}
 
-			return $"{Messages.GetDateTime()} {{SteamGifts}} {strings.ParseLoadGiveaways_Found} {count} {message} {pages} {strings.ParseLoadGiveaways_Pages}\n";
+			return
+				$"{Messages.GetDateTime()} {{SteamGifts}} {strings.ParseLoadGiveaways_Found} {count} {message} {pages} {strings.ParseLoadGiveaways_Pages}\n";
 		}
 
 		private void AddGiveaways(HtmlNodeCollection nodes, List<SteamGiftsGiveaway> giveawaysList)
@@ -353,7 +389,7 @@ namespace KryBot.Core.Sites
 					headers.Add(header);
 
 					var response = Web.Post(Links.SteamGiftsAjax,
-						Generate.PostData_SteamGifts(xsrfToken.Attributes["value"].Value, "", "sync"), headers,
+						GenerateJoinParams(xsrfToken.Attributes["value"].Value, "", "sync"), headers,
 						Cookies.Generate(), UserAgent);
 					if (response != null)
 					{

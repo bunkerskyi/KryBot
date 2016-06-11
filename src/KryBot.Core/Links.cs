@@ -56,7 +56,8 @@
 		#region SteamTrade
 
 		public const string SteamTrade = "http://steamtrade.info/";
-		public static readonly string SteamTradeWon = $"{UseGamble}awards/";
+		public static readonly string SteamTradeLogin = $"{SteamTrade}reg.php?login";
+		public static readonly string SteamTradeWon = $"{SteamTrade}awards/";
 
 		#endregion
 

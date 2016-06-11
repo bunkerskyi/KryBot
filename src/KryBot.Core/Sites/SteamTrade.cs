@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 using HtmlAgilityPack;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
+using RestSharp;
 
 namespace KryBot.Core.Sites
 {
@@ -25,6 +27,11 @@ namespace KryBot.Core.Sites
 		{
 			Cookies = new SteamTradeCookie();
 			Enabled = false;
+		}
+
+		public async Task<Web.Response> DoAuth(CookieContainer cookies)
+		{
+			return await Web.PostAsync(Links.SteamTradeLogin, GenerateJoinData(), cookies);
 		}
 
 		#region JoinGiveaway
@@ -56,6 +63,30 @@ namespace KryBot.Core.Sites
 			});
 
 			return task.Task.Result;
+		}
+
+		public static List<Parameter> GenerateJoinData()
+		{
+			var rnd = new Random();
+			var list = new List<Parameter>();
+
+			var xParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "x",
+				Value = rnd.Next(0, 190)
+			};
+			list.Add(xParam);
+
+			var yParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "y",
+				Value = rnd.Next(0, 23)
+			};
+			list.Add(yParam);
+
+			return list;
 		}
 
 		#endregion

@@ -41,10 +41,10 @@ namespace KryBot.Core.Sites
 
 		#region JoinGivaway
 
-		private Log JoinGiveaway(SteamCompanionGiveaway giveaway, string steamCookie, Steam steam)
+		private Log JoinGiveaway(SteamCompanionGiveaway giveaway, Steam steam)
 		{
 			Thread.Sleep(400);
-			var data = GetJoinData(giveaway, steamCookie, steam);
+			var data = GetJoinData(giveaway, steam);
 			if (data != null && data.Success)
 			{
 				if (giveaway.Code != null)
@@ -58,7 +58,7 @@ namespace KryBot.Core.Sites
 					list.Add(header);
 
 					var response = Web.Post(Links.SteamCompanionJoin,
-						Generate.PostData_SteamCompanion(giveaway.Code), list,
+						GenerateJoinData(giveaway.Code), list,
 						Cookies.Generate());
 
 					if (response.RestResponse.Content.Split('"')[3].Split('"')[0] == "Success")
@@ -79,11 +79,50 @@ namespace KryBot.Core.Sites
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = JoinGiveaway(Giveaways[index], steamCookie, steam);
+				var result = JoinGiveaway(Giveaways[index], steam);
 				task.SetResult(result);
 			});
 
 			return task.Task.Result;
+		}
+
+		private static List<Parameter> GenerateJoinData(string hashId)
+		{
+			var list = new List<Parameter>();
+
+			var xsrfParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "script",
+				Value = "enter"
+			};
+			list.Add(xsrfParam);
+
+			var codeParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "hashID",
+				Value = hashId
+			};
+			list.Add(codeParam);
+
+			var tokenParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "token",
+				Value = ""
+			};
+			list.Add(tokenParam);
+
+			var doParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "action",
+				Value = "enter_giveaway"
+			};
+			list.Add(doParam);
+
+			return list;
 		}
 
 		#endregion
@@ -305,7 +344,7 @@ namespace KryBot.Core.Sites
 			}
 		}
 
-		private Log GetJoinData(SteamCompanionGiveaway scGiveaway, string steamCookie, Steam steam)
+		private Log GetJoinData(SteamCompanionGiveaway scGiveaway, Steam steam)
 		{
 			var response = Web.Get(scGiveaway.Link, Cookies.Generate());
 
@@ -332,8 +371,7 @@ namespace KryBot.Core.Sites
 					{
 						var trueGroupUrl = Web.Get(group.Attributes["href"].Value, Cookies.Generate());
 
-						return steam.JoinGroup(trueGroupUrl.RestResponse.ResponseUri.AbsoluteUri,
-							Generate.PostData_SteamGroupJoin(steamCookie));
+						return steam.JoinGroup(trueGroupUrl.RestResponse.ResponseUri.AbsoluteUri);
 					}
 					var error =
 						htmlDoc.DocumentNode.SelectSingleNode("//a[@class='notification group-join regular-button qa']");

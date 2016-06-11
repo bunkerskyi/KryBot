@@ -1,8 +1,8 @@
 ﻿namespace KryBot.Core.Json.SteamGifts
 {
-	public class JsonResponseSyncAccount
+	public class JsonResponseJoin
 	{
 		public string Type { get; set; }
-		public string Msg { get; set; }
+		public int Points { get; set; }
 	}
 }

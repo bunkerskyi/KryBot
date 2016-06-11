@@ -10,7 +10,7 @@ namespace KryBot.Core
 	{
 		private static readonly int requestInterval = 400;
 
-		public static Classes.Response Get(string url)
+		private static Response Get(string url)
 		{
 			var client = new RestClient(url)
 			{
@@ -21,18 +21,12 @@ namespace KryBot.Core
 
 			var response = client.Execute(request);
 
-			var data = new Classes.Response
-			{
-				Cookies = client.CookieContainer,
-				RestResponse = response
-			};
-
 			Thread.Sleep(requestInterval);
 
-			return data;
+			return new Response(client.CookieContainer, response);
 		}
 
-		public static Classes.Response Get(string url, CookieContainer cookies, string userAgent)
+		public static Response Get(string url, CookieContainer cookies, string userAgent)
 		{
 			var client = new RestClient(url)
 			{
@@ -45,18 +39,12 @@ namespace KryBot.Core
 
 			var response = client.Execute(request);
 
-			var data = new Classes.Response
-			{
-				Cookies = client.CookieContainer,
-				RestResponse = response
-			};
-
 			Thread.Sleep(requestInterval);
 
-			return data;
+			return new Response(client.CookieContainer, response);
 		}
 
-		public static Classes.Response Get(string url, CookieContainer cookies)
+		public static Response Get(string url, CookieContainer cookies)
 		{
 			var client = new RestClient(url)
 			{
@@ -68,20 +56,14 @@ namespace KryBot.Core
 
 			var response = client.Execute(request);
 
-			var data = new Classes.Response
-			{
-				Cookies = client.CookieContainer,
-				RestResponse = response
-			};
-
 			Thread.Sleep(requestInterval);
 
-			return data;
+			return new Response(client.CookieContainer, response);
 		}
 
-		public static async Task<Classes.Response> GetAsync(string url)
+		public static async Task<Response> GetAsync(string url)
 		{
-			var task = new TaskCompletionSource<Classes.Response>();
+			var task = new TaskCompletionSource<Response>();
 			await Task.Run(() =>
 			{
 				var result = Get(url);
@@ -91,7 +73,19 @@ namespace KryBot.Core
 			return task.Task.Result;
 		}
 
-		public static Classes.Response Post(string url, List<Parameter> parameters,
+		public static async Task<Response> GetAsync(string url, CookieContainer cookies)
+		{
+			var task = new TaskCompletionSource<Response>();
+			await Task.Run(() =>
+			{
+				var result = Get(url, cookies);
+				task.SetResult(result);
+			});
+
+			return task.Task.Result;
+		}
+
+		public static Response Post(string url, List<Parameter> parameters,
 			List<HttpHeader> headers, CookieContainer cookies, string userAgent)
 		{
 			var client = new RestClient(url)
@@ -114,18 +108,13 @@ namespace KryBot.Core
 			}
 
 			var response = client.Execute(request);
-			var data = new Classes.Response
-			{
-				Cookies = client.CookieContainer,
-				RestResponse = response
-			};
 
 			Thread.Sleep(requestInterval);
 
-			return data;
+			return new Response(client.CookieContainer, response);
 		}
 
-		public static Classes.Response Post(string url, List<Parameter> parameters,
+		public static Response Post(string url, List<Parameter> parameters,
 			List<HttpHeader> headers, CookieContainer cookies)
 		{
 			var client = new RestClient(url)
@@ -147,18 +136,12 @@ namespace KryBot.Core
 			}
 
 			var response = client.Execute(request);
-			var data = new Classes.Response
-			{
-				Cookies = client.CookieContainer,
-				RestResponse = response
-			};
-
 			Thread.Sleep(requestInterval);
 
-			return data;
+			return new Response(client.CookieContainer, response);
 		}
 
-		public static Classes.Response Post(string url, List<Parameter> parameters, CookieContainer cookies)
+		public static Response Post(string url, List<Parameter> parameters, CookieContainer cookies)
 		{
 			var client = new RestClient(url)
 			{
@@ -174,18 +157,13 @@ namespace KryBot.Core
 			}
 
 			var response = client.Execute(request);
-			var data = new Classes.Response
-			{
-				Cookies = client.CookieContainer,
-				RestResponse = response
-			};
 
 			Thread.Sleep(requestInterval);
 
-			return data;
+			return new Response(client.CookieContainer, response);
 		}
 
-		public static Classes.Response Post(string url, List<Parameter> parameters,
+		public static Response Post(string url, List<Parameter> parameters,
 			CookieContainer cookies, string userAgent)
 		{
 			var client = new RestClient(url)
@@ -203,43 +181,22 @@ namespace KryBot.Core
 			}
 
 			var response = client.Execute(request);
-			var data = new Classes.Response
-			{
-				Cookies = client.CookieContainer,
-				RestResponse = response
-			};
 
 			Thread.Sleep(requestInterval);
 
-			return data;
+			return new Response(client.CookieContainer, response);
 		}
 
-		public static Classes.Response SteamTradeDoAuth(string url, List<Parameter> parameters,
-			CookieContainer cookies)
+		public static async Task<Response> PostAsync(string url, List<Parameter> parameters, CookieContainer cookies)
 		{
-			var client = new RestClient(url)
+			var task = new TaskCompletionSource<Response>();
+			await Task.Run(() =>
 			{
-				FollowRedirects = false,
-				CookieContainer = cookies
-			};
+				var result = Post(url, parameters, cookies);
+				task.SetResult(result);
+			});
 
-			var request = new RestRequest(string.Empty, Method.POST);
-
-			foreach (var param in parameters)
-			{
-				request.AddParameter(param);
-			}
-
-			var response = client.Execute(request);
-			var data = new Classes.Response
-			{
-				Cookies = client.CookieContainer,
-				RestResponse = response
-			};
-
-			Thread.Sleep(requestInterval);
-
-			return data;
+			return task.Task.Result;
 		}
 
 		private static string GetVersionInGitHub(string url)
@@ -266,6 +223,18 @@ namespace KryBot.Core
 			});
 
 			return task.Task.Result;
+		}
+
+		public class Response
+		{
+			public Response(CookieContainer cookies, IRestResponse response)
+			{
+				Cookies = cookies;
+				RestResponse = response;
+			}
+
+			public CookieContainer Cookies { get; }
+			public IRestResponse RestResponse { get; }
 		}
 	}
 }

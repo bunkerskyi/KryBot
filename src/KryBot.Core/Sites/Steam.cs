@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 using Exceptionless.Json;
 using HtmlAgilityPack;
 using KryBot.Core.Cookies;
+using KryBot.Core.Json.Steam;
 using RestSharp;
 
 namespace KryBot.Core.Sites
@@ -28,9 +29,9 @@ namespace KryBot.Core.Sites
 
 		#region JoinGroup
 
-		public Log JoinGroup(string url, List<Parameter> parameters)
+		public Log JoinGroup(string url)
 		{
-			var response = Web.Post(url, parameters, Cookies.Generate());
+			var response = Web.Post(url, GenerateJoinParams(), Cookies.Generate());
 			if (response.RestResponse.Content != string.Empty)
 			{
 				var htmlDoc = new HtmlDocument();
@@ -51,16 +52,39 @@ namespace KryBot.Core.Sites
 			return Messages.GroupNotJoinde(url);
 		}
 
-		public async Task<Log> Join(string url, List<Parameter> parameters)
+		public async Task<Log> Join(string url)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = JoinGroup(url, parameters);
+				var result = JoinGroup(url);
 				task.SetResult(result);
 			});
 
 			return task.Task.Result;
+		}
+
+		private List<Parameter> GenerateJoinParams()
+		{
+			var list = new List<Parameter>();
+
+			var actionParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "action",
+				Value = "join"
+			};
+			list.Add(actionParam);
+
+			var sessidParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "sessionID",
+				Value = Cookies.Sessid
+			};
+			list.Add(sessidParam);
+
+			return list;
 		}
 
 		#endregion
@@ -102,12 +126,12 @@ namespace KryBot.Core.Sites
 			return task.Task.Result;
 		}
 
-		public async Task<Classes.ProfileGamesList> GetUserGames()
+		public async Task<ProfileGamesList> GetUserGames()
 		{
 			var responseXmlProfile = await Web.GetAsync($"{ProfileLink}games?tab=all&xml=1");
-			var serializer = new XmlSerializer(typeof(Classes.ProfileGamesList));
+			var serializer = new XmlSerializer(typeof(ProfileGamesList));
 			TextReader reader = new StringReader(responseXmlProfile.RestResponse.Content);
-			var games = (Classes.ProfileGamesList) serializer.Deserialize(reader);
+			var games = (ProfileGamesList) serializer.Deserialize(reader);
 			return games;
 		}
 
@@ -121,7 +145,7 @@ namespace KryBot.Core.Sites
 			}
 
 			var json = responseJsonDetail.RestResponse.Content.Replace($"{{\"{appId}\":", "");
-			var gameDetail = JsonConvert.DeserializeObject<Classes.GameDetail>(json.Substring(0, json.Length - 1));
+			var gameDetail = JsonConvert.DeserializeObject<GameDetail>(json.Substring(0, json.Length - 1));
 			return gameDetail.success ? gameDetail.data.name : null;
 		}
 

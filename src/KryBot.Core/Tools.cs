@@ -11,7 +11,6 @@ using System.Xml.Serialization;
 using KryBot.CommonResources.lang;
 using KryBot.Core.Giveaways;
 using Microsoft.Win32;
-using RestSharp;
 
 namespace KryBot.Core
 {
@@ -46,13 +45,6 @@ namespace KryBot.Core
 			}
 
 			return wb.DocumentText.Substring(js.Length);
-		}
-
-		public static string GetLocationInresponse(IRestResponse response)
-		{
-			return
-				(from header in response.Headers where header.Name == "Location" select header.Value.ToString())
-					.FirstOrDefault();
 		}
 
 		public static string GetSessCookieInresponse(CookieContainer cookies, string domain, string cookieName)

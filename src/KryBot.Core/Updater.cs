@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using Exceptionless.Json;
 using KryBot.CommonResources.lang;
 using KryBot.Core.Properties;
+using KryBot.Core.Serializable.GitHub;
 
 namespace KryBot.Core
 {
@@ -18,10 +19,10 @@ namespace KryBot.Core
 
 			if (json != "")
 			{
-				Classes.GitHubRelease release;
+				GitHubRelease release;
 				try
 				{
-					release = JsonConvert.DeserializeObject<Classes.GitHubRelease>(json);
+					release = JsonConvert.DeserializeObject<GitHubRelease>(json);
 				}
 				catch (JsonReaderException)
 				{
@@ -80,17 +81,17 @@ namespace KryBot.Core
 
 			var json = await Web.GetVersionInGitHubAsync(Settings.Default.GitHubRepoReleaseUrl);
 
-			Classes.GitHubRelease release;
+			GitHubRelease release;
 			try
 			{
-				release = JsonConvert.DeserializeObject<Classes.GitHubRelease>(json);
+				release = JsonConvert.DeserializeObject<GitHubRelease>(json);
 			}
 			catch (JsonReaderException)
 			{
 				return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
 			}
 
-			Classes.GitHunReleaseAssets binaryAsset = null;
+			GitHunReleaseAssets binaryAsset = null;
 			foreach (var asset in release.assets)
 			{
 				if (asset.name == "KryBot.exe")

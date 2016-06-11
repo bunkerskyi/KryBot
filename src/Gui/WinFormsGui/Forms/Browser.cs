@@ -278,7 +278,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 			// Call InternetGetCookieEx from wininet.dll
 			if (
-				!NativeMethods.InternetGetCookieEx(uri.ToString(), null, cookieData, ref datasize, InternetCookieHttponly, IntPtr.Zero))
+				!NativeMethods.InternetGetCookieEx(uri.ToString(), null, cookieData, ref datasize, InternetCookieHttponly,
+					IntPtr.Zero))
 			{
 				if (datasize < 0)
 					return null;
@@ -319,7 +320,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private static class NativeMethods
 		{
-			[DllImport("wininet.dll", CharSet = CharSet.Auto, SetLastError = true, BestFitMapping = false, ThrowOnUnmappableChar = true)]
+			[DllImport("wininet.dll", CharSet = CharSet.Auto, SetLastError = true, BestFitMapping = false,
+				ThrowOnUnmappableChar = true)]
 			public static extern bool InternetSetCookie(string lpszUrlName, string lbszCookieName, string lpszCookieData);
 
 			[DllImport("wininet.dll", SetLastError = true, BestFitMapping = false, ThrowOnUnmappableChar = true)]
