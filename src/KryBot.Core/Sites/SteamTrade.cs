@@ -8,7 +8,6 @@ using HtmlAgilityPack;
 using KryBot.CommonResources.lang;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
-using RestSharp;
 
 namespace KryBot.Core.Sites
 {
@@ -38,9 +37,7 @@ namespace KryBot.Core.Sites
 			giveaway = GetJoinData(giveaway);
 			if (giveaway.LinkJoin != null)
 			{
-				var response = Web.Get("http://steamtrade.info", new List<Parameter>(),
-					Cookies.Generate(),
-					new List<HttpHeader>(), giveaway.LinkJoin);
+				var response = Web.Get($"{Links.SteamTrade}{giveaway.LinkJoin}", Cookies.Generate());
 				if (response.RestResponse.StatusCode == HttpStatusCode.OK)
 				{
 					return Messages.GiveawayJoined("SteamTrade", giveaway.Name.Trim(), 0, 0, 0);
@@ -69,9 +66,7 @@ namespace KryBot.Core.Sites
 
 		private Log SteamTradeGetProfile()
 		{
-			var response = Web.Get(Links.SteamTrade, new List<Parameter>(),
-				Cookies.Generate(),
-				new List<HttpHeader>(), string.Empty);
+			var response = Web.Get(Links.SteamTrade, Cookies.Generate());
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -103,9 +98,7 @@ namespace KryBot.Core.Sites
 		{
 			Giveaways?.Clear();
 
-			var response = Web.Get(Links.SteamTrade, new List<Parameter>(),
-				Cookies.Generate(),
-				new List<HttpHeader>(), "awards/");
+			var response = Web.Get($"{Links.SteamTrade}awards/", Cookies.Generate());
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -183,9 +176,7 @@ namespace KryBot.Core.Sites
 
 		private SteamTradeGiveaway GetJoinData(SteamTradeGiveaway stGiveaway)
 		{
-			var response = Web.Get(Links.SteamTrade,
-				new List<Parameter>(), Cookies.Generate(),
-				new List<HttpHeader>(), stGiveaway.Link);
+			var response = Web.Get($"{Links.SteamTrade}{stGiveaway.Link}", Cookies.Generate());
 
 			if (response.RestResponse.Content != string.Empty)
 			{

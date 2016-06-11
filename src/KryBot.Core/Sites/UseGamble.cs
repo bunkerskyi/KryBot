@@ -93,9 +93,7 @@ namespace KryBot.Core.Sites
 
 		private Log GetProfile()
 		{
-			var response = Web.Get(Links.UseGamble, new List<Parameter>(),
-				Cookies.Generate(),
-				new List<HttpHeader>(), string.Empty);
+			var response = Web.Get(Links.UseGamble, Cookies.Generate());
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -128,8 +126,7 @@ namespace KryBot.Core.Sites
 
 		private Log WonParse()
 		{
-			var response = Web.Get(Links.UseGamble, new List<Parameter>(),
-				Cookies.Generate(), new List<HttpHeader>(), "profile/logs");
+			var response = Web.Get($"{Links.UseGamble}profile/logs", Cookies.Generate());
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -199,9 +196,7 @@ namespace KryBot.Core.Sites
 				}
 				else
 				{
-					var response = Web.Get(Links.UseGamble,
-						new List<Parameter>(), Cookies.Generate(),
-						new List<HttpHeader>(), string.Empty);
+					var response = Web.Get(Links.UseGamble, Cookies.Generate());
 
 					if (response.RestResponse.Content != string.Empty)
 					{

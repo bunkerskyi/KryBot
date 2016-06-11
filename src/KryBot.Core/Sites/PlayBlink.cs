@@ -104,8 +104,7 @@ namespace KryBot.Core.Sites
 
 		private Log PlayBlinkGetProfile()
 		{
-			var response = Web.Get(Links.PlayBlink, new List<Parameter>(),
-				Cookies.Generate(Level), new List<HttpHeader>(), string.Empty);
+			var response = Web.Get(Links.PlayBlink, Cookies.Generate(Level));
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -143,9 +142,7 @@ namespace KryBot.Core.Sites
 		{
 			Giveaways?.Clear();
 
-			var response = Web.Get(Links.PlayBlink, new List<Parameter>(),
-				Cookies.Generate(Level),
-				new List<HttpHeader>(), string.Empty);
+			var response = Web.Get(Links.PlayBlink, Cookies.Generate(Level));
 
 			if (response.RestResponse.Content != string.Empty)
 			{

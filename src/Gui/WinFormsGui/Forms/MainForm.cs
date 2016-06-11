@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KryBot.CommonResources.lang;
 using KryBot.Core;
 using KryBot.Core.Giveaways;
 using KryBot.Gui.WinFormsGui.Properties;
-using RestSharp;
 
 namespace KryBot.Gui.WinFormsGui.Forms
 {
@@ -1063,10 +1061,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private async void btnSTLogin_Click(object sender, EventArgs e)
 		{
 			btnSTLogin.Enabled = false;
-			var first = Web.Get(Links.SteamTrade, new List<Parameter>(), new CookieContainer(),
-				new List<HttpHeader>(), "");
+			var first = Web.Get(Links.SteamTrade);
 			var getLoginHref = Web.SteamTradeDoAuth($"{Links.SteamTrade}reg.php?login",
-				Generate.LoginData_SteamTrade(), first.Cookies, new List<HttpHeader>());
+				Generate.LoginData_SteamTrade(), first.Cookies);
 			var location = Tools.GetLocationInresponse(getLoginHref.RestResponse);
 			var cookie = Tools.GetSessCookieInresponse(getLoginHref.Cookies, "steamtrade.info", "PHPSESSID");
 

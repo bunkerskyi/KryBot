@@ -122,8 +122,25 @@ namespace KryBot.Core
 
 		public static Log ParseProfileFailed(string site)
 		{
-			return new Log($"{GetDateTime()} {{{site}}} {strings.ParseProfile_LoginOrServerError}", Color.Red,
-				false, true);
+			return new Log($"{GetDateTime()} {{{site}}} {strings.ParseProfile_LoginOrServerError}", Color.Red, false, true);
+		}
+
+		public static Log ParseProfileFailed(string site, string message)
+		{
+			return new Log($"{GetDateTime()} {{{site}}} {strings.AccountNotActive} {{{message}}}", Color.Red, false, true);
+		}
+
+		public static Log ParseGiveawaysEmpty(string content, string site)
+		{
+			return new Log($"{content}{GetDateTime()} {{{site}}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0",
+				Color.White, true, true);
+		}
+
+		public static Log ParseGiveawaysFoundMatchGiveaways(string content, string site, string count)
+		{
+			return new Log(
+				$"{content}{GetDateTime()} {{{site}}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {count}",
+				Color.White, true, true);
 		}
 	}
 }

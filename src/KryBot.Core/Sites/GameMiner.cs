@@ -8,7 +8,6 @@ using HtmlAgilityPack;
 using KryBot.CommonResources.lang;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
-using RestSharp;
 
 namespace KryBot.Core.Sites
 {
@@ -122,7 +121,7 @@ namespace KryBot.Core.Sites
 			public int Exp { get; set; }
 		}
 
-		public class JsonGiveaway
+		private class JsonGiveaway
 		{
 			public string State { get; set; }
 			public bool Golden { get; set; }
@@ -184,8 +183,7 @@ namespace KryBot.Core.Sites
 			var response =
 				Web.Post(
 					$"{Links.GameMiner}giveaway/enter/{giveaway.Id}?{(giveaway.IsSandbox ? "sandbox" : "coal")}_page={giveaway.Page}",
-					Generate.PostData_GameMiner(Cookies.Xsrf), new List<HttpHeader>(),
-					Cookies.Generate(), userAgent);
+					Generate.PostData_GameMiner(Cookies.Xsrf), Cookies.Generate(), userAgent);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -229,8 +227,7 @@ namespace KryBot.Core.Sites
 
 		private Log GetProfile(string userAgent)
 		{
-			var response = Web.Get(Links.GameMiner, new List<Parameter>(),
-				Cookies.Generate(), new List<HttpHeader>(), userAgent);
+			var response = Web.Get(Links.GameMiner, Cookies.Generate(), userAgent);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -267,8 +264,7 @@ namespace KryBot.Core.Sites
 
 		private Log WonParse(string userAgent)
 		{
-			var response = Web.Get($"{Links.GameMiner}giveaways/won", new List<Parameter>(),
-				Cookies.Generate(), new List<HttpHeader>(), userAgent);
+			var response = Web.Get($"{Links.GameMiner}giveaways/won", Cookies.Generate(), userAgent);
 
 			if (response.RestResponse.Content != "")
 			{
@@ -322,9 +318,7 @@ namespace KryBot.Core.Sites
 			{
 				var goldenFreesResponse = Web.Get($"{Links.GameMiner}" +
 				                                  "api/giveaways/golden?page=1&count=10&q=&type=regular&enter_price=on&sortby=finish&order=asc&filter_entered=on",
-					new List<Parameter>(),
-					Cookies.Generate(),
-					new List<HttpHeader>(), userAgent);
+					Cookies.Generate(), userAgent);
 
 				if (goldenFreesResponse.RestResponse.Content != "")
 				{
@@ -345,10 +339,7 @@ namespace KryBot.Core.Sites
 						{
 							goldenFreesResponse = Web.Get($"{Links.GameMiner}" +
 							                              $"/api/giveaways/golden?page={i + 1}&count=10&q=&type=regular&enter_price=on&sortby=finish&order=asc&filter_entered=on",
-								new List<Parameter>(),
-								Cookies.Generate(),
-								new List<HttpHeader>(),
-								userAgent);
+								Cookies.Generate(), userAgent);
 							goldenFreeJsonResponse =
 								JsonConvert.DeserializeObject<JsonRootObject>(
 									goldenFreesResponse.RestResponse.Content);
@@ -363,9 +354,7 @@ namespace KryBot.Core.Sites
 			{
 				var regularResponse = Web.Get($"{Links.GameMiner}" +
 				                              $"api/giveaways/coal?page=1&count=10&q=&type={(OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
-					new List<Parameter>(),
-					Cookies.Generate(),
-					new List<HttpHeader>(), userAgent);
+					Cookies.Generate(), userAgent);
 
 				var regularJsonResponse =
 					JsonConvert.DeserializeObject<JsonRootObject>(
@@ -383,9 +372,7 @@ namespace KryBot.Core.Sites
 					{
 						var regularGiftsResponse = Web.Get($"{Links.GameMiner}" +
 						                                   $"api/giveaways/coal?page={i + 1}&count=10&q=&type={(OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
-							new List<Parameter>(),
-							Cookies.Generate(),
-							new List<HttpHeader>(), userAgent);
+							Cookies.Generate(), userAgent);
 
 						var regularGiftJsonResponse =
 							JsonConvert.DeserializeObject<JsonRootObject>(
@@ -400,9 +387,7 @@ namespace KryBot.Core.Sites
 			{
 				var sandboxGiftsResponse = Web.Get($"{Links.GameMiner}" +
 				                                   $"api/giveaways/sandbox?page=1&count=10&q=&type={(OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
-					new List<Parameter>(),
-					Cookies.Generate(),
-					new List<HttpHeader>(), userAgent);
+					Cookies.Generate(), userAgent);
 
 				if (sandboxGiftsResponse.RestResponse.Content != "")
 				{
@@ -424,9 +409,7 @@ namespace KryBot.Core.Sites
 					{
 						var regularGiftsResponse = Web.Get($"{Links.GameMiner}" +
 						                                   $"api/giveaways/sandbox?page={i + 1}&count=10&q=&type={(OnlyGifts ? "regular" : "any")}&enter_price=on&sortby=finish&order=asc&filter_entered=on",
-							new List<Parameter>(),
-							Cookies.Generate(),
-							new List<HttpHeader>(), userAgent);
+							Cookies.Generate(), userAgent);
 
 						if (regularGiftsResponse.RestResponse.Content != "")
 						{
@@ -475,8 +458,7 @@ namespace KryBot.Core.Sites
 		private Log SyncAccount(string userAgent)
 		{
 			var response = Web.Post("http://gameminer.net/account/sync",
-				Generate.SyncPostData_GameMiner(Cookies.Xsrf), new List<HttpHeader>(),
-				Cookies.Generate(), userAgent);
+				Generate.SyncPostData_GameMiner(Cookies.Xsrf), Cookies.Generate(), userAgent);
 
 			if (response.RestResponse.Content != "")
 			{

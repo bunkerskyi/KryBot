@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
@@ -93,9 +93,7 @@ namespace KryBot.Core.Sites
 
 		private Log GetProfile()
 		{
-			var response = Web.Get(Links.SteamCompanion, new List<Parameter>(),
-				Cookies.Generate(),
-				new List<HttpHeader>(), "/");
+			var response = Web.Get(Links.SteamCompanion, Cookies.Generate());
 			if (response.RestResponse.Content != string.Empty)
 			{
 				var htmlDoc = new HtmlDocument();
@@ -128,8 +126,7 @@ namespace KryBot.Core.Sites
 
 		private Log WonParse()
 		{
-			var response = Web.Get(Links.SteamCompanion, new List<Parameter>(),
-				Cookies.Generate(), new List<HttpHeader>(), "gifts/won");
+			var response = Web.Get($"{Links.SteamCompanion}gifts/won", Cookies.Generate());
 			if (response.RestResponse.Content != string.Empty)
 			{
 				var htmlDoc = new HtmlDocument();
@@ -174,84 +171,47 @@ namespace KryBot.Core.Sites
 		{
 			var content = string.Empty;
 			Giveaways?.Clear();
+			WishlistGiveaways?.Clear();
 
 			if (WishList)
 			{
-				content += LoadWishListGiveaways();
+				content += LoadGiveawaysByUrl(
+					$"{Links.SteamCompanion}gifts/search/?wishlist=true",
+					strings.ParseLoadGiveaways_FoundGiveAwaysInWishList,
+					WishlistGiveaways);
 			}
 
 			if (Contributors)
 			{
-				content += LoadContributorsGiveaways();
+				content += LoadGiveawaysByUrl(
+					$"{Links.SteamCompanion}gifts/search/?type=contributor",
+					strings.ParseLoadGiveaways_FoundGiveAwaysInWishList,
+					Giveaways);
 			}
 
 			if (Group)
 			{
-				content += LoadGroupGiveaways();
+				content += LoadGiveawaysByUrl(
+					$"{Links.SteamCompanion}gifts/search/?type=group",
+					strings.ParseLoadGiveaways_FoundGiveAwaysInWishList,
+					Giveaways);
 			}
 
 			if (Regular)
 			{
-				var pages = 1;
-				for (var i = 0; i < pages; i++)
-				{
-					var response = Web.Get(Links.SteamCompanion,
-						new List<Parameter>(),
-						Cookies.Generate(), new List<HttpHeader>(),
-						i == 0 ? "/gifts/search/?type=public" : "/gifts/search.php?page=" + (i + 1) + "&type=public");
-
-					if (response.RestResponse.Content != null)
-					{
-						var htmlDoc = new HtmlDocument();
-						htmlDoc.LoadHtml(response.RestResponse.Content);
-
-						var pageNode = htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]");
-						if (pageNode != null)
-						{
-							try
-							{
-								pages = int.Parse(pageNode.Attributes["href"].Value.Split('=')[1].Split('&')[0]);
-							}
-							catch (FormatException)
-							{
-								pages = int.Parse(pageNode.Attributes["href"].Value.Split('=')[2]);
-							}
-						}
-
-						var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/div");
-						if (nodes != null)
-						{
-							for (var j = 0; j < nodes.Count; j++)
-							{
-								if (nodes[j].Attributes["style"] != null &&
-								    nodes[j].Attributes["style"].Value == "opacity: 0.5;")
-								{
-									nodes.Remove(nodes[j]);
-									j--;
-								}
-							}
-
-							if (nodes.Count > 0)
-							{
-								AddGiveaways(nodes, Giveaways);
-							}
-						}
-					}
-				}
+				content += LoadGiveawaysByUrl(
+					$"{Links.SteamCompanion}gifts/search/?type=public",
+					strings.ParseLoadGiveaways_FoundGiveAwaysInWishList,
+					Giveaways);
 			}
 
-			if (Giveaways?.Count == 0 && WishlistGiveaways.Count == 0)
+			if (Giveaways?.Count == 0 && WishlistGiveaways?.Count == 0)
 			{
-				return
-					new Log(
-						$"{content}{Messages.GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0",
-						Color.White, true, true);
+				return Messages.ParseGiveawaysEmpty(content, "SteamCompanion");
 			}
 
-			return
-				new Log(
-					$"{content}{Messages.GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {Giveaways?.Count + WishlistGiveaways.Count}",
-					Color.White, true, true);
+			return Messages.ParseGiveawaysFoundMatchGiveaways(content, "SteamCompanion",
+				(Giveaways?.Count + WishlistGiveaways?.Count).ToString());
 		}
 
 		public async Task<Log> LoadGiveawaysAsync()
@@ -266,18 +226,16 @@ namespace KryBot.Core.Sites
 			return task.Task.Result;
 		}
 
-		private string LoadWishListGiveaways()
+		private string LoadGiveawaysByUrl(string url, string message, List<SteamCompanionGiveaway> giveawaysList)
 		{
 			var count = 0;
 			var pages = 1;
 			for (var i = 0; i < pages; i++)
 			{
-				var response = Web.Get(Links.SteamCompanion,
-					new List<Parameter>(),
-					Cookies.Generate(), new List<HttpHeader>(),
-					i == 0 ? "/gifts/search/?wishlist=true" : "/gifts/search/?wishlist=true&page=" + (i + 1));
+				var response = Web.Get(
+					$"{url}{(i > 0 ? $"&page={i + 1}" : string.Empty)}", Cookies.Generate());
 
-				if (response.RestResponse.Content != null)
+				if (response.RestResponse.Content != string.Empty)
 				{
 					var htmlDoc = new HtmlDocument();
 					htmlDoc.LoadHtml(response.RestResponse.Content);
@@ -285,7 +243,7 @@ namespace KryBot.Core.Sites
 					var pageNode = htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]");
 					if (pageNode != null)
 					{
-						pages = int.Parse(pageNode.Attributes["href"].Value.Split('=')[2]);
+						pages = int.Parse(Regex.Match(pageNode.Attributes["href"].Value, @"\d+").Value);
 					}
 
 					var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/div");
@@ -301,110 +259,12 @@ namespace KryBot.Core.Sites
 							}
 						}
 						count += nodes.Count;
-						AddGiveaways(nodes, WishlistGiveaways);
+						AddGiveaways(nodes, giveawaysList);
 					}
 				}
 			}
 			return
-				$"{Messages.GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_Found} {(Giveaways.Count == 0 ? 0 : count)} {strings.ParseLoadGiveaways_WishListGiveAwaysIn} {pages} {strings.ParseLoadGiveaways_Pages}\n";
-		}
-
-		private string LoadContributorsGiveaways()
-		{
-			var count = 0;
-			var pages = 1;
-			for (var i = 0; i < pages; i++)
-			{
-				var response = Web.Get(Links.SteamCompanion,
-					new List<Parameter>(),
-					Cookies.Generate(), new List<HttpHeader>(),
-					i == 0 ? "/gifts/search/?type=contributor" : "/gifts/search/?type=contributor&page=" + (i + 1));
-
-				if (response.RestResponse.Content != null)
-				{
-					var htmlDoc = new HtmlDocument();
-					htmlDoc.LoadHtml(response.RestResponse.Content);
-
-					var pageNode = htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]");
-					if (pageNode != null)
-					{
-						pages = int.Parse(pageNode.Attributes["href"].Value.Split('=')[1]);
-					}
-
-					var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/div");
-					if (nodes != null)
-					{
-						for (var j = 0; j < nodes.Count; j++)
-						{
-							if (nodes[j].Attributes["style"] != null &&
-							    nodes[j].Attributes["style"].Value == "opacity: 0.5;")
-							{
-								nodes.Remove(nodes[j]);
-								j--;
-							}
-						}
-						count += nodes.Count;
-						AddGiveaways(nodes, Giveaways);
-					}
-				}
-			}
-			return
-				$"{Messages.GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_Found} {(Giveaways.Count == 0 ? 0 : count)} {strings.ParseLoadGiveaways__ContributorsIn} {pages} {strings.ParseLoadGiveaways_Pages}\n";
-		}
-
-		private string LoadGroupGiveaways()
-		{
-			var count = 0;
-			var pages = 1;
-			for (var i = 0; i < pages; i++)
-			{
-				var response = Web.Get(Links.SteamCompanion,
-					new List<Parameter>(),
-					Cookies.Generate(), new List<HttpHeader>(),
-					i == 0 ? "/gifts/search/?type=group" : "/gifts/search/?type=group&page=" + (i + 1));
-
-				if (response.RestResponse.Content != null)
-				{
-					var htmlDoc = new HtmlDocument();
-					htmlDoc.LoadHtml(response.RestResponse.Content);
-
-					var pageNode = htmlDoc.DocumentNode.SelectSingleNode("//li[@class='arrow']/a[1]");
-					if (pageNode != null)
-					{
-						try
-						{
-							pages = int.Parse(pageNode.Attributes["href"].Value.Split('=')[1].Split('&')[0]);
-						}
-						catch (FormatException)
-						{
-							pages = int.Parse(pageNode.Attributes["href"].Value.Split('=')[2].Split('&')[0]);
-						}
-					}
-
-					var nodes = htmlDoc.DocumentNode.SelectNodes("//section[@class='col-2-3']/div");
-					if (nodes != null)
-					{
-						for (var j = 0; j < nodes.Count; j++)
-						{
-							if (nodes[j].Attributes["style"] != null &&
-							    nodes[j].Attributes["style"].Value == "opacity: 0.5;")
-							{
-								nodes.Remove(nodes[j]);
-								j--;
-							}
-						}
-						count += nodes.Count;
-						if (nodes.Count > 0)
-						{
-							AddGiveaways(nodes, Giveaways);
-						}
-					}
-				}
-			}
-
-			return
-				$"{Messages.GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_Found} {count} {strings.ParseLoadGiveaways_GroupGiveAwaysIn} {pages} " +
-				$"{strings.ParseLoadGiveaways_Pages} \n";
+				$"{Messages.GetDateTime()} {{SteamCompanion}} {strings.ParseLoadGiveaways_Found} {(Giveaways.Count == 0 ? 0 : count)} {message} {pages} {strings.ParseLoadGiveaways_Pages}\n";
 		}
 
 		private void AddGiveaways(HtmlNodeCollection nodes, List<SteamCompanionGiveaway> giveaways)
@@ -449,9 +309,7 @@ namespace KryBot.Core.Sites
 
 		private Log GetJoinData(SteamCompanionGiveaway scGiveaway, string steamCookie, Steam steam)
 		{
-			var response = Web.Get(scGiveaway.Link,
-				new List<Parameter>(), Cookies.Generate(),
-				new List<HttpHeader>(), string.Empty);
+			var response = Web.Get(scGiveaway.Link, Cookies.Generate());
 
 			if (response.RestResponse.Content != null)
 			{
@@ -474,9 +332,7 @@ namespace KryBot.Core.Sites
 				{
 					if (AutoJoin)
 					{
-						var trueGroupUrl = Web.Get(group.Attributes["href"].Value, new List<Parameter>(),
-							Cookies.Generate(),
-							new List<HttpHeader>(), string.Empty);
+						var trueGroupUrl = Web.Get(group.Attributes["href"].Value, Cookies.Generate());
 
 						return steam.JoinGroup(trueGroupUrl.RestResponse.ResponseUri.AbsoluteUri,
 							Generate.PostData_SteamGroupJoin(steamCookie));
@@ -507,9 +363,8 @@ namespace KryBot.Core.Sites
 
 		private Log SyncAccount()
 		{
-			var response = Web.Get("https://steamcompanion.com//settings/resync&success=true", new List<Parameter>(),
-				Cookies.Generate(), new List<HttpHeader>(), "");
-			if (response.RestResponse.Content != "")
+			var response = Web.Get("https://steamcompanion.com//settings/resync&success=true", Cookies.Generate());
+			if (response.RestResponse.Content != string.Empty)
 			{
 				return new Log($"{Messages.GetDateTime()} {{SteamCompanion}} Sync success!", Color.Green,
 					true, true);

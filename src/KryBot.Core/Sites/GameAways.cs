@@ -32,8 +32,7 @@ namespace KryBot.Core.Sites
 
 		public static Log SteamGetProfile(Bot bot, bool echo)
 		{
-			var response = Web.Get(Links.GameAways, new List<Parameter>(), bot.Steam.Cookies.Generate(),
-				new List<HttpHeader>(), string.Empty);
+			var response = Web.Get(Links.GameAways, bot.Steam.Cookies.Generate());
 
 			if (response.RestResponse.Content != "")
 			{

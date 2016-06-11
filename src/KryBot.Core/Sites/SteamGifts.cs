@@ -8,7 +8,6 @@ using KryBot.CommonResources.lang;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
 using RestSharp;
-using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 namespace KryBot.Core.Sites
 {
@@ -65,7 +64,6 @@ namespace KryBot.Core.Sites
 			{
 				var response = Web.Post($"{Links.SteamGifts}ajax.php",
 					Generate.PostData_SteamGifts(giveaway.Token, giveaway.Code, "entry_insert"),
-					new List<HttpHeader>(),
 					Cookies.Generate(), userAgent);
 
 				if (response.RestResponse.Content != null)
@@ -106,8 +104,7 @@ namespace KryBot.Core.Sites
 
 		private Log GetProfile(string userAgent)
 		{
-			var response = Web.Get(Links.SteamGifts, new List<Parameter>(),
-				Cookies.Generate(), new List<HttpHeader>(), userAgent);
+			var response = Web.Get(Links.SteamGifts, Cookies.Generate(), userAgent);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -130,10 +127,7 @@ namespace KryBot.Core.Sites
 				if (error != null)
 				{
 					Enabled = false;
-					return
-						new Log(
-							$"{Messages.GetDateTime()} {{SteamGifts}} {strings.AccountNotActive} {{{error.InnerText}}}",
-							Color.Red, false, true);
+					return Messages.ParseProfileFailed("SteamGifts", error.InnerText);
 				}
 			}
 			return Messages.ParseProfileFailed("SteamGifts");
@@ -153,8 +147,7 @@ namespace KryBot.Core.Sites
 
 		private Log WonParse(string userAgent)
 		{
-			var response = Web.Get($"{Links.SteamGifts}giveaways/won", new List<Parameter>(),
-				Cookies.Generate(), new List<HttpHeader>(), userAgent);
+			var response = Web.Get($"{Links.SteamGifts}giveaways/won", Cookies.Generate(), userAgent);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -194,9 +187,9 @@ namespace KryBot.Core.Sites
 			if (WishList)
 			{
 				content += LoadGiveawaysByUrl(
-					$"{Links.SteamGifts}giveaways/search?type=wishlist", 
-					userAgent, 
-					strings.ParseLoadGiveaways_FoundGiveAwaysInWishList, 
+					$"{Links.SteamGifts}giveaways/search?type=wishlist",
+					userAgent,
+					strings.ParseLoadGiveaways_FoundGiveAwaysInWishList,
 					WishlistGiveaways);
 			}
 
@@ -205,7 +198,7 @@ namespace KryBot.Core.Sites
 				content += LoadGiveawaysByUrl(
 					$"{Links.SteamGifts}giveaways/search?type=group",
 					userAgent,
-					strings.ParseLoadGiveaways_FoundGiveAwaysInGroup, 
+					strings.ParseLoadGiveaways_FoundGiveAwaysInGroup,
 					Giveaways);
 			}
 
@@ -214,26 +207,20 @@ namespace KryBot.Core.Sites
 				LoadGiveawaysByUrl(
 					$"{Links.SteamGifts}giveaways/search?page=1",
 					userAgent,
-					strings.ParseLoadGiveaways_FoundGiveAwaysInGroup,
+					string.Empty,
 					Giveaways);
-				
 			}
 
 			if (Giveaways?.Count == 0 && WishlistGiveaways?.Count == 0)
 			{
-				return
-					new Log(
-						$"{content}{Messages.GetDateTime()} {{SteamGifts}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0",
-						Color.White, true, true);
+				return Messages.ParseGiveawaysEmpty(content, "SteamGifts");
 			}
 
 			Tools.RemoveBlacklistedGames(Giveaways, blackList);
 			Tools.RemoveBlacklistedGames(WishlistGiveaways, blackList);
 
-			return
-				new Log(
-					$"{content}{Messages.GetDateTime()} {{SteamGifts}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {Giveaways?.Count + WishlistGiveaways?.Count}",
-					Color.White, true, true);
+			return Messages.ParseGiveawaysFoundMatchGiveaways(content, "SteamGifts",
+				(Giveaways?.Count + WishlistGiveaways?.Count).ToString());
 		}
 
 		public async Task<Log> LoadGiveawaysAsync(Blacklist blackList, string userAgent)
@@ -250,59 +237,42 @@ namespace KryBot.Core.Sites
 
 		private string LoadGiveawaysByUrl(string url, string userAgent, string message, List<SteamGiftsGiveaway> giveawaysList)
 		{
-			var nodesCount = 0;
+			var count = 0;
 			var pages = 1;
 
-			var response = Web.Get(url, new List<Parameter>(), Cookies.Generate(), new List<HttpHeader>(), userAgent);
 
-			if(response.RestResponse.Content != string.Empty)
+			for (var i = 0; i < pages; i++)
 			{
-				var htmlDoc = new HtmlDocument();
-				htmlDoc.LoadHtml(response.RestResponse.Content);
+				var response = Web.Get(
+					$"{url}{(i > 0 ? $"&page={i + 1}" : string.Empty)}",
+					Cookies.Generate(), userAgent);
 
-				var pageNodeCounter = htmlDoc.DocumentNode.SelectNodes("//div[@class='pagination__navigation']/a");
-				if(pageNodeCounter != null)
+				if (response.RestResponse.Content != string.Empty)
 				{
-					var pageNode =
-						htmlDoc.DocumentNode.SelectSingleNode(
-							$"//div[@class='pagination__navigation']/a[{pageNodeCounter.Count - 1}]");
-					if(pageNode != null)
-					{
-						pages = int.Parse(pageNode.Attributes["data-page-number"].Value);
-					}
-				}
+					var htmlDoc = new HtmlDocument();
+					htmlDoc.LoadHtml(response.RestResponse.Content);
 
-				if(pages != 1)
-				{
-					for(var i = 1; i < pages + 1; i++)
+					var pageNodeCounter = htmlDoc.DocumentNode.SelectNodes("//div[@class='pagination__navigation']/a");
+					if (pageNodeCounter != null)
 					{
-						var nodes =
-							htmlDoc.DocumentNode.SelectNodes(
-								"//div[@class='widget-container']//div[2]//div[3]//div[@class='giveaway__row-outer-wrap']//div[@class='giveaway__row-inner-wrap']");
-
-						pageNodeCounter = htmlDoc.DocumentNode.SelectNodes("//div[@class='pagination__navigation']/a");
 						var pageNode =
 							htmlDoc.DocumentNode.SelectSingleNode(
 								$"//div[@class='pagination__navigation']/a[{pageNodeCounter.Count - 1}]");
-						if(pageNode != null)
+						if (pageNode != null)
 						{
 							pages = int.Parse(pageNode.Attributes["data-page-number"].Value);
 						}
-
-						nodesCount += nodes?.Count ?? 0;
-						AddGiveaways(nodes, giveawaysList);
 					}
-				}
-				else
-				{
+
 					var nodes =
 						htmlDoc.DocumentNode.SelectNodes(
 							"//div[@class='widget-container']//div[2]//div[3]//div[@class='giveaway__row-outer-wrap']//div[@class='giveaway__row-inner-wrap']");
-					nodesCount += nodes?.Count ?? 0;
+					count += nodes?.Count ?? 0;
 					AddGiveaways(nodes, giveawaysList);
 				}
 			}
-			return $"{Messages.GetDateTime()} {{SteamGifts}} {message}: {nodesCount}\n";
+
+			return $"{Messages.GetDateTime()} {{SteamGifts}} {message}: {count}\n";
 		}
 
 		private void AddGiveaways(HtmlNodeCollection nodes, List<SteamGiftsGiveaway> giveawaysList)
@@ -354,8 +324,7 @@ namespace KryBot.Core.Sites
 
 		private SteamGiftsGiveaway GetJoinData(SteamGiftsGiveaway sgGiveaway, string userAgent)
 		{
-			var response = Web.Get($"{Links.SteamGifts}{sgGiveaway.Link}",
-				new List<Parameter>(), Cookies.Generate(), new List<HttpHeader>(), userAgent);
+			var response = Web.Get($"{Links.SteamGifts}{sgGiveaway.Link}", Cookies.Generate(), userAgent);
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -379,8 +348,7 @@ namespace KryBot.Core.Sites
 
 		private Log SyncAccount(string userAgent)
 		{
-			var xsrf = Web.Get("https://www.steamgifts.com/account/profile/sync",
-				new List<Parameter>(), Cookies.Generate(), new List<HttpHeader>(), "");
+			var xsrf = Web.Get("https://www.steamgifts.com/account/profile/sync", Cookies.Generate(), userAgent);
 
 			if (xsrf.RestResponse.Content != null)
 			{

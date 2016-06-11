@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Exceptionless.Json;
@@ -31,8 +30,8 @@ namespace KryBot.Core.Sites
 
 		public Log JoinGroup(string url, List<Parameter> parameters)
 		{
-			var response = Web.Post(url, parameters, new List<HttpHeader>(), Cookies.Generate());
-			if (response.RestResponse.Content != "")
+			var response = Web.Post(url, parameters, Cookies.Generate());
+			if (response.RestResponse.Content != string.Empty)
 			{
 				var htmlDoc = new HtmlDocument();
 				htmlDoc.LoadHtml(response.RestResponse.Content);
@@ -70,8 +69,7 @@ namespace KryBot.Core.Sites
 
 		private Log GetProfile()
 		{
-			var response = Web.Get(Links.Steam, new List<Parameter>(),
-				Cookies.Generate(), new List<HttpHeader>(), string.Empty);
+			var response = Web.Get(Links.Steam, Cookies.Generate());
 
 			if (response.RestResponse.Content != string.Empty)
 			{
@@ -109,8 +107,7 @@ namespace KryBot.Core.Sites
 		{
 			var responseXmlProfile =
 				await
-					Web.GetAsync($"{ProfileLink}games?tab=all&xml=1", new List<Parameter>(), new CookieContainer(),
-						new List<HttpHeader>(), "");
+					Web.GetAsync($"{ProfileLink}games?tab=all&xml=1");
 			var serializer = new XmlSerializer(typeof(Classes.ProfileGamesList));
 			TextReader reader = new StringReader(responseXmlProfile.RestResponse.Content);
 			var games = (Classes.ProfileGamesList) serializer.Deserialize(reader);
@@ -119,11 +116,7 @@ namespace KryBot.Core.Sites
 
 		public async Task<string> GetGameName(string appId)
 		{
-			var responseJsonDetail =
-				await
-					Web.GetAsync($"http://store.steampowered.com/api/appdetails?appids={appId}",
-						new List<Parameter>(),
-						new CookieContainer(), new List<HttpHeader>(), "");
+			var responseJsonDetail = await Web.GetAsync($"http://store.steampowered.com/api/appdetails?appids={appId}");
 
 			if (responseJsonDetail.RestResponse.Content == "null" || responseJsonDetail.RestResponse.Content == "")
 			{

@@ -28,5 +28,10 @@ namespace KryBot.Core
 		public Color Color { get; }
 		public bool Success { get; }
 		public bool Echo { get; }
+
+		public override string ToString()
+		{
+			return Content;
+		}
 	}
 }

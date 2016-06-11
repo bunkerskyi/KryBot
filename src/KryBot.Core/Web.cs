@@ -10,27 +10,14 @@ namespace KryBot.Core
 	{
 		private static readonly int requestInterval = 400;
 
-		public static Classes.Response Get(string url, List<Parameter> parameters,
-			CookieContainer cookies, List<HttpHeader> headers, string userAgent)
+		public static Classes.Response Get(string url)
 		{
 			var client = new RestClient(url)
 			{
-				UserAgent = userAgent == "" ? null : userAgent,
-				FollowRedirects = true,
-				CookieContainer = cookies
+				FollowRedirects = true
 			};
 
 			var request = new RestRequest(string.Empty, Method.GET);
-
-			foreach (var header in headers)
-			{
-				request.AddHeader(header.Name, header.Value);
-			}
-
-			foreach (var param in parameters)
-			{
-				request.AddParameter(param);
-			}
 
 			var response = client.Execute(request);
 
@@ -45,13 +32,59 @@ namespace KryBot.Core
 			return data;
 		}
 
-		public static async Task<Classes.Response> GetAsync(string url, List<Parameter> parameters,
-			CookieContainer cookies, List<HttpHeader> headers, string userAgent)
+		public static Classes.Response Get(string url, CookieContainer cookies, string userAgent)
+		{
+			var client = new RestClient(url)
+			{
+				UserAgent = userAgent,
+				FollowRedirects = true,
+				CookieContainer = cookies
+			};
+
+			var request = new RestRequest(string.Empty, Method.GET);
+
+			var response = client.Execute(request);
+
+			var data = new Classes.Response
+			{
+				Cookies = client.CookieContainer,
+				RestResponse = response
+			};
+
+			Thread.Sleep(requestInterval);
+
+			return data;
+		}
+
+		public static Classes.Response Get(string url, CookieContainer cookies)
+		{
+			var client = new RestClient(url)
+			{
+				FollowRedirects = true,
+				CookieContainer = cookies
+			};
+
+			var request = new RestRequest(string.Empty, Method.GET);
+
+			var response = client.Execute(request);
+
+			var data = new Classes.Response
+			{
+				Cookies = client.CookieContainer,
+				RestResponse = response
+			};
+
+			Thread.Sleep(requestInterval);
+
+			return data;
+		}
+
+		public static async Task<Classes.Response> GetAsync(string url)
 		{
 			var task = new TaskCompletionSource<Classes.Response>();
 			await Task.Run(() =>
 			{
-				var result = Get(url, parameters, cookies, headers, userAgent);
+				var result = Get(url);
 				task.SetResult(result);
 			});
 
@@ -125,8 +158,64 @@ namespace KryBot.Core
 			return data;
 		}
 
+		public static Classes.Response Post(string url, List<Parameter> parameters, CookieContainer cookies)
+		{
+			var client = new RestClient(url)
+			{
+				FollowRedirects = true,
+				CookieContainer = cookies
+			};
+
+			var request = new RestRequest(string.Empty, Method.POST);
+
+			foreach (var param in parameters)
+			{
+				request.AddParameter(param);
+			}
+
+			var response = client.Execute(request);
+			var data = new Classes.Response
+			{
+				Cookies = client.CookieContainer,
+				RestResponse = response
+			};
+
+			Thread.Sleep(requestInterval);
+
+			return data;
+		}
+
+		public static Classes.Response Post(string url, List<Parameter> parameters,
+			CookieContainer cookies, string userAgent)
+		{
+			var client = new RestClient(url)
+			{
+				UserAgent = userAgent,
+				FollowRedirects = true,
+				CookieContainer = cookies
+			};
+
+			var request = new RestRequest(string.Empty, Method.POST);
+
+			foreach (var param in parameters)
+			{
+				request.AddParameter(param);
+			}
+
+			var response = client.Execute(request);
+			var data = new Classes.Response
+			{
+				Cookies = client.CookieContainer,
+				RestResponse = response
+			};
+
+			Thread.Sleep(requestInterval);
+
+			return data;
+		}
+
 		public static Classes.Response SteamTradeDoAuth(string url, List<Parameter> parameters,
-			CookieContainer cookies, List<HttpHeader> headers)
+			CookieContainer cookies)
 		{
 			var client = new RestClient(url)
 			{
@@ -135,11 +224,6 @@ namespace KryBot.Core
 			};
 
 			var request = new RestRequest(string.Empty, Method.POST);
-
-			foreach (var header in headers)
-			{
-				request.AddHeader(header.Name, header.Value);
-			}
 
 			foreach (var param in parameters)
 			{
