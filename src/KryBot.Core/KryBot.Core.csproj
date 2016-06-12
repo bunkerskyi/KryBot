@@ -69,6 +69,7 @@
     <Compile Include="Giveaways\SteamGiftsGiveaway.cs" />
     <Compile Include="Giveaways\UseGambleGiveaway.cs" />
     <Compile Include="Giveaways\SteamTradeGiveaway.cs" />
+    <Compile Include="LogMessage.cs" />
     <Compile Include="Serializable\GameMiner\JsonGame.cs" />
     <Compile Include="Serializable\GameMiner\JsonGiveaway.cs" />
     <Compile Include="Serializable\GameMiner\JsonResponse.cs" />

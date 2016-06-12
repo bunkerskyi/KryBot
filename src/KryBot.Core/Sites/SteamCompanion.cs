@@ -74,7 +74,7 @@ namespace KryBot.Core.Sites
 			return data;
 		}
 
-		public async Task<Log> Join(int index, string steamCookie, Steam steam)
+		public async Task<Log> Join(int index, Steam steam)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -360,7 +360,7 @@ namespace KryBot.Core.Sites
 				{
 					scGiveaway.StoreId = storId.Attributes["href"].Value.Split('/')[4];
 					scGiveaway.Code = code.Attributes["data-hashid"].Value;
-					return new Log("", Color.White, true, false);
+					return new Log("", Color.White, true);
 				}
 
 				var group =
@@ -379,7 +379,7 @@ namespace KryBot.Core.Sites
 						new Log(
 							$"{Messages.GetDateTime()} {{SteamCompanion}} {strings.GiveawayJoined_Join} \"{scGiveaway.Name}\" {strings.GiveawayNotJoined_NotConfirmed} " +
 							$"{strings.GiveawayNotJoined_YouMustEnteredToGroup} {{{(error == null ? "Error" : error.Attributes["href"].Value)}}}",
-							Color.Yellow, false, true);
+							Color.Yellow, false);
 				}
 
 				var exception =
@@ -403,9 +403,9 @@ namespace KryBot.Core.Sites
 			if (response.RestResponse.Content != string.Empty)
 			{
 				return new Log($"{Messages.GetDateTime()} {{SteamCompanion}} Sync success!", Color.Green,
-					true, true);
+					true);
 			}
-			return new Log($"{Messages.GetDateTime()} {{SteamCompanion}} Sync failed", Color.Red, false, true);
+			return new Log($"{Messages.GetDateTime()} {{SteamCompanion}} Sync failed", Color.Red, false);
 		}
 
 		public async Task<Log> Sync()

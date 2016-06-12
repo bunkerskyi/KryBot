@@ -98,7 +98,7 @@ namespace KryBot.Core.Sites
 			return task.Task.Result;
 		}
 
-		public static List<Parameter> GenerateJoinData(string game)
+		private static List<Parameter> GenerateJoinData(string game)
 		{
 			var list = new List<Parameter>();
 
@@ -183,7 +183,7 @@ namespace KryBot.Core.Sites
 					return
 						new Log(
 							$"{Messages.GetDateTime()} {{PlayBlink}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0",
-							Color.White, true, true);
+							Color.White, true);
 				}
 
 				Tools.RemoveBlacklistedGames(Giveaways, blackList);
@@ -191,7 +191,7 @@ namespace KryBot.Core.Sites
 			return
 				new Log(
 					$"{Messages.GetDateTime()} {{PlayBlink}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {Giveaways?.Count}",
-					Color.White, true, true);
+					Color.White, true);
 		}
 
 		public async Task<Log> PlayBlinkLoadGiveawaysAsync(Blacklist blackList)

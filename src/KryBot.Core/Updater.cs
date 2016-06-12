@@ -26,16 +26,16 @@ namespace KryBot.Core
 				}
 				catch (JsonReaderException)
 				{
-					return new Log("Updater: JsonReaderException", Color.Red, false, true);
+					return new Log("Updater: JsonReaderException", Color.Red, false);
 				}
 
 				if (release.tag_name != null && VersionCompare(Application.ProductVersion, release.tag_name))
 				{
-					return new Log($"Доступно обновление {release.tag_name}", Color.Green, true, true);
+					return new Log($"Доступно обновление {release.tag_name}", Color.Green, true);
 				}
-				return new Log($"Актуальная версия {release.tag_name}", Color.White, false, true);
+				return new Log($"Актуальная версия {release.tag_name}", Color.White, false);
 			}
-			return new Log("Updater: Json is Empty", Color.Red, false, true);
+			return new Log("Updater: Json is Empty", Color.Red, false);
 		}
 
 		private static bool VersionCompare(string sClient, string sServer)
@@ -62,7 +62,7 @@ namespace KryBot.Core
 				catch (Exception ex)
 				{
 					MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-					return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
+					return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
 				}
 			}
 
@@ -75,7 +75,7 @@ namespace KryBot.Core
 				catch (Exception ex)
 				{
 					MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-					return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
+					return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
 				}
 			}
 
@@ -88,7 +88,7 @@ namespace KryBot.Core
 			}
 			catch (JsonReaderException)
 			{
-				return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
+				return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
 			}
 
 			GitHunReleaseAssets binaryAsset = null;
@@ -103,13 +103,13 @@ namespace KryBot.Core
 
 			if (binaryAsset == null)
 			{
-				return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
+				return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
 			}
 
 			var stream = new WebClient().OpenRead(binaryAsset.browser_download_url);
 			if (stream == null)
 			{
-				return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
+				return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
 			}
 
 			try
@@ -122,7 +122,7 @@ namespace KryBot.Core
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
+				return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
 			}
 
 			try
@@ -143,7 +143,7 @@ namespace KryBot.Core
 					// ignored
 				}
 
-				return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
+				return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
 			}
 
 			try
@@ -165,10 +165,10 @@ namespace KryBot.Core
 					// ignored
 				}
 
-				return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false, true);
+				return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
 			}
 
-			return new Log(strings.Updater_Update_UpdateDone, Color.Green, true, true);
+			return new Log(strings.Updater_Update_UpdateDone, Color.Green, true);
 		}
 	}
 }

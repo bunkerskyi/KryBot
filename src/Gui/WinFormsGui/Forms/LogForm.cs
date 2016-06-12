@@ -2,12 +2,14 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
+using KryBot.Core;
 using KryBot.Gui.WinFormsGui.Properties;
 
 namespace KryBot.Gui.WinFormsGui.Forms
 {
 	public partial class FormLog : Form
 	{
+		readonly LogMessage _messages = LogMessage.Instance;
 		private readonly int _y;
 		private bool _win7;
 		private int _x;
@@ -17,6 +19,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			_x = x;
 			_y = y;
 			InitializeComponent();
+			_messages.HandleMessage += OnHandleMessage;
 		}
 
 		private void formLog_Load(object sender, EventArgs e)
@@ -60,12 +63,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			}
 		}
 
-		public void LogChanged()
-		{
-			var owner = Owner as FormMain;
-			if (owner != null) AppendText(richTextBox1, owner.LogBuffer.Content, owner.LogBuffer.Color);
-		}
-
 		private void Design()
 		{
 			Text = @"Лог";
@@ -100,6 +97,15 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			Properties.Settings.Default.LogHeight = Height;
 			Properties.Settings.Default.LogWidth = Width;
 			Properties.Settings.Default.Save();
+		}
+
+		private void OnHandleMessage(object sender, EventArgs args)
+		{
+			var messageEvent = args as MessageEventArgs;
+			if(messageEvent != null)
+			{
+				AppendText(richTextBox1, messageEvent.Message, messageEvent.Color);
+			}
 		}
 	}
 }

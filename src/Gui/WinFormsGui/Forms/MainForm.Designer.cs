@@ -135,8 +135,8 @@
 			// statusStrip1
 			// 
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripProgressBar1});
+			this.toolStripStatusLabel1,
+			this.toolStripProgressBar1});
 			this.statusStrip1.Location = new System.Drawing.Point(0, 186);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.Size = new System.Drawing.Size(350, 22);
@@ -158,10 +158,10 @@
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.файлToolStripMenuItem,
-            this.настройкиToolStripMenuItem,
-            this.оПрограммеToolStripMenuItem,
-            this.логToolStripMenuItem});
+			this.файлToolStripMenuItem,
+			this.настройкиToolStripMenuItem,
+			this.оПрограммеToolStripMenuItem,
+			this.логToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(350, 24);
@@ -171,10 +171,10 @@
 			// файлToolStripMenuItem
 			// 
 			this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.вПапкуСБотомToolStripMenuItem,
-            this.сохранитьToolStripMenuItem,
-            this.сохранитьКакToolStripMenuItem,
-            this.загрузитьToolStripMenuItem});
+			this.вПапкуСБотомToolStripMenuItem,
+			this.сохранитьToolStripMenuItem,
+			this.сохранитьКакToolStripMenuItem,
+			this.загрузитьToolStripMenuItem});
 			this.файлToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.file;
 			this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
 			this.файлToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
@@ -215,8 +215,8 @@
 			// настройкиToolStripMenuItem
 			// 
 			this.настройкиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.настройкиToolStripMenuItem1,
-            this.черныйСписокToolStripMenuItem});
+			this.настройкиToolStripMenuItem1,
+			this.черныйСписокToolStripMenuItem});
 			this.настройкиToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("настройкиToolStripMenuItem.Image")));
 			this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
 			this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
@@ -241,9 +241,9 @@
 			// оПрограммеToolStripMenuItem
 			// 
 			this.оПрограммеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.статстикаToolStripMenuItem,
-            this.оПрограммеToolStripMenuItem1,
-            this.донатToolStripMenuItem});
+			this.статстикаToolStripMenuItem,
+			this.оПрограммеToolStripMenuItem1,
+			this.донатToolStripMenuItem});
 			this.оПрограммеToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.info;
 			this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
 			this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
@@ -954,9 +954,9 @@
 			// toolStripMenuItem_Main
 			// 
 			this.toolStripMenuItem_Main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem_Show,
-            this.toolStripMenuItem_Farm,
-            this.toolStripMenuItem_Exit});
+			this.toolStripMenuItem_Show,
+			this.toolStripMenuItem_Farm,
+			this.toolStripMenuItem_Exit});
 			this.toolStripMenuItem_Main.Name = "toolStripMenuItem_Main";
 			this.toolStripMenuItem_Main.Size = new System.Drawing.Size(136, 70);
 			// 

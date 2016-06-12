@@ -397,10 +397,10 @@ namespace KryBot.Core.Sites
 						if (result.Type == "success")
 						{
 							return new Log($"{Messages.GetDateTime()} {{SteamGifts}} {result.Msg}", Color.Green,
-								true, true);
+								true);
 						}
 						return new Log($"{Messages.GetDateTime()} {{SteamGifts}} {result.Msg}", Color.Red,
-							false, true);
+							false);
 					}
 				}
 			}

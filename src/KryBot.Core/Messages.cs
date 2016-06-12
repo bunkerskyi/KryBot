@@ -76,25 +76,22 @@ namespace KryBot.Core
 		public static Log GiveawayHaveWon(string site, int count, string url)
 		{
 			return new Log($"{GetDateTime()} {{{site}}} {strings.GiveawaysHaveWon} ({count}) {{{url}}}",
-				Color.Orange, true, true);
+				Color.Orange, true);
 		}
 
 		public static Log GroupJoined(string url)
 		{
-			return new Log($"{GetDateTime()} {{Steam}} {strings.SteamGroupJoined} {{{url}}}", Color.Yellow, false,
-				true);
+			return new Log($"{GetDateTime()} {{Steam}} {strings.SteamGroupJoined} {{{url}}}", Color.Yellow, false);
 		}
 
 		public static Log GroupNotJoinde(string url)
 		{
-			return new Log($"{GetDateTime()} {{Steam}} {strings.SteamGroupNotJoined} {{{url}}}", Color.Yellow,
-				false, true);
+			return new Log($"{GetDateTime()} {{Steam}} {strings.SteamGroupNotJoined} {{{url}}}", Color.Yellow, false);
 		}
 
 		public static Log GroupAlreadyMember(string url)
 		{
-			return new Log($"{GetDateTime()} {{Steam}} {strings.SteamGroupAlreadyMember} {{{url}}}", Color.Yellow,
-				false, true);
+			return new Log($"{GetDateTime()} {{Steam}} {strings.SteamGroupAlreadyMember} {{{url}}}", Color.Yellow, false);
 		}
 
 		public static Log ParseProfile(string site, int points, int level, string username)
@@ -108,7 +105,7 @@ namespace KryBot.Core
 
 			str += $" ({username})";
 
-			return new Log(str, Color.Green, true, true);
+			return new Log(str, Color.Green, true);
 		}
 
 		public static Log ParseProfile(string site, int points, string username)
@@ -116,49 +113,48 @@ namespace KryBot.Core
 			return
 				new Log(
 					$"{GetDateTime()} {{{site}}} {strings.LoginSuccess} {strings.ParseProfile_Points}: {points} ({username})",
-					Color.Green, true, true);
+					Color.Green, true);
 		}
 
 		public static Log ParseProfile(string site, string username)
 		{
-			return new Log($"{GetDateTime()} {{{site}}} {strings.LoginSuccess} ({username})", Color.Green, true,
-				true);
+			return new Log($"{GetDateTime()} {{{site}}} {strings.LoginSuccess} ({username})", Color.Green, true);
 		}
 
 		public static Log ParseProfileFailed(string site)
 		{
-			return new Log($"{GetDateTime()} {{{site}}} {strings.ParseProfile_LoginOrServerError}", Color.Red, false, true);
+			return new Log($"{GetDateTime()} {{{site}}} {strings.ParseProfile_LoginOrServerError}", Color.Red, false);
 		}
 
 		public static Log ParseProfileFailed(string site, string message)
 		{
-			return new Log($"{GetDateTime()} {{{site}}} {strings.AccountNotActive} {{{message}}}", Color.Red, false, true);
+			return new Log($"{GetDateTime()} {{{site}}} {strings.AccountNotActive} {{{message}}}", Color.Red, false);
 		}
 
 		public static Log ParseGiveawaysEmpty(string content, string site)
 		{
 			return new Log($"{content}{GetDateTime()} {{{site}}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0",
-				Color.White, true, true);
+				Color.White, true);
 		}
 
 		public static Log ParseGiveawaysEmpty(string site)
 		{
 			return new Log($"{GetDateTime()} {{{site}}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: 0",
-				Color.White, true, true);
+				Color.White, true);
 		}
 
 		public static Log ParseGiveawaysFoundMatchGiveaways(string content, string site, string count)
 		{
 			return new Log(
 				$"{content}{GetDateTime()} {{{site}}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {count}",
-				Color.White, true, true);
+				Color.White, true);
 		}
 
 		public static Log ParseGiveawaysFoundMatchGiveaways(string site, string count)
 		{
 			return new Log(
 				$"{GetDateTime()} {{{site}}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {count}",
-				Color.White, true, true);
+				Color.White, true);
 		}
 	}
 }

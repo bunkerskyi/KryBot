@@ -38,7 +38,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		public event SubscribesContainer LogHide;
 		public event SubscribesContainer LogUnHide;
 		public event SubscribesContainer FormChangeLocation;
-		public event SubscribesContainer LogChanged;
 		public event SubscribesContainer LoadProfilesInfo;
 
 		private void логToolStripMenuItem_Click(object sender, EventArgs e)
@@ -92,7 +91,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			_blackList = Tools.LoadBlackList();
 
 			var version = await Updater.CheckForUpdates();
-			WriteLog(version);
+			LogMessage.Instance.AddMessage(version);
 
 			if (version.Success)
 			{
@@ -100,13 +99,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 				if (dr == DialogResult.Yes)
 				{
-					WriteLog(new Log($"{Messages.GetDateTime()} Обновление...", Color.White, true, true));
+					LogMessage.Instance.AddMessage(new Log($"{Messages.GetDateTime()} Обновление...", Color.White, true));
 
 					toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
 					toolStripProgressBar1.Visible = true;
 
 					var log = await Updater.Update();
-					WriteLog(log);
+					LogMessage.Instance.AddMessage(log);
 
 					if (log.Success)
 					{
@@ -223,8 +222,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				}
 				else
 				{
-					WriteLog(new Log($"{Messages.GetDateTime()} {strings.FormMain_btnStart_Click_FarmSkip}", Color.Red,
-						false, true));
+					LogMessage.Instance.AddMessage(new Log($"{Messages.GetDateTime()} {strings.FormMain_btnStart_Click_FarmSkip}", Color.Red, false));
 					btnStart.Text = strings.FormMain_btnStart_Click_Старт;
 				}
 			}
@@ -288,13 +286,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				{
 					var message = Messages.FileLoadFailed("profile.xml");
 					message.Content += "\n";
-					WriteLog(message);
+					LogMessage.Instance.AddMessage(message);
 
 					MessageBox.Show(message.Content.Split(']')[1], strings.Error, MessageBoxButtons.OK,
 						MessageBoxIcon.Error);
 					return false;
 				}
-				WriteLog(Messages.ProfileLoaded());
+				LogMessage.Instance.AddMessage(Messages.ProfileLoaded());
 				return true;
 			}
 
@@ -320,7 +318,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			LogHide += form.FormHide;
 			LogUnHide += form.FormUnHide;
 			FormChangeLocation += form.FormChangeLocation;
-			LogChanged += form.LogChanged;
 
 			LogBuffer = Messages.Start();
 			form.Show();
@@ -361,7 +358,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private async Task<bool> DoFarm()
 		{
 			_farming = true;
-			WriteLog(Messages.DoFarm_Start());
+			LogMessage.Instance.AddMessage(Messages.DoFarm_Start());
 
 			toolStripProgressBar1.Value = 0;
 			toolStripProgressBar1.Maximum = 5;
@@ -372,145 +369,27 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			var stopWatch = new Stopwatch();
 			stopWatch.Start();
 
-			if (_bot.GameMiner.Enabled)
-			{
-				var profile = await _bot.GameMiner.CheckLogin();
-				if (profile.Echo)
-				{
-					WriteLog(profile);
-				}
-				LoadProfilesInfo?.Invoke();
-
-				if (profile.Success)
-				{
-					var won = await _bot.GameMiner.CheckWon();
-					if (won != null && won.Content != "\n")
-					{
-						WriteLog(won);
-						if (Properties.Settings.Default.ShowWonTip)
-						{
-							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
-						}
-					}
-
-					var giveaways = await _bot.GameMiner.LoadGiveawaysAsync(_blackList);
-					if (giveaways != null && giveaways.Content != "\n")
-					{
-						WriteLog(giveaways);
-					}
-
-					if (_bot.GameMiner.Giveaways?.Count > 0)
-					{
-						if (Properties.Settings.Default.Sort)
-						{
-							if (Properties.Settings.Default.SortToMore)
-							{
-								_bot.GameMiner.Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
-							}
-							else
-							{
-								_bot.GameMiner.Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
-							}
-						}
-
-						await JoinGiveaways(_bot.GameMiner.Giveaways);
-					}
-				}
-				else
-				{
-					BlockTabpage(tabPageGM, false);
-					btnGMLogin.Enabled = true;
-					btnGMLogin.Visible = true;
-					linkLabel1.Enabled = true;
-					lblGMStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
-				}
-			}
 			toolStripProgressBar1.Value++;
 
 			if (_bot.SteamGifts.Enabled)
 			{
 				var profile = await _bot.SteamGifts.CheckLogin();
-				if (profile.Echo)
-				{
-					WriteLog(profile);
-				}
+				LogMessage.Instance.AddMessage(profile);
 				LoadProfilesInfo?.Invoke();
 
 				if (profile.Success)
 				{
 					var won = await _bot.SteamGifts.CheckWon();
-					if (won != null && won.Content != "\n")
+					if (won != new Log())
 					{
-						WriteLog(won);
+						LogMessage.Instance.AddMessage(won);
 						if (Properties.Settings.Default.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
 						}
 					}
 
-					if (_bot.SteamGifts.Points > 0)
-					{
-						var giveaways =
-							await
-								_bot.SteamGifts.LoadGiveawaysAsync(_blackList);
-						if (giveaways != null && giveaways.Content != "\n")
-						{
-							WriteLog(giveaways);
-						}
-
-						if (_bot.SteamGifts.WishlistGiveaways.Count > 0)
-						{
-							if (Properties.Settings.Default.Sort)
-							{
-								if (Properties.Settings.Default.SortToMore)
-								{
-									if (!Properties.Settings.Default.WishlistNotSort)
-									{
-										_bot.SteamGifts.WishlistGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
-									}
-								}
-								else
-								{
-									if (!Properties.Settings.Default.WishlistNotSort)
-									{
-										_bot.SteamGifts.WishlistGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
-									}
-								}
-							}
-
-							if (_bot.SteamGifts.SortToLessLevel)
-							{
-								if (!Properties.Settings.Default.WishlistNotSort)
-								{
-									_bot.SteamGifts.WishlistGiveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
-								}
-							}
-
-							await JoinGiveaways(_bot.SteamGifts.WishlistGiveaways, true);
-						}
-
-						if (_bot.SteamGifts.Giveaways.Count > 0)
-						{
-							if (Properties.Settings.Default.Sort)
-							{
-								if (Properties.Settings.Default.SortToMore)
-								{
-									_bot.SteamGifts.Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
-								}
-								else
-								{
-									_bot.SteamGifts.Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
-								}
-							}
-
-							if (_bot.SteamGifts.SortToLessLevel)
-							{
-								_bot.SteamGifts.Giveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
-							}
-
-							await JoinGiveaways(_bot.SteamGifts.Giveaways, false);
-						}
-					}
+					await _bot.GameMiner.Join(_blackList);
 				}
 				else
 				{
@@ -526,17 +405,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			if (_bot.SteamCompanion.Enabled)
 			{
 				var profile = await _bot.SteamCompanion.CheckLogin();
-				if (profile.Echo)
-				{
-					WriteLog(profile);
-				}
+				LogMessage.Instance.AddMessage(profile);
 				LoadProfilesInfo?.Invoke();
 				if (profile.Success)
 				{
 					var won = await _bot.SteamCompanion.CheckWon();
 					if (won != null)
 					{
-						WriteLog(won);
+						LogMessage.Instance.AddMessage(won);
 						if (Properties.Settings.Default.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
@@ -547,7 +423,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 						await _bot.SteamCompanion.LoadGiveawaysAsync();
 					if (giveaways != null && giveaways.Content != "\n")
 					{
-						WriteLog(giveaways);
+						LogMessage.Instance.AddMessage(giveaways);
 					}
 
 					if (_bot.SteamCompanion.WishlistGiveaways.Count > 0)
@@ -601,7 +477,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					var async = await _bot.SteamCompanion.Sync();
 					if (async != null)
 					{
-						WriteLog(async);
+						LogMessage.Instance.AddMessage(async);
 					}
 				}
 				else
@@ -617,17 +493,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			if (_bot.UseGamble.Enabled)
 			{
 				var profile = await _bot.UseGamble.CheckLogin();
-				if (profile.Echo)
-				{
-					WriteLog(profile);
-				}
+				LogMessage.Instance.AddMessage(profile);
 				LoadProfilesInfo?.Invoke();
 				if (profile.Success)
 				{
 					var won = await _bot.UseGamble.CheckWon();
 					if (won != null)
 					{
-						WriteLog(won);
+						LogMessage.Instance.AddMessage(won);
 						if (Properties.Settings.Default.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
@@ -639,7 +512,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 						await _bot.UseGamble.LoadGiveawaysAsync(_blackList);
 					if (giveaways != null && giveaways.Content != "\n")
 					{
-						WriteLog(giveaways);
+						LogMessage.Instance.AddMessage(giveaways);
 					}
 
 					if (_bot.UseGamble.Giveaways?.Count > 0)
@@ -672,17 +545,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			if (_bot.SteamTrade.Enabled)
 			{
 				var profile = await _bot.SteamTrade.CheckLogin();
-				if (profile.Echo)
-				{
-					WriteLog(profile);
-				}
+				LogMessage.Instance.AddMessage(profile);
 				LoadProfilesInfo?.Invoke();
 				if (profile.Success)
 				{
 					var giveaways = await _bot.SteamTrade.LoadGiveawaysAsync(_blackList);
 					if (giveaways != null && giveaways.Content != "\n")
 					{
-						WriteLog(giveaways);
+						LogMessage.Instance.AddMessage(giveaways);
 					}
 
 					if (_bot.SteamTrade.Giveaways?.Count > 0)
@@ -703,10 +573,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			if (_bot.PlayBlink.Enabled)
 			{
 				var profile = await _bot.PlayBlink.PlayBlinkGetProfileAsync();
-				if (profile.Echo)
-				{
-					WriteLog(profile);
-				}
+				LogMessage.Instance.AddMessage(profile);
 				LoadProfilesInfo?.Invoke();
 
 				if (profile.Success)
@@ -716,7 +583,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 						var giveaways = await _bot.PlayBlink.PlayBlinkLoadGiveawaysAsync(_blackList);
 						if (giveaways != null && giveaways.Content != "\n")
 						{
-							WriteLog(giveaways);
+							LogMessage.Instance.AddMessage(giveaways);
 						}
 
 						if (_bot.PlayBlink.Giveaways?.Count > 0)
@@ -751,13 +618,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			stopWatch.Stop();
 			var ts = stopWatch.Elapsed;
 			string elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}";
-			WriteLog(Messages.DoFarm_Finish(elapsedTime));
+			LogMessage.Instance.AddMessage(Messages.DoFarm_Finish(elapsedTime));
 			LoadProfilesInfo?.Invoke();
 
 			if (_loopsLeft > 0)
 			{
-				WriteLog(new Log($"{Messages.GetDateTime()} {strings.FormMain_timer_Tick_LoopsLeft}: {_loopsLeft - 1}",
-					Color.White, true, true));
+				LogMessage.Instance.AddMessage(new Log($"{Messages.GetDateTime()} {strings.FormMain_timer_Tick_LoopsLeft}: {_loopsLeft - 1}",
+					Color.White, true));
 				_loopsLeft += -1;
 			}
 
@@ -806,15 +673,15 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			toolStripStatusLabel1.Text = strings.TryLogin;
 			var login = false;
 
-			if (_bot.GameMiner.Enabled)
+			if(_bot.GameMiner.Enabled)
 			{
-				if (await CheckLoginGm())
+				if(await CheckLoginGm())
 				{
-					var won = await _bot.GameMiner.CheckWon();
-					if (won != null && won.Content != "\n")
+					var won = await _bot.GameMiner.CkeckWon();
+					if(won != null && won.Content != "\n")
 					{
-						WriteLog(won);
-						if (Properties.Settings.Default.ShowWonTip)
+						LogMessage.Instance.AddMessage(won);
+						if(Properties.Settings.Default.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
 						}
@@ -844,6 +711,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				btnGMLogin.Enabled = true;
 				btnGMLogin.Visible = true;
 			}
+
 			toolStripProgressBar1.Value++;
 
 			if (_bot.SteamGifts.Enabled)
@@ -853,7 +721,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					var won = await _bot.SteamGifts.CheckWon();
 					if (won != null && won.Content != "\n")
 					{
-						WriteLog(won);
+						LogMessage.Instance.AddMessage(won);
 						if (Properties.Settings.Default.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
@@ -891,7 +759,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					var won = await _bot.SteamCompanion.CheckWon();
 					if (won != null && won.Content != "\n")
 					{
-						WriteLog(won);
+						LogMessage.Instance.AddMessage(won);
 						if (Properties.Settings.Default.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
@@ -929,7 +797,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					var won = await _bot.UseGamble.CheckWon();
 					if (won != null)
 					{
-						WriteLog(won);
+						LogMessage.Instance.AddMessage(won);
 						if (Properties.Settings.Default.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
@@ -1117,7 +985,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				var won = await _bot.UseGamble.CheckWon();
 				if (won != null && won.Content != "\n")
 				{
-					WriteLog(won);
+					LogMessage.Instance.AddMessage(won);
 				}
 
 				BlockTabpage(tabPageUG, true);
@@ -1157,7 +1025,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				var won = await _bot.SteamCompanion.CheckWon();
 				if (won != null && won.Content != "\n")
 				{
-					WriteLog(won);
+					LogMessage.Instance.AddMessage(won);
 				}
 
 				BlockTabpage(tabPageSC, true);
@@ -1202,7 +1070,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				var won = await _bot.SteamGifts.CheckWon();
 				if (won != null && won.Content != "\n")
 				{
-					WriteLog(won);
+					LogMessage.Instance.AddMessage(won);
 				}
 				BlockTabpage(tabPageSG, true);
 				btnSGLogin.Enabled = false;
@@ -1245,11 +1113,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			var login = await CheckLoginGm();
 			if (login)
 			{
-				var won = await _bot.GameMiner.CheckWon();
-				if (won != null && won.Content != "\n")
-				{
-					WriteLog(won);
-				}
 				BlockTabpage(tabPageGM, true);
 				btnGMLogin.Enabled = false;
 				btnGMLogin.Visible = false;
@@ -1277,7 +1140,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			Message_TryLogin("GameMiner");
 			var login = await _bot.GameMiner.CheckLogin();
-			WriteLog(login);
+			LogMessage.Instance.AddMessage(login);
 			return login.Success;
 		}
 
@@ -1285,7 +1148,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			Message_TryLogin("SteamGifts");
 			var login = await _bot.SteamGifts.CheckLogin();
-			WriteLog(login);
+			LogMessage.Instance.AddMessage(login);
 			return login.Success;
 		}
 
@@ -1293,7 +1156,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			Message_TryLogin("SteamCompanion");
 			var login = await _bot.SteamCompanion.CheckLogin();
-			WriteLog(login);
+			LogMessage.Instance.AddMessage(login);
 			return login.Success;
 		}
 
@@ -1301,7 +1164,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			Message_TryLogin("UseGamble");
 			var login = await _bot.UseGamble.CheckLogin();
-			WriteLog(login);
+			LogMessage.Instance.AddMessage(login);
 			return login.Success;
 		}
 
@@ -1309,7 +1172,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			Message_TryLogin("SteamTrade");
 			var login = await _bot.SteamTrade.CheckLogin();
-			WriteLog(login);
+			LogMessage.Instance.AddMessage(login);
 			return login.Success;
 		}
 
@@ -1317,7 +1180,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			Message_TryLogin("Steam");
 			var login = await _bot.Steam.CheckLogin();
-			WriteLog(login);
+			LogMessage.Instance.AddMessage(login);
 			return login.Success;
 		}
 
@@ -1325,7 +1188,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			Message_TryLogin("PlayBlink");
 			var login = await _bot.PlayBlink.PlayBlinkGetProfileAsync();
-			WriteLog(login);
+			LogMessage.Instance.AddMessage(login);
 			return login.Success;
 		}
 
@@ -1338,16 +1201,11 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			if (await CheckLoginGm())
 			{
 				LoadProfilesInfo?.Invoke();
-				var won = await _bot.GameMiner.CheckWon();
-				if (won != null && won.Content != "\n")
-				{
-					WriteLog(won);
-				}
 
 				var async = await _bot.GameMiner.Sync();
 				if (async != null)
 				{
-					WriteLog(async);
+					LogMessage.Instance.AddMessage(async);
 				}
 
 				btnGMLogin.Enabled = false;
@@ -1381,13 +1239,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				var won = await _bot.SteamGifts.CheckWon();
 				if (won != null)
 				{
-					WriteLog(won);
+					LogMessage.Instance.AddMessage(won);
 				}
 
 				var async = await _bot.SteamGifts.Sync();
 				if (async != null)
 				{
-					WriteLog(async);
+					LogMessage.Instance.AddMessage(async);
 				}
 
 				btnSGLogin.Enabled = false;
@@ -1420,7 +1278,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				var won = await _bot.SteamCompanion.CheckWon();
 				if (won != null)
 				{
-					WriteLog(won);
+					LogMessage.Instance.AddMessage(won);
 				}
 				btnSCLogin.Enabled = false;
 				btnSCLogin.Visible = false;
@@ -1430,7 +1288,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				var async = await _bot.SteamCompanion.Sync();
 				if (async != null)
 				{
-					WriteLog(async);
+					LogMessage.Instance.AddMessage(async);
 				}
 			}
 			else
@@ -1552,7 +1410,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			if (_bot.Save())
 			{
-				WriteLog(new Log(Messages.GetDateTime() + " Настройки сохранены в profile.xml", Color.White, true, true));
+				LogMessage.Instance.AddMessage(new Log(Messages.GetDateTime() + " Настройки сохранены в profile.xml", Color.White, true));
 			}
 
 			Properties.Settings.Default.Save();
@@ -1571,12 +1429,12 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			{
 				if (_bot.Save(saveFileDialog1.FileName))
 				{
-					WriteLog(new Log(Messages.GetDateTime() + " Файл сохранен по пути " + saveFileDialog1.FileName,
-						Color.White, true, true));
+					LogMessage.Instance.AddMessage(new Log(Messages.GetDateTime() + " Файл сохранен по пути " + saveFileDialog1.FileName,
+						Color.White, true));
 				}
 				else
 				{
-					WriteLog(new Log(Messages.GetDateTime() + " Файл НЕ сохранен", Color.Red, true, true));
+					LogMessage.Instance.AddMessage(new Log(Messages.GetDateTime() + " Файл НЕ сохранен", Color.Red, true));
 				}
 			}
 		}
@@ -1920,56 +1778,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			btnPBExit.Enabled = true;
 		}
 
-		private async Task<bool> JoinGiveaways(List<GameMinerGiveaway> giveaways)
-		{
-			foreach (var giveaway in giveaways)
-			{
-				if (giveaway.Price <= _bot.GameMiner.JoinCoalLimit && giveaway.Price <= _bot.GameMiner.Coal)
-				{
-					if (_bot.GameMiner.CoalReserv <= _bot.GameMiner.Coal - giveaway.Price || giveaway.Price == 0)
-					{
-						var data = await _bot.GameMiner.Join(giveaways.IndexOf(giveaway));
-						if (data != null && data.Content != "\n")
-						{
-							WriteLog(data);
-						}
-					}
-				}
-			}
-			return true;
-		}
-
-		private async Task<bool> JoinGiveaways(List<SteamGiftsGiveaway> giveaways, bool wishlist)
-		{
-			foreach (var giveaway in giveaways)
-			{
-				if (wishlist)
-				{
-					if (giveaway.Price <= _bot.SteamGifts.Points)
-					{
-						var data = await _bot.SteamGifts.Join(giveaways.IndexOf(giveaway));
-						if (data != null && data.Content != "\n")
-						{
-							WriteLog(data);
-						}
-					}
-				}
-				else
-				{
-					if (giveaway.Price <= _bot.SteamGifts.Points &&
-					    _bot.SteamGifts.PointsReserv <= _bot.SteamGifts.Points - giveaway.Price)
-					{
-						var data = await _bot.SteamGifts.Join(giveaways.IndexOf(giveaway));
-						if (data != null && data.Content != "\n")
-						{
-							WriteLog(data);
-						}
-					}
-				}
-			}
-			return true;
-		}
-
 		private async Task<bool> JoinGiveaways(List<SteamCompanionGiveaway> giveaways, bool wishlist)
 		{
 			foreach (var giveaway in giveaways)
@@ -1979,10 +1787,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					if (giveaway.Price <= _bot.SteamCompanion.Points)
 					{
 						var data =
-							await _bot.SteamCompanion.Join(giveaways.IndexOf(giveaway), _bot.Steam.Cookies.Sessid, _bot.Steam);
+							await _bot.SteamCompanion.Join(giveaways.IndexOf(giveaway), _bot.Steam);
 						if (data != null && data.Content != "\n")
 						{
-							WriteLog(data);
+							LogMessage.Instance.AddMessage(data);
 						}
 					}
 				}
@@ -1992,10 +1800,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					    _bot.SteamCompanion.PointsReserv <= _bot.SteamCompanion.Points - giveaway.Price)
 					{
 						var data =
-							await _bot.SteamCompanion.Join(giveaways.IndexOf(giveaway), _bot.Steam.Cookies.Sessid, _bot.Steam);
+							await _bot.SteamCompanion.Join(giveaways.IndexOf(giveaway), _bot.Steam);
 						if (data != null && data.Content != "\n")
 						{
-							WriteLog(data);
+							LogMessage.Instance.AddMessage(data);
 						}
 					}
 				}
@@ -2013,7 +1821,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					var data = await _bot.UseGamble.Join(giveaways.IndexOf(giveaway));
 					if (data != null && data.Content != "\n")
 					{
-						WriteLog(data);
+						LogMessage.Instance.AddMessage(data);
 					}
 				}
 			}
@@ -2027,7 +1835,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				var data = await _bot.SteamTrade.Join(giveaways.IndexOf(giveaway));
 				if (data != null && data.Content != "\n")
 				{
-					WriteLog(data);
+					LogMessage.Instance.AddMessage(data);
 				}
 			}
 			return true;
@@ -2044,7 +1852,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 						var data = await _bot.PlayBlink.JoinGiveawayAsync(giveaway);
 						if (data != null && data.Content != "\n")
 						{
-							WriteLog(data);
+							LogMessage.Instance.AddMessage(data);
 						}
 					}
 				}
@@ -2054,7 +1862,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void Message_TryLogin(string site)
 		{
-			WriteLog(new Log($"{Messages.GetDateTime()} {{{site}}} {strings.TryLogin}", Color.White, true, true));
+			LogMessage.Instance.AddMessage(new Log($"{Messages.GetDateTime()} {{{site}}} {strings.TryLogin}", Color.White, true));
 		}
 
 		private void SetStatusPanel(string text, Image image)
@@ -2076,12 +1884,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				BlockTabpage(tabPagePB, true);
 				_bot.PlayBlink.Enabled = true;
 			}
-		}
-
-		private void WriteLog(Log log)
-		{
-			LogBuffer = log;
-			LogChanged?.Invoke();
 		}
 	}
 }

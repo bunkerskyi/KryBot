@@ -22,6 +22,8 @@
 		public static readonly string GameMinerSandboxGiveaways =
 			$"{GameMiner}api/giveaways/sandbox?count=10&q=&enter_price=on&sortby=finish&order=asc&filter_entered=on";
 
+		public static readonly string GameMinerSync = $"{GameMiner}account/sync";
+
 		#endregion
 
 		#region SteamGifts
