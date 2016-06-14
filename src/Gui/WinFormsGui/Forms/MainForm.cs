@@ -206,7 +206,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				}
 				else
 				{
-					LogMessage.Instance.AddMessage(new Log($"{Messages.GetDateTime()} {strings.FormMain_btnStart_Click_FarmSkip}", Color.Red, false));
+					LogMessage.Instance.AddMessage(new Log($"{Messages.GetDateTime()} {strings.FormMain_btnStart_Click_FarmSkip}",
+						Color.Red, false));
 					btnStart.Text = strings.FormMain_btnStart_Click_Старт;
 				}
 			}
@@ -353,19 +354,19 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			var stopWatch = new Stopwatch();
 			stopWatch.Start();
 
-			if(_bot.GameMiner.Enabled)
+			if (_bot.GameMiner.Enabled)
 			{
 				var profile = await _bot.GameMiner.CheckLogin();
 				LogMessage.Instance.AddMessage(profile);
 				LoadProfilesInfo?.Invoke();
 
-				if(profile.Success)
+				if (profile.Success)
 				{
 					var won = await _bot.GameMiner.CheckWon();
-					if(won != null)
+					if (won != null)
 					{
 						LogMessage.Instance.AddMessage(won);
-						if(Properties.Settings.Default.ShowWonTip)
+						if (Properties.Settings.Default.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
 						}
@@ -636,8 +637,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 			if (_loopsLeft > 0)
 			{
-				LogMessage.Instance.AddMessage(new Log($"{Messages.GetDateTime()} {strings.FormMain_timer_Tick_LoopsLeft}: {_loopsLeft - 1}",
-					Color.White, true));
+				LogMessage.Instance.AddMessage(
+					new Log($"{Messages.GetDateTime()} {strings.FormMain_timer_Tick_LoopsLeft}: {_loopsLeft - 1}",
+						Color.White, true));
 				_loopsLeft += -1;
 			}
 
@@ -686,15 +688,15 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			toolStripStatusLabel1.Text = strings.TryLogin;
 			var login = false;
 
-			if(_bot.GameMiner.Enabled)
+			if (_bot.GameMiner.Enabled)
 			{
-				if(await CheckLoginGm())
+				if (await CheckLoginGm())
 				{
 					var won = await _bot.GameMiner.CheckWon();
-					if(won != null)
+					if (won != null)
 					{
 						LogMessage.Instance.AddMessage(won);
-						if(Properties.Settings.Default.ShowWonTip)
+						if (Properties.Settings.Default.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
 						}
@@ -978,8 +980,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private static void BrowserStart(string startPage, string endPage, string title, string phpSessId)
 		{
 			Form form = new Browser(_bot, startPage, endPage, title, phpSessId);
-			form.Height = Screen.PrimaryScreen.Bounds.Height / 2;
-			form.Width = Screen.PrimaryScreen.Bounds.Width / 2;
+			form.Height = Screen.PrimaryScreen.Bounds.Height/2;
+			form.Width = Screen.PrimaryScreen.Bounds.Width/2;
 			form.Name = "KryBot - CefBrowser";
 			form.ShowDialog();
 		}
@@ -1423,7 +1425,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			if (_bot.Save())
 			{
-				LogMessage.Instance.AddMessage(new Log(Messages.GetDateTime() + " Настройки сохранены в profile.xml", Color.White, true));
+				LogMessage.Instance.AddMessage(new Log(Messages.GetDateTime() + " Настройки сохранены в profile.xml", Color.White,
+					true));
 			}
 
 			Properties.Settings.Default.Save();
@@ -1442,8 +1445,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			{
 				if (_bot.Save(saveFileDialog1.FileName))
 				{
-					LogMessage.Instance.AddMessage(new Log(Messages.GetDateTime() + " Файл сохранен по пути " + saveFileDialog1.FileName,
-						Color.White, true));
+					LogMessage.Instance.AddMessage(
+						new Log(Messages.GetDateTime() + " Файл сохранен по пути " + saveFileDialog1.FileName,
+							Color.White, true));
 				}
 				else
 				{

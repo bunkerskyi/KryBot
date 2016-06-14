@@ -6,17 +6,16 @@ using CefSharp;
 using CefSharp.WinForms;
 using KryBot.Core;
 using KryBot.Gui.WinFormsGui.Properties;
-using Cookie = CefSharp.Cookie;
 
 namespace KryBot.Gui.WinFormsGui.Forms
 {
 	public partial class Browser : Form
 	{
 		private readonly Bot _bot;
-		private readonly string _startPage;
 		private readonly string _endPage;
-		private readonly string _title;
 		private readonly string _phpSessId;
+		private readonly string _startPage;
+		private readonly string _title;
 		private ChromiumWebBrowser _browser;
 
 		public Browser(Bot bot, string startPage, string endPage, string title, string phpSessId)
@@ -34,7 +33,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			if (!Cef.IsInitialized)
 			{
-				CefSettings cefSettings = new CefSettings
+				var cefSettings = new CefSettings
 				{
 					UserAgent = CefTools.GetUserAgent()
 				};
@@ -54,18 +53,19 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			Text = _title;
 			Icon = Resources.KryBotPresent_256b;
-			toolStripStatusLabelChromium.Text = $"Chromium: {Cef.ChromiumVersion} Cef: {Cef.CefVersion} CefSharp: {Cef.CefSharpVersion}";
+			toolStripStatusLabelChromium.Text =
+				$"Chromium: {Cef.ChromiumVersion} Cef: {Cef.CefVersion} CefSharp: {Cef.CefSharpVersion}";
 
 			var steamCookie = _bot.Steam.Cookies.Generate();
 			if (steamCookie.Count > 0)
 			{
-				foreach(var cookie in CefTools.CookieContainerToCefCookie(steamCookie))
+				foreach (var cookie in CefTools.CookieContainerToCefCookie(steamCookie))
 				{
 					await Cef.GetGlobalCookieManager().SetCookieAsync(Links.Steam, cookie);
 				}
 			}
 
-			if(_phpSessId != "")
+			if (_phpSessId != "")
 			{
 				await Cef.GetGlobalCookieManager().SetCookieAsync(Links.SteamTrade, new Cookie
 				{
@@ -80,48 +80,48 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			if (!loadingStateChangedEventArgs.IsLoading)
 			{
-				if(_browser.Address.Contains(_endPage) || _browser.Address.Contains("http://steamcommunity.com/profiles/"))
+				if (_browser.Address.Contains(_endPage) || _browser.Address.Contains("http://steamcommunity.com/profiles/"))
 				{
-					if(_endPage == "http://steamcommunity.com/id/")
+					if (_endPage == "http://steamcommunity.com/id/")
 					{
 						SteamAuth();
 						Exit();
 					}
 				}
 
-				if(_browser.Address == _endPage || _browser.Address == "https://www.steamgifts.com/register")
+				if (_browser.Address == _endPage || _browser.Address == "https://www.steamgifts.com/register")
 				{
-					if(_endPage.Contains("http://gameminer.net/?lang="))
+					if (_endPage.Contains("http://gameminer.net/?lang="))
 					{
 						GameMinerAuth();
 						Exit();
 					}
 
-					if(_endPage == Links.SteamGifts)
+					if (_endPage == Links.SteamGifts)
 					{
 						SteamGiftsAuth();
 						Exit();
 					}
 
-					if(_endPage == Links.SteamCompanion)
+					if (_endPage == Links.SteamCompanion)
 					{
 						SteamCompanionAuth();
 						Exit();
 					}
 
-					if(_endPage == Links.UseGamble)
+					if (_endPage == Links.UseGamble)
 					{
 						UseGambleAuth();
 						Exit();
 					}
 
-					if(_endPage == Links.SteamTrade)
+					if (_endPage == Links.SteamTrade)
 					{
 						SteamTradeAuth();
 						Exit();
 					}
 
-					if(_endPage == Links.PlayBlink)
+					if (_endPage == Links.PlayBlink)
 					{
 						PlayBlinkAuth();
 						Exit();
@@ -132,9 +132,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private async void PlayBlinkAuth()
 		{
-			foreach(var cookie in await GetCookies(Links.PlayBlink))
+			foreach (var cookie in await GetCookies(Links.PlayBlink))
 			{
-				if(cookie.Name == "PHPSESSID")
+				if (cookie.Name == "PHPSESSID")
 				{
 					_bot.PlayBlink.Cookies.PhpSessId = cookie.Value;
 				}
@@ -144,24 +144,24 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private async void SteamTradeAuth()
 		{
-			foreach(var cookie in await GetCookies(Links.SteamTrade))
+			foreach (var cookie in await GetCookies(Links.SteamTrade))
 			{
-				if(cookie.Name == "PHPSESSID")
+				if (cookie.Name == "PHPSESSID")
 				{
 					_bot.SteamTrade.Cookies.PhpSessId = cookie.Value;
 				}
 
-				if(cookie.Name == "dle_user_id")
+				if (cookie.Name == "dle_user_id")
 				{
 					_bot.SteamTrade.Cookies.DleUserId = cookie.Value;
 				}
 
-				if(cookie.Name == "dle_password")
+				if (cookie.Name == "dle_password")
 				{
 					_bot.SteamTrade.Cookies.DlePassword = cookie.Value;
 				}
 
-				if(cookie.Name == "passhash")
+				if (cookie.Name == "passhash")
 				{
 					_bot.SteamTrade.Cookies.PassHash = cookie.Value;
 				}
@@ -171,9 +171,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private async void UseGambleAuth()
 		{
-			foreach(var cookie in await GetCookies(Links.UseGamble))
+			foreach (var cookie in await GetCookies(Links.UseGamble))
 			{
-				if(cookie.Name == "PHPSESSID")
+				if (cookie.Name == "PHPSESSID")
 				{
 					_bot.UseGamble.Cookies.PhpSessId = cookie.Value;
 				}
@@ -183,24 +183,24 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private async void SteamCompanionAuth()
 		{
-			foreach(var cookie in await GetCookies(Links.SteamCompanion))
+			foreach (var cookie in await GetCookies(Links.SteamCompanion))
 			{
-				if(cookie.Name == "PHPSESSID")
+				if (cookie.Name == "PHPSESSID")
 				{
 					_bot.SteamCompanion.Cookies.PhpSessId = cookie.Value;
 				}
 
-				if(cookie.Name == "userc")
+				if (cookie.Name == "userc")
 				{
 					_bot.SteamCompanion.Cookies.UserC = cookie.Value;
 				}
 
-				if(cookie.Name == "userid")
+				if (cookie.Name == "userid")
 				{
 					_bot.SteamCompanion.Cookies.UserId = cookie.Value;
 				}
 
-				if(cookie.Name == "usert")
+				if (cookie.Name == "usert")
 				{
 					_bot.SteamCompanion.Cookies.UserT = cookie.Value;
 				}
@@ -211,9 +211,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private async void SteamGiftsAuth()
 		{
-			foreach(var cookie in await GetCookies(Links.SteamGifts))
+			foreach (var cookie in await GetCookies(Links.SteamGifts))
 			{
-				if(cookie.Name == "PHPSESSID")
+				if (cookie.Name == "PHPSESSID")
 				{
 					_bot.SteamGifts.Cookies.PhpSessId = cookie.Value;
 				}
@@ -223,14 +223,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private async void GameMinerAuth()
 		{
-			foreach(var cookie in await GetCookies(Links.GameMiner))
+			foreach (var cookie in await GetCookies(Links.GameMiner))
 			{
-				if(cookie.Name == "token")
+				if (cookie.Name == "token")
 				{
 					_bot.GameMiner.Cookies.Token = cookie.Value;
 				}
 
-				if(cookie.Name == "_xsrf")
+				if (cookie.Name == "_xsrf")
 				{
 					_bot.GameMiner.Cookies.Xsrf = cookie.Value;
 				}
@@ -243,26 +243,26 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			var allCookies = await GetCookies(Links.Steam);
 
-			foreach(var cookie in allCookies)
+			foreach (var cookie in allCookies)
 			{
-				if(cookie.Domain == "steamcommunity.com")
+				if (cookie.Domain == "steamcommunity.com")
 				{
-					if(cookie.Name == "sessionid")
+					if (cookie.Name == "sessionid")
 					{
 						_bot.Steam.Cookies.Sessid = cookie.Value;
 					}
 
-					if(cookie.Name == "steamLogin")
+					if (cookie.Name == "steamLogin")
 					{
 						_bot.Steam.Cookies.Login = cookie.Value;
 					}
 
-					if(cookie.Name == "steamLoginSecure")
+					if (cookie.Name == "steamLoginSecure")
 					{
 						_bot.Steam.Cookies.LoginSecure = cookie.Value;
 					}
 
-					if(cookie.Name.Contains("steamMachineAuth"))
+					if (cookie.Name.Contains("steamMachineAuth"))
 					{
 						_bot.Steam.Cookies.MachineAuth = cookie.Value;
 					}
@@ -279,9 +279,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void Exit()
 		{
-			if(IsHandleCreated)
+			if (IsHandleCreated)
 			{
-				Invoke((MethodInvoker)Close);
+				Invoke((MethodInvoker) Close);
 			}
 		}
 	}

@@ -9,7 +9,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 {
 	public partial class FormLog : Form
 	{
-		readonly LogMessage _messages = LogMessage.Instance;
+		private readonly LogMessage _messages = LogMessage.Instance;
 		private readonly int _y;
 		private bool _win7;
 		private int _x;
@@ -102,7 +102,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private void OnHandleMessage(object sender, EventArgs args)
 		{
 			var messageEvent = args as MessageEventArgs;
-			if(messageEvent != null)
+			if (messageEvent != null)
 			{
 				AppendText(richTextBox1, messageEvent.Message, messageEvent.Color);
 			}
