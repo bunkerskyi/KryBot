@@ -1,22 +1,23 @@
 ﻿using System;
-using System.Net;
-using System.Runtime.InteropServices;
-using System.Text;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using CefSharp;
+using CefSharp.WinForms;
 using KryBot.Core;
 using KryBot.Gui.WinFormsGui.Properties;
-using HtmlDocument = HtmlAgilityPack.HtmlDocument;
+using Cookie = CefSharp.Cookie;
 
 namespace KryBot.Gui.WinFormsGui.Forms
 {
 	public partial class Browser : Form
 	{
-		private const int InternetCookieHttponly = 0x2000;
 		private readonly Bot _bot;
-		private readonly string _endPage;
-		private readonly string _phpSessId;
 		private readonly string _startPage;
+		private readonly string _endPage;
 		private readonly string _title;
+		private readonly string _phpSessId;
+		private ChromiumWebBrowser _browser;
 
 		public Browser(Bot bot, string startPage, string endPage, string title, string phpSessId)
 		{
@@ -26,307 +27,262 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			_title = title;
 			_phpSessId = phpSessId;
 			InitializeComponent();
+			InitializeBrowserControl();
 		}
 
-		private void Browser_Load(object sender, EventArgs e)
+		private void InitializeBrowserControl()
+		{
+			if (!Cef.IsInitialized)
+			{
+				CefSettings cefSettings = new CefSettings
+				{
+					UserAgent = CefTools.GetUserAgent()
+				};
+				Cef.Initialize(cefSettings);
+			}
+
+			_browser = new ChromiumWebBrowser(_startPage)
+			{
+				Dock = DockStyle.Fill
+			};
+			browserPanel.Controls.Add(_browser);
+
+			_browser.LoadingStateChanged += BrowserOnLoadingStateChanged;
+		}
+
+		private async void NewBrowser_Load(object sender, EventArgs e)
 		{
 			Text = _title;
 			Icon = Resources.KryBotPresent_256b;
-			toolStripStatusLabelIE.Text = $"IE: {webBrowser.Version}";
-			webBrowser.ScriptErrorsSuppressed = true;
-			webBrowser.DocumentCompleted += wb_DocumentCompleted;
+			toolStripStatusLabelChromium.Text = $"Chromium: {Cef.ChromiumVersion} Cef: {Cef.CefVersion} CefSharp: {Cef.CefSharpVersion}";
 
-			if (_phpSessId != "")
+			var steamCookie = _bot.Steam.Cookies.Generate();
+			if (steamCookie.Count > 0)
 			{
-				NativeMethods.InternetSetCookie(Links.SteamTrade, "PHPSESSID", _phpSessId);
+				foreach(var cookie in CefTools.CookieContainerToCefCookie(steamCookie))
+				{
+					await Cef.GetGlobalCookieManager().SetCookieAsync(Links.Steam, cookie);
+				}
 			}
-			toolStripStatusLabelURL.Text = @"URL: " + _startPage;
-			webBrowser.Navigate(_startPage);
+
+			if(_phpSessId != "")
+			{
+				await Cef.GetGlobalCookieManager().SetCookieAsync(Links.SteamTrade, new Cookie
+				{
+					Domain = "steamtrade.info",
+					Name = "PHPSESSID",
+					Value = _phpSessId
+				});
+			}
 		}
 
-		private void wb_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+		private void BrowserOnLoadingStateChanged(object sender, LoadingStateChangedEventArgs loadingStateChangedEventArgs)
 		{
-			toolStripStatusLabelLoad.Image = null;
-			toolStripStatusLabelLoad.Text = @"Завершено";
-			toolStripStatusLabelURL.Text = @"URL: " + webBrowser.Document?.Url?.AbsoluteUri;
-
-			try
+			if (!loadingStateChangedEventArgs.IsLoading)
 			{
-				if (webBrowser.Url.AbsoluteUri.Contains(_endPage) ||
-				    webBrowser.Url.AbsoluteUri.Contains("http://steamcommunity.com/profiles/"))
+				if(_browser.Address.Contains(_endPage) || _browser.Address.Contains("http://steamcommunity.com/profiles/"))
 				{
-					if (_endPage == "http://steamcommunity.com/id/")
+					if(_endPage == "http://steamcommunity.com/id/")
 					{
 						SteamAuth();
+						Exit();
 					}
 				}
 
-				if (webBrowser.Url.AbsoluteUri == _endPage ||
-				    webBrowser.Url.AbsoluteUri == "https://www.steamgifts.com/register")
+				if(_browser.Address == _endPage || _browser.Address == "https://www.steamgifts.com/register")
 				{
-					if (_endPage.Contains("http://gameminer.net/?lang="))
+					if(_endPage.Contains("http://gameminer.net/?lang="))
 					{
 						GameMinerAuth();
+						Exit();
 					}
 
-					if (_endPage == Links.SteamGifts)
+					if(_endPage == Links.SteamGifts)
 					{
 						SteamGiftsAuth();
+						Exit();
 					}
 
-					if (_endPage == Links.SteamCompanion)
+					if(_endPage == Links.SteamCompanion)
 					{
 						SteamCompanionAuth();
+						Exit();
 					}
 
-					if (_endPage == Links.UseGamble)
+					if(_endPage == Links.UseGamble)
 					{
 						UseGambleAuth();
+						Exit();
 					}
 
-					if (_endPage == Links.SteamTrade)
+					if(_endPage == Links.SteamTrade)
 					{
 						SteamTradeAuth();
+						Exit();
 					}
 
-					if (_endPage == Links.PlayBlink)
+					if(_endPage == Links.PlayBlink)
 					{
 						PlayBlinkAuth();
+						Exit();
 					}
 				}
 			}
-			catch (ObjectDisposedException)
-			{
-			}
 		}
 
-		private void SteamAuth()
+		private async void PlayBlinkAuth()
 		{
-			var container = GetUriCookieContainer(webBrowser.Url);
-			var cookies = container.GetCookies(webBrowser.Url);
-			foreach (Cookie cookie in cookies)
+			foreach(var cookie in await GetCookies(Links.PlayBlink))
 			{
-				if (cookie.Name == "sessionid")
+				if(cookie.Name == "PHPSESSID")
 				{
-					_bot.Steam.Cookies.Sessid = cookie.Value;
-				}
-
-				if (cookie.Name == "steamLogin")
-				{
-					_bot.Steam.Cookies.Login = cookie.Value;
+					_bot.PlayBlink.Cookies.PhpSessId = cookie.Value;
 				}
 			}
-			_bot.Steam.Enabled = true;
-			webBrowser.Dispose();
-			Close();
+			_bot.PlayBlink.Enabled = true;
 		}
 
-		private void GameMinerAuth()
+		private async void SteamTradeAuth()
 		{
-			var container = GetUriCookieContainer(webBrowser.Url);
-			var cookies = container.GetCookies(webBrowser.Url);
-			foreach (Cookie cookie in cookies)
+			foreach(var cookie in await GetCookies(Links.SteamTrade))
 			{
-				if (cookie.Name == "token")
-				{
-					_bot.GameMiner.Cookies.Token = cookie.Value;
-				}
-
-				if (cookie.Name == "_xsrf")
-				{
-					_bot.GameMiner.Cookies.Xsrf = cookie.Value;
-				}
-			}
-			_bot.GameMiner.Enabled = true;
-			webBrowser.Dispose();
-			Close();
-		}
-
-		private void SteamGiftsAuth()
-		{
-			var container = GetUriCookieContainer(webBrowser.Url);
-			var cookies = container.GetCookies(webBrowser.Url);
-			foreach (Cookie cookie in cookies)
-			{
-				if (cookie.Name == "PHPSESSID")
-				{
-					_bot.SteamGifts.Cookies.PhpSessId = cookie.Value;
-				}
-			}
-			_bot.SteamGifts.Enabled = true;
-			webBrowser.Dispose();
-			Close();
-		}
-
-		private void SteamCompanionAuth()
-		{
-			var container = GetUriCookieContainer(webBrowser.Url);
-			var cookies = container.GetCookies(webBrowser.Url);
-			foreach (Cookie cookie in cookies)
-			{
-				if (cookie.Name == "PHPSESSID")
-				{
-					_bot.SteamCompanion.Cookies.PhpSessId = cookie.Value;
-				}
-
-				if (cookie.Name == "userc")
-				{
-					_bot.SteamCompanion.Cookies.UserC = cookie.Value;
-				}
-
-				if (cookie.Name == "userid")
-				{
-					_bot.SteamCompanion.Cookies.UserId = cookie.Value;
-				}
-
-				if (cookie.Name == "usert")
-				{
-					_bot.SteamCompanion.Cookies.UserT = cookie.Value;
-				}
-			}
-			_bot.SteamCompanion.Enabled = true;
-			webBrowser.Dispose();
-			Close();
-		}
-
-		private void UseGambleAuth()
-		{
-			var container = GetUriCookieContainer(webBrowser.Url);
-			var cookies = container.GetCookies(webBrowser.Url);
-			foreach (Cookie cookie in cookies)
-			{
-				if (cookie.Name == "PHPSESSID")
-				{
-					_bot.UseGamble.Cookies.PhpSessId = cookie.Value;
-				}
-			}
-			_bot.UseGamble.Enabled = true;
-			webBrowser.Dispose();
-			Close();
-		}
-
-		private void SteamTradeAuth()
-		{
-			var container = GetUriCookieContainer(webBrowser.Url);
-			var cookies = container.GetCookies(webBrowser.Url);
-			foreach (Cookie cookie in cookies)
-			{
-				if (cookie.Name == "PHPSESSID")
+				if(cookie.Name == "PHPSESSID")
 				{
 					_bot.SteamTrade.Cookies.PhpSessId = cookie.Value;
 				}
 
-				if (cookie.Name == "dle_user_id")
+				if(cookie.Name == "dle_user_id")
 				{
 					_bot.SteamTrade.Cookies.DleUserId = cookie.Value;
 				}
 
-				if (cookie.Name == "dle_password")
+				if(cookie.Name == "dle_password")
 				{
 					_bot.SteamTrade.Cookies.DlePassword = cookie.Value;
 				}
 
-				if (cookie.Name == "passhash")
+				if(cookie.Name == "passhash")
 				{
 					_bot.SteamTrade.Cookies.PassHash = cookie.Value;
 				}
 			}
 			_bot.SteamTrade.Enabled = true;
-			webBrowser.Dispose();
-			Close();
 		}
 
-		private void PlayBlinkAuth()
+		private async void UseGambleAuth()
 		{
-			if (webBrowser.DocumentText != "")
+			foreach(var cookie in await GetCookies(Links.UseGamble))
 			{
-				var htmlDoc = new HtmlDocument();
-				htmlDoc.LoadHtml(webBrowser.DocumentText);
-
-				var node = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='usr_link']");
-				if (node != null)
+				if(cookie.Name == "PHPSESSID")
 				{
-					var container = GetUriCookieContainer(webBrowser.Url);
-					var cookies = container.GetCookies(webBrowser.Url);
-					foreach (Cookie cookie in cookies)
-					{
-						if (cookie.Name == "PHPSESSID")
-						{
-							_bot.PlayBlink.Cookies.PhpSessId = cookie.Value;
-						}
-					}
-					_bot.PlayBlink.Enabled = true;
-					webBrowser.Dispose();
-					Close();
+					_bot.UseGamble.Cookies.PhpSessId = cookie.Value;
 				}
 			}
+			_bot.UseGamble.Enabled = true;
 		}
 
-		private static CookieContainer GetUriCookieContainer(Uri uri)
+		private async void SteamCompanionAuth()
 		{
-			// First, create a null cookie container
-			CookieContainer cookies = null;
-
-			// Determine the size of the cookie
-			var datasize = 8192*16;
-			var cookieData = new StringBuilder(datasize);
-
-			// Call InternetGetCookieEx from wininet.dll
-			if (
-				!NativeMethods.InternetGetCookieEx(uri.ToString(), null, cookieData, ref datasize, InternetCookieHttponly,
-					IntPtr.Zero))
+			foreach(var cookie in await GetCookies(Links.SteamCompanion))
 			{
-				if (datasize < 0)
-					return null;
-				// Allocate stringbuilder large enough to hold the cookie
-				cookieData = new StringBuilder(datasize);
-				if (!NativeMethods.InternetGetCookieEx(
-					uri.ToString(),
-					null, cookieData,
-					ref datasize,
-					InternetCookieHttponly,
-					IntPtr.Zero))
-					return null;
+				if(cookie.Name == "PHPSESSID")
+				{
+					_bot.SteamCompanion.Cookies.PhpSessId = cookie.Value;
+				}
+
+				if(cookie.Name == "userc")
+				{
+					_bot.SteamCompanion.Cookies.UserC = cookie.Value;
+				}
+
+				if(cookie.Name == "userid")
+				{
+					_bot.SteamCompanion.Cookies.UserId = cookie.Value;
+				}
+
+				if(cookie.Name == "usert")
+				{
+					_bot.SteamCompanion.Cookies.UserT = cookie.Value;
+				}
+			}
+			_bot.SteamCompanion.Enabled = true;
+			Exit();
+		}
+
+		private async void SteamGiftsAuth()
+		{
+			foreach(var cookie in await GetCookies(Links.SteamGifts))
+			{
+				if(cookie.Name == "PHPSESSID")
+				{
+					_bot.SteamGifts.Cookies.PhpSessId = cookie.Value;
+				}
+			}
+			_bot.SteamGifts.Enabled = true;
+		}
+
+		private async void GameMinerAuth()
+		{
+			foreach(var cookie in await GetCookies(Links.GameMiner))
+			{
+				if(cookie.Name == "token")
+				{
+					_bot.GameMiner.Cookies.Token = cookie.Value;
+				}
+
+				if(cookie.Name == "_xsrf")
+				{
+					_bot.GameMiner.Cookies.Xsrf = cookie.Value;
+				}
 			}
 
-			// If the cookie contains data, add it to the cookie container
-			if (cookieData.Length > 0)
+			_bot.GameMiner.Enabled = true;
+		}
+
+		private async void SteamAuth()
+		{
+			var allCookies = await GetCookies(Links.Steam);
+
+			foreach(var cookie in allCookies)
 			{
-				cookies = new CookieContainer();
-				cookies.SetCookies(uri, cookieData.ToString().Replace(';', ','));
+				if(cookie.Domain == "steamcommunity.com")
+				{
+					if(cookie.Name == "sessionid")
+					{
+						_bot.Steam.Cookies.Sessid = cookie.Value;
+					}
+
+					if(cookie.Name == "steamLogin")
+					{
+						_bot.Steam.Cookies.Login = cookie.Value;
+					}
+
+					if(cookie.Name == "steamLoginSecure")
+					{
+						_bot.Steam.Cookies.LoginSecure = cookie.Value;
+					}
+
+					if(cookie.Name.Contains("steamMachineAuth"))
+					{
+						_bot.Steam.Cookies.MachineAuth = cookie.Value;
+					}
+				}
 			}
 
-			// Return the cookie container
-			return cookies;
+			_bot.Steam.Enabled = true;
 		}
 
-		private void webBrowser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+		private async Task<List<Cookie>> GetCookies(string url)
 		{
-			toolStripStatusLabelLoad.Image = Resources.load;
-			toolStripStatusLabelLoad.Text = @"Загрузка...";
-			toolStripStatusLabelURL.Text = @"URL: " + webBrowser.Url?.AbsoluteUri;
+			return await Cef.GetGlobalCookieManager().VisitUrlCookiesAsync(url, true);
 		}
 
-		private void webBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+		private void Exit()
 		{
-			toolStripStatusLabelLoad.Image = null;
-			toolStripStatusLabelURL.Text = @"URL: " + webBrowser.Url?.AbsoluteUri;
-		}
-
-		private static class NativeMethods
-		{
-			[DllImport("wininet.dll", CharSet = CharSet.Auto, SetLastError = true, BestFitMapping = false,
-				ThrowOnUnmappableChar = true)]
-			public static extern bool InternetSetCookie(string lpszUrlName, string lbszCookieName, string lpszCookieData);
-
-			[DllImport("wininet.dll", SetLastError = true, BestFitMapping = false, ThrowOnUnmappableChar = true)]
-			public static extern bool InternetGetCookieEx(
-				string url,
-				string cookieName,
-				StringBuilder cookieData,
-				ref int size,
-				int dwFlags,
-				IntPtr lpReserved);
+			if(IsHandleCreated)
+			{
+				Invoke((MethodInvoker)Close);
+			}
 		}
 	}
 }
