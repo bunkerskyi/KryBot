@@ -9,7 +9,9 @@ namespace KryBot.Core.Cookies
 
 		public string Login { get; set; }
 
-		public string RememberLogin { get; set; }
+		public string LoginSecure { get; set; }
+
+		public string MachineAuth { get; set; }
 
 		public CookieContainer Generate()
 		{
@@ -26,9 +28,14 @@ namespace KryBot.Core.Cookies
 				cookie.Add(new Cookie("steamLogin", Login) {Domain = target.Host});
 			}
 
-			if (RememberLogin != null)
+			if (LoginSecure != null)
 			{
-				cookie.Add(new Cookie("steamRememberLogin", RememberLogin) {Domain = target.Host});
+				cookie.Add(new Cookie("steamLoginSecure", LoginSecure) {Domain = target.Host});
+			}
+
+			if(MachineAuth != null)
+			{
+				cookie.Add(new Cookie($"{LoginSecure?.Split('%')[0]}steamMachineAuth", MachineAuth) { Domain = target.Host });
 			}
 
 			return cookie;

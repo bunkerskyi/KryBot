@@ -16,12 +16,12 @@ namespace KryBot.Core
 {
 	public static class Tools
 	{
-		public static Bot LoadProfile(string path)
+		public static Bot LoadProfile()
 		{
 			try
 			{
 				var serializer = new XmlSerializer(typeof(Bot));
-				var reader = new StreamReader(path == "" ? "profile.xml" : path);
+				var reader = new StreamReader("profile.xml");
 				var bot = (Bot) serializer.Deserialize(reader);
 				reader.Close();
 				return bot;
@@ -30,21 +30,6 @@ namespace KryBot.Core
 			{
 				return new Bot();
 			}
-		}
-
-		public static string UserAgent()
-		{
-			var js =
-				@"<script type='text/javascript'>function getUserAgent(){document.write(navigator.userAgent)}</script>";
-
-			var wb = new WebBrowser {Url = new Uri("about:blank")};
-			if (wb.Document != null)
-			{
-				wb.Document.Write(js);
-				wb.Document.InvokeScript("getUserAgent");
-			}
-
-			return wb.DocumentText.Substring(js.Length);
 		}
 
 		public static string GetSessCookieInresponse(CookieContainer cookies, string domain, string cookieName)
@@ -60,7 +45,7 @@ namespace KryBot.Core
 			return null;
 		}
 
-		private static List<Cookie> CookieContainer_ToList(CookieContainer container)
+		public static List<Cookie> CookieContainer_ToList(CookieContainer container)
 		{
 			var cookies = new List<Cookie>();
 
@@ -173,16 +158,6 @@ namespace KryBot.Core
 				}
 			}
 			return new Blacklist();
-		}
-
-		private static string GetIeVersion()
-		{
-			return new WebBrowser().Version.ToString();
-		}
-
-		public static bool CheckIeVersion(int minIeVersion)
-		{
-			return int.Parse(GetIeVersion().Split('.')[0]) < minIeVersion;
 		}
 
 		//	myShortcut.WorkingDirectory = MediaTypeNames.Application.StartupPath;

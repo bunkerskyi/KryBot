@@ -68,22 +68,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				}
 			}
 
-			if (Tools.CheckIeVersion(9))
-			{
-				switch (
-					MessageBox.Show(strings.IECheck, strings.Warning, MessageBoxButtons.YesNoCancel,
-						MessageBoxIcon.Warning))
-				{
-					case DialogResult.Yes:
-						Process.Start("http://windows.microsoft.com/ru-ru/internet-explorer/download-ie");
-						Application.Exit();
-						break;
-					case DialogResult.Cancel:
-						Application.Exit();
-						break;
-				}
-			}
-
 			new Settings().Load();
 			LoadProfilesInfo += ShowProfileInfo;
 			_logActive = Properties.Settings.Default.LogActive;
@@ -281,7 +265,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			if (File.Exists("profile.xml"))
 			{
-				_bot = Tools.LoadProfile("");
+				_bot = Tools.LoadProfile();
 				if (_bot == null)
 				{
 					var message = Messages.FileLoadFailed("profile.xml");
@@ -993,10 +977,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private static void BrowserStart(string startPage, string endPage, string title, string phpSessId)
 		{
-			Form form = new Browser(_bot, startPage, endPage, title, phpSessId);
-			form.Height = Screen.PrimaryScreen.Bounds.Height/2;
-			form.Width = Screen.PrimaryScreen.Bounds.Width/2;
-			form.Name = "Browser";
+			Form form = new NewBrowser(_bot, startPage, endPage, title, phpSessId);
+			form.Height = Screen.PrimaryScreen.Bounds.Height / 2;
+			form.Width = Screen.PrimaryScreen.Bounds.Width / 2;
+			form.Name = "KryBot - CefBrowser";
 			form.ShowDialog();
 		}
 
@@ -1087,7 +1071,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 			if (string.IsNullOrEmpty(_bot.SteamGifts.UserAgent))
 			{
-				_bot.SteamGifts.UserAgent = Tools.UserAgent();
+				_bot.SteamGifts.UserAgent = CefTools.GetUserAgent();
 			}
 			_bot.Save();
 
@@ -1133,7 +1117,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 			if (string.IsNullOrEmpty(_bot.GameMiner.UserAgent))
 			{
-				_bot.GameMiner.UserAgent = Tools.UserAgent();
+				_bot.GameMiner.UserAgent = CefTools.GetUserAgent();
 			}
 			_bot.Save();
 

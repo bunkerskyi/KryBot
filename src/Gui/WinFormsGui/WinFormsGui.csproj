@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\packages\CefSharp.WinForms.51.0.0-pre01\build\CefSharp.WinForms.props" Condition="Exists('..\..\packages\CefSharp.WinForms.51.0.0-pre01\build\CefSharp.WinForms.props')" />
+  <Import Project="..\..\packages\CefSharp.Common.51.0.0-pre01\build\CefSharp.Common.props" Condition="Exists('..\..\packages\CefSharp.Common.51.0.0-pre01\build\CefSharp.Common.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -105,23 +107,18 @@
       <HintPath>..\..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CefTools.cs" />
     <Compile Include="Forms\Browser.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,6 +160,12 @@
     </Compile>
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NewBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NewBrowser.Designer.cs">
+      <DependentUpon>NewBrowser.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SettingsForm.cs">
       <SubType>Form</SubType>
@@ -213,6 +216,9 @@
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\NewBrowser.resx">
+      <DependentUpon>NewBrowser.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -224,9 +230,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -284,6 +288,19 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
+  <Import Project="..\..\packages\cef.redist.x64.3.2704.1418\build\cef.redist.x64.targets" Condition="Exists('..\..\packages\cef.redist.x64.3.2704.1418\build\cef.redist.x64.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\cef.redist.x64.3.2704.1418\build\cef.redist.x64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\cef.redist.x64.3.2704.1418\build\cef.redist.x64.targets'))" />
+    <Error Condition="!Exists('..\..\packages\cef.redist.x86.3.2704.1418\build\cef.redist.x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\cef.redist.x86.3.2704.1418\build\cef.redist.x86.targets'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Common.51.0.0-pre01\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Common.51.0.0-pre01\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.Common.51.0.0-pre01\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.Common.51.0.0-pre01\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\..\packages\CefSharp.WinForms.51.0.0-pre01\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\CefSharp.WinForms.51.0.0-pre01\build\CefSharp.WinForms.props'))" />
+  </Target>
+  <Import Project="..\..\packages\cef.redist.x86.3.2704.1418\build\cef.redist.x86.targets" Condition="Exists('..\..\packages\cef.redist.x86.3.2704.1418\build\cef.redist.x86.targets')" />
+  <Import Project="..\..\packages\CefSharp.Common.51.0.0-pre01\build\CefSharp.Common.targets" Condition="Exists('..\..\packages\CefSharp.Common.51.0.0-pre01\build\CefSharp.Common.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

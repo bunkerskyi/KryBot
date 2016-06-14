@@ -115,11 +115,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				{
 					_bot.Steam.Cookies.Login = cookie.Value;
 				}
-
-				if (cookie.Name == "steamRememberLogin")
-				{
-					_bot.Steam.Cookies.RememberLogin = cookie.Value;
-				}
 			}
 			_bot.Steam.Enabled = true;
 			webBrowser.Dispose();
