@@ -369,6 +369,35 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			var stopWatch = new Stopwatch();
 			stopWatch.Start();
 
+			if(_bot.GameMiner.Enabled)
+			{
+				var profile = await _bot.GameMiner.CheckLogin();
+				LogMessage.Instance.AddMessage(profile);
+				LoadProfilesInfo?.Invoke();
+
+				if(profile.Success)
+				{
+					var won = await _bot.GameMiner.CheckWon();
+					if(won != null)
+					{
+						LogMessage.Instance.AddMessage(won);
+						if(Properties.Settings.Default.ShowWonTip)
+						{
+							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
+						}
+					}
+
+					await _bot.GameMiner.Join(_blackList);
+				}
+				else
+				{
+					BlockTabpage(tabPageSG, false);
+					btnSGLogin.Enabled = true;
+					btnSGLogin.Visible = true;
+					linkLabel2.Enabled = true;
+					lblSGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+				}
+			}
 			toolStripProgressBar1.Value++;
 
 			if (_bot.SteamGifts.Enabled)
@@ -380,7 +409,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				if (profile.Success)
 				{
 					var won = await _bot.SteamGifts.CheckWon();
-					if (won != new Log())
+					if (won != null)
 					{
 						LogMessage.Instance.AddMessage(won);
 						if (Properties.Settings.Default.ShowWonTip)
@@ -677,8 +706,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			{
 				if(await CheckLoginGm())
 				{
-					var won = await _bot.GameMiner.CkeckWon();
-					if(won != null && won.Content != "\n")
+					var won = await _bot.GameMiner.CheckWon();
+					if(won != null)
 					{
 						LogMessage.Instance.AddMessage(won);
 						if(Properties.Settings.Default.ShowWonTip)

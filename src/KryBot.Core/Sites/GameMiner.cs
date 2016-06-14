@@ -218,7 +218,7 @@ namespace KryBot.Core.Sites
 			return task.Task.Result;
 		}
 
-		public async Task<Log> CkeckWon()
+		public async Task<Log> CheckWon()
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -250,7 +250,7 @@ namespace KryBot.Core.Sites
 						}
 					}
 				}
-				task.SetResult(new Log());
+				task.SetResult(null);
 			});
 			return task.Task.Result;
 		}
