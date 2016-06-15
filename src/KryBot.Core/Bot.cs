@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Windows.Forms;
-using System.Xml.Serialization;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+
 using KryBot.Core.Giveaways;
+using KryBot.Core.Helpers;
 using KryBot.Core.Sites;
 
 namespace KryBot.Core
 {
+	[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+	[SuppressMessage("ReSharper", "AutoPropertyCanBeMadeGetOnly.Global")]
 	public class Bot
 	{
 		public Bot()
@@ -45,45 +46,11 @@ namespace KryBot.Core
 			PlayBlink.Giveaways = new List<PlayBlinkGiveaway>();
 		}
 
-		[Obsolete("Следует вызывать Save(string path), а этот метод удалить")]
-		public bool Save()
+		public bool Save(string path = FilePaths.Profile)
 		{
 			ClearGiveawayList();
 
-			try
-			{
-				using (var fileStream = new FileStream("profile.xml", FileMode.Create, FileAccess.Write))
-				{
-					var serializer = new XmlSerializer(typeof(Bot));
-					serializer.Serialize(fileStream, this);
-				}
-				return true;
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message, @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return false;
-			}
-		}
-
-		public bool Save(string path)
-		{
-			ClearGiveawayList();
-
-			try
-			{
-				using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
-				{
-					var serializer = new XmlSerializer(typeof(Bot));
-					serializer.Serialize(fileStream, this);
-				}
-				return true;
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message, @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return false;
-			}
+			return FileHelper.Save(this, path);
 		}
 	}
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using KryBot.CommonResources.lang;
 using KryBot.Core;
+using KryBot.Core.Helpers;
 using KryBot.Gui.WinFormsGui.Properties;
 
 namespace KryBot.Gui.WinFormsGui.Forms
@@ -60,7 +61,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					blacklist.Items.Add(item);
 				}
 
-				blacklist.Save();
+				FileHelper.Save(blacklist, FilePaths.Blacklist);
 			}
 		}
 

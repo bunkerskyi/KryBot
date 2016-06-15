@@ -1,10 +1,11 @@
-﻿using System;
-using System.IO;
-using System.Windows.Forms;
-using System.Xml.Serialization;
+﻿using System.Diagnostics.CodeAnalysis;
+
+using KryBot.Core;
+using KryBot.Core.Helpers;
 
 namespace KryBot.Gui.WinFormsGui
 {
+	[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
 	public class Settings
 	{
 		// НЕ ДЕЛАТЬ ПОЛЯ ПРИВАТНЫМИ
@@ -35,19 +36,7 @@ namespace KryBot.Gui.WinFormsGui
 
 		public void Load()
 		{
-			Settings settings;
-			try
-			{
-				using (var reader = new StreamReader("settings.xml"))
-				{
-					var serializer = new XmlSerializer(typeof(Settings));
-					settings = (Settings) serializer.Deserialize(reader);
-				}
-			}
-			catch (Exception)
-			{
-				settings = new Settings();
-			}
+			var settings = FileHelper.SafelyLoad<Settings>(FilePaths.Settings);
 
 			Properties.Settings.Default.Autorun = settings.Autorun;
 			Properties.Settings.Default.Sort = settings.Sort;
@@ -82,18 +71,7 @@ namespace KryBot.Gui.WinFormsGui
 				WishlistSort = Properties.Settings.Default.WishlistNotSort
 			};
 
-			try
-			{
-				using (var fs = new FileStream("settings.xml", FileMode.Create, FileAccess.Write))
-				{
-					var serializer = new XmlSerializer(typeof(Settings));
-					serializer.Serialize(fs, settings);
-				}
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(@"Ошибка", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
+			FileHelper.Save(settings, FilePaths.Settings);
 		}
 	}
 }

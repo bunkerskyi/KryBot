@@ -64,6 +64,7 @@
     <Compile Include="Cookies\SteamGiftsCookie.cs" />
     <Compile Include="Cookies\UseGambleCookie.cs" />
     <Compile Include="Cookies\SteamTradeCookie.cs" />
+    <Compile Include="FilePaths.cs" />
     <Compile Include="Giveaways\BaseGiveaway.cs" />
     <Compile Include="Giveaways\GameAwaysGiveaway.cs" />
     <Compile Include="Giveaways\GameMinerGiveaway.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Giveaways\SteamGiftsGiveaway.cs" />
     <Compile Include="Giveaways\UseGambleGiveaway.cs" />
     <Compile Include="Giveaways\SteamTradeGiveaway.cs" />
+    <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="LogMessage.cs" />
     <Compile Include="Serializable\GameMiner\JsonGame.cs" />
     <Compile Include="Serializable\GameMiner\JsonGiveaway.cs" />

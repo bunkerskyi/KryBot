@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Security;
 using System.Windows.Forms;
-using System.Xml.Serialization;
+
 using KryBot.CommonResources.lang;
 using KryBot.Core.Giveaways;
+using KryBot.Core.Helpers;
+
 using Microsoft.Win32;
 
 namespace KryBot.Core
@@ -18,18 +19,11 @@ namespace KryBot.Core
 	{
 		public static Bot LoadProfile()
 		{
-			try
-			{
-				var serializer = new XmlSerializer(typeof(Bot));
-				var reader = new StreamReader("profile.xml");
-				var bot = (Bot) serializer.Deserialize(reader);
-				reader.Close();
-				return bot;
-			}
-			catch (Exception)
-			{
-				return new Bot();
-			}
+			var bot = new Bot();
+
+			FileHelper.Load(ref bot, FilePaths.Profile);
+
+			return bot;
 		}
 
 		public static string GetSessCookieInresponse(CookieContainer cookies, string domain, string cookieName)
@@ -140,24 +134,7 @@ namespace KryBot.Core
 
 		public static Blacklist LoadBlackList()
 		{
-			if (File.Exists("blacklist.xml"))
-			{
-				try
-				{
-					using (var reader = new StreamReader("blacklist.xml"))
-					{
-						var serializer = new XmlSerializer(typeof(Blacklist));
-						var blacklist = (Blacklist) serializer.Deserialize(reader);
-						return blacklist;
-					}
-				}
-				catch (Exception ex)
-				{
-					MessageBox.Show(@"Ошибка", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
-					return new Blacklist();
-				}
-			}
-			return new Blacklist();
+			return FileHelper.SafelyLoad<Blacklist>(FilePaths.Blacklist);
 		}
 
 		//	myShortcut.WorkingDirectory = MediaTypeNames.Application.StartupPath;
