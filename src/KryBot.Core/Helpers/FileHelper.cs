@@ -11,7 +11,7 @@ namespace KryBot.Core.Helpers
 		/// Trying to write (serialize) object to file.
 		/// </summary>
 		/// <returns> 
-		/// If write is successful, returns true, otherwise false. 
+		/// If writing is successful, returns true, otherwise false. 
 		/// </returns>
 		public static bool Save<T>(T instance, string path) 
 		{ 
