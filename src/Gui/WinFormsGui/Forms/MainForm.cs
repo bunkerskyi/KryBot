@@ -1425,8 +1425,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			if (_bot.Save())
 			{
-				LogMessage.Instance.AddMessage(new Log(Messages.GetDateTime() + " Настройки сохранены в profile.xml", Color.White,
-					true));
+				LogMessage.Instance.AddMessage(new Log($"{Messages.GetDateTime()} Настройки сохранены в profile.xml", Color.White, true));
 			}
 
 			Properties.Settings.Default.Save();
@@ -1446,12 +1445,12 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				if (_bot.Save(saveFileDialog1.FileName))
 				{
 					LogMessage.Instance.AddMessage(
-						new Log(Messages.GetDateTime() + " Файл сохранен по пути " + saveFileDialog1.FileName,
+						new Log($"{Messages.GetDateTime()} Файл сохранен по пути {saveFileDialog1.FileName}",
 							Color.White, true));
 				}
 				else
 				{
-					LogMessage.Instance.AddMessage(new Log(Messages.GetDateTime() + " Файл НЕ сохранен", Color.Red, true));
+					LogMessage.Instance.AddMessage(new Log($"{Messages.GetDateTime()} Файл НЕ сохранен", Color.Red, true));
 				}
 			}
 		}

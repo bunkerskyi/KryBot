@@ -84,7 +84,7 @@ namespace KryBot.Core.Sites
 			}
 		}
 
-		#region JoinGivaway
+		#region JoinGivaway	
 
 		private async Task<Log> JoinGiveaway(GameMinerGiveaway giveaway)
 		{
@@ -125,7 +125,7 @@ namespace KryBot.Core.Sites
 			return task.Task.Result;
 		}
 
-		public async Task<bool> Join(Blacklist blacklist)
+		public async Task Join(Blacklist blacklist)
 		{
 			LogMessage.Instance.AddMessage(await LoadGiveaways(blacklist));
 
@@ -152,7 +152,6 @@ namespace KryBot.Core.Sites
 					}
 				}
 			}
-			return true;
 		}
 
 		private List<Parameter> GenerateJoinData()
