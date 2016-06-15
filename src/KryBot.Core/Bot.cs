@@ -45,6 +45,7 @@ namespace KryBot.Core
 			PlayBlink.Giveaways = new List<PlayBlinkGiveaway>();
 		}
 
+		[Obsolete("Следует вызывать Save(string path), а этот метод удалить")]
 		public bool Save()
 		{
 			ClearGiveawayList();
