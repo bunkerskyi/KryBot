@@ -1,4 +1,4 @@
-﻿namespace KryBot.Core.Json.Steam
+﻿namespace KryBot.Core.Serializable.Steam
 {
 	public class GameDetailData
 	{

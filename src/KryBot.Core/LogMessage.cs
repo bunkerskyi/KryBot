@@ -10,11 +10,6 @@ namespace KryBot.Core
 		public event EventHandler HandleMessage;
 
 		/// <summary>
-		/// Prevents a default instance of the <see cref="Messages"/> class from being created.
-		/// </summary>
-		private LogMessage(){}
-
-		/// <summary>
 		/// Gets the instance of the class.
 		/// </summary>
 		public static LogMessage Instance { get; } = new LogMessage();

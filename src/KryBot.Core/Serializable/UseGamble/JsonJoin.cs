@@ -1,4 +1,4 @@
-﻿namespace KryBot.Core.Json.UseGamble
+﻿namespace KryBot.Core.Serializable.UseGamble
 {
 	public class JsonJoin
 	{

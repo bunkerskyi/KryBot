@@ -5,7 +5,7 @@ using Exceptionless.Json;
 using HtmlAgilityPack;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
-using KryBot.Core.Json.UseGamble;
+using KryBot.Core.Serializable.UseGamble;
 using RestSharp;
 
 namespace KryBot.Core.Sites

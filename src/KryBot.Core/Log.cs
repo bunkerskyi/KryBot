@@ -4,8 +4,6 @@ namespace KryBot.Core
 {
 	public class Log
 	{
-		public Log(){}
-
 		public Log(string content)
 		{
 			Content = $"{content}\n";

@@ -7,8 +7,8 @@ using HtmlAgilityPack;
 using KryBot.CommonResources.lang;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
-using KryBot.Core.Json.GameMiner;
-using KryBot.Core.Json.SteamGifts;
+using KryBot.Core.Serializable.GameMiner;
+using KryBot.Core.Serializable.SteamGifts;
 using RestSharp;
 
 namespace KryBot.Core.Sites

@@ -1,6 +1,6 @@
 ﻿using System.Xml.Serialization;
 
-namespace KryBot.Core.Json.Steam
+namespace KryBot.Core.Serializable.Steam
 {
 	[XmlRoot(ElementName = "game")]
 	public class ProfileGame

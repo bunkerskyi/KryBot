@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace KryBot.Core.Json.GameMiner
+namespace KryBot.Core.Serializable.GameMiner
 {
 	public class JsonRootObject
 	{

@@ -1,4 +1,4 @@
-﻿namespace KryBot.Core.Json.GameMiner
+﻿namespace KryBot.Core.Serializable.GameMiner
 {
 	public class JsonResponseError
 	{

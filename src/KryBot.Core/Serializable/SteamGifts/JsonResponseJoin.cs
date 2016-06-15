@@ -1,4 +1,4 @@
-﻿namespace KryBot.Core.Json.SteamGifts
+﻿namespace KryBot.Core.Serializable.SteamGifts
 {
 	public class JsonResponseJoin
 	{

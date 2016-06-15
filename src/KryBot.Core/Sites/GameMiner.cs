@@ -7,7 +7,7 @@ using Exceptionless.Json;
 using KryBot.CommonResources.lang;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
-using KryBot.Core.Json.GameMiner;
+using KryBot.Core.Serializable.GameMiner;
 using RestSharp;
 using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 

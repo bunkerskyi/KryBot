@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 using Exceptionless.Json;
 using HtmlAgilityPack;
 using KryBot.Core.Cookies;
-using KryBot.Core.Json.Steam;
+using KryBot.Core.Serializable.Steam;
 using RestSharp;
 
 namespace KryBot.Core.Sites
