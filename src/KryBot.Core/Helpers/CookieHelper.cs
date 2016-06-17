@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 
@@ -45,6 +46,19 @@ namespace KryBot.Core.Helpers
 					}
 				}
 				return cookies;
+			}
+			return null;
+		}
+
+		public static string GetSessCookieInresponse(CookieContainer cookies, string domain, string cookieName)
+		{
+			if(cookies?.Count > 0)
+			{
+				var list = CookieContainer_ToList(cookies);
+
+				return
+					(from cookie in list where cookie.Name == cookieName && cookie.Domain == domain select cookie.Value)
+						.FirstOrDefault();
 			}
 			return null;
 		}

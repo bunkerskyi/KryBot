@@ -888,7 +888,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			var first = await Web.GetAsync(Links.SteamTrade, new CookieContainer());
 			var getLoginHref = await _bot.SteamTrade.DoAuth(first.Cookies);
 			var location = getLoginHref.RestResponse.ResponseUri.ToString();
-			var cookie = Tools.GetSessCookieInresponse(getLoginHref.Cookies, "steamtrade.info", "PHPSESSID");
+			var cookie = CookieHelper.GetSessCookieInresponse(getLoginHref.Cookies, "steamtrade.info", "PHPSESSID");
 
 			BrowserStart(location, Links.SteamTrade, "SteamTrade - Login", cookie);
 			_bot.Save();
