@@ -4,12 +4,13 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Exceptionless.Json;
+using HtmlAgilityPack;
 using KryBot.CommonResources.lang;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
+using KryBot.Core.Properties;
 using KryBot.Core.Serializable.GameMiner;
 using RestSharp;
-using HtmlDocument = HtmlAgilityPack.HtmlDocument;
 
 namespace KryBot.Core.Sites
 {
@@ -93,15 +94,17 @@ namespace KryBot.Core.Sites
 			{
 				Thread.Sleep(400);
 
-				var response = Web.Post($"{Links.GameMiner}giveaway/enter/{giveaway.Id}?{(giveaway.IsSandbox ? "sandbox" : "coal")}_page={giveaway.Page}",
+				var response =
+					Web.Post(
+						$"{Links.GameMiner}giveaway/enter/{giveaway.Id}?{(giveaway.IsSandbox ? "sandbox" : "coal")}_page={giveaway.Page}",
 						GenerateJoinData(), Cookies.Generate(), UserAgent);
 
-				if(response.RestResponse.Content != string.Empty)
+				if (response.RestResponse.Content != string.Empty)
 				{
 					try
 					{
 						var jsonresponse = JsonConvert.DeserializeObject<JsonResponse>(response.RestResponse.Content);
-						if(jsonresponse.Status == "ok")
+						if (jsonresponse.Status == "ok")
 						{
 							Points = jsonresponse.Coal;
 							task.SetResult(Messages.GiveawayJoined("GameMiner", giveaway.Name, giveaway.Price, jsonresponse.Coal));
@@ -112,7 +115,7 @@ namespace KryBot.Core.Sites
 							task.SetResult(Messages.GiveawayNotJoined("GameMiner", giveaway.Name, jresponse.Error.Message));
 						}
 					}
-					catch(JsonReaderException)
+					catch (JsonReaderException)
 					{
 						task.SetResult(Messages.GiveawayNotJoined("GameMiner", giveaway.Name, response.RestResponse.Content));
 					}
@@ -129,11 +132,11 @@ namespace KryBot.Core.Sites
 		{
 			LogMessage.Instance.AddMessage(await LoadGiveaways(blacklist));
 
-			if(Giveaways?.Count > 0)
+			if (Giveaways?.Count > 0)
 			{
-				if(Properties.Settings.Default.Sort)
+				if (Settings.Default.Sort)
 				{
-					if(Properties.Settings.Default.SortToMore)
+					if (Settings.Default.SortToMore)
 					{
 						Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
 					}
@@ -143,10 +146,9 @@ namespace KryBot.Core.Sites
 					}
 				}
 
-				foreach(var giveaway in Giveaways)
+				foreach (var giveaway in Giveaways)
 				{
-
-					if(giveaway.Price <= Points && PointsReserv <= Points - giveaway.Price)
+					if (giveaway.Price <= Points && PointsReserv <= Points - giveaway.Price)
 					{
 						LogMessage.Instance.AddMessage(await JoinGiveaway(giveaway));
 					}
@@ -229,14 +231,14 @@ namespace KryBot.Core.Sites
 					htmlDoc.LoadHtml(response.RestResponse.Content);
 
 					var nodes = htmlDoc.DocumentNode.SelectNodes(
-							"//tbody[@class='giveaways__giveaways']//td[@class='valign-middle m-table-state-finished']");
+						"//tbody[@class='giveaways__giveaways']//td[@class='valign-middle m-table-state-finished']");
 
 					if (nodes != null)
 					{
 						for (var i = 0; i < nodes.Count; i++)
 						{
 							if (!nodes[i].InnerText.Contains("требует подтверждения") &&
-								!nodes[i].InnerText.Contains("to be confirmed"))
+							    !nodes[i].InnerText.Contains("to be confirmed"))
 							{
 								nodes.Remove(nodes[i]);
 								i--;
@@ -263,22 +265,22 @@ namespace KryBot.Core.Sites
 
 				Giveaways?.Clear();
 
-				if(FreeGolden)
+				if (FreeGolden)
 				{
 					content += LoadGiveawaysByUrl(Links.GameMinerGoldenGiveaways, strings.ParseLoadGiveaways_FreeGoldenGiveawaysIn);
 				}
 
-				if(Regular)
+				if (Regular)
 				{
 					content += LoadGiveawaysByUrl(Links.GameMinerRegularGiveaways, strings.ParseLoadGiveaways_RegularGiveawaysIn);
 				}
 
-				if(Sandbox)
+				if (Sandbox)
 				{
 					content += LoadGiveawaysByUrl(Links.GameMinerSandboxGiveaways, strings.ParseLoadGiveaways_SandboxGiveawaysIn);
 				}
 
-				if(Giveaways == null)
+				if (Giveaways == null)
 				{
 					task.SetResult(Messages.ParseGiveawaysEmpty(content, "GameMiner"));
 				}

@@ -43,22 +43,22 @@ namespace KryBot.Core.Sites
 			{
 				Thread.Sleep(400);
 				giveaway = GetJoinData(giveaway);
-				if(giveaway.LinkJoin != null)
+				if (giveaway.LinkJoin != null)
 				{
 					var response = Web.Get($"{Links.SteamTrade}{giveaway.LinkJoin}", Cookies.Generate());
-					if(response.RestResponse.StatusCode == HttpStatusCode.OK)
+					if (response.RestResponse.StatusCode == HttpStatusCode.OK)
 					{
 						task.SetResult(Messages.GiveawayJoined("SteamTrade", giveaway.Name.Trim(), 0, 0));
 					}
 					else
 					{
-						task.SetResult(Messages.GiveawayNotJoined("SteamTrade", giveaway.Name, 
+						task.SetResult(Messages.GiveawayNotJoined("SteamTrade", giveaway.Name,
 							response.RestResponse.StatusCode.ToString()));
 					}
 				}
 				else
 				{
-					task.SetResult(null);	
+					task.SetResult(null);
 				}
 			});
 			return task.Task.Result;
@@ -98,13 +98,13 @@ namespace KryBot.Core.Sites
 			await Task.Run(() =>
 			{
 				var response = Web.Get(Links.SteamTrade, Cookies.Generate());
-				if(response.RestResponse.Content != string.Empty)
+				if (response.RestResponse.Content != string.Empty)
 				{
 					var htmlDoc = new HtmlDocument();
 					htmlDoc.LoadHtml(response.RestResponse.Content);
 
 					var test = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='topm1']");
-					if(test != null)
+					if (test != null)
 					{
 						task.SetResult(Messages.ParseProfile("SteamTrade", test.InnerText));
 					}
@@ -126,7 +126,7 @@ namespace KryBot.Core.Sites
 
 				var response = Web.Get(Links.SteamTradeWon, Cookies.Generate());
 
-				if(response.RestResponse.Content != string.Empty)
+				if (response.RestResponse.Content != string.Empty)
 				{
 					var htmlDoc = new HtmlDocument();
 					htmlDoc.LoadHtml(response.RestResponse.Content);
@@ -134,17 +134,17 @@ namespace KryBot.Core.Sites
 					var nodes = htmlDoc.DocumentNode.SelectNodes("//tbody[@bgcolor='#F3F5F7']/tr");
 					AddGiveaways(nodes);
 
-					if(Giveaways == null)
+					if (Giveaways == null)
 					{
 						task.SetResult(Messages.ParseGiveawaysEmpty("SteamTrade"));
 					}
 					else
 					{
-						if(blackList != null)
+						if (blackList != null)
 						{
-							for(var i = 0; i < Giveaways.Count; i++)
+							for (var i = 0; i < Giveaways.Count; i++)
 							{
-								if(blackList.Items.Any(item => Giveaways[i].StoreId == item.Id))
+								if (blackList.Items.Any(item => Giveaways[i].StoreId == item.Id))
 								{
 									Giveaways.Remove(Giveaways[i]);
 									i--;
@@ -156,7 +156,7 @@ namespace KryBot.Core.Sites
 				}
 				else
 				{
-					task.SetResult(null);	
+					task.SetResult(null);
 				}
 			});
 			return task.Task.Result;

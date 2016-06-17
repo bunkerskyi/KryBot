@@ -35,20 +35,20 @@ namespace KryBot.Core.Sites
 			await Task.Run(() =>
 			{
 				var response = Web.Post(url, GenerateJoinParams(), Cookies.Generate());
-				if(response.RestResponse.Content != string.Empty)
+				if (response.RestResponse.Content != string.Empty)
 				{
 					var htmlDoc = new HtmlDocument();
 					htmlDoc.LoadHtml(response.RestResponse.Content);
 
 					var node = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='btn_blue_white_innerfade btn_medium']");
-					if(node != null)
+					if (node != null)
 					{
 						task.SetResult(Messages.GroupJoined(url));
 					}
 					else
 					{
 						var error = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='error_ctn']");
-						if(error != null && error.InnerText.Contains("You are already a member of this group."))
+						if (error != null && error.InnerText.Contains("You are already a member of this group."))
 						{
 							task.SetResult(Messages.GroupAlreadyMember(url));
 						}
@@ -96,7 +96,7 @@ namespace KryBot.Core.Sites
 			{
 				var response = Web.Get(Links.Steam, Cookies.Generate());
 
-				if(response.RestResponse.Content != string.Empty)
+				if (response.RestResponse.Content != string.Empty)
 				{
 					var htmlDoc = new HtmlDocument();
 					htmlDoc.LoadHtml(response.RestResponse.Content);
@@ -104,7 +104,7 @@ namespace KryBot.Core.Sites
 					var login =
 						htmlDoc.DocumentNode.SelectSingleNode(
 							"//a[contains(@class, 'user_avatar') and contains(@class, 'playerAvatar')]");
-					if(login == null)
+					if (login == null)
 					{
 						task.SetResult(Messages.ParseProfileFailed("Steam"));
 					}

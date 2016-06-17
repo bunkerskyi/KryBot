@@ -416,19 +416,19 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			}
 			toolStripProgressBar1.Value++;
 
-			if(_bot.SteamCompanion.Enabled)
+			if (_bot.SteamCompanion.Enabled)
 			{
 				var profile = await _bot.SteamCompanion.CheckLogin();
 				LogMessage.Instance.AddMessage(profile);
 				LoadProfilesInfo?.Invoke();
 
-				if(profile.Success)
+				if (profile.Success)
 				{
 					var won = await _bot.SteamCompanion.CheckWon();
-					if(won != null)
+					if (won != null)
 					{
 						LogMessage.Instance.AddMessage(won);
-						if(Properties.Settings.Default.ShowWonTip)
+						if (Properties.Settings.Default.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
 						}
@@ -710,15 +710,15 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			}
 			toolStripProgressBar1.Value++;
 
-			if(_bot.SteamCompanion.Enabled)
+			if (_bot.SteamCompanion.Enabled)
 			{
-				if(await CheckLoginSc())
+				if (await CheckLoginSc())
 				{
 					var won = await _bot.SteamCompanion.CheckWon();
-					if(won != null && won.Content != "\n")
+					if (won != null && won.Content != "\n")
 					{
 						LogMessage.Instance.AddMessage(won);
-						if(Properties.Settings.Default.ShowWonTip)
+						if (Properties.Settings.Default.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
 						}
@@ -1368,7 +1368,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			if (_bot.Save())
 			{
-				LogMessage.Instance.AddMessage(new Log($"{Messages.GetDateTime()} Настройки сохранены в profile.xml", Color.White, true));
+				LogMessage.Instance.AddMessage(new Log($"{Messages.GetDateTime()} Настройки сохранены в profile.xml", Color.White,
+					true));
 			}
 
 			Properties.Settings.Default.Save();

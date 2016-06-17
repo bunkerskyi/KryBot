@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-
 using KryBot.Core.Giveaways;
 using KryBot.Core.Helpers;
 using KryBot.Core.Sites;

@@ -33,9 +33,9 @@ namespace KryBot.Core.Cookies
 				cookie.Add(new Cookie("steamLoginSecure", LoginSecure) {Domain = target.Host});
 			}
 
-			if(MachineAuth != null)
+			if (MachineAuth != null)
 			{
-				cookie.Add(new Cookie($"{LoginSecure?.Split('%')[0]}steamMachineAuth", MachineAuth) { Domain = target.Host });
+				cookie.Add(new Cookie($"{LoginSecure?.Split('%')[0]}steamMachineAuth", MachineAuth) {Domain = target.Host});
 			}
 
 			return cookie;

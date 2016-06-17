@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Drawing;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
-using KryBot.CommonResources.lang;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
 using RestSharp;
@@ -41,7 +39,7 @@ namespace KryBot.Core.Sites
 			await Task.Run(() =>
 			{
 				Thread.Sleep(1000);
-				if(pbGiveaway.Id != null)
+				if (pbGiveaway.Id != null)
 				{
 					var list = new List<HttpHeader>();
 					var header = new HttpHeader
@@ -55,9 +53,9 @@ namespace KryBot.Core.Sites
 						GenerateJoinData(pbGiveaway.Id), list,
 						Cookies.Generate(Level));
 
-					if(response.RestResponse.StatusCode == HttpStatusCode.OK)
+					if (response.RestResponse.StatusCode == HttpStatusCode.OK)
 					{
-						if(response.RestResponse.Content != "")
+						if (response.RestResponse.Content != "")
 						{
 							var htmldoc = new HtmlDocument();
 							htmldoc.LoadHtml(response.RestResponse.Content);
@@ -65,26 +63,26 @@ namespace KryBot.Core.Sites
 							Points = Points - pbGiveaway.Price;
 
 							var message = htmldoc.DocumentNode.SelectSingleNode("//div[@class='msgbox success']");
-							if(message != null)
+							if (message != null)
 							{
 								task.SetResult(Messages.GiveawayJoined("PlayBlink", pbGiveaway.Name, pbGiveaway.Price, Points));
 							}
 							else
 							{
 								var error = htmldoc.DocumentNode.SelectSingleNode("//div[@class='msgbox error']");
-								if(error != null)
+								if (error != null)
 								{
 									task.SetResult(Messages.GiveawayNotJoined("PlayBlink", pbGiveaway.Name, error.InnerText));
 								}
 								else
 								{
 									var captcha = htmldoc.DocumentNode.SelectSingleNode("//div[@class='flash_rules']");
-									if(captcha != null)
+									if (captcha != null)
 									{
 										task.SetResult(Messages.GiveawayNotJoined("PlayBlink", pbGiveaway.Name, "Captcha"));
 									}
 								}
-							}			
+							}
 						}
 						else
 						{
@@ -98,7 +96,7 @@ namespace KryBot.Core.Sites
 				}
 				else
 				{
-					task.SetResult(null);	
+					task.SetResult(null);
 				}
 			});
 			return task.Task.Result;
@@ -137,7 +135,7 @@ namespace KryBot.Core.Sites
 			await Task.Run(() =>
 			{
 				var response = Web.Get(Links.PlayBlink, Cookies.Generate(Level));
-				if(response.RestResponse.Content != string.Empty)
+				if (response.RestResponse.Content != string.Empty)
 				{
 					var htmlDoc = new HtmlDocument();
 					htmlDoc.LoadHtml(response.RestResponse.Content);
@@ -145,7 +143,7 @@ namespace KryBot.Core.Sites
 					var points = htmlDoc.DocumentNode.SelectSingleNode("//td[@id='points']");
 					var level = htmlDoc.DocumentNode.SelectSingleNode("//a[@title='Your contribution level']/b");
 					var username = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='usr_link']");
-					if(points != null && level != null && username != null)
+					if (points != null && level != null && username != null)
 					{
 						Points = int.Parse(points.InnerText.Split('P')[0].Split('\n')[1].Trim());
 						Level = int.Parse(level.InnerText);
@@ -159,7 +157,7 @@ namespace KryBot.Core.Sites
 					task.SetResult(Messages.ParseProfileFailed("PlayBlink"));
 				}
 			});
-			return task.Task.Result;			
+			return task.Task.Result;
 		}
 
 		public async Task<Log> LoadGiveawaysAsync(Blacklist blackList)
@@ -171,18 +169,18 @@ namespace KryBot.Core.Sites
 
 				var response = Web.Get(Links.PlayBlink, Cookies.Generate(Level));
 
-				if(response.RestResponse.Content != string.Empty)
+				if (response.RestResponse.Content != string.Empty)
 				{
 					var htmlDoc = new HtmlDocument();
 					htmlDoc.LoadHtml(response.RestResponse.Content);
 
 					var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@id='games_free']/div[@class='game_box']");
-					if(nodes != null)
+					if (nodes != null)
 					{
 						PlayBlinkAddGiveaways(nodes);
 					}
 
-					if(Giveaways == null)
+					if (Giveaways == null)
 					{
 						task.SetResult(Messages.ParseGiveawaysEmpty("PlayBlink"));
 					}
@@ -191,7 +189,7 @@ namespace KryBot.Core.Sites
 				}
 				else
 				{
-					task.SetResult(Messages.ParseGiveawaysFoundMatchGiveaways("PlayBlink", Giveaways?.Count.ToString()));	
+					task.SetResult(Messages.ParseGiveawaysFoundMatchGiveaways("PlayBlink", Giveaways?.Count.ToString()));
 				}
 			});
 			return task.Task.Result;

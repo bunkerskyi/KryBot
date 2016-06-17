@@ -6,11 +6,9 @@ using System.Net;
 using System.Reflection;
 using System.Security;
 using System.Windows.Forms;
-
 using KryBot.CommonResources.lang;
 using KryBot.Core.Giveaways;
 using KryBot.Core.Helpers;
-
 using Microsoft.Win32;
 
 namespace KryBot.Core

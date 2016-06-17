@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-
 using KryBot.Core;
 using KryBot.Core.Helpers;
 

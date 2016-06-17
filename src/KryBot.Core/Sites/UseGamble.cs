@@ -100,14 +100,14 @@ namespace KryBot.Core.Sites
 			{
 				var response = Web.Get(Links.UseGamble, Cookies.Generate());
 
-				if(response.RestResponse.Content != string.Empty)
+				if (response.RestResponse.Content != string.Empty)
 				{
 					var htmlDoc = new HtmlDocument();
 					htmlDoc.LoadHtml(response.RestResponse.Content);
 
 					var points = htmlDoc.DocumentNode.SelectSingleNode("//span[@class='my_coins']");
 					var profileLink = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='mp-wrap']/a[1]");
-					if(points != null && profileLink != null)
+					if (points != null && profileLink != null)
 					{
 						Points = int.Parse(points.InnerText);
 						task.SetResult(Messages.ParseProfile("UseGamble", Points, profileLink.InnerText));
@@ -131,18 +131,18 @@ namespace KryBot.Core.Sites
 			await Task.Run(() =>
 			{
 				var response = Web.Get(Links.UseGambleWon, Cookies.Generate());
-				if(response.RestResponse.Content != string.Empty)
+				if (response.RestResponse.Content != string.Empty)
 				{
 					var htmlDoc = new HtmlDocument();
 					htmlDoc.LoadHtml(response.RestResponse.Content);
 
 					var nodes = htmlDoc.DocumentNode.SelectNodes("//tr[@class='gray']");
-					if(nodes != null)
+					if (nodes != null)
 					{
-						for(var i = 0; i < nodes.Count; i++)
+						for (var i = 0; i < nodes.Count; i++)
 						{
 							var content = nodes[i].SelectSingleNode("//tr/td[2]").InnerText;
-							if(!content.Contains("you've won the Giveaway"))
+							if (!content.Contains("you've won the Giveaway"))
 							{
 								nodes.Remove(nodes[i]);
 								i--;
@@ -172,9 +172,9 @@ namespace KryBot.Core.Sites
 
 				var pages = 1;
 
-				for(var i = 0; i < pages; i++)
+				for (var i = 0; i < pages; i++)
 				{
-					if(pages != 1)
+					if (pages != 1)
 					{
 						var headerList = new List<HttpHeader>();
 						var header = new HttpHeader
@@ -187,7 +187,7 @@ namespace KryBot.Core.Sites
 						var jsonresponse = Web.Post(Links.UseGambleGaPage,
 							GeneratePageData(i + 1), headerList,
 							Cookies.Generate());
-						if(jsonresponse.RestResponse.Content != string.Empty)
+						if (jsonresponse.RestResponse.Content != string.Empty)
 						{
 							var data = jsonresponse.RestResponse.Content.Replace("\\", "");
 							var htmlDoc = new HtmlDocument();
@@ -201,14 +201,14 @@ namespace KryBot.Core.Sites
 					{
 						var response = Web.Get(Links.UseGambleGiveaways, Cookies.Generate());
 
-						if(response.RestResponse.Content != string.Empty)
+						if (response.RestResponse.Content != string.Empty)
 						{
 							var htmlDoc = new HtmlDocument();
 							htmlDoc.LoadHtml(response.RestResponse.Content);
 
 							var count =
 								htmlDoc.DocumentNode.SelectNodes("//div[@class='nPagin']//div[@class='pagin']/span");
-							if(count != null)
+							if (count != null)
 							{
 								pages = int.Parse(htmlDoc.DocumentNode.
 									SelectSingleNode($"//div[@class='nPagin']//div[@class='pagin']/span[{count.Count - 1}]")
@@ -222,7 +222,7 @@ namespace KryBot.Core.Sites
 					}
 				}
 
-				if(Giveaways == null)
+				if (Giveaways == null)
 				{
 					task.SetResult(Messages.ParseGiveawaysEmpty("UseGamble"));
 				}
