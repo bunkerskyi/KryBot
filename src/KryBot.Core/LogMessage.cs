@@ -1,23 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 
 namespace KryBot.Core
 {
 	public class LogMessage
 	{
-		private readonly List<string> _messages = new List<string>();
 		public event EventHandler HandleMessage;
 
 		/// <summary>
 		/// Gets the instance of the class.
 		/// </summary>
 		public static LogMessage Instance { get; } = new LogMessage();
-
-		/// <summary>
-		/// Gets the current messages list.
-		/// </summary>
-		public List<string> CurrentMessages => _messages;
 
 		/// <summary>
 		/// Notifies any of the subscribers that a new message has been received.
@@ -38,8 +31,10 @@ namespace KryBot.Core
 		/// <param name="log">The message.</param>
 		public void AddMessage(Log log)
 		{
-			_messages.Add(log.Content);
-			NotifyNewMessage(log.Content, log.Color);
+			if (log != null)
+			{
+				NotifyNewMessage(log.Content, log.Color);
+			}
 		}
 	}
 

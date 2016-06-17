@@ -63,8 +63,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			chGMSandbox.Checked = _bot.GameMiner.Sandbox;
 			cbGMGolden.Checked = _bot.GameMiner.FreeGolden;
 			cbGMRegional.Checked = _bot.GameMiner.NoRegion;
-			tbGMMaxValue.Text = _bot.GameMiner.JoinCoalLimit.ToString();
-			tbGMReserv.Text = _bot.GameMiner.CoalReserv.ToString();
+			tbGMMaxValue.Text = _bot.GameMiner.JoinPointsLimit.ToString();
+			tbGMReserv.Text = _bot.GameMiner.PointsReserv.ToString();
 
 			cbSGWishlist.Checked = _bot.SteamGifts.WishList;
 			cbSGGroup.Checked = _bot.SteamGifts.Group;
@@ -135,8 +135,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			_bot.GameMiner.Sandbox = chGMSandbox.Checked;
 			_bot.GameMiner.FreeGolden = cbGMGolden.Checked;
 			_bot.GameMiner.NoRegion = cbGMRegional.Checked;
-			_bot.GameMiner.JoinCoalLimit = int.Parse(tbGMMaxValue.Text);
-			_bot.GameMiner.CoalReserv = int.Parse(tbGMReserv.Text);
+			_bot.GameMiner.JoinPointsLimit = int.Parse(tbGMMaxValue.Text);
+			_bot.GameMiner.PointsReserv = int.Parse(tbGMReserv.Text);
 
 			_bot.SteamGifts.WishList = cbSGWishlist.Checked;
 			_bot.SteamGifts.Group = cbSGGroup.Checked;

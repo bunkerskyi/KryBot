@@ -22,10 +22,10 @@ namespace KryBot.Core.Sites
 		}
 
 		public bool Enabled { get; set; }
-		public int Coal { get; set; }
+		public int Points { get; set; }
 		public int Level { get; set; }
-		public int JoinCoalLimit { get; set; } = 50;
-		public int CoalReserv { get; set; }
+		public int JoinPointsLimit { get; set; } = 50;
+		public int PointsReserv { get; set; }
 		public bool Sandbox { get; set; } = true;
 		public bool Regular { get; set; } = true;
 		public bool FreeGolden { get; set; } = true;
@@ -52,7 +52,7 @@ namespace KryBot.Core.Sites
 						break;
 					}
 
-					if (lot.Price > Coal || lot.Price > JoinCoalLimit)
+					if (lot.Price > Points || lot.Price > JoinPointsLimit)
 					{
 						break;
 					}
@@ -103,7 +103,7 @@ namespace KryBot.Core.Sites
 						var jsonresponse = JsonConvert.DeserializeObject<JsonResponse>(response.RestResponse.Content);
 						if(jsonresponse.Status == "ok")
 						{
-							Coal = jsonresponse.Coal;
+							Points = jsonresponse.Coal;
 							task.SetResult(Messages.GiveawayJoined("GameMiner", giveaway.Name, giveaway.Price, jsonresponse.Coal));
 						}
 						else
@@ -146,7 +146,7 @@ namespace KryBot.Core.Sites
 				foreach(var giveaway in Giveaways)
 				{
 
-					if(giveaway.Price <= Coal && CoalReserv <= Coal - giveaway.Price)
+					if(giveaway.Price <= Points && PointsReserv <= Points - giveaway.Price)
 					{
 						LogMessage.Instance.AddMessage(await JoinGiveaway(giveaway));
 					}
@@ -199,10 +199,10 @@ namespace KryBot.Core.Sites
 
 					if (coal != null && level != null && username != null)
 					{
-						Coal = int.Parse(coal.InnerText);
+						Points = int.Parse(coal.InnerText);
 						Level = int.Parse(level.InnerText);
 
-						task.SetResult(Messages.ParseProfile("GameMiner", Coal, Level, username.InnerText.Trim().Replace("\n1", "")));
+						task.SetResult(Messages.ParseProfile("GameMiner", Points, Level, username.InnerText.Trim().Replace("\n1", "")));
 					}
 					else
 					{

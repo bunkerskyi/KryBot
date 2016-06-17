@@ -403,7 +403,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 						}
 					}
 
-					await _bot.GameMiner.Join(_blackList);
+					await _bot.SteamGifts.Join(_blackList);
 				}
 				else
 				{
@@ -660,7 +660,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void ShowProfileInfo()
 		{
-			lblGMCoal.Text = $"{strings.Coal}: {_bot.GameMiner.Coal}";
+			lblGMCoal.Text = $"{strings.Coal}: {_bot.GameMiner.Points}";
 			lblGMLevel.Text = $"{strings.Level}: {_bot.GameMiner.Level}";
 
 			lblSGPoints.Text = $"{strings.Points}: {_bot.SteamGifts.Points}";
@@ -1257,7 +1257,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					LogMessage.Instance.AddMessage(won);
 				}
 
-				var async = await _bot.SteamGifts.Sync();
+				var async = await _bot.SteamGifts.SyncAccount();
 				if (async != null)
 				{
 					LogMessage.Instance.AddMessage(async);
