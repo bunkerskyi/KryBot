@@ -8,30 +8,6 @@ namespace KryBot.Core.Helpers
 	public static class FileHelper
 	{
 		/// <summary>
-		///     Trying to write (serialize) object to file.
-		/// </summary>
-		/// <returns>
-		///     If writing is successful, returns true, otherwise false.
-		/// </returns>
-		public static bool Save<T>(T instance, string path)
-		{
-			try
-			{
-				using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
-				{
-					var serializer = new XmlSerializer(typeof(T));
-					serializer.Serialize(fileStream, instance);
-				}
-				return true;
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show(ex.Message, @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				return false;
-			}
-		}
-
-		/// <summary>
 		///     Trying to read (deserialize) the file into an object.
 		/// </summary>
 		/// <returns>
@@ -43,8 +19,8 @@ namespace KryBot.Core.Helpers
 			{
 				using (var reader = new StreamReader(path))
 				{
-					var serializer = new XmlSerializer(typeof(T));
-					instance = (T) serializer.Deserialize(reader);
+					var serializer = new XmlSerializer(typeof (T));
+					instance = (T)serializer.Deserialize(reader);
 				}
 				return true;
 			}
@@ -52,6 +28,17 @@ namespace KryBot.Core.Helpers
 			{
 				MessageBox.Show(ex.Message, @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return false;
+			}
+		}
+
+		/// <summary>
+		/// If file exists, delete it.
+		/// </summary>
+		public static void SafelyDelete(string path)
+		{
+			if (File.Exists(path))
+			{
+				File.Delete(path);
 			}
 		}
 
@@ -67,13 +54,37 @@ namespace KryBot.Core.Helpers
 			{
 				using (var reader = new StreamReader(path))
 				{
-					var serializer = new XmlSerializer(typeof(T));
-					return (T) serializer.Deserialize(reader);
+					var serializer = new XmlSerializer(typeof (T));
+					return (T)serializer.Deserialize(reader);
 				}
 			}
 			catch (Exception)
 			{
 				return new T();
+			}
+		}
+
+		/// <summary>
+		///     Trying to write (serialize) object to file.
+		/// </summary>
+		/// <returns>
+		///     If writing is successful, returns true, otherwise false.
+		/// </returns>
+		public static bool Save<T>(T instance, string path)
+		{
+			try
+			{
+				using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
+				{
+					var serializer = new XmlSerializer(typeof (T));
+					serializer.Serialize(fileStream, instance);
+				}
+				return true;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return false;
 			}
 		}
 	}

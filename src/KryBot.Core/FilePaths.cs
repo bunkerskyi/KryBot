@@ -7,5 +7,11 @@
 		public const string Blacklist = "blacklist.xml";
 
 		public const string Settings = "settings.xml";
+
+		public const string KryBot = "KryBot.exe";
+
+		public const string KryBotOld = "KryBot.exe.old";
+
+		public const string KryBotNew = "KryBot.exe.new";
 	}
 }
