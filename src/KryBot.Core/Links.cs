@@ -95,8 +95,8 @@
 
 		#region GitHub
 
-		private const string GitHubRepo = "https://github.com/KriBetko/KryBot";
-		public static readonly string GitHubLatestReliase = $"{GitHubRepo}releases/latest";
+		public const string GitHubRepo = "https://github.com/KriBetko/KryBot";
+		public const string GitHubLatestReliase = "https://api.github.com/repos/KriBetko/KryBot/releases/latest";
 
 		#endregion
 	}

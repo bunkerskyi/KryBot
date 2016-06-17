@@ -2,7 +2,6 @@
 using System.Drawing;
 using System.Windows.Forms;
 using KryBot.CommonResources.lang;
-using KryBot.Core.Properties;
 
 namespace KryBot.Core
 {
@@ -43,10 +42,6 @@ namespace KryBot.Core
 
 		public static Log GiveawayJoined(string site, string name, int price, int points, int level)
 		{
-			Settings.Default.JoinsPerSession += 1;
-			Settings.Default.JoinsTotal += 1;
-			Settings.Default.Save();
-
 			return
 				new Log(
 					$"{GetDateTime()} {{{site}}} {strings.GiveawayJoined_Join} \"{name}\" [{level}] {strings.GiveawayJoined_ConfirmedFor} {price} " +
@@ -55,10 +50,6 @@ namespace KryBot.Core
 
 		public static Log GiveawayJoined(string site, string name, int price, int points)
 		{
-			Settings.Default.JoinsPerSession += 1;
-			Settings.Default.JoinsTotal += 1;
-			Settings.Default.Save();
-
 			return
 				new Log(
 					$"{GetDateTime()} {{{site}}} {strings.GiveawayJoined_Join} \"{name}\" {strings.GiveawayJoined_ConfirmedFor} {price} " +

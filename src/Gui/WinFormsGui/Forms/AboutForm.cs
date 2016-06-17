@@ -24,6 +24,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			Text = @"О программе";
 
 			labelVersion.Text = @"KryBot - " + Application.ProductVersion;
+
+			linkLabelGitHub.Text = Core.Links.GitHubRepo;
 		}
 
 		private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -38,7 +40,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			Process.Start(linkLabel3.Text);
+			Process.Start(linkLabelGitHub.Text);
 		}
 	}
 }

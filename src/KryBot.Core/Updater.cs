@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Exceptionless.Json;
 using KryBot.CommonResources.lang;
-using KryBot.Core.Properties;
 using KryBot.Core.Serializable.GitHub;
 
 namespace KryBot.Core
@@ -79,7 +78,7 @@ namespace KryBot.Core
 				}
 			}
 
-			var json = await Web.GetVersionInGitHubAsync(Settings.Default.GitHubRepoReleaseUrl);
+			var json = await Web.GetVersionInGitHubAsync(Links.GitHubLatestReliase);
 
 			GitHubRelease release;
 			try

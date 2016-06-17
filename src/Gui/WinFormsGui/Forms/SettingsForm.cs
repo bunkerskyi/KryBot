@@ -34,28 +34,28 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 			cbSortBy.Text = cbSortBy.Items[0].ToString();
 
-			if (Properties.Settings.Default.Timer)
+			if (_bot.Timer)
 			{
 				cbTimerEnable.Checked = true;
 				gbTimerSettings.Enabled = true;
-				tbTimerInterval.Text = (Properties.Settings.Default.TimerInterval/60000).ToString();
-				tbTimerLoops.Text = Properties.Settings.Default.TimerLoops.ToString();
+				tbTimerInterval.Text = (_bot.TimerInterval/60000).ToString();
+				tbTimerLoops.Text = _bot.TimerLoops.ToString();
 			}
 			else
 			{
 				cbTimerEnable.Checked = false;
 				gbTimerSettings.Enabled = false;
-				tbTimerInterval.Text = (Properties.Settings.Default.TimerInterval/60000).ToString();
-				tbTimerLoops.Text = Properties.Settings.Default.TimerLoops.ToString();
+				tbTimerInterval.Text = (_bot.TimerInterval/60000).ToString();
+				tbTimerLoops.Text = _bot.TimerLoops.ToString();
 			}
 
-			cbSort.Checked = Properties.Settings.Default.Sort;
-			if (Properties.Settings.Default.SortToMore)
+			cbSort.Checked = _bot.Sort;
+			if (_bot.SortToMore)
 			{
 				cbSortBy.Text = @"дорогие";
 			}
 
-			if (Properties.Settings.Default.SortToLess)
+			if (_bot.SortToLess)
 			{
 				cbSortBy.Text = @"дешевые";
 			}
@@ -96,7 +96,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			cbAutorun.Checked = Properties.Settings.Default.Autorun;
 			cbWonTip.Checked = Properties.Settings.Default.ShowWonTip;
 			cbFarmTip.Checked = Properties.Settings.Default.ShowFarmTip;
-			cbWishlistSort.Checked = Properties.Settings.Default.WishlistNotSort;
+			cbWishlistSort.Checked = _bot.WishlistSort;
 		}
 
 		private void btbGMCookies_Click(object sender, EventArgs e)
@@ -124,13 +124,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			{
 				MessageBox.Show(@"Интервал таймера не может равняться 0", strings.Error, MessageBoxButtons.OK,
 					MessageBoxIcon.Error);
-				tbTimerInterval.Text = Properties.Settings.Default.TimerInterval.ToString();
+				tbTimerInterval.Text = _bot.TimerInterval.ToString();
 				return;
 			}
 
-			Properties.Settings.Default.Sort = cbSort.Checked;
-			Properties.Settings.Default.SortToMore = cbSortBy.Text == @"дорогие";
-			Properties.Settings.Default.SortToLess = cbSortBy.Text == @"дешевые";
+			_bot.Sort = cbSort.Checked;
+			_bot.SortToMore = cbSortBy.Text == @"дорогие";
+			_bot.SortToLess = cbSortBy.Text == @"дешевые";
 
 			_bot.GameMiner.Regular = cbGMRegular.Checked;
 			_bot.GameMiner.Sandbox = chGMSandbox.Checked;
@@ -162,14 +162,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			_bot.PlayBlink.MaxJoinValue = int.Parse(tbPBMaxValue.Text);
 			_bot.PlayBlink.PointReserv = int.Parse(tbPBReserv.Text);
 
-			Properties.Settings.Default.Timer = cbTimerEnable.Checked;
-			Properties.Settings.Default.TimerInterval = int.Parse(tbTimerInterval.Text)*60000;
-			Properties.Settings.Default.TimerLoops = int.Parse(tbTimerLoops.Text);
+			_bot.Timer = cbTimerEnable.Checked;
+			_bot.TimerInterval = int.Parse(tbTimerInterval.Text)*60000;
+			_bot.TimerLoops = int.Parse(tbTimerLoops.Text);
 
 			Properties.Settings.Default.Autorun = cbAutorun.Checked;
 			Properties.Settings.Default.ShowWonTip = cbWonTip.Checked;
 			Properties.Settings.Default.ShowFarmTip = cbFarmTip.Checked;
-			Properties.Settings.Default.WishlistNotSort = cbWishlistSort.Checked;
+			_bot.WishlistSort = cbWishlistSort.Checked;
 
 			_bot.Save();
 			Properties.Settings.Default.Save();

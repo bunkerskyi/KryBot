@@ -85,18 +85,6 @@ namespace KryBot.Gui.WinFormsGui.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string CostomProfilePath {
-            get {
-                return ((string)(this["CostomProfilePath"]));
-            }
-            set {
-                this["CostomProfilePath"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool FirstExecute {
             get {
@@ -116,54 +104,6 @@ namespace KryBot.Gui.WinFormsGui.Properties {
             }
             set {
                 this["Lang"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool Sort {
-            get {
-                return ((bool)(this["Sort"]));
-            }
-            set {
-                this["Sort"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool SortToMore {
-            get {
-                return ((bool)(this["SortToMore"]));
-            }
-            set {
-                this["SortToMore"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool SortToLess {
-            get {
-                return ((bool)(this["SortToLess"]));
-            }
-            set {
-                this["SortToLess"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool Timer {
-            get {
-                return ((bool)(this["Timer"]));
-            }
-            set {
-                this["Timer"] = value;
             }
         }
         
@@ -200,42 +140,6 @@ namespace KryBot.Gui.WinFormsGui.Properties {
             }
             set {
                 this["ShowFarmTip"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("600000")]
-        public int TimerInterval {
-            get {
-                return ((int)(this["TimerInterval"]));
-            }
-            set {
-                this["TimerInterval"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int TimerLoops {
-            get {
-                return ((int)(this["TimerLoops"]));
-            }
-            set {
-                this["TimerLoops"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool WishlistNotSort {
-            get {
-                return ((bool)(this["WishlistNotSort"]));
-            }
-            set {
-                this["WishlistNotSort"] = value;
             }
         }
         

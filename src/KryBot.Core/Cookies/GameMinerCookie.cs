@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net;
-using KryBot.Core.Properties;
 
 namespace KryBot.Core.Cookies
 {
@@ -10,7 +9,7 @@ namespace KryBot.Core.Cookies
 
 		public string Xsrf { get; set; }
 
-		public CookieContainer Generate()
+		public CookieContainer Generate(string lang)
 		{
 			var cookie = new CookieContainer();
 			var target = new Uri(Links.GameMiner);
@@ -25,9 +24,9 @@ namespace KryBot.Core.Cookies
 				cookie.Add(new Cookie("_xsrf", Xsrf) {Domain = target.Host});
 			}
 
-			if (Settings.Default.Lang != null)
+			if (lang != null)
 			{
-				cookie.Add(new Cookie("lang", Settings.Default.Lang) {Domain = target.Host});
+				cookie.Add(new Cookie("lang", lang) {Domain = target.Host});
 			}
 
 			return cookie;

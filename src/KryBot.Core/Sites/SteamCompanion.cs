@@ -7,7 +7,6 @@ using HtmlAgilityPack;
 using KryBot.CommonResources.lang;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
-using KryBot.Core.Properties;
 using RestSharp;
 
 namespace KryBot.Core.Sites
@@ -105,15 +104,15 @@ namespace KryBot.Core.Sites
 			return task.Task.Result;
 		}
 
-		public async Task Join(Steam steam)
+		public async Task Join(Steam steam, bool sort, bool sortToMore)
 		{
 			LogMessage.Instance.AddMessage(await LoadGiveawaysAsync());
 
 			if (Giveaways?.Count > 0)
 			{
-				if (Settings.Default.Sort)
+				if (sort)
 				{
-					if (Settings.Default.SortToMore)
+					if (sortToMore)
 					{
 						Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
 					}
