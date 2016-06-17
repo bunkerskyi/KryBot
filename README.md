@@ -11,7 +11,7 @@ Free bot for giveaway sites.
 * Steamgifts
 * Steamcompanion
 * Steamportal
-* Playblink
+* Usegamble
 
 
 **Minimum system requirements**: Windows 7 and .NET Framework 4.5
