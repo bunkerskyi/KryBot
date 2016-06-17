@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using KryBot.CommonResources.lang;
 using KryBot.Core;
 using KryBot.Gui.WinFormsGui.Properties;
+using KryBot.Core.Helpers;
 
 namespace KryBot.Gui.WinFormsGui.Forms
 {
@@ -284,7 +285,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			{
 				if (cbAutorun.Checked)
 				{
-					if (!Tools.SetAutorun(Application.ExecutablePath))
+					if (!AutorunHelper.SetAutorun(Application.ExecutablePath))
 					{
 						_userAutorun = false;
 						cbAutorun.Checked = false;
@@ -292,7 +293,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				}
 				else
 				{
-					if (!Tools.DeleteAutorun())
+					if (!AutorunHelper.DeleteAutorun())
 					{
 						_userAutorun = false;
 						cbAutorun.Checked = true;

@@ -24,7 +24,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private void formBlackList_Load(object sender, EventArgs e)
 		{
 			Design();
-			var blacklist = Tools.LoadBlackList();
+			var blacklist = FileHelper.SafelyLoad<Blacklist>(FilePaths.Blacklist);
 
 			if (blacklist.Items != null)
 			{

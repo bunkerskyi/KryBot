@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using KryBot.CommonResources.lang;
 using KryBot.Core;
 using KryBot.Core.Giveaways;
+using KryBot.Core.Helpers;
 using KryBot.Gui.WinFormsGui.Properties;
 
 namespace KryBot.Gui.WinFormsGui.Forms
@@ -72,7 +73,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			LoadProfilesInfo += ShowProfileInfo;
 			_logActive = Properties.Settings.Default.LogActive;
 			Design();
-			_blackList = Tools.LoadBlackList();
+			_blackList = FileHelper.SafelyLoad<Blacklist>(FilePaths.Blacklist);
 
 			var version = await Updater.CheckForUpdates();
 			LogMessage.Instance.AddMessage(version);
@@ -1653,7 +1654,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			var form = new FormBlackList(_bot);
 			form.ShowDialog();
-			_blackList = Tools.LoadBlackList();
+			_blackList = FileHelper.SafelyLoad<Blacklist>(FilePaths.Blacklist);
 		}
 
 		private void настройкиToolStripMenuItem1_Click(object sender, EventArgs e)

@@ -310,8 +310,8 @@ namespace KryBot.Core.Sites
 					task.SetResult(Messages.ParseGiveawaysEmpty(content, "SteamGifts"));
 				}
 
-				Tools.RemoveBlacklistedGames(Giveaways, blackList);
-				Tools.RemoveBlacklistedGames(WishlistGiveaways, blackList);
+				blackList.RemoveGames(Giveaways);
+				blackList.RemoveGames(WishlistGiveaways);
 
 				task.SetResult(Messages.ParseGiveawaysFoundMatchGiveaways(content, "SteamGifts",
 					(Giveaways?.Count + WishlistGiveaways?.Count).ToString()));

@@ -286,7 +286,7 @@ namespace KryBot.Core.Sites
 				}
 				else
 				{
-					Tools.RemoveBlacklistedGames(Giveaways, blackList);
+					blackList.RemoveGames(Giveaways);
 					task.SetResult(Messages.ParseGiveawaysFoundMatchGiveaways(content, "GameMiner", Giveaways.Count.ToString()));
 				}
 			});

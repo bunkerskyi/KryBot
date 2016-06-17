@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using CefSharp;
-using KryBot.Core;
+using KryBot.Core.Helpers;
 using Cookie = CefSharp.Cookie;
 
 namespace KryBot.Gui.WinFormsGui
@@ -17,7 +17,7 @@ namespace KryBot.Gui.WinFormsGui
 		public static List<Cookie> CookieContainerToCefCookie(CookieContainer container)
 		{
 			var cefCookies = new List<Cookie>();
-			foreach (var cookie in Tools.CookieContainer_ToList(container))
+			foreach (var cookie in CookieHelper.CookieContainer_ToList(container))
 			{
 				cefCookies.Add(new Cookie
 				{

@@ -185,7 +185,7 @@ namespace KryBot.Core.Sites
 						task.SetResult(Messages.ParseGiveawaysEmpty("PlayBlink"));
 					}
 
-					Tools.RemoveBlacklistedGames(Giveaways, blackList);
+					blackList.RemoveGames(Giveaways);
 				}
 				else
 				{
