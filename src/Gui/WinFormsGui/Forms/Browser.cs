@@ -206,7 +206,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				}
 			}
 			_bot.SteamCompanion.Enabled = true;
-			Exit();
 		}
 
 		private async void SteamGiftsAuth()

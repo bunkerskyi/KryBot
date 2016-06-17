@@ -416,83 +416,25 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			}
 			toolStripProgressBar1.Value++;
 
-			if (_bot.SteamCompanion.Enabled)
+			if(_bot.SteamCompanion.Enabled)
 			{
 				var profile = await _bot.SteamCompanion.CheckLogin();
 				LogMessage.Instance.AddMessage(profile);
 				LoadProfilesInfo?.Invoke();
-				if (profile.Success)
+
+				if(profile.Success)
 				{
 					var won = await _bot.SteamCompanion.CheckWon();
-					if (won != null)
+					if(won != null)
 					{
 						LogMessage.Instance.AddMessage(won);
-						if (Properties.Settings.Default.ShowWonTip)
+						if(Properties.Settings.Default.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
 						}
 					}
 
-					var giveaways =
-						await _bot.SteamCompanion.LoadGiveawaysAsync();
-					if (giveaways != null && giveaways.Content != "\n")
-					{
-						LogMessage.Instance.AddMessage(giveaways);
-					}
-
-					if (_bot.SteamCompanion.WishlistGiveaways.Count > 0)
-					{
-						if (Properties.Settings.Default.Sort)
-						{
-							if (Properties.Settings.Default.SortToMore)
-							{
-								if (!Properties.Settings.Default.WishlistNotSort)
-								{
-									_bot.SteamCompanion.WishlistGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
-								}
-							}
-							else
-							{
-								if (!Properties.Settings.Default.WishlistNotSort)
-								{
-									_bot.SteamCompanion.WishlistGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
-								}
-							}
-						}
-
-						await JoinGiveaways(_bot.SteamCompanion.WishlistGiveaways, true);
-					}
-
-					if (_bot.SteamCompanion.Giveaways.Count > 0)
-					{
-						if (Properties.Settings.Default.Sort)
-						{
-							if (Properties.Settings.Default.SortToMore)
-							{
-								_bot.SteamCompanion.Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
-								if (!Properties.Settings.Default.WishlistNotSort)
-								{
-									_bot.SteamCompanion.WishlistGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
-								}
-							}
-							else
-							{
-								_bot.SteamCompanion.Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
-								if (!Properties.Settings.Default.WishlistNotSort)
-								{
-									_bot.SteamCompanion.WishlistGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
-								}
-							}
-						}
-					}
-
-					await JoinGiveaways(_bot.SteamCompanion.Giveaways, false);
-
-					var async = await _bot.SteamCompanion.Sync();
-					if (async != null)
-					{
-						LogMessage.Instance.AddMessage(async);
-					}
+					await _bot.SteamCompanion.Join(_bot.Steam);
 				}
 				else
 				{
@@ -503,6 +445,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					lblSCStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
 				}
 			}
+			toolStripProgressBar1.Value++;
 
 			if (_bot.UseGamble.Enabled)
 			{
@@ -767,15 +710,15 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			}
 			toolStripProgressBar1.Value++;
 
-			if (_bot.SteamCompanion.Enabled)
+			if(_bot.SteamCompanion.Enabled)
 			{
-				if (await CheckLoginSc())
+				if(await CheckLoginSc())
 				{
 					var won = await _bot.SteamCompanion.CheckWon();
-					if (won != null && won.Content != "\n")
+					if(won != null && won.Content != "\n")
 					{
 						LogMessage.Instance.AddMessage(won);
-						if (Properties.Settings.Default.ShowWonTip)
+						if(Properties.Settings.Default.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
 						}
@@ -1792,39 +1735,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			SetStatusPanel(strings.Finish, null);
 			pbPBRefresh.Image = Resources.refresh;
 			btnPBExit.Enabled = true;
-		}
-
-		private async Task<bool> JoinGiveaways(List<SteamCompanionGiveaway> giveaways, bool wishlist)
-		{
-			foreach (var giveaway in giveaways)
-			{
-				if (wishlist)
-				{
-					if (giveaway.Price <= _bot.SteamCompanion.Points)
-					{
-						var data =
-							await _bot.SteamCompanion.Join(giveaways.IndexOf(giveaway), _bot.Steam);
-						if (data != null && data.Content != "\n")
-						{
-							LogMessage.Instance.AddMessage(data);
-						}
-					}
-				}
-				else
-				{
-					if (giveaway.Price <= _bot.SteamCompanion.Points &&
-					    _bot.SteamCompanion.PointsReserv <= _bot.SteamCompanion.Points - giveaway.Price)
-					{
-						var data =
-							await _bot.SteamCompanion.Join(giveaways.IndexOf(giveaway), _bot.Steam);
-						if (data != null && data.Content != "\n")
-						{
-							LogMessage.Instance.AddMessage(data);
-						}
-					}
-				}
-			}
-			return true;
 		}
 
 		private async Task<bool> JoinGiveaways(List<UseGambleGiveaway> giveaways)

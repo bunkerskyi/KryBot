@@ -41,49 +41,76 @@ namespace KryBot.Core.Sites
 
 		#region JoinGivaway
 
-		private Log JoinGiveaway(SteamCompanionGiveaway giveaway, Steam steam)
-		{
-			Thread.Sleep(400);
-			var data = GetJoinData(giveaway, steam);
-			if (data != null && data.Success)
-			{
-				if (giveaway.Code != null)
-				{
-					var list = new List<HttpHeader>();
-					var header = new HttpHeader
-					{
-						Name = "X-Requested-With",
-						Value = "XMLHttpRequest"
-					};
-					list.Add(header);
-
-					var response = Web.Post(Links.SteamCompanionJoin,
-						GenerateJoinData(giveaway.Code), list,
-						Cookies.Generate());
-
-					if (response.RestResponse.Content.Split('"')[3].Split('"')[0] == "Success")
-					{
-						Points = int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]);
-						return Messages.GiveawayJoined("SteamCompanion", giveaway.Name, giveaway.Price,
-							int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]));
-					}
-
-					return Messages.GiveawayNotJoined("SteamCompanion", giveaway.Name, response.RestResponse.Content);
-				}
-			}
-			return data;
-		}
-
-		public async Task<Log> Join(int index, Steam steam)
+		private async Task<Log> JoinGiveaway(SteamCompanionGiveaway giveaway, Steam steam)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = JoinGiveaway(Giveaways[index], steam);
-				task.SetResult(result);
-			});
+				Thread.Sleep(400);
+				var data = GetJoinData(giveaway, steam);
+				if(data != null && data.Success)
+				{
+					if(giveaway.Code != null)
+					{
+						var list = new List<HttpHeader>();
+						var header = new HttpHeader
+						{
+							Name = "X-Requested-With",
+							Value = "XMLHttpRequest"
+						};
+						list.Add(header);
 
+						var response = Web.Post(Links.SteamCompanionJoin,
+							GenerateJoinData(giveaway.Code), list,
+							Cookies.Generate());
+
+						if(response.RestResponse.Content.Split('"')[3].Split('"')[0] == "Success")
+						{
+							Points = int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0]);
+							task.SetResult(Messages.GiveawayJoined("SteamCompanion", giveaway.Name, giveaway.Price,
+								int.Parse(response.RestResponse.Content.Split(':')[2].Split(',')[0])));
+						}
+						else
+						{
+							task.SetResult(Messages.GiveawayNotJoined("SteamCompanion", giveaway.Name, response.RestResponse.Content));
+						}
+					}
+				}
+				else
+				{
+					task.SetResult(data);	
+				}
+			});
 			return task.Task.Result;
+		}
+
+		public async Task Join(Steam steam)
+		{
+			LogMessage.Instance.AddMessage(await LoadGiveawaysAsync());
+
+			if(Giveaways?.Count > 0)
+			{
+				if(Properties.Settings.Default.Sort)
+				{
+					if(Properties.Settings.Default.SortToMore)
+					{
+						Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+					}
+					else
+					{
+						Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+					}
+				}
+
+				foreach(var giveaway in Giveaways)
+				{
+
+					if(giveaway.Price <= Points && PointsReserv <= Points - giveaway.Price)
+					{
+						LogMessage.Instance.AddMessage(await JoinGiveaway(giveaway, steam));
+					}
+				}
+			}
 		}
 
 		private static List<Parameter> GenerateJoinData(string hashId)
@@ -129,67 +156,32 @@ namespace KryBot.Core.Sites
 
 		#region Parse
 
-		private Log GetProfile()
-		{
-			var response = Web.Get(Links.SteamCompanion, Cookies.Generate());
-			if (response.RestResponse.Content != string.Empty)
-			{
-				var htmlDoc = new HtmlDocument();
-				htmlDoc.LoadHtml(response.RestResponse.Content);
-
-				var points = htmlDoc.DocumentNode.SelectSingleNode("//span[@class='points']");
-				var profileLink = htmlDoc.DocumentNode.SelectSingleNode("//ul[@class='right']/li[1]/a[1]");
-				if (points != null && profileLink != null)
-				{
-					Points = int.Parse(points.InnerText);
-					return Messages.ParseProfile("SteamCompanion", Points,
-						profileLink.Attributes["href"].Value.Split('/')[4]);
-				}
-			}
-			return Messages.ParseProfileFailed("SteamCompanion");
-		}
-
 		public async Task<Log> CheckLogin()
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = GetProfile();
-				task.SetResult(result);
-			});
-
-			return task.Task.Result;
-		}
-
-		private Log WonParse()
-		{
-			var response = Web.Get(Links.SteamCompanionWon, Cookies.Generate());
-			if (response.RestResponse.Content != string.Empty)
-			{
-				var htmlDoc = new HtmlDocument();
-				htmlDoc.LoadHtml(response.RestResponse.Content);
-
-				var nodes = htmlDoc.DocumentNode.SelectNodes("//table[@id='created_giveaway']/tbody/tr");
-
-				if (nodes != null)
+				var response = Web.Get(Links.SteamCompanion, Cookies.Generate());
+				if(response.RestResponse.Content != string.Empty)
 				{
-					for (var i = 0; i < nodes.Count; i++)
-					{
-						var test = nodes[i].SelectSingleNode(".//input[@checked]");
-						if (test != null)
-						{
-							nodes.Remove(nodes[i]);
-							i--;
-						}
-					}
+					var htmlDoc = new HtmlDocument();
+					htmlDoc.LoadHtml(response.RestResponse.Content);
 
-					if (nodes.Count > 0)
+					var points = htmlDoc.DocumentNode.SelectSingleNode("//span[@class='points']");
+					var profileLink = htmlDoc.DocumentNode.SelectSingleNode("//ul[@class='right']/li[1]/a[1]");
+					if(points != null && profileLink != null)
 					{
-						return Messages.GiveawayHaveWon("SteamCompanion", nodes.Count, Links.SteamCompanionWon);
+						Points = int.Parse(points.InnerText);
+						task.SetResult( Messages.ParseProfile("SteamCompanion", Points,
+							profileLink.Attributes["href"].Value.Split('/')[4]));
 					}
 				}
-			}
-			return null;
+				else
+				{
+					task.SetResult(Messages.ParseProfileFailed("SteamCompanion"));
+				}
+			});
+			return task.Task.Result;
 		}
 
 		public async Task<Log> CheckWon()
@@ -197,69 +189,95 @@ namespace KryBot.Core.Sites
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = WonParse();
-				task.SetResult(result);
-			});
+				var response = Web.Get(Links.SteamCompanionWon, Cookies.Generate());
+				if(response.RestResponse.Content != string.Empty)
+				{
+					var htmlDoc = new HtmlDocument();
+					htmlDoc.LoadHtml(response.RestResponse.Content);
 
+					var nodes = htmlDoc.DocumentNode.SelectNodes("//table[@id='created_giveaway']/tbody/tr");
+
+					if(nodes != null)
+					{
+						for(var i = 0; i < nodes.Count; i++)
+						{
+							var test = nodes[i].SelectSingleNode(".//input[@checked]");
+							if(test != null)
+							{
+								nodes.Remove(nodes[i]);
+								i--;
+							}
+						}
+
+						if(nodes.Count > 0)
+						{
+							task.SetResult(Messages.GiveawayHaveWon("SteamCompanion", nodes.Count, Links.SteamCompanionWon));
+						}
+						else
+						{
+							task.SetResult(null);
+						}
+					}
+				}
+				else
+				{
+					task.SetResult(null);	
+				}
+			});
 			return task.Task.Result;
 		}
 
-		private Log LoadGiveaways()
-		{
-			var content = string.Empty;
-			Giveaways?.Clear();
-			WishlistGiveaways?.Clear();
-
-			if (WishList)
-			{
-				content += LoadGiveawaysByUrl(
-					$"{Links.SteamCompanionSearch}?wishlist=true",
-					strings.ParseLoadGiveaways_WishListGiveAwaysIn,
-					WishlistGiveaways);
-			}
-
-			if (Contributors)
-			{
-				content += LoadGiveawaysByUrl(
-					$"{Links.SteamCompanionSearch}?type=contributor",
-					strings.ParseLoadGiveaways__ContributorsIn,
-					Giveaways);
-			}
-
-			if (Group)
-			{
-				content += LoadGiveawaysByUrl(
-					$"{Links.SteamCompanionSearch}?type=group",
-					strings.ParseLoadGiveaways_GroupGiveAwaysIn,
-					Giveaways);
-			}
-
-			if (Regular)
-			{
-				content += LoadGiveawaysByUrl(
-					$"{Links.SteamCompanionSearch}?type=public",
-					strings.ParseLoadGiveaways_RegularGiveawaysIn,
-					Giveaways);
-			}
-
-			if (Giveaways?.Count == 0 && WishlistGiveaways?.Count == 0)
-			{
-				return Messages.ParseGiveawaysEmpty(content, "SteamCompanion");
-			}
-
-			return Messages.ParseGiveawaysFoundMatchGiveaways(content, "SteamCompanion",
-				(Giveaways?.Count + WishlistGiveaways?.Count).ToString());
-		}
-
-		public async Task<Log> LoadGiveawaysAsync()
+		private async Task<Log> LoadGiveawaysAsync()
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = LoadGiveaways();
-				task.SetResult(result);
-			});
+				var content = string.Empty;
+				Giveaways?.Clear();
+				WishlistGiveaways?.Clear();
 
+				if(WishList)
+				{
+					content += LoadGiveawaysByUrl(
+						$"{Links.SteamCompanionSearch}?wishlist=true",
+						strings.ParseLoadGiveaways_WishListGiveAwaysIn,
+						WishlistGiveaways);
+				}
+
+				if(Contributors)
+				{
+					content += LoadGiveawaysByUrl(
+						$"{Links.SteamCompanionSearch}?type=contributor",
+						strings.ParseLoadGiveaways__ContributorsIn,
+						Giveaways);
+				}
+
+				if(Group)
+				{
+					content += LoadGiveawaysByUrl(
+						$"{Links.SteamCompanionSearch}?type=group",
+						strings.ParseLoadGiveaways_GroupGiveAwaysIn,
+						Giveaways);
+				}
+
+				if(Regular)
+				{
+					content += LoadGiveawaysByUrl(
+						$"{Links.SteamCompanionSearch}?type=public",
+						strings.ParseLoadGiveaways_RegularGiveawaysIn,
+						Giveaways);
+				}
+
+				if(Giveaways?.Count == 0 && WishlistGiveaways?.Count == 0)
+				{
+					task.SetResult(Messages.ParseGiveawaysEmpty(content, "SteamCompanion"));
+				}
+				else
+				{
+					task.SetResult(Messages.ParseGiveawaysFoundMatchGiveaways(content, "SteamCompanion",
+					(Giveaways?.Count + WishlistGiveaways?.Count).ToString()));
+				}				
+			});
 			return task.Task.Result;
 		}
 
@@ -397,26 +415,19 @@ namespace KryBot.Core.Sites
 
 		#region Sync
 
-		private Log SyncAccount()
-		{
-			var response = Web.Get("https://steamcompanion.com//settings/resync&success=true", Cookies.Generate());
-			if (response.RestResponse.Content != string.Empty)
-			{
-				return new Log($"{Messages.GetDateTime()} {{SteamCompanion}} Sync success!", Color.Green,
-					true);
-			}
-			return new Log($"{Messages.GetDateTime()} {{SteamCompanion}} Sync failed", Color.Red, false);
-		}
-
 		public async Task<Log> Sync()
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = SyncAccount();
-				task.SetResult(result);
+				var response = Web.Get("https://steamcompanion.com//settings/resync&success=true", Cookies.Generate());
+				if(response.RestResponse.Content != string.Empty)
+				{
+					task.SetResult(new Log($"{Messages.GetDateTime()} {{SteamCompanion}} Sync success!", Color.Green,
+						true));
+				}
+				task.SetResult(new Log($"{Messages.GetDateTime()} {{SteamCompanion}} Sync failed", Color.Red, false));
 			});
-
 			return task.Task.Result;
 		}
 

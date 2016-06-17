@@ -2,19 +2,18 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFGui"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:regions="http://prismlibrary.com/"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow"
+        Width="525"
+        Height="350"
+        mc:Ignorable="d">
     <Grid>
         <DockPanel>
-            <ContentControl regions:RegionManager.RegionName="{x:Static local:MainRegionNames.MenuRegion}"
-                            DockPanel.Dock="Top" />
-            <ContentControl regions:RegionManager.RegionName="{x:Static local:MainRegionNames.StatusRegion}"
-                            DockPanel.Dock="Bottom" />
-            <ContentControl regions:RegionManager.RegionName="{x:Static local:MainRegionNames.MainRegion}"
-                            DockPanel.Dock="Left" />
+            <ContentControl regions:RegionManager.RegionName="{x:Static local:MainRegionNames.MenuRegion}" DockPanel.Dock="Top" />
+            <ContentControl regions:RegionManager.RegionName="{x:Static local:MainRegionNames.StatusRegion}" DockPanel.Dock="Bottom" />
+            <ContentControl regions:RegionManager.RegionName="{x:Static local:MainRegionNames.MainRegion}" DockPanel.Dock="Left" />
             <ContentControl regions:RegionManager.RegionName="{x:Static local:MainRegionNames.SitesRigon}" />
         </DockPanel>
     </Grid>
