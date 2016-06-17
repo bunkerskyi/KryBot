@@ -29,38 +29,36 @@ namespace KryBot.Core.Sites
 
 		#region JoinGroup
 
-		public Log JoinGroup(string url)
-		{
-			var response = Web.Post(url, GenerateJoinParams(), Cookies.Generate());
-			if (response.RestResponse.Content != string.Empty)
-			{
-				var htmlDoc = new HtmlDocument();
-				htmlDoc.LoadHtml(response.RestResponse.Content);
-
-				var node = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='btn_blue_white_innerfade btn_medium']");
-				if (node != null)
-				{
-					return Messages.GroupJoined(url);
-				}
-
-				var error = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='error_ctn']");
-				if (error != null && error.InnerText.Contains("You are already a member of this group."))
-				{
-					return Messages.GroupAlreadyMember(url);
-				}
-			}
-			return Messages.GroupNotJoinde(url);
-		}
-
 		public async Task<Log> Join(string url)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = JoinGroup(url);
-				task.SetResult(result);
-			});
+				var response = Web.Post(url, GenerateJoinParams(), Cookies.Generate());
+				if(response.RestResponse.Content != string.Empty)
+				{
+					var htmlDoc = new HtmlDocument();
+					htmlDoc.LoadHtml(response.RestResponse.Content);
 
+					var node = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='btn_blue_white_innerfade btn_medium']");
+					if(node != null)
+					{
+						task.SetResult(Messages.GroupJoined(url));
+					}
+					else
+					{
+						var error = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='error_ctn']");
+						if(error != null && error.InnerText.Contains("You are already a member of this group."))
+						{
+							task.SetResult(Messages.GroupAlreadyMember(url));
+						}
+					}
+				}
+				else
+				{
+					task.SetResult(Messages.GroupNotJoinde(url));
+				}
+			});
 			return task.Task.Result;
 		}
 
@@ -91,38 +89,36 @@ namespace KryBot.Core.Sites
 
 		#region Parse
 
-		private Log GetProfile()
-		{
-			var response = Web.Get(Links.Steam, Cookies.Generate());
-
-			if (response.RestResponse.Content != string.Empty)
-			{
-				var htmlDoc = new HtmlDocument();
-				htmlDoc.LoadHtml(response.RestResponse.Content);
-
-				var login =
-					htmlDoc.DocumentNode.SelectSingleNode(
-						"//a[contains(@class, 'user_avatar') and contains(@class, 'playerAvatar')]");
-				if (login == null)
-				{
-					return Messages.ParseProfileFailed("Steam");
-				}
-
-				ProfileLink = login.Attributes["href"].Value;
-				return Messages.ParseProfile("Steam", login.Attributes["href"].Value.Split('/')[4]);
-			}
-			return Messages.ParseProfileFailed("Steam");
-		}
-
 		public async Task<Log> CheckLogin()
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = GetProfile();
-				task.SetResult(result);
-			});
+				var response = Web.Get(Links.Steam, Cookies.Generate());
 
+				if(response.RestResponse.Content != string.Empty)
+				{
+					var htmlDoc = new HtmlDocument();
+					htmlDoc.LoadHtml(response.RestResponse.Content);
+
+					var login =
+						htmlDoc.DocumentNode.SelectSingleNode(
+							"//a[contains(@class, 'user_avatar') and contains(@class, 'playerAvatar')]");
+					if(login == null)
+					{
+						task.SetResult(Messages.ParseProfileFailed("Steam"));
+					}
+					else
+					{
+						ProfileLink = login.Attributes["href"].Value;
+						task.SetResult(Messages.ParseProfile("Steam", login.Attributes["href"].Value.Split('/')[4]));
+					}
+				}
+				else
+				{
+					task.SetResult(Messages.ParseProfileFailed("Steam"));
+				}
+			});
 			return task.Task.Result;
 		}
 

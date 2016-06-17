@@ -44,10 +44,10 @@ namespace KryBot.Core.Sites
 		private async Task<Log> JoinGiveaway(SteamCompanionGiveaway giveaway, Steam steam)
 		{
 			var task = new TaskCompletionSource<Log>();
-			await Task.Run(() =>
+			await Task.Run(async () =>
 			{
 				Thread.Sleep(400);
-				var data = GetJoinData(giveaway, steam);
+				var data = await GetJoinData(giveaway, steam);
 				if(data != null && data.Success)
 				{
 					if(giveaway.Code != null)
@@ -78,7 +78,7 @@ namespace KryBot.Core.Sites
 				}
 				else
 				{
-					task.SetResult(data);	
+					task.SetResult(data);
 				}
 			});
 			return task.Task.Result;
@@ -362,7 +362,7 @@ namespace KryBot.Core.Sites
 			}
 		}
 
-		private Log GetJoinData(SteamCompanionGiveaway scGiveaway, Steam steam)
+		private async Task<Log> GetJoinData(SteamCompanionGiveaway scGiveaway, Steam steam)
 		{
 			var response = Web.Get(scGiveaway.Link, Cookies.Generate());
 
@@ -389,7 +389,7 @@ namespace KryBot.Core.Sites
 					{
 						var trueGroupUrl = Web.Get(group.Attributes["href"].Value, Cookies.Generate());
 
-						return steam.JoinGroup(trueGroupUrl.RestResponse.ResponseUri.AbsoluteUri);
+						return await steam.Join(trueGroupUrl.RestResponse.ResponseUri.AbsoluteUri);
 					}
 					var error =
 						htmlDoc.DocumentNode.SelectSingleNode("//a[@class='notification group-join regular-button qa']");
