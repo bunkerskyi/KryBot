@@ -15,7 +15,7 @@ namespace KryBot.Core
 	{
 		public static async Task<Log> CheckForUpdates()
 		{
-			var json = await Web.GetVersionInGitHubAsync(Settings.Default.GitHubRepoReleaseUrl);
+			var json = await Web.GetVersionInGitHubAsync(Links.GitHubLatestReliase);
 
 			if (json != "")
 			{

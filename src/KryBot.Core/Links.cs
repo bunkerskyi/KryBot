@@ -92,5 +92,12 @@
 		public const string SteamGameInfo = "http://store.steampowered.com/api/appdetails?appids=";
 
 		#endregion
+
+		#region GitHub
+
+		private const string GitHubRepo = "https://github.com/KriBetko/KryBot";
+		public static readonly string GitHubLatestReliase = $"{GitHubRepo}releases/latest";
+
+		#endregion
 	}
 }

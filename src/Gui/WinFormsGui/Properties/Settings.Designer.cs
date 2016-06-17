@@ -229,30 +229,6 @@ namespace KryBot.Gui.WinFormsGui.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/KriBetko/KryBot")]
-        public string GitHubRepoUrl {
-            get {
-                return ((string)(this["GitHubRepoUrl"]));
-            }
-            set {
-                this["GitHubRepoUrl"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://api.github.com/repos/KriBetko/KryBot/releases/latest")]
-        public string GitHubRepoReleaseUrl {
-            get {
-                return ((string)(this["GitHubRepoReleaseUrl"]));
-            }
-            set {
-                this["GitHubRepoReleaseUrl"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool WishlistNotSort {
             get {

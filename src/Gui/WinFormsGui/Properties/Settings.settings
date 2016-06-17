@@ -1,7 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
-              GeneratedClassNamespace="KryBot.Gui.WinFormsGui.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="KryBot.Gui.WinFormsGui.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="LogActive" Type="System.Boolean" Scope="User">
@@ -54,12 +52,6 @@
     </Setting>
     <Setting Name="TimerLoops" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="GitHubRepoUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://github.com/KriBetko/KryBot</Value>
-    </Setting>
-    <Setting Name="GitHubRepoReleaseUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://api.github.com/repos/KriBetko/KryBot/releases/latest</Value>
     </Setting>
     <Setting Name="WishlistNotSort" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
