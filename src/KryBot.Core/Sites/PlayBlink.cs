@@ -151,6 +151,10 @@ namespace KryBot.Core.Sites
 						Messages.ProfileLoaded();
 						task.SetResult(Messages.ParseProfile("PlayBlink", Points, Level, username.InnerText));
 					}
+					else
+					{
+						task.SetResult(Messages.ParseProfileFailed("PlayBlink"));
+					}
 				}
 				else
 				{

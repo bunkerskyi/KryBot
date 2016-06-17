@@ -530,7 +530,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 			if (_bot.PlayBlink.Enabled)
 			{
-				var profile = await _bot.PlayBlink.LoadGiveawaysAsync(_blackList);
+				var profile = await _bot.PlayBlink.CheckProfile();
 				LogMessage.Instance.AddMessage(profile);
 				LoadProfilesInfo?.Invoke();
 
@@ -1146,7 +1146,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private async Task<bool> CheckLoginPb()
 		{
 			Message_TryLogin("PlayBlink");
-			var login = await _bot.PlayBlink.LoadGiveawaysAsync(_blackList);
+			var login = await _bot.PlayBlink.CheckProfile();
 			LogMessage.Instance.AddMessage(login);
 			return login.Success;
 		}
