@@ -1,13 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using KryBot.Core.Giveaways;
 using KryBot.Core.Helpers;
 using KryBot.Core.Sites;
 
 namespace KryBot.Core
 {
-	[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-	[SuppressMessage("ReSharper", "AutoPropertyCanBeMadeGetOnly.Global")]
 	public class Bot
 	{
 		public Bot()
@@ -21,6 +18,14 @@ namespace KryBot.Core
 			Steam = new Steam();
 			GameAways = new GameAways();
 		}
+
+		public bool Sort { get; set; }
+		public bool SortToMore { get; set; }
+		public bool SortToLess { get; set; }
+		public bool Timer { get; set; }
+		public bool WishlistSort { get; set; }
+		public int TimerInterval { get; set; }
+		public int TimerLoops { get; set; }
 
 		// НЕ ИЗМЕНЯТЬ У ПОЛЕЙ SET
 		public GameMiner GameMiner { get; set; }

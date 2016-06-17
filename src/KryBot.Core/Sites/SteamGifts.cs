@@ -7,7 +7,6 @@ using HtmlAgilityPack;
 using KryBot.CommonResources.lang;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
-using KryBot.Core.Properties;
 using KryBot.Core.Serializable.GameMiner;
 using KryBot.Core.Serializable.SteamGifts;
 using RestSharp;
@@ -135,15 +134,15 @@ namespace KryBot.Core.Sites
 			return task.Task.Result;
 		}
 
-		public async Task Join(Blacklist blacklist)
+		public async Task Join(Blacklist blacklist, bool sort, bool sortToMore)
 		{
 			LogMessage.Instance.AddMessage(await LoadGiveawaysAsync(blacklist));
 
 			if (Giveaways?.Count > 0)
 			{
-				if (Settings.Default.Sort)
+				if (sort)
 				{
-					if (Settings.Default.SortToMore)
+					if (sortToMore)
 					{
 						Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
 					}
@@ -255,14 +254,9 @@ namespace KryBot.Core.Sites
 					var nodes =
 						htmlDoc.DocumentNode.SelectSingleNode("//a[@title='Giveaways Won']//div[@class='nav__notification']");
 
-					if (nodes != null)
-					{
-						task.SetResult(Messages.GiveawayHaveWon("SteamGifts", int.Parse(nodes.InnerText), Links.SteamGiftsWon));
-					}
-					else
-					{
-						task.SetResult(null);
-					}
+					task.SetResult(nodes != null
+						? Messages.GiveawayHaveWon("SteamGifts", int.Parse(nodes.InnerText), Links.SteamGiftsWon)
+						: null);
 				}
 				else
 				{

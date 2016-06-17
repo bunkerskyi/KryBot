@@ -139,12 +139,12 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private async void btnStart_Click(object sender, EventArgs e)
 		{
-			if (Properties.Settings.Default.Timer)
+			if (_bot.Timer)
 			{
 				if (!_farming)
 				{
-					_loopsLeft = Properties.Settings.Default.TimerLoops;
-					_timer.Interval = Properties.Settings.Default.TimerInterval;
+					_loopsLeft = _bot.TimerLoops;
+					_timer.Interval = _bot.TimerInterval;
 					_interval = _timer.Interval;
 					_timerTickCount.Interval = 1000;
 					_timer.Tick += timer_Tick;
@@ -357,13 +357,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 			if (_bot.GameMiner.Enabled)
 			{
-				var profile = await _bot.GameMiner.CheckLogin();
+				var profile = await _bot.GameMiner.CheckLogin(Properties.Settings.Default.Lang);
 				LogMessage.Instance.AddMessage(profile);
 				LoadProfilesInfo?.Invoke();
 
 				if (profile.Success)
 				{
-					var won = await _bot.GameMiner.CheckWon();
+					var won = await _bot.GameMiner.CheckWon(Properties.Settings.Default.Lang);
 					if (won != null)
 					{
 						LogMessage.Instance.AddMessage(won);
@@ -373,7 +373,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 						}
 					}
 
-					await _bot.GameMiner.Join(_blackList);
+					await _bot.GameMiner.Join(_blackList, _bot.Sort, _bot.SortToMore, Properties.Settings.Default.Lang);
 				}
 				else
 				{
@@ -404,7 +404,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 						}
 					}
 
-					await _bot.SteamGifts.Join(_blackList);
+					await _bot.SteamGifts.Join(_blackList, _bot.Sort, _bot.SortToMore);
 				}
 				else
 				{
@@ -435,7 +435,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 						}
 					}
 
-					await _bot.SteamCompanion.Join(_bot.Steam);
+					await _bot.SteamCompanion.Join(_bot.Steam, _bot.Sort, _bot.SortToMore);
 				}
 				else
 				{
@@ -475,9 +475,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 					if (_bot.UseGamble.Giveaways?.Count > 0)
 					{
-						if (Properties.Settings.Default.Sort)
+						if (_bot.Sort)
 						{
-							if (Properties.Settings.Default.SortToMore)
+							if (_bot.SortToMore)
 							{
 								_bot.UseGamble.Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
 							}
@@ -546,9 +546,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 						if (_bot.PlayBlink.Giveaways?.Count > 0)
 						{
-							if (Properties.Settings.Default.Sort)
+							if (_bot.Sort)
 							{
-								if (Properties.Settings.Default.SortToMore)
+								if (_bot.SortToMore)
 								{
 									_bot.PlayBlink.Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
 								}
@@ -636,7 +636,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			{
 				if (await CheckLoginGm())
 				{
-					var won = await _bot.GameMiner.CheckWon();
+					var won = await _bot.GameMiner.CheckWon(Properties.Settings.Default.Lang);
 					if (won != null)
 					{
 						LogMessage.Instance.AddMessage(won);
@@ -1098,7 +1098,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private async Task<bool> CheckLoginGm()
 		{
 			Message_TryLogin("GameMiner");
-			var login = await _bot.GameMiner.CheckLogin();
+			var login = await _bot.GameMiner.CheckLogin(Properties.Settings.Default.Lang);
 			LogMessage.Instance.AddMessage(login);
 			return login.Success;
 		}
@@ -1161,7 +1161,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			{
 				LoadProfilesInfo?.Invoke();
 
-				var async = await _bot.GameMiner.Sync();
+				var async = await _bot.GameMiner.Sync(Properties.Settings.Default.Lang);
 				if (async != null)
 				{
 					LogMessage.Instance.AddMessage(async);
