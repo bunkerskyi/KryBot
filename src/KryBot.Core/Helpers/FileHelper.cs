@@ -32,6 +32,26 @@ namespace KryBot.Core.Helpers
 		}
 
 		/// <summary>
+		/// Read (deserialize) the file into new object and then return it.
+		/// </summary>
+		public static T Load<T>(string path) where T : new()
+		{
+			try
+			{
+				using (var reader = new StreamReader(path))
+				{
+					var serializer = new XmlSerializer(typeof(T));
+					return (T)serializer.Deserialize(reader);
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			return new T();
+		}
+
+		/// <summary>
 		/// If file exists, delete it.
 		/// </summary>
 		public static void SafelyDelete(string path)

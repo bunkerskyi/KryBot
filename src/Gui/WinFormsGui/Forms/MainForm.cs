@@ -267,7 +267,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			if (File.Exists("profile.xml"))
 			{
-				_bot = Tools.LoadProfile();
+				_bot = FileHelper.Load<Bot>(FilePaths.Profile);
 				if (_bot == null)
 				{
 					var message = Messages.FileLoadFailed("profile.xml");
@@ -1058,7 +1058,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			btnGMLogin.Enabled = false;
 			BrowserStart($"{Links.GameMiner}login/steam?backurl=http%3A%2F%2Fgameminer.net%2F%3Flang%3D" +
-			             Properties.Settings.Default.Lang + @"&agree=True",
+						 Properties.Settings.Default.Lang + @"&agree=True",
 				"http://gameminer.net/?lang=" + Properties.Settings.Default.Lang, "GameMiner - Login", "");
 
 			if (string.IsNullOrEmpty(_bot.GameMiner.UserAgent))
@@ -1744,7 +1744,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			foreach (var giveaway in giveaways)
 			{
 				if (giveaway.Price <= _bot.UseGamble.Points &&
-				    _bot.UseGamble.PointsReserv <= _bot.UseGamble.Points - giveaway.Price)
+					_bot.UseGamble.PointsReserv <= _bot.UseGamble.Points - giveaway.Price)
 				{
 					var data = await _bot.UseGamble.Join(giveaways.IndexOf(giveaway));
 					if (data != null && data.Content != "\n")
