@@ -1758,7 +1758,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			foreach (var giveaway in giveaways)
 			{
-				var data = await _bot.SteamTrade.Join(giveaways.IndexOf(giveaway));
+				var data = await _bot.SteamTrade.Join(giveaway);
 				if (data != null && data.Content != "\n")
 				{
 					LogMessage.Instance.AddMessage(data);
