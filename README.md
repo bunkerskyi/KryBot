@@ -10,7 +10,7 @@ Free bot for giveaway sites.
 * Gameminer
 * Steamgifts
 * Steamcompanion
-* Steamportal
+* UseGamble
 * Playblink
 
 
