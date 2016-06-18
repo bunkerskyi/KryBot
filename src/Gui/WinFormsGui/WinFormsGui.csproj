@@ -92,15 +92,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Exceptionless.Extras, Version=3.5.1738.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Exceptionless.Windows.3.5.1738\lib\net45\Exceptionless.Extras.dll</HintPath>
+      <HintPath>..\..\packages\Exceptionless.Windows.3.5.1738\lib\net45\Exceptionless.Extras.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Exceptionless.Portable, Version=3.5.1738.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Exceptionless.Portable.3.5.1738\lib\net45\Exceptionless.Portable.dll</HintPath>
+      <HintPath>..\..\packages\Exceptionless.Portable.3.5.1738\lib\net45\Exceptionless.Portable.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Exceptionless.Windows, Version=3.5.1738.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Exceptionless.Windows.3.5.1738\lib\net45\Exceptionless.Windows.dll</HintPath>
+      <HintPath>..\..\packages\Exceptionless.Windows.3.5.1738\lib\net45\Exceptionless.Windows.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
