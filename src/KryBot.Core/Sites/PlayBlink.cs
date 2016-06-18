@@ -79,7 +79,7 @@ namespace KryBot.Core.Sites
 
 					var response = Web.Post($"{Links.PlayBlinkJoin}&game={pbGiveaway.Id}",
 						GenerateJoinData(pbGiveaway.Id), list,
-						Cookies.Generate(Level));
+						Cookies.Generate());
 
 					if (response.RestResponse.StatusCode == HttpStatusCode.OK)
 					{
@@ -130,29 +130,6 @@ namespace KryBot.Core.Sites
 			return task.Task.Result;
 		}
 
-		private static List<Parameter> GenerateJoinData(string game)
-		{
-			var list = new List<Parameter>();
-
-			var doParam = new Parameter
-			{
-				Type = ParameterType.GetOrPost,
-				Name = "do",
-				Value = "blink"
-			};
-			list.Add(doParam);
-
-			var gameParam = new Parameter
-			{
-				Type = ParameterType.GetOrPost,
-				Name = "game",
-				Value = game
-			};
-			list.Add(gameParam);
-
-			return list;
-		}
-
 		#endregion
 
 		#region Parse
@@ -162,7 +139,7 @@ namespace KryBot.Core.Sites
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var response = Web.Get(Links.PlayBlink, Cookies.Generate(Level));
+				var response = Web.Get(Links.PlayBlink, Cookies.Generate());
 				if (response.RestResponse.Content != string.Empty)
 				{
 					var htmlDoc = new HtmlDocument();
@@ -199,7 +176,7 @@ namespace KryBot.Core.Sites
 			{
 				Giveaways?.Clear();
 
-				var response = Web.Get(Links.PlayBlink, Cookies.Generate(Level));
+				var response = Web.Post(Links.PlayBlink, GenerateParsData(), Cookies.Generate());
 
 				if (response.RestResponse.Content != string.Empty)
 				{
@@ -209,7 +186,7 @@ namespace KryBot.Core.Sites
 					var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@id='games_free']/div[@class='game_box']");
 					if (nodes != null)
 					{
-						PlayBlinkAddGiveaways(nodes);
+						AddGiveaways(nodes);
 					}
 
 					if (Giveaways == null)
@@ -230,7 +207,7 @@ namespace KryBot.Core.Sites
 			return task.Task.Result;
 		}
 
-		private void PlayBlinkAddGiveaways(HtmlNodeCollection nodes)
+		private void AddGiveaways(HtmlNodeCollection nodes)
 		{
 			if (nodes != null)
 			{
@@ -256,13 +233,66 @@ namespace KryBot.Core.Sites
 								node.SelectSingleNode(".//div[@class='stats']/table/tr[3]/td/div[2]") ??
 								node.SelectSingleNode(".//div[@class='stats']/table/tr[3]");
 
-							pbGiveaway.Price =
-								int.Parse(price.InnerText.Replace("Point(s)", "").Replace("Entrance Fee:", "").Trim());
-							Giveaways?.Add(pbGiveaway);
+							pbGiveaway.Price = int.Parse(price.InnerText.Replace("Point(s)", "").Replace("Entrance Fee:", "").Trim());
+
+							if (pbGiveaway.Price <= Points && pbGiveaway.Level <= Level)
+							{
+								Giveaways?.Add(pbGiveaway);
+							}
 						}
 					}
 				}
 			}
+		}
+
+		#endregion
+
+		#region Generate 
+
+		private static List<Parameter> GenerateJoinData(string game)
+		{
+			var list = new List<Parameter>();
+
+			var doParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "do",
+				Value = "blink"
+			};
+			list.Add(doParam);
+
+			var gameParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "game",
+				Value = game
+			};
+			list.Add(gameParam);
+
+			return list;
+		}
+
+		private List<Parameter> GenerateParsData()
+		{
+			var list = new List<Parameter>();
+
+			var doParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "ppage",
+				Value = "100"
+			};
+			list.Add(doParam);
+
+			var gameParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "level",
+				Value = (Level-1).ToString()
+			};
+			list.Add(gameParam);
+
+			return list;
 		}
 
 		#endregion
