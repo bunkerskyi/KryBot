@@ -479,33 +479,26 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			}
 			toolStripProgressBar1.Value++;
 
-			if (_bot.SteamTrade.Enabled)
+			if(_bot.SteamTrade.Enabled)
 			{
 				var profile = await _bot.SteamTrade.CheckLogin();
 				LogMessage.Instance.AddMessage(profile);
 				LoadProfilesInfo?.Invoke();
-				if (profile.Success)
-				{
-					var giveaways = await _bot.SteamTrade.LoadGiveawaysAsync(_blackList);
-					if (giveaways != null && giveaways.Content != "\n")
-					{
-						LogMessage.Instance.AddMessage(giveaways);
-					}
 
-					if (_bot.SteamTrade.Giveaways?.Count > 0)
-					{
-						await JoinGiveaways(_bot.SteamTrade.Giveaways);
-					}
+				if(profile.Success)
+				{
+					await _bot.SteamTrade.Join(_blackList);
 				}
 				else
 				{
-					BlockTabpage(tabPageSteam, false);
-					btnSteamLogin.Enabled = true;
-					btnSteamLogin.Visible = true;
-					linkLabel6.Enabled = true;
-					lblSteamStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+					BlockTabpage(tabPageST, false);
+					btnSTLogin.Enabled = true;
+					btnSTLogin.Visible = true;
+					linkLabelST.Enabled = true;
+					lblSTStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
 				}
 			}
+			toolStripProgressBar1.Value++;
 
 			if (_bot.PlayBlink.Enabled)
 			{
@@ -1716,19 +1709,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			SetStatusPanel(strings.Finish, null);
 			pbPBRefresh.Image = Resources.refresh;
 			btnPBExit.Enabled = true;
-		}
-
-		private async Task<bool> JoinGiveaways(List<SteamTradeGiveaway> giveaways)
-		{
-			foreach (var giveaway in giveaways)
-			{
-				var data = await _bot.SteamTrade.Join(giveaway);
-				if (data != null && data.Content != "\n")
-				{
-					LogMessage.Instance.AddMessage(data);
-				}
-			}
-			return true;
 		}
 
 		private async Task<bool> JoinGiveaways(List<PlayBlinkGiveaway> giveaways)

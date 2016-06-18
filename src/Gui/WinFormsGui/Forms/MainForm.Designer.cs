@@ -87,7 +87,7 @@
 			this.tabPageST = new System.Windows.Forms.TabPage();
 			this.btnSTExit = new System.Windows.Forms.Button();
 			this.cbSTEnable = new System.Windows.Forms.CheckBox();
-			this.linkLabel5 = new System.Windows.Forms.LinkLabel();
+			this.linkLabelST = new System.Windows.Forms.LinkLabel();
 			this.pbSTreload = new System.Windows.Forms.PictureBox();
 			this.lblSTStatus = new System.Windows.Forms.Label();
 			this.lblSTPoints = new System.Windows.Forms.Label();
@@ -692,7 +692,7 @@
 			// 
 			this.tabPageST.Controls.Add(this.btnSTExit);
 			this.tabPageST.Controls.Add(this.cbSTEnable);
-			this.tabPageST.Controls.Add(this.linkLabel5);
+			this.tabPageST.Controls.Add(this.linkLabelST);
 			this.tabPageST.Controls.Add(this.pbSTreload);
 			this.tabPageST.Controls.Add(this.lblSTStatus);
 			this.tabPageST.Controls.Add(this.lblSTPoints);
@@ -727,16 +727,16 @@
 			this.cbSTEnable.UseVisualStyleBackColor = true;
 			this.cbSTEnable.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
 			// 
-			// linkLabel5
+			// linkLabelST
 			// 
-			this.linkLabel5.AutoSize = true;
-			this.linkLabel5.Location = new System.Drawing.Point(6, 42);
-			this.linkLabel5.Name = "linkLabel5";
-			this.linkLabel5.Size = new System.Drawing.Size(47, 13);
-			this.linkLabel5.TabIndex = 24;
-			this.linkLabel5.TabStop = true;
-			this.linkLabel5.Text = "На сайт";
-			this.linkLabel5.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel5_LinkClicked);
+			this.linkLabelST.AutoSize = true;
+			this.linkLabelST.Location = new System.Drawing.Point(6, 42);
+			this.linkLabelST.Name = "linkLabelST";
+			this.linkLabelST.Size = new System.Drawing.Size(47, 13);
+			this.linkLabelST.TabIndex = 24;
+			this.linkLabelST.TabStop = true;
+			this.linkLabelST.Text = "На сайт";
+			this.linkLabelST.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel5_LinkClicked);
 			// 
 			// pbSTreload
 			// 
@@ -1080,7 +1080,7 @@
 		private System.Windows.Forms.LinkLabel linkLabel2;
 		private System.Windows.Forms.LinkLabel linkLabel3;
 		private System.Windows.Forms.LinkLabel linkLabelUG;
-		private System.Windows.Forms.LinkLabel linkLabel5;
+		private System.Windows.Forms.LinkLabel linkLabelST;
 		private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem1;
 		private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem сохранитьКакToolStripMenuItem;

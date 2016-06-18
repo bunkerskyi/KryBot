@@ -36,7 +36,7 @@ namespace KryBot.Core.Sites
 
 		#region JoinGiveaway
 
-		public async Task<Log> Join(SteamTradeGiveaway giveaway)
+		private async Task<Log> JoinGiveaway(SteamTradeGiveaway giveaway)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -62,6 +62,19 @@ namespace KryBot.Core.Sites
 				}
 			});
 			return task.Task.Result;
+		}
+
+		public async Task Join(Blacklist blacklist)
+		{
+			LogMessage.Instance.AddMessage(await LoadGiveawaysAsync(blacklist));
+
+			if(Giveaways?.Count > 0)
+			{ 
+				foreach(var giveaway in Giveaways)
+				{
+					LogMessage.Instance.AddMessage(await JoinGiveaway(giveaway));
+				}
+			}
 		}
 
 		private static List<Parameter> GenerateJoinData()
@@ -117,7 +130,7 @@ namespace KryBot.Core.Sites
 			return task.Task.Result;
 		}
 
-		public async Task<Log> LoadGiveawaysAsync(Blacklist blackList)
+		private async Task<Log> LoadGiveawaysAsync(Blacklist blackList)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
