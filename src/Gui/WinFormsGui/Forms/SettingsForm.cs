@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 using KryBot.CommonResources.lang;
 using KryBot.Core;
-using KryBot.Gui.WinFormsGui.Properties;
 using KryBot.Core.Helpers;
 
 namespace KryBot.Gui.WinFormsGui.Forms
@@ -29,9 +27,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void Design()
 		{
-			Text = strings.Settings;
-			Icon = Icon.FromHandle(Resources.settings.GetHicon());
-
 			cbSortBy.Text = cbSortBy.Items[0].ToString();
 
 			if (_bot.Timer)

@@ -1,4 +1,6 @@
-﻿using KryBot.CommonResources.lang;
+﻿using System.Drawing;
+using KryBot.CommonResources.lang;
+using KryBot.Gui.WinFormsGui.Properties;
 
 namespace KryBot.Gui.WinFormsGui.Forms
 {
@@ -806,9 +808,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "FormSettings";
+			this.Icon = Icon.FromHandle(Resources.settings.GetHicon());
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "formSettings";
+			this.Text = strings.Settings;
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSettings_FormClosing);
 			this.Load += new System.EventHandler(this.formSettings_Load);
 			this.tabControl1.ResumeLayout(false);
