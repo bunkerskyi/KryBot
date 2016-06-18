@@ -72,6 +72,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			_logActive = Properties.Settings.Default.LogActive;
 			Design();
 			_blackList = FileHelper.SafelyLoad<Blacklist>(FilePaths.Blacklist);
+			LogMessage.Instance.AddMessage(Messages.GamesInBlacklist(_blackList.Items.Count));
 
 			var version = await Updater.CheckForUpdates();
 			LogMessage.Instance.AddMessage(version);

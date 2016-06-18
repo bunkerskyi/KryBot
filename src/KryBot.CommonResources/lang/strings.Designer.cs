@@ -232,6 +232,15 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Игр в Blacklist&apos;e.
+        /// </summary>
+        public static string GamesInBlacklist {
+            get {
+                return ResourceManager.GetString("GamesInBlacklist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Конфигурация.
         /// </summary>
         public static string GetBotInConfig_Config {

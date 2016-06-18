@@ -147,5 +147,10 @@ namespace KryBot.Core
 				$"{GetDateTime()} {{{site}}} {strings.ParseLoadGiveaways_FoundMatchGiveaways}: {count}",
 				Color.White, true);
 		}
+
+		public static Log GamesInBlacklist(int count)
+		{
+			return new Log($"{strings.GamesInBlacklist}: {count}", Color.White, true);
+		}
 	}
 }
