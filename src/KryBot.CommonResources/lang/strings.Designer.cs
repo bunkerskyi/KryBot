@@ -792,29 +792,20 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Резерв угля:.
-        /// </summary>
-        public static string SettingForm_label2 {
-            get {
-                return ResourceManager.GetString("SettingForm_label2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 50.
-        /// </summary>
-        public static string SettingForm_tbGMMaxValue {
-            get {
-                return ResourceManager.GetString("SettingForm_tbGMMaxValue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Настройки.
         /// </summary>
         public static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Максимальная ставка:.
+        /// </summary>
+        public static string SettingsFform_MaxValue {
+            get {
+                return ResourceManager.GetString("SettingsFform_MaxValue", resourceCulture);
             }
         }
         
@@ -855,11 +846,38 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Обычные раздачи.
+        ///   Looks up a localized string similar to Автовступление в группы (нужна авторизация в Steam).
         /// </summary>
-        public static string SettingsForm_cbGMRegular {
+        public static string SettingsForm_cbSCAutojoin {
             get {
-                return ResourceManager.GetString("SettingsForm_cbGMRegular", resourceCulture);
+                return ResourceManager.GetString("SettingsForm_cbSCAutojoin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contributors раздачи.
+        /// </summary>
+        public static string SettingsForm_cbSCContributors {
+            get {
+                return ResourceManager.GetString("SettingsForm_cbSCContributors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Минимальный уровень раздач.
+        /// </summary>
+        public static string SettingsForm_cbSGMinLevel {
+            get {
+                return ResourceManager.GetString("SettingsForm_cbSGMinLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сначала раздачи наивысшего уровня.
+        /// </summary>
+        public static string SettingsForm_cbSGSortTeLessLevel {
+            get {
+                return ResourceManager.GetString("SettingsForm_cbSGSortTeLessLevel", resourceCulture);
             }
         }
         
@@ -936,20 +954,20 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Групповые раздачи.
+        /// </summary>
+        public static string SettingsForm_GroupGiveaways {
+            get {
+                return ResourceManager.GetString("SettingsForm_GroupGiveaways", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Интервал таймера не может равняться 0.
         /// </summary>
         public static string SettingsForm_IntervalNotZero {
             get {
                 return ResourceManager.GetString("SettingsForm_IntervalNotZero", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Максимальная ставка:.
-        /// </summary>
-        public static string SettingsForm_label1 {
-            get {
-                return ResourceManager.GetString("SettingsForm_label1", resourceCulture);
             }
         }
         
@@ -990,29 +1008,29 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0.
+        ///   Looks up a localized string similar to Резерв points:.
         /// </summary>
-        public static string SettingsForm_tbGMReserv {
+        public static string SettingsForm_PointsReserv {
             get {
-                return ResourceManager.GetString("SettingsForm_tbGMReserv", resourceCulture);
+                return ResourceManager.GetString("SettingsForm_PointsReserv", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 5.
+        ///   Looks up a localized string similar to Обычные раздачи.
         /// </summary>
-        public static string SettingsForm_tbTimerInterval {
+        public static string SettingsForm_RegularGiveaways {
             get {
-                return ResourceManager.GetString("SettingsForm_tbTimerInterval", resourceCulture);
+                return ResourceManager.GetString("SettingsForm_RegularGiveaways", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0.
+        ///   Looks up a localized string similar to Wishlist.
         /// </summary>
-        public static string SettingsForm_tbTimerLoops {
+        public static string SettingsForm_WishlistGiveaways {
             get {
-                return ResourceManager.GetString("SettingsForm_tbTimerLoops", resourceCulture);
+                return ResourceManager.GetString("SettingsForm_WishlistGiveaways", resourceCulture);
             }
         }
         

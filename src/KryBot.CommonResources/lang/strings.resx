@@ -353,12 +353,6 @@
   <data name="SetitngsForm_btnDeleteCookies" xml:space="preserve">
     <value>Удалить куки браузера</value>
   </data>
-  <data name="SettingForm_label2" xml:space="preserve">
-    <value>Резерв угля:</value>
-  </data>
-  <data name="SettingForm_tbGMMaxValue" xml:space="preserve">
-    <value>50</value>
-  </data>
   <data name="Settings" xml:space="preserve">
     <value>Настройки</value>
   </data>
@@ -373,9 +367,6 @@
   </data>
   <data name="SettingsForm_cbGMRegional" xml:space="preserve">
     <value>Без региональных ограничений</value>
-  </data>
-  <data name="SettingsForm_cbGMRegular" xml:space="preserve">
-    <value>Обычные раздачи</value>
   </data>
   <data name="SettingsForm_cbSort" xml:space="preserve">
     <value>Сначала</value>
@@ -404,9 +395,6 @@
   <data name="SettingsForm_IntervalNotZero" xml:space="preserve">
     <value>Интервал таймера не может равняться 0</value>
   </data>
-  <data name="SettingsForm_label1" xml:space="preserve">
-    <value>Максимальная ставка:</value>
-  </data>
   <data name="SettingsForm_label5" xml:space="preserve">
     <value>Интервал:</value>
   </data>
@@ -418,15 +406,6 @@
   </data>
   <data name="SettingsForm_label8" xml:space="preserve">
     <value>Циклов: </value>
-  </data>
-  <data name="SettingsForm_tbGMReserv" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="SettingsForm_tbTimerInterval" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="SettingsForm_tbTimerLoops" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="Updater_CurrentVersion" xml:space="preserve">
     <value>Актуальная версия</value>
@@ -484,5 +463,32 @@
   </data>
   <data name="Tools" xml:space="preserve">
     <value>Сервис</value>
+  </data>
+  <data name="SettingsFform_MaxValue" xml:space="preserve">
+    <value>Максимальная ставка:</value>
+  </data>
+  <data name="SettingsForm_cbSCAutojoin" xml:space="preserve">
+    <value>Автовступление в группы (нужна авторизация в Steam)</value>
+  </data>
+  <data name="SettingsForm_cbSCContributors" xml:space="preserve">
+    <value>Contributors раздачи</value>
+  </data>
+  <data name="SettingsForm_cbSGMinLevel" xml:space="preserve">
+    <value>Минимальный уровень раздач</value>
+  </data>
+  <data name="SettingsForm_cbSGSortTeLessLevel" xml:space="preserve">
+    <value>Сначала раздачи наивысшего уровня</value>
+  </data>
+  <data name="SettingsForm_GroupGiveaways" xml:space="preserve">
+    <value>Групповые раздачи</value>
+  </data>
+  <data name="SettingsForm_PointsReserv" xml:space="preserve">
+    <value>Резерв points:</value>
+  </data>
+  <data name="SettingsForm_RegularGiveaways" xml:space="preserve">
+    <value>Обычные раздачи</value>
+  </data>
+  <data name="SettingsForm_WishlistGiveaways" xml:space="preserve">
+    <value>Wishlist</value>
   </data>
 </root>
