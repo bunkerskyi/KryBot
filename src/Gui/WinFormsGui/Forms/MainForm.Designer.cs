@@ -102,6 +102,15 @@
 			this.lblPBStatus = new System.Windows.Forms.Label();
 			this.lblPBPoints = new System.Windows.Forms.Label();
 			this.lblPBLevel = new System.Windows.Forms.Label();
+			this.tabPageGA = new System.Windows.Forms.TabPage();
+			this.pbGARefresh = new System.Windows.Forms.PictureBox();
+			this.cbGAEnabled = new System.Windows.Forms.CheckBox();
+			this.btnGAExit = new System.Windows.Forms.Button();
+			this.btnGALogin = new System.Windows.Forms.Button();
+			this.linkLabelGA = new System.Windows.Forms.LinkLabel();
+			this.lblGAPoints = new System.Windows.Forms.Label();
+			this.lblGALevel = new System.Windows.Forms.Label();
+			this.lblGAStatus = new System.Windows.Forms.Label();
 			this.tabPageSteam = new System.Windows.Forms.TabPage();
 			this.btnSteamExit = new System.Windows.Forms.Button();
 			this.btnSteamLogin = new System.Windows.Forms.Button();
@@ -128,6 +137,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.pbSTreload)).BeginInit();
 			this.tabPagePB.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbPBRefresh)).BeginInit();
+			this.tabPageGA.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pbGARefresh)).BeginInit();
 			this.tabPageSteam.SuspendLayout();
 			this.toolStripMenuItem_Main.SuspendLayout();
 			this.SuspendLayout();
@@ -290,6 +301,7 @@
 			this.tabControl1.Controls.Add(this.tabPageUG);
 			this.tabControl1.Controls.Add(this.tabPageST);
 			this.tabControl1.Controls.Add(this.tabPagePB);
+			this.tabControl1.Controls.Add(this.tabPageGA);
 			this.tabControl1.Controls.Add(this.tabPageSteam);
 			this.tabControl1.Location = new System.Drawing.Point(4, 27);
 			this.tabControl1.Name = "tabControl1";
@@ -882,6 +894,102 @@
 			this.lblPBLevel.TabIndex = 25;
 			this.lblPBLevel.Text = "Уровень: ";
 			// 
+			// tabPageGA
+			// 
+			this.tabPageGA.Controls.Add(this.pbGARefresh);
+			this.tabPageGA.Controls.Add(this.cbGAEnabled);
+			this.tabPageGA.Controls.Add(this.btnGAExit);
+			this.tabPageGA.Controls.Add(this.btnGALogin);
+			this.tabPageGA.Controls.Add(this.linkLabelGA);
+			this.tabPageGA.Controls.Add(this.lblGAPoints);
+			this.tabPageGA.Controls.Add(this.lblGALevel);
+			this.tabPageGA.Controls.Add(this.lblGAStatus);
+			this.tabPageGA.Location = new System.Drawing.Point(4, 22);
+			this.tabPageGA.Name = "tabPageGA";
+			this.tabPageGA.Size = new System.Drawing.Size(334, 61);
+			this.tabPageGA.TabIndex = 7;
+			this.tabPageGA.Text = "GA";
+			this.tabPageGA.UseVisualStyleBackColor = true;
+			// 
+			// pbGARefresh
+			// 
+			this.pbGARefresh.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.refresh;
+			this.pbGARefresh.Location = new System.Drawing.Point(314, 42);
+			this.pbGARefresh.Name = "pbGARefresh";
+			this.pbGARefresh.Size = new System.Drawing.Size(16, 16);
+			this.pbGARefresh.TabIndex = 35;
+			this.pbGARefresh.TabStop = false;
+			// 
+			// cbGAEnabled
+			// 
+			this.cbGAEnabled.AutoSize = true;
+			this.cbGAEnabled.Checked = true;
+			this.cbGAEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.cbGAEnabled.Location = new System.Drawing.Point(315, 3);
+			this.cbGAEnabled.Name = "cbGAEnabled";
+			this.cbGAEnabled.Size = new System.Drawing.Size(15, 14);
+			this.cbGAEnabled.TabIndex = 34;
+			this.cbGAEnabled.UseVisualStyleBackColor = true;
+			this.cbGAEnabled.CheckedChanged += new System.EventHandler(this.cbGAEnabled_CheckedChanged);
+			// 
+			// btnGAExit
+			// 
+			this.btnGAExit.Location = new System.Drawing.Point(134, 19);
+			this.btnGAExit.Name = "btnGAExit";
+			this.btnGAExit.Size = new System.Drawing.Size(75, 23);
+			this.btnGAExit.TabIndex = 33;
+			this.btnGAExit.Text = "Выход";
+			this.btnGAExit.UseVisualStyleBackColor = true;
+			this.btnGAExit.Click += new System.EventHandler(this.buttonExitGA_Click);
+			// 
+			// btnGALogin
+			// 
+			this.btnGALogin.Location = new System.Drawing.Point(134, 19);
+			this.btnGALogin.Name = "btnGALogin";
+			this.btnGALogin.Size = new System.Drawing.Size(75, 23);
+			this.btnGALogin.TabIndex = 32;
+			this.btnGALogin.Text = "Логин";
+			this.btnGALogin.UseVisualStyleBackColor = true;
+			this.btnGALogin.Click += new System.EventHandler(this.buttonLoginGA_Click);
+			// 
+			// linkLabelGA
+			// 
+			this.linkLabelGA.AutoSize = true;
+			this.linkLabelGA.Location = new System.Drawing.Point(6, 42);
+			this.linkLabelGA.Name = "linkLabelGA";
+			this.linkLabelGA.Size = new System.Drawing.Size(47, 13);
+			this.linkLabelGA.TabIndex = 31;
+			this.linkLabelGA.TabStop = true;
+			this.linkLabelGA.Text = "На сайт";
+			this.linkLabelGA.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelGA_LinkClicked);
+			// 
+			// lblGAPoints
+			// 
+			this.lblGAPoints.AutoSize = true;
+			this.lblGAPoints.Location = new System.Drawing.Point(6, 29);
+			this.lblGAPoints.Name = "lblGAPoints";
+			this.lblGAPoints.Size = new System.Drawing.Size(42, 13);
+			this.lblGAPoints.TabIndex = 30;
+			this.lblGAPoints.Text = "Points: ";
+			// 
+			// lblGALevel
+			// 
+			this.lblGALevel.AutoSize = true;
+			this.lblGALevel.Location = new System.Drawing.Point(6, 16);
+			this.lblGALevel.Name = "lblGALevel";
+			this.lblGALevel.Size = new System.Drawing.Size(57, 13);
+			this.lblGALevel.TabIndex = 29;
+			this.lblGALevel.Text = "Уровень: ";
+			// 
+			// lblGAStatus
+			// 
+			this.lblGAStatus.AutoSize = true;
+			this.lblGAStatus.Location = new System.Drawing.Point(6, 3);
+			this.lblGAStatus.Name = "lblGAStatus";
+			this.lblGAStatus.Size = new System.Drawing.Size(129, 13);
+			this.lblGAStatus.TabIndex = 28;
+			this.lblGAStatus.Text = "Статус: Не авторизован";
+			// 
 			// tabPageSteam
 			// 
 			this.tabPageSteam.Controls.Add(this.btnSteamExit);
@@ -1024,6 +1132,9 @@
 			this.tabPagePB.ResumeLayout(false);
 			this.tabPagePB.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pbPBRefresh)).EndInit();
+			this.tabPageGA.ResumeLayout(false);
+			this.tabPageGA.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pbGARefresh)).EndInit();
 			this.tabPageSteam.ResumeLayout(false);
 			this.tabPageSteam.PerformLayout();
 			this.toolStripMenuItem_Main.ResumeLayout(false);
@@ -1117,6 +1228,15 @@
 		private System.Windows.Forms.Label lblPBStatus;
 		private System.Windows.Forms.Label lblPBPoints;
 		private System.Windows.Forms.Label lblPBLevel;
+		private System.Windows.Forms.TabPage tabPageGA;
+		private System.Windows.Forms.PictureBox pbGARefresh;
+		private System.Windows.Forms.CheckBox cbGAEnabled;
+		private System.Windows.Forms.Button btnGAExit;
+		private System.Windows.Forms.Button btnGALogin;
+		private System.Windows.Forms.LinkLabel linkLabelGA;
+		private System.Windows.Forms.Label lblGAPoints;
+		private System.Windows.Forms.Label lblGALevel;
+		private System.Windows.Forms.Label lblGAStatus;
 	}
 }
 

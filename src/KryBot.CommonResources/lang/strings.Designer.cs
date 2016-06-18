@@ -29,7 +29,7 @@ namespace KryBot.CommonResources.lang {
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public strings() {
+        internal strings() {
         }
         
         /// <summary>
@@ -322,8 +322,7 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Уровень
-        ///.
+        ///   Looks up a localized string similar to Уровень.
         /// </summary>
         public static string Level {
             get {

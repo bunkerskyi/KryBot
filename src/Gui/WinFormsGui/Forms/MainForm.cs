@@ -109,6 +109,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				cbUGEnable.Checked = _bot.UseGamble.Enabled;
 				cbSTEnable.Checked = _bot.SteamTrade.Enabled;
 				cbPBEnabled.Checked = _bot.SteamTrade.Enabled;
+				cbGAEnabled.Checked = _bot.GameAways.Enabled;
 				btnStart.Enabled = await LoginCheck();
 
 				if (_bot.Steam.Enabled)
@@ -126,6 +127,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				btnSTLogin.Visible = true;
 				btnPBLogin.Visible = true;
 				btnSteamLogin.Visible = true;
+				btnGALogin.Visible = true;
 				btnStart.Enabled = false;
 			}
 		}
@@ -345,7 +347,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			LogMessage.Instance.AddMessage(Messages.DoFarm_Start());
 
 			toolStripProgressBar1.Value = 0;
-			toolStripProgressBar1.Maximum = 6;
+			toolStripProgressBar1.Maximum = 7;
 			toolStripProgressBar1.Visible = true;
 			toolStripStatusLabel1.Image = Resources.load;
 			toolStripStatusLabel1.Text = strings.FormMain_DoFarm_Farn;
@@ -519,6 +521,27 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			}
 			toolStripProgressBar1.Value++;
 
+			if(_bot.GameAways.Enabled)
+			{
+				var profile = await _bot.GameAways.CheckLogin();
+				LogMessage.Instance.AddMessage(profile);
+				LoadProfilesInfo?.Invoke();
+
+				if(profile.Success)
+				{
+					await _bot.GameAways.Join(_blackList, _bot.Sort, _bot.SortToMore);
+				}
+				else
+				{
+					BlockTabpage(tabPageGA, false);
+					btnGALogin.Enabled = true;
+					btnGALogin.Visible = true;
+					linkLabelGA.Enabled = true;
+					lblGAStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+				}
+			}
+			toolStripProgressBar1.Value++;
+
 			stopWatch.Stop();
 			var ts = stopWatch.Elapsed;
 			string elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}";
@@ -567,12 +590,15 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 			lblPBPoints.Text = $"{strings.Points}: {_bot.PlayBlink.Points}";
 			lblPBLevel.Text = $"{strings.Level}: {_bot.PlayBlink.Level}";
+
+			lblGAPoints.Text = $"{strings.Points}: {_bot.GameAways.Points}";
+			lblGALevel.Text = $"{strings.Level}: -";
 		}
 
 		private async Task<bool> LoginCheck()
 		{
 			toolStripProgressBar1.Value = 0;
-			toolStripProgressBar1.Maximum = 7;
+			toolStripProgressBar1.Maximum = 8;
 			toolStripProgressBar1.Visible = true;
 			toolStripStatusLabel1.Image = Resources.load;
 			toolStripStatusLabel1.Text = strings.TryLogin;
@@ -764,7 +790,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				if (await CheckLoginPb())
 				{
 					LoadProfilesInfo?.Invoke();
-
 					login = true;
 					btnPBLogin.Enabled = false;
 					btnPBLogin.Visible = false;
@@ -811,6 +836,33 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				BlockTabpage(tabPageSteam, false);
 				btnSteamLogin.Enabled = true;
 				btnSteamLogin.Visible = true;
+			}
+			toolStripProgressBar1.Value++;
+
+			if(_bot.GameAways.Enabled)
+			{
+				if(await CheckLoginGa())
+				{
+					LoadProfilesInfo?.Invoke();
+					login = true;
+					btnGALogin.Enabled = false;
+					btnGALogin.Visible = false;
+					lblGAStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+					btnGAExit.Visible = true;
+				}
+				else
+				{
+					BlockTabpage(tabPageGA, false);
+					btnGALogin.Enabled = true;
+					btnGALogin.Visible = true;
+					lblGAStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+				}
+			}
+			else
+			{
+				BlockTabpage(tabPageGA, false);
+				btnGALogin.Enabled = true;
+				btnGALogin.Visible = true;
 			}
 			toolStripProgressBar1.Value++;
 
@@ -1093,6 +1145,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			Message_TryLogin("PlayBlink");
 			var login = await _bot.PlayBlink.CheckLogin();
+			LogMessage.Instance.AddMessage(login);
+			return login.Success;
+		}
+
+		private async Task<bool> CheckLoginGa()
+		{
+			Message_TryLogin("GameAways");
+			var login = await _bot.GameAways.CheckLogin();
 			LogMessage.Instance.AddMessage(login);
 			return login.Success;
 		}
@@ -1708,6 +1768,65 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			{
 				BlockTabpage(tabPagePB, true);
 				_bot.PlayBlink.Enabled = true;
+			}
+		}
+
+		private async void buttonLoginGA_Click(object sender, EventArgs e)
+		{
+			btnGALogin.Enabled = false;
+			BrowserStart(Links.GameAwaysAuth, Links.GameAways, "GameAways - Login", "");
+			_bot.Save();
+
+			toolStripStatusLabel1.Image = Resources.load;
+			toolStripStatusLabel1.Text = strings.StatusBar_Login;
+			var login = await CheckLoginGa();
+			if(login)
+			{
+				BlockTabpage(tabPageGA, true);
+				btnGALogin.Enabled = false;
+				btnGALogin.Visible = false;
+				lblGAStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+				LoadProfilesInfo?.Invoke();
+				btnStart.Enabled = true;
+				pbGARefresh.Visible = true;
+				btnGAExit.Visible = true;
+				btnGAExit.Enabled = true;
+				cbGAEnabled.Checked = true;
+				_bot.GameAways.Enabled = true;
+			}
+			else
+			{
+				lblGAStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+				BlockTabpage(tabPageGA, false);
+				btnGALogin.Enabled = true;
+				btnGALogin.Visible = true;
+			}
+			toolStripStatusLabel1.Image = null;
+			toolStripStatusLabel1.Text = strings.StatusBar_End;
+		}
+
+		private void buttonExitGA_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void linkLabelGA_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+		{
+			Process.Start(Links.GameAways);
+		}
+
+		private void cbGAEnabled_CheckedChanged(object sender, EventArgs e)
+		{
+			if(lblGAStatus.Enabled)
+			{
+				BlockTabpage(tabPageGA, false);
+				cbGAEnabled.Enabled = true;
+				_bot.GameAways.Enabled = false;
+			}
+			else
+			{
+				BlockTabpage(tabPageGA, true);
+				_bot.GameAways.Enabled = true;
 			}
 		}
 	}

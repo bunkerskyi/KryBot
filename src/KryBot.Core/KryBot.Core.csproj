@@ -77,6 +77,7 @@
     <Compile Include="Helpers\CookieHelper.cs" />
     <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="LogMessage.cs" />
+    <Compile Include="Serializable\GameAways\JsonJoinResponse.cs" />
     <Compile Include="Serializable\GameMiner\JsonGame.cs" />
     <Compile Include="Serializable\GameMiner\JsonGiveaway.cs" />
     <Compile Include="Serializable\GameMiner\JsonResponse.cs" />

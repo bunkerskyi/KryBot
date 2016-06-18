@@ -134,7 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="lang\strings.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>strings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>

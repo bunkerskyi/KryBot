@@ -126,8 +126,26 @@ namespace KryBot.Gui.WinFormsGui.Forms
 						PlayBlinkAuth();
 						Exit();
 					}
+
+					if(_endPage == Links.GameAways)
+					{
+						GameAwaysAuth();
+						Exit();
+					}
 				}
 			}
+		}
+
+		private async void GameAwaysAuth()
+		{
+			foreach(var cookie in await GetCookies(Links.GameAways))
+			{
+				if(cookie.Name == ".AspNet.ApplicationCookie")
+				{
+					_bot.GameAways.Cookies.AspNetApplicationCookie = cookie.Value;
+				}
+			}
+			_bot.GameAways.Enabled = true;
 		}
 
 		private async void PlayBlinkAuth()
