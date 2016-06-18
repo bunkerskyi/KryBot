@@ -448,57 +448,36 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			}
 			toolStripProgressBar1.Value++;
 
-			if (_bot.UseGamble.Enabled)
+			if(_bot.UseGamble.Enabled)
 			{
 				var profile = await _bot.UseGamble.CheckLogin();
 				LogMessage.Instance.AddMessage(profile);
 				LoadProfilesInfo?.Invoke();
-				if (profile.Success)
+
+				if(profile.Success)
 				{
 					var won = await _bot.UseGamble.CheckWon();
-					if (won != null)
+					if(won != null)
 					{
 						LogMessage.Instance.AddMessage(won);
-						if (Properties.Settings.Default.ShowWonTip)
+						if(Properties.Settings.Default.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
 						}
 					}
 
-
-					var giveaways =
-						await _bot.UseGamble.LoadGiveawaysAsync(_blackList);
-					if (giveaways != null && giveaways.Content != "\n")
-					{
-						LogMessage.Instance.AddMessage(giveaways);
-					}
-
-					if (_bot.UseGamble.Giveaways?.Count > 0)
-					{
-						if (_bot.Sort)
-						{
-							if (_bot.SortToMore)
-							{
-								_bot.UseGamble.Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
-							}
-							else
-							{
-								_bot.UseGamble.Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
-							}
-						}
-
-						await JoinGiveaways(_bot.UseGamble.Giveaways);
-					}
+					await _bot.UseGamble.Join(_bot.Sort, _bot.SortToMore, _blackList);
 				}
 				else
 				{
-					BlockTabpage(tabPageUG, false);
-					btnSPLogin.Enabled = true;
-					btnSPLogin.Visible = true;
-					linkLabel4.Enabled = true;
-					lblSPStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+					BlockTabpage(tabPageSC, false);
+					btnSCLogin.Enabled = true;
+					btnSCLogin.Visible = true;
+					linkLabel3.Enabled = true;
+					lblSCStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
 				}
 			}
+			toolStripProgressBar1.Value++;
 
 			if (_bot.SteamTrade.Enabled)
 			{
@@ -1737,23 +1716,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			SetStatusPanel(strings.Finish, null);
 			pbPBRefresh.Image = Resources.refresh;
 			btnPBExit.Enabled = true;
-		}
-
-		private async Task<bool> JoinGiveaways(List<UseGambleGiveaway> giveaways)
-		{
-			foreach (var giveaway in giveaways)
-			{
-				if (giveaway.Price <= _bot.UseGamble.Points &&
-					_bot.UseGamble.PointsReserv <= _bot.UseGamble.Points - giveaway.Price)
-				{
-					var data = await _bot.UseGamble.Join(giveaways.IndexOf(giveaway));
-					if (data != null && data.Content != "\n")
-					{
-						LogMessage.Instance.AddMessage(data);
-					}
-				}
-			}
-			return true;
 		}
 
 		private async Task<bool> JoinGiveaways(List<SteamTradeGiveaway> giveaways)

@@ -33,45 +33,72 @@ namespace KryBot.Core.Sites
 
 		#region JoinGiveaway
 
-		private Log JoinGiveaway(UseGambleGiveaway giveaway)
-		{
-			Thread.Sleep(400);
-			if (giveaway.Code != null)
-			{
-				var list = new List<HttpHeader>();
-				var header = new HttpHeader
-				{
-					Name = "X-Requested-With",
-					Value = "XMLHttpRequest"
-				};
-				list.Add(header);
-
-				var response = Web.Post(Links.UseGambleJoin,
-					GenerateJoinData(giveaway.Code), list,
-					Cookies.Generate());
-				var jresponse =
-					JsonConvert.DeserializeObject<JsonJoin>(response.RestResponse.Content.Replace(".", ""));
-				if (jresponse.Error == 0)
-				{
-					Points = jresponse.target_h.my_coins;
-					return Messages.GiveawayJoined("UseGamble", giveaway.Name, giveaway.Price,
-						jresponse.target_h.my_coins);
-				}
-				return Messages.GiveawayNotJoined("UseGamble", giveaway.Name, "Error");
-			}
-			return null;
-		}
-
-		public async Task<Log> Join(int index)
+		private async Task<Log> JoinGiveaway(UseGambleGiveaway giveaway)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var result = JoinGiveaway(Giveaways[index]);
-				task.SetResult(result);
-			});
+				Thread.Sleep(400);
+				if(giveaway.Code != null)
+				{
+					var list = new List<HttpHeader>();
+					var header = new HttpHeader
+					{
+						Name = "X-Requested-With",
+						Value = "XMLHttpRequest"
+					};
+					list.Add(header);
 
+					var response = Web.Post(Links.UseGambleJoin,
+						GenerateJoinData(giveaway.Code), list,
+						Cookies.Generate());
+					var jresponse =
+						JsonConvert.DeserializeObject<JsonJoin>(response.RestResponse.Content.Replace(".", ""));
+					if(jresponse.Error == 0)
+					{
+						Points = jresponse.target_h.my_coins;
+						task.SetResult(Messages.GiveawayJoined("UseGamble", giveaway.Name, giveaway.Price,
+							jresponse.target_h.my_coins));
+					}
+					else
+					{
+						task.SetResult(Messages.GiveawayNotJoined("UseGamble", giveaway.Name, "Error"));
+					}
+				}
+				else
+				{
+					task.SetResult(null);
+				}
+			});
 			return task.Task.Result;
+		}
+
+		public async Task Join(bool sort, bool sortToMore, Blacklist blacklist)
+		{
+			LogMessage.Instance.AddMessage(await LoadGiveawaysAsync(blacklist));
+
+			if(Giveaways?.Count > 0)
+			{
+				if(sort)
+				{
+					if(sortToMore)
+					{
+						Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+					}
+					else
+					{
+						Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+					}
+				}
+
+				foreach(var giveaway in Giveaways)
+				{
+					if(giveaway.Price <= Points && PointsReserv <= Points - giveaway.Price)
+					{
+						LogMessage.Instance.AddMessage(await JoinGiveaway(giveaway));
+					}
+				}
+			}
 		}
 
 		private static List<Parameter> GenerateJoinData(string ga)
@@ -163,7 +190,7 @@ namespace KryBot.Core.Sites
 			return task.Task.Result;
 		}
 
-		public async Task<Log> LoadGiveawaysAsync(Blacklist blackList)
+		private async Task<Log> LoadGiveawaysAsync(Blacklist blackList)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
