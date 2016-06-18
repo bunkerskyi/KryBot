@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using KryBot.CommonResources.lang;
 
 namespace KryBot.Core.Helpers
 {
@@ -26,7 +27,7 @@ namespace KryBot.Core.Helpers
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message, @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return false;
 			}
 		}
@@ -46,7 +47,7 @@ namespace KryBot.Core.Helpers
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message, @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			return new T();
 		}
@@ -103,7 +104,7 @@ namespace KryBot.Core.Helpers
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message, @"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return false;
 			}
 		}

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Diagnostics;
-using System.Drawing;
+﻿using System.Diagnostics;
 using System.Windows.Forms;
-using KryBot.Gui.WinFormsGui.Properties;
 
 namespace KryBot.Gui.WinFormsGui.Forms
 {
@@ -13,34 +10,19 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			InitializeComponent();
 		}
 
-		private void FormAbout_Load(object sender, EventArgs e)
-		{
-			Design();
-		}
-
-		private void Design()
-		{
-			Icon = Icon.FromHandle(Resources.info.GetHicon());
-			Text = @"О программе";
-
-			labelVersion.Text = @"KryBot - " + Application.ProductVersion;
-
-			linkLabelGitHub.Text = Core.Links.GitHubRepo;
-		}
-
 		private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			Process.Start(linkLabel1.Text);
+			Process.Start(((LinkLabel)sender).Text);
 		}
 
 		private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			Process.Start(linkLabel2.Text);
+			Process.Start(((LinkLabel)sender).Text);
 		}
 
 		private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			Process.Start(linkLabelGitHub.Text);
+			Process.Start(((LinkLabel)sender).Text);
 		}
 	}
 }

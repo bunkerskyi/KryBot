@@ -1,4 +1,8 @@
-﻿namespace KryBot.Gui.WinFormsGui.Forms
+﻿using System.Drawing;
+using KryBot.CommonResources.lang;
+using KryBot.Gui.WinFormsGui.Properties;
+
+namespace KryBot.Gui.WinFormsGui.Forms
 {
 	partial class FormBlackList
 	{
@@ -29,9 +33,9 @@
 		private void InitializeComponent()
 		{
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-			this.добавитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.удалитьToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-			this.загрузитьИзToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.delToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.loadFromИзToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.профильSteamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -43,50 +47,50 @@
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.добавитьToolStripMenuItem,
-			this.удалитьToolStripMenuItem1,
-			this.загрузитьИзToolStripMenuItem});
+            this.addToolStripMenuItem,
+            this.delToolStripMenuItem1,
+            this.loadFromИзToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(284, 24);
 			this.menuStrip1.TabIndex = 1;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
-			// добавитьToolStripMenuItem
+			// addToolStripMenuItem
 			// 
-			this.добавитьToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.plus;
-			this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
-			this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
-			this.добавитьToolStripMenuItem.Text = "Добавить";
-			this.добавитьToolStripMenuItem.Click += new System.EventHandler(this.добавитьToolStripMenuItem_Click);
+			this.addToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.plus;
+			this.addToolStripMenuItem.Name = "addToolStripMenuItem";
+			this.addToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
+			this.addToolStripMenuItem.Text = strings.BlacklistForm_Add;
+			this.addToolStripMenuItem.Click += new System.EventHandler(this.добавитьToolStripMenuItem_Click);
 			// 
-			// удалитьToolStripMenuItem1
+			// delToolStripMenuItem1
 			// 
-			this.удалитьToolStripMenuItem1.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.close1;
-			this.удалитьToolStripMenuItem1.Name = "удалитьToolStripMenuItem1";
-			this.удалитьToolStripMenuItem1.Size = new System.Drawing.Size(79, 20);
-			this.удалитьToolStripMenuItem1.Text = "Удалить";
-			this.удалитьToolStripMenuItem1.Click += new System.EventHandler(this.удалитьToolStripMenuItem1_Click);
+			this.delToolStripMenuItem1.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.close1;
+			this.delToolStripMenuItem1.Name = "delToolStripMenuItem1";
+			this.delToolStripMenuItem1.Size = new System.Drawing.Size(79, 20);
+			this.delToolStripMenuItem1.Text = strings.BlacklistForm_Del;
+			this.delToolStripMenuItem1.Click += new System.EventHandler(this.удалитьToolStripMenuItem1_Click);
 			// 
-			// загрузитьИзToolStripMenuItem
+			// loadFromИзToolStripMenuItem
 			// 
-			this.загрузитьИзToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.профильSteamToolStripMenuItem});
-			this.загрузитьИзToolStripMenuItem.Name = "загрузитьИзToolStripMenuItem";
-			this.загрузитьИзToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
-			this.загрузитьИзToolStripMenuItem.Text = "Добавить из...";
+			this.loadFromИзToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.профильSteamToolStripMenuItem});
+			this.loadFromИзToolStripMenuItem.Name = "loadFromИзToolStripMenuItem";
+			this.loadFromИзToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
+			this.loadFromИзToolStripMenuItem.Text = strings.BlacklistForm_LoadFrom;
 			// 
 			// профильSteamToolStripMenuItem
 			// 
 			this.профильSteamToolStripMenuItem.Name = "профильSteamToolStripMenuItem";
 			this.профильSteamToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-			this.профильSteamToolStripMenuItem.Text = "Профиль Steam";
+			this.профильSteamToolStripMenuItem.Text = strings.BlacklistForm_SteamAccount;
 			this.профильSteamToolStripMenuItem.Click += new System.EventHandler(this.профильSteamToolStripMenuItem_Click);
 			// 
 			// statusStrip1
 			// 
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.toolStripStatusLabel});
+            this.toolStripStatusLabel});
 			this.statusStrip1.Location = new System.Drawing.Point(0, 271);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.Size = new System.Drawing.Size(284, 22);
@@ -97,7 +101,7 @@
 			// 
 			this.toolStripStatusLabel.Name = "toolStripStatusLabel";
 			this.toolStripStatusLabel.Size = new System.Drawing.Size(84, 17);
-			this.toolStripStatusLabel.Text = "Количество: 0";
+			this.toolStripStatusLabel.Text = $"{strings.Count}: 0";
 			// 
 			// listView
 			// 
@@ -115,6 +119,7 @@
 			// FormBlackList
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.Icon = Icon.FromHandle(Resources.blocked.GetHicon());
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(284, 293);
 			this.Controls.Add(this.listView);
@@ -125,7 +130,7 @@
 			this.MinimizeBox = false;
 			this.Name = "FormBlackList";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "formBlackList";
+			this.Text = strings.Blacklist;
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormBlackList_FormClosing);
 			this.Load += new System.EventHandler(this.formBlackList_Load);
 			this.menuStrip1.ResumeLayout(false);
@@ -139,9 +144,9 @@
 
 		#endregion
 		private System.Windows.Forms.MenuStrip menuStrip1;
-		private System.Windows.Forms.ToolStripMenuItem добавитьToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem удалитьToolStripMenuItem1;
-		private System.Windows.Forms.ToolStripMenuItem загрузитьИзToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem delToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem loadFromИзToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem профильSteamToolStripMenuItem;
 		private System.Windows.Forms.StatusStrip statusStrip1;
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;

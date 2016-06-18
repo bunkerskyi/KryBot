@@ -1,4 +1,7 @@
-﻿namespace KryBot.Gui.WinFormsGui.Forms
+﻿using System.Drawing;
+using KryBot.Gui.WinFormsGui.Properties;
+
+namespace KryBot.Gui.WinFormsGui.Forms
 {
 	partial class FormCookie
 	{
@@ -43,6 +46,7 @@
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "formCookie";
 			this.Load += new System.EventHandler(this.formCookie_Load);
+			this.Icon = Icon.FromHandle(Resources.locked1.GetHicon());
 			this.ResumeLayout(false);
 
 		}

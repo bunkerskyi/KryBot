@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Drawing;
 using System.Windows.Forms;
-using KryBot.Gui.WinFormsGui.Properties;
 
 namespace KryBot.Gui.WinFormsGui.Forms
 {
@@ -20,7 +18,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private void FormTextBox_Load(object sender, EventArgs e)
 		{
 			Text = _formTitle;
-			Icon = Icon.FromHandle(Resources.blocked.GetHicon());
 		}
 
 		private void textBox_KeyPress(object sender, KeyPressEventArgs e)

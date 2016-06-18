@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KryBot.CommonResources.lang;
@@ -33,14 +32,11 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					listView.Items.Add(item.Id).SubItems.Add(item.Name);
 				}
 			}
-			toolStripStatusLabel.Text = $"Количество: {listView.Items.Count}";
+			toolStripStatusLabel.Text = $"{strings.Count}: {listView.Items.Count}";
 		}
 
 		private void Design()
 		{
-			Text = @"Черный список";
-			Icon = Icon.FromHandle(Resources.blocked.GetHicon());
-
 			listView.Columns.Add("ID");
 			listView.Columns.Add("Name", Width - listView.Columns[0].Width);
 		}
@@ -74,7 +70,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					listView.Items.Remove(listView.Items[listView.SelectedItems[i].Index]);
 					i--;
 				}
-				toolStripStatusLabel.Text = $"Количество: {listView.Items.Count}";
+				toolStripStatusLabel.Text = $"{strings.Count}: {listView.Items.Count}";
 			}
 		}
 
@@ -106,11 +102,11 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				}
 
 				toolStripStatusLabel.Image = null;
-				toolStripStatusLabel.Text = $"Количество: {listView.Items.Count}";
+				toolStripStatusLabel.Text = $"{strings.Count}: {listView.Items.Count}";
 			}
 			else
 			{
-				MessageBox.Show(@"Нужна авторизация в Steam", strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show(strings.Blacklist_NeedAuth, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
 
@@ -129,7 +125,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					.SubItems.Add(await LoadName(Properties.Settings.Default._idCache));
 				Properties.Settings.Default._idCache = "0";
 			}
-			toolStripStatusLabel.Text = $"Количество: {listView.Items.Count}";
+			toolStripStatusLabel.Text = $"{strings.Count}: {listView.Items.Count}";
 		}
 
 		private async Task<string> LoadName(string id)

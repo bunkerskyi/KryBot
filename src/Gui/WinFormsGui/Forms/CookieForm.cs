@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using KryBot.CommonResources.lang;
 using KryBot.Core;
-using KryBot.Gui.WinFormsGui.Properties;
 
 namespace KryBot.Gui.WinFormsGui.Forms
 {
@@ -24,7 +24,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private void formCookie_Load(object sender, EventArgs e)
 		{
 			Text = _site;
-			Icon = Icon.FromHandle(Resources.locked1.GetHicon());
 
 			foreach (var name in _names)
 			{
@@ -52,7 +51,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			{
 				Location = new Point(6, Controls[Controls.Count - 1].Location.Y + 28),
 				Width = 272,
-				Text = @"Save"
+				Text = strings.CookieForm_Save
 			};
 			button.Click += ButtonOnClick;
 			Controls.Add(button);
@@ -129,7 +128,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void ShowMessage()
 		{
-			MessageBox.Show(@"Для применения измененией нужен перезапуск приложения.", @"Информация",
+			MessageBox.Show(strings.CookieForm_MustRestart, strings.Information,
 				MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 	}

@@ -1,4 +1,6 @@
-﻿namespace KryBot.Gui.WinFormsGui.Forms
+﻿using KryBot.CommonResources.lang;
+
+namespace KryBot.Gui.WinFormsGui.Forms
 {
 	partial class FormSettings
 	{
@@ -134,7 +136,7 @@
 			this.tabPageCommun.Name = "tabPageCommun";
 			this.tabPageCommun.Size = new System.Drawing.Size(309, 155);
 			this.tabPageCommun.TabIndex = 5;
-			this.tabPageCommun.Text = "Общие";
+			this.tabPageCommun.Text = strings.SettingsForm_Commun;
 			this.tabPageCommun.UseVisualStyleBackColor = true;
 			// 
 			// cbWishlistSort
@@ -144,7 +146,7 @@
 			this.cbWishlistSort.Name = "cbWishlistSort";
 			this.cbWishlistSort.Size = new System.Drawing.Size(144, 30);
 			this.cbWishlistSort.TabIndex = 8;
-			this.cbWishlistSort.Text = "Не применять \r\nсортировку к вишлисту";
+			this.cbWishlistSort.Text = strings.SettingsForm_cbWishlistSort;
 			this.cbWishlistSort.UseVisualStyleBackColor = true;
 			// 
 			// btnDeleteCookies
@@ -153,7 +155,7 @@
 			this.btnDeleteCookies.Name = "btnDeleteCookies";
 			this.btnDeleteCookies.Size = new System.Drawing.Size(144, 23);
 			this.btnDeleteCookies.TabIndex = 7;
-			this.btnDeleteCookies.Text = "Удалить куки браузера";
+			this.btnDeleteCookies.Text = strings.SetitngsForm_btnDeleteCookies;
 			this.btnDeleteCookies.UseVisualStyleBackColor = true;
 			this.btnDeleteCookies.Click += new System.EventHandler(this.btnDeleteCookies_Click);
 			// 
@@ -164,7 +166,7 @@
 			this.cbFarmTip.Name = "cbFarmTip";
 			this.cbFarmTip.Size = new System.Drawing.Size(137, 17);
 			this.cbFarmTip.TabIndex = 5;
-			this.cbFarmTip.Text = "Оповещение о фарме";
+			this.cbFarmTip.Text = strings.SettingsForm_cbFarmTip;
 			this.cbFarmTip.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.cbFarmTip.UseVisualStyleBackColor = true;
 			// 
@@ -175,7 +177,7 @@
 			this.cbWonTip.Name = "cbWonTip";
 			this.cbWonTip.Size = new System.Drawing.Size(144, 17);
 			this.cbWonTip.TabIndex = 4;
-			this.cbWonTip.Text = "Оповещение о победах";
+			this.cbWonTip.Text = strings.SettingsForm_cbWonTip;
 			this.cbWonTip.UseVisualStyleBackColor = true;
 			// 
 			// cbAutorun
@@ -185,7 +187,7 @@
 			this.cbAutorun.Name = "cbAutorun";
 			this.cbAutorun.Size = new System.Drawing.Size(96, 17);
 			this.cbAutorun.TabIndex = 3;
-			this.cbAutorun.Text = "Автозагрузка";
+			this.cbAutorun.Text = strings.SettingsForm_cbAutorun;
 			this.cbAutorun.UseVisualStyleBackColor = true;
 			this.cbAutorun.CheckedChanged += new System.EventHandler(this.cbAutorun_CheckedChanged);
 			// 
@@ -198,7 +200,7 @@
 			this.groupBox1.Size = new System.Drawing.Size(154, 114);
 			this.groupBox1.TabIndex = 2;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "Таймер";
+			this.groupBox1.Text = strings.SettingsForm_groupBox1;
 			// 
 			// gbTimerSettings
 			// 
@@ -213,7 +215,7 @@
 			this.gbTimerSettings.Size = new System.Drawing.Size(154, 72);
 			this.gbTimerSettings.TabIndex = 1;
 			this.gbTimerSettings.TabStop = false;
-			this.gbTimerSettings.Text = "Настройки";
+			this.gbTimerSettings.Text = strings.SettingsForm_gbTimerSettings;
 			// 
 			// label8
 			// 
@@ -222,7 +224,7 @@
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(51, 13);
 			this.label8.TabIndex = 5;
-			this.label8.Text = "Циклов: ";
+			this.label8.Text = strings.SettingsForm_label8;
 			// 
 			// label7
 			// 
@@ -231,7 +233,7 @@
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(20, 13);
 			this.label7.TabIndex = 4;
-			this.label7.Text = "шт";
+			this.label7.Text = strings.SettingsForm_label7;
 			// 
 			// tbTimerLoops
 			// 
@@ -239,7 +241,7 @@
 			this.tbTimerLoops.Name = "tbTimerLoops";
 			this.tbTimerLoops.Size = new System.Drawing.Size(56, 20);
 			this.tbTimerLoops.TabIndex = 3;
-			this.tbTimerLoops.Text = "0";
+			this.tbTimerLoops.Text = strings.SettingsForm_tbTimerLoops;
 			this.tbTimerLoops.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbTimerLoops_KeyPress);
 			// 
 			// label6
@@ -249,7 +251,7 @@
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(15, 13);
 			this.label6.TabIndex = 2;
-			this.label6.Text = "м";
+			this.label6.Text = strings.SettingsForm_label6;
 			// 
 			// tbTimerInterval
 			// 
@@ -257,7 +259,7 @@
 			this.tbTimerInterval.Name = "tbTimerInterval";
 			this.tbTimerInterval.Size = new System.Drawing.Size(56, 20);
 			this.tbTimerInterval.TabIndex = 1;
-			this.tbTimerInterval.Text = "5";
+			this.tbTimerInterval.Text = strings.SettingsForm_tbTimerInterval;
 			this.tbTimerInterval.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbTimerInterval_KeyPress);
 			// 
 			// label5
@@ -267,7 +269,7 @@
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(59, 13);
 			this.label5.TabIndex = 0;
-			this.label5.Text = "Интервал:";
+			this.label5.Text = strings.SettingsForm_label5;
 			// 
 			// cbTimerEnable
 			// 
@@ -276,7 +278,7 @@
 			this.cbTimerEnable.Name = "cbTimerEnable";
 			this.cbTimerEnable.Size = new System.Drawing.Size(70, 17);
 			this.cbTimerEnable.TabIndex = 0;
-			this.cbTimerEnable.Text = "Включен";
+			this.cbTimerEnable.Text = strings.SettingsForm_cbTimerEnable;
 			this.cbTimerEnable.UseVisualStyleBackColor = true;
 			this.cbTimerEnable.CheckedChanged += new System.EventHandler(this.cbTimerEnable_CheckedChanged);
 			// 
@@ -300,7 +302,7 @@
 			this.cbSort.Name = "cbSort";
 			this.cbSort.Size = new System.Drawing.Size(68, 17);
 			this.cbSort.TabIndex = 0;
-			this.cbSort.Text = "Сначала";
+			this.cbSort.Text = strings.SettingsForm_cbSort;
 			this.cbSort.UseVisualStyleBackColor = true;
 			// 
 			// tabPageGM
@@ -339,7 +341,7 @@
 			this.cbGMRegional.Name = "cbGMRegional";
 			this.cbGMRegional.Size = new System.Drawing.Size(187, 17);
 			this.cbGMRegional.TabIndex = 8;
-			this.cbGMRegional.Text = "Без региональных ограничений";
+			this.cbGMRegional.Text = strings.SettingsForm_cbGMRegional;
 			this.cbGMRegional.UseVisualStyleBackColor = true;
 			// 
 			// cbGMGolden
@@ -349,7 +351,7 @@
 			this.cbGMGolden.Name = "cbGMGolden";
 			this.cbGMGolden.Size = new System.Drawing.Size(178, 17);
 			this.cbGMGolden.TabIndex = 6;
-			this.cbGMGolden.Text = "Бесплатные золотые раздачи";
+			this.cbGMGolden.Text = strings.SettingsForm_cbGMGolden;
 			this.cbGMGolden.UseVisualStyleBackColor = true;
 			// 
 			// chGMSandbox
@@ -359,7 +361,7 @@
 			this.chGMSandbox.Name = "chGMSandbox";
 			this.chGMSandbox.Size = new System.Drawing.Size(141, 17);
 			this.chGMSandbox.TabIndex = 5;
-			this.chGMSandbox.Text = "Раздачи из песочницы";
+			this.chGMSandbox.Text = strings.SettingsForm_chGMSandbox;
 			this.chGMSandbox.UseVisualStyleBackColor = true;
 			// 
 			// cbGMRegular
@@ -369,7 +371,7 @@
 			this.cbGMRegular.Name = "cbGMRegular";
 			this.cbGMRegular.Size = new System.Drawing.Size(117, 17);
 			this.cbGMRegular.TabIndex = 4;
-			this.cbGMRegular.Text = "Обычные раздачи";
+			this.cbGMRegular.Text = strings.SettingsForm_cbGMRegular;
 			this.cbGMRegular.UseVisualStyleBackColor = true;
 			// 
 			// tbGMReserv
@@ -378,7 +380,7 @@
 			this.tbGMReserv.Name = "tbGMReserv";
 			this.tbGMReserv.Size = new System.Drawing.Size(30, 20);
 			this.tbGMReserv.TabIndex = 3;
-			this.tbGMReserv.Text = "0";
+			this.tbGMReserv.Text = strings.SettingsForm_tbGMReserv;
 			this.tbGMReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbGMReserv_KeyPress);
 			// 
 			// tbGMMaxValue
@@ -387,7 +389,7 @@
 			this.tbGMMaxValue.Name = "tbGMMaxValue";
 			this.tbGMMaxValue.Size = new System.Drawing.Size(30, 20);
 			this.tbGMMaxValue.TabIndex = 2;
-			this.tbGMMaxValue.Text = "50";
+			this.tbGMMaxValue.Text = strings.SettingForm_tbGMMaxValue;
 			this.tbGMMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbGMMaxValue_KeyPress);
 			// 
 			// label2
@@ -397,7 +399,7 @@
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(72, 13);
 			this.label2.TabIndex = 1;
-			this.label2.Text = "Резерв угля:";
+			this.label2.Text = strings.SettingForm_label2;
 			// 
 			// label1
 			// 
@@ -406,7 +408,7 @@
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(125, 13);
 			this.label1.TabIndex = 0;
-			this.label1.Text = "Максимальная ставка:";
+			this.label1.Text = strings.SettingsForm_label1;
 			// 
 			// tabPageSG
 			// 

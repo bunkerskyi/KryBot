@@ -1,4 +1,8 @@
-﻿namespace KryBot.Gui.WinFormsGui.Forms
+﻿using System.Drawing;
+using KryBot.CommonResources.lang;
+using KryBot.Gui.WinFormsGui.Properties;
+
+namespace KryBot.Gui.WinFormsGui.Forms
 {
 	partial class FormLog
 	{
@@ -53,9 +57,12 @@
 			this.Controls.Add(this.richTextBox1);
 			this.Name = "FormLog";
 			this.ShowInTaskbar = false;
-			this.Text = "formLog";
+			this.Text = strings.Log;
 			this.Load += new System.EventHandler(this.formLog_Load);
+			this.Icon = Icon.FromHandle(Resources.log.GetHicon());
 			this.ResizeEnd += new System.EventHandler(this.FormLog_ResizeEnd);
+			this.Height = Properties.Settings.Default.LogHeight;
+			this.Width = Properties.Settings.Default.LogWidth;
 			this.ResumeLayout(false);
 
 		}

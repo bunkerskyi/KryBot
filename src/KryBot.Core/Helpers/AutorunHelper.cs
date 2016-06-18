@@ -19,14 +19,14 @@ namespace KryBot.Core.Helpers
 			catch(SecurityException)
 			{
 				MessageBox.Show(
-					@"Для выполнения этого действия приложение должно быть запущено с правами администратора",
-					@"Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					strings.Autorun_RegisterEditError,
+					strings.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return false;
 			}
 			catch(UnauthorizedAccessException)
 			{
 				MessageBox.Show(
-					@"При записи в реестр произошла aошибка. Запись в реестр разрешена администратором?",
+					strings.Autorun_RegisterEditError,
 					strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return false;
 			}
@@ -43,14 +43,14 @@ namespace KryBot.Core.Helpers
 			catch(SecurityException)
 			{
 				MessageBox.Show(
-					@"Для выполнения этого действия приложение должно быть запущено с правами администратора",
-					@"Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					strings.Autorun_MustHaveAdminPerm,
+					strings.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return false;
 			}
 			catch(UnauthorizedAccessException)
 			{
 				MessageBox.Show(
-					@"При записи в реестр произошла ошибка. Запись в реестр разрешена администратором?",
+					strings.Autorun_RegisterEditError,
 					strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return false;
 			}

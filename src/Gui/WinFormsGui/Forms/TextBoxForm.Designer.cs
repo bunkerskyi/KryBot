@@ -1,4 +1,8 @@
-﻿namespace KryBot.Gui.WinFormsGui.Forms
+﻿using System.Drawing;
+using KryBot.CommonResources.lang;
+using KryBot.Gui.WinFormsGui.Properties;
+
+namespace KryBot.Gui.WinFormsGui.Forms
 {
 	partial class TextBoxForm
 	{
@@ -46,7 +50,7 @@
 			this.buttonAdd.Name = "buttonAdd";
 			this.buttonAdd.Size = new System.Drawing.Size(260, 23);
 			this.buttonAdd.TabIndex = 1;
-			this.buttonAdd.Text = "Добавить";
+			this.buttonAdd.Text = strings.BlacklistForm_Add;
 			this.buttonAdd.UseVisualStyleBackColor = true;
 			this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
 			// 
@@ -62,6 +66,7 @@
 			this.Name = "FormTextBox";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "FormTextBox";
+			this.Icon = Icon.FromHandle(Resources.blocked.GetHicon());
 			this.Load += new System.EventHandler(this.FormTextBox_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();

@@ -303,4 +303,186 @@
   <data name="GamesInBlacklist" xml:space="preserve">
     <value>Игр в Blacklist'e</value>
   </data>
+  <data name="AboutForm_groupBox1" xml:space="preserve">
+    <value>Ссылки на сообщества</value>
+  </data>
+  <data name="AboutProgram" xml:space="preserve">
+    <value>О программе</value>
+  </data>
+  <data name="Autorun_MustHaveAdminPerm" xml:space="preserve">
+    <value>Для выполнения этого действия приложение должно быть запущено с правами администратора</value>
+  </data>
+  <data name="Autorun_RegisterEditError" xml:space="preserve">
+    <value>При записи в реестр произошла ошибка. Запись в реестр разрешена администратором?</value>
+  </data>
+  <data name="Blacklist" xml:space="preserve">
+    <value>Черный список</value>
+  </data>
+  <data name="BlacklistForm_Add" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="BlacklistForm_Del" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="BlacklistForm_LoadFrom" xml:space="preserve">
+    <value>Загрузить из...</value>
+  </data>
+  <data name="Blacklist_NeedAuth" xml:space="preserve">
+    <value>Нужна авторизация в Steam</value>
+  </data>
+  <data name="CookieForm_MustRestart" xml:space="preserve">
+    <value>Для применения измененией нужен перезапуск приложения.</value>
+  </data>
+  <data name="CookieForm_Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="Count" xml:space="preserve">
+    <value>Количество</value>
+  </data>
+  <data name="DonateForm_Donate" xml:space="preserve">
+    <value>Поддержать разработчика</value>
+  </data>
+  <data name="DonateForm_Text" xml:space="preserve">
+    <value>Вы можете помочь разработчику материально 
+переведя любую сумму на один из счетов, 
+предоставленных ниже:</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="SetitngsForm_btnDeleteCookies" xml:space="preserve">
+    <value>Удалить куки браузера</value>
+  </data>
+  <data name="SettingForm_label2" xml:space="preserve">
+    <value>Резерв угля:</value>
+  </data>
+  <data name="SettingForm_tbGMMaxValue" xml:space="preserve">
+    <value>50</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="SettingsForm_cbAutorun" xml:space="preserve">
+    <value>Автозагрузка</value>
+  </data>
+  <data name="SettingsForm_cbFarmTip" xml:space="preserve">
+    <value>Оповещение о фарме</value>
+  </data>
+  <data name="SettingsForm_cbGMGolden" xml:space="preserve">
+    <value>Бесплатные золотые раздачи</value>
+  </data>
+  <data name="SettingsForm_cbGMRegional" xml:space="preserve">
+    <value>Без региональных ограничений</value>
+  </data>
+  <data name="SettingsForm_cbGMRegular" xml:space="preserve">
+    <value>Обычные раздачи</value>
+  </data>
+  <data name="SettingsForm_cbSort" xml:space="preserve">
+    <value>Сначала</value>
+  </data>
+  <data name="SettingsForm_cbTimerEnable" xml:space="preserve">
+    <value>Включен</value>
+  </data>
+  <data name="SettingsForm_cbWishlistSort" xml:space="preserve">
+    <value>Не применять сортировку к вишлисту</value>
+  </data>
+  <data name="SettingsForm_cbWonTip" xml:space="preserve">
+    <value>Оповещение о победах</value>
+  </data>
+  <data name="SettingsForm_chGMSandbox" xml:space="preserve">
+    <value>Раздачи из песочницы</value>
+  </data>
+  <data name="SettingsForm_Commun" xml:space="preserve">
+    <value>Общие</value>
+  </data>
+  <data name="SettingsForm_gbTimerSettings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="SettingsForm_groupBox1" xml:space="preserve">
+    <value>Таймер</value>
+  </data>
+  <data name="SettingsForm_IntervalNotZero" xml:space="preserve">
+    <value>Интервал таймера не может равняться 0</value>
+  </data>
+  <data name="SettingsForm_label1" xml:space="preserve">
+    <value>Максимальная ставка:</value>
+  </data>
+  <data name="SettingsForm_label5" xml:space="preserve">
+    <value>Интервал:</value>
+  </data>
+  <data name="SettingsForm_label6" xml:space="preserve">
+    <value>м</value>
+  </data>
+  <data name="SettingsForm_label7" xml:space="preserve">
+    <value>шт</value>
+  </data>
+  <data name="SettingsForm_label8" xml:space="preserve">
+    <value>Циклов: </value>
+  </data>
+  <data name="SettingsForm_tbGMReserv" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="SettingsForm_tbTimerInterval" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="SettingsForm_tbTimerLoops" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Updater_CurrentVersion" xml:space="preserve">
+    <value>Актуальная версия</value>
+  </data>
+  <data name="Updater_HaveUpdate" xml:space="preserve">
+    <value>Доступно обновление</value>
+  </data>
+  <data name="BlacklistForm_SteamAccount" xml:space="preserve">
+    <value>Профиль Steam</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Выход</value>
+  </data>
+  <data name="Farm" xml:space="preserve">
+    <value>Фарм</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>Файл</value>
+  </data>
+  <data name="FileDialog_SaveProfile" xml:space="preserve">
+    <value>Сохранить профиль</value>
+  </data>
+  <data name="LinkLabel_OnSite" xml:space="preserve">
+    <value>На сайт</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Логин</value>
+  </data>
+  <data name="MainForm_Donate" xml:space="preserve">
+    <value>Поддержать</value>
+  </data>
+  <data name="MainForm_UpdateInfoAbout" xml:space="preserve">
+    <value>Обновление информации о</value>
+  </data>
+  <data name="OpenBotFolder" xml:space="preserve">
+    <value>Открыть папку с ботом</value>
+  </data>
+  <data name="ProfileLoading" xml:space="preserve">
+    <value>Загрузка профиля</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="SaveAs" xml:space="preserve">
+    <value>Сохранить как...</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Развернуть</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="Status_NotLogined" xml:space="preserve">
+    <value>Не авторизован</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Сервис</value>
+  </data>
 </root>

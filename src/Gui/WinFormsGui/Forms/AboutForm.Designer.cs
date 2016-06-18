@@ -1,4 +1,10 @@
-﻿namespace KryBot.Gui.WinFormsGui.Forms
+﻿using System.Drawing;
+using System.Windows.Forms;
+using KryBot.CommonResources.lang;
+using KryBot.Core;
+using KryBot.Gui.WinFormsGui.Properties;
+
+namespace KryBot.Gui.WinFormsGui.Forms
 {
 	partial class FormAbout
 	{
@@ -43,7 +49,7 @@
 			this.labelVersion.Name = "labelVersion";
 			this.labelVersion.Size = new System.Drawing.Size(74, 13);
 			this.labelVersion.TabIndex = 0;
-			this.labelVersion.Text = "KryBot 1.0.0.0";
+			this.labelVersion.Text = $"KryBot - {Application.ProductVersion}";
 			// 
 			// groupBox1
 			// 
@@ -55,7 +61,7 @@
 			this.groupBox1.Size = new System.Drawing.Size(260, 67);
 			this.groupBox1.TabIndex = 1;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = "Ссылки на сообщества";
+			this.groupBox1.Text = strings.AboutForm_groupBox1;
 			// 
 			// linkLabelGitHub
 			// 
@@ -65,7 +71,7 @@
 			this.linkLabelGitHub.Size = new System.Drawing.Size(40, 13);
 			this.linkLabelGitHub.TabIndex = 2;
 			this.linkLabelGitHub.TabStop = true;
-			this.linkLabelGitHub.Text = "GitHub";
+			this.linkLabelGitHub.Text = Links.GitHubRepo;
 			this.linkLabelGitHub.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
 			// 
 			// linkLabel2
@@ -76,7 +82,7 @@
 			this.linkLabel2.Size = new System.Drawing.Size(215, 13);
 			this.linkLabel2.TabIndex = 1;
 			this.linkLabel2.TabStop = true;
-			this.linkLabel2.Text = "https://steamcommunity.com/groups/krybot";
+			this.linkLabel2.Text = Links.SteamGroup;
 			this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
 			// 
 			// linkLabel1
@@ -87,7 +93,7 @@
 			this.linkLabel1.Size = new System.Drawing.Size(112, 13);
 			this.linkLabel1.TabIndex = 0;
 			this.linkLabel1.TabStop = true;
-			this.linkLabel1.Text = "https://vk.com/krybot";
+			this.linkLabel1.Text = Links.VkGroup;
 			this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
 			// 
 			// FormAbout
@@ -103,12 +109,12 @@
 			this.Name = "FormAbout";
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "formAbout";
-			this.Load += new System.EventHandler(this.FormAbout_Load);
+			this.Text = strings.AboutProgram;
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
+			this.Icon = Icon.FromHandle(Resources.info.GetHicon());
 
 		}
 

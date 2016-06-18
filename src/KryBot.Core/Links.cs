@@ -93,7 +93,11 @@
 
 		public const string Steam = "http://steamcommunity.com/";
 
+		public const string SteamGroup = "https://steamcommunity.com/groups/krybot";
+
 		public const string SteamGameInfo = "http://store.steampowered.com/api/appdetails?appids=";
+
+		public const string SteamTradeUrl = "https://steamcommunity.com/tradeoffer/new/?partner=107171644&token=eSC3IOi7";
 
 		#endregion
 
@@ -103,5 +107,7 @@
 		public const string GitHubLatestReliase = "https://api.github.com/repos/KriBetko/KryBot/releases/latest";
 
 		#endregion
+
+		public const string VkGroup = "https://vk.com/krybot";
 	}
 }

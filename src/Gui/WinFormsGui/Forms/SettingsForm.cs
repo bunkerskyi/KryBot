@@ -29,7 +29,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void Design()
 		{
-			Text = @"Настройки";
+			Text = strings.Settings;
 			Icon = Icon.FromHandle(Resources.settings.GetHicon());
 
 			cbSortBy.Text = cbSortBy.Items[0].ToString();
@@ -122,7 +122,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			if (cbTimerEnable.Checked && int.Parse(tbTimerInterval.Text) == 0)
 			{
-				MessageBox.Show(@"Интервал таймера не может равняться 0", strings.Error, MessageBoxButtons.OK,
+				MessageBox.Show(strings.SettingsForm_IntervalNotZero, strings.Error, MessageBoxButtons.OK,
 					MessageBoxIcon.Error);
 				tbTimerInterval.Text = _bot.TimerInterval.ToString();
 				return;
@@ -311,7 +311,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			try
 			{
 				Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.Cookies), true);
-				MessageBox.Show(@"Для применения изменений нужен перезапуск приложения", @"Предупреждение",
+				MessageBox.Show(strings.CookieForm_MustRestart, strings.Warning,
 					MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			}
 			catch (Exception)

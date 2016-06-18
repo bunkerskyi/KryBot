@@ -223,9 +223,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void Design()
 		{
-			Text = $"{Application.ProductName} [{Application.ProductVersion}]";
-			Icon = Resources.KryBotPresent_256b;
-
 			btnStart.Enabled = false;
 			btnGMLogin.Visible = false;
 			btnSGLogin.Visible = false;
@@ -1157,7 +1154,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			btnGMExit.Enabled = false;
 			pbGMReload.Image = Resources.load;
-			SetStatusPanel("Обновление информации о GameMiner", Resources.load);
+			SetStatusPanel($"{strings.MainForm_UpdateInfoAbout} GameMiner", Resources.load);
 
 			if (await CheckLoginGm())
 			{
@@ -1192,7 +1189,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			btnGMExit.Enabled = false;
 			pbSGReload.Image = Resources.load;
-			SetStatusPanel("Обновление информации о SteamGifts", Resources.load);
+			SetStatusPanel($"{strings.MainForm_UpdateInfoAbout} SteamGifts", Resources.load);
 
 			if (await CheckLoginSg())
 			{
@@ -1231,7 +1228,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			btnGMExit.Enabled = false;
 			pbSCReload.Image = Resources.load;
-			SetStatusPanel("Обновление информации о SteamCompanion", Resources.load);
+			SetStatusPanel($"{strings.MainForm_UpdateInfoAbout} SteamCompanion", Resources.load);
 
 			if (await CheckLoginSc())
 			{
@@ -1269,7 +1266,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			btnGMExit.Enabled = false;
 			pbUGReload.Image = Resources.load;
-			SetStatusPanel("Обновление информации о UseGamble", Resources.load);
+			SetStatusPanel($"{strings.MainForm_UpdateInfoAbout} UseGamble", Resources.load);
 
 			if (await CheckLoginSp())
 			{
@@ -1296,7 +1293,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			btnGMExit.Enabled = false;
 			pbSTreload.Image = Resources.load;
-			SetStatusPanel("Обновление информации о SteamTrade", Resources.load);
+			SetStatusPanel($"{strings.MainForm_UpdateInfoAbout} SteamTrade", Resources.load);
 
 			if (await CheckLoginSt())
 			{
@@ -1377,7 +1374,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			var saveFileDialog1 = new SaveFileDialog
 			{
 				Filter = @"XML|*.xml",
-				Title = @"Сохранить профиль"
+				Title = strings.FileDialog_SaveProfile
 			};
 			saveFileDialog1.ShowDialog();
 
@@ -1712,7 +1709,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			btnPBExit.Enabled = false;
 			pbPBRefresh.Image = Resources.load;
-			SetStatusPanel("Обновление информации о PlayBlink", Resources.load);
+			SetStatusPanel($"{strings.MainForm_UpdateInfoAbout} PlayBlink", Resources.load);
 
 			if (await CheckLoginPb())
 			{

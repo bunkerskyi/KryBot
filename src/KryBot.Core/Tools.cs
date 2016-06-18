@@ -1,6 +1,4 @@
-﻿using KryBot.Core.Helpers;
-
-namespace KryBot.Core
+﻿namespace KryBot.Core
 {
 	public static class Tools
 	{

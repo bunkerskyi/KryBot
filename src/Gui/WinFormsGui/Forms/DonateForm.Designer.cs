@@ -1,4 +1,9 @@
-﻿namespace KryBot.Gui.WinFormsGui.Forms
+﻿using System.Drawing;
+using KryBot.CommonResources.lang;
+using KryBot.Core;
+using KryBot.Gui.WinFormsGui.Properties;
+
+namespace KryBot.Gui.WinFormsGui.Forms
 {
 	partial class FormDonate
 	{
@@ -28,6 +33,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormDonate));
 			this.label1 = new System.Windows.Forms.Label();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.label4 = new System.Windows.Forms.Label();
@@ -56,7 +62,7 @@
 			this.label1.Size = new System.Drawing.Size(249, 39);
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Вы можете помочь разработчику материально \r\nпереведя любую сумму на один из счето" +
-	"в, \r\nпредоставленных ниже:\r\n";
+    "в, \r\nпредоставленных ниже:";
 			// 
 			// groupBox1
 			// 
@@ -86,8 +92,10 @@
 			// 
 			this.textBoxWMU.Location = new System.Drawing.Point(53, 65);
 			this.textBoxWMU.Name = "textBoxWMU";
+			this.textBoxWMU.ReadOnly = true;
 			this.textBoxWMU.Size = new System.Drawing.Size(201, 20);
 			this.textBoxWMU.TabIndex = 4;
+			this.textBoxWMU.Text = "U353566680538";
 			// 
 			// label3
 			// 
@@ -102,15 +110,19 @@
 			// 
 			this.textBoxWMZ.Location = new System.Drawing.Point(53, 39);
 			this.textBoxWMZ.Name = "textBoxWMZ";
+			this.textBoxWMZ.ReadOnly = true;
 			this.textBoxWMZ.Size = new System.Drawing.Size(201, 20);
 			this.textBoxWMZ.TabIndex = 2;
+			this.textBoxWMZ.Text = "Z332499191215";
 			// 
 			// textBoxWMR
 			// 
 			this.textBoxWMR.Location = new System.Drawing.Point(53, 13);
 			this.textBoxWMR.Name = "textBoxWMR";
+			this.textBoxWMR.ReadOnly = true;
 			this.textBoxWMR.Size = new System.Drawing.Size(201, 20);
 			this.textBoxWMR.TabIndex = 1;
+			this.textBoxWMR.Text = "R287737597223";
 			// 
 			// label2
 			// 
@@ -135,8 +147,10 @@
 			// 
 			this.textBoxYandex.Location = new System.Drawing.Point(9, 19);
 			this.textBoxYandex.Name = "textBoxYandex";
+			this.textBoxYandex.ReadOnly = true;
 			this.textBoxYandex.Size = new System.Drawing.Size(245, 20);
 			this.textBoxYandex.TabIndex = 0;
+			this.textBoxYandex.Text = "410011518354546";
 			// 
 			// groupBox3
 			// 
@@ -152,8 +166,10 @@
 			// 
 			this.textBoxPayPal.Location = new System.Drawing.Point(9, 19);
 			this.textBoxPayPal.Name = "textBoxPayPal";
+			this.textBoxPayPal.ReadOnly = true;
 			this.textBoxPayPal.Size = new System.Drawing.Size(245, 20);
 			this.textBoxPayPal.TabIndex = 0;
+			this.textBoxPayPal.Text = "kribetko@gmail.com";
 			// 
 			// groupBox4
 			// 
@@ -168,12 +184,12 @@
 			// linkLabel1
 			// 
 			this.linkLabel1.AutoSize = true;
-			this.linkLabel1.Location = new System.Drawing.Point(16, 16);
+			this.linkLabel1.Location = new System.Drawing.Point(6, 16);
 			this.linkLabel1.Name = "linkLabel1";
-			this.linkLabel1.Size = new System.Drawing.Size(230, 26);
+			this.linkLabel1.Size = new System.Drawing.Size(401, 13);
 			this.linkLabel1.TabIndex = 0;
 			this.linkLabel1.TabStop = true;
-			this.linkLabel1.Text = "https://steamcommunity.com/tradeoffer/new/?\r\npartner=107171644&token=eSC3IOi7";
+			this.linkLabel1.Text = "https://steamcommunity.com/tradeoffer/new/?partner=107171644&token=eSC3IOi7";
 			this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
 			this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
 			// 
@@ -187,10 +203,10 @@
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.label1);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "FormDonate";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "formDonate";
-			this.Load += new System.EventHandler(this.formDonate_Load);
+			this.Text = "Поддержать разработчика";
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.groupBox2.ResumeLayout(false);

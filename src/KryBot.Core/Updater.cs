@@ -32,9 +32,9 @@ namespace KryBot.Core
 			if (release.tag_name != null &&
 				CompareVersion(Application.ProductVersion, release.tag_name))
 			{
-				return new Log($"Доступно обновление {release.tag_name}", Color.Green, true);
+				return new Log($"{strings.Updater_HaveUpdate} {release.tag_name}", Color.Green, true);
 			}
-			return new Log($"Актуальная версия {release.tag_name}", Color.White, false);
+			return new Log($"{strings.Updater_CurrentVersion} {release.tag_name}", Color.White, false);
 		}
 
 		/// <summary>

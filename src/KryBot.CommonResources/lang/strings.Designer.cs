@@ -61,6 +61,24 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ссылки на сообщества.
+        /// </summary>
+        public static string AboutForm_groupBox1 {
+            get {
+                return ResourceManager.GetString("AboutForm_groupBox1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to О программе.
+        /// </summary>
+        public static string AboutProgram {
+            get {
+                return ResourceManager.GetString("AboutProgram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Аккаунт не активирван.
         /// </summary>
         public static string AccountNotActive {
@@ -79,11 +97,110 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Для выполнения этого действия приложение должно быть запущено с правами администратора.
+        /// </summary>
+        public static string Autorun_MustHaveAdminPerm {
+            get {
+                return ResourceManager.GetString("Autorun_MustHaveAdminPerm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to При записи в реестр произошла ошибка. Запись в реестр разрешена администратором?.
+        /// </summary>
+        public static string Autorun_RegisterEditError {
+            get {
+                return ResourceManager.GetString("Autorun_RegisterEditError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Черный список.
+        /// </summary>
+        public static string Blacklist {
+            get {
+                return ResourceManager.GetString("Blacklist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Нужна авторизация в Steam.
+        /// </summary>
+        public static string Blacklist_NeedAuth {
+            get {
+                return ResourceManager.GetString("Blacklist_NeedAuth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Добавить.
+        /// </summary>
+        public static string BlacklistForm_Add {
+            get {
+                return ResourceManager.GetString("BlacklistForm_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Удалить.
+        /// </summary>
+        public static string BlacklistForm_Del {
+            get {
+                return ResourceManager.GetString("BlacklistForm_Del", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Загрузить из....
+        /// </summary>
+        public static string BlacklistForm_LoadFrom {
+            get {
+                return ResourceManager.GetString("BlacklistForm_LoadFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Профиль Steam.
+        /// </summary>
+        public static string BlacklistForm_SteamAccount {
+            get {
+                return ResourceManager.GetString("BlacklistForm_SteamAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Угля.
         /// </summary>
         public static string Coal {
             get {
                 return ResourceManager.GetString("Coal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Для применения измененией нужен перезапуск приложения..
+        /// </summary>
+        public static string CookieForm_MustRestart {
+            get {
+                return ResourceManager.GetString("CookieForm_MustRestart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сохранить.
+        /// </summary>
+        public static string CookieForm_Save {
+            get {
+                return ResourceManager.GetString("CookieForm_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Количество.
+        /// </summary>
+        public static string Count {
+            get {
+                return ResourceManager.GetString("Count", resourceCulture);
             }
         }
         
@@ -106,11 +223,67 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Поддержать разработчика.
+        /// </summary>
+        public static string DonateForm_Donate {
+            get {
+                return ResourceManager.GetString("DonateForm_Donate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Вы можете помочь разработчику материально 
+        ///переведя любую сумму на один из счетов, 
+        ///предоставленных ниже:.
+        /// </summary>
+        public static string DonateForm_Text {
+            get {
+                return ResourceManager.GetString("DonateForm_Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ошибка.
         /// </summary>
         public static string Error {
             get {
                 return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выход.
+        /// </summary>
+        public static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Фарм.
+        /// </summary>
+        public static string Farm {
+            get {
+                return ResourceManager.GetString("Farm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Файл.
+        /// </summary>
+        public static string File {
+            get {
+                return ResourceManager.GetString("File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сохранить профиль.
+        /// </summary>
+        public static string FileDialog_SaveProfile {
+            get {
+                return ResourceManager.GetString("FileDialog_SaveProfile", resourceCulture);
             }
         }
         
@@ -331,6 +504,15 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Информация.
+        /// </summary>
+        public static string Information {
+            get {
+                return ResourceManager.GetString("Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Уровень.
         /// </summary>
         public static string Level {
@@ -345,6 +527,15 @@ namespace KryBot.CommonResources.lang {
         public static string Licens {
             get {
                 return ResourceManager.GetString("Licens", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to На сайт.
+        /// </summary>
+        public static string LinkLabel_OnSite {
+            get {
+                return ResourceManager.GetString("LinkLabel_OnSite", resourceCulture);
             }
         }
         
@@ -367,6 +558,15 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Логин.
+        /// </summary>
+        public static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ошибка авторизации.
         /// </summary>
         public static string LoginFaild {
@@ -381,6 +581,33 @@ namespace KryBot.CommonResources.lang {
         public static string LoginSuccess {
             get {
                 return ResourceManager.GetString("LoginSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Поддержать.
+        /// </summary>
+        public static string MainForm_Donate {
+            get {
+                return ResourceManager.GetString("MainForm_Donate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Обновление информации о.
+        /// </summary>
+        public static string MainForm_UpdateInfoAbout {
+            get {
+                return ResourceManager.GetString("MainForm_UpdateInfoAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Открыть папку с ботом.
+        /// </summary>
+        public static string OpenBotFolder {
+            get {
+                return ResourceManager.GetString("OpenBotFolder", resourceCulture);
             }
         }
         
@@ -529,11 +756,299 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Загрузка профиля.
+        /// </summary>
+        public static string ProfileLoading {
+            get {
+                return ResourceManager.GetString("ProfileLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сохранить.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сохранить как....
+        /// </summary>
+        public static string SaveAs {
+            get {
+                return ResourceManager.GetString("SaveAs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Удалить куки браузера.
+        /// </summary>
+        public static string SetitngsForm_btnDeleteCookies {
+            get {
+                return ResourceManager.GetString("SetitngsForm_btnDeleteCookies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Резерв угля:.
+        /// </summary>
+        public static string SettingForm_label2 {
+            get {
+                return ResourceManager.GetString("SettingForm_label2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 50.
+        /// </summary>
+        public static string SettingForm_tbGMMaxValue {
+            get {
+                return ResourceManager.GetString("SettingForm_tbGMMaxValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Настройки.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Автозагрузка.
+        /// </summary>
+        public static string SettingsForm_cbAutorun {
+            get {
+                return ResourceManager.GetString("SettingsForm_cbAutorun", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Оповещение о фарме.
+        /// </summary>
+        public static string SettingsForm_cbFarmTip {
+            get {
+                return ResourceManager.GetString("SettingsForm_cbFarmTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Бесплатные золотые раздачи.
+        /// </summary>
+        public static string SettingsForm_cbGMGolden {
+            get {
+                return ResourceManager.GetString("SettingsForm_cbGMGolden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Без региональных ограничений.
+        /// </summary>
+        public static string SettingsForm_cbGMRegional {
+            get {
+                return ResourceManager.GetString("SettingsForm_cbGMRegional", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Обычные раздачи.
+        /// </summary>
+        public static string SettingsForm_cbGMRegular {
+            get {
+                return ResourceManager.GetString("SettingsForm_cbGMRegular", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сначала.
+        /// </summary>
+        public static string SettingsForm_cbSort {
+            get {
+                return ResourceManager.GetString("SettingsForm_cbSort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Включен.
+        /// </summary>
+        public static string SettingsForm_cbTimerEnable {
+            get {
+                return ResourceManager.GetString("SettingsForm_cbTimerEnable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не применять сортировку к вишлисту.
+        /// </summary>
+        public static string SettingsForm_cbWishlistSort {
+            get {
+                return ResourceManager.GetString("SettingsForm_cbWishlistSort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Оповещение о победах.
+        /// </summary>
+        public static string SettingsForm_cbWonTip {
+            get {
+                return ResourceManager.GetString("SettingsForm_cbWonTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Раздачи из песочницы.
+        /// </summary>
+        public static string SettingsForm_chGMSandbox {
+            get {
+                return ResourceManager.GetString("SettingsForm_chGMSandbox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Общие.
+        /// </summary>
+        public static string SettingsForm_Commun {
+            get {
+                return ResourceManager.GetString("SettingsForm_Commun", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Настройки.
+        /// </summary>
+        public static string SettingsForm_gbTimerSettings {
+            get {
+                return ResourceManager.GetString("SettingsForm_gbTimerSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Таймер.
+        /// </summary>
+        public static string SettingsForm_groupBox1 {
+            get {
+                return ResourceManager.GetString("SettingsForm_groupBox1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Интервал таймера не может равняться 0.
+        /// </summary>
+        public static string SettingsForm_IntervalNotZero {
+            get {
+                return ResourceManager.GetString("SettingsForm_IntervalNotZero", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Максимальная ставка:.
+        /// </summary>
+        public static string SettingsForm_label1 {
+            get {
+                return ResourceManager.GetString("SettingsForm_label1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Интервал:.
+        /// </summary>
+        public static string SettingsForm_label5 {
+            get {
+                return ResourceManager.GetString("SettingsForm_label5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to м.
+        /// </summary>
+        public static string SettingsForm_label6 {
+            get {
+                return ResourceManager.GetString("SettingsForm_label6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to шт.
+        /// </summary>
+        public static string SettingsForm_label7 {
+            get {
+                return ResourceManager.GetString("SettingsForm_label7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Циклов: .
+        /// </summary>
+        public static string SettingsForm_label8 {
+            get {
+                return ResourceManager.GetString("SettingsForm_label8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0.
+        /// </summary>
+        public static string SettingsForm_tbGMReserv {
+            get {
+                return ResourceManager.GetString("SettingsForm_tbGMReserv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5.
+        /// </summary>
+        public static string SettingsForm_tbTimerInterval {
+            get {
+                return ResourceManager.GetString("SettingsForm_tbTimerInterval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0.
+        /// </summary>
+        public static string SettingsForm_tbTimerLoops {
+            get {
+                return ResourceManager.GetString("SettingsForm_tbTimerLoops", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Развернуть.
+        /// </summary>
+        public static string Show {
+            get {
+                return ResourceManager.GetString("Show", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Старт....
         /// </summary>
         public static string Start {
             get {
                 return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Статус.
+        /// </summary>
+        public static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Не авторизован.
+        /// </summary>
+        public static string Status_NotLogined {
+            get {
+                return ResourceManager.GetString("Status_NotLogined", resourceCulture);
             }
         }
         
@@ -583,11 +1098,38 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Сервис.
+        /// </summary>
+        public static string Tools {
+            get {
+                return ResourceManager.GetString("Tools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Авторизация....
         /// </summary>
         public static string TryLogin {
             get {
                 return ResourceManager.GetString("TryLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Актуальная версия.
+        /// </summary>
+        public static string Updater_CurrentVersion {
+            get {
+                return ResourceManager.GetString("Updater_CurrentVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Доступно обновление.
+        /// </summary>
+        public static string Updater_HaveUpdate {
+            get {
+                return ResourceManager.GetString("Updater_HaveUpdate", resourceCulture);
             }
         }
         

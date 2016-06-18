@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using KryBot.Core;
-using KryBot.Gui.WinFormsGui.Properties;
 
 namespace KryBot.Gui.WinFormsGui.Forms
 {
@@ -37,7 +36,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			Location = new Point(_x, _y);
 			var owner = Owner as FormMain;
 			if (owner != null) AppendText(richTextBox1, owner.LogBuffer.Content, owner.LogBuffer.Color);
-			Design();
 		}
 
 		public void FormHide()
@@ -61,14 +59,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			{
 				if (owner != null) Location = new Point(owner.Location.X + owner.Width - 15, owner.Location.Y);
 			}
-		}
-
-		private void Design()
-		{
-			Text = @"Лог";
-			Icon = Icon.FromHandle(Resources.log.GetHicon());
-			Height = Properties.Settings.Default.LogHeight;
-			Width = Properties.Settings.Default.LogWidth;
 		}
 
 		private static void AppendText(RichTextBox box, string text, Color color)

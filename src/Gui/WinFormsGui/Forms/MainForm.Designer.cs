@@ -1,4 +1,8 @@
-﻿namespace KryBot.Gui.WinFormsGui.Forms
+﻿using System.Windows.Forms;
+using KryBot.CommonResources.lang;
+using KryBot.Gui.WinFormsGui.Properties;
+
+namespace KryBot.Gui.WinFormsGui.Forms
 {
 	partial class FormMain
 	{
@@ -157,7 +161,7 @@
 			// 
 			this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
 			this.toolStripStatusLabel1.Size = new System.Drawing.Size(108, 17);
-			this.toolStripStatusLabel1.Text = "Загрузка профиля";
+			this.toolStripStatusLabel1.Text = strings.ProfileLoading;
 			// 
 			// toolStripProgressBar1
 			// 
@@ -188,14 +192,14 @@
 			this.файлToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.file;
 			this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
 			this.файлToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
-			this.файлToolStripMenuItem.Text = "Файл";
+			this.файлToolStripMenuItem.Text = strings.File;
 			// 
 			// вПапкуСБотомToolStripMenuItem
 			// 
 			this.вПапкуСБотомToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.folder;
 			this.вПапкуСБотомToolStripMenuItem.Name = "вПапкуСБотомToolStripMenuItem";
 			this.вПапкуСБотомToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-			this.вПапкуСБотомToolStripMenuItem.Text = "Открыть папку с ботом";
+			this.вПапкуСБотомToolStripMenuItem.Text = strings.OpenBotFolder;
 			this.вПапкуСБотомToolStripMenuItem.Click += new System.EventHandler(this.вПапкуСБотомToolStripMenuItem_Click);
 			// 
 			// сохранитьToolStripMenuItem
@@ -203,7 +207,7 @@
 			this.сохранитьToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.file;
 			this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
 			this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-			this.сохранитьToolStripMenuItem.Text = "Сохранить";
+			this.сохранитьToolStripMenuItem.Text = strings.Save;
 			this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
 			// 
 			// сохранитьКакToolStripMenuItem
@@ -211,7 +215,7 @@
 			this.сохранитьКакToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.file;
 			this.сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
 			this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-			this.сохранитьКакToolStripMenuItem.Text = "Сохранить как...";
+			this.сохранитьКакToolStripMenuItem.Text = strings.SaveAs;
 			this.сохранитьКакToolStripMenuItem.Click += new System.EventHandler(this.сохранитьКакToolStripMenuItem_Click);
 			// 
 			// загрузитьToolStripMenuItem
@@ -219,7 +223,7 @@
 			this.загрузитьToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.exit;
 			this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
 			this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-			this.загрузитьToolStripMenuItem.Text = "Выйти";
+			this.загрузитьToolStripMenuItem.Text = strings.Exit;
 			this.загрузитьToolStripMenuItem.Click += new System.EventHandler(this.загрузитьToolStripMenuItem_Click);
 			// 
 			// настройкиToolStripMenuItem
@@ -230,14 +234,14 @@
 			this.настройкиToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("настройкиToolStripMenuItem.Image")));
 			this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
 			this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
-			this.настройкиToolStripMenuItem.Text = "Сервис";
+			this.настройкиToolStripMenuItem.Text = strings.Tools;
 			// 
 			// настройкиToolStripMenuItem1
 			// 
 			this.настройкиToolStripMenuItem1.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.settings;
 			this.настройкиToolStripMenuItem1.Name = "настройкиToolStripMenuItem1";
 			this.настройкиToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
-			this.настройкиToolStripMenuItem1.Text = "Настройки";
+			this.настройкиToolStripMenuItem1.Text = strings.Settings;
 			this.настройкиToolStripMenuItem1.Click += new System.EventHandler(this.настройкиToolStripMenuItem1_Click);
 			// 
 			// черныйСписокToolStripMenuItem
@@ -245,7 +249,7 @@
 			this.черныйСписокToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.blocked;
 			this.черныйСписокToolStripMenuItem.Name = "черныйСписокToolStripMenuItem";
 			this.черныйСписокToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-			this.черныйСписокToolStripMenuItem.Text = "Черный список";
+			this.черныйСписокToolStripMenuItem.Text = strings.Blacklist;
 			this.черныйСписокToolStripMenuItem.Click += new System.EventHandler(this.черныйСписокToolStripMenuItem_Click);
 			// 
 			// оПрограммеToolStripMenuItem
@@ -256,14 +260,14 @@
 			this.оПрограммеToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.info;
 			this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
 			this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
-			this.оПрограммеToolStripMenuItem.Text = "Информация";
+			this.оПрограммеToolStripMenuItem.Text = strings.Information;
 			// 
 			// оПрограммеToolStripMenuItem1
 			// 
 			this.оПрограммеToolStripMenuItem1.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.info;
 			this.оПрограммеToolStripMenuItem1.Name = "оПрограммеToolStripMenuItem1";
 			this.оПрограммеToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-			this.оПрограммеToolStripMenuItem1.Text = "О программе";
+			this.оПрограммеToolStripMenuItem1.Text = strings.AboutProgram;
 			this.оПрограммеToolStripMenuItem1.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem1_Click);
 			// 
 			// донатToolStripMenuItem
@@ -271,7 +275,7 @@
 			this.донатToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.wallet;
 			this.донатToolStripMenuItem.Name = "донатToolStripMenuItem";
 			this.донатToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.донатToolStripMenuItem.Text = "Поддержать";
+			this.донатToolStripMenuItem.Text = strings.MainForm_Donate;
 			this.донатToolStripMenuItem.Click += new System.EventHandler(this.донатToolStripMenuItem_Click);
 			// 
 			// логToolStripMenuItem
@@ -280,7 +284,7 @@
 			this.логToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.log1;
 			this.логToolStripMenuItem.Name = "логToolStripMenuItem";
 			this.логToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
-			this.логToolStripMenuItem.Text = "Лог <<";
+			this.логToolStripMenuItem.Text = $"{strings.Log} <<";
 			this.логToolStripMenuItem.Click += new System.EventHandler(this.логToolStripMenuItem_Click);
 			// 
 			// tabControl1
@@ -324,7 +328,7 @@
 			this.btnGMExit.Name = "btnGMExit";
 			this.btnGMExit.Size = new System.Drawing.Size(75, 23);
 			this.btnGMExit.TabIndex = 27;
-			this.btnGMExit.Text = "Выход";
+			this.btnGMExit.Text = strings.LinkLabel_OnSite;
 			this.btnGMExit.UseVisualStyleBackColor = true;
 			this.btnGMExit.Click += new System.EventHandler(this.btnGMExit_Click);
 			// 
@@ -348,7 +352,7 @@
 			this.linkLabel1.Size = new System.Drawing.Size(47, 13);
 			this.linkLabel1.TabIndex = 7;
 			this.linkLabel1.TabStop = true;
-			this.linkLabel1.Text = "На сайт";
+			this.linkLabel1.Text = strings.LinkLabel_OnSite;
 			this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
 			// 
 			// pbGMReload
@@ -367,7 +371,7 @@
 			this.btnGMLogin.Name = "btnGMLogin";
 			this.btnGMLogin.Size = new System.Drawing.Size(75, 23);
 			this.btnGMLogin.TabIndex = 5;
-			this.btnGMLogin.Text = "Логин";
+			this.btnGMLogin.Text = strings.Login;
 			this.btnGMLogin.UseVisualStyleBackColor = true;
 			this.btnGMLogin.Click += new System.EventHandler(this.btnGMLogin_Click);
 			// 
@@ -378,7 +382,7 @@
 			this.lblGMStatus.Name = "lblGMStatus";
 			this.lblGMStatus.Size = new System.Drawing.Size(129, 13);
 			this.lblGMStatus.TabIndex = 3;
-			this.lblGMStatus.Text = "Статус: Не авторизован";
+			this.lblGMStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
 			// 
 			// lblGMCoal
 			// 
@@ -387,7 +391,7 @@
 			this.lblGMCoal.Name = "lblGMCoal";
 			this.lblGMCoal.Size = new System.Drawing.Size(44, 13);
 			this.lblGMCoal.TabIndex = 2;
-			this.lblGMCoal.Text = "Уголь: ";
+			this.lblGMCoal.Text = $"{strings.Points}: ";
 			// 
 			// lblGMLevel
 			// 
@@ -396,7 +400,7 @@
 			this.lblGMLevel.Name = "lblGMLevel";
 			this.lblGMLevel.Size = new System.Drawing.Size(57, 13);
 			this.lblGMLevel.TabIndex = 1;
-			this.lblGMLevel.Text = "Уровень: ";
+			this.lblGMLevel.Text = $"{strings.Level}: ";
 			// 
 			// tabPageSG
 			// 
@@ -422,7 +426,7 @@
 			this.btnSGExit.Name = "btnSGExit";
 			this.btnSGExit.Size = new System.Drawing.Size(75, 23);
 			this.btnSGExit.TabIndex = 28;
-			this.btnSGExit.Text = "Выход";
+			this.btnSGExit.Text = strings.Exit;
 			this.btnSGExit.UseVisualStyleBackColor = true;
 			this.btnSGExit.Click += new System.EventHandler(this.btnSGExit_Click);
 			// 
@@ -446,7 +450,7 @@
 			this.linkLabel2.Size = new System.Drawing.Size(47, 13);
 			this.linkLabel2.TabIndex = 12;
 			this.linkLabel2.TabStop = true;
-			this.linkLabel2.Text = "На сайт";
+			this.linkLabel2.Text = strings.LinkLabel_OnSite;
 			this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
 			// 
 			// pbSGReload
@@ -466,7 +470,7 @@
 			this.lblSGStatus.Name = "lblSGStatus";
 			this.lblSGStatus.Size = new System.Drawing.Size(129, 13);
 			this.lblSGStatus.TabIndex = 9;
-			this.lblSGStatus.Text = "Статус: Не авторизован";
+			this.lblSGStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
 			// 
 			// lblSGPoints
 			// 
@@ -475,7 +479,7 @@
 			this.lblSGPoints.Name = "lblSGPoints";
 			this.lblSGPoints.Size = new System.Drawing.Size(42, 13);
 			this.lblSGPoints.TabIndex = 8;
-			this.lblSGPoints.Text = "Points: ";
+			this.lblSGPoints.Text = $"{strings.Points}: ";
 			// 
 			// lblSGLevel
 			// 
@@ -484,7 +488,7 @@
 			this.lblSGLevel.Name = "lblSGLevel";
 			this.lblSGLevel.Size = new System.Drawing.Size(57, 13);
 			this.lblSGLevel.TabIndex = 7;
-			this.lblSGLevel.Text = "Уровень: ";
+			this.lblSGLevel.Text = $"{strings.Level}: ";
 			// 
 			// btnSGLogin
 			// 
@@ -492,7 +496,7 @@
 			this.btnSGLogin.Name = "btnSGLogin";
 			this.btnSGLogin.Size = new System.Drawing.Size(75, 23);
 			this.btnSGLogin.TabIndex = 6;
-			this.btnSGLogin.Text = "Логин";
+			this.btnSGLogin.Text = strings.Login;
 			this.btnSGLogin.UseVisualStyleBackColor = true;
 			this.btnSGLogin.Click += new System.EventHandler(this.btnSGLogin_Click);
 			// 
@@ -519,7 +523,7 @@
 			this.btnSCExit.Name = "btnSCExit";
 			this.btnSCExit.Size = new System.Drawing.Size(75, 23);
 			this.btnSCExit.TabIndex = 29;
-			this.btnSCExit.Text = "Выход";
+			this.btnSCExit.Text = strings.Exit;
 			this.btnSCExit.UseVisualStyleBackColor = true;
 			this.btnSCExit.Click += new System.EventHandler(this.btnSCExit_Click);
 			// 
@@ -543,7 +547,7 @@
 			this.linkLabel3.Size = new System.Drawing.Size(47, 13);
 			this.linkLabel3.TabIndex = 16;
 			this.linkLabel3.TabStop = true;
-			this.linkLabel3.Text = "На сайт";
+			this.linkLabel3.Text = strings.LinkLabel_OnSite;
 			this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
 			// 
 			// pbSCReload
@@ -563,7 +567,7 @@
 			this.lblSCStatus.Name = "lblSCStatus";
 			this.lblSCStatus.Size = new System.Drawing.Size(129, 13);
 			this.lblSCStatus.TabIndex = 13;
-			this.lblSCStatus.Text = "Статус: Не авторизован";
+			this.lblSCStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
 			// 
 			// lblSCPoints
 			// 
@@ -572,7 +576,7 @@
 			this.lblSCPoints.Name = "lblSCPoints";
 			this.lblSCPoints.Size = new System.Drawing.Size(42, 13);
 			this.lblSCPoints.TabIndex = 12;
-			this.lblSCPoints.Text = "Points: ";
+			this.lblSCPoints.Text = $"{strings.Points}: ";
 			// 
 			// lblSCLevel
 			// 
@@ -581,7 +585,7 @@
 			this.lblSCLevel.Name = "lblSCLevel";
 			this.lblSCLevel.Size = new System.Drawing.Size(57, 13);
 			this.lblSCLevel.TabIndex = 11;
-			this.lblSCLevel.Text = "Уровень: ";
+			this.lblSCLevel.Text = $"{strings.Level}: ";
 			// 
 			// btnSCLogin
 			// 
@@ -589,7 +593,7 @@
 			this.btnSCLogin.Name = "btnSCLogin";
 			this.btnSCLogin.Size = new System.Drawing.Size(75, 23);
 			this.btnSCLogin.TabIndex = 7;
-			this.btnSCLogin.Text = "Логин";
+			this.btnSCLogin.Text = strings.Login;
 			this.btnSCLogin.UseVisualStyleBackColor = true;
 			this.btnSCLogin.Click += new System.EventHandler(this.btnSCLogin_Click);
 			// 
@@ -616,7 +620,7 @@
 			this.btnUGExit.Name = "btnUGExit";
 			this.btnUGExit.Size = new System.Drawing.Size(75, 23);
 			this.btnUGExit.TabIndex = 29;
-			this.btnUGExit.Text = "Выход";
+			this.btnUGExit.Text = strings.Exit;
 			this.btnUGExit.UseVisualStyleBackColor = true;
 			this.btnUGExit.Click += new System.EventHandler(this.btnSPExit_Click);
 			// 
@@ -640,7 +644,7 @@
 			this.linkLabelUG.Size = new System.Drawing.Size(47, 13);
 			this.linkLabelUG.TabIndex = 20;
 			this.linkLabelUG.TabStop = true;
-			this.linkLabelUG.Text = "На сайт";
+			this.linkLabelUG.Text = strings.LinkLabel_OnSite;
 			this.linkLabelUG.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel4_LinkClicked);
 			// 
 			// pbUGReload
@@ -660,7 +664,7 @@
 			this.lblUGStatus.Name = "lblUGStatus";
 			this.lblUGStatus.Size = new System.Drawing.Size(129, 13);
 			this.lblUGStatus.TabIndex = 17;
-			this.lblUGStatus.Text = "Статус: Не авторизован";
+			this.lblUGStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
 			// 
 			// lblUGPoints
 			// 
@@ -669,7 +673,7 @@
 			this.lblUGPoints.Name = "lblUGPoints";
 			this.lblUGPoints.Size = new System.Drawing.Size(42, 13);
 			this.lblUGPoints.TabIndex = 16;
-			this.lblUGPoints.Text = "Points: ";
+			this.lblUGPoints.Text = $"{strings.Points}: ";
 			// 
 			// lblUGLevel
 			// 
@@ -678,7 +682,7 @@
 			this.lblUGLevel.Name = "lblUGLevel";
 			this.lblUGLevel.Size = new System.Drawing.Size(57, 13);
 			this.lblUGLevel.TabIndex = 15;
-			this.lblUGLevel.Text = "Уровень: ";
+			this.lblUGLevel.Text = $"{strings.Level}: ";
 			// 
 			// btnUGLogin
 			// 
@@ -686,7 +690,7 @@
 			this.btnUGLogin.Name = "btnUGLogin";
 			this.btnUGLogin.Size = new System.Drawing.Size(75, 23);
 			this.btnUGLogin.TabIndex = 9;
-			this.btnUGLogin.Text = "Логин";
+			this.btnUGLogin.Text = strings.Login;
 			this.btnUGLogin.UseVisualStyleBackColor = true;
 			this.btnUGLogin.Click += new System.EventHandler(this.btnSPLogin_Click);
 			// 
@@ -713,7 +717,7 @@
 			this.btnSTExit.Name = "btnSTExit";
 			this.btnSTExit.Size = new System.Drawing.Size(75, 23);
 			this.btnSTExit.TabIndex = 29;
-			this.btnSTExit.Text = "Выход";
+			this.btnSTExit.Text = strings.Exit;
 			this.btnSTExit.UseVisualStyleBackColor = true;
 			this.btnSTExit.Click += new System.EventHandler(this.btnSTExit_Click);
 			// 
@@ -737,7 +741,7 @@
 			this.linkLabelST.Size = new System.Drawing.Size(47, 13);
 			this.linkLabelST.TabIndex = 24;
 			this.linkLabelST.TabStop = true;
-			this.linkLabelST.Text = "На сайт";
+			this.linkLabelST.Text = strings.LinkLabel_OnSite;
 			this.linkLabelST.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel5_LinkClicked);
 			// 
 			// pbSTreload
@@ -757,7 +761,7 @@
 			this.lblSTStatus.Name = "lblSTStatus";
 			this.lblSTStatus.Size = new System.Drawing.Size(129, 13);
 			this.lblSTStatus.TabIndex = 21;
-			this.lblSTStatus.Text = "Статус: Не авторизован";
+			this.lblSTStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
 			// 
 			// lblSTPoints
 			// 
@@ -766,7 +770,7 @@
 			this.lblSTPoints.Name = "lblSTPoints";
 			this.lblSTPoints.Size = new System.Drawing.Size(42, 13);
 			this.lblSTPoints.TabIndex = 20;
-			this.lblSTPoints.Text = "Points: ";
+			this.lblSTPoints.Text = $"{strings.Points}: ";
 			// 
 			// lblSTLevel
 			// 
@@ -775,7 +779,7 @@
 			this.lblSTLevel.Name = "lblSTLevel";
 			this.lblSTLevel.Size = new System.Drawing.Size(57, 13);
 			this.lblSTLevel.TabIndex = 19;
-			this.lblSTLevel.Text = "Уровень: ";
+			this.lblSTLevel.Text = $"{strings.Level}: ";
 			// 
 			// btnSTLogin
 			// 
@@ -783,7 +787,7 @@
 			this.btnSTLogin.Name = "btnSTLogin";
 			this.btnSTLogin.Size = new System.Drawing.Size(75, 23);
 			this.btnSTLogin.TabIndex = 8;
-			this.btnSTLogin.Text = "Логин";
+			this.btnSTLogin.Text = strings.Login;
 			this.btnSTLogin.UseVisualStyleBackColor = true;
 			this.btnSTLogin.Click += new System.EventHandler(this.btnSTLogin_Click);
 			// 
@@ -810,7 +814,7 @@
 			this.btnPBExit.Name = "btnPBExit";
 			this.btnPBExit.Size = new System.Drawing.Size(75, 23);
 			this.btnPBExit.TabIndex = 32;
-			this.btnPBExit.Text = "Выход";
+			this.btnPBExit.Text = strings.Exit;
 			this.btnPBExit.UseVisualStyleBackColor = true;
 			this.btnPBExit.Click += new System.EventHandler(this.btnPBExit_Click);
 			// 
@@ -820,7 +824,7 @@
 			this.btnPBLogin.Name = "btnPBLogin";
 			this.btnPBLogin.Size = new System.Drawing.Size(75, 23);
 			this.btnPBLogin.TabIndex = 31;
-			this.btnPBLogin.Text = "Логин";
+			this.btnPBLogin.Text = strings.Login;
 			this.btnPBLogin.UseVisualStyleBackColor = true;
 			this.btnPBLogin.Click += new System.EventHandler(this.btnPBLogin_Click);
 			// 
@@ -854,7 +858,7 @@
 			this.linkLabelPB.Size = new System.Drawing.Size(47, 13);
 			this.linkLabelPB.TabIndex = 28;
 			this.linkLabelPB.TabStop = true;
-			this.linkLabelPB.Text = "На сайт";
+			this.linkLabelPB.Text = strings.LinkLabel_OnSite;
 			this.linkLabelPB.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel7_LinkClicked);
 			// 
 			// lblPBStatus
@@ -864,7 +868,7 @@
 			this.lblPBStatus.Name = "lblPBStatus";
 			this.lblPBStatus.Size = new System.Drawing.Size(129, 13);
 			this.lblPBStatus.TabIndex = 27;
-			this.lblPBStatus.Text = "Статус: Не авторизован";
+			this.lblPBStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
 			// 
 			// lblPBPoints
 			// 
@@ -873,7 +877,7 @@
 			this.lblPBPoints.Name = "lblPBPoints";
 			this.lblPBPoints.Size = new System.Drawing.Size(42, 13);
 			this.lblPBPoints.TabIndex = 26;
-			this.lblPBPoints.Text = "Points: ";
+			this.lblPBPoints.Text = $"{strings.Points}: ";
 			// 
 			// lblPBLevel
 			// 
@@ -882,7 +886,7 @@
 			this.lblPBLevel.Name = "lblPBLevel";
 			this.lblPBLevel.Size = new System.Drawing.Size(57, 13);
 			this.lblPBLevel.TabIndex = 25;
-			this.lblPBLevel.Text = "Уровень: ";
+			this.lblPBLevel.Text = $"{strings.Level}: ";
 			// 
 			// tabPageGA
 			// 
@@ -928,7 +932,7 @@
 			this.btnGAExit.Name = "btnGAExit";
 			this.btnGAExit.Size = new System.Drawing.Size(75, 23);
 			this.btnGAExit.TabIndex = 33;
-			this.btnGAExit.Text = "Выход";
+			this.btnGAExit.Text = strings.Exit;
 			this.btnGAExit.UseVisualStyleBackColor = true;
 			this.btnGAExit.Click += new System.EventHandler(this.buttonExitGA_Click);
 			// 
@@ -938,7 +942,7 @@
 			this.btnGALogin.Name = "btnGALogin";
 			this.btnGALogin.Size = new System.Drawing.Size(75, 23);
 			this.btnGALogin.TabIndex = 32;
-			this.btnGALogin.Text = "Логин";
+			this.btnGALogin.Text = strings.Login;
 			this.btnGALogin.UseVisualStyleBackColor = true;
 			this.btnGALogin.Click += new System.EventHandler(this.buttonLoginGA_Click);
 			// 
@@ -950,7 +954,7 @@
 			this.linkLabelGA.Size = new System.Drawing.Size(47, 13);
 			this.linkLabelGA.TabIndex = 31;
 			this.linkLabelGA.TabStop = true;
-			this.linkLabelGA.Text = "На сайт";
+			this.linkLabelGA.Text = strings.LinkLabel_OnSite;
 			this.linkLabelGA.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelGA_LinkClicked);
 			// 
 			// lblGAPoints
@@ -960,7 +964,7 @@
 			this.lblGAPoints.Name = "lblGAPoints";
 			this.lblGAPoints.Size = new System.Drawing.Size(42, 13);
 			this.lblGAPoints.TabIndex = 30;
-			this.lblGAPoints.Text = "Points: ";
+			this.lblGAPoints.Text = $"{strings.Points}: ";
 			// 
 			// lblGALevel
 			// 
@@ -969,7 +973,7 @@
 			this.lblGALevel.Name = "lblGALevel";
 			this.lblGALevel.Size = new System.Drawing.Size(57, 13);
 			this.lblGALevel.TabIndex = 29;
-			this.lblGALevel.Text = "Уровень: ";
+			this.lblGALevel.Text = $"{strings.Level}: ";
 			// 
 			// lblGAStatus
 			// 
@@ -978,7 +982,7 @@
 			this.lblGAStatus.Name = "lblGAStatus";
 			this.lblGAStatus.Size = new System.Drawing.Size(129, 13);
 			this.lblGAStatus.TabIndex = 28;
-			this.lblGAStatus.Text = "Статус: Не авторизован";
+			this.lblGAStatus.Text = $"{ strings.Status}: { strings.Status_NotLogined}";
 			// 
 			// tabPageSteam
 			// 
@@ -999,7 +1003,7 @@
 			this.btnSteamExit.Name = "btnSteamExit";
 			this.btnSteamExit.Size = new System.Drawing.Size(75, 23);
 			this.btnSteamExit.TabIndex = 29;
-			this.btnSteamExit.Text = "Выход";
+			this.btnSteamExit.Text = strings.Exit;
 			this.btnSteamExit.UseVisualStyleBackColor = true;
 			this.btnSteamExit.Click += new System.EventHandler(this.btnSteamExit_Click);
 			// 
@@ -1009,7 +1013,7 @@
 			this.btnSteamLogin.Name = "btnSteamLogin";
 			this.btnSteamLogin.Size = new System.Drawing.Size(75, 23);
 			this.btnSteamLogin.TabIndex = 12;
-			this.btnSteamLogin.Text = "Логин";
+			this.btnSteamLogin.Text = strings.Login;
 			this.btnSteamLogin.UseVisualStyleBackColor = true;
 			this.btnSteamLogin.Click += new System.EventHandler(this.btnSteamLogin_Click);
 			// 
@@ -1021,7 +1025,7 @@
 			this.linkLabel6.Size = new System.Drawing.Size(47, 13);
 			this.linkLabel6.TabIndex = 11;
 			this.linkLabel6.TabStop = true;
-			this.linkLabel6.Text = "На сайт";
+			this.linkLabel6.Text = strings.LinkLabel_OnSite;
 			this.linkLabel6.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel6_LinkClicked);
 			// 
 			// lblSteamStatus
@@ -1031,7 +1035,7 @@
 			this.lblSteamStatus.Name = "lblSteamStatus";
 			this.lblSteamStatus.Size = new System.Drawing.Size(129, 13);
 			this.lblSteamStatus.TabIndex = 10;
-			this.lblSteamStatus.Text = "Статус: Не авторизован";
+			this.lblSteamStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
 			// 
 			// btnStart
 			// 
@@ -1039,7 +1043,7 @@
 			this.btnStart.Name = "btnStart";
 			this.btnStart.Size = new System.Drawing.Size(342, 67);
 			this.btnStart.TabIndex = 5;
-			this.btnStart.Text = "Старт";
+			this.btnStart.Text = strings.Start;
 			this.btnStart.UseVisualStyleBackColor = true;
 			this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
 			// 
@@ -1062,21 +1066,21 @@
 			// 
 			this.toolStripMenuItem_Show.Name = "toolStripMenuItem_Show";
 			this.toolStripMenuItem_Show.Size = new System.Drawing.Size(135, 22);
-			this.toolStripMenuItem_Show.Text = "Развернуть";
+			this.toolStripMenuItem_Show.Text = strings.Show;
 			this.toolStripMenuItem_Show.Click += new System.EventHandler(this.toolStripMenuItem_Show_Click);
 			// 
 			// toolStripMenuItem_Farm
 			// 
 			this.toolStripMenuItem_Farm.Name = "toolStripMenuItem_Farm";
 			this.toolStripMenuItem_Farm.Size = new System.Drawing.Size(135, 22);
-			this.toolStripMenuItem_Farm.Text = "Фарм";
+			this.toolStripMenuItem_Farm.Text = strings.Farm;
 			this.toolStripMenuItem_Farm.Click += new System.EventHandler(this.toolStripMenuItem_Farm_Click);
 			// 
 			// toolStripMenuItem_Exit
 			// 
 			this.toolStripMenuItem_Exit.Name = "toolStripMenuItem_Exit";
 			this.toolStripMenuItem_Exit.Size = new System.Drawing.Size(135, 22);
-			this.toolStripMenuItem_Exit.Text = "Выход";
+			this.toolStripMenuItem_Exit.Text = strings.Exit;
 			this.toolStripMenuItem_Exit.Click += new System.EventHandler(this.toolStripMenuItem_Exit_Click);
 			// 
 			// FormMain
@@ -1092,9 +1096,10 @@
 			this.MainMenuStrip = this.menuStrip1;
 			this.MaximizeBox = false;
 			this.Name = "FormMain";
+			this.Icon = Resources.KryBotPresent_256b;
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "KryBot";
+			this.Text = $"{Application.ProductName} [{Application.ProductVersion}]";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
 			this.Load += new System.EventHandler(this.FormMain_Load);
 			this.LocationChanged += new System.EventHandler(this.FormMain_LocationChanged);
