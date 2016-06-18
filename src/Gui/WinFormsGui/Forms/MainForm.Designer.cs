@@ -43,7 +43,6 @@
 			this.настройкиToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.черныйСписокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.статстикаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.оПрограммеToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
 			this.донатToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.логToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -252,7 +251,6 @@
 			// оПрограммеToolStripMenuItem
 			// 
 			this.оПрограммеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.статстикаToolStripMenuItem,
             this.оПрограммеToolStripMenuItem1,
             this.донатToolStripMenuItem});
 			this.оПрограммеToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.info;
@@ -260,19 +258,11 @@
 			this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
 			this.оПрограммеToolStripMenuItem.Text = "Информация";
 			// 
-			// статстикаToolStripMenuItem
-			// 
-			this.статстикаToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.statistic1;
-			this.статстикаToolStripMenuItem.Name = "статстикаToolStripMenuItem";
-			this.статстикаToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-			this.статстикаToolStripMenuItem.Text = "Статистика";
-			this.статстикаToolStripMenuItem.Click += new System.EventHandler(this.статстикаToolStripMenuItem_Click);
-			// 
 			// оПрограммеToolStripMenuItem1
 			// 
 			this.оПрограммеToolStripMenuItem1.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.info;
 			this.оПрограммеToolStripMenuItem1.Name = "оПрограммеToolStripMenuItem1";
-			this.оПрограммеToolStripMenuItem1.Size = new System.Drawing.Size(149, 22);
+			this.оПрограммеToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
 			this.оПрограммеToolStripMenuItem1.Text = "О программе";
 			this.оПрограммеToolStripMenuItem1.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem1_Click);
 			// 
@@ -280,7 +270,7 @@
 			// 
 			this.донатToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.wallet;
 			this.донатToolStripMenuItem.Name = "донатToolStripMenuItem";
-			this.донатToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+			this.донатToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.донатToolStripMenuItem.Text = "Поддержать";
 			this.донатToolStripMenuItem.Click += new System.EventHandler(this.донатToolStripMenuItem_Click);
 			// 
@@ -1163,7 +1153,6 @@
 		private System.Windows.Forms.Label lblGMCoal;
 		private System.Windows.Forms.Label lblGMLevel;
 		private System.Windows.Forms.Button btnStart;
-		private System.Windows.Forms.ToolStripMenuItem статстикаToolStripMenuItem;
 		private System.Windows.Forms.Button btnGMLogin;
 		private System.Windows.Forms.Button btnSGLogin;
 		private System.Windows.Forms.Button btnSCLogin;

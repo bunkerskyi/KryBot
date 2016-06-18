@@ -124,9 +124,6 @@
     <None Include="Resources\settings.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\statistic.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\timer.png" />
   </ItemGroup>
   <ItemGroup>

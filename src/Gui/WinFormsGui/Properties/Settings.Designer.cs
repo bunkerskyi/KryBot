@@ -37,54 +37,6 @@ namespace KryBot.Gui.WinFormsGui.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int JoinsPerSession {
-            get {
-                return ((int)(this["JoinsPerSession"]));
-            }
-            set {
-                this["JoinsPerSession"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int JoinsTotal {
-            get {
-                return ((int)(this["JoinsTotal"]));
-            }
-            set {
-                this["JoinsTotal"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int JoinsLoops {
-            get {
-                return ((int)(this["JoinsLoops"]));
-            }
-            set {
-                this["JoinsLoops"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int JoinsLoopsTotal {
-            get {
-                return ((int)(this["JoinsLoopsTotal"]));
-            }
-            set {
-                this["JoinsLoopsTotal"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool FirstExecute {
             get {

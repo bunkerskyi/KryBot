@@ -292,8 +292,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			Properties.Settings.Default.LogActive = _logActive;
 			_bot.Save();
 			new Settings().Save();
-			Properties.Settings.Default.JoinsPerSession = 0;
-			Properties.Settings.Default.JoinsLoops = 0;
 			Properties.Settings.Default.Save();
 		}
 
@@ -564,9 +562,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			toolStripStatusLabel1.Text = strings.StatusBar_End;
 			_farming = false;
 			btnStart.Enabled = true;
-
-			Properties.Settings.Default.JoinsLoops += 1;
-			Properties.Settings.Default.JoinsLoopsTotal += 1;
 			Properties.Settings.Default.Save();
 
 			return true;
@@ -1358,12 +1353,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			Process.Start(Links.SteamTrade);
-		}
-
-		private void статстикаToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			var form = new FormStatistic();
-			form.ShowDialog();
 		}
 
 		private void оПрограммеToolStripMenuItem1_Click(object sender, EventArgs e)
