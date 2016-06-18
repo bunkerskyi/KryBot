@@ -98,7 +98,7 @@
 			this.btnPBLogin = new System.Windows.Forms.Button();
 			this.pbPBRefresh = new System.Windows.Forms.PictureBox();
 			this.cbPBEnabled = new System.Windows.Forms.CheckBox();
-			this.linkLabel7 = new System.Windows.Forms.LinkLabel();
+			this.linkLabelPB = new System.Windows.Forms.LinkLabel();
 			this.lblPBStatus = new System.Windows.Forms.Label();
 			this.lblPBPoints = new System.Windows.Forms.Label();
 			this.lblPBLevel = new System.Windows.Forms.Label();
@@ -791,7 +791,7 @@
 			this.tabPagePB.Controls.Add(this.btnPBLogin);
 			this.tabPagePB.Controls.Add(this.pbPBRefresh);
 			this.tabPagePB.Controls.Add(this.cbPBEnabled);
-			this.tabPagePB.Controls.Add(this.linkLabel7);
+			this.tabPagePB.Controls.Add(this.linkLabelPB);
 			this.tabPagePB.Controls.Add(this.lblPBStatus);
 			this.tabPagePB.Controls.Add(this.lblPBPoints);
 			this.tabPagePB.Controls.Add(this.lblPBLevel);
@@ -844,16 +844,16 @@
 			this.cbPBEnabled.UseVisualStyleBackColor = true;
 			this.cbPBEnabled.CheckedChanged += new System.EventHandler(this.cbPBEnabled_CheckedChanged);
 			// 
-			// linkLabel7
+			// linkLabelPB
 			// 
-			this.linkLabel7.AutoSize = true;
-			this.linkLabel7.Location = new System.Drawing.Point(6, 42);
-			this.linkLabel7.Name = "linkLabel7";
-			this.linkLabel7.Size = new System.Drawing.Size(47, 13);
-			this.linkLabel7.TabIndex = 28;
-			this.linkLabel7.TabStop = true;
-			this.linkLabel7.Text = "На сайт";
-			this.linkLabel7.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel7_LinkClicked);
+			this.linkLabelPB.AutoSize = true;
+			this.linkLabelPB.Location = new System.Drawing.Point(6, 42);
+			this.linkLabelPB.Name = "linkLabelPB";
+			this.linkLabelPB.Size = new System.Drawing.Size(47, 13);
+			this.linkLabelPB.TabIndex = 28;
+			this.linkLabelPB.TabStop = true;
+			this.linkLabelPB.Text = "На сайт";
+			this.linkLabelPB.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel7_LinkClicked);
 			// 
 			// lblPBStatus
 			// 
@@ -1113,7 +1113,7 @@
 		private System.Windows.Forms.Button btnPBLogin;
 		private System.Windows.Forms.PictureBox pbPBRefresh;
 		private System.Windows.Forms.CheckBox cbPBEnabled;
-		private System.Windows.Forms.LinkLabel linkLabel7;
+		private System.Windows.Forms.LinkLabel linkLabelPB;
 		private System.Windows.Forms.Label lblPBStatus;
 		private System.Windows.Forms.Label lblPBPoints;
 		private System.Windows.Forms.Label lblPBLevel;

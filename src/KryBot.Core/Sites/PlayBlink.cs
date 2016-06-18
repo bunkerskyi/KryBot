@@ -33,7 +33,35 @@ namespace KryBot.Core.Sites
 
 		#region JoinGiveaway
 
-		public async Task<Log> JoinGiveawayAsync(PlayBlinkGiveaway pbGiveaway)
+		public async Task Join(bool sort, bool sortToMore, Blacklist blacklist)
+		{
+			LogMessage.Instance.AddMessage(await LoadGiveawaysAsync(blacklist));
+
+			if(Giveaways?.Count > 0)
+			{
+				if(sort)
+				{
+					if(sortToMore)
+					{
+						Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+					}
+					else
+					{
+						Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+					}
+				}
+
+				foreach(var giveaway in Giveaways)
+				{
+					if(giveaway.Price <= Points && PointReserv <= Points - giveaway.Price)
+					{
+						LogMessage.Instance.AddMessage(await JoinGiveaway(giveaway));
+					}
+				}
+			}
+		}
+
+		private async Task<Log> JoinGiveaway(PlayBlinkGiveaway pbGiveaway)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -129,7 +157,7 @@ namespace KryBot.Core.Sites
 
 		#region Parse
 
-		public async Task<Log> CheckProfile()
+		public async Task<Log> CheckLogin()
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -164,7 +192,7 @@ namespace KryBot.Core.Sites
 			return task.Task.Result;
 		}
 
-		public async Task<Log> LoadGiveawaysAsync(Blacklist blackList)
+		private async Task<Log> LoadGiveawaysAsync(Blacklist blackList)
 		{
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
@@ -188,12 +216,15 @@ namespace KryBot.Core.Sites
 					{
 						task.SetResult(Messages.ParseGiveawaysEmpty("PlayBlink"));
 					}
-
-					blackList.RemoveGames(Giveaways);
+					else
+					{
+						blackList.RemoveGames(Giveaways);
+						task.SetResult(Messages.ParseGiveawaysFoundMatchGiveaways("PlayBlink", Giveaways?.Count.ToString()));
+					}
 				}
 				else
 				{
-					task.SetResult(Messages.ParseGiveawaysFoundMatchGiveaways("PlayBlink", Giveaways?.Count.ToString()));
+					task.SetResult(Messages.ParseGiveawaysEmpty("PlayBlink"));
 				}
 			});
 			return task.Task.Result;

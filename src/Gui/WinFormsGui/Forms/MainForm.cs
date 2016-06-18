@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -8,7 +7,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using KryBot.CommonResources.lang;
 using KryBot.Core;
-using KryBot.Core.Giveaways;
 using KryBot.Core.Helpers;
 using KryBot.Gui.WinFormsGui.Properties;
 
@@ -347,7 +345,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			LogMessage.Instance.AddMessage(Messages.DoFarm_Start());
 
 			toolStripProgressBar1.Value = 0;
-			toolStripProgressBar1.Maximum = 5;
+			toolStripProgressBar1.Maximum = 6;
 			toolStripProgressBar1.Visible = true;
 			toolStripStatusLabel1.Image = Resources.load;
 			toolStripStatusLabel1.Text = strings.FormMain_DoFarm_Farn;
@@ -500,46 +498,22 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			}
 			toolStripProgressBar1.Value++;
 
-			if (_bot.PlayBlink.Enabled)
+			if(_bot.PlayBlink.Enabled)
 			{
-				var profile = await _bot.PlayBlink.CheckProfile();
+				var profile = await _bot.PlayBlink.CheckLogin();
 				LogMessage.Instance.AddMessage(profile);
 				LoadProfilesInfo?.Invoke();
 
-				if (profile.Success)
+				if(profile.Success)
 				{
-					if (_bot.PlayBlink.Points > 0)
-					{
-						var giveaways = await _bot.PlayBlink.LoadGiveawaysAsync(_blackList);
-						if (giveaways != null && giveaways.Content != "\n")
-						{
-							LogMessage.Instance.AddMessage(giveaways);
-						}
-
-						if (_bot.PlayBlink.Giveaways?.Count > 0)
-						{
-							if (_bot.Sort)
-							{
-								if (_bot.SortToMore)
-								{
-									_bot.PlayBlink.Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
-								}
-								else
-								{
-									_bot.PlayBlink.Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
-								}
-							}
-
-							await JoinGiveaways(_bot.PlayBlink.Giveaways);
-						}
-					}
+					await _bot.PlayBlink.Join(_bot.Sort, _bot.SortToMore, _blackList);
 				}
 				else
 				{
 					BlockTabpage(tabPagePB, false);
 					btnPBLogin.Enabled = true;
 					btnPBLogin.Visible = true;
-					linkLabel7.Enabled = true;
+					linkLabelPB.Enabled = true;
 					lblPBStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
 				}
 			}
@@ -1118,7 +1092,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private async Task<bool> CheckLoginPb()
 		{
 			Message_TryLogin("PlayBlink");
-			var login = await _bot.PlayBlink.CheckProfile();
+			var login = await _bot.PlayBlink.CheckLogin();
 			LogMessage.Instance.AddMessage(login);
 			return login.Success;
 		}
@@ -1709,25 +1683,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			SetStatusPanel(strings.Finish, null);
 			pbPBRefresh.Image = Resources.refresh;
 			btnPBExit.Enabled = true;
-		}
-
-		private async Task<bool> JoinGiveaways(List<PlayBlinkGiveaway> giveaways)
-		{
-			foreach (var giveaway in giveaways)
-			{
-				if (giveaway.Price <= _bot.PlayBlink.MaxJoinValue && giveaway.Price <= _bot.PlayBlink.Points)
-				{
-					if (_bot.PlayBlink.PointReserv <= _bot.PlayBlink.Points - giveaway.Price || giveaway.Price == 0)
-					{
-						var data = await _bot.PlayBlink.JoinGiveawayAsync(giveaway);
-						if (data != null && data.Content != "\n")
-						{
-							LogMessage.Instance.AddMessage(data);
-						}
-					}
-				}
-			}
-			return true;
 		}
 
 		private void Message_TryLogin(string site)

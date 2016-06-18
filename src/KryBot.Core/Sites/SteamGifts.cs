@@ -303,12 +303,13 @@ namespace KryBot.Core.Sites
 				{
 					task.SetResult(Messages.ParseGiveawaysEmpty(content, "SteamGifts"));
 				}
-
-				blackList.RemoveGames(Giveaways);
-				blackList.RemoveGames(WishlistGiveaways);
-
-				task.SetResult(Messages.ParseGiveawaysFoundMatchGiveaways(content, "SteamGifts",
-					(Giveaways?.Count + WishlistGiveaways?.Count).ToString()));
+				else
+				{
+					blackList.RemoveGames(Giveaways);
+					blackList.RemoveGames(WishlistGiveaways);
+					task.SetResult(Messages.ParseGiveawaysFoundMatchGiveaways(content, "SteamGifts",
+						(Giveaways?.Count + WishlistGiveaways?.Count).ToString()));
+				}
 			});
 			return task.Task.Result;
 		}
