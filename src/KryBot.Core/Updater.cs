@@ -15,7 +15,7 @@ namespace KryBot.Core
 	public static class Updater
 	{
 		/// <summary>
-		/// Check application updates from GitHub repo. 
+		///     Check application updates from GitHub repo.
 		/// </summary>
 		public static async Task<Log> CheckForUpdates()
 		{
@@ -30,7 +30,7 @@ namespace KryBot.Core
 			}
 
 			if (release.tag_name != null &&
-				CompareVersion(Application.ProductVersion, release.tag_name))
+			    CompareVersion(Application.ProductVersion, release.tag_name))
 			{
 				return new Log($"{strings.Updater_HaveUpdate} {release.tag_name}", Color.Green, true);
 			}
@@ -38,7 +38,7 @@ namespace KryBot.Core
 		}
 
 		/// <summary>
-		/// Update application.
+		///     Update application.
 		/// </summary>
 		public static async Task<Log> Update()
 		{
@@ -88,7 +88,7 @@ namespace KryBot.Core
 		}
 
 		/// <summary>
-		/// Compare two strings as verions.
+		///     Compare two strings as verions.
 		/// </summary>
 		private static bool CompareVersion(string sClient, string sServer)
 		{

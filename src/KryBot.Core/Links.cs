@@ -2,11 +2,14 @@
 {
 	public static class Links
 	{
+		public const string VkGroup = "https://vk.com/krybot";
+
 		#region GameAways
 
 		public const string GameAways = "http://www.gameaways.com/";
 
-		public const string GameAwaysAuth = "https://steamcommunity.com/openid/login?openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.return_to=http%3A%2F%2Fwww.gameaways.com%2FAccount%2FExternalLoginCallback%3FReturnUrl%3D%252FHome%252FIndex%26authenticationProvider%3DSteam&openid.realm=http%3A%2F%2Fwww.gameaways.com";
+		public const string GameAwaysAuth =
+			"https://steamcommunity.com/openid/login?openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.return_to=http%3A%2F%2Fwww.gameaways.com%2FAccount%2FExternalLoginCallback%3FReturnUrl%3D%252FHome%252FIndex%26authenticationProvider%3DSteam&openid.realm=http%3A%2F%2Fwww.gameaways.com";
 
 		public static readonly string GameAwaysJoin = $"{GameAways}Giveaways/Enter/";
 
@@ -107,7 +110,5 @@
 		public const string GitHubLatestReliase = "https://api.github.com/repos/KriBetko/KryBot/releases/latest";
 
 		#endregion
-
-		public const string VkGroup = "https://vk.com/krybot";
 	}
 }

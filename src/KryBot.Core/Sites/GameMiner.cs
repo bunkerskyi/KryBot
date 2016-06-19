@@ -266,7 +266,8 @@ namespace KryBot.Core.Sites
 
 				if (FreeGolden)
 				{
-					content += LoadGiveawaysByUrl(Links.GameMinerGoldenGiveaways, strings.ParseLoadGiveaways_FreeGoldenGiveawaysIn, lang);
+					content += LoadGiveawaysByUrl(Links.GameMinerGoldenGiveaways, strings.ParseLoadGiveaways_FreeGoldenGiveawaysIn,
+						lang);
 				}
 
 				if (Regular)

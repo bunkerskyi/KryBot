@@ -127,7 +127,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 						Exit();
 					}
 
-					if(_endPage == Links.GameAways)
+					if (_endPage == Links.GameAways)
 					{
 						GameAwaysAuth();
 						Exit();
@@ -138,9 +138,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private async void GameAwaysAuth()
 		{
-			foreach(var cookie in await GetCookies(Links.GameAways))
+			foreach (var cookie in await GetCookies(Links.GameAways))
 			{
-				if(cookie.Name == ".AspNet.ApplicationCookie")
+				if (cookie.Name == ".AspNet.ApplicationCookie")
 				{
 					_bot.GameAways.Cookies.AspNetApplicationCookie = cookie.Value;
 				}

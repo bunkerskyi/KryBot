@@ -39,7 +39,7 @@ namespace KryBot.Core.Sites
 			await Task.Run(() =>
 			{
 				Thread.Sleep(400);
-				if(giveaway.Code != null)
+				if (giveaway.Code != null)
 				{
 					var list = new List<HttpHeader>();
 					var header = new HttpHeader
@@ -54,7 +54,7 @@ namespace KryBot.Core.Sites
 						Cookies.Generate());
 					var jresponse =
 						JsonConvert.DeserializeObject<JsonJoin>(response.RestResponse.Content.Replace(".", ""));
-					if(jresponse.Error == 0)
+					if (jresponse.Error == 0)
 					{
 						Points = jresponse.target_h.my_coins;
 						task.SetResult(Messages.GiveawayJoined("UseGamble", giveaway.Name, giveaway.Price,
@@ -77,11 +77,11 @@ namespace KryBot.Core.Sites
 		{
 			LogMessage.Instance.AddMessage(await LoadGiveawaysAsync(blacklist));
 
-			if(Giveaways?.Count > 0)
+			if (Giveaways?.Count > 0)
 			{
-				if(sort)
+				if (sort)
 				{
-					if(sortToMore)
+					if (sortToMore)
 					{
 						Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
 					}
@@ -91,9 +91,9 @@ namespace KryBot.Core.Sites
 					}
 				}
 
-				foreach(var giveaway in Giveaways)
+				foreach (var giveaway in Giveaways)
 				{
-					if(giveaway.Price <= Points && PointsReserv <= Points - giveaway.Price)
+					if (giveaway.Price <= Points && PointsReserv <= Points - giveaway.Price)
 					{
 						LogMessage.Instance.AddMessage(await JoinGiveaway(giveaway));
 					}

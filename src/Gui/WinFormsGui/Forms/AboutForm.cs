@@ -12,17 +12,17 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			Process.Start(((LinkLabel)sender).Text);
+			Process.Start(((LinkLabel) sender).Text);
 		}
 
 		private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			Process.Start(((LinkLabel)sender).Text);
+			Process.Start(((LinkLabel) sender).Text);
 		}
 
 		private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
 		{
-			Process.Start(((LinkLabel)sender).Text);
+			Process.Start(((LinkLabel) sender).Text);
 		}
 	}
 }

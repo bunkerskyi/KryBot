@@ -7,40 +7,40 @@ using System.Reflection;
 
 namespace KryBot.Core.Helpers
 {
-	public  static class CookieHelper
+	public static class CookieHelper
 	{
 		public static List<Cookie> CookieContainer_ToList(CookieContainer container)
 		{
 			var cookies = new List<Cookie>();
 
-			var table = (Hashtable)container.GetType().InvokeMember("m_domainTable",
+			var table = (Hashtable) container.GetType().InvokeMember("m_domainTable",
 				BindingFlags.NonPublic |
 				BindingFlags.GetField |
 				BindingFlags.Instance,
 				null,
 				container,
-				new object[] { });
+				new object[] {});
 
-			foreach(var key in table.Keys)
+			foreach (var key in table.Keys)
 			{
 				Uri uri;
 
 				var domain = key as string;
 
-				if(domain == null)
+				if (domain == null)
 					continue;
 
-				if(domain.StartsWith("."))
+				if (domain.StartsWith("."))
 					domain = domain.Substring(1);
 
 				var address = $"http://{domain}/";
 
-				if(Uri.TryCreate(address, UriKind.RelativeOrAbsolute, out uri) == false)
+				if (Uri.TryCreate(address, UriKind.RelativeOrAbsolute, out uri) == false)
 					continue;
 
-				foreach(Cookie cookie in container.GetCookies(uri))
+				foreach (Cookie cookie in container.GetCookies(uri))
 				{
-					if(cookies.Contains(cookie) == false)
+					if (cookies.Contains(cookie) == false)
 					{
 						cookies.Add(cookie);
 					}
@@ -52,7 +52,7 @@ namespace KryBot.Core.Helpers
 
 		public static string GetSessCookieInresponse(CookieContainer cookies, string domain, string cookieName)
 		{
-			if(cookies?.Count > 0)
+			if (cookies?.Count > 0)
 			{
 				var list = CookieContainer_ToList(cookies);
 

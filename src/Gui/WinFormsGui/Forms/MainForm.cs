@@ -10,7 +10,6 @@ using KryBot.CommonResources.Localization;
 using KryBot.Core;
 using KryBot.Core.Helpers;
 using KryBot.Gui.WinFormsGui.Properties;
-using Timer = System.Windows.Forms.Timer;
 
 namespace KryBot.Gui.WinFormsGui.Forms
 {
@@ -447,19 +446,19 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			}
 			toolStripProgressBar1.Value++;
 
-			if(_bot.UseGamble.Enabled)
+			if (_bot.UseGamble.Enabled)
 			{
 				var profile = await _bot.UseGamble.CheckLogin();
 				LogMessage.Instance.AddMessage(profile);
 				LoadProfilesInfo?.Invoke();
 
-				if(profile.Success)
+				if (profile.Success)
 				{
 					var won = await _bot.UseGamble.CheckWon();
-					if(won != null)
+					if (won != null)
 					{
 						LogMessage.Instance.AddMessage(won);
-						if(Properties.Settings.Default.ShowWonTip)
+						if (Properties.Settings.Default.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
 						}
@@ -478,13 +477,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			}
 			toolStripProgressBar1.Value++;
 
-			if(_bot.SteamTrade.Enabled)
+			if (_bot.SteamTrade.Enabled)
 			{
 				var profile = await _bot.SteamTrade.CheckLogin();
 				LogMessage.Instance.AddMessage(profile);
 				LoadProfilesInfo?.Invoke();
 
-				if(profile.Success)
+				if (profile.Success)
 				{
 					await _bot.SteamTrade.Join(_blackList);
 				}
@@ -499,13 +498,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			}
 			toolStripProgressBar1.Value++;
 
-			if(_bot.PlayBlink.Enabled)
+			if (_bot.PlayBlink.Enabled)
 			{
 				var profile = await _bot.PlayBlink.CheckLogin();
 				LogMessage.Instance.AddMessage(profile);
 				LoadProfilesInfo?.Invoke();
 
-				if(profile.Success)
+				if (profile.Success)
 				{
 					await _bot.PlayBlink.Join(_bot.Sort, _bot.SortToMore, _blackList);
 				}
@@ -520,13 +519,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			}
 			toolStripProgressBar1.Value++;
 
-			if(_bot.GameAways.Enabled)
+			if (_bot.GameAways.Enabled)
 			{
 				var profile = await _bot.GameAways.CheckLogin();
 				LogMessage.Instance.AddMessage(profile);
 				LoadProfilesInfo?.Invoke();
 
-				if(profile.Success)
+				if (profile.Success)
 				{
 					await _bot.GameAways.Join(_blackList, _bot.Sort, _bot.SortToMore);
 				}
@@ -835,9 +834,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			}
 			toolStripProgressBar1.Value++;
 
-			if(_bot.GameAways.Enabled)
+			if (_bot.GameAways.Enabled)
 			{
-				if(await CheckLoginGa())
+				if (await CheckLoginGa())
 				{
 					LoadProfilesInfo?.Invoke();
 					login = true;
@@ -1052,7 +1051,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			btnGMLogin.Enabled = false;
 			BrowserStart($"{Links.GameMiner}login/steam?backurl=http%3A%2F%2Fgameminer.net%2F%3Flang%3D" +
-						 Properties.Settings.Default.Lang + @"&agree=True",
+			             Properties.Settings.Default.Lang + @"&agree=True",
 				"http://gameminer.net/?lang=" + Properties.Settings.Default.Lang, "GameMiner - Login", "");
 
 			if (string.IsNullOrEmpty(_bot.GameMiner.UserAgent))
@@ -1770,7 +1769,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			toolStripStatusLabel1.Image = Resources.load;
 			toolStripStatusLabel1.Text = strings.StatusBar_Login;
 			var login = await CheckLoginGa();
-			if(login)
+			if (login)
 			{
 				BlockTabpage(tabPageGA, true);
 				btnGALogin.Enabled = false;
@@ -1797,7 +1796,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void buttonExitGA_Click(object sender, EventArgs e)
 		{
-
 		}
 
 		private void linkLabelGA_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -1807,7 +1805,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void cbGAEnabled_CheckedChanged(object sender, EventArgs e)
 		{
-			if(lblGAStatus.Enabled)
+			if (lblGAStatus.Enabled)
 			{
 				BlockTabpage(tabPageGA, false);
 				cbGAEnabled.Enabled = true;
@@ -1832,7 +1830,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					default:
 						Properties.Settings.Default.Lang = "en-EN";
 						break;
-
 				}
 				Properties.Settings.Default.Save();
 			}

@@ -12,9 +12,9 @@ namespace KryBot.Core.Cookies
 			var cookie = new CookieContainer();
 			var target = new Uri(Links.GameAways);
 
-			if(AspNetApplicationCookie != null)
+			if (AspNetApplicationCookie != null)
 			{
-				cookie.Add(new Cookie(".AspNet.ApplicationCookie", AspNetApplicationCookie) { Domain = target.Host });
+				cookie.Add(new Cookie(".AspNet.ApplicationCookie", AspNetApplicationCookie) {Domain = target.Host});
 			}
 
 			return cookie;

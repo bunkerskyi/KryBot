@@ -20,8 +20,8 @@ namespace KryBot.Core.Helpers
 			{
 				using (var reader = new StreamReader(path))
 				{
-					var serializer = new XmlSerializer(typeof (T));
-					instance = (T)serializer.Deserialize(reader);
+					var serializer = new XmlSerializer(typeof(T));
+					instance = (T) serializer.Deserialize(reader);
 				}
 				return true;
 			}
@@ -33,7 +33,7 @@ namespace KryBot.Core.Helpers
 		}
 
 		/// <summary>
-		/// Read (deserialize) the file into new object and then return it.
+		///     Read (deserialize) the file into new object and then return it.
 		/// </summary>
 		public static T Load<T>(string path) where T : new()
 		{
@@ -42,7 +42,7 @@ namespace KryBot.Core.Helpers
 				using (var reader = new StreamReader(path))
 				{
 					var serializer = new XmlSerializer(typeof(T));
-					return (T)serializer.Deserialize(reader);
+					return (T) serializer.Deserialize(reader);
 				}
 			}
 			catch (Exception ex)
@@ -53,7 +53,7 @@ namespace KryBot.Core.Helpers
 		}
 
 		/// <summary>
-		/// If file exists, delete it.
+		///     If file exists, delete it.
 		/// </summary>
 		public static void SafelyDelete(string path)
 		{
@@ -75,8 +75,8 @@ namespace KryBot.Core.Helpers
 			{
 				using (var reader = new StreamReader(path))
 				{
-					var serializer = new XmlSerializer(typeof (T));
-					return (T)serializer.Deserialize(reader);
+					var serializer = new XmlSerializer(typeof(T));
+					return (T) serializer.Deserialize(reader);
 				}
 			}
 			catch (Exception)
@@ -97,7 +97,7 @@ namespace KryBot.Core.Helpers
 			{
 				using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
 				{
-					var serializer = new XmlSerializer(typeof (T));
+					var serializer = new XmlSerializer(typeof(T));
 					serializer.Serialize(fileStream, instance);
 				}
 				return true;

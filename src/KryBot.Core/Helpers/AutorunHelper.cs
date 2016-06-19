@@ -16,14 +16,14 @@ namespace KryBot.Core.Helpers
 				key?.SetValue("KryBot", path);
 				return true;
 			}
-			catch(SecurityException)
+			catch (SecurityException)
 			{
 				MessageBox.Show(
 					strings.Autorun_RegisterEditError,
 					strings.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return false;
 			}
-			catch(UnauthorizedAccessException)
+			catch (UnauthorizedAccessException)
 			{
 				MessageBox.Show(
 					strings.Autorun_RegisterEditError,
@@ -40,21 +40,21 @@ namespace KryBot.Core.Helpers
 				key?.DeleteValue("KryBot");
 				return true;
 			}
-			catch(SecurityException)
+			catch (SecurityException)
 			{
 				MessageBox.Show(
 					strings.Autorun_MustHaveAdminPerm,
 					strings.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return false;
 			}
-			catch(UnauthorizedAccessException)
+			catch (UnauthorizedAccessException)
 			{
 				MessageBox.Show(
 					strings.Autorun_RegisterEditError,
 					strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return false;
 			}
-			catch(ArgumentException)
+			catch (ArgumentException)
 			{
 				return false;
 			}

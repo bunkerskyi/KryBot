@@ -68,9 +68,9 @@ namespace KryBot.Core.Sites
 		{
 			LogMessage.Instance.AddMessage(await LoadGiveawaysAsync(blacklist));
 
-			if(Giveaways?.Count > 0)
-			{ 
-				foreach(var giveaway in Giveaways)
+			if (Giveaways?.Count > 0)
+			{
+				foreach (var giveaway in Giveaways)
 				{
 					LogMessage.Instance.AddMessage(await JoinGiveaway(giveaway));
 				}

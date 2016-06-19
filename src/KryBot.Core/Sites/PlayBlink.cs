@@ -37,11 +37,11 @@ namespace KryBot.Core.Sites
 		{
 			LogMessage.Instance.AddMessage(await LoadGiveawaysAsync(blacklist));
 
-			if(Giveaways?.Count > 0)
+			if (Giveaways?.Count > 0)
 			{
-				if(sort)
+				if (sort)
 				{
-					if(sortToMore)
+					if (sortToMore)
 					{
 						Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
 					}
@@ -51,9 +51,9 @@ namespace KryBot.Core.Sites
 					}
 				}
 
-				foreach(var giveaway in Giveaways)
+				foreach (var giveaway in Giveaways)
 				{
-					if(giveaway.Price <= Points && PointReserv <= Points - giveaway.Price)
+					if (giveaway.Price <= Points && PointReserv <= Points - giveaway.Price)
 					{
 						LogMessage.Instance.AddMessage(await JoinGiveaway(giveaway));
 					}
@@ -288,7 +288,7 @@ namespace KryBot.Core.Sites
 			{
 				Type = ParameterType.GetOrPost,
 				Name = "level",
-				Value = (Level-1).ToString()
+				Value = (Level - 1).ToString()
 			};
 			list.Add(gameParam);
 

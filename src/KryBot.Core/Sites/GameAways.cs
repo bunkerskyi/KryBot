@@ -25,17 +25,36 @@ namespace KryBot.Core.Sites
 		public GameAwaysCookie Cookies { get; set; }
 		public List<GameAwaysGiveaway> Giveaways { get; set; }
 
+		#region Generate
+
+		private List<Parameter> GenerateJoinParams()
+		{
+			var list = new List<Parameter>();
+
+			var idParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "_",
+				Value = "229"
+			};
+			list.Add(idParam);
+
+			return list;
+		}
+
+		#endregion
+
 		#region Join
 
 		public async Task Join(Blacklist blacklist, bool sort, bool sortToMore)
 		{
 			LogMessage.Instance.AddMessage(await LoadGiveawaysAsync(blacklist));
 
-			if(Giveaways?.Count > 0)
+			if (Giveaways?.Count > 0)
 			{
-				if(sort)
+				if (sort)
 				{
-					if(sortToMore)
+					if (sortToMore)
 					{
 						Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
 					}
@@ -45,9 +64,9 @@ namespace KryBot.Core.Sites
 					}
 				}
 
-				foreach(var giveaway in Giveaways)
+				foreach (var giveaway in Giveaways)
 				{
-					if(giveaway.Price <= Points && PointsReserv <= Points - giveaway.Price)
+					if (giveaway.Price <= Points && PointsReserv <= Points - giveaway.Price)
 					{
 						LogMessage.Instance.AddMessage(await JoinGiveaway(giveaway));
 					}
@@ -65,7 +84,7 @@ namespace KryBot.Core.Sites
 				var response = Web.Post($"{Links.GameAwaysJoin}{giveaway.Id}",
 					GenerateJoinParams(), Cookies.Generate());
 
-				if(!string.IsNullOrEmpty(response.RestResponse.Content))
+				if (!string.IsNullOrEmpty(response.RestResponse.Content))
 				{
 					var jsonresponse = JsonConvert.DeserializeObject<JsonJoinResponse>(response.RestResponse.Content);
 					if (jsonresponse != null)
@@ -94,7 +113,7 @@ namespace KryBot.Core.Sites
 			{
 				var response = Web.Get(Links.GameAways, Cookies.Generate());
 
-				if(response.RestResponse.Content != string.Empty)
+				if (response.RestResponse.Content != string.Empty)
 				{
 					var htmlDoc = new HtmlDocument();
 					htmlDoc.LoadHtml(response.RestResponse.Content);
@@ -102,7 +121,7 @@ namespace KryBot.Core.Sites
 					var points = htmlDoc.DocumentNode.SelectSingleNode("//span[@class='ga-points']");
 					var username = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='username']");
 
-					if(points != null && username != null)
+					if (points != null && username != null)
 					{
 						Points = int.Parse(points.InnerText.Replace(" GP", ""));
 
@@ -132,17 +151,17 @@ namespace KryBot.Core.Sites
 				var pages = 1;
 
 
-				for(var i = 0; i < pages; i++)
+				for (var i = 0; i < pages; i++)
 				{
 					var response = Web.Get($"{Links.GameAways}{(i > 0 ? $"?page={i + 1}" : string.Empty)}", Cookies.Generate());
 
-					if(response.RestResponse.Content != string.Empty)
+					if (response.RestResponse.Content != string.Empty)
 					{
 						var htmlDoc = new HtmlDocument();
 						htmlDoc.LoadHtml(response.RestResponse.Content);
 
 						var pageNodeCounter = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='float-right next']");
-						if(pageNodeCounter != null)
+						if (pageNodeCounter != null)
 						{
 							pages = int.Parse(pageNodeCounter.Attributes["href"].Value.Split('=')[1]);
 						}
@@ -152,7 +171,7 @@ namespace KryBot.Core.Sites
 					}
 				}
 
-				if(Giveaways?.Count == 0)
+				if (Giveaways?.Count == 0)
 				{
 					task.SetResult(Messages.ParseGiveawaysEmpty(content, "GameAways"));
 				}
@@ -167,50 +186,32 @@ namespace KryBot.Core.Sites
 
 		private void AddGiveaways(HtmlNodeCollection nodes, List<GameAwaysGiveaway> giveawaysList)
 		{
-			if(nodes != null)
+			if (nodes != null)
 			{
-				foreach(var node in nodes)
+				foreach (var node in nodes)
 				{
 					var name = node.SelectSingleNode(".//a[@class='game-title']");
 					var storeId = node.SelectSingleNode(".//div[@class='ga-tag-container']/a[1]");
 					var price = node.SelectSingleNode(".//a[@class='entry-fee']");
-					var group = node.SelectSingleNode(".//span[contains(@class, 'ga-list-menu-icon') and contains(@class, 'ga-list-group')]");
-					if(name != null && storeId != null && price != null && group == null)
+					var group =
+						node.SelectSingleNode(".//span[contains(@class, 'ga-list-menu-icon') and contains(@class, 'ga-list-group')]");
+					if (name != null && storeId != null && price != null && group == null)
 					{
 						var gaGiveaway = new GameAwaysGiveaway
 						{
 							Name = name.InnerText,
 							Id = node.Attributes["id"].Value,
 							StoreId = storeId.Attributes["href"].Value.Split('/')[4],
-							Price = int.Parse(price.InnerText.Replace(" GP", "")),
+							Price = int.Parse(price.InnerText.Replace(" GP", ""))
 						};
 
-						if(gaGiveaway.Price <= Points && gaGiveaway.Price <= JoinPointsLimit)
+						if (gaGiveaway.Price <= Points && gaGiveaway.Price <= JoinPointsLimit)
 						{
 							giveawaysList?.Add(gaGiveaway);
 						}
 					}
 				}
 			}
-		}
-
-		#endregion
-
-		#region Generate
-
-		private List<Parameter> GenerateJoinParams()
-		{
-			var list = new List<Parameter>();
-
-			var idParam = new Parameter
-			{
-				Type = ParameterType.GetOrPost,
-				Name = "_",
-				Value = "229"
-			};
-			list.Add(idParam);
-
-			return list;
 		}
 
 		#endregion
