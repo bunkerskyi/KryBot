@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security;
 using System.Windows.Forms;
-using KryBot.CommonResources.lang;
+using KryBot.CommonResources.Localization;
 using Microsoft.Win32;
 
 namespace KryBot.Core.Helpers

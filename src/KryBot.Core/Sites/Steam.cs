@@ -52,6 +52,10 @@ namespace KryBot.Core.Sites
 						{
 							task.SetResult(Messages.GroupAlreadyMember(url));
 						}
+						else
+						{
+							task.SetResult(Messages.GroupNotJoinde(url));
+						}
 					}
 				}
 				else

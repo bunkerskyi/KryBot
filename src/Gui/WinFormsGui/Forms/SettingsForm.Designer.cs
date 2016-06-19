@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using KryBot.CommonResources.lang;
+using KryBot.CommonResources.Localization;
 using KryBot.Gui.WinFormsGui.Properties;
 
 namespace KryBot.Gui.WinFormsGui.Forms
@@ -32,10 +32,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPageCommun = new System.Windows.Forms.TabPage();
 			this.cbWishlistSort = new System.Windows.Forms.CheckBox();
-			this.btnDeleteCookies = new System.Windows.Forms.Button();
 			this.cbFarmTip = new System.Windows.Forms.CheckBox();
 			this.cbWonTip = new System.Windows.Forms.CheckBox();
 			this.cbAutorun = new System.Windows.Forms.CheckBox();
@@ -127,7 +127,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// tabPageCommun
 			// 
 			this.tabPageCommun.Controls.Add(this.cbWishlistSort);
-			this.tabPageCommun.Controls.Add(this.btnDeleteCookies);
 			this.tabPageCommun.Controls.Add(this.cbFarmTip);
 			this.tabPageCommun.Controls.Add(this.cbWonTip);
 			this.tabPageCommun.Controls.Add(this.cbAutorun);
@@ -138,7 +137,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.tabPageCommun.Name = "tabPageCommun";
 			this.tabPageCommun.Size = new System.Drawing.Size(309, 155);
 			this.tabPageCommun.TabIndex = 5;
-			this.tabPageCommun.Text = strings.SettingsForm_Commun;
+			this.tabPageCommun.Text = "Общие";
 			this.tabPageCommun.UseVisualStyleBackColor = true;
 			// 
 			// cbWishlistSort
@@ -146,20 +145,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbWishlistSort.AutoSize = true;
 			this.cbWishlistSort.Location = new System.Drawing.Point(160, 97);
 			this.cbWishlistSort.Name = "cbWishlistSort";
-			this.cbWishlistSort.Size = new System.Drawing.Size(144, 30);
+			this.cbWishlistSort.Size = new System.Drawing.Size(219, 17);
 			this.cbWishlistSort.TabIndex = 8;
-			this.cbWishlistSort.Text = strings.SettingsForm_cbWishlistSort;
+			this.cbWishlistSort.Text = "Не применять сортировку к вишлисту";
 			this.cbWishlistSort.UseVisualStyleBackColor = true;
-			// 
-			// btnDeleteCookies
-			// 
-			this.btnDeleteCookies.Location = new System.Drawing.Point(8, 120);
-			this.btnDeleteCookies.Name = "btnDeleteCookies";
-			this.btnDeleteCookies.Size = new System.Drawing.Size(144, 23);
-			this.btnDeleteCookies.TabIndex = 7;
-			this.btnDeleteCookies.Text = strings.SetitngsForm_btnDeleteCookies;
-			this.btnDeleteCookies.UseVisualStyleBackColor = true;
-			this.btnDeleteCookies.Click += new System.EventHandler(this.btnDeleteCookies_Click);
 			// 
 			// cbFarmTip
 			// 
@@ -168,7 +157,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbFarmTip.Name = "cbFarmTip";
 			this.cbFarmTip.Size = new System.Drawing.Size(137, 17);
 			this.cbFarmTip.TabIndex = 5;
-			this.cbFarmTip.Text = strings.SettingsForm_cbFarmTip;
+			this.cbFarmTip.Text = "Оповещение о фарме";
 			this.cbFarmTip.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.cbFarmTip.UseVisualStyleBackColor = true;
 			// 
@@ -179,7 +168,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbWonTip.Name = "cbWonTip";
 			this.cbWonTip.Size = new System.Drawing.Size(144, 17);
 			this.cbWonTip.TabIndex = 4;
-			this.cbWonTip.Text = strings.SettingsForm_cbWonTip;
+			this.cbWonTip.Text = "Оповещение о победах";
 			this.cbWonTip.UseVisualStyleBackColor = true;
 			// 
 			// cbAutorun
@@ -189,7 +178,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbAutorun.Name = "cbAutorun";
 			this.cbAutorun.Size = new System.Drawing.Size(96, 17);
 			this.cbAutorun.TabIndex = 3;
-			this.cbAutorun.Text = strings.SettingsForm_cbAutorun;
+			this.cbAutorun.Text = "Автозагрузка";
 			this.cbAutorun.UseVisualStyleBackColor = true;
 			this.cbAutorun.CheckedChanged += new System.EventHandler(this.cbAutorun_CheckedChanged);
 			// 
@@ -202,7 +191,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.groupBox1.Size = new System.Drawing.Size(154, 114);
 			this.groupBox1.TabIndex = 2;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = strings.SettingsForm_groupBox1;
+			this.groupBox1.Text = "Таймер";
 			// 
 			// gbTimerSettings
 			// 
@@ -217,7 +206,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.gbTimerSettings.Size = new System.Drawing.Size(154, 72);
 			this.gbTimerSettings.TabIndex = 1;
 			this.gbTimerSettings.TabStop = false;
-			this.gbTimerSettings.Text = strings.SettingsForm_gbTimerSettings;
+			this.gbTimerSettings.Text = "Настройки";
 			// 
 			// label8
 			// 
@@ -226,7 +215,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.label8.Name = "label8";
 			this.label8.Size = new System.Drawing.Size(51, 13);
 			this.label8.TabIndex = 5;
-			this.label8.Text = strings.SettingsForm_label8;
+			this.label8.Text = "Циклов: ";
 			// 
 			// label7
 			// 
@@ -235,7 +224,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.label7.Name = "label7";
 			this.label7.Size = new System.Drawing.Size(20, 13);
 			this.label7.TabIndex = 4;
-			this.label7.Text = strings.SettingsForm_label7;
+			this.label7.Text = "шт";
 			// 
 			// tbTimerLoops
 			// 
@@ -253,7 +242,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(15, 13);
 			this.label6.TabIndex = 2;
-			this.label6.Text = strings.SettingsForm_label6;
+			this.label6.Text = "м";
 			// 
 			// tbTimerInterval
 			// 
@@ -271,7 +260,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(59, 13);
 			this.label5.TabIndex = 0;
-			this.label5.Text = strings.SettingsForm_label5;
+			this.label5.Text = "Интервал:";
 			// 
 			// cbTimerEnable
 			// 
@@ -280,7 +269,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbTimerEnable.Name = "cbTimerEnable";
 			this.cbTimerEnable.Size = new System.Drawing.Size(70, 17);
 			this.cbTimerEnable.TabIndex = 0;
-			this.cbTimerEnable.Text = strings.SettingsForm_cbTimerEnable;
+			this.cbTimerEnable.Text = "Включен";
 			this.cbTimerEnable.UseVisualStyleBackColor = true;
 			this.cbTimerEnable.CheckedChanged += new System.EventHandler(this.cbTimerEnable_CheckedChanged);
 			// 
@@ -304,7 +293,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSort.Name = "cbSort";
 			this.cbSort.Size = new System.Drawing.Size(68, 17);
 			this.cbSort.TabIndex = 0;
-			this.cbSort.Text = strings.SettingsForm_cbSort;
+			this.cbSort.Text = "Сначала";
 			this.cbSort.UseVisualStyleBackColor = true;
 			// 
 			// tabPageGM
@@ -343,7 +332,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbGMRegional.Name = "cbGMRegional";
 			this.cbGMRegional.Size = new System.Drawing.Size(187, 17);
 			this.cbGMRegional.TabIndex = 8;
-			this.cbGMRegional.Text = strings.SettingsForm_cbGMRegional;
+			this.cbGMRegional.Text = "Без региональных ограничений";
 			this.cbGMRegional.UseVisualStyleBackColor = true;
 			// 
 			// cbGMGolden
@@ -353,7 +342,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbGMGolden.Name = "cbGMGolden";
 			this.cbGMGolden.Size = new System.Drawing.Size(178, 17);
 			this.cbGMGolden.TabIndex = 6;
-			this.cbGMGolden.Text = strings.SettingsForm_cbGMGolden;
+			this.cbGMGolden.Text = "Бесплатные золотые раздачи";
 			this.cbGMGolden.UseVisualStyleBackColor = true;
 			// 
 			// chGMSandbox
@@ -363,7 +352,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.chGMSandbox.Name = "chGMSandbox";
 			this.chGMSandbox.Size = new System.Drawing.Size(141, 17);
 			this.chGMSandbox.TabIndex = 5;
-			this.chGMSandbox.Text = strings.SettingsForm_chGMSandbox;
+			this.chGMSandbox.Text = "Раздачи из песочницы";
 			this.chGMSandbox.UseVisualStyleBackColor = true;
 			// 
 			// cbGMRegular
@@ -373,12 +362,12 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbGMRegular.Name = "cbGMRegular";
 			this.cbGMRegular.Size = new System.Drawing.Size(117, 17);
 			this.cbGMRegular.TabIndex = 4;
-			this.cbGMRegular.Text = strings.SettingsForm_RegularGiveaways;
+			this.cbGMRegular.Text = "Обычные раздачи";
 			this.cbGMRegular.UseVisualStyleBackColor = true;
 			// 
 			// tbGMReserv
 			// 
-			this.tbGMReserv.Location = new System.Drawing.Point(248, 98);
+			this.tbGMReserv.Location = new System.Drawing.Point(254, 127);
 			this.tbGMReserv.Name = "tbGMReserv";
 			this.tbGMReserv.Size = new System.Drawing.Size(30, 20);
 			this.tbGMReserv.TabIndex = 3;
@@ -387,7 +376,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// 
 			// tbGMMaxValue
 			// 
-			this.tbGMMaxValue.Location = new System.Drawing.Point(134, 98);
+			this.tbGMMaxValue.Location = new System.Drawing.Point(134, 127);
 			this.tbGMMaxValue.Name = "tbGMMaxValue";
 			this.tbGMMaxValue.Size = new System.Drawing.Size(30, 20);
 			this.tbGMMaxValue.TabIndex = 2;
@@ -397,20 +386,20 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(170, 101);
+			this.label2.Location = new System.Drawing.Point(170, 130);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(72, 13);
+			this.label2.Size = new System.Drawing.Size(78, 13);
 			this.label2.TabIndex = 1;
-			this.label2.Text = strings.SettingsFform_MaxValue;
+			this.label2.Text = "Резерв points:";
 			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(3, 101);
+			this.label1.Location = new System.Drawing.Point(3, 130);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(125, 13);
 			this.label1.TabIndex = 0;
-			this.label1.Text = strings.SettingsForm_PointsReserv;
+			this.label1.Text = "Максимальная ставка:";
 			// 
 			// tabPageSG
 			// 
@@ -440,7 +429,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSGSortTeLessLevel.Name = "cbSGSortTeLessLevel";
 			this.cbSGSortTeLessLevel.Size = new System.Drawing.Size(216, 17);
 			this.cbSGSortTeLessLevel.TabIndex = 14;
-			this.cbSGSortTeLessLevel.Text = strings.SettingsForm_cbSGSortTeLessLevel;
+			this.cbSGSortTeLessLevel.Text = "Сначала раздачи наивысшего уровня";
 			this.cbSGSortTeLessLevel.UseVisualStyleBackColor = true;
 			// 
 			// numSGLevel
@@ -462,7 +451,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSGMinLevel.Name = "cbSGMinLevel";
 			this.cbSGMinLevel.Size = new System.Drawing.Size(181, 17);
 			this.cbSGMinLevel.TabIndex = 12;
-			this.cbSGMinLevel.Text = strings.SettingsForm_cbSGMinLevel;
+			this.cbSGMinLevel.Text = "Минимальный уровень раздач";
 			this.cbSGMinLevel.UseVisualStyleBackColor = true;
 			this.cbSGMinLevel.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
 			// 
@@ -473,7 +462,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSGRegular.Name = "cbSGRegular";
 			this.cbSGRegular.Size = new System.Drawing.Size(117, 17);
 			this.cbSGRegular.TabIndex = 11;
-			this.cbSGRegular.Text = strings.SettingsForm_RegularGiveaways;
+			this.cbSGRegular.Text = "Обычные раздачи";
 			this.cbSGRegular.UseVisualStyleBackColor = true;
 			// 
 			// btnSGCookies
@@ -488,7 +477,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// 
 			// tbSGReserv
 			// 
-			this.tbSGReserv.Location = new System.Drawing.Point(254, 115);
+			this.tbSGReserv.Location = new System.Drawing.Point(254, 127);
 			this.tbSGReserv.Name = "tbSGReserv";
 			this.tbSGReserv.Size = new System.Drawing.Size(30, 20);
 			this.tbSGReserv.TabIndex = 7;
@@ -497,7 +486,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// 
 			// tbSGMaxValue
 			// 
-			this.tbSGMaxValue.Location = new System.Drawing.Point(134, 115);
+			this.tbSGMaxValue.Location = new System.Drawing.Point(134, 127);
 			this.tbSGMaxValue.Name = "tbSGMaxValue";
 			this.tbSGMaxValue.Size = new System.Drawing.Size(30, 20);
 			this.tbSGMaxValue.TabIndex = 6;
@@ -507,20 +496,20 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// lblSGReserv
 			// 
 			this.lblSGReserv.AutoSize = true;
-			this.lblSGReserv.Location = new System.Drawing.Point(170, 118);
+			this.lblSGReserv.Location = new System.Drawing.Point(170, 130);
 			this.lblSGReserv.Name = "lblSGReserv";
 			this.lblSGReserv.Size = new System.Drawing.Size(78, 13);
 			this.lblSGReserv.TabIndex = 5;
-			this.lblSGReserv.Text = strings.SettingsForm_PointsReserv;
+			this.lblSGReserv.Text = "Резерв points:";
 			// 
 			// lblSGMaxValue
 			// 
 			this.lblSGMaxValue.AutoSize = true;
-			this.lblSGMaxValue.Location = new System.Drawing.Point(3, 118);
+			this.lblSGMaxValue.Location = new System.Drawing.Point(3, 130);
 			this.lblSGMaxValue.Name = "lblSGMaxValue";
 			this.lblSGMaxValue.Size = new System.Drawing.Size(125, 13);
 			this.lblSGMaxValue.TabIndex = 4;
-			this.lblSGMaxValue.Text = strings.SettingsFform_MaxValue;
+			this.lblSGMaxValue.Text = "Максимальная ставка:";
 			// 
 			// cbSGGroup
 			// 
@@ -529,7 +518,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSGGroup.Name = "cbSGGroup";
 			this.cbSGGroup.Size = new System.Drawing.Size(125, 17);
 			this.cbSGGroup.TabIndex = 1;
-			this.cbSGGroup.Text = strings.SettingsForm_GroupGiveaways;
+			this.cbSGGroup.Text = "Групповые раздачи";
 			this.cbSGGroup.UseVisualStyleBackColor = true;
 			// 
 			// cbSGWishlist
@@ -539,7 +528,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSGWishlist.Name = "cbSGWishlist";
 			this.cbSGWishlist.Size = new System.Drawing.Size(62, 17);
 			this.cbSGWishlist.TabIndex = 0;
-			this.cbSGWishlist.Text = strings.SettingsForm_WishlistGiveaways;
+			this.cbSGWishlist.Text = "Wishlist";
 			this.cbSGWishlist.UseVisualStyleBackColor = true;
 			// 
 			// tabPageSC
@@ -568,7 +557,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSCContributors.Name = "cbSCContributors";
 			this.cbSCContributors.Size = new System.Drawing.Size(126, 17);
 			this.cbSCContributors.TabIndex = 17;
-			this.cbSCContributors.Text = strings.SettingsForm_cbSCContributors;
+			this.cbSCContributors.Text = "Contributors раздачи";
 			this.cbSCContributors.UseVisualStyleBackColor = true;
 			// 
 			// cbSCRegular
@@ -578,7 +567,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSCRegular.Name = "cbSCRegular";
 			this.cbSCRegular.Size = new System.Drawing.Size(117, 17);
 			this.cbSCRegular.TabIndex = 16;
-			this.cbSCRegular.Text = strings.SettingsForm_RegularGiveaways;
+			this.cbSCRegular.Text = "Обычные раздачи";
 			this.cbSCRegular.UseVisualStyleBackColor = true;
 			// 
 			// cbSCAutojoin
@@ -588,7 +577,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSCAutojoin.Name = "cbSCAutojoin";
 			this.cbSCAutojoin.Size = new System.Drawing.Size(306, 17);
 			this.cbSCAutojoin.TabIndex = 15;
-			this.cbSCAutojoin.Text = strings.SettingsForm_cbSCAutojoin;
+			this.cbSCAutojoin.Text = "Автовступление в группы (нужна авторизация в Steam)";
 			this.cbSCAutojoin.UseVisualStyleBackColor = true;
 			// 
 			// btnSCCookies
@@ -603,7 +592,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// 
 			// tbSCReserv
 			// 
-			this.tbSCReserv.Location = new System.Drawing.Point(254, 121);
+			this.tbSCReserv.Location = new System.Drawing.Point(254, 127);
 			this.tbSCReserv.Name = "tbSCReserv";
 			this.tbSCReserv.Size = new System.Drawing.Size(30, 20);
 			this.tbSCReserv.TabIndex = 13;
@@ -612,7 +601,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// 
 			// tbSCMaxValue
 			// 
-			this.tbSCMaxValue.Location = new System.Drawing.Point(134, 121);
+			this.tbSCMaxValue.Location = new System.Drawing.Point(134, 127);
 			this.tbSCMaxValue.Name = "tbSCMaxValue";
 			this.tbSCMaxValue.Size = new System.Drawing.Size(30, 20);
 			this.tbSCMaxValue.TabIndex = 12;
@@ -622,20 +611,20 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// lblSCReserv
 			// 
 			this.lblSCReserv.AutoSize = true;
-			this.lblSCReserv.Location = new System.Drawing.Point(170, 124);
+			this.lblSCReserv.Location = new System.Drawing.Point(170, 130);
 			this.lblSCReserv.Name = "lblSCReserv";
 			this.lblSCReserv.Size = new System.Drawing.Size(78, 13);
 			this.lblSCReserv.TabIndex = 11;
-			this.lblSCReserv.Text = strings.SettingsForm_PointsReserv;
+			this.lblSCReserv.Text = "Резерв points:";
 			// 
 			// lblSCMaxValue
 			// 
 			this.lblSCMaxValue.AutoSize = true;
-			this.lblSCMaxValue.Location = new System.Drawing.Point(3, 124);
+			this.lblSCMaxValue.Location = new System.Drawing.Point(3, 130);
 			this.lblSCMaxValue.Name = "lblSCMaxValue";
 			this.lblSCMaxValue.Size = new System.Drawing.Size(125, 13);
 			this.lblSCMaxValue.TabIndex = 10;
-			this.lblSCMaxValue.Text = strings.SettingsFform_MaxValue;
+			this.lblSCMaxValue.Text = "Максимальная ставка:";
 			// 
 			// cbSCGroup
 			// 
@@ -644,7 +633,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSCGroup.Name = "cbSCGroup";
 			this.cbSCGroup.Size = new System.Drawing.Size(125, 17);
 			this.cbSCGroup.TabIndex = 9;
-			this.cbSCGroup.Text = strings.SettingsForm_GroupGiveaways;
+			this.cbSCGroup.Text = "Групповые раздачи";
 			this.cbSCGroup.UseVisualStyleBackColor = true;
 			this.cbSCGroup.CheckedChanged += new System.EventHandler(this.cbSCGroup_CheckedChanged);
 			// 
@@ -655,7 +644,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSCWishlist.Name = "cbSCWishlist";
 			this.cbSCWishlist.Size = new System.Drawing.Size(62, 17);
 			this.cbSCWishlist.TabIndex = 8;
-			this.cbSCWishlist.Text = strings.SettingsForm_WishlistGiveaways;
+			this.cbSCWishlist.Text = "Wishlist";
 			this.cbSCWishlist.UseVisualStyleBackColor = true;
 			// 
 			// tabPageUG
@@ -684,7 +673,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// 
 			// tbSPReserv
 			// 
-			this.tbSPReserv.Location = new System.Drawing.Point(242, 3);
+			this.tbSPReserv.Location = new System.Drawing.Point(254, 127);
 			this.tbSPReserv.Name = "tbSPReserv";
 			this.tbSPReserv.Size = new System.Drawing.Size(30, 20);
 			this.tbSPReserv.TabIndex = 17;
@@ -693,7 +682,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// 
 			// tbSPMaxValue
 			// 
-			this.tbSPMaxValue.Location = new System.Drawing.Point(134, 3);
+			this.tbSPMaxValue.Location = new System.Drawing.Point(134, 127);
 			this.tbSPMaxValue.Name = "tbSPMaxValue";
 			this.tbSPMaxValue.Size = new System.Drawing.Size(30, 20);
 			this.tbSPMaxValue.TabIndex = 16;
@@ -703,20 +692,20 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(170, 6);
+			this.label3.Location = new System.Drawing.Point(170, 130);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(78, 13);
 			this.label3.TabIndex = 15;
-			this.label3.Text = strings.SettingsForm_PointsReserv;
+			this.label3.Text = "Резерв points:";
 			// 
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(3, 6);
+			this.label4.Location = new System.Drawing.Point(3, 130);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(125, 13);
 			this.label4.TabIndex = 14;
-			this.label4.Text = strings.SettingsFform_MaxValue;
+			this.label4.Text = "Максимальная ставка:";
 			// 
 			// tabPagePB
 			// 
@@ -734,7 +723,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// 
 			// tbPBReserv
 			// 
-			this.tbPBReserv.Location = new System.Drawing.Point(244, 3);
+			this.tbPBReserv.Location = new System.Drawing.Point(254, 127);
 			this.tbPBReserv.Name = "tbPBReserv";
 			this.tbPBReserv.Size = new System.Drawing.Size(30, 20);
 			this.tbPBReserv.TabIndex = 24;
@@ -743,7 +732,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// 
 			// tbPBMaxValue
 			// 
-			this.tbPBMaxValue.Location = new System.Drawing.Point(128, 3);
+			this.tbPBMaxValue.Location = new System.Drawing.Point(134, 127);
 			this.tbPBMaxValue.Name = "tbPBMaxValue";
 			this.tbPBMaxValue.Size = new System.Drawing.Size(30, 20);
 			this.tbPBMaxValue.TabIndex = 23;
@@ -753,20 +742,20 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// label9
 			// 
 			this.label9.AutoSize = true;
-			this.label9.Location = new System.Drawing.Point(160, 6);
+			this.label9.Location = new System.Drawing.Point(170, 130);
 			this.label9.Name = "label9";
 			this.label9.Size = new System.Drawing.Size(78, 13);
 			this.label9.TabIndex = 22;
-			this.label9.Text = strings.SettingsForm_PointsReserv;
+			this.label9.Text = "Резерв points:";
 			// 
 			// label10
 			// 
 			this.label10.AutoSize = true;
-			this.label10.Location = new System.Drawing.Point(3, 6);
+			this.label10.Location = new System.Drawing.Point(3, 130);
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(125, 13);
 			this.label10.TabIndex = 21;
-			this.label10.Text = strings.SettingsFform_MaxValue;
+			this.label10.Text = "Максимальная ставка:";
 			// 
 			// btnPBCookies
 			// 
@@ -793,7 +782,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.сохранитьToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.check;
 			this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
 			this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
-			this.сохранитьToolStripMenuItem.Text = strings.Save;
+			this.сохранитьToolStripMenuItem.Text = "Сохранить";
 			this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
 			// 
 			// FormSettings
@@ -804,14 +793,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.Controls.Add(this.tabControl1);
 			this.Controls.Add(this.menuStrip1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.Icon = Icon.FromHandle(Resources.settings.GetHicon());
 			this.MainMenuStrip = this.menuStrip1;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "FormSettings";
-			this.Icon = Icon.FromHandle(Resources.settings.GetHicon());
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = strings.Settings;
+			this.Text = "Настройки";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSettings_FormClosing);
 			this.Load += new System.EventHandler(this.formSettings_Load);
 			this.tabControl1.ResumeLayout(false);
@@ -894,7 +883,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private System.Windows.Forms.CheckBox cbFarmTip;
 		private System.Windows.Forms.CheckBox cbSGRegular;
 		private System.Windows.Forms.CheckBox cbSCRegular;
-		private System.Windows.Forms.Button btnDeleteCookies;
 		private System.Windows.Forms.NumericUpDown numSGLevel;
 		private System.Windows.Forms.CheckBox cbSGMinLevel;
 		private System.Windows.Forms.CheckBox cbSGSortTeLessLevel;

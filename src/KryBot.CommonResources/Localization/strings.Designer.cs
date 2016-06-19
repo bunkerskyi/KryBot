@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace KryBot.CommonResources.lang {
+namespace KryBot.CommonResources.Localization {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace KryBot.CommonResources.lang {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KryBot.CommonResources.lang.strings", typeof(strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KryBot.CommonResources.Localization.strings", typeof(strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -79,7 +79,7 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Аккаунт не активирван.
+        ///   Looks up a localized string similar to Аккаунт не активирован.
         /// </summary>
         public static string AccountNotActive {
             get {
@@ -97,7 +97,7 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Для выполнения этого действия приложение должно быть запущено с правами администратора.
+        ///   Looks up a localized string similar to Для выполнения этого действия приложение должно быть запущен с правами администратора.
         /// </summary>
         public static string Autorun_MustHaveAdminPerm {
             get {
@@ -106,7 +106,7 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to При записи в реестр произошла ошибка. Запись в реестр разрешена администратором?.
+        ///   Looks up a localized string similar to При записи в реестр произошла ошибка. Запись в реестр запрещена администратором?.
         /// </summary>
         public static string Autorun_RegisterEditError {
             get {
@@ -169,15 +169,6 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Угля.
-        /// </summary>
-        public static string Coal {
-            get {
-                return ResourceManager.GetString("Coal", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Для применения измененией нужен перезапуск приложения..
         /// </summary>
         public static string CookieForm_MustRestart {
@@ -205,24 +196,6 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Библиотека .
-        /// </summary>
-        public static string DllNotLoad {
-            get {
-                return ResourceManager.GetString("DllNotLoad", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to не была загружена. .
-        /// </summary>
-        public static string DllNotLoad_1 {
-            get {
-                return ResourceManager.GetString("DllNotLoad_1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Поддержать разработчика.
         /// </summary>
         public static string DonateForm_Donate {
@@ -232,8 +205,8 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Вы можете помочь разработчику материально 
-        ///переведя любую сумму на один из счетов, 
+        ///   Looks up a localized string similar to Вы можете помочь разработчику материально
+        ///перевести любую сумму на один из счетов,
         ///предоставленных ниже:.
         /// </summary>
         public static string DonateForm_Text {
@@ -324,7 +297,7 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Пропуск попытки фарма. Предыдущий цикл фарма еше не окончен..
+        ///   Looks up a localized string similar to Пропуск попытки фарма. Предыдущий цикл фарма еще не окончен..
         /// </summary>
         public static string FormMain_btnStart_Click_FarmSkip {
             get {
@@ -432,15 +405,6 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to угля.
-        /// </summary>
-        public static string GiveawayJoined_Coal {
-            get {
-                return ResourceManager.GetString("GiveawayJoined_Coal", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to подтверждено за.
         /// </summary>
         public static string GiveawayJoined_ConfirmedFor {
@@ -491,15 +455,6 @@ namespace KryBot.CommonResources.lang {
         public static string GiveawaysHaveWon {
             get {
                 return ResourceManager.GetString("GiveawaysHaveWon", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to У вас устаревшая версия Internet Explorer. Чтобы избежать проблем с работой программы, рекомендуется обновить. Перейти на сайт Microsoft для скачивания обновления?.
-        /// </summary>
-        public static string IECheck {
-            get {
-                return ResourceManager.GetString("IECheck", resourceCulture);
             }
         }
         
@@ -711,38 +666,11 @@ namespace KryBot.CommonResources.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Угля.
-        /// </summary>
-        public static string ParseProfile_Coal {
-            get {
-                return ResourceManager.GetString("ParseProfile_Coal", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Уровень.
-        /// </summary>
-        public static string ParseProfile_Level {
-            get {
-                return ResourceManager.GetString("ParseProfile_Level", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Ошибка логина/сервера.
         /// </summary>
         public static string ParseProfile_LoginOrServerError {
             get {
                 return ResourceManager.GetString("ParseProfile_LoginOrServerError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Points.
-        /// </summary>
-        public static string ParseProfile_Points {
-            get {
-                return ResourceManager.GetString("ParseProfile_Points", resourceCulture);
             }
         }
         
@@ -779,15 +707,6 @@ namespace KryBot.CommonResources.lang {
         public static string SaveAs {
             get {
                 return ResourceManager.GetString("SaveAs", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Удалить куки браузера.
-        /// </summary>
-        public static string SetitngsForm_btnDeleteCookies {
-            get {
-                return ResourceManager.GetString("SetitngsForm_btnDeleteCookies", resourceCulture);
             }
         }
         

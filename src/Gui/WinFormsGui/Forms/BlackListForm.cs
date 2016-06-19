@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using KryBot.CommonResources.lang;
+using KryBot.CommonResources.Localization;
 using KryBot.Core;
 using KryBot.Core.Helpers;
 using KryBot.Gui.WinFormsGui.Properties;

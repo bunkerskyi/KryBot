@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using KryBot.CommonResources.lang;
+using KryBot.CommonResources.Localization;
 using KryBot.Core;
 using KryBot.Core.Helpers;
 using KryBot.Gui.WinFormsGui.Properties;
+using Timer = System.Windows.Forms.Timer;
 
 namespace KryBot.Gui.WinFormsGui.Forms
 {
@@ -31,6 +33,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		public FormMain()
 		{
+			SetLocalization();
 			InitializeComponent();
 		}
 
@@ -566,7 +569,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void ShowProfileInfo()
 		{
-			lblGMCoal.Text = $"{strings.Coal}: {_bot.GameMiner.Points}";
+			lblGMCoal.Text = $"{strings.Points}: {_bot.GameMiner.Points}";
 			lblGMLevel.Text = $"{strings.Level}: {_bot.GameMiner.Level}";
 
 			lblSGPoints.Text = $"{strings.Points}: {_bot.SteamGifts.Points}";
@@ -1815,6 +1818,27 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				BlockTabpage(tabPageGA, true);
 				_bot.GameAways.Enabled = true;
 			}
+		}
+
+		private void SetLocalization()
+		{
+			if (Properties.Settings.Default.Lang == "")
+			{
+				switch (CultureInfo.CurrentCulture.Name)
+				{
+					case "ru-RU":
+						Properties.Settings.Default.Lang = "ru-RU";
+						break;
+					default:
+						Properties.Settings.Default.Lang = "en-EN";
+						break;
+
+				}
+				Properties.Settings.Default.Save();
+			}
+
+			CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(Properties.Settings.Default.Lang);
+			CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(Properties.Settings.Default.Lang);
 		}
 	}
 }

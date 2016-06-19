@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Windows.Forms;
-using KryBot.CommonResources.lang;
+using KryBot.CommonResources.Localization;
 using KryBot.Core;
 using KryBot.Core.Helpers;
 
@@ -298,20 +297,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			else
 			{
 				_userAutorun = true;
-			}
-		}
-
-		private void btnDeleteCookies_Click(object sender, EventArgs e)
-		{
-			try
-			{
-				Directory.Delete(Environment.GetFolderPath(Environment.SpecialFolder.Cookies), true);
-				MessageBox.Show(strings.CookieForm_MustRestart, strings.Warning,
-					MessageBoxButtons.OK, MessageBoxIcon.Warning);
-			}
-			catch (Exception)
-			{
-				// ignored
 			}
 		}
 

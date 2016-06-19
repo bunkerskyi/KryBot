@@ -6,7 +6,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Exceptionless.Json;
-using KryBot.CommonResources.lang;
+using KryBot.CommonResources.Localization;
 using KryBot.Core.Helpers;
 using KryBot.Core.Serializable.GitHub;
 

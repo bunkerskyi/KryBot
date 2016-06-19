@@ -35,8 +35,13 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="lang\strings.Designer.cs">
+    <Compile Include="Localization\strings.Designer.cs">
       <DependentUpon>strings.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Localization\strings.en.Designer.cs">
+      <DependentUpon>strings.en.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -55,12 +60,6 @@
     <None Include="Resources\close.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\close47.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\coins28.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\exit.png" />
   </ItemGroup>
   <ItemGroup>
@@ -70,13 +69,7 @@
     <None Include="Resources\folder.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\gift85.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\info.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\info28.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\KryBotPresent_256a.ico" />
@@ -92,9 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\locked.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\locked59.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\log.png" />
@@ -130,7 +120,11 @@
     <None Include="Resources\wallet.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="lang\strings.resx">
+    <EmbeddedResource Include="Localization\strings.en.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>strings.en.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Localization\strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>strings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>

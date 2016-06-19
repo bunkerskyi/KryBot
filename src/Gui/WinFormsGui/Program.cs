@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Windows.Forms;
 using Exceptionless;
-using KryBot.CommonResources.lang;
+using KryBot.CommonResources.Localization;
 using KryBot.Gui.WinFormsGui.Forms;
 
 namespace KryBot.Gui.WinFormsGui

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 using System.Xml.Serialization;
-using KryBot.CommonResources.lang;
+using KryBot.CommonResources.Localization;
 
 namespace KryBot.Core.Helpers
 {

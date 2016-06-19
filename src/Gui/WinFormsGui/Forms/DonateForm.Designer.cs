@@ -1,6 +1,5 @@
 ﻿using System.Drawing;
-using KryBot.CommonResources.lang;
-using KryBot.Core;
+using KryBot.CommonResources.Localization;
 using KryBot.Gui.WinFormsGui.Properties;
 
 namespace KryBot.Gui.WinFormsGui.Forms
@@ -61,8 +60,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(249, 39);
 			this.label1.TabIndex = 0;
-			this.label1.Text = "Вы можете помочь разработчику материально \r\nпереведя любую сумму на один из счето" +
-    "в, \r\nпредоставленных ниже:";
+			this.label1.Text = strings.DonateForm_Text;
 			// 
 			// groupBox1
 			// 
@@ -203,10 +201,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.label1);
-			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Icon = Icon.FromHandle(Resources.wallet.GetHicon());
 			this.Name = "FormDonate";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "Поддержать разработчика";
+			this.Text = strings.DonateForm_Donate;
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.groupBox2.ResumeLayout(false);

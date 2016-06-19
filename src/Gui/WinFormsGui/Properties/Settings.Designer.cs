@@ -49,7 +49,7 @@ namespace KryBot.Gui.WinFormsGui.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ru_RU")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string Lang {
             get {
                 return ((string)(this["Lang"]));

@@ -9,7 +9,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="Lang" Type="System.String" Scope="User">
-      <Value Profile="(Default)">ru_RU</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Autorun" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

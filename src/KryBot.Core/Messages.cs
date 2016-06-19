@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using KryBot.CommonResources.lang;
+using KryBot.CommonResources.Localization;
 
 namespace KryBot.Core
 {
@@ -87,11 +87,11 @@ namespace KryBot.Core
 
 		public static Log ParseProfile(string site, int points, int level, string username)
 		{
-			var str = $"{GetDateTime()} {{{site}}} {strings.LoginSuccess} {strings.ParseProfile_Points}: {points}";
+			var str = $"{GetDateTime()} {{{site}}} {strings.LoginSuccess} {strings.Points}: {points}";
 
 			if (level != -1)
 			{
-				str += $" {strings.ParseProfile_Level}: {level}";
+				str += $" {strings.Level}: {level}";
 			}
 
 			str += $" ({username})";
@@ -103,7 +103,7 @@ namespace KryBot.Core
 		{
 			return
 				new Log(
-					$"{GetDateTime()} {{{site}}} {strings.LoginSuccess} {strings.ParseProfile_Points}: {points} ({username})",
+					$"{GetDateTime()} {{{site}}} {strings.LoginSuccess} {strings.Points}: {points} ({username})",
 					Color.Green, true);
 		}
 

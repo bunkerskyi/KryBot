@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Exceptionless.Json;
 using HtmlAgilityPack;
-using KryBot.CommonResources.lang;
+using KryBot.CommonResources.Localization;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
 using KryBot.Core.Serializable.GameMiner;
