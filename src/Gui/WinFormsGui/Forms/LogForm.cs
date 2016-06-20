@@ -9,8 +9,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 	public partial class FormLog : Form
 	{
 		private readonly LogMessage _messages = LogMessage.Instance;
-		private readonly int _y;
 		private readonly Settings _settings;
+		private readonly int _y;
 		private bool _win7;
 		private int _x;
 

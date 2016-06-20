@@ -1833,7 +1833,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				{
 					case "ru-RU":
 						lang = "ru-RU";
-						break;																  
+						break;
 					case "uk-UA":
 						lang = "ru-RU";
 						break;

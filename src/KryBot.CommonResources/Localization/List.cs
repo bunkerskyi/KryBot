@@ -7,21 +7,21 @@
 
 		public static string GetFullLang(string shortLang)
 		{
-			for (int i = 0; i < ShortLangList.Length; i++)
+			for (var i = 0; i < ShortLangList.Length; i++)
 			{
 				if (ShortLangList[i] == shortLang)
 				{
 					return LangList[i];
-				}	
+				}
 			}
 			return LangList[0];
 		}
 
 		public static string GetShortLang(string fullLang)
 		{
-			for(int i = 0; i < LangList.Length; i++)
+			for (var i = 0; i < LangList.Length; i++)
 			{
-				if(LangList[i] == fullLang)
+				if (LangList[i] == fullLang)
 				{
 					return ShortLangList[i];
 				}

@@ -273,7 +273,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private void LoadLags()
 		{
 			var array = List.GetFullLangs();
-			foreach (string item in array)
+			foreach (var item in array)
 			{
 				cbLang.Items.Add(item);
 			}
