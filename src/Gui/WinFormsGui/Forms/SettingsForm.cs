@@ -214,66 +214,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			_bot.Save();
 		}
 
-		private void tbGMMaxValue_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
-				e.Handled = true;
-		}
-
-		private void tbGMReserv_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
-				e.Handled = true;
-		}
-
-		private void tbSGMaxValue_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
-				e.Handled = true;
-		}
-
-		private void tbSGReserv_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
-				e.Handled = true;
-		}
-
-		private void tbSCMaxValue_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
-				e.Handled = true;
-		}
-
-		private void tbSCReserv_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
-				e.Handled = true;
-		}
-
-		private void tbSPMaxValue_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
-				e.Handled = true;
-		}
-
-		private void tbSPReserv_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
-				e.Handled = true;
-		}
-
-		private void cbTimerEnable_CheckedChanged(object sender, EventArgs e)
-		{
-			gbTimerSettings.Enabled = cbTimerEnable.Checked;
-		}
-
-		private void tbTimerInterval_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
-				e.Handled = true;
-		}
-
-		private void tbTimerLoops_KeyPress(object sender, KeyPressEventArgs e)
+		private void EventKeyPress(object sender, KeyPressEventArgs e)
 		{
 			if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
 				e.Handled = true;
@@ -324,16 +265,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			form.ShowDialog();
 		}
 
-		private void tbPBMaxValue_KeyPress(object sender, KeyPressEventArgs e)
+		private void cbTimerEnable_CheckedChanged(object sender, EventArgs e)
 		{
-			if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
-				e.Handled = true;
-		}
-
-		private void tbPBReserv_KeyPress(object sender, KeyPressEventArgs e)
-		{
-			if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
-				e.Handled = true;
+			gbTimerSettings.Enabled = cbTimerEnable.Checked;
 		}
 
 		private void LoadLags()

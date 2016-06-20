@@ -247,7 +247,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.tbTimerLoops.Size = new System.Drawing.Size(56, 20);
 			this.tbTimerLoops.TabIndex = 3;
 			this.tbTimerLoops.Text = "0";
-			this.tbTimerLoops.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbTimerLoops_KeyPress);
+			this.tbTimerLoops.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EventKeyPress);
 			// 
 			// label6
 			// 
@@ -265,7 +265,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.tbTimerInterval.Size = new System.Drawing.Size(56, 20);
 			this.tbTimerInterval.TabIndex = 1;
 			this.tbTimerInterval.Text = "5";
-			this.tbTimerInterval.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbTimerInterval_KeyPress);
+			this.tbTimerInterval.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EventKeyPress);
 			// 
 			// label5
 			// 
@@ -386,7 +386,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.tbGMReserv.Size = new System.Drawing.Size(30, 20);
 			this.tbGMReserv.TabIndex = 3;
 			this.tbGMReserv.Text = "0";
-			this.tbGMReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbGMReserv_KeyPress);
+			this.tbGMReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EventKeyPress);
 			// 
 			// tbGMMaxValue
 			// 
@@ -395,7 +395,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.tbGMMaxValue.Size = new System.Drawing.Size(30, 20);
 			this.tbGMMaxValue.TabIndex = 2;
 			this.tbGMMaxValue.Text = "50";
-			this.tbGMMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbGMMaxValue_KeyPress);
+			this.tbGMMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EventKeyPress);
 			// 
 			// label2
 			// 
@@ -496,7 +496,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.tbSGReserv.Size = new System.Drawing.Size(30, 20);
 			this.tbSGReserv.TabIndex = 7;
 			this.tbSGReserv.Text = "0";
-			this.tbSGReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSGReserv_KeyPress);
+			this.tbSGReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EventKeyPress);
 			// 
 			// tbSGMaxValue
 			// 
@@ -505,7 +505,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.tbSGMaxValue.Size = new System.Drawing.Size(30, 20);
 			this.tbSGMaxValue.TabIndex = 6;
 			this.tbSGMaxValue.Text = "300";
-			this.tbSGMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSGMaxValue_KeyPress);
+			this.tbSGMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EventKeyPress);
 			// 
 			// lblSGReserv
 			// 
@@ -611,7 +611,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.tbSCReserv.Size = new System.Drawing.Size(30, 20);
 			this.tbSCReserv.TabIndex = 13;
 			this.tbSCReserv.Text = "0";
-			this.tbSCReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSCReserv_KeyPress);
+			this.tbSCReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EventKeyPress);
 			// 
 			// tbSCMaxValue
 			// 
@@ -620,7 +620,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.tbSCMaxValue.Size = new System.Drawing.Size(30, 20);
 			this.tbSCMaxValue.TabIndex = 12;
 			this.tbSCMaxValue.Text = "1500";
-			this.tbSCMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSCMaxValue_KeyPress);
+			this.tbSCMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EventKeyPress);
 			// 
 			// lblSCReserv
 			// 
@@ -692,7 +692,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.tbSPReserv.Size = new System.Drawing.Size(30, 20);
 			this.tbSPReserv.TabIndex = 17;
 			this.tbSPReserv.Text = "0";
-			this.tbSPReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSPReserv_KeyPress);
+			this.tbSPReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EventKeyPress);
 			// 
 			// tbSPMaxValue
 			// 
@@ -701,7 +701,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.tbSPMaxValue.Size = new System.Drawing.Size(30, 20);
 			this.tbSPMaxValue.TabIndex = 16;
 			this.tbSPMaxValue.Text = "30";
-			this.tbSPMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbSPMaxValue_KeyPress);
+			this.tbSPMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EventKeyPress);
 			// 
 			// label3
 			// 
@@ -742,7 +742,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.tbPBReserv.Size = new System.Drawing.Size(30, 20);
 			this.tbPBReserv.TabIndex = 24;
 			this.tbPBReserv.Text = "0";
-			this.tbPBReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPBReserv_KeyPress);
+			this.tbPBReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EventKeyPress);
 			// 
 			// tbPBMaxValue
 			// 
@@ -751,7 +751,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.tbPBMaxValue.Size = new System.Drawing.Size(30, 20);
 			this.tbPBMaxValue.TabIndex = 23;
 			this.tbPBMaxValue.Text = "30";
-			this.tbPBMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPBMaxValue_KeyPress);
+			this.tbPBMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EventKeyPress);
 			// 
 			// label9
 			// 
