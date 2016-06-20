@@ -10,13 +10,15 @@ namespace KryBot.Gui.WinFormsGui.Forms
 	{
 		private readonly LogMessage _messages = LogMessage.Instance;
 		private readonly int _y;
+		private readonly Settings _settings;
 		private bool _win7;
 		private int _x;
 
-		public FormLog(int x, int y)
+		public FormLog(int x, int y, Settings settings)
 		{
 			_x = x;
 			_y = y;
+			_settings = settings;
 			InitializeComponent();
 			_messages.HandleMessage += OnHandleMessage;
 		}
@@ -34,6 +36,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			}
 
 			Location = new Point(_x, _y);
+			Height = _settings.LogHeight;
+			Width = _settings.LogWidth;
 			var owner = Owner as FormMain;
 			if (owner != null) AppendText(richTextBox1, owner.LogBuffer.Content, owner.LogBuffer.Color);
 		}
@@ -84,9 +88,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void FormLog_ResizeEnd(object sender, EventArgs e)
 		{
-			Properties.Settings.Default.LogHeight = Height;
-			Properties.Settings.Default.LogWidth = Width;
-			Properties.Settings.Default.Save();
+			_settings.LogHeight = Height;
+			_settings.LogWidth = Width;
 		}
 
 		private void OnHandleMessage(object sender, EventArgs args)

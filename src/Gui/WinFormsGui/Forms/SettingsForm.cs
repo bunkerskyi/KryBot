@@ -11,11 +11,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
 	public partial class FormSettings : Form
 	{
 		private readonly Bot _bot;
+		private readonly Settings _settings;
 		private bool _userAutorun;
 
-		public FormSettings(Bot bot)
+		public FormSettings(Bot bot, Settings settings)
 		{
 			_bot = bot;
+			_settings = settings;
 			InitializeComponent();
 		}
 
@@ -26,6 +28,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void Design()
 		{
+			LoadLags();
+
 			cbSortBy.Text = cbSortBy.Items[0].ToString();
 
 			if (_bot.Timer)
@@ -87,9 +91,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			tbSPMaxValue.Text = _bot.UseGamble.MaxJoinValue.ToString();
 			tbSPReserv.Text = _bot.UseGamble.PointsReserv.ToString();
 
-			cbAutorun.Checked = Properties.Settings.Default.Autorun;
-			cbWonTip.Checked = Properties.Settings.Default.ShowWonTip;
-			cbFarmTip.Checked = Properties.Settings.Default.ShowFarmTip;
+			cbAutorun.Checked = _settings.Autorun;
+			cbWonTip.Checked = _settings.ShowWonTip;
+			cbFarmTip.Checked = _settings.ShowFarmTip;
 			cbWishlistSort.Checked = _bot.WishlistSort;
 		}
 
@@ -114,6 +118,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void SaveSettings()
 		{
+			_settings.Lang = List.GetShortLang(cbLang.Text);
+			((FormMain)Owner).SetLocalization();
+
 			if (cbTimerEnable.Checked && int.Parse(tbTimerInterval.Text) == 0)
 			{
 				MessageBox.Show(strings.SettingsForm_IntervalNotZero, strings.Error, MessageBoxButtons.OK,
@@ -160,13 +167,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			_bot.TimerInterval = int.Parse(tbTimerInterval.Text)*60000;
 			_bot.TimerLoops = int.Parse(tbTimerLoops.Text);
 
-			Properties.Settings.Default.Autorun = cbAutorun.Checked;
-			Properties.Settings.Default.ShowWonTip = cbWonTip.Checked;
-			Properties.Settings.Default.ShowFarmTip = cbFarmTip.Checked;
+			_settings.Autorun = cbAutorun.Checked;
+			_settings.ShowWonTip = cbWonTip.Checked;
+			_settings.ShowFarmTip = cbFarmTip.Checked;
 			_bot.WishlistSort = cbWishlistSort.Checked;
 
 			_bot.Save();
-			Properties.Settings.Default.Save();
+			_settings.Save();
 		}
 
 		private void btnSGCookies_Click(object sender, EventArgs e)
@@ -328,6 +335,16 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
 				e.Handled = true;
+		}
+
+		private void LoadLags()
+		{
+			var array = List.GetFullLangs();
+			foreach (string item in array)
+			{
+				cbLang.Items.Add(item);
+			}
+			cbLang.Text = List.GetFullLang(_settings.Lang);
 		}
 	}
 }

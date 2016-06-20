@@ -61,8 +61,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.Load += new System.EventHandler(this.formLog_Load);
 			this.Icon = Icon.FromHandle(Resources.log.GetHicon());
 			this.ResizeEnd += new System.EventHandler(this.FormLog_ResizeEnd);
-			this.Height = Properties.Settings.Default.LogHeight;
-			this.Width = Properties.Settings.Default.LogWidth;
+			this.Height = 247;
+			this.Width = 500;
 			this.ResumeLayout(false);
 
 		}

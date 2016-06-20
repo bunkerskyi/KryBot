@@ -26,72 +26,12 @@ namespace KryBot.Gui.WinFormsGui.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool LogActive {
-            get {
-                return ((bool)(this["LogActive"]));
-            }
-            set {
-                this["LogActive"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool FirstExecute {
             get {
                 return ((bool)(this["FirstExecute"]));
             }
             set {
                 this["FirstExecute"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Lang {
-            get {
-                return ((string)(this["Lang"]));
-            }
-            set {
-                this["Lang"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool Autorun {
-            get {
-                return ((bool)(this["Autorun"]));
-            }
-            set {
-                this["Autorun"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ShowWonTip {
-            get {
-                return ((bool)(this["ShowWonTip"]));
-            }
-            set {
-                this["ShowWonTip"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ShowFarmTip {
-            get {
-                return ((bool)(this["ShowFarmTip"]));
-            }
-            set {
-                this["ShowFarmTip"] = value;
             }
         }
         
@@ -104,30 +44,6 @@ namespace KryBot.Gui.WinFormsGui.Properties {
             }
             set {
                 this["_idCache"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("247")]
-        public int LogHeight {
-            get {
-                return ((int)(this["LogHeight"]));
-            }
-            set {
-                this["LogHeight"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("500")]
-        public int LogWidth {
-            get {
-                return ((int)(this["LogWidth"]));
-            }
-            set {
-                this["LogWidth"] = value;
             }
         }
     }

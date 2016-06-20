@@ -19,6 +19,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private static Bot _bot = new Bot();
 		private static Blacklist _blackList;
+		private static Settings _settings;
 
 
 		private readonly Timer _timer = new Timer();
@@ -32,7 +33,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		public FormMain()
 		{
-			SetLocalization();
+			_settings = Settings.Load();
+			GetLocalization();
 			InitializeComponent();
 		}
 
@@ -69,9 +71,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 				}
 			}
 
-			new Settings().Load();
 			LoadProfilesInfo += ShowProfileInfo;
-			_logActive = Properties.Settings.Default.LogActive;
+			_logActive = _settings.IsLogActive;
 			Design();
 			_blackList = FileHelper.SafelyLoad<Blacklist>(FilePaths.Blacklist);
 			LogMessage.Instance.AddMessage(Messages.GamesInBlacklist(_blackList.Items.Count));
@@ -156,14 +157,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					_timerTickCount.Start();
 					btnStart.Text =
 						$"{strings.FormMain_btnStart_Click_Stop} ({TimeSpan.FromMilliseconds(_timer.Interval)})";
-					if (Properties.Settings.Default.ShowFarmTip)
+					if (_settings.ShowFarmTip)
 					{
 						ShowBaloolTip(
 							$"{strings.FormMain_btnStart_Click_FarmBeginWithInterval} {_interval/60000} {strings.FormMain_btnStart_Click_M}",
 							5000, ToolTipIcon.Info);
 					}
 					await DoFarm();
-					if (Properties.Settings.Default.ShowFarmTip)
+					if (_settings.ShowFarmTip)
 					{
 						ShowBaloolTip(strings.FormMain_btnStart_Click_FarmFinish, 5000, ToolTipIcon.Info);
 					}
@@ -193,14 +194,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					btnStart.Enabled = false;
 					btnStart.Text = strings.FormMain_btnStart_Click_TaskBegin;
 
-					if (Properties.Settings.Default.ShowFarmTip)
+					if (_settings.ShowFarmTip)
 					{
 						ShowBaloolTip(strings.FormMain_btnStart_Click_FarmBegin, 5000, ToolTipIcon.Info);
 					}
 
 					await DoFarm();
 
-					if (Properties.Settings.Default.ShowFarmTip)
+					if (_settings.ShowFarmTip)
 					{
 						ShowBaloolTip(strings.FormMain_btnStart_Click_FarmFinish, 5000, ToolTipIcon.Info);
 					}
@@ -288,16 +289,16 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			Properties.Settings.Default.LogActive = _logActive;
+			_settings.IsLogActive = _logActive;
 			_bot.Save();
-			new Settings().Save();
+			_settings.Save();
 			Properties.Settings.Default.Save();
 		}
 
 		private void OpenLog()
 		{
 			логToolStripMenuItem.Text = $"{strings.Log} <<";
-			var form = new FormLog(Location.X + Width - 15, Location.Y) {Owner = this};
+			var form = new FormLog(Location.X + Width - 15, Location.Y, _settings) {Owner = this};
 
 			LogHide += form.FormHide;
 			LogUnHide += form.FormUnHide;
@@ -355,23 +356,23 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 			if (_bot.GameMiner.Enabled)
 			{
-				var profile = await _bot.GameMiner.CheckLogin(Properties.Settings.Default.Lang);
+				var profile = await _bot.GameMiner.CheckLogin(_settings.Lang);
 				LogMessage.Instance.AddMessage(profile);
 				LoadProfilesInfo?.Invoke();
 
 				if (profile.Success)
 				{
-					var won = await _bot.GameMiner.CheckWon(Properties.Settings.Default.Lang);
+					var won = await _bot.GameMiner.CheckWon(_settings.Lang);
 					if (won != null)
 					{
 						LogMessage.Instance.AddMessage(won);
-						if (Properties.Settings.Default.ShowWonTip)
+						if (_settings.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
 						}
 					}
 
-					await _bot.GameMiner.Join(_blackList, _bot.Sort, _bot.SortToMore, Properties.Settings.Default.Lang);
+					await _bot.GameMiner.Join(_blackList, _bot.Sort, _bot.SortToMore, _settings.Lang);
 				}
 				else
 				{
@@ -396,7 +397,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					if (won != null)
 					{
 						LogMessage.Instance.AddMessage(won);
-						if (Properties.Settings.Default.ShowWonTip)
+						if (_settings.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
 						}
@@ -427,7 +428,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					if (won != null)
 					{
 						LogMessage.Instance.AddMessage(won);
-						if (Properties.Settings.Default.ShowWonTip)
+						if (_settings.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
 						}
@@ -458,7 +459,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					if (won != null)
 					{
 						LogMessage.Instance.AddMessage(won);
-						if (Properties.Settings.Default.ShowWonTip)
+						if (_settings.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
 						}
@@ -603,11 +604,11 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			{
 				if (await CheckLoginGm())
 				{
-					var won = await _bot.GameMiner.CheckWon(Properties.Settings.Default.Lang);
+					var won = await _bot.GameMiner.CheckWon(_settings.Lang);
 					if (won != null)
 					{
 						LogMessage.Instance.AddMessage(won);
-						if (Properties.Settings.Default.ShowWonTip)
+						if (_settings.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
 						}
@@ -648,7 +649,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					if (won != null && won.Content != "\n")
 					{
 						LogMessage.Instance.AddMessage(won);
-						if (Properties.Settings.Default.ShowWonTip)
+						if (_settings.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
 						}
@@ -686,7 +687,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					if (won != null && won.Content != "\n")
 					{
 						LogMessage.Instance.AddMessage(won);
-						if (Properties.Settings.Default.ShowWonTip)
+						if (_settings.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
 						}
@@ -724,7 +725,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					if (won != null)
 					{
 						LogMessage.Instance.AddMessage(won);
-						if (Properties.Settings.Default.ShowWonTip)
+						if (_settings.ShowWonTip)
 						{
 							ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
 						}
@@ -1051,8 +1052,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			btnGMLogin.Enabled = false;
 			BrowserStart($"{Links.GameMiner}login/steam?backurl=http%3A%2F%2Fgameminer.net%2F%3Flang%3D" +
-			             Properties.Settings.Default.Lang + @"&agree=True",
-				"http://gameminer.net/?lang=" + Properties.Settings.Default.Lang, "GameMiner - Login", "");
+			             _settings.Lang + @"&agree=True",
+				"http://gameminer.net/?lang=" + _settings.Lang, "GameMiner - Login", "");
 
 			if (string.IsNullOrEmpty(_bot.GameMiner.UserAgent))
 			{
@@ -1091,7 +1092,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private async Task<bool> CheckLoginGm()
 		{
 			Message_TryLogin("GameMiner");
-			var login = await _bot.GameMiner.CheckLogin(Properties.Settings.Default.Lang);
+			var login = await _bot.GameMiner.CheckLogin(_settings.Lang);
 			LogMessage.Instance.AddMessage(login);
 			return login.Success;
 		}
@@ -1162,7 +1163,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			{
 				LoadProfilesInfo?.Invoke();
 
-				var async = await _bot.GameMiner.Sync(Properties.Settings.Default.Lang);
+				var async = await _bot.GameMiner.Sync(_settings.Lang);
 				if (async != null)
 				{
 					LogMessage.Instance.AddMessage(async);
@@ -1654,7 +1655,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void настройкиToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
-			var form = new FormSettings(_bot);
+			var form = new FormSettings(_bot, _settings) {Owner = this};
 			form.ShowDialog();
 		}
 
@@ -1818,24 +1819,34 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			}
 		}
 
-		private void SetLocalization()
+		private void GetLocalization()
 		{
-			if (Properties.Settings.Default.Lang == "")
+			if (string.IsNullOrEmpty(_settings.Lang))
 			{
+				string lang;
 				switch (CultureInfo.CurrentCulture.Name)
 				{
 					case "ru-RU":
-						Properties.Settings.Default.Lang = "ru-RU";
+						lang = "ru-RU";
+						break;																  
+					case "uk-UA":
+						lang = "ru-RU";
 						break;
 					default:
-						Properties.Settings.Default.Lang = "en-EN";
+						lang = "en-EN";
 						break;
 				}
-				Properties.Settings.Default.Save();
+				_settings.Lang = lang;
+				_settings.Save();
 			}
 
-			CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(Properties.Settings.Default.Lang);
-			CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(Properties.Settings.Default.Lang);
+			SetLocalization();
+		}
+
+		public void SetLocalization()
+		{
+			CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(_settings.Lang);
+			CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(_settings.Lang);
 		}
 	}
 }

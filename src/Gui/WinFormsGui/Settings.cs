@@ -11,32 +11,18 @@ namespace KryBot.Gui.WinFormsGui
 		public bool Autorun { get; set; }
 		public bool ShowWonTip { get; set; }
 		public bool ShowFarmTip { get; set; }
+		public int LogHeight { get; set; } = 247;
+		public int LogWidth { get; set; } = 500;
 		// НЕ ДЕЛАТЬ ПОЛЯ ПРИВАТНЫМИ
 
-		public void Load()
+		public static Settings Load()
 		{
-			var settings = FileHelper.SafelyLoad<Settings>(FilePaths.Settings);
-
-			Properties.Settings.Default.Autorun = settings.Autorun;
-			Properties.Settings.Default.LogActive = settings.IsLogActive;
-			Properties.Settings.Default.Lang = settings.Lang;
-			Properties.Settings.Default.ShowFarmTip = settings.ShowFarmTip;
-			Properties.Settings.Default.ShowWonTip = settings.ShowWonTip;
-			Properties.Settings.Default.Save();
+			return FileHelper.SafelyLoad<Settings>(FilePaths.Settings);
 		}
 
 		public void Save()
 		{
-			var settings = new Settings
-			{
-				Lang = Properties.Settings.Default.Lang,
-				IsLogActive = Properties.Settings.Default.LogActive,
-				ShowFarmTip = Properties.Settings.Default.ShowFarmTip,
-				ShowWonTip = Properties.Settings.Default.ShowWonTip,
-				Autorun = Properties.Settings.Default.Autorun
-			};
-
-			FileHelper.Save(settings, FilePaths.Settings);
+			FileHelper.Save(this, FilePaths.Settings);
 		}
 	}
 }

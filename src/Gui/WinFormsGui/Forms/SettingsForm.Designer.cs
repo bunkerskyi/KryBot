@@ -35,6 +35,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPageCommun = new System.Windows.Forms.TabPage();
+			this.gbLang = new System.Windows.Forms.GroupBox();
 			this.cbWishlistSort = new System.Windows.Forms.CheckBox();
 			this.cbFarmTip = new System.Windows.Forms.CheckBox();
 			this.cbWonTip = new System.Windows.Forms.CheckBox();
@@ -97,8 +98,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.btnPBCookies = new System.Windows.Forms.Button();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.cbLang = new System.Windows.Forms.ComboBox();
 			this.tabControl1.SuspendLayout();
 			this.tabPageCommun.SuspendLayout();
+			this.gbLang.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.gbTimerSettings.SuspendLayout();
 			this.tabPageGM.SuspendLayout();
@@ -126,6 +129,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// 
 			// tabPageCommun
 			// 
+			this.tabPageCommun.Controls.Add(this.gbLang);
 			this.tabPageCommun.Controls.Add(this.cbWishlistSort);
 			this.tabPageCommun.Controls.Add(this.cbFarmTip);
 			this.tabPageCommun.Controls.Add(this.cbWonTip);
@@ -139,6 +143,16 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.tabPageCommun.TabIndex = 5;
 			this.tabPageCommun.Text = strings.SettingsForm_Commun;
 			this.tabPageCommun.UseVisualStyleBackColor = true;
+			// 
+			// gbLang
+			// 
+			this.gbLang.Controls.Add(this.cbLang);
+			this.gbLang.Location = new System.Drawing.Point(0, 115);
+			this.gbLang.Name = "gbLang";
+			this.gbLang.Size = new System.Drawing.Size(154, 40);
+			this.gbLang.TabIndex = 9;
+			this.gbLang.TabStop = false;
+			this.gbLang.Text = "Язык";
 			// 
 			// cbWishlistSort
 			// 
@@ -279,8 +293,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSortBy.FormattingEnabled = true;
 			this.cbSortBy.ItemHeight = 13;
 			this.cbSortBy.Items.AddRange(new object[] {
-			"дешевые",
-			"дорогие"});
+            "дешевые",
+            "дорогие"});
 			this.cbSortBy.Location = new System.Drawing.Point(225, 3);
 			this.cbSortBy.Name = "cbSortBy";
 			this.cbSortBy.Size = new System.Drawing.Size(79, 21);
@@ -436,10 +450,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// 
 			this.numSGLevel.Location = new System.Drawing.Point(183, 74);
 			this.numSGLevel.Maximum = new decimal(new int[] {
-			10,
-			0,
-			0,
-			0});
+            10,
+            0,
+            0,
+            0});
 			this.numSGLevel.Name = "numSGLevel";
 			this.numSGLevel.Size = new System.Drawing.Size(27, 20);
 			this.numSGLevel.TabIndex = 13;
@@ -770,7 +784,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.сохранитьToolStripMenuItem});
+            this.сохранитьToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(317, 24);
@@ -784,6 +798,15 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
 			this.сохранитьToolStripMenuItem.Text = strings.Save;
 			this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
+			// 
+			// cbLang
+			// 
+			this.cbLang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cbLang.FormattingEnabled = true;
+			this.cbLang.Location = new System.Drawing.Point(6, 13);
+			this.cbLang.Name = "cbLang";
+			this.cbLang.Size = new System.Drawing.Size(142, 21);
+			this.cbLang.TabIndex = 0;
 			// 
 			// FormSettings
 			// 
@@ -806,6 +829,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.tabControl1.ResumeLayout(false);
 			this.tabPageCommun.ResumeLayout(false);
 			this.tabPageCommun.PerformLayout();
+			this.gbLang.ResumeLayout(false);
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.gbTimerSettings.ResumeLayout(false);
@@ -894,5 +918,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private System.Windows.Forms.Label label10;
 		private System.Windows.Forms.CheckBox cbWishlistSort;
 		private System.Windows.Forms.CheckBox cbSCContributors;
+		private System.Windows.Forms.GroupBox gbLang;
+		private System.Windows.Forms.ComboBox cbLang;
 	}
 }
