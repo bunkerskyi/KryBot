@@ -1655,8 +1655,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void настройкиToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
-			var form = new FormSettings(_bot, _settings) {Owner = this};
+			var form = new FormSettings(_bot, _settings);
 			form.ShowDialog();
+			SetLocalization();
+			MessageBox.Show(strings.CookieForm_MustRestart, strings.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 		}
 
 		private async void btnPBLogin_Click(object sender, EventArgs e)
@@ -1843,7 +1845,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			SetLocalization();
 		}
 
-		public void SetLocalization()
+		private void SetLocalization()
 		{
 			CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(_settings.Lang);
 			CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(_settings.Lang);

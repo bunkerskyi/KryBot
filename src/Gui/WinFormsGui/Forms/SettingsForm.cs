@@ -119,7 +119,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private void SaveSettings()
 		{
 			_settings.Lang = List.GetShortLang(cbLang.Text);
-			((FormMain)Owner).SetLocalization();
 
 			if (cbTimerEnable.Checked && int.Parse(tbTimerInterval.Text) == 0)
 			{
