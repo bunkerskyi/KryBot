@@ -1657,8 +1657,11 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			var form = new FormSettings(_bot, _settings);
 			form.ShowDialog();
-			SetLocalization();
-			MessageBox.Show(strings.CookieForm_MustRestart, strings.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			if (CultureInfo.CurrentCulture.Name != _settings.Lang)
+			{
+				SetLocalization();
+				MessageBox.Show(strings.CookieForm_MustRestart, strings.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			}
 		}
 
 		private async void btnPBLogin_Click(object sender, EventArgs e)
