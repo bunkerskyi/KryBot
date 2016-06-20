@@ -464,4 +464,7 @@
   <data name="SettingsForm_WishlistGiveaways" xml:space="preserve">
     <value>Wishlist</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Язык</value>
+  </data>
 </root>

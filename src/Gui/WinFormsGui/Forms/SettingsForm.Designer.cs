@@ -152,7 +152,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.gbLang.Size = new System.Drawing.Size(154, 40);
 			this.gbLang.TabIndex = 9;
 			this.gbLang.TabStop = false;
-			this.gbLang.Text = "Язык";
+			this.gbLang.Text = strings.Language;
 			// 
 			// cbWishlistSort
 			// 
