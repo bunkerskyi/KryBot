@@ -17,6 +17,7 @@ namespace KryBot.Core
 			PlayBlink = new PlayBlink();
 			Steam = new Steam();
 			GameAways = new GameAways();
+			Blacklist = new Blacklist();
 		}
 
 		public bool Sort { get; set; }
@@ -36,6 +37,7 @@ namespace KryBot.Core
 		public PlayBlink PlayBlink { get; set; }
 		public Steam Steam { get; set; }
 		public GameAways GameAways { get; set; }
+		public Blacklist Blacklist { get; set; }
 		// НЕ ИЗМЕНЯТЬ У ПОЛЕЙ SET
 
 		public void ClearGiveawayList()

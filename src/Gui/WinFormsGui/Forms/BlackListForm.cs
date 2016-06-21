@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using KryBot.CommonResources.Localization;
 using KryBot.Core;
-using KryBot.Core.Helpers;
 using KryBot.Gui.WinFormsGui.Properties;
 
 namespace KryBot.Gui.WinFormsGui.Forms
@@ -24,11 +23,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private void formBlackList_Load(object sender, EventArgs e)
 		{
 			Design();
-			var blacklist = FileHelper.SafelyLoad<Blacklist>(FilePaths.Blacklist);
 
-			if (blacklist.Items != null)
+			if (_bot.Blacklist != null)
 			{
-				foreach (var item in blacklist.Items)
+				foreach (var item in _bot.Blacklist.Items)
 				{
 					listView.Items.Add(item.Id).SubItems.Add(item.Name);
 				}
@@ -46,19 +44,16 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			if (listView.Items.Count > 0)
 			{
-				var blacklist = new Blacklist();
-
+				_bot.Blacklist.Items.Clear();
 				foreach (ListViewItem lvitem in listView.Items)
 				{
-					var item = new Blacklist.BlacklistItem
+					_bot.Blacklist.Items.Add(new Blacklist.BlacklistItem
 					{
 						Id = lvitem.SubItems[0].Text,
 						Name = lvitem.SubItems[1].Text
-					};
-					blacklist.Items.Add(item);
+					});
 				}
-
-				FileHelper.Save(blacklist, FilePaths.Blacklist);
+				_bot.Save();
 			}
 		}
 

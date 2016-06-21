@@ -18,7 +18,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		public delegate void SubscribesContainer();
 
 		private static Bot _bot = new Bot();
-		private static Blacklist _blackList;
 		private static Settings _settings;
 
 
@@ -75,8 +74,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			LoadProfilesInfo += ShowProfileInfo;
 			_logActive = _settings.IsLogActive;
 			Design();
-			_blackList = FileHelper.SafelyLoad<Blacklist>(FilePaths.Blacklist);
-			LogMessage.Instance.AddMessage(Messages.GamesInBlacklist(_blackList.Items.Count));
 
 			var version = await Updater.CheckForUpdates();
 			LogMessage.Instance.AddMessage(version);
@@ -281,6 +278,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					return false;
 				}
 				LogMessage.Instance.AddMessage(Messages.ProfileLoaded());
+				LogMessage.Instance.AddMessage(Messages.GamesInBlacklist(_bot.Blacklist?.Items.Count ?? 0));
 				return true;
 			}
 
@@ -373,7 +371,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 						}
 					}
 
-					await _bot.GameMiner.Join(_blackList, _bot.Sort, _bot.SortToMore, _settings.Lang);
+					await _bot.GameMiner.Join(_bot.Blacklist, _bot.Sort, _bot.SortToMore, _settings.Lang);
 				}
 				else
 				{
@@ -404,7 +402,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 						}
 					}
 
-					await _bot.SteamGifts.Join(_blackList, _bot.Sort, _bot.SortToMore);
+					await _bot.SteamGifts.Join(_bot.Blacklist, _bot.Sort, _bot.SortToMore);
 				}
 				else
 				{
@@ -466,7 +464,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 						}
 					}
 
-					await _bot.UseGamble.Join(_bot.Sort, _bot.SortToMore, _blackList);
+					await _bot.UseGamble.Join(_bot.Sort, _bot.SortToMore, _bot.Blacklist);
 				}
 				else
 				{
@@ -487,7 +485,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 				if (profile.Success)
 				{
-					await _bot.SteamTrade.Join(_blackList);
+					await _bot.SteamTrade.Join(_bot.Blacklist);
 				}
 				else
 				{
@@ -508,7 +506,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 				if (profile.Success)
 				{
-					await _bot.PlayBlink.Join(_bot.Sort, _bot.SortToMore, _blackList);
+					await _bot.PlayBlink.Join(_bot.Sort, _bot.SortToMore, _bot.Blacklist);
 				}
 				else
 				{
@@ -529,7 +527,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 				if (profile.Success)
 				{
-					await _bot.GameAways.Join(_blackList, _bot.Sort, _bot.SortToMore);
+					await _bot.GameAways.Join(_bot.Blacklist, _bot.Sort, _bot.SortToMore);
 				}
 				else
 				{
@@ -1651,7 +1649,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			var form = new FormBlackList(_bot);
 			form.ShowDialog();
-			_blackList = FileHelper.SafelyLoad<Blacklist>(FilePaths.Blacklist);
+			LogMessage.Instance.AddMessage(Messages.GamesInBlacklist(_bot.Blacklist?.Items.Count ?? 0));
 		}
 
 		private void настройкиToolStripMenuItem1_Click(object sender, EventArgs e)

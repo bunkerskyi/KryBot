@@ -150,7 +150,7 @@ namespace KryBot.Core
 
 		public static Log GamesInBlacklist(int count)
 		{
-			return new Log($"{strings.GamesInBlacklist}: {count}", Color.White, true);
+			return new Log($"{GetDateTime()} {strings.GamesInBlacklist}: {count}", Color.White, true);
 		}
 	}
 }
