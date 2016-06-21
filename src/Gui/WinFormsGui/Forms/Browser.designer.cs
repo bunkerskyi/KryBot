@@ -33,6 +33,7 @@
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabelChromium = new System.Windows.Forms.ToolStripStatusLabel();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.loadStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
 			this.browserPanel.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
 			this.SuspendLayout();
@@ -49,7 +50,8 @@
 			// statusStrip1
 			// 
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-			this.toolStripStatusLabelChromium});
+            this.loadStatusLabel,
+            this.toolStripStatusLabelChromium});
 			this.statusStrip1.Location = new System.Drawing.Point(0, 239);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.Size = new System.Drawing.Size(284, 22);
@@ -68,13 +70,20 @@
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
 			this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
 			// 
-			// NewBrowser
+			// loadStatusLabel
+			// 
+			this.loadStatusLabel.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.load;
+			this.loadStatusLabel.Name = "loadStatusLabel";
+			this.loadStatusLabel.Size = new System.Drawing.Size(16, 17);
+			this.loadStatusLabel.Click += new System.EventHandler(this.loadStatusLabel_Click);
+			// 
+			// Browser
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(284, 261);
 			this.Controls.Add(this.browserPanel);
-			this.Name = "NewBrowser";
+			this.Name = "Browser";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "NewBrowser";
 			this.Load += new System.EventHandler(this.NewBrowser_Load);
@@ -92,5 +101,6 @@
 		private System.Windows.Forms.StatusStrip statusStrip1;
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabelChromium;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+		private System.Windows.Forms.ToolStripStatusLabel loadStatusLabel;
 	}
 }

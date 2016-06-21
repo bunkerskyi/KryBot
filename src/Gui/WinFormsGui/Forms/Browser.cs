@@ -80,6 +80,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			if (!loadingStateChangedEventArgs.IsLoading)
 			{
+				loadStatusLabel.Image = Resources.refresh;
+
 				if (_browser.Address.Contains(_endPage) || _browser.Address.Contains("http://steamcommunity.com/profiles/"))
 				{
 					if (_endPage == "http://steamcommunity.com/id/")
@@ -132,6 +134,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
 						GameAwaysAuth();
 						Exit();
 					}
+				}
+			}
+			else
+			{
+				if (loadStatusLabel.Image != Resources.refresh)
+				{
+					loadStatusLabel.Image = Resources.load;
 				}
 			}
 		}
@@ -299,6 +308,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			if (IsHandleCreated)
 			{
 				Invoke((MethodInvoker) Close);
+			}
+		}
+
+		private void loadStatusLabel_Click(object sender, EventArgs e)
+		{
+			if (!_browser.IsLoading)
+			{
+				_browser.Reload();
 			}
 		}
 	}
