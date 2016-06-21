@@ -17,6 +17,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			_bot = bot;
 			InitializeComponent();
+            Localization();
 			listView.ListViewItemSorter = new ListViewItemComparer();
 		}
 

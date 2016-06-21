@@ -166,9 +166,7 @@
     <value>Developer Support</value>
   </data>
   <data name="DonateForm_Text" xml:space="preserve">
-    <value>You can help the developer material
-transfer any amount to one of the accounts,
-given below:</value>
+    <value>You can help the developer material transfer any amount to one of the accounts, iven below:</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>

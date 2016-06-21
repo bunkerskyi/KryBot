@@ -49,7 +49,7 @@
 			// statusStrip1
 			// 
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabelChromium});
+			this.toolStripStatusLabelChromium});
 			this.statusStrip1.Location = new System.Drawing.Point(0, 239);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.Size = new System.Drawing.Size(284, 22);

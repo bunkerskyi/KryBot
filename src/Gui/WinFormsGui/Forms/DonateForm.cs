@@ -8,6 +8,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		public FormDonate()
 		{
 			InitializeComponent();
+			Localization();
 		}
 
 		private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

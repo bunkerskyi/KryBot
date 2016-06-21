@@ -49,7 +49,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.labelVersion.Name = "labelVersion";
 			this.labelVersion.Size = new System.Drawing.Size(74, 13);
 			this.labelVersion.TabIndex = 0;
-			this.labelVersion.Text = $"KryBot - {Application.ProductVersion}";
+			this.labelVersion.Text = "KryBot - 1.0.0.0";
 			// 
 			// groupBox1
 			// 
@@ -61,7 +61,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.groupBox1.Size = new System.Drawing.Size(260, 67);
 			this.groupBox1.TabIndex = 1;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = strings.AboutForm_groupBox1;
+			this.groupBox1.Text = "Social links";
 			// 
 			// linkLabelGitHub
 			// 
@@ -109,7 +109,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.Name = "FormAbout";
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = strings.AboutProgram;
+			this.Text = "About program";
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.ResumeLayout(false);
@@ -125,5 +125,12 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private System.Windows.Forms.LinkLabel linkLabel1;
 		private System.Windows.Forms.LinkLabel linkLabelGitHub;
 		private System.Windows.Forms.LinkLabel linkLabel2;
+
+		private void Localization()
+		{
+			labelVersion.Text = $"KryBot - {Application.ProductVersion}";
+			groupBox1.Text = strings.AboutForm_groupBox1;
+			Text = strings.AboutProgram;
+		}
 	}
 }

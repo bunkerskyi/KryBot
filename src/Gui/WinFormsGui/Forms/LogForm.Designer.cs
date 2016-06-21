@@ -57,7 +57,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.Controls.Add(this.richTextBox1);
 			this.Name = "FormLog";
 			this.ShowInTaskbar = false;
-			this.Text = strings.Log;
+			this.Text = "Log";
 			this.Load += new System.EventHandler(this.formLog_Load);
 			this.Icon = Icon.FromHandle(Resources.log.GetHicon());
 			this.ResizeEnd += new System.EventHandler(this.FormLog_ResizeEnd);
@@ -70,5 +70,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		#endregion
 
 		private System.Windows.Forms.RichTextBox richTextBox1;
+
+		private void Localization()
+		{
+			Text = strings.Log;
+		}
 	}
 }

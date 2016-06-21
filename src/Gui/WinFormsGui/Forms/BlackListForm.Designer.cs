@@ -47,9 +47,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addToolStripMenuItem,
-            this.delToolStripMenuItem1,
-            this.loadFromИзToolStripMenuItem});
+			this.addToolStripMenuItem,
+			this.delToolStripMenuItem1,
+			this.loadFromИзToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(284, 24);
@@ -61,7 +61,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.addToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.plus;
 			this.addToolStripMenuItem.Name = "addToolStripMenuItem";
 			this.addToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
-			this.addToolStripMenuItem.Text = strings.BlacklistForm_Add;
+			this.addToolStripMenuItem.Text = "Add";
 			this.addToolStripMenuItem.Click += new System.EventHandler(this.добавитьToolStripMenuItem_Click);
 			// 
 			// delToolStripMenuItem1
@@ -69,28 +69,28 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.delToolStripMenuItem1.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.close1;
 			this.delToolStripMenuItem1.Name = "delToolStripMenuItem1";
 			this.delToolStripMenuItem1.Size = new System.Drawing.Size(79, 20);
-			this.delToolStripMenuItem1.Text = strings.BlacklistForm_Del;
+			this.delToolStripMenuItem1.Text = "Delete";
 			this.delToolStripMenuItem1.Click += new System.EventHandler(this.удалитьToolStripMenuItem1_Click);
 			// 
 			// loadFromИзToolStripMenuItem
 			// 
 			this.loadFromИзToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.профильSteamToolStripMenuItem});
+			this.профильSteamToolStripMenuItem});
 			this.loadFromИзToolStripMenuItem.Name = "loadFromИзToolStripMenuItem";
 			this.loadFromИзToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
-			this.loadFromИзToolStripMenuItem.Text = strings.BlacklistForm_LoadFrom;
+			this.loadFromИзToolStripMenuItem.Text = "Load from...";
 			// 
 			// профильSteamToolStripMenuItem
 			// 
 			this.профильSteamToolStripMenuItem.Name = "профильSteamToolStripMenuItem";
 			this.профильSteamToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-			this.профильSteamToolStripMenuItem.Text = strings.BlacklistForm_SteamAccount;
+			this.профильSteamToolStripMenuItem.Text = "Steam profile";
 			this.профильSteamToolStripMenuItem.Click += new System.EventHandler(this.профильSteamToolStripMenuItem_Click);
 			// 
 			// statusStrip1
 			// 
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel});
+			this.toolStripStatusLabel});
 			this.statusStrip1.Location = new System.Drawing.Point(0, 271);
 			this.statusStrip1.Name = "statusStrip1";
 			this.statusStrip1.Size = new System.Drawing.Size(284, 22);
@@ -101,7 +101,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// 
 			this.toolStripStatusLabel.Name = "toolStripStatusLabel";
 			this.toolStripStatusLabel.Size = new System.Drawing.Size(84, 17);
-			this.toolStripStatusLabel.Text = $"{strings.Count}: 0";
+			this.toolStripStatusLabel.Text = "Count: 0";
 			// 
 			// listView
 			// 
@@ -130,7 +130,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.MinimizeBox = false;
 			this.Name = "FormBlackList";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = strings.Blacklist;
+			this.Text = "Blacklist";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormBlackList_FormClosing);
 			this.Load += new System.EventHandler(this.formBlackList_Load);
 			this.menuStrip1.ResumeLayout(false);
@@ -151,5 +151,15 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private System.Windows.Forms.StatusStrip statusStrip1;
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
 		private System.Windows.Forms.ListView listView;
+
+		private void Localization()
+		{
+			addToolStripMenuItem.Text = strings.BlacklistForm_Add;
+			delToolStripMenuItem1.Text = strings.BlacklistForm_Del;
+			loadFromИзToolStripMenuItem.Text = strings.BlacklistForm_LoadFrom;
+            профильSteamToolStripMenuItem.Text = strings.BlacklistForm_SteamAccount;
+            toolStripStatusLabel.Text = $"{strings.Count}: 0";
+			Text = strings.Blacklist;
+		}
 	}
 }
