@@ -41,8 +41,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Localization\strings.en.Designer.cs">
-      <DependentUpon>strings.en.resx</DependentUpon>
+    <Compile Include="Localization\strings.ru.Designer.cs">
+      <DependentUpon>strings.ru.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -121,9 +121,9 @@
     <None Include="Resources\wallet.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Localization\strings.en.resx">
+    <EmbeddedResource Include="Localization\strings.ru.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>strings.en.Designer.cs</LastGenOutput>
+      <LastGenOutput>strings.ru.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Localization\strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

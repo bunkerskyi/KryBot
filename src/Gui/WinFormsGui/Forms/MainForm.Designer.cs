@@ -161,7 +161,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// 
 			this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
 			this.toolStripStatusLabel1.Size = new System.Drawing.Size(108, 17);
-			this.toolStripStatusLabel1.Text = strings.ProfileLoading;
+			this.toolStripStatusLabel1.Text = "Loading profile...";
 			// 
 			// toolStripProgressBar1
 			// 
@@ -192,14 +192,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.файлToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.file;
 			this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
 			this.файлToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
-			this.файлToolStripMenuItem.Text = strings.File;
+			this.файлToolStripMenuItem.Text = "File";
 			// 
 			// вПапкуСБотомToolStripMenuItem
 			// 
 			this.вПапкуСБотомToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.folder;
 			this.вПапкуСБотомToolStripMenuItem.Name = "вПапкуСБотомToolStripMenuItem";
 			this.вПапкуСБотомToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-			this.вПапкуСБотомToolStripMenuItem.Text = strings.OpenBotFolder;
+			this.вПапкуСБотомToolStripMenuItem.Text = "Open folder with bot";
 			this.вПапкуСБотомToolStripMenuItem.Click += new System.EventHandler(this.вПапкуСБотомToolStripMenuItem_Click);
 			// 
 			// сохранитьToolStripMenuItem
@@ -207,7 +207,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.сохранитьToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.file;
 			this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
 			this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-			this.сохранитьToolStripMenuItem.Text = strings.Save;
+			this.сохранитьToolStripMenuItem.Text = "Save";
 			this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
 			// 
 			// сохранитьКакToolStripMenuItem
@@ -215,7 +215,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.сохранитьКакToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.file;
 			this.сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
 			this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-			this.сохранитьКакToolStripMenuItem.Text = strings.SaveAs;
+			this.сохранитьКакToolStripMenuItem.Text = "Save as...";
 			this.сохранитьКакToolStripMenuItem.Click += new System.EventHandler(this.сохранитьКакToolStripMenuItem_Click);
 			// 
 			// загрузитьToolStripMenuItem
@@ -223,7 +223,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.загрузитьToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.exit;
 			this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
 			this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
-			this.загрузитьToolStripMenuItem.Text = strings.Exit;
+			this.загрузитьToolStripMenuItem.Text = "Exit";
 			this.загрузитьToolStripMenuItem.Click += new System.EventHandler(this.загрузитьToolStripMenuItem_Click);
 			// 
 			// настройкиToolStripMenuItem
@@ -234,7 +234,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.настройкиToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("настройкиToolStripMenuItem.Image")));
 			this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
 			this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(75, 20);
-			this.настройкиToolStripMenuItem.Text = strings.Tools;
+			this.настройкиToolStripMenuItem.Text = "Tools";
 			this.настройкиToolStripMenuItem.Image = Resources.settings;
 			// 
 			// настройкиToolStripMenuItem1
@@ -242,7 +242,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.настройкиToolStripMenuItem1.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.settings;
 			this.настройкиToolStripMenuItem1.Name = "настройкиToolStripMenuItem1";
 			this.настройкиToolStripMenuItem1.Size = new System.Drawing.Size(160, 22);
-			this.настройкиToolStripMenuItem1.Text = strings.Settings;
+			this.настройкиToolStripMenuItem1.Text = "Settings";
 			this.настройкиToolStripMenuItem1.Click += new System.EventHandler(this.настройкиToolStripMenuItem1_Click);
 			// 
 			// черныйСписокToolStripMenuItem
@@ -250,7 +250,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.черныйСписокToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.blocked;
 			this.черныйСписокToolStripMenuItem.Name = "черныйСписокToolStripMenuItem";
 			this.черныйСписокToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
-			this.черныйСписокToolStripMenuItem.Text = strings.Blacklist;
+			this.черныйСписокToolStripMenuItem.Text = "Blacklist";
 			this.черныйСписокToolStripMenuItem.Click += new System.EventHandler(this.черныйСписокToolStripMenuItem_Click);
 			// 
 			// оПрограммеToolStripMenuItem
@@ -261,14 +261,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.оПрограммеToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.info;
 			this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
 			this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(109, 20);
-			this.оПрограммеToolStripMenuItem.Text = strings.Information;
+			this.оПрограммеToolStripMenuItem.Text = "Information";
 			// 
 			// оПрограммеToolStripMenuItem1
 			// 
 			this.оПрограммеToolStripMenuItem1.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.info;
 			this.оПрограммеToolStripMenuItem1.Name = "оПрограммеToolStripMenuItem1";
 			this.оПрограммеToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-			this.оПрограммеToolStripMenuItem1.Text = strings.AboutProgram;
+			this.оПрограммеToolStripMenuItem1.Text = "About program";
 			this.оПрограммеToolStripMenuItem1.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem1_Click);
 			// 
 			// донатToolStripMenuItem
@@ -276,7 +276,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.донатToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.wallet;
 			this.донатToolStripMenuItem.Name = "донатToolStripMenuItem";
 			this.донатToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.донатToolStripMenuItem.Text = strings.MainForm_Donate;
+			this.донатToolStripMenuItem.Text = "Donate";
 			this.донатToolStripMenuItem.Click += new System.EventHandler(this.донатToolStripMenuItem_Click);
 			// 
 			// логToolStripMenuItem
@@ -285,7 +285,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.логToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.log1;
 			this.логToolStripMenuItem.Name = "логToolStripMenuItem";
 			this.логToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
-			this.логToolStripMenuItem.Text = $"{strings.Log} <<";
+			this.логToolStripMenuItem.Text = "Log <<";
 			this.логToolStripMenuItem.Click += new System.EventHandler(this.логToolStripMenuItem_Click);
 			// 
 			// tabControl1
@@ -329,7 +329,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.btnGMExit.Name = "btnGMExit";
 			this.btnGMExit.Size = new System.Drawing.Size(75, 23);
 			this.btnGMExit.TabIndex = 27;
-			this.btnGMExit.Text = strings.Exit;
+			this.btnGMExit.Text = "Logout";
 			this.btnGMExit.UseVisualStyleBackColor = true;
 			this.btnGMExit.Click += new System.EventHandler(this.btnGMExit_Click);
 			// 
@@ -353,7 +353,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.linkLabel1.Size = new System.Drawing.Size(47, 13);
 			this.linkLabel1.TabIndex = 7;
 			this.linkLabel1.TabStop = true;
-			this.linkLabel1.Text = strings.LinkLabel_OnSite;
+			this.linkLabel1.Text = "To website";
 			this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
 			// 
 			// pbGMReload
@@ -372,7 +372,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.btnGMLogin.Name = "btnGMLogin";
 			this.btnGMLogin.Size = new System.Drawing.Size(75, 23);
 			this.btnGMLogin.TabIndex = 5;
-			this.btnGMLogin.Text = strings.Login;
+			this.btnGMLogin.Text = "Login";
 			this.btnGMLogin.UseVisualStyleBackColor = true;
 			this.btnGMLogin.Click += new System.EventHandler(this.btnGMLogin_Click);
 			// 
@@ -383,7 +383,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblGMStatus.Name = "lblGMStatus";
 			this.lblGMStatus.Size = new System.Drawing.Size(129, 13);
 			this.lblGMStatus.TabIndex = 3;
-			this.lblGMStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
+			this.lblGMStatus.Text = "Status: Not authorized";
 			// 
 			// lblGMCoal
 			// 
@@ -392,7 +392,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblGMCoal.Name = "lblGMCoal";
 			this.lblGMCoal.Size = new System.Drawing.Size(44, 13);
 			this.lblGMCoal.TabIndex = 2;
-			this.lblGMCoal.Text = $"{strings.Points}: ";
+			this.lblGMCoal.Text = "Points:";
 			// 
 			// lblGMLevel
 			// 
@@ -401,7 +401,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblGMLevel.Name = "lblGMLevel";
 			this.lblGMLevel.Size = new System.Drawing.Size(57, 13);
 			this.lblGMLevel.TabIndex = 1;
-			this.lblGMLevel.Text = $"{strings.Level}: ";
+			this.lblGMLevel.Text = "Level:";
 			// 
 			// tabPageSG
 			// 
@@ -427,7 +427,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.btnSGExit.Name = "btnSGExit";
 			this.btnSGExit.Size = new System.Drawing.Size(75, 23);
 			this.btnSGExit.TabIndex = 28;
-			this.btnSGExit.Text = strings.Exit;
+			this.btnSGExit.Text = "Logout";
 			this.btnSGExit.UseVisualStyleBackColor = true;
 			this.btnSGExit.Click += new System.EventHandler(this.btnSGExit_Click);
 			// 
@@ -451,7 +451,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.linkLabel2.Size = new System.Drawing.Size(47, 13);
 			this.linkLabel2.TabIndex = 12;
 			this.linkLabel2.TabStop = true;
-			this.linkLabel2.Text = strings.LinkLabel_OnSite;
+			this.linkLabel2.Text = "To website";
 			this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
 			// 
 			// pbSGReload
@@ -471,7 +471,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblSGStatus.Name = "lblSGStatus";
 			this.lblSGStatus.Size = new System.Drawing.Size(129, 13);
 			this.lblSGStatus.TabIndex = 9;
-			this.lblSGStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
+			this.lblSGStatus.Text = "Status: Not authorized";
 			// 
 			// lblSGPoints
 			// 
@@ -480,7 +480,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblSGPoints.Name = "lblSGPoints";
 			this.lblSGPoints.Size = new System.Drawing.Size(42, 13);
 			this.lblSGPoints.TabIndex = 8;
-			this.lblSGPoints.Text = $"{strings.Points}: ";
+			this.lblSGPoints.Text = "Points:";
 			// 
 			// lblSGLevel
 			// 
@@ -489,7 +489,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblSGLevel.Name = "lblSGLevel";
 			this.lblSGLevel.Size = new System.Drawing.Size(57, 13);
 			this.lblSGLevel.TabIndex = 7;
-			this.lblSGLevel.Text = $"{strings.Level}: ";
+			this.lblSGLevel.Text = "Level:";
 			// 
 			// btnSGLogin
 			// 
@@ -497,7 +497,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.btnSGLogin.Name = "btnSGLogin";
 			this.btnSGLogin.Size = new System.Drawing.Size(75, 23);
 			this.btnSGLogin.TabIndex = 6;
-			this.btnSGLogin.Text = strings.Login;
+			this.btnSGLogin.Text = "Login";
 			this.btnSGLogin.UseVisualStyleBackColor = true;
 			this.btnSGLogin.Click += new System.EventHandler(this.btnSGLogin_Click);
 			// 
@@ -524,7 +524,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.btnSCExit.Name = "btnSCExit";
 			this.btnSCExit.Size = new System.Drawing.Size(75, 23);
 			this.btnSCExit.TabIndex = 29;
-			this.btnSCExit.Text = strings.Exit;
+			this.btnSCExit.Text = "Logout";
 			this.btnSCExit.UseVisualStyleBackColor = true;
 			this.btnSCExit.Click += new System.EventHandler(this.btnSCExit_Click);
 			// 
@@ -548,7 +548,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.linkLabel3.Size = new System.Drawing.Size(47, 13);
 			this.linkLabel3.TabIndex = 16;
 			this.linkLabel3.TabStop = true;
-			this.linkLabel3.Text = strings.LinkLabel_OnSite;
+			this.linkLabel3.Text = "To website";
 			this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
 			// 
 			// pbSCReload
@@ -568,7 +568,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblSCStatus.Name = "lblSCStatus";
 			this.lblSCStatus.Size = new System.Drawing.Size(129, 13);
 			this.lblSCStatus.TabIndex = 13;
-			this.lblSCStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
+			this.lblSCStatus.Text = "Status: Not authorized";
 			// 
 			// lblSCPoints
 			// 
@@ -577,7 +577,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblSCPoints.Name = "lblSCPoints";
 			this.lblSCPoints.Size = new System.Drawing.Size(42, 13);
 			this.lblSCPoints.TabIndex = 12;
-			this.lblSCPoints.Text = $"{strings.Points}: ";
+			this.lblSCPoints.Text = "Points:";
 			// 
 			// lblSCLevel
 			// 
@@ -586,7 +586,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblSCLevel.Name = "lblSCLevel";
 			this.lblSCLevel.Size = new System.Drawing.Size(57, 13);
 			this.lblSCLevel.TabIndex = 11;
-			this.lblSCLevel.Text = $"{strings.Level}: ";
+			this.lblSCLevel.Text = "Level:";
 			// 
 			// btnSCLogin
 			// 
@@ -594,7 +594,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.btnSCLogin.Name = "btnSCLogin";
 			this.btnSCLogin.Size = new System.Drawing.Size(75, 23);
 			this.btnSCLogin.TabIndex = 7;
-			this.btnSCLogin.Text = strings.Login;
+			this.btnSCLogin.Text = "Login";
 			this.btnSCLogin.UseVisualStyleBackColor = true;
 			this.btnSCLogin.Click += new System.EventHandler(this.btnSCLogin_Click);
 			// 
@@ -621,7 +621,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.btnUGExit.Name = "btnUGExit";
 			this.btnUGExit.Size = new System.Drawing.Size(75, 23);
 			this.btnUGExit.TabIndex = 29;
-			this.btnUGExit.Text = strings.Exit;
+			this.btnUGExit.Text = "Logout";
 			this.btnUGExit.UseVisualStyleBackColor = true;
 			this.btnUGExit.Click += new System.EventHandler(this.btnSPExit_Click);
 			// 
@@ -645,7 +645,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.linkLabelUG.Size = new System.Drawing.Size(47, 13);
 			this.linkLabelUG.TabIndex = 20;
 			this.linkLabelUG.TabStop = true;
-			this.linkLabelUG.Text = strings.LinkLabel_OnSite;
+			this.linkLabelUG.Text = "To website";
 			this.linkLabelUG.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel4_LinkClicked);
 			// 
 			// pbUGReload
@@ -665,7 +665,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblUGStatus.Name = "lblUGStatus";
 			this.lblUGStatus.Size = new System.Drawing.Size(129, 13);
 			this.lblUGStatus.TabIndex = 17;
-			this.lblUGStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
+			this.lblUGStatus.Text = "Status: Not authorized";
 			// 
 			// lblUGPoints
 			// 
@@ -674,7 +674,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblUGPoints.Name = "lblUGPoints";
 			this.lblUGPoints.Size = new System.Drawing.Size(42, 13);
 			this.lblUGPoints.TabIndex = 16;
-			this.lblUGPoints.Text = $"{strings.Points}: ";
+			this.lblUGPoints.Text = "Points:";
 			// 
 			// lblUGLevel
 			// 
@@ -683,7 +683,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblUGLevel.Name = "lblUGLevel";
 			this.lblUGLevel.Size = new System.Drawing.Size(57, 13);
 			this.lblUGLevel.TabIndex = 15;
-			this.lblUGLevel.Text = $"{strings.Level}: ";
+			this.lblUGLevel.Text = "Level:";
 			// 
 			// btnUGLogin
 			// 
@@ -691,7 +691,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.btnUGLogin.Name = "btnUGLogin";
 			this.btnUGLogin.Size = new System.Drawing.Size(75, 23);
 			this.btnUGLogin.TabIndex = 9;
-			this.btnUGLogin.Text = strings.Login;
+			this.btnUGLogin.Text = "Login";
 			this.btnUGLogin.UseVisualStyleBackColor = true;
 			this.btnUGLogin.Click += new System.EventHandler(this.btnSPLogin_Click);
 			// 
@@ -718,7 +718,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.btnSTExit.Name = "btnSTExit";
 			this.btnSTExit.Size = new System.Drawing.Size(75, 23);
 			this.btnSTExit.TabIndex = 29;
-			this.btnSTExit.Text = strings.Exit;
+			this.btnSTExit.Text = "Logout";
 			this.btnSTExit.UseVisualStyleBackColor = true;
 			this.btnSTExit.Click += new System.EventHandler(this.btnSTExit_Click);
 			// 
@@ -742,7 +742,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.linkLabelST.Size = new System.Drawing.Size(47, 13);
 			this.linkLabelST.TabIndex = 24;
 			this.linkLabelST.TabStop = true;
-			this.linkLabelST.Text = strings.LinkLabel_OnSite;
+			this.linkLabelST.Text = "To website";
 			this.linkLabelST.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel5_LinkClicked);
 			// 
 			// pbSTreload
@@ -762,7 +762,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblSTStatus.Name = "lblSTStatus";
 			this.lblSTStatus.Size = new System.Drawing.Size(129, 13);
 			this.lblSTStatus.TabIndex = 21;
-			this.lblSTStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
+			this.lblSTStatus.Text = "Status: Not authorized";
 			// 
 			// lblSTPoints
 			// 
@@ -771,7 +771,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblSTPoints.Name = "lblSTPoints";
 			this.lblSTPoints.Size = new System.Drawing.Size(42, 13);
 			this.lblSTPoints.TabIndex = 20;
-			this.lblSTPoints.Text = $"{strings.Points}: ";
+			this.lblSTPoints.Text = "Points:";
 			// 
 			// lblSTLevel
 			// 
@@ -780,7 +780,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblSTLevel.Name = "lblSTLevel";
 			this.lblSTLevel.Size = new System.Drawing.Size(57, 13);
 			this.lblSTLevel.TabIndex = 19;
-			this.lblSTLevel.Text = $"{strings.Level}: ";
+			this.lblSTLevel.Text = "Level:";
 			// 
 			// btnSTLogin
 			// 
@@ -788,7 +788,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.btnSTLogin.Name = "btnSTLogin";
 			this.btnSTLogin.Size = new System.Drawing.Size(75, 23);
 			this.btnSTLogin.TabIndex = 8;
-			this.btnSTLogin.Text = strings.Login;
+			this.btnSTLogin.Text = "Login";
 			this.btnSTLogin.UseVisualStyleBackColor = true;
 			this.btnSTLogin.Click += new System.EventHandler(this.btnSTLogin_Click);
 			// 
@@ -815,7 +815,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.btnPBExit.Name = "btnPBExit";
 			this.btnPBExit.Size = new System.Drawing.Size(75, 23);
 			this.btnPBExit.TabIndex = 32;
-			this.btnPBExit.Text = strings.Exit;
+			this.btnPBExit.Text = "Logout";
 			this.btnPBExit.UseVisualStyleBackColor = true;
 			this.btnPBExit.Click += new System.EventHandler(this.btnPBExit_Click);
 			// 
@@ -825,7 +825,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.btnPBLogin.Name = "btnPBLogin";
 			this.btnPBLogin.Size = new System.Drawing.Size(75, 23);
 			this.btnPBLogin.TabIndex = 31;
-			this.btnPBLogin.Text = strings.Login;
+			this.btnPBLogin.Text = "Login";
 			this.btnPBLogin.UseVisualStyleBackColor = true;
 			this.btnPBLogin.Click += new System.EventHandler(this.btnPBLogin_Click);
 			// 
@@ -859,7 +859,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.linkLabelPB.Size = new System.Drawing.Size(47, 13);
 			this.linkLabelPB.TabIndex = 28;
 			this.linkLabelPB.TabStop = true;
-			this.linkLabelPB.Text = strings.LinkLabel_OnSite;
+			this.linkLabelPB.Text = "To website";
 			this.linkLabelPB.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel7_LinkClicked);
 			// 
 			// lblPBStatus
@@ -869,7 +869,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblPBStatus.Name = "lblPBStatus";
 			this.lblPBStatus.Size = new System.Drawing.Size(129, 13);
 			this.lblPBStatus.TabIndex = 27;
-			this.lblPBStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
+			this.lblPBStatus.Text = "Status: Not authorized";
 			// 
 			// lblPBPoints
 			// 
@@ -878,7 +878,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblPBPoints.Name = "lblPBPoints";
 			this.lblPBPoints.Size = new System.Drawing.Size(42, 13);
 			this.lblPBPoints.TabIndex = 26;
-			this.lblPBPoints.Text = $"{strings.Points}: ";
+			this.lblPBPoints.Text = "Points:";
 			// 
 			// lblPBLevel
 			// 
@@ -887,7 +887,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblPBLevel.Name = "lblPBLevel";
 			this.lblPBLevel.Size = new System.Drawing.Size(57, 13);
 			this.lblPBLevel.TabIndex = 25;
-			this.lblPBLevel.Text = $"{strings.Level}: ";
+			this.lblPBLevel.Text = "Level:";
 			// 
 			// tabPageGA
 			// 
@@ -933,7 +933,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.btnGAExit.Name = "btnGAExit";
 			this.btnGAExit.Size = new System.Drawing.Size(75, 23);
 			this.btnGAExit.TabIndex = 33;
-			this.btnGAExit.Text = strings.Exit;
+			this.btnGAExit.Text = "Logout";
 			this.btnGAExit.UseVisualStyleBackColor = true;
 			this.btnGAExit.Click += new System.EventHandler(this.buttonExitGA_Click);
 			// 
@@ -943,7 +943,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.btnGALogin.Name = "btnGALogin";
 			this.btnGALogin.Size = new System.Drawing.Size(75, 23);
 			this.btnGALogin.TabIndex = 32;
-			this.btnGALogin.Text = strings.Login;
+			this.btnGALogin.Text = "Login";
 			this.btnGALogin.UseVisualStyleBackColor = true;
 			this.btnGALogin.Click += new System.EventHandler(this.buttonLoginGA_Click);
 			// 
@@ -955,7 +955,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.linkLabelGA.Size = new System.Drawing.Size(47, 13);
 			this.linkLabelGA.TabIndex = 31;
 			this.linkLabelGA.TabStop = true;
-			this.linkLabelGA.Text = strings.LinkLabel_OnSite;
+			this.linkLabelGA.Text = "To website";
 			this.linkLabelGA.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelGA_LinkClicked);
 			// 
 			// lblGAPoints
@@ -965,7 +965,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblGAPoints.Name = "lblGAPoints";
 			this.lblGAPoints.Size = new System.Drawing.Size(42, 13);
 			this.lblGAPoints.TabIndex = 30;
-			this.lblGAPoints.Text = $"{strings.Points}: ";
+			this.lblGAPoints.Text = "Points:";
 			// 
 			// lblGALevel
 			// 
@@ -974,7 +974,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblGALevel.Name = "lblGALevel";
 			this.lblGALevel.Size = new System.Drawing.Size(57, 13);
 			this.lblGALevel.TabIndex = 29;
-			this.lblGALevel.Text = $"{strings.Level}: ";
+			this.lblGALevel.Text = "Level:";
 			// 
 			// lblGAStatus
 			// 
@@ -983,7 +983,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblGAStatus.Name = "lblGAStatus";
 			this.lblGAStatus.Size = new System.Drawing.Size(129, 13);
 			this.lblGAStatus.TabIndex = 28;
-			this.lblGAStatus.Text = $"{ strings.Status}: { strings.Status_NotLogined}";
+			this.lblGAStatus.Text = "Status: Not authorized";
 			// 
 			// tabPageSteam
 			// 
@@ -1004,7 +1004,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.btnSteamExit.Name = "btnSteamExit";
 			this.btnSteamExit.Size = new System.Drawing.Size(75, 23);
 			this.btnSteamExit.TabIndex = 29;
-			this.btnSteamExit.Text = strings.Exit;
+			this.btnSteamExit.Text = "Logout";
 			this.btnSteamExit.UseVisualStyleBackColor = true;
 			this.btnSteamExit.Click += new System.EventHandler(this.btnSteamExit_Click);
 			// 
@@ -1014,7 +1014,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.btnSteamLogin.Name = "btnSteamLogin";
 			this.btnSteamLogin.Size = new System.Drawing.Size(75, 23);
 			this.btnSteamLogin.TabIndex = 12;
-			this.btnSteamLogin.Text = strings.Login;
+			this.btnSteamLogin.Text = "Login";
 			this.btnSteamLogin.UseVisualStyleBackColor = true;
 			this.btnSteamLogin.Click += new System.EventHandler(this.btnSteamLogin_Click);
 			// 
@@ -1026,7 +1026,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.linkLabel6.Size = new System.Drawing.Size(47, 13);
 			this.linkLabel6.TabIndex = 11;
 			this.linkLabel6.TabStop = true;
-			this.linkLabel6.Text = strings.LinkLabel_OnSite;
+			this.linkLabel6.Text = "To website";
 			this.linkLabel6.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel6_LinkClicked);
 			// 
 			// lblSteamStatus
@@ -1036,7 +1036,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblSteamStatus.Name = "lblSteamStatus";
 			this.lblSteamStatus.Size = new System.Drawing.Size(129, 13);
 			this.lblSteamStatus.TabIndex = 10;
-			this.lblSteamStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
+			this.lblSteamStatus.Text = "Status: Not authorized";
 			// 
 			// btnStart
 			// 
@@ -1044,7 +1044,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.btnStart.Name = "btnStart";
 			this.btnStart.Size = new System.Drawing.Size(342, 67);
 			this.btnStart.TabIndex = 5;
-			this.btnStart.Text = strings.Start;
+			this.btnStart.Text = "Start";
 			this.btnStart.UseVisualStyleBackColor = true;
 			this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
 			// 
@@ -1067,21 +1067,21 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// 
 			this.toolStripMenuItem_Show.Name = "toolStripMenuItem_Show";
 			this.toolStripMenuItem_Show.Size = new System.Drawing.Size(135, 22);
-			this.toolStripMenuItem_Show.Text = strings.Show;
+			this.toolStripMenuItem_Show.Text = "Show";
 			this.toolStripMenuItem_Show.Click += new System.EventHandler(this.toolStripMenuItem_Show_Click);
 			// 
 			// toolStripMenuItem_Farm
 			// 
 			this.toolStripMenuItem_Farm.Name = "toolStripMenuItem_Farm";
 			this.toolStripMenuItem_Farm.Size = new System.Drawing.Size(135, 22);
-			this.toolStripMenuItem_Farm.Text = strings.Farm;
+			this.toolStripMenuItem_Farm.Text = "Farm";
 			this.toolStripMenuItem_Farm.Click += new System.EventHandler(this.toolStripMenuItem_Farm_Click);
 			// 
 			// toolStripMenuItem_Exit
 			// 
 			this.toolStripMenuItem_Exit.Name = "toolStripMenuItem_Exit";
 			this.toolStripMenuItem_Exit.Size = new System.Drawing.Size(135, 22);
-			this.toolStripMenuItem_Exit.Text = strings.Exit;
+			this.toolStripMenuItem_Exit.Text = "Logout";
 			this.toolStripMenuItem_Exit.Click += new System.EventHandler(this.toolStripMenuItem_Exit_Click);
 			// 
 			// FormMain
@@ -1100,7 +1100,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.Icon = Resources.KryBotPresent_256b;
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = $"{Application.ProductName} [{Application.ProductVersion}]";
+			this.Text = "KryBot";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
 			this.Load += new System.EventHandler(this.FormMain_Load);
 			this.LocationChanged += new System.EventHandler(this.FormMain_LocationChanged);
@@ -1232,6 +1232,74 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private System.Windows.Forms.Label lblGAPoints;
 		private System.Windows.Forms.Label lblGALevel;
 		private System.Windows.Forms.Label lblGAStatus;
+
+		private void Localization()
+		{
+			toolStripStatusLabel1.Text = strings.ProfileLoading;
+			файлToolStripMenuItem.Text = strings.File;
+			вПапкуСБотомToolStripMenuItem.Text = strings.OpenBotFolder;
+			сохранитьToolStripMenuItem.Text = strings.Save;
+			сохранитьКакToolStripMenuItem.Text = strings.SaveAs;
+			загрузитьToolStripMenuItem.Text = strings.Exit;
+			настройкиToolStripMenuItem.Text = strings.Tools;
+			настройкиToolStripMenuItem1.Text = strings.Settings;
+			черныйСписокToolStripMenuItem.Text = strings.Blacklist;
+			оПрограммеToolStripMenuItem.Text = strings.Information;
+			оПрограммеToolStripMenuItem1.Text = strings.AboutProgram;
+			донатToolStripMenuItem.Text = strings.MainForm_Donate;
+			логToolStripMenuItem.Text = $"{strings.Log} <<";
+			btnGMExit.Text = strings.Logout;
+			linkLabel1.Text = strings.LinkLabel_OnSite;
+			btnGMLogin.Text = strings.Login;
+			lblGMStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
+			lblGMCoal.Text = $"{strings.Points}: ";
+			lblGMLevel.Text = $"{strings.Level}: ";
+			btnSGExit.Text = strings.Logout;
+			linkLabel2.Text = strings.LinkLabel_OnSite;
+			lblSGStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
+			lblSGPoints.Text = $"{strings.Points}: ";
+			lblSGLevel.Text = $"{strings.Level}: ";
+			btnSGLogin.Text = strings.Login;
+			btnSCExit.Text = strings.Logout;
+			linkLabel3.Text = strings.LinkLabel_OnSite;
+			lblSCStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
+			lblSCPoints.Text = $"{strings.Points}: ";
+			lblSCLevel.Text = $"{strings.Level}: ";
+			btnSCLogin.Text = strings.Login;
+			btnUGExit.Text = strings.Logout;
+			linkLabelUG.Text = strings.LinkLabel_OnSite;
+			lblUGStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
+			lblUGPoints.Text = $"{strings.Points}: ";
+			lblUGLevel.Text = $"{strings.Level}: ";
+			btnUGLogin.Text = strings.Login;
+			btnSTExit.Text = strings.Logout;
+			linkLabelST.Text = strings.LinkLabel_OnSite;
+			lblSTStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
+			lblSTPoints.Text = $"{strings.Points}: ";
+			lblSTLevel.Text = $"{strings.Level}: ";
+			btnSTLogin.Text = strings.Login;
+			btnPBExit.Text = strings.Logout;
+			btnPBLogin.Text = strings.Login;
+			linkLabelPB.Text = strings.LinkLabel_OnSite;
+			lblPBStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
+			lblPBPoints.Text = $"{strings.Points}: ";
+			lblPBLevel.Text = $"{strings.Level}: ";
+			btnGAExit.Text = strings.Logout;
+			btnGALogin.Text = strings.Login;
+			linkLabelGA.Text = strings.LinkLabel_OnSite;
+			lblGAPoints.Text = $"{strings.Points}: ";
+			lblGALevel.Text = $"{strings.Level}: ";
+			lblGAStatus.Text = $"{ strings.Status}: { strings.Status_NotLogined}";
+			btnSteamExit.Text = strings.Logout;
+			btnSteamLogin.Text = strings.Login;
+			linkLabel6.Text = strings.LinkLabel_OnSite;
+			lblSteamStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
+			btnStart.Text = strings.Start;
+			toolStripMenuItem_Show.Text = strings.Show;
+			toolStripMenuItem_Farm.Text = strings.Farm;
+			toolStripMenuItem_Exit.Text = strings.Exit;
+			Text = $"{Application.ProductName} [{Application.ProductVersion}]";
+		}
 	}
 }
 

@@ -19,6 +19,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			_bot = bot;
 			_settings = settings;
 			InitializeComponent();
+			Localization();
 		}
 
 		private void formSettings_Load(object sender, EventArgs e)

@@ -50,7 +50,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.buttonAdd.Name = "buttonAdd";
 			this.buttonAdd.Size = new System.Drawing.Size(260, 23);
 			this.buttonAdd.TabIndex = 1;
-			this.buttonAdd.Text = strings.BlacklistForm_Add;
+			this.buttonAdd.Text = "Add";
 			this.buttonAdd.UseVisualStyleBackColor = true;
 			this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
 			// 
@@ -77,5 +77,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private System.Windows.Forms.TextBox textBox;
 		private System.Windows.Forms.Button buttonAdd;
+
+		private void Localization()
+		{
+			buttonAdd.Text = strings.BlacklistForm_Add;
+		}
 	}
 }

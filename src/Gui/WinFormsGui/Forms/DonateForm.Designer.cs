@@ -201,8 +201,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FormDonate";
+			this.Name = "FormDonate";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Donate";
             this.groupBox1.ResumeLayout(false);
@@ -238,6 +237,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			label1.Text = strings.DonateForm_Text;
 			linkLabel1.Text = Links.SteamTradeUrl;
 			Text = strings.DonateForm_Donate;
+			Icon = Icon = Icon.FromHandle(Resources.wallet.GetHicon());
 		}
 	}
 }

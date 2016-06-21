@@ -20,7 +20,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			_y = y;
 			_settings = settings;
 			InitializeComponent();
-            Localization();
+			Localization();
 			_messages.HandleMessage += OnHandleMessage;
 		}
 

@@ -36,6 +36,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.tabControl1 = new System.Windows.Forms.TabControl();
 			this.tabPageCommun = new System.Windows.Forms.TabPage();
 			this.gbLang = new System.Windows.Forms.GroupBox();
+			this.cbLang = new System.Windows.Forms.ComboBox();
 			this.cbWishlistSort = new System.Windows.Forms.CheckBox();
 			this.cbFarmTip = new System.Windows.Forms.CheckBox();
 			this.cbWonTip = new System.Windows.Forms.CheckBox();
@@ -98,7 +99,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.btnPBCookies = new System.Windows.Forms.Button();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.cbLang = new System.Windows.Forms.ComboBox();
 			this.tabControl1.SuspendLayout();
 			this.tabPageCommun.SuspendLayout();
 			this.gbLang.SuspendLayout();
@@ -141,7 +141,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.tabPageCommun.Name = "tabPageCommun";
 			this.tabPageCommun.Size = new System.Drawing.Size(309, 155);
 			this.tabPageCommun.TabIndex = 5;
-			this.tabPageCommun.Text = strings.SettingsForm_Commun;
+			this.tabPageCommun.Text = "Commun";
 			this.tabPageCommun.UseVisualStyleBackColor = true;
 			// 
 			// gbLang
@@ -152,16 +152,24 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.gbLang.Size = new System.Drawing.Size(154, 40);
 			this.gbLang.TabIndex = 9;
 			this.gbLang.TabStop = false;
-			this.gbLang.Text = strings.Language;
+			this.gbLang.Text = "Language";
+			// 
+			// cbLang
+			// 
+			this.cbLang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.cbLang.FormattingEnabled = true;
+			this.cbLang.Location = new System.Drawing.Point(6, 13);
+			this.cbLang.Name = "cbLang";
+			this.cbLang.Size = new System.Drawing.Size(142, 21);
+			this.cbLang.TabIndex = 0;
 			// 
 			// cbWishlistSort
 			// 
-			this.cbWishlistSort.AutoSize = true;
 			this.cbWishlistSort.Location = new System.Drawing.Point(160, 97);
 			this.cbWishlistSort.Name = "cbWishlistSort";
-			this.cbWishlistSort.Size = new System.Drawing.Size(219, 17);
+			this.cbWishlistSort.Size = new System.Drawing.Size(144, 30);
 			this.cbWishlistSort.TabIndex = 8;
-			this.cbWishlistSort.Text = strings.SettingsForm_cbWishlistSort;
+			this.cbWishlistSort.Text = "Do not use sorting to wishlist";
 			this.cbWishlistSort.UseVisualStyleBackColor = true;
 			// 
 			// cbFarmTip
@@ -169,9 +177,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbFarmTip.AutoSize = true;
 			this.cbFarmTip.Location = new System.Drawing.Point(160, 74);
 			this.cbFarmTip.Name = "cbFarmTip";
-			this.cbFarmTip.Size = new System.Drawing.Size(137, 17);
+			this.cbFarmTip.Size = new System.Drawing.Size(132, 17);
 			this.cbFarmTip.TabIndex = 5;
-			this.cbFarmTip.Text = strings.SettingsForm_cbFarmTip;
+			this.cbFarmTip.Text = "Notification about farm";
 			this.cbFarmTip.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.cbFarmTip.UseVisualStyleBackColor = true;
 			// 
@@ -180,9 +188,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbWonTip.AutoSize = true;
 			this.cbWonTip.Location = new System.Drawing.Point(160, 51);
 			this.cbWonTip.Name = "cbWonTip";
-			this.cbWonTip.Size = new System.Drawing.Size(144, 17);
+			this.cbWonTip.Size = new System.Drawing.Size(130, 17);
 			this.cbWonTip.TabIndex = 4;
-			this.cbWonTip.Text = strings.SettingsForm_cbWonTip;
+			this.cbWonTip.Text = "Notificaions about win";
 			this.cbWonTip.UseVisualStyleBackColor = true;
 			// 
 			// cbAutorun
@@ -190,9 +198,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbAutorun.AutoSize = true;
 			this.cbAutorun.Location = new System.Drawing.Point(160, 28);
 			this.cbAutorun.Name = "cbAutorun";
-			this.cbAutorun.Size = new System.Drawing.Size(96, 17);
+			this.cbAutorun.Size = new System.Drawing.Size(63, 17);
 			this.cbAutorun.TabIndex = 3;
-			this.cbAutorun.Text = strings.SettingsForm_cbAutorun;
+			this.cbAutorun.Text = "Autorun";
 			this.cbAutorun.UseVisualStyleBackColor = true;
 			this.cbAutorun.CheckedChanged += new System.EventHandler(this.cbAutorun_CheckedChanged);
 			// 
@@ -205,7 +213,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.groupBox1.Size = new System.Drawing.Size(154, 114);
 			this.groupBox1.TabIndex = 2;
 			this.groupBox1.TabStop = false;
-			this.groupBox1.Text = strings.SettingsForm_groupBox1;
+			this.groupBox1.Text = "Timer";
 			// 
 			// gbTimerSettings
 			// 
@@ -220,25 +228,24 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.gbTimerSettings.Size = new System.Drawing.Size(154, 72);
 			this.gbTimerSettings.TabIndex = 1;
 			this.gbTimerSettings.TabStop = false;
-			this.gbTimerSettings.Text = strings.SettingsForm_gbTimerSettings;
+			this.gbTimerSettings.Text = "Settings";
 			// 
 			// label8
 			// 
 			this.label8.AutoSize = true;
 			this.label8.Location = new System.Drawing.Point(3, 42);
 			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(51, 13);
+			this.label8.Size = new System.Drawing.Size(41, 13);
 			this.label8.TabIndex = 5;
-			this.label8.Text = strings.SettingsForm_label8;
+			this.label8.Text = "Cycles:";
 			// 
 			// label7
 			// 
 			this.label7.AutoSize = true;
 			this.label7.Location = new System.Drawing.Point(128, 46);
 			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(20, 13);
+			this.label7.Size = new System.Drawing.Size(0, 13);
 			this.label7.TabIndex = 4;
-			this.label7.Text = strings.SettingsForm_label7;
 			// 
 			// tbTimerLoops
 			// 
@@ -256,7 +263,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(15, 13);
 			this.label6.TabIndex = 2;
-			this.label6.Text = strings.SettingsForm_label6;
+			this.label6.Text = "m";
 			// 
 			// tbTimerInterval
 			// 
@@ -272,18 +279,18 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.label5.AutoSize = true;
 			this.label5.Location = new System.Drawing.Point(3, 16);
 			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(59, 13);
+			this.label5.Size = new System.Drawing.Size(45, 13);
 			this.label5.TabIndex = 0;
-			this.label5.Text = strings.SettingsForm_label5;
+			this.label5.Text = "Interval:";
 			// 
 			// cbTimerEnable
 			// 
 			this.cbTimerEnable.AutoSize = true;
 			this.cbTimerEnable.Location = new System.Drawing.Point(6, 19);
 			this.cbTimerEnable.Name = "cbTimerEnable";
-			this.cbTimerEnable.Size = new System.Drawing.Size(70, 17);
+			this.cbTimerEnable.Size = new System.Drawing.Size(65, 17);
 			this.cbTimerEnable.TabIndex = 0;
-			this.cbTimerEnable.Text = strings.SettingsForm_cbTimerEnable;
+			this.cbTimerEnable.Text = "Enabled";
 			this.cbTimerEnable.UseVisualStyleBackColor = true;
 			this.cbTimerEnable.CheckedChanged += new System.EventHandler(this.cbTimerEnable_CheckedChanged);
 			// 
@@ -305,9 +312,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSort.AutoSize = true;
 			this.cbSort.Location = new System.Drawing.Point(160, 5);
 			this.cbSort.Name = "cbSort";
-			this.cbSort.Size = new System.Drawing.Size(68, 17);
+			this.cbSort.Size = new System.Drawing.Size(45, 17);
 			this.cbSort.TabIndex = 0;
-			this.cbSort.Text = strings.SettingsForm_cbSort;
+			this.cbSort.Text = "First";
 			this.cbSort.UseVisualStyleBackColor = true;
 			// 
 			// tabPageGM
@@ -344,9 +351,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbGMRegional.AutoSize = true;
 			this.cbGMRegional.Location = new System.Drawing.Point(6, 75);
 			this.cbGMRegional.Name = "cbGMRegional";
-			this.cbGMRegional.Size = new System.Drawing.Size(187, 17);
+			this.cbGMRegional.Size = new System.Drawing.Size(133, 17);
 			this.cbGMRegional.TabIndex = 8;
-			this.cbGMRegional.Text = strings.SettingsForm_cbGMRegional;
+			this.cbGMRegional.Text = "No regional restrictions";
 			this.cbGMRegional.UseVisualStyleBackColor = true;
 			// 
 			// cbGMGolden
@@ -354,9 +361,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbGMGolden.AutoSize = true;
 			this.cbGMGolden.Location = new System.Drawing.Point(6, 52);
 			this.cbGMGolden.Name = "cbGMGolden";
-			this.cbGMGolden.Size = new System.Drawing.Size(178, 17);
+			this.cbGMGolden.Size = new System.Drawing.Size(135, 17);
 			this.cbGMGolden.TabIndex = 6;
-			this.cbGMGolden.Text = strings.SettingsForm_cbGMGolden;
+			this.cbGMGolden.Text = "Free golden giveaways";
 			this.cbGMGolden.UseVisualStyleBackColor = true;
 			// 
 			// chGMSandbox
@@ -364,9 +371,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.chGMSandbox.AutoSize = true;
 			this.chGMSandbox.Location = new System.Drawing.Point(6, 29);
 			this.chGMSandbox.Name = "chGMSandbox";
-			this.chGMSandbox.Size = new System.Drawing.Size(141, 17);
+			this.chGMSandbox.Size = new System.Drawing.Size(121, 17);
 			this.chGMSandbox.TabIndex = 5;
-			this.chGMSandbox.Text = strings.SettingsForm_chGMSandbox;
+			this.chGMSandbox.Text = "Sandbox giveaways";
 			this.chGMSandbox.UseVisualStyleBackColor = true;
 			// 
 			// cbGMRegular
@@ -374,9 +381,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbGMRegular.AutoSize = true;
 			this.cbGMRegular.Location = new System.Drawing.Point(6, 6);
 			this.cbGMRegular.Name = "cbGMRegular";
-			this.cbGMRegular.Size = new System.Drawing.Size(117, 17);
+			this.cbGMRegular.Size = new System.Drawing.Size(116, 17);
 			this.cbGMRegular.TabIndex = 4;
-			this.cbGMRegular.Text = strings.SettingsForm_RegularGiveaways;
+			this.cbGMRegular.Text = "Regular giveaways";
 			this.cbGMRegular.UseVisualStyleBackColor = true;
 			// 
 			// tbGMReserv
@@ -402,18 +409,18 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.label2.AutoSize = true;
 			this.label2.Location = new System.Drawing.Point(170, 130);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(78, 13);
+			this.label2.Size = new System.Drawing.Size(81, 13);
 			this.label2.TabIndex = 1;
-			this.label2.Text = strings.SettingsForm_PointsReserv;
+			this.label2.Text = "Reserve points:";
 			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
 			this.label1.Location = new System.Drawing.Point(3, 130);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(125, 13);
+			this.label1.Size = new System.Drawing.Size(72, 13);
 			this.label1.TabIndex = 0;
-			this.label1.Text = strings.SettingsFform_MaxValue;
+			this.label1.Text = "Maximum bet:";
 			// 
 			// tabPageSG
 			// 
@@ -441,9 +448,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSGSortTeLessLevel.AutoSize = true;
 			this.cbSGSortTeLessLevel.Location = new System.Drawing.Point(6, 98);
 			this.cbSGSortTeLessLevel.Name = "cbSGSortTeLessLevel";
-			this.cbSGSortTeLessLevel.Size = new System.Drawing.Size(216, 17);
+			this.cbSGSortTeLessLevel.Size = new System.Drawing.Size(190, 17);
 			this.cbSGSortTeLessLevel.TabIndex = 14;
-			this.cbSGSortTeLessLevel.Text = strings.SettingsForm_cbSGSortTeLessLevel;
+			this.cbSGSortTeLessLevel.Text = "First giveaways of the highest level";
 			this.cbSGSortTeLessLevel.UseVisualStyleBackColor = true;
 			// 
 			// numSGLevel
@@ -463,9 +470,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSGMinLevel.AutoSize = true;
 			this.cbSGMinLevel.Location = new System.Drawing.Point(6, 75);
 			this.cbSGMinLevel.Name = "cbSGMinLevel";
-			this.cbSGMinLevel.Size = new System.Drawing.Size(181, 17);
+			this.cbSGMinLevel.Size = new System.Drawing.Size(178, 17);
 			this.cbSGMinLevel.TabIndex = 12;
-			this.cbSGMinLevel.Text = strings.SettingsForm_cbSGMinLevel;
+			this.cbSGMinLevel.Text = "The minimum level of giveaways";
 			this.cbSGMinLevel.UseVisualStyleBackColor = true;
 			this.cbSGMinLevel.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
 			// 
@@ -474,9 +481,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSGRegular.AutoSize = true;
 			this.cbSGRegular.Location = new System.Drawing.Point(6, 6);
 			this.cbSGRegular.Name = "cbSGRegular";
-			this.cbSGRegular.Size = new System.Drawing.Size(117, 17);
+			this.cbSGRegular.Size = new System.Drawing.Size(116, 17);
 			this.cbSGRegular.TabIndex = 11;
-			this.cbSGRegular.Text = strings.SettingsForm_RegularGiveaways;
+			this.cbSGRegular.Text = "Regular giveaways";
 			this.cbSGRegular.UseVisualStyleBackColor = true;
 			// 
 			// btnSGCookies
@@ -512,27 +519,27 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblSGReserv.AutoSize = true;
 			this.lblSGReserv.Location = new System.Drawing.Point(170, 130);
 			this.lblSGReserv.Name = "lblSGReserv";
-			this.lblSGReserv.Size = new System.Drawing.Size(78, 13);
+			this.lblSGReserv.Size = new System.Drawing.Size(81, 13);
 			this.lblSGReserv.TabIndex = 5;
-			this.lblSGReserv.Text = strings.SettingsForm_PointsReserv;
+			this.lblSGReserv.Text = "Reserve points:";
 			// 
 			// lblSGMaxValue
 			// 
 			this.lblSGMaxValue.AutoSize = true;
 			this.lblSGMaxValue.Location = new System.Drawing.Point(3, 130);
 			this.lblSGMaxValue.Name = "lblSGMaxValue";
-			this.lblSGMaxValue.Size = new System.Drawing.Size(125, 13);
+			this.lblSGMaxValue.Size = new System.Drawing.Size(72, 13);
 			this.lblSGMaxValue.TabIndex = 4;
-			this.lblSGMaxValue.Text = strings.SettingsFform_MaxValue;
+			this.lblSGMaxValue.Text = "Maximum bet:";
 			// 
 			// cbSGGroup
 			// 
 			this.cbSGGroup.AutoSize = true;
 			this.cbSGGroup.Location = new System.Drawing.Point(6, 52);
 			this.cbSGGroup.Name = "cbSGGroup";
-			this.cbSGGroup.Size = new System.Drawing.Size(125, 17);
+			this.cbSGGroup.Size = new System.Drawing.Size(108, 17);
 			this.cbSGGroup.TabIndex = 1;
-			this.cbSGGroup.Text = strings.SettingsForm_GroupGiveaways;
+			this.cbSGGroup.Text = "Group giveaways";
 			this.cbSGGroup.UseVisualStyleBackColor = true;
 			// 
 			// cbSGWishlist
@@ -542,7 +549,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSGWishlist.Name = "cbSGWishlist";
 			this.cbSGWishlist.Size = new System.Drawing.Size(62, 17);
 			this.cbSGWishlist.TabIndex = 0;
-			this.cbSGWishlist.Text = strings.SettingsForm_WishlistGiveaways;
+			this.cbSGWishlist.Text = "Wishlist";
 			this.cbSGWishlist.UseVisualStyleBackColor = true;
 			// 
 			// tabPageSC
@@ -569,9 +576,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSCContributors.AutoSize = true;
 			this.cbSCContributors.Location = new System.Drawing.Point(6, 52);
 			this.cbSCContributors.Name = "cbSCContributors";
-			this.cbSCContributors.Size = new System.Drawing.Size(126, 17);
+			this.cbSCContributors.Size = new System.Drawing.Size(135, 17);
 			this.cbSCContributors.TabIndex = 17;
-			this.cbSCContributors.Text = strings.SettingsForm_cbSCContributors;
+			this.cbSCContributors.Text = "Contributors giveaways";
 			this.cbSCContributors.UseVisualStyleBackColor = true;
 			// 
 			// cbSCRegular
@@ -579,9 +586,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSCRegular.AutoSize = true;
 			this.cbSCRegular.Location = new System.Drawing.Point(6, 6);
 			this.cbSCRegular.Name = "cbSCRegular";
-			this.cbSCRegular.Size = new System.Drawing.Size(117, 17);
+			this.cbSCRegular.Size = new System.Drawing.Size(116, 17);
 			this.cbSCRegular.TabIndex = 16;
-			this.cbSCRegular.Text = strings.SettingsForm_RegularGiveaways;
+			this.cbSCRegular.Text = "Regular giveaways";
 			this.cbSCRegular.UseVisualStyleBackColor = true;
 			// 
 			// cbSCAutojoin
@@ -589,9 +596,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSCAutojoin.AutoSize = true;
 			this.cbSCAutojoin.Location = new System.Drawing.Point(6, 98);
 			this.cbSCAutojoin.Name = "cbSCAutojoin";
-			this.cbSCAutojoin.Size = new System.Drawing.Size(306, 17);
+			this.cbSCAutojoin.Size = new System.Drawing.Size(303, 17);
 			this.cbSCAutojoin.TabIndex = 15;
-			this.cbSCAutojoin.Text = strings.SettingsForm_cbSCAutojoin;
+			this.cbSCAutojoin.Text = "Automatic entry into group (required authorization in Steam)";
 			this.cbSCAutojoin.UseVisualStyleBackColor = true;
 			// 
 			// btnSCCookies
@@ -627,27 +634,27 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.lblSCReserv.AutoSize = true;
 			this.lblSCReserv.Location = new System.Drawing.Point(170, 130);
 			this.lblSCReserv.Name = "lblSCReserv";
-			this.lblSCReserv.Size = new System.Drawing.Size(78, 13);
+			this.lblSCReserv.Size = new System.Drawing.Size(81, 13);
 			this.lblSCReserv.TabIndex = 11;
-			this.lblSCReserv.Text = strings.SettingsForm_PointsReserv;
+			this.lblSCReserv.Text = "Reserve points:";
 			// 
 			// lblSCMaxValue
 			// 
 			this.lblSCMaxValue.AutoSize = true;
 			this.lblSCMaxValue.Location = new System.Drawing.Point(3, 130);
 			this.lblSCMaxValue.Name = "lblSCMaxValue";
-			this.lblSCMaxValue.Size = new System.Drawing.Size(125, 13);
+			this.lblSCMaxValue.Size = new System.Drawing.Size(72, 13);
 			this.lblSCMaxValue.TabIndex = 10;
-			this.lblSCMaxValue.Text = strings.SettingsFform_MaxValue;
+			this.lblSCMaxValue.Text = "Maximum bet:";
 			// 
 			// cbSCGroup
 			// 
 			this.cbSCGroup.AutoSize = true;
 			this.cbSCGroup.Location = new System.Drawing.Point(6, 75);
 			this.cbSCGroup.Name = "cbSCGroup";
-			this.cbSCGroup.Size = new System.Drawing.Size(125, 17);
+			this.cbSCGroup.Size = new System.Drawing.Size(108, 17);
 			this.cbSCGroup.TabIndex = 9;
-			this.cbSCGroup.Text = strings.SettingsForm_GroupGiveaways;
+			this.cbSCGroup.Text = "Group giveaways";
 			this.cbSCGroup.UseVisualStyleBackColor = true;
 			this.cbSCGroup.CheckedChanged += new System.EventHandler(this.cbSCGroup_CheckedChanged);
 			// 
@@ -658,7 +665,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.cbSCWishlist.Name = "cbSCWishlist";
 			this.cbSCWishlist.Size = new System.Drawing.Size(62, 17);
 			this.cbSCWishlist.TabIndex = 8;
-			this.cbSCWishlist.Text = strings.SettingsForm_WishlistGiveaways;
+			this.cbSCWishlist.Text = "Wishlist";
 			this.cbSCWishlist.UseVisualStyleBackColor = true;
 			// 
 			// tabPageUG
@@ -708,18 +715,18 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.label3.AutoSize = true;
 			this.label3.Location = new System.Drawing.Point(170, 130);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(78, 13);
+			this.label3.Size = new System.Drawing.Size(81, 13);
 			this.label3.TabIndex = 15;
-			this.label3.Text = strings.SettingsForm_PointsReserv;
+			this.label3.Text = "Reserve points:";
 			// 
 			// label4
 			// 
 			this.label4.AutoSize = true;
 			this.label4.Location = new System.Drawing.Point(3, 130);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(125, 13);
+			this.label4.Size = new System.Drawing.Size(72, 13);
 			this.label4.TabIndex = 14;
-			this.label4.Text = strings.SettingsFform_MaxValue;
+			this.label4.Text = "Maximum bet:";
 			// 
 			// tabPagePB
 			// 
@@ -758,18 +765,18 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.label9.AutoSize = true;
 			this.label9.Location = new System.Drawing.Point(170, 130);
 			this.label9.Name = "label9";
-			this.label9.Size = new System.Drawing.Size(78, 13);
+			this.label9.Size = new System.Drawing.Size(81, 13);
 			this.label9.TabIndex = 22;
-			this.label9.Text = strings.SettingsForm_PointsReserv;
+			this.label9.Text = "Reserve points:";
 			// 
 			// label10
 			// 
 			this.label10.AutoSize = true;
 			this.label10.Location = new System.Drawing.Point(3, 130);
 			this.label10.Name = "label10";
-			this.label10.Size = new System.Drawing.Size(125, 13);
+			this.label10.Size = new System.Drawing.Size(81, 13);
 			this.label10.TabIndex = 21;
-			this.label10.Text = strings.SettingsFform_MaxValue;
+			this.label10.Text = "Reserve points:";
 			// 
 			// btnPBCookies
 			// 
@@ -795,18 +802,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			// 
 			this.сохранитьToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.check;
 			this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-			this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(93, 20);
-			this.сохранитьToolStripMenuItem.Text = strings.Save;
+			this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+			this.сохранитьToolStripMenuItem.Text = "Save";
 			this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
-			// 
-			// cbLang
-			// 
-			this.cbLang.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.cbLang.FormattingEnabled = true;
-			this.cbLang.Location = new System.Drawing.Point(6, 13);
-			this.cbLang.Name = "cbLang";
-			this.cbLang.Size = new System.Drawing.Size(142, 21);
-			this.cbLang.TabIndex = 0;
 			// 
 			// FormSettings
 			// 
@@ -816,14 +814,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			this.Controls.Add(this.tabControl1);
 			this.Controls.Add(this.menuStrip1);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			this.Icon = Icon.FromHandle(Resources.settings.GetHicon());
 			this.MainMenuStrip = this.menuStrip1;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "FormSettings";
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = strings.Settings;
+			this.Text = "Settings";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSettings_FormClosing);
 			this.Load += new System.EventHandler(this.formSettings_Load);
 			this.tabControl1.ResumeLayout(false);
@@ -920,5 +917,49 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private System.Windows.Forms.CheckBox cbSCContributors;
 		private System.Windows.Forms.GroupBox gbLang;
 		private System.Windows.Forms.ComboBox cbLang;
+
+		private void Localization()
+		{
+			tabPageCommun.Text = strings.SettingsForm_Commun;
+			gbLang.Text = strings.Language;
+			cbWishlistSort.Text = strings.SettingsForm_cbWishlistSort;
+			cbFarmTip.Text = strings.SettingsForm_cbFarmTip;
+			cbWonTip.Text = strings.SettingsForm_cbWonTip;
+			cbAutorun.Text = strings.SettingsForm_cbAutorun;
+			groupBox1.Text = strings.SettingsForm_groupBox1;
+			gbTimerSettings.Text = strings.SettingsForm_gbTimerSettings;
+			label8.Text = strings.SettingsForm_label8;
+			label7.Text = strings.SettingsForm_label7;
+			label6.Text = strings.SettingsForm_label6;
+			label5.Text = strings.SettingsForm_label5;
+			cbTimerEnable.Text = strings.SettingsForm_cbTimerEnable;
+			cbSort.Text = strings.SettingsForm_cbSort;
+			cbGMRegional.Text = strings.SettingsForm_cbGMRegional;
+			cbGMGolden.Text = strings.SettingsForm_cbGMGolden;
+			chGMSandbox.Text = strings.SettingsForm_chGMSandbox;
+			cbGMRegular.Text = strings.SettingsForm_RegularGiveaways;
+			label2.Text = strings.SettingsForm_PointsReserv;
+			label1.Text = strings.SettingsFform_MaxValue;
+			cbSGSortTeLessLevel.Text = strings.SettingsForm_cbSGSortTeLessLevel;
+			cbSGMinLevel.Text = strings.SettingsForm_cbSGMinLevel;
+			cbSGRegular.Text = strings.SettingsForm_RegularGiveaways;
+			lblSGReserv.Text = strings.SettingsForm_PointsReserv;
+			lblSGMaxValue.Text = strings.SettingsFform_MaxValue;
+			cbSGWishlist.Text = strings.SettingsForm_WishlistGiveaways;
+			cbSCContributors.Text = strings.SettingsForm_cbSCContributors;
+			cbSCRegular.Text = strings.SettingsForm_RegularGiveaways;
+			cbSCAutojoin.Text = strings.SettingsForm_cbSCAutojoin;
+			lblSCReserv.Text = strings.SettingsForm_PointsReserv;
+			lblSCMaxValue.Text = strings.SettingsFform_MaxValue;
+			cbSCGroup.Text = strings.SettingsForm_GroupGiveaways;
+			cbSCWishlist.Text = strings.SettingsForm_WishlistGiveaways;
+			label3.Text = strings.SettingsForm_PointsReserv;
+			label4.Text = strings.SettingsFform_MaxValue;
+			label9.Text = strings.SettingsForm_PointsReserv;
+			label10.Text = strings.SettingsFform_MaxValue;
+			сохранитьToolStripMenuItem.Text = strings.Save;
+			Text = strings.Settings;
+			Icon = Icon.FromHandle(Resources.settings.GetHicon());
+		}
 	}
 }

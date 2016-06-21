@@ -36,6 +36,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			_settings = Settings.Load();
 			GetLocalization();
 			InitializeComponent();
+			Localization();
 		}
 
 		public event SubscribesContainer LogHide;

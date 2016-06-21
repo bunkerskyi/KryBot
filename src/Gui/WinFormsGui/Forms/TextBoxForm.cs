@@ -13,6 +13,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			_isInteger = isInteger;
 			_formTitle = formTitle;
 			InitializeComponent();
+			Localization();
 		}
 
 		private void FormTextBox_Load(object sender, EventArgs e)
