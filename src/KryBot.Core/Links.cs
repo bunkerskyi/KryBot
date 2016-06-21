@@ -58,6 +58,8 @@
 
 		public static readonly string SteamCompanionSearch = $"{SteamCompanion}gifts/search/";
 
+	    public static readonly string SteamCompanionSync = $"{SteamCompanion}settings/resync&success=true";
+
 		#endregion
 
 		#region UseGamble
@@ -101,6 +103,12 @@
 		public const string SteamGameInfo = "http://store.steampowered.com/api/appdetails?appids=";
 
 		public const string SteamTradeUrl = "https://steamcommunity.com/tradeoffer/new/?partner=107171644&token=eSC3IOi7";
+
+	    public static string SteamUserGames(string userProfile)
+	    {
+	        return $"{userProfile}games?tab=all&xml=1";
+
+	    }
 
 		#endregion
 

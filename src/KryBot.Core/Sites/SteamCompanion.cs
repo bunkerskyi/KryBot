@@ -46,7 +46,7 @@ namespace KryBot.Core.Sites
 			var task = new TaskCompletionSource<Log>();
 			await Task.Run(() =>
 			{
-				var response = Web.Get("https://steamcompanion.com//settings/resync&success=true", Cookies.Generate());
+				var response = Web.Get(Links.SteamCompanionSync, Cookies.Generate());
 				if (response.RestResponse.Content != string.Empty)
 				{
 					task.SetResult(new Log($"{Messages.GetDateTime()} {{SteamCompanion}} Sync success!", Color.Green,

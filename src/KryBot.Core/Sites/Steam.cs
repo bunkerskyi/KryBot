@@ -128,7 +128,7 @@ namespace KryBot.Core.Sites
 
 		public async Task<ProfileGamesList> GetUserGames()
 		{
-			var responseXmlProfile = await Web.GetAsync($"{ProfileLink}games?tab=all&xml=1");
+			var responseXmlProfile = await Web.GetAsync(Links.SteamUserGames(ProfileLink));
 			var serializer = new XmlSerializer(typeof(ProfileGamesList));
 			TextReader reader = new StringReader(responseXmlProfile.RestResponse.Content);
 			var games = (ProfileGamesList) serializer.Deserialize(reader);
