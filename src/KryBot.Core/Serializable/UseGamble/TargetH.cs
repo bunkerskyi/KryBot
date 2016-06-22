@@ -1,7 +1,13 @@
-﻿namespace KryBot.Core.Serializable.UseGamble
+﻿using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json;
+
+namespace KryBot.Core.Serializable.UseGamble
 {
+	[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
+	[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
 	public class TargetH
 	{
-		public int my_coins { get; set; }
+        [JsonProperty(PropertyName = "my_coins", Required = Required.Always)]
+        public int MyCoins { get; set; }
 	}
 }

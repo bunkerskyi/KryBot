@@ -1,7 +1,13 @@
-﻿namespace KryBot.Core.Serializable.GameMiner
+﻿using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json;
+
+namespace KryBot.Core.Serializable.GameMiner
 {
+	[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
+	[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
 	public class JsonResponseError
 	{
-		public JsonResponseErrorDetail Error { get; set; }
+        [JsonProperty(PropertyName = "error", Required = Required.Always)]
+        public JsonResponseErrorDetail Error { get; set; }
 	}
 }

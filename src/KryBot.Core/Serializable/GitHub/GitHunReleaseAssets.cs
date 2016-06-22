@@ -1,8 +1,16 @@
-﻿namespace KryBot.Core.Serializable.GitHub
+﻿using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json;
+
+namespace KryBot.Core.Serializable.GitHub
 {
+	[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
+	[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
 	public class GitHunReleaseAssets
 	{
-		public string name { get; set; }
-		public string browser_download_url { get; set; }
-	}
+        [JsonProperty(PropertyName = "name", Required = Required.Always)]
+        internal string Name { get; set; }
+
+        [JsonProperty(PropertyName = "browser_download_url", Required = Required.Always)]
+        internal string DownloadUrl { get; set; }
+    }
 }

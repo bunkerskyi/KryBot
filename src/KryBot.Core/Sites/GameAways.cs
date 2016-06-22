@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Exceptionless.Json;
+using Newtonsoft.Json;
 using HtmlAgilityPack;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;

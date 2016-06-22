@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Exceptionless.Json;
+using Newtonsoft.Json;
 using HtmlAgilityPack;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
@@ -56,9 +56,9 @@ namespace KryBot.Core.Sites
 						JsonConvert.DeserializeObject<JsonJoin>(response.RestResponse.Content.Replace(".", ""));
 					if (jresponse.Error == 0)
 					{
-						Points = jresponse.target_h.my_coins;
+						Points = jresponse.TargetH.MyCoins;
 						task.SetResult(Messages.GiveawayJoined("UseGamble", giveaway.Name, giveaway.Price,
-							jresponse.target_h.my_coins));
+							jresponse.TargetH.MyCoins));
 					}
 					else
 					{

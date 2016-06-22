@@ -1,10 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json;
 
 namespace KryBot.Core.Serializable.GitHub
 {
-	public class GitHubRelease
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
+    [SuppressMessage("ReSharper", "CollectionNeverUpdated.Global")]
+    public class GitHubRelease
 	{
-		public string tag_name { get; set; }
-		public List<GitHunReleaseAssets> assets { get; set; }
-	}
+        [JsonProperty(PropertyName = "tag_name", Required = Required.Always)]
+        internal string Tag { get; set; }
+
+        [JsonProperty(PropertyName = "assets", Required = Required.Always)]
+        internal List<GitHunReleaseAssets> Assets { get; set; }
+    }
 }

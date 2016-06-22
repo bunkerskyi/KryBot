@@ -6,7 +6,7 @@ namespace KryBot.Core.Serializable.Steam
 	public class ProfileGame
 	{
 		[XmlElement(ElementName = "appID")]
-		public string AppID { get; set; }
+		public string AppId { get; set; }
 
 		[XmlElement(ElementName = "name")]
 		public string Name { get; set; }

@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Exceptionless.Json;
+using Newtonsoft.Json;
 using HtmlAgilityPack;
 using KryBot.CommonResources.Localization;
 using KryBot.Core.Cookies;
@@ -303,9 +303,9 @@ namespace KryBot.Core.Sites
 				var jsonResponse = JsonConvert.DeserializeObject<JsonRootObject>(response.RestResponse.Content);
 				AddGiveaways(jsonResponse);
 
-				if (jsonResponse.last_page > 1)
+				if (jsonResponse.LastPage > 1)
 				{
-					for (var i = 1; i < jsonResponse.last_page + 1; i++)
+					for (var i = 1; i < jsonResponse.LastPage + 1; i++)
 					{
 						response = Web.Get($"{url}&page={i + 1}", Cookies.Generate(lang), UserAgent);
 						jsonResponse = JsonConvert.DeserializeObject<JsonRootObject>(response.RestResponse.Content);
@@ -314,7 +314,7 @@ namespace KryBot.Core.Sites
 				}
 
 				return $"{Messages.GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {jsonResponse.Total} " +
-				       $"{message} {jsonResponse.last_page} {strings.ParseLoadGiveaways_Pages}\n";
+				       $"{message} {jsonResponse.LastPage} {strings.ParseLoadGiveaways_Pages}\n";
 			}
 
 			return string.Empty;

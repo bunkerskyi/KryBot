@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Exceptionless.Json;
+using Newtonsoft.Json;
 using KryBot.CommonResources.Localization;
 using KryBot.Core.Helpers;
 using KryBot.Core.Serializable.GitHub;
@@ -29,12 +29,12 @@ namespace KryBot.Core
 				return new Log("Updater: JsonReaderException", Color.Red, false);
 			}
 
-			if (release.tag_name != null &&
-			    CompareVersion(Application.ProductVersion, release.tag_name))
+			if (release.Tag != null &&
+			    CompareVersion(Application.ProductVersion, release.Tag))
 			{
-				return new Log($"{strings.Updater_HaveUpdate} {release.tag_name}", Color.Green, true);
+				return new Log($"{strings.Updater_HaveUpdate} {release.Tag}", Color.Green, true);
 			}
-			return new Log($"{strings.Updater_CurrentVersion} {release.tag_name}", Color.White, false);
+			return new Log($"{strings.Updater_CurrentVersion} {release.Tag}", Color.White, false);
 		}
 
 		/// <summary>
@@ -46,12 +46,12 @@ namespace KryBot.Core
 			{
 				DeleteTempFiles();
 				var release = await GetGitHubRelease();
-				var binaryAsset = release.assets.FirstOrDefault(asset => asset.name == FilePaths.KryBot);
+				var binaryAsset = release.Assets.FirstOrDefault(asset => asset.Name == FilePaths.KryBot);
 				if (binaryAsset == null)
 				{
 					return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
 				}
-				var stream = new WebClient().OpenRead(binaryAsset.browser_download_url);
+				var stream = new WebClient().OpenRead(binaryAsset.DownloadUrl);
 				if (stream == null)
 				{
 					return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);

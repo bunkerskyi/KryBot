@@ -6,6 +6,6 @@ namespace KryBot.Core.Serializable.Steam
 	public class Profile
 	{
 		[XmlElement(ElementName = "steamID64")]
-		public string SteamID64 { get; set; }
+		public string SteamId64 { get; set; }
 	}
 }

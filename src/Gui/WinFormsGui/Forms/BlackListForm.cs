@@ -83,7 +83,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 					{
 						for (var i = 0; i < list.Games.Game.Count; i++)
 						{
-							if (item.Text == list.Games.Game[i].AppID)
+							if (item.Text == list.Games.Game[i].AppId)
 							{
 								list.Games.Game.Remove(list.Games.Game[i]);
 								i--;
@@ -93,7 +93,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 					foreach (var game in list.Games.Game)
 					{
-						listView.Items.Add(game.AppID).SubItems.Add(game.Name);
+						listView.Items.Add(game.AppId).SubItems.Add(game.Name);
 					}
 				}
 

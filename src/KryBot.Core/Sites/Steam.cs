@@ -2,7 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using Exceptionless.Json;
+using Newtonsoft.Json;
 using HtmlAgilityPack;
 using KryBot.Core.Cookies;
 using KryBot.Core.Serializable.Steam;
@@ -146,7 +146,7 @@ namespace KryBot.Core.Sites
 
 			var json = responseJsonDetail.RestResponse.Content.Replace($"{{\"{appId}\":", "");
 			var gameDetail = JsonConvert.DeserializeObject<GameDetail>(json.Substring(0, json.Length - 1));
-			return gameDetail.success ? gameDetail.data.name : null;
+			return gameDetail.Success ? gameDetail.Data.Name : null;
 		}
 
 		#endregion

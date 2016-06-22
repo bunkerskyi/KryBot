@@ -1,12 +1,23 @@
-﻿namespace KryBot.Core.Serializable.GameMiner
+﻿using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json;
+
+namespace KryBot.Core.Serializable.GameMiner
 {
+	[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
+	[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
 	public class JsonGiveaway
 	{
-		public bool Golden { get; set; }
-		public string Code { get; set; }
-		public int Price { get; set; }
-		public object Sandbox { get; set; }
-		public JsonGame Game { get; set; }
-		public string RegionlockTypeId { get; set; }
+        [JsonProperty(PropertyName = "golden", Required = Required.Always)]
+        public bool Golden { get; set; }
+        [JsonProperty(PropertyName = "code", Required = Required.Always)]
+        public string Code { get; set; }
+        [JsonProperty(PropertyName = "price", Required = Required.Always)]
+        public int Price { get; set; }
+        [JsonProperty(PropertyName = "sandbox")]
+        public object Sandbox { get; set; }
+        [JsonProperty(PropertyName = "game", Required = Required.Always)]
+        public JsonGame Game { get; set; }
+        [JsonProperty(PropertyName = "regionlock_type_id")]
+        public string RegionlockTypeId { get; set; }
 	}
 }

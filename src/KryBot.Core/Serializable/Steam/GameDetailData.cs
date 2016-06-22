@@ -1,7 +1,13 @@
-﻿namespace KryBot.Core.Serializable.Steam
+﻿using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json;
+
+namespace KryBot.Core.Serializable.Steam
 {
+	[SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
+	[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
 	public class GameDetailData
 	{
-		public string name { get; set; }
+        [JsonProperty(PropertyName = "name", Required = Required.Always)]
+        public string Name { get; set; }
 	}
 }
