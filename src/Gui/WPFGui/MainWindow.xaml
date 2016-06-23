@@ -11,12 +11,9 @@
         mc:Ignorable="d">
     <Grid>
         <DockPanel>
-            <ContentControl regions:RegionManager.RegionName="{x:Static local:MainRegionNames.MenuRegion}"
-                            DockPanel.Dock="Top" />
-            <ContentControl regions:RegionManager.RegionName="{x:Static local:MainRegionNames.StatusRegion}"
-                            DockPanel.Dock="Bottom" />
-            <ContentControl regions:RegionManager.RegionName="{x:Static local:MainRegionNames.MainRegion}"
-                            DockPanel.Dock="Left" />
+            <ContentControl regions:RegionManager.RegionName="{x:Static local:MainRegionNames.MenuRegion}" DockPanel.Dock="Top" />
+            <ContentControl regions:RegionManager.RegionName="{x:Static local:MainRegionNames.StatusRegion}" DockPanel.Dock="Bottom" />
+            <ContentControl regions:RegionManager.RegionName="{x:Static local:MainRegionNames.MainRegion}" DockPanel.Dock="Left" />
             <ContentControl regions:RegionManager.RegionName="{x:Static local:MainRegionNames.SitesRigon}" />
         </DockPanel>
     </Grid>
