@@ -38,6 +38,10 @@
       <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Interop.IWshRuntimeLibrary">
+      <HintPath>..\Gui\WinFormsGui\obj\x86\Debug\Interop.IWshRuntimeLibrary.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -76,6 +80,7 @@
     <Compile Include="Helpers\AutorunHelper.cs" />
     <Compile Include="Helpers\CookieHelper.cs" />
     <Compile Include="Helpers\FileHelper.cs" />
+    <Compile Include="Helpers\ShortcutHelper.cs" />
     <Compile Include="LogMessage.cs" />
     <Compile Include="Serializable\GameAways\JsonJoinResponse.cs" />
     <Compile Include="Serializable\GameMiner\JsonGame.cs" />
@@ -108,7 +113,6 @@
     <Compile Include="Sites\SteamGifts.cs" />
     <Compile Include="Sites\UseGamble.cs" />
     <Compile Include="Sites\SteamTrade.cs" />
-    <Compile Include="Tools.cs" />
     <Compile Include="Updater.cs" />
     <Compile Include="Web.cs" />
   </ItemGroup>

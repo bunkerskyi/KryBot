@@ -280,5 +280,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			}
 			cbLang.Text = List.GetFullLang(_settings.Lang);
 		}
-	}
+
+        private void btnShortcut_Click(object sender, EventArgs e)
+        {
+            ShortcutHelper.Create();
+        }
+    }
 }
