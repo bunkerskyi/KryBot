@@ -40,7 +40,7 @@
     </Reference>
     <Reference Include="Interop.IWshRuntimeLibrary">
       <HintPath>..\Gui\WinFormsGui\obj\x86\Debug\Interop.IWshRuntimeLibrary.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
