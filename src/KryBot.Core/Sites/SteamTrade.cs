@@ -11,214 +11,215 @@ using RestSharp;
 
 namespace KryBot.Core.Sites
 {
-	public class SteamTrade
-	{
-		public SteamTrade()
-		{
-			Cookies = new SteamTradeCookie();
-			Giveaways = new List<SteamTradeGiveaway>();
-		}
+    public class SteamTrade
+    {
+        public SteamTrade()
+        {
+            Cookies = new SteamTradeCookie();
+            Giveaways = new List<SteamTradeGiveaway>();
+        }
 
-		public bool Enabled { get; set; }
-		public SteamTradeCookie Cookies { get; set; }
-		public List<SteamTradeGiveaway> Giveaways { get; set; }
+        public bool Enabled { get; set; }
+        public SteamTradeCookie Cookies { get; set; }
+        public List<SteamTradeGiveaway> Giveaways { get; set; }
 
-		public void Logout()
-		{
-			Cookies = new SteamTradeCookie();
-			Enabled = false;
-		}
+        public void Logout()
+        {
+            Cookies = new SteamTradeCookie();
+            Enabled = false;
+        }
 
-		public async Task<Web.Response> DoAuth(CookieContainer cookies)
-		{
-			return await Web.PostAsync(Links.SteamTradeLogin, GenerateJoinData(), cookies);
-		}
+        public async Task<Web.Response> DoAuth(CookieContainer cookies)
+        {
+            return await Web.PostAsync(Links.SteamTradeLogin, GenerateJoinData(), cookies);
+        }
 
-		#region JoinGiveaway
+        #region JoinGiveaway
 
-		private async Task<Log> JoinGiveaway(SteamTradeGiveaway giveaway)
-		{
-			var task = new TaskCompletionSource<Log>();
-			await Task.Run(() =>
-			{
-				Thread.Sleep(400);
-				giveaway = GetJoinData(giveaway);
-				if (giveaway.LinkJoin != null)
-				{
-					var response = Web.Get($"{Links.SteamTrade}{giveaway.LinkJoin}", Cookies.Generate());
-					if (response.RestResponse.StatusCode == HttpStatusCode.OK)
-					{
-						task.SetResult(Messages.GiveawayJoined("SteamTrade", giveaway.Name.Trim(), 0, 0));
-					}
-					else
-					{
-						task.SetResult(Messages.GiveawayNotJoined("SteamTrade", giveaway.Name,
-							response.RestResponse.StatusCode.ToString()));
-					}
-				}
-				else
-				{
-					task.SetResult(null);
-				}
-			});
-			return task.Task.Result;
-		}
+        private async Task<Log> JoinGiveaway(SteamTradeGiveaway giveaway)
+        {
+            var task = new TaskCompletionSource<Log>();
+            await Task.Run(() =>
+            {
+                Thread.Sleep(400);
+                giveaway = GetJoinData(giveaway);
+                if (giveaway.LinkJoin != null)
+                {
+                    var response = Web.Get($"{Links.SteamTrade}{giveaway.LinkJoin}", Cookies.Generate());
+                    if (response.RestResponse.StatusCode == HttpStatusCode.OK)
+                    {
+                        task.SetResult(Messages.GiveawayJoined("SteamTrade", giveaway.Name.Trim(), 0, 0));
+                    }
+                    else
+                    {
+                        task.SetResult(Messages.GiveawayNotJoined("SteamTrade", giveaway.Name,
+                            response.RestResponse.StatusCode.ToString()));
+                    }
+                }
+                else
+                {
+                    task.SetResult(null);
+                }
+            });
+            return task.Task.Result;
+        }
 
-		public async Task Join(Blacklist blacklist)
-		{
-			LogMessage.Instance.AddMessage(await LoadGiveawaysAsync(blacklist));
+        public async Task Join(Blacklist blacklist)
+        {
+            LogMessage.Instance.AddMessage(await LoadGiveawaysAsync(blacklist));
 
-			if (Giveaways?.Count > 0)
-			{
-				foreach (var giveaway in Giveaways)
-				{
-					LogMessage.Instance.AddMessage(await JoinGiveaway(giveaway));
-				}
-			}
-		}
+            if (Giveaways?.Count > 0)
+            {
+                foreach (var giveaway in Giveaways)
+                {
+                    LogMessage.Instance.AddMessage(await JoinGiveaway(giveaway));
+                }
+            }
+        }
 
-		private static List<Parameter> GenerateJoinData()
-		{
-			var rnd = new Random();
-			var list = new List<Parameter>();
+        private static List<Parameter> GenerateJoinData()
+        {
+            var rnd = new Random();
+            var list = new List<Parameter>();
 
-			var xParam = new Parameter
-			{
-				Type = ParameterType.GetOrPost,
-				Name = "x",
-				Value = rnd.Next(0, 190)
-			};
-			list.Add(xParam);
+            var xParam = new Parameter
+            {
+                Type = ParameterType.GetOrPost,
+                Name = "x",
+                Value = rnd.Next(0, 190)
+            };
+            list.Add(xParam);
 
-			var yParam = new Parameter
-			{
-				Type = ParameterType.GetOrPost,
-				Name = "y",
-				Value = rnd.Next(0, 23)
-			};
-			list.Add(yParam);
+            var yParam = new Parameter
+            {
+                Type = ParameterType.GetOrPost,
+                Name = "y",
+                Value = rnd.Next(0, 23)
+            };
+            list.Add(yParam);
 
-			return list;
-		}
+            return list;
+        }
 
-		#endregion
+        #endregion
 
-		#region Parse
+        #region Parse
 
-		public async Task<Log> CheckLogin()
-		{
-			var task = new TaskCompletionSource<Log>();
-			await Task.Run(() =>
-			{
-				var response = Web.Get(Links.SteamTrade, Cookies.Generate());
-				if (response.RestResponse.Content != string.Empty)
-				{
-					var htmlDoc = new HtmlDocument();
-					htmlDoc.LoadHtml(response.RestResponse.Content);
+        public async Task<Log> CheckLogin()
+        {
+            var task = new TaskCompletionSource<Log>();
+            await Task.Run(() =>
+            {
+                var response = Web.Get(Links.SteamTrade, Cookies.Generate());
+                if (response.RestResponse.Content != string.Empty)
+                {
+                    var htmlDoc = new HtmlDocument();
+                    htmlDoc.LoadHtml(response.RestResponse.Content);
 
-					var test = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='topm1']");
-					if (test != null)
-					{
-						task.SetResult(Messages.ParseProfile("SteamTrade", test.InnerText));
-					}
-				}
-				else
-				{
-					task.SetResult(Messages.ParseProfileFailed("SteamTrade"));
-				}
-			});
-			return task.Task.Result;
-		}
+                    var test = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='topm1']");
+                    if (test != null)
+                    {
+                        task.SetResult(Messages.ParseProfile("SteamTrade", test.InnerText));
+                    }
+                }
+                else
+                {
+                    task.SetResult(Messages.ParseProfileFailed("SteamTrade"));
+                }
+            });
+            return task.Task.Result;
+        }
 
-		private async Task<Log> LoadGiveawaysAsync(Blacklist blackList)
-		{
-			var task = new TaskCompletionSource<Log>();
-			await Task.Run(() =>
-			{
-				Giveaways?.Clear();
+        private async Task<Log> LoadGiveawaysAsync(Blacklist blackList)
+        {
+            var task = new TaskCompletionSource<Log>();
+            await Task.Run(() =>
+            {
+                Giveaways?.Clear();
 
-				var response = Web.Get(Links.SteamTradeWon, Cookies.Generate());
+                var response = Web.Get(Links.SteamTradeWon, Cookies.Generate());
 
-				if (response.RestResponse.Content != string.Empty)
-				{
-					var htmlDoc = new HtmlDocument();
-					htmlDoc.LoadHtml(response.RestResponse.Content);
+                if (response.RestResponse.Content != string.Empty)
+                {
+                    var htmlDoc = new HtmlDocument();
+                    htmlDoc.LoadHtml(response.RestResponse.Content);
 
-					var nodes = htmlDoc.DocumentNode.SelectNodes("//tbody[@bgcolor='#F3F5F7']/tr");
-					AddGiveaways(nodes);
+                    var nodes = htmlDoc.DocumentNode.SelectNodes("//tbody[@bgcolor='#F3F5F7']/tr");
+                    AddGiveaways(nodes);
 
-					if (Giveaways == null)
-					{
-						task.SetResult(Messages.ParseGiveawaysEmpty("SteamTrade"));
-					}
-					else
-					{
-						if (blackList != null)
-						{
-							for (var i = 0; i < Giveaways.Count; i++)
-							{
-								if (blackList.Items.Any(item => Giveaways[i].StoreId == item.Id))
-								{
-									Giveaways.Remove(Giveaways[i]);
-									i--;
-								}
-							}
-						}
-						task.SetResult(Messages.ParseGiveawaysFoundMatchGiveaways("SteamTrade", Giveaways.Count.ToString()));
-					}
-				}
-				else
-				{
-					task.SetResult(null);
-				}
-			});
-			return task.Task.Result;
-		}
+                    if (Giveaways == null)
+                    {
+                        task.SetResult(Messages.ParseGiveawaysEmpty("SteamTrade"));
+                    }
+                    else
+                    {
+                        if (blackList != null)
+                        {
+                            for (var i = 0; i < Giveaways.Count; i++)
+                            {
+                                if (blackList.Items.Any(item => Giveaways[i].StoreId == item.Id))
+                                {
+                                    Giveaways.Remove(Giveaways[i]);
+                                    i--;
+                                }
+                            }
+                        }
+                        task.SetResult(Messages.ParseGiveawaysFoundMatchGiveaways("SteamTrade",
+                            Giveaways.Count.ToString()));
+                    }
+                }
+                else
+                {
+                    task.SetResult(null);
+                }
+            });
+            return task.Task.Result;
+        }
 
-		private void AddGiveaways(HtmlNodeCollection nodes)
-		{
-			if (nodes != null)
-			{
-				foreach (var node in nodes)
-				{
-					if (node.SelectSingleNode(".//span[@class='status1']") == null)
-					{
-						var name = node.SelectSingleNode(".//td[1]/a[2]");
-						var link = node.SelectSingleNode(".//td[1]/a[2]");
-						var storeId = node.SelectSingleNode(".//td[1]/a[1]");
-						if (name != null && link != null && storeId != null)
-						{
-							var spGiveaway = new SteamTradeGiveaway
-							{
-								Name = node.SelectSingleNode(".//td[1]/a[2]").InnerText,
-								Link = node.SelectSingleNode(".//td[1]/a[2]").Attributes["href"].Value,
-								StoreId = node.SelectSingleNode(".//td[1]/a[1]").Attributes["href"].Value.Split('/')[4]
-							};
-							Giveaways?.Add(spGiveaway);
-						}
-					}
-				}
-			}
-		}
+        private void AddGiveaways(HtmlNodeCollection nodes)
+        {
+            if (nodes != null)
+            {
+                foreach (var node in nodes)
+                {
+                    if (node.SelectSingleNode(".//span[@class='status1']") == null)
+                    {
+                        var name = node.SelectSingleNode(".//td[1]/a[2]");
+                        var link = node.SelectSingleNode(".//td[1]/a[2]");
+                        var storeId = node.SelectSingleNode(".//td[1]/a[1]");
+                        if (name != null && link != null && storeId != null)
+                        {
+                            var spGiveaway = new SteamTradeGiveaway
+                            {
+                                Name = node.SelectSingleNode(".//td[1]/a[2]").InnerText,
+                                Link = node.SelectSingleNode(".//td[1]/a[2]").Attributes["href"].Value,
+                                StoreId = node.SelectSingleNode(".//td[1]/a[1]").Attributes["href"].Value.Split('/')[4]
+                            };
+                            Giveaways?.Add(spGiveaway);
+                        }
+                    }
+                }
+            }
+        }
 
-		private SteamTradeGiveaway GetJoinData(SteamTradeGiveaway stGiveaway)
-		{
-			var response = Web.Get($"{Links.SteamTrade}{stGiveaway.Link}", Cookies.Generate());
+        private SteamTradeGiveaway GetJoinData(SteamTradeGiveaway stGiveaway)
+        {
+            var response = Web.Get($"{Links.SteamTrade}{stGiveaway.Link}", Cookies.Generate());
 
-			if (response.RestResponse.Content != string.Empty)
-			{
-				var htmlDoc = new HtmlDocument();
-				htmlDoc.LoadHtml(response.RestResponse.Content);
+            if (response.RestResponse.Content != string.Empty)
+            {
+                var htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(response.RestResponse.Content);
 
-				var linkJoin = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='inv_join']");
-				if (linkJoin != null)
-				{
-					stGiveaway.LinkJoin = linkJoin.Attributes["href"].Value.Trim();
-				}
-			}
-			return stGiveaway;
-		}
+                var linkJoin = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='inv_join']");
+                if (linkJoin != null)
+                {
+                    stGiveaway.LinkJoin = linkJoin.Attributes["href"].Value.Trim();
+                }
+            }
+            return stGiveaway;
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

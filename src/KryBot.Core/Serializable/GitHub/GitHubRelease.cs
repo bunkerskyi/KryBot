@@ -8,7 +8,7 @@ namespace KryBot.Core.Serializable.GitHub
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     [SuppressMessage("ReSharper", "CollectionNeverUpdated.Global")]
     public class GitHubRelease
-	{
+    {
         [JsonProperty(PropertyName = "tag_name", Required = Required.Always)]
         internal string Tag { get; set; }
 

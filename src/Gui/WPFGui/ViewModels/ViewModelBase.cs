@@ -4,26 +4,26 @@ using Prism.Mvvm;
 
 namespace WPFGui.ViewModels
 {
-	internal class ViewModelBase : BindableBase
-	{
-		#region data
+    internal class ViewModelBase : BindableBase
+    {
+        #region data
 
-		private DelegateCommand _loadedCommand;
+        private DelegateCommand _loadedCommand;
 
-		#endregion
+        #endregion
 
-		#region properties
+        #region properties
 
-		public ICommand LoadedCommand => _loadedCommand ?? (_loadedCommand = new DelegateCommand(OnViewLoaded));
+        public ICommand LoadedCommand => _loadedCommand ?? (_loadedCommand = new DelegateCommand(OnViewLoaded));
 
-		#endregion
+        #endregion
 
-		#region virtual
+        #region virtual
 
-		protected virtual void OnViewLoaded()
-		{
-		}
+        protected virtual void OnViewLoaded()
+        {
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

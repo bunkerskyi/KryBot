@@ -1,7 +1,7 @@
 ﻿namespace KryBot.Core.Cookies
 {
-	public abstract class BaseCookie
-	{
-		public string PhpSessId { get; set; }
-	}
+    public abstract class BaseCookie
+    {
+        public string PhpSessId { get; set; }
+    }
 }

@@ -9,90 +9,90 @@ using WPFGui.Modules;
 
 namespace WPFGui.Startup
 {
-	public class Bootstrapper : UnityBootstrapper, IDisposable
-	{
-		#region IDisposable Members
+    public class Bootstrapper : UnityBootstrapper, IDisposable
+    {
+        #region IDisposable Members
 
-		public void Dispose()
-		{
-		}
+        public void Dispose()
+        {
+        }
 
-		#endregion
+        #endregion
 
-		#region Private
+        #region Private
 
-		private void InitializeLaunch()
-		{
-			// TODO Обработка "необработанных" исключений.
-		}
+        private void InitializeLaunch()
+        {
+            // TODO Обработка "необработанных" исключений.
+        }
 
-		#endregion
+        #endregion
 
-		#region data
+        #region data
 
-		#endregion
+        #endregion
 
-		#region overrides
+        #region overrides
 
-		protected override DependencyObject CreateShell()
-		{
-			return Container.Resolve<MainWindow>();
-		}
+        protected override DependencyObject CreateShell()
+        {
+            return Container.Resolve<MainWindow>();
+        }
 
-		protected override void InitializeShell()
-		{
-			// register view
-			var regionManager = Container.Resolve<IRegionManager>();
-			if (regionManager == null) throw new ArgumentNullException(nameof(regionManager));
+        protected override void InitializeShell()
+        {
+            // register view
+            var regionManager = Container.Resolve<IRegionManager>();
+            if (regionManager == null) throw new ArgumentNullException(nameof(regionManager));
 
-			Application.Current.MainWindow.Show();
-		}
+            Application.Current.MainWindow.Show();
+        }
 
-		/// <summary>
-		///     Configures the <see cref="T:Microsoft.Practices.Unity.IUnityContainer" />.
-		///     May be overwritten in a derived class to add specific type mappings required by the application.
-		/// </summary>
-		protected override void ConfigureContainer()
-		{
-			base.ConfigureContainer();
-			Container.RegisterType(
-				typeof(IServiceLocator),
-				typeof(UnityServiceLocatorAdapter),
-				new ContainerControlledLifetimeManager());
-			ServiceLocator.SetLocatorProvider(() => Container.Resolve<IServiceLocator>());
-		}
+        /// <summary>
+        ///     Configures the <see cref="T:Microsoft.Practices.Unity.IUnityContainer" />.
+        ///     May be overwritten in a derived class to add specific type mappings required by the application.
+        /// </summary>
+        protected override void ConfigureContainer()
+        {
+            base.ConfigureContainer();
+            Container.RegisterType(
+                typeof(IServiceLocator),
+                typeof(UnityServiceLocatorAdapter),
+                new ContainerControlledLifetimeManager());
+            ServiceLocator.SetLocatorProvider(() => Container.Resolve<IServiceLocator>());
+        }
 
-		/// <summary>
-		///     Configures the <see cref="T:Prism.Modularity.IModuleCatalog" /> used by Prism.
-		/// </summary>
-		protected override void ConfigureModuleCatalog()
-		{
-			base.ConfigureModuleCatalog();
+        /// <summary>
+        ///     Configures the <see cref="T:Prism.Modularity.IModuleCatalog" /> used by Prism.
+        /// </summary>
+        protected override void ConfigureModuleCatalog()
+        {
+            base.ConfigureModuleCatalog();
 
-			var moduleCatalog = ModuleCatalog as ModuleCatalog;
-			if (moduleCatalog == null) throw new ArgumentNullException(nameof(moduleCatalog));
+            var moduleCatalog = ModuleCatalog as ModuleCatalog;
+            if (moduleCatalog == null) throw new ArgumentNullException(nameof(moduleCatalog));
 
-			moduleCatalog.AddModule(typeof(StatusModule), InitializationMode.WhenAvailable);
-			moduleCatalog.AddModule(typeof(MenuModule), InitializationMode.WhenAvailable);
-			moduleCatalog.AddModule(typeof(MainModule), InitializationMode.WhenAvailable);
-			moduleCatalog.AddModule(typeof(SitesModule), InitializationMode.WhenAvailable);
-		}
+            moduleCatalog.AddModule(typeof(StatusModule), InitializationMode.WhenAvailable);
+            moduleCatalog.AddModule(typeof(MenuModule), InitializationMode.WhenAvailable);
+            moduleCatalog.AddModule(typeof(MainModule), InitializationMode.WhenAvailable);
+            moduleCatalog.AddModule(typeof(SitesModule), InitializationMode.WhenAvailable);
+        }
 
-		/// <summary>
-		///     Run the bootstrapper process.
-		/// </summary>
-		/// <param name="runWithDefaultConfiguration">
-		///     If <see langword="true" />,
-		///     registers default Prism Library services in the container.
-		///     This is the default behavior.
-		/// </param>
-		public override void Run(bool runWithDefaultConfiguration)
-		{
-			InitializeLaunch();
+        /// <summary>
+        ///     Run the bootstrapper process.
+        /// </summary>
+        /// <param name="runWithDefaultConfiguration">
+        ///     If <see langword="true" />,
+        ///     registers default Prism Library services in the container.
+        ///     This is the default behavior.
+        /// </param>
+        public override void Run(bool runWithDefaultConfiguration)
+        {
+            InitializeLaunch();
 
-			base.Run(runWithDefaultConfiguration); // override собственную последовательность
-		}
+            base.Run(runWithDefaultConfiguration); // override собственную последовательность
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }
