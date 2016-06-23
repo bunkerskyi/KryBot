@@ -1320,13 +1320,24 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
-			notifyIcon.Visible = false;
-			Show();
-			WindowState = FormWindowState.Normal;
-			if (_logActive)
-			{
-				LogUnHide?.Invoke();
-			}
+		    if (WindowState == FormWindowState.Minimized)
+		    {
+		        Show();
+		        WindowState = FormWindowState.Normal;
+		        if (_logActive)
+		        {
+		            LogUnHide?.Invoke();
+		        }
+		    }
+		    else
+		    {
+                Hide();
+                WindowState = FormWindowState.Minimized;
+                if (_logActive)
+                {
+                    LogHide?.Invoke();
+                }
+            }
 		}
 
 		private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -1517,8 +1528,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
 			if (WindowState == FormWindowState.Minimized)
 			{
-				notifyIcon.Icon = Resources.KryBotPresent_256b;
-				notifyIcon.Visible = true;
 				if (_logActive)
 				{
 					LogHide?.Invoke();
