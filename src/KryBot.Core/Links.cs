@@ -118,5 +118,19 @@
         public const string GitHubLatestReliase = "https://api.github.com/repos/KriBetko/KryBot/releases/latest";
 
         #endregion
+
+        #region InventoryGifts
+
+        public const string InventoryGifts = "https://inventorygifts.com/";
+
+        public const string InventoryGiftsAuth = "https://steamcommunity.com/openid/login?openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.mode=checkid_setup&openid.return_to=https%3A%2F%2Finventorygifts.com&openid.realm=https%3A%2F%2Finventorygifts.com&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select";
+
+        public static readonly string InventoryGiftsSearch = $"{InventoryGifts}section.php";
+
+        public static readonly string InvenrotyGiftsSync = $"{InventoryGifts}settings/dc_resync.php";
+
+        public static readonly string InventoryGiftsJoin = $"{InventoryGifts}giveaway_threads/view_thread.php";
+
+        #endregion
     }
 }

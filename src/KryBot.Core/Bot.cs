@@ -17,6 +17,7 @@ namespace KryBot.Core
             PlayBlink = new PlayBlink();
             Steam = new Steam();
             GameAways = new GameAways();
+            InventoryGifts = new InventoryGifts();
             Blacklist = new Blacklist();
         }
 
@@ -37,6 +38,7 @@ namespace KryBot.Core
         public PlayBlink PlayBlink { get; set; }
         public Steam Steam { get; set; }
         public GameAways GameAways { get; set; }
+        public InventoryGifts InventoryGifts { get; set; }
         public Blacklist Blacklist { get; set; }
         // НЕ ИЗМЕНЯТЬ У ПОЛЕЙ SET
 
@@ -50,6 +52,9 @@ namespace KryBot.Core
             UseGamble.Giveaways = new List<UseGambleGiveaway>();
             SteamTrade.Giveaways = new List<SteamTradeGiveaway>();
             PlayBlink.Giveaways = new List<PlayBlinkGiveaway>();
+            GameAways.Giveaways = new List<GameAwaysGiveaway>();
+            InventoryGifts.Giveaways = new List<InventoryGiftsGiveaway>();
+            
         }
 
         public bool Save(string path = FilePaths.Profile)

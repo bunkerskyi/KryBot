@@ -592,6 +592,24 @@ namespace KryBot.CommonResources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CS:GO items on.
+        /// </summary>
+        public static string ParseLoadGiveaways_CSGOGiveawaysIn {
+            get {
+                return ResourceManager.GetString("ParseLoadGiveaways_CSGOGiveawaysIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dota 2 items on.
+        /// </summary>
+        public static string ParseLoadGiveaways_DotaGiveawaysIn {
+            get {
+                return ResourceManager.GetString("ParseLoadGiveaways_DotaGiveawaysIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Found.
         /// </summary>
         public static string ParseLoadGiveaways_Found {
@@ -669,6 +687,33 @@ namespace KryBot.CommonResources.Localization {
         public static string ParseLoadGiveaways_SandboxGiveawaysIn {
             get {
                 return ResourceManager.GetString("ParseLoadGiveaways_SandboxGiveawaysIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Steam giveaways on.
+        /// </summary>
+        public static string ParseLoadGiveaways_SteamGiveawaysIn {
+            get {
+                return ResourceManager.GetString("ParseLoadGiveaways_SteamGiveawaysIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Steam items on.
+        /// </summary>
+        public static string ParseLoadGiveaways_SteamItemsIn {
+            get {
+                return ResourceManager.GetString("ParseLoadGiveaways_SteamItemsIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TF2 items on.
+        /// </summary>
+        public static string ParseLoadGiveaways_TF2GiveawaysIn {
+            get {
+                return ResourceManager.GetString("ParseLoadGiveaways_TF2GiveawaysIn", resourceCulture);
             }
         }
         
@@ -777,6 +822,51 @@ namespace KryBot.CommonResources.Localization {
         public static string SettingsForm_cbGMRegional {
             get {
                 return ResourceManager.GetString("SettingsForm_cbGMRegional", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CS:GO items.
+        /// </summary>
+        public static string SettingsForm_cbIGCSGO {
+            get {
+                return ResourceManager.GetString("SettingsForm_cbIGCSGO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dota 2 items.
+        /// </summary>
+        public static string SettingsForm_cbIGDota {
+            get {
+                return ResourceManager.GetString("SettingsForm_cbIGDota", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Steam giveaways.
+        /// </summary>
+        public static string SettingsForm_cbIGSteamGiveaways {
+            get {
+                return ResourceManager.GetString("SettingsForm_cbIGSteamGiveaways", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Steam items.
+        /// </summary>
+        public static string SettingsForm_cbIGSteamItems {
+            get {
+                return ResourceManager.GetString("SettingsForm_cbIGSteamItems", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TF2 items.
+        /// </summary>
+        public static string SettingsForm_cbIGTF2 {
+            get {
+                return ResourceManager.GetString("SettingsForm_cbIGTF2", resourceCulture);
             }
         }
         

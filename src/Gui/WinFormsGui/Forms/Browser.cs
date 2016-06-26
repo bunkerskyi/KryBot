@@ -136,6 +136,12 @@ namespace KryBot.Gui.WinFormsGui.Forms
                         GameAwaysAuth();
                         Exit();
                     }
+
+                    if (_endPage == Links.InventoryGifts)
+                    {
+                        InventoryGiftsAuth();
+                        Exit();
+                    }
                 }
             }
             else
@@ -145,6 +151,28 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     loadStatusLabel.Image = Resources.load;
                 }
             }
+        }
+
+        private async void InventoryGiftsAuth()
+        {
+            foreach (var cookie in await GetCookies(Links.InventoryGifts))
+            {
+                if (cookie.Name == "PHPSESSID")
+                {
+                    _bot.InventoryGifts.Cookies.Phpsessid = cookie.Value;
+                }
+
+                if (cookie.Name == "hash")
+                {
+                    _bot.InventoryGifts.Cookies.Hash = cookie.Value;
+                }
+
+                if (cookie.Name == "steamid")
+                {
+                    _bot.InventoryGifts.Cookies.Steamid = cookie.Value;
+                }
+            }
+            _bot.InventoryGifts.Enabled = true;
         }
 
         private async void GameAwaysAuth()

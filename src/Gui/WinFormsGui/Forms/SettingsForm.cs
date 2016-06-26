@@ -285,5 +285,17 @@ namespace KryBot.Gui.WinFormsGui.Forms
         {
             ShortcutHelper.Create();
         }
+
+        private void btnIGCookie_Click(object sender, EventArgs e)
+        {
+            var cookies = new List<string>
+            {
+                "PHPSESSID:" + _bot.InventoryGifts.Cookies.Phpsessid,
+                "hash:" + _bot.InventoryGifts.Cookies.Hash,
+                "steamid:" + _bot.InventoryGifts.Cookies.Steamid
+            };
+
+            new FormCookie("InventoryGifts", cookies, _bot).ShowDialog();
+        }
     }
 }

@@ -23,7 +23,13 @@ namespace KryBot.Core.Sites
         public int JoinPointsLimit { get; set; }
         public int PointsReserv { get; set; }
         public GameAwaysCookie Cookies { get; set; }
-        private List<GameAwaysGiveaway> Giveaways { get; }
+        public List<GameAwaysGiveaway> Giveaways { get; set; }
+
+        public void Logout()
+        {
+            Cookies = new GameAwaysCookie();
+            Enabled = false;
+        }
 
         #region Generate
 

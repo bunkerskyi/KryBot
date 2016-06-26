@@ -11,7 +11,7 @@ namespace KryBot.Gui.WinFormsGui
         public bool Autorun { get; set; }
         public bool ShowWonTip { get; set; }
         public bool ShowFarmTip { get; set; }
-        public int LogHeight { get; set; } = 247;
+        public int LogHeight { get; set; } = 266;
         public int LogWidth { get; set; } = 500;
         // НЕ ДЕЛАТЬ ПОЛЯ ПРИВАТНЫМИ
 

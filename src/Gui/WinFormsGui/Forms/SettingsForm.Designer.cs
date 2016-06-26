@@ -34,6 +34,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		{
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageCommun = new System.Windows.Forms.TabPage();
+            this.btnShortcut = new System.Windows.Forms.Button();
             this.gbLang = new System.Windows.Forms.GroupBox();
             this.cbLang = new System.Windows.Forms.ComboBox();
             this.cbWishlistSort = new System.Windows.Forms.CheckBox();
@@ -96,9 +97,19 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.btnPBCookies = new System.Windows.Forms.Button();
+            this.tabPageIG = new System.Windows.Forms.TabPage();
+            this.tbIGReserv = new System.Windows.Forms.TextBox();
+            this.lblIGReserv = new System.Windows.Forms.Label();
+            this.tbIGMaxValue = new System.Windows.Forms.TextBox();
+            this.lblIGMaxValue = new System.Windows.Forms.Label();
+            this.cbIGDota = new System.Windows.Forms.CheckBox();
+            this.cbIGCSGO = new System.Windows.Forms.CheckBox();
+            this.cbIGTF2 = new System.Windows.Forms.CheckBox();
+            this.cbIGSteamItems = new System.Windows.Forms.CheckBox();
+            this.cbIGSteamGiveaways = new System.Windows.Forms.CheckBox();
+            this.btnIGCookie = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnShortcut = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPageCommun.SuspendLayout();
             this.gbLang.SuspendLayout();
@@ -110,6 +121,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageSC.SuspendLayout();
             this.tabPageUG.SuspendLayout();
             this.tabPagePB.SuspendLayout();
+            this.tabPageIG.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -121,6 +133,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabControl1.Controls.Add(this.tabPageSC);
             this.tabControl1.Controls.Add(this.tabPageUG);
             this.tabControl1.Controls.Add(this.tabPagePB);
+            this.tabControl1.Controls.Add(this.tabPageIG);
             this.tabControl1.Location = new System.Drawing.Point(0, 27);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -144,6 +157,16 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageCommun.TabIndex = 5;
             this.tabPageCommun.Text = "Commun";
             this.tabPageCommun.UseVisualStyleBackColor = true;
+            // 
+            // btnShortcut
+            // 
+            this.btnShortcut.Location = new System.Drawing.Point(160, 126);
+            this.btnShortcut.Name = "btnShortcut";
+            this.btnShortcut.Size = new System.Drawing.Size(141, 23);
+            this.btnShortcut.TabIndex = 10;
+            this.btnShortcut.Text = "Create shortcut";
+            this.btnShortcut.UseVisualStyleBackColor = true;
+            this.btnShortcut.Click += new System.EventHandler(this.btnShortcut_Click);
             // 
             // gbLang
             // 
@@ -340,7 +363,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             // btbGMCookies
             // 
             this.btbGMCookies.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.locked1;
-            this.btbGMCookies.Location = new System.Drawing.Point(278, 6);
+            this.btbGMCookies.Location = new System.Drawing.Point(280, 6);
             this.btbGMCookies.Name = "btbGMCookies";
             this.btbGMCookies.Size = new System.Drawing.Size(23, 23);
             this.btbGMCookies.TabIndex = 9;
@@ -490,7 +513,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             // btnSGCookies
             // 
             this.btnSGCookies.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.locked1;
-            this.btnSGCookies.Location = new System.Drawing.Point(278, 6);
+            this.btnSGCookies.Location = new System.Drawing.Point(280, 6);
             this.btnSGCookies.Name = "btnSGCookies";
             this.btnSGCookies.Size = new System.Drawing.Size(23, 23);
             this.btnSGCookies.TabIndex = 10;
@@ -605,7 +628,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             // btnSCCookies
             // 
             this.btnSCCookies.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.locked1;
-            this.btnSCCookies.Location = new System.Drawing.Point(278, 6);
+            this.btnSCCookies.Location = new System.Drawing.Point(280, 6);
             this.btnSCCookies.Name = "btnSCCookies";
             this.btnSCCookies.Size = new System.Drawing.Size(23, 23);
             this.btnSCCookies.TabIndex = 14;
@@ -686,7 +709,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             // btnSPCookies
             // 
             this.btnSPCookies.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.locked1;
-            this.btnSPCookies.Location = new System.Drawing.Point(278, 6);
+            this.btnSPCookies.Location = new System.Drawing.Point(280, 6);
             this.btnSPCookies.Name = "btnSPCookies";
             this.btnSPCookies.Size = new System.Drawing.Size(23, 23);
             this.btnSPCookies.TabIndex = 18;
@@ -775,19 +798,134 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(3, 130);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(81, 13);
+            this.label10.Size = new System.Drawing.Size(72, 13);
             this.label10.TabIndex = 21;
-            this.label10.Text = "Reserve points:";
+            this.label10.Text = "Maximum bet:";
             // 
             // btnPBCookies
             // 
             this.btnPBCookies.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.locked1;
-            this.btnPBCookies.Location = new System.Drawing.Point(278, 6);
+            this.btnPBCookies.Location = new System.Drawing.Point(280, 6);
             this.btnPBCookies.Name = "btnPBCookies";
             this.btnPBCookies.Size = new System.Drawing.Size(23, 23);
             this.btnPBCookies.TabIndex = 20;
             this.btnPBCookies.UseVisualStyleBackColor = true;
             this.btnPBCookies.Click += new System.EventHandler(this.btnPBCookies_Click);
+            // 
+            // tabPageIG
+            // 
+            this.tabPageIG.Controls.Add(this.tbIGReserv);
+            this.tabPageIG.Controls.Add(this.lblIGReserv);
+            this.tabPageIG.Controls.Add(this.tbIGMaxValue);
+            this.tabPageIG.Controls.Add(this.lblIGMaxValue);
+            this.tabPageIG.Controls.Add(this.cbIGDota);
+            this.tabPageIG.Controls.Add(this.cbIGCSGO);
+            this.tabPageIG.Controls.Add(this.cbIGTF2);
+            this.tabPageIG.Controls.Add(this.cbIGSteamItems);
+            this.tabPageIG.Controls.Add(this.cbIGSteamGiveaways);
+            this.tabPageIG.Controls.Add(this.btnIGCookie);
+            this.tabPageIG.Location = new System.Drawing.Point(4, 22);
+            this.tabPageIG.Name = "tabPageIG";
+            this.tabPageIG.Size = new System.Drawing.Size(309, 155);
+            this.tabPageIG.TabIndex = 8;
+            this.tabPageIG.Text = "IG";
+            this.tabPageIG.UseVisualStyleBackColor = true;
+            // 
+            // tbIGReserv
+            // 
+            this.tbIGReserv.Location = new System.Drawing.Point(254, 127);
+            this.tbIGReserv.Name = "tbIGReserv";
+            this.tbIGReserv.Size = new System.Drawing.Size(30, 20);
+            this.tbIGReserv.TabIndex = 30;
+            this.tbIGReserv.Text = "0";
+            this.tbIGReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EventKeyPress);
+            // 
+            // lblIGReserv
+            // 
+            this.lblIGReserv.AutoSize = true;
+            this.lblIGReserv.Location = new System.Drawing.Point(170, 130);
+            this.lblIGReserv.Name = "lblIGReserv";
+            this.lblIGReserv.Size = new System.Drawing.Size(81, 13);
+            this.lblIGReserv.TabIndex = 29;
+            this.lblIGReserv.Text = "Reserve points:";
+            // 
+            // tbIGMaxValue
+            // 
+            this.tbIGMaxValue.Location = new System.Drawing.Point(134, 127);
+            this.tbIGMaxValue.Name = "tbIGMaxValue";
+            this.tbIGMaxValue.Size = new System.Drawing.Size(30, 20);
+            this.tbIGMaxValue.TabIndex = 28;
+            this.tbIGMaxValue.Text = "20000";
+            this.tbIGMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EventKeyPress);
+            // 
+            // lblIGMaxValue
+            // 
+            this.lblIGMaxValue.AutoSize = true;
+            this.lblIGMaxValue.Location = new System.Drawing.Point(3, 130);
+            this.lblIGMaxValue.Name = "lblIGMaxValue";
+            this.lblIGMaxValue.Size = new System.Drawing.Size(81, 13);
+            this.lblIGMaxValue.TabIndex = 27;
+            this.lblIGMaxValue.Text = "Reserve points:";
+            // 
+            // cbIGDota
+            // 
+            this.cbIGDota.AutoSize = true;
+            this.cbIGDota.Location = new System.Drawing.Point(6, 98);
+            this.cbIGDota.Name = "cbIGDota";
+            this.cbIGDota.Size = new System.Drawing.Size(85, 17);
+            this.cbIGDota.TabIndex = 26;
+            this.cbIGDota.Text = "Dota 2 items";
+            this.cbIGDota.UseVisualStyleBackColor = true;
+            // 
+            // cbIGCSGO
+            // 
+            this.cbIGCSGO.AutoSize = true;
+            this.cbIGCSGO.Location = new System.Drawing.Point(6, 75);
+            this.cbIGCSGO.Name = "cbIGCSGO";
+            this.cbIGCSGO.Size = new System.Drawing.Size(86, 17);
+            this.cbIGCSGO.TabIndex = 25;
+            this.cbIGCSGO.Text = "CS:GO items";
+            this.cbIGCSGO.UseVisualStyleBackColor = true;
+            // 
+            // cbIGTF2
+            // 
+            this.cbIGTF2.AutoSize = true;
+            this.cbIGTF2.Location = new System.Drawing.Point(6, 52);
+            this.cbIGTF2.Name = "cbIGTF2";
+            this.cbIGTF2.Size = new System.Drawing.Size(72, 17);
+            this.cbIGTF2.TabIndex = 24;
+            this.cbIGTF2.Text = "TF2 items";
+            this.cbIGTF2.UseVisualStyleBackColor = true;
+            // 
+            // cbIGSteamItems
+            // 
+            this.cbIGSteamItems.AutoSize = true;
+            this.cbIGSteamItems.Location = new System.Drawing.Point(6, 29);
+            this.cbIGSteamItems.Name = "cbIGSteamItems";
+            this.cbIGSteamItems.Size = new System.Drawing.Size(83, 17);
+            this.cbIGSteamItems.TabIndex = 23;
+            this.cbIGSteamItems.Text = "Steam items";
+            this.cbIGSteamItems.UseVisualStyleBackColor = true;
+            // 
+            // cbIGSteamGiveaways
+            // 
+            this.cbIGSteamGiveaways.AutoSize = true;
+            this.cbIGSteamGiveaways.Location = new System.Drawing.Point(6, 6);
+            this.cbIGSteamGiveaways.Name = "cbIGSteamGiveaways";
+            this.cbIGSteamGiveaways.Size = new System.Drawing.Size(109, 17);
+            this.cbIGSteamGiveaways.TabIndex = 22;
+            this.cbIGSteamGiveaways.Text = "Steam giveaways";
+            this.cbIGSteamGiveaways.UseVisualStyleBackColor = true;
+            // 
+            // btnIGCookie
+            // 
+            this.btnIGCookie.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.locked1;
+            this.btnIGCookie.Location = new System.Drawing.Point(280, 6);
+            this.btnIGCookie.Name = "btnIGCookie";
+            this.btnIGCookie.Size = new System.Drawing.Size(23, 23);
+            this.btnIGCookie.TabIndex = 21;
+            this.btnIGCookie.UseVisualStyleBackColor = true;
+            this.btnIGCookie.Click += new System.EventHandler(this.btnIGCookie_Click);
             // 
             // menuStrip1
             // 
@@ -806,16 +944,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.сохранитьToolStripMenuItem.Text = "Save";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
-            // 
-            // btnShortcut
-            // 
-            this.btnShortcut.Location = new System.Drawing.Point(160, 126);
-            this.btnShortcut.Name = "btnShortcut";
-            this.btnShortcut.Size = new System.Drawing.Size(141, 23);
-            this.btnShortcut.TabIndex = 10;
-            this.btnShortcut.Text = "Create shortcut";
-            this.btnShortcut.UseVisualStyleBackColor = true;
-            this.btnShortcut.Click += new System.EventHandler(this.btnShortcut_Click);
             // 
             // FormSettings
             // 
@@ -853,6 +981,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageUG.PerformLayout();
             this.tabPagePB.ResumeLayout(false);
             this.tabPagePB.PerformLayout();
+            this.tabPageIG.ResumeLayout(false);
+            this.tabPageIG.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -971,8 +1101,26 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			сохранитьToolStripMenuItem.Text = strings.Save;
 			Text = strings.Settings;
 			Icon = Icon.FromHandle(Resources.settings.GetHicon());
+		    cbIGCSGO.Text = strings.SettingsForm_cbIGCSGO;
+		    cbIGTF2.Text = strings.SettingsForm_cbIGTF2;
+		    cbIGDota.Text = strings.SettingsForm_cbIGDota;
+		    cbIGSteamGiveaways.Text = strings.SettingsForm_cbIGSteamGiveaways;
+		    cbIGSteamItems.Text = strings.SettingsForm_cbIGSteamItems;
+		    lblIGMaxValue.Text = strings.SettingsFform_MaxValue;
+		    lblIGReserv.Text = strings.SettingsForm_PointsReserv;
 		}
 
         private System.Windows.Forms.Button btnShortcut;
+        private System.Windows.Forms.TabPage tabPageIG;
+        private System.Windows.Forms.Button btnIGCookie;
+        private System.Windows.Forms.CheckBox cbIGDota;
+        private System.Windows.Forms.CheckBox cbIGCSGO;
+        private System.Windows.Forms.CheckBox cbIGTF2;
+        private System.Windows.Forms.CheckBox cbIGSteamItems;
+        private System.Windows.Forms.CheckBox cbIGSteamGiveaways;
+        private System.Windows.Forms.Label lblIGReserv;
+        private System.Windows.Forms.TextBox tbIGMaxValue;
+        private System.Windows.Forms.Label lblIGMaxValue;
+        private System.Windows.Forms.TextBox tbIGReserv;
     }
 }

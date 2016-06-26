@@ -470,4 +470,34 @@
   <data name="Logout" xml:space="preserve">
     <value>Выйти</value>
   </data>
+  <data name="ParseLoadGiveaways_CSGOGiveawaysIn" xml:space="preserve">
+    <value>предметов CS:GO на</value>
+  </data>
+  <data name="ParseLoadGiveaways_DotaGiveawaysIn" xml:space="preserve">
+    <value>предметов Dota 2 на</value>
+  </data>
+  <data name="ParseLoadGiveaways_SteamGiveawaysIn" xml:space="preserve">
+    <value>Steam раздач на</value>
+  </data>
+  <data name="ParseLoadGiveaways_SteamItemsIn" xml:space="preserve">
+    <value>предметов Steam на</value>
+  </data>
+  <data name="ParseLoadGiveaways_TF2GiveawaysIn" xml:space="preserve">
+    <value>предметов TF2 на</value>
+  </data>
+  <data name="SettingsForm_cbIGCSGO" xml:space="preserve">
+    <value>CS:GO предметы</value>
+  </data>
+  <data name="SettingsForm_cbIGDota" xml:space="preserve">
+    <value>Dota 2 предметы</value>
+  </data>
+  <data name="SettingsForm_cbIGSteamGiveaways" xml:space="preserve">
+    <value>Steam раздачи</value>
+  </data>
+  <data name="SettingsForm_cbIGSteamItems" xml:space="preserve">
+    <value>Steam предметы</value>
+  </data>
+  <data name="SettingsForm_cbIGTF2" xml:space="preserve">
+    <value>TF2 предметы</value>
+  </data>
 </root>

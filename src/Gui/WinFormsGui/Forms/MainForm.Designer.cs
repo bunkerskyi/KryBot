@@ -124,6 +124,15 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.toolStripMenuItem_Show = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_Farm = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_Exit = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabPageIG = new System.Windows.Forms.TabPage();
+            this.btnIGLogout = new System.Windows.Forms.Button();
+            this.cbIGEnabled = new System.Windows.Forms.CheckBox();
+            this.linkLabelIG = new System.Windows.Forms.LinkLabel();
+            this.pbIGRefresh = new System.Windows.Forms.PictureBox();
+            this.btnIGLogin = new System.Windows.Forms.Button();
+            this.lblIGStatus = new System.Windows.Forms.Label();
+            this.lblIGPoints = new System.Windows.Forms.Label();
+            this.lblIGLevel = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -143,6 +152,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             ((System.ComponentModel.ISupportInitialize)(this.pbGARefresh)).BeginInit();
             this.tabPageSteam.SuspendLayout();
             this.toolStripMenuItem_Main.SuspendLayout();
+            this.tabPageIG.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIGRefresh)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -150,7 +161,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripProgressBar1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 186);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 205);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(350, 22);
             this.statusStrip1.TabIndex = 0;
@@ -296,10 +307,12 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabControl1.Controls.Add(this.tabPagePB);
             this.tabControl1.Controls.Add(this.tabPageGA);
             this.tabControl1.Controls.Add(this.tabPageSteam);
+            this.tabControl1.Controls.Add(this.tabPageIG);
             this.tabControl1.Location = new System.Drawing.Point(4, 27);
+            this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(342, 87);
+            this.tabControl1.Size = new System.Drawing.Size(342, 105);
             this.tabControl1.TabIndex = 4;
             // 
             // tabPageGM
@@ -312,7 +325,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageGM.Controls.Add(this.lblGMStatus);
             this.tabPageGM.Controls.Add(this.lblGMCoal);
             this.tabPageGM.Controls.Add(this.lblGMLevel);
-            this.tabPageGM.Location = new System.Drawing.Point(4, 22);
+            this.tabPageGM.Location = new System.Drawing.Point(4, 40);
             this.tabPageGM.Name = "tabPageGM";
             this.tabPageGM.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageGM.Size = new System.Drawing.Size(334, 61);
@@ -411,7 +424,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageSG.Controls.Add(this.lblSGPoints);
             this.tabPageSG.Controls.Add(this.lblSGLevel);
             this.tabPageSG.Controls.Add(this.btnSGLogin);
-            this.tabPageSG.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSG.Location = new System.Drawing.Point(4, 40);
             this.tabPageSG.Name = "tabPageSG";
             this.tabPageSG.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageSG.Size = new System.Drawing.Size(334, 61);
@@ -1038,7 +1051,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(4, 116);
+            this.btnStart.Location = new System.Drawing.Point(4, 134);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(342, 67);
             this.btnStart.TabIndex = 5;
@@ -1049,10 +1062,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
             // notifyIcon
             // 
             this.notifyIcon.ContextMenuStrip = this.toolStripMenuItem_Main;
+            this.notifyIcon.Icon = global::KryBot.Gui.WinFormsGui.Properties.Resources.KryBotPresent_256b;
             this.notifyIcon.Text = "KryBot";
             this.notifyIcon.Visible = true;
             this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseDoubleClick);
-		    this.notifyIcon.Icon = Resources.KryBotPresent_256b;
             // 
             // toolStripMenuItem_Main
             // 
@@ -1084,11 +1097,106 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.toolStripMenuItem_Exit.Text = "Logout";
             this.toolStripMenuItem_Exit.Click += new System.EventHandler(this.toolStripMenuItem_Exit_Click);
             // 
+            // tabPageIG
+            // 
+            this.tabPageIG.Controls.Add(this.btnIGLogout);
+            this.tabPageIG.Controls.Add(this.cbIGEnabled);
+            this.tabPageIG.Controls.Add(this.linkLabelIG);
+            this.tabPageIG.Controls.Add(this.pbIGRefresh);
+            this.tabPageIG.Controls.Add(this.btnIGLogin);
+            this.tabPageIG.Controls.Add(this.lblIGStatus);
+            this.tabPageIG.Controls.Add(this.lblIGPoints);
+            this.tabPageIG.Controls.Add(this.lblIGLevel);
+            this.tabPageIG.Location = new System.Drawing.Point(4, 40);
+            this.tabPageIG.Name = "tabPageIG";
+            this.tabPageIG.Size = new System.Drawing.Size(334, 61);
+            this.tabPageIG.TabIndex = 8;
+            this.tabPageIG.Text = "IG";
+            this.tabPageIG.UseVisualStyleBackColor = true;
+            // 
+            // btnIGLogout
+            // 
+            this.btnIGLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnIGLogout.Location = new System.Drawing.Point(134, 19);
+            this.btnIGLogout.Name = "btnIGLogout";
+            this.btnIGLogout.Size = new System.Drawing.Size(75, 23);
+            this.btnIGLogout.TabIndex = 35;
+            this.btnIGLogout.Text = "Logout";
+            this.btnIGLogout.UseVisualStyleBackColor = true;
+            this.btnIGLogout.Click += new System.EventHandler(this.btnIGLogout_Click);
+            // 
+            // cbIGEnabled
+            // 
+            this.cbIGEnabled.AutoSize = true;
+            this.cbIGEnabled.Checked = true;
+            this.cbIGEnabled.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbIGEnabled.Location = new System.Drawing.Point(315, 3);
+            this.cbIGEnabled.Name = "cbIGEnabled";
+            this.cbIGEnabled.Size = new System.Drawing.Size(15, 14);
+            this.cbIGEnabled.TabIndex = 34;
+            this.cbIGEnabled.UseVisualStyleBackColor = true;
+            // 
+            // linkLabelIG
+            // 
+            this.linkLabelIG.AutoSize = true;
+            this.linkLabelIG.Location = new System.Drawing.Point(6, 42);
+            this.linkLabelIG.Name = "linkLabelIG";
+            this.linkLabelIG.Size = new System.Drawing.Size(59, 13);
+            this.linkLabelIG.TabIndex = 33;
+            this.linkLabelIG.TabStop = true;
+            this.linkLabelIG.Text = "To website";
+            // 
+            // pbIGRefresh
+            // 
+            this.pbIGRefresh.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.refresh;
+            this.pbIGRefresh.Location = new System.Drawing.Point(314, 42);
+            this.pbIGRefresh.Name = "pbIGRefresh";
+            this.pbIGRefresh.Size = new System.Drawing.Size(16, 16);
+            this.pbIGRefresh.TabIndex = 32;
+            this.pbIGRefresh.TabStop = false;
+            // 
+            // btnIGLogin
+            // 
+            this.btnIGLogin.Location = new System.Drawing.Point(134, 19);
+            this.btnIGLogin.Name = "btnIGLogin";
+            this.btnIGLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnIGLogin.TabIndex = 31;
+            this.btnIGLogin.Text = "Login";
+            this.btnIGLogin.UseVisualStyleBackColor = true;
+            this.btnIGLogin.Click += new System.EventHandler(this.btnIGLogin_Click);
+            // 
+            // lblIGStatus
+            // 
+            this.lblIGStatus.AutoSize = true;
+            this.lblIGStatus.Location = new System.Drawing.Point(6, 3);
+            this.lblIGStatus.Name = "lblIGStatus";
+            this.lblIGStatus.Size = new System.Drawing.Size(112, 13);
+            this.lblIGStatus.TabIndex = 30;
+            this.lblIGStatus.Text = "Status: Not authorized";
+            // 
+            // lblIGPoints
+            // 
+            this.lblIGPoints.AutoSize = true;
+            this.lblIGPoints.Location = new System.Drawing.Point(6, 29);
+            this.lblIGPoints.Name = "lblIGPoints";
+            this.lblIGPoints.Size = new System.Drawing.Size(39, 13);
+            this.lblIGPoints.TabIndex = 29;
+            this.lblIGPoints.Text = "Points:";
+            // 
+            // lblIGLevel
+            // 
+            this.lblIGLevel.AutoSize = true;
+            this.lblIGLevel.Location = new System.Drawing.Point(6, 16);
+            this.lblIGLevel.Name = "lblIGLevel";
+            this.lblIGLevel.Size = new System.Drawing.Size(36, 13);
+            this.lblIGLevel.TabIndex = 28;
+            this.lblIGLevel.Text = "Level:";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(350, 208);
+            this.ClientSize = new System.Drawing.Size(350, 227);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
@@ -1134,6 +1242,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageSteam.ResumeLayout(false);
             this.tabPageSteam.PerformLayout();
             this.toolStripMenuItem_Main.ResumeLayout(false);
+            this.tabPageIG.ResumeLayout(false);
+            this.tabPageIG.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbIGRefresh)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1299,7 +1410,23 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			toolStripMenuItem_Farm.Text = strings.Farm;
 			toolStripMenuItem_Exit.Text = strings.Exit;
 			Text = $"{Application.ProductName} [{Application.ProductVersion}]";
-		}
-	}
+		    btnIGLogin.Text = strings.Logout;
+		    btnIGLogin.Text = strings.Login;
+            lblIGPoints.Text = $"{strings.Points}: ";
+            lblIGLevel.Text = $"{strings.Level}: ";
+            lblIGStatus.Text = $"{ strings.Status}: { strings.Status_NotLogined}";
+            linkLabelIG.Text = strings.LinkLabel_OnSite;
+        }
+
+        private TabPage tabPageIG;
+        private Button btnIGLogout;
+        private CheckBox cbIGEnabled;
+        private LinkLabel linkLabelIG;
+        private PictureBox pbIGRefresh;
+        private Button btnIGLogin;
+        private Label lblIGStatus;
+        private Label lblIGPoints;
+        private Label lblIGLevel;
+    }
 }
 

@@ -468,4 +468,34 @@
   <data name="Points" xml:space="preserve">
     <value>Points</value>
   </data>
+  <data name="ParseLoadGiveaways_CSGOGiveawaysIn" xml:space="preserve">
+    <value>CS:GO items on</value>
+  </data>
+  <data name="ParseLoadGiveaways_DotaGiveawaysIn" xml:space="preserve">
+    <value>Dota 2 items on</value>
+  </data>
+  <data name="ParseLoadGiveaways_SteamGiveawaysIn" xml:space="preserve">
+    <value>Steam giveaways on</value>
+  </data>
+  <data name="ParseLoadGiveaways_SteamItemsIn" xml:space="preserve">
+    <value>Steam items on</value>
+  </data>
+  <data name="ParseLoadGiveaways_TF2GiveawaysIn" xml:space="preserve">
+    <value>TF2 items on</value>
+  </data>
+  <data name="SettingsForm_cbIGDota" xml:space="preserve">
+    <value>Dota 2 items</value>
+  </data>
+  <data name="SettingsForm_cbIGSteamGiveaways" xml:space="preserve">
+    <value>Steam giveaways</value>
+  </data>
+  <data name="SettingsForm_cbIGSteamItems" xml:space="preserve">
+    <value>Steam items</value>
+  </data>
+  <data name="SettingsForm_cbIGTF2" xml:space="preserve">
+    <value>TF2 items</value>
+  </data>
+  <data name="SettingsForm_cbIGCSGO" xml:space="preserve">
+    <value>CS:GO items</value>
+  </data>
 </root>

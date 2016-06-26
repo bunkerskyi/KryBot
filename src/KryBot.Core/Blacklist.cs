@@ -27,6 +27,11 @@ namespace KryBot.Core
                     giveaways.Remove(giveaways[i]);
                     i--;
                 }
+                else if (Items.Any(item => giveaways[i].Name == item.Name))
+                {
+                    giveaways.Remove(giveaways[i]);
+                    i--;
+                }
             }
         }
 
