@@ -92,6 +92,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
             tbSPMaxValue.Text = _bot.UseGamble.MaxJoinValue.ToString();
             tbSPReserv.Text = _bot.UseGamble.PointsReserv.ToString();
 
+            cbIGSteamGiveaways.Checked = _bot.InventoryGifts.SteamGifts;
+            cbIGSteamItems.Checked = _bot.InventoryGifts.SteamItems;
+            cbIGTF2.Checked = _bot.InventoryGifts.Tf2Items;
+            cbIGCSGO.Checked = _bot.InventoryGifts.CsGoitem;
+            cbIGDota.Checked = _bot.InventoryGifts.DotaItems;
+            tbIGReserv.Text = _bot.InventoryGifts.PointsReserv.ToString();
+            tbIGMaxValue.Text = _bot.InventoryGifts.JoinPointsLimit.ToString();
+
             cbAutorun.Checked = _settings.Autorun;
             cbWonTip.Checked = _settings.ShowWonTip;
             cbFarmTip.Checked = _settings.ShowFarmTip;
@@ -162,6 +170,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
             _bot.PlayBlink.MaxJoinValue = int.Parse(tbPBMaxValue.Text);
             _bot.PlayBlink.PointReserv = int.Parse(tbPBReserv.Text);
+
+            _bot.InventoryGifts.SteamGifts = cbIGSteamGiveaways.Checked;
+            _bot.InventoryGifts.SteamItems = cbIGSteamItems.Checked;
+            _bot.InventoryGifts.Tf2Items = cbIGTF2.Checked;
+            _bot.InventoryGifts.CsGoitem = cbIGCSGO.Checked;
+            _bot.InventoryGifts.DotaItems = cbIGDota.Checked;
+            _bot.InventoryGifts.JoinPointsLimit = int.Parse(tbIGMaxValue.Text);
+            _bot.InventoryGifts.PointsReserv = int.Parse(tbIGReserv.Text);
 
             _bot.Timer = cbTimerEnable.Checked;
             _bot.TimerInterval = int.Parse(tbTimerInterval.Text)*60000;
