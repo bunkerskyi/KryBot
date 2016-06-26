@@ -56,15 +56,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             toolStripStatusLabelChromium.Text =
                 $"Chromium: {Cef.ChromiumVersion} Cef: {Cef.CefVersion} CefSharp: {Cef.CefSharpVersion}";
 
-            var steamCookie = _bot.Steam.Cookies.Generate();
-            if (steamCookie.Count > 0)
-            {
-                foreach (var cookie in CefTools.CookieContainerToCefCookie(steamCookie))
-                {
-                    await Cef.GetGlobalCookieManager().SetCookieAsync(Links.Steam, cookie);
-                }
-            }
-
             if (_phpSessId != "")
             {
                 await Cef.GetGlobalCookieManager().SetCookieAsync(Links.SteamTrade, new Cookie
