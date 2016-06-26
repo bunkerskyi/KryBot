@@ -629,6 +629,31 @@ namespace KryBot.Gui.WinFormsGui.Forms
             toolStripStatusLabel1.Text = strings.TryLogin;
             var login = false;
 
+            if (_bot.Steam.Enabled)
+            {
+                if (await CheckLoginSteam())
+                {
+                    btnSteamLogin.Enabled = false;
+                    btnSteamLogin.Visible = false;
+                    lblSteamStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                    btnSteamExit.Visible = true;
+                }
+                else
+                {
+                    BlockTabpage(tabPageSteam, false);
+                    btnSteamLogin.Enabled = true;
+                    btnSteamLogin.Visible = true;
+                    lblSteamStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                }
+            }
+            else
+            {
+                BlockTabpage(tabPageSteam, false);
+                btnSteamLogin.Enabled = true;
+                btnSteamLogin.Visible = true;
+            }
+            toolStripProgressBar1.Value++;
+
             if (_bot.GameMiner.Enabled)
             {
                 if (await CheckLoginGm())
@@ -836,31 +861,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 BlockTabpage(tabPagePB, false);
                 btnPBLogin.Enabled = true;
                 btnPBLogin.Visible = true;
-            }
-            toolStripProgressBar1.Value++;
-
-            if (_bot.Steam.Enabled)
-            {
-                if (await CheckLoginSteam())
-                {
-                    btnSteamLogin.Enabled = false;
-                    btnSteamLogin.Visible = false;
-                    lblSteamStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
-                    btnSteamExit.Visible = true;
-                }
-                else
-                {
-                    BlockTabpage(tabPageSteam, false);
-                    btnSteamLogin.Enabled = true;
-                    btnSteamLogin.Visible = true;
-                    lblSteamStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
-                }
-            }
-            else
-            {
-                BlockTabpage(tabPageSteam, false);
-                btnSteamLogin.Enabled = true;
-                btnSteamLogin.Visible = true;
             }
             toolStripProgressBar1.Value++;
 
