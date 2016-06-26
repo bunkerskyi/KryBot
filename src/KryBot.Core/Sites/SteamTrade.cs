@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,6 +11,7 @@ using RestSharp;
 
 namespace KryBot.Core.Sites
 {
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public class SteamTrade
     {
         public SteamTrade()
@@ -153,17 +154,7 @@ namespace KryBot.Core.Sites
                     }
                     else
                     {
-                        if (blackList != null)
-                        {
-                            for (var i = 0; i < Giveaways.Count; i++)
-                            {
-                                if (blackList.Items.Any(item => Giveaways[i].StoreId == item.Id))
-                                {
-                                    Giveaways.Remove(Giveaways[i]);
-                                    i--;
-                                }
-                            }
-                        }
+                        blackList.RemoveGames(Giveaways);
                         task.SetResult(Messages.ParseGiveawaysFoundMatchGiveaways("SteamTrade",
                             Giveaways.Count.ToString()));
                     }

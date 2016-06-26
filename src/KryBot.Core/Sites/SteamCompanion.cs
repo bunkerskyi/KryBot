@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -11,6 +12,7 @@ using RestSharp;
 
 namespace KryBot.Core.Sites
 {
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public class SteamCompanion
     {
         public SteamCompanion()

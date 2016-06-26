@@ -138,9 +138,6 @@
   <data name="GiveawayJoined_Join" xml:space="preserve">
     <value>Участие в</value>
   </data>
-  <data name="GiveawayJoined_Points" xml:space="preserve">
-    <value>points</value>
-  </data>
   <data name="GiveawayNotJoined_NotConfirmed" xml:space="preserve">
     <value>не подтверждено</value>
   </data>
@@ -254,9 +251,6 @@
   </data>
   <data name="Level" xml:space="preserve">
     <value>Уровень</value>
-  </data>
-  <data name="Points" xml:space="preserve">
-    <value>Points</value>
   </data>
   <data name="Agreement" xml:space="preserve">
     <value>KryBot - Соглашение</value>
@@ -460,9 +454,6 @@
   </data>
   <data name="SettingsForm_RegularGiveaways" xml:space="preserve">
     <value>Обычные раздачи</value>
-  </data>
-  <data name="SettingsForm_WishlistGiveaways" xml:space="preserve">
-    <value>Wishlist</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Язык</value>

@@ -4,8 +4,6 @@
     {
         public const string Profile = "profile.xml";
 
-        public const string Blacklist = "blacklist.xml";
-
         public const string Settings = "settings.xml";
 
         public const string KryBot = "KryBot.exe";

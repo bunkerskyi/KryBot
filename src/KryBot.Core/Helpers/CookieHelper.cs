@@ -9,7 +9,7 @@ namespace KryBot.Core.Helpers
 {
     public static class CookieHelper
     {
-        public static List<Cookie> CookieContainer_ToList(CookieContainer container)
+        private static List<Cookie> CookieContainer_ToList(CookieContainer container)
         {
             var cookies = new List<Cookie>();
 

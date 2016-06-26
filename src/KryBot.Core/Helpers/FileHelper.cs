@@ -9,30 +9,6 @@ namespace KryBot.Core.Helpers
     public static class FileHelper
     {
         /// <summary>
-        ///     Trying to read (deserialize) the file into an object.
-        /// </summary>
-        /// <returns>
-        ///     If reading is successful, returns true, otherwise false.
-        /// </returns>
-        public static bool Load<T>(ref T instance, string path)
-        {
-            try
-            {
-                using (var reader = new StreamReader(path))
-                {
-                    var serializer = new XmlSerializer(typeof(T));
-                    instance = (T) serializer.Deserialize(reader);
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-        }
-
-        /// <summary>
         ///     Read (deserialize) the file into new object and then return it.
         /// </summary>
         public static T Load<T>(string path) where T : new()

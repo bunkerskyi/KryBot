@@ -1,5 +1,8 @@
-﻿namespace KryBot.Core.Giveaways
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace KryBot.Core.Giveaways
 {
+    [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     public class UseGambleGiveaway : BaseGiveaway
     {
         public int Price { get; set; }

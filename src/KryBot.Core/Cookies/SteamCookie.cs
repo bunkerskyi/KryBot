@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 
 namespace KryBot.Core.Cookies
 {
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public class SteamCookie
     {
         public string Sessid { get; set; }

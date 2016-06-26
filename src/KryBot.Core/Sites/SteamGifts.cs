@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using RestSharp;
 
 namespace KryBot.Core.Sites
 {
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public class SteamGifts
     {
         public SteamGifts()

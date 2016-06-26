@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
@@ -9,6 +10,8 @@ using RestSharp;
 
 namespace KryBot.Core.Sites
 {
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    [SuppressMessage("ReSharper", "ConvertIfStatementToConditionalTernaryExpression")]
     public class InventoryGifts
     {
         public InventoryGifts()
@@ -26,7 +29,7 @@ namespace KryBot.Core.Sites
         public bool CsGoitem { get; set; } = true;
         public bool DotaItems { get; set; } = true;
         public int JoinPointsLimit { get; set; } = 20000;
-        public int PointsReserv { get; set; } = 0;
+        public int PointsReserv { get; set; }
         public InventoryGiftsCookie Cookies { get; set; }
         public List<InventoryGiftsGiveaway> Giveaways { get; set; }
 
@@ -152,8 +155,11 @@ namespace KryBot.Core.Sites
                     }
 
                     var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class='box']/div//div[@class='thread']");
-                    count += nodes?.Count ?? 0;
-                    AddGiveaways(nodes, nodeClass);
+                    if (nodes != null)
+                    {
+                        count += nodes.Count;
+                       AddGiveaways(nodes, nodeClass); 
+                    }
                 }
             }
 
@@ -163,41 +169,38 @@ namespace KryBot.Core.Sites
 
         private void AddGiveaways(HtmlNodeCollection nodes, string nodeClass)
         {
-            if (nodes != null)
+            foreach (var node in nodes)
             {
-                foreach (var node in nodes)
+                var entered =
+                    node.SelectSingleNode(
+                        ".//i[contains(@class, 'fa') and contains(@class, 'fa-check')]");
+                if (entered == null)
                 {
-                    var entered =
-                        node.SelectSingleNode(
-                            ".//i[contains(@class, 'fa') and contains(@class, 'fa-check')]");
-                    if (entered == null)
+                    var id = node.SelectSingleNode($".//div[@class='{nodeClass}']/a");
+                    if (id != null)
                     {
-                        var id = node.SelectSingleNode($".//div[@class='{nodeClass}']/a");
-                        if (id != null)
+                        var name = id.SelectSingleNode(".//span");
+                        var price = id.SelectSingleNode(".//span[2]");
+                        if (name != null && price != null)
                         {
-                            var name = id.SelectSingleNode(".//span");
-                            var price = id.SelectSingleNode(".//span[2]");
-                            if (name != null && price != null)
+                            var giveaway = new InventoryGiftsGiveaway()
                             {
-                                var giveaway = new InventoryGiftsGiveaway()
-                                {
-                                    Name = name.InnerText.Trim(),
-                                    Id = id.Attributes["href"].Value.Split('/')[3].Split('/')[0]
-                                };
+                                Name = name.InnerText.Trim(),
+                                Id = id.Attributes["href"].Value.Split('/')[3].Split('/')[0]
+                            };
 
-                                if (price.InnerText.Contains("(CD-Key)"))
-                                {
-                                    giveaway.Price = int.Parse(price.InnerText.Split('(')[2].Split('p')[0].Trim());
-                                }
-                                else
-                                {
-                                    giveaway.Price = int.Parse(price.InnerText.Split('(')[1].Split('p')[0].Trim());
-                                }
+                            if (price.InnerText.Contains("(CD-Key)"))
+                            {
+                                giveaway.Price = int.Parse(price.InnerText.Split('(')[2].Split('p')[0].Trim());
+                            }
+                            else
+                            {
+                                giveaway.Price = int.Parse(price.InnerText.Split('(')[1].Split('p')[0].Trim());
+                            }
 
-                                if (giveaway.Price <= Points && giveaway.Price <= JoinPointsLimit)
-                                {
-                                    Giveaways?.Add(giveaway);
-                                }
+                            if (giveaway.Price <= Points && giveaway.Price <= JoinPointsLimit)
+                            {
+                                Giveaways?.Add(giveaway);
                             }
                         }
                     }
