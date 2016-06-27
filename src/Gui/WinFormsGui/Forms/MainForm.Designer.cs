@@ -33,27 +33,32 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.вПапкуСБотомToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.сохранитьКакToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.загрузитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.настройкиToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.черныйСписокToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.оПрограммеToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.донатToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.логToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveAsКакToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.blacklistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.informationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.donateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.tabPageSteam = new System.Windows.Forms.TabPage();
+            this.btnSteamExit = new System.Windows.Forms.Button();
+            this.btnSteamLogin = new System.Windows.Forms.Button();
+            this.linkLabelSteam = new System.Windows.Forms.LinkLabel();
+            this.lblSteamStatus = new System.Windows.Forms.Label();
             this.tabPageGM = new System.Windows.Forms.TabPage();
             this.btnGMExit = new System.Windows.Forms.Button();
             this.cbGMEnable = new System.Windows.Forms.CheckBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.linkLabelGM = new System.Windows.Forms.LinkLabel();
             this.pbGMReload = new System.Windows.Forms.PictureBox();
             this.btnGMLogin = new System.Windows.Forms.Button();
             this.lblGMStatus = new System.Windows.Forms.Label();
@@ -62,7 +67,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageSG = new System.Windows.Forms.TabPage();
             this.btnSGExit = new System.Windows.Forms.Button();
             this.cbSGEnable = new System.Windows.Forms.CheckBox();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.linkLabelSG = new System.Windows.Forms.LinkLabel();
             this.pbSGReload = new System.Windows.Forms.PictureBox();
             this.lblSGStatus = new System.Windows.Forms.Label();
             this.lblSGPoints = new System.Windows.Forms.Label();
@@ -71,7 +76,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageSC = new System.Windows.Forms.TabPage();
             this.btnSCExit = new System.Windows.Forms.Button();
             this.cbSCEnable = new System.Windows.Forms.CheckBox();
-            this.linkLabel3 = new System.Windows.Forms.LinkLabel();
+            this.linkLabelSC = new System.Windows.Forms.LinkLabel();
             this.pbSCReload = new System.Windows.Forms.PictureBox();
             this.lblSCStatus = new System.Windows.Forms.Label();
             this.lblSCPoints = new System.Windows.Forms.Label();
@@ -113,11 +118,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.lblGAPoints = new System.Windows.Forms.Label();
             this.lblGALevel = new System.Windows.Forms.Label();
             this.lblGAStatus = new System.Windows.Forms.Label();
-            this.tabPageSteam = new System.Windows.Forms.TabPage();
-            this.btnSteamExit = new System.Windows.Forms.Button();
-            this.btnSteamLogin = new System.Windows.Forms.Button();
-            this.linkLabel6 = new System.Windows.Forms.LinkLabel();
-            this.lblSteamStatus = new System.Windows.Forms.Label();
             this.tabPageIG = new System.Windows.Forms.TabPage();
             this.btnIGLogout = new System.Windows.Forms.Button();
             this.cbIGEnabled = new System.Windows.Forms.CheckBox();
@@ -133,9 +133,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.toolStripMenuItem_Show = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_Farm = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem_Exit = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.tabControl.SuspendLayout();
+            this.tabPageSteam.SuspendLayout();
             this.tabPageGM.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbGMReload)).BeginInit();
             this.tabPageSG.SuspendLayout();
@@ -150,185 +151,237 @@ namespace KryBot.Gui.WinFormsGui.Forms
             ((System.ComponentModel.ISupportInitialize)(this.pbPBRefresh)).BeginInit();
             this.tabPageGA.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbGARefresh)).BeginInit();
-            this.tabPageSteam.SuspendLayout();
             this.tabPageIG.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbIGRefresh)).BeginInit();
             this.toolStripMenuItem_Main.SuspendLayout();
             this.SuspendLayout();
             // 
-            // statusStrip1
+            // statusStrip
             // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1,
-            this.toolStripProgressBar1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 205);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(350, 22);
-            this.statusStrip1.TabIndex = 0;
-            this.statusStrip1.Text = "statusStrip1";
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel,
+            this.toolStripProgressBar});
+            this.statusStrip.Location = new System.Drawing.Point(0, 205);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(350, 22);
+            this.statusStrip.TabIndex = 0;
+            this.statusStrip.Text = "statusStrip1";
             // 
-            // toolStripStatusLabel1
+            // toolStripStatusLabel
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(96, 17);
-            this.toolStripStatusLabel1.Text = "Loading profile...";
+            this.toolStripStatusLabel.Name = "toolStripStatusLabel";
+            this.toolStripStatusLabel.Size = new System.Drawing.Size(96, 17);
+            this.toolStripStatusLabel.Text = "Loading profile...";
             // 
-            // toolStripProgressBar1
+            // toolStripProgressBar
             // 
-            this.toolStripProgressBar1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
+            this.toolStripProgressBar.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripProgressBar.Name = "toolStripProgressBar";
+            this.toolStripProgressBar.Size = new System.Drawing.Size(100, 16);
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.файлToolStripMenuItem,
-            this.настройкиToolStripMenuItem,
-            this.оПрограммеToolStripMenuItem,
-            this.логToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.toolsToolStripMenuItem,
+            this.informationToolStripMenuItem,
+            this.logToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(350, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // файлToolStripMenuItem
+            // fileToolStripMenuItem
             // 
-            this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.вПапкуСБотомToolStripMenuItem,
-            this.сохранитьToolStripMenuItem,
-            this.сохранитьКакToolStripMenuItem,
-            this.загрузитьToolStripMenuItem});
-            this.файлToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.file;
-            this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            this.файлToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
-            this.файлToolStripMenuItem.Text = "File";
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openFolderToolStripMenuItem,
+            this.saveToolStripMenuItem,
+            this.saveAsКакToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.file;
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+            this.fileToolStripMenuItem.Text = "File";
             // 
-            // вПапкуСБотомToolStripMenuItem
+            // openFolderToolStripMenuItem
             // 
-            this.вПапкуСБотомToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.folder;
-            this.вПапкуСБотомToolStripMenuItem.Name = "вПапкуСБотомToolStripMenuItem";
-            this.вПапкуСБотомToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.вПапкуСБотомToolStripMenuItem.Text = "Open folder with bot";
-            this.вПапкуСБотомToolStripMenuItem.Click += new System.EventHandler(this.вПапкуСБотомToolStripMenuItem_Click);
+            this.openFolderToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.folder;
+            this.openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
+            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.openFolderToolStripMenuItem.Text = "Open folder with bot";
+            this.openFolderToolStripMenuItem.Click += new System.EventHandler(this.вПапкуСБотомToolStripMenuItem_Click);
             // 
-            // сохранитьToolStripMenuItem
+            // saveToolStripMenuItem
             // 
-            this.сохранитьToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.file;
-            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.сохранитьToolStripMenuItem.Text = "Save";
-            this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
+            this.saveToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.file;
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
-            // сохранитьКакToolStripMenuItem
+            // saveAsКакToolStripMenuItem
             // 
-            this.сохранитьКакToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.file;
-            this.сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
-            this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.сохранитьКакToolStripMenuItem.Text = "Save as...";
-            this.сохранитьКакToolStripMenuItem.Click += new System.EventHandler(this.сохранитьКакToolStripMenuItem_Click);
+            this.saveAsКакToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.file;
+            this.saveAsКакToolStripMenuItem.Name = "saveAsКакToolStripMenuItem";
+            this.saveAsКакToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.saveAsКакToolStripMenuItem.Text = "Save as...";
+            this.saveAsКакToolStripMenuItem.Click += new System.EventHandler(this.сохранитьКакToolStripMenuItem_Click);
             // 
-            // загрузитьToolStripMenuItem
+            // exitToolStripMenuItem
             // 
-            this.загрузитьToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.exit;
-            this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
-            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-            this.загрузитьToolStripMenuItem.Text = "Exit";
-            this.загрузитьToolStripMenuItem.Click += new System.EventHandler(this.загрузитьToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.exit;
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.загрузитьToolStripMenuItem_Click);
             // 
-            // настройкиToolStripMenuItem
+            // toolsToolStripMenuItem
             // 
-            this.настройкиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.настройкиToolStripMenuItem1,
-            this.черныйСписокToolStripMenuItem});
-            this.настройкиToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.settings;
-            this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
-            this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
-            this.настройкиToolStripMenuItem.Text = "Tools";
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingsToolStripMenuItem,
+            this.blacklistToolStripMenuItem});
+            this.toolsToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.settings;
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
             // 
-            // настройкиToolStripMenuItem1
+            // settingsToolStripMenuItem
             // 
-            this.настройкиToolStripMenuItem1.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.settings;
-            this.настройкиToolStripMenuItem1.Name = "настройкиToolStripMenuItem1";
-            this.настройкиToolStripMenuItem1.Size = new System.Drawing.Size(117, 22);
-            this.настройкиToolStripMenuItem1.Text = "Settings";
-            this.настройкиToolStripMenuItem1.Click += new System.EventHandler(this.настройкиToolStripMenuItem1_Click);
+            this.settingsToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.settings;
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.настройкиToolStripMenuItem1_Click);
             // 
-            // черныйСписокToolStripMenuItem
+            // blacklistToolStripMenuItem
             // 
-            this.черныйСписокToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.blocked;
-            this.черныйСписокToolStripMenuItem.Name = "черныйСписокToolStripMenuItem";
-            this.черныйСписокToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
-            this.черныйСписокToolStripMenuItem.Text = "Blacklist";
-            this.черныйСписокToolStripMenuItem.Click += new System.EventHandler(this.черныйСписокToolStripMenuItem_Click);
+            this.blacklistToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.blocked;
+            this.blacklistToolStripMenuItem.Name = "blacklistToolStripMenuItem";
+            this.blacklistToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.blacklistToolStripMenuItem.Text = "Blacklist";
+            this.blacklistToolStripMenuItem.Click += new System.EventHandler(this.черныйСписокToolStripMenuItem_Click);
             // 
-            // оПрограммеToolStripMenuItem
+            // informationToolStripMenuItem
             // 
-            this.оПрограммеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.оПрограммеToolStripMenuItem1,
-            this.донатToolStripMenuItem});
-            this.оПрограммеToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.info;
-            this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
-            this.оПрограммеToolStripMenuItem.Text = "Information";
+            this.informationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem,
+            this.donateToolStripMenuItem});
+            this.informationToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.info;
+            this.informationToolStripMenuItem.Name = "informationToolStripMenuItem";
+            this.informationToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
+            this.informationToolStripMenuItem.Text = "Information";
             // 
-            // оПрограммеToolStripMenuItem1
+            // aboutToolStripMenuItem
             // 
-            this.оПрограммеToolStripMenuItem1.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.info;
-            this.оПрограммеToolStripMenuItem1.Name = "оПрограммеToolStripMenuItem1";
-            this.оПрограммеToolStripMenuItem1.Size = new System.Drawing.Size(156, 22);
-            this.оПрограммеToolStripMenuItem1.Text = "About program";
-            this.оПрограммеToolStripMenuItem1.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem1_Click);
+            this.aboutToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.info;
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.aboutToolStripMenuItem.Text = "About program";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem1_Click);
             // 
-            // донатToolStripMenuItem
+            // donateToolStripMenuItem
             // 
-            this.донатToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.wallet;
-            this.донатToolStripMenuItem.Name = "донатToolStripMenuItem";
-            this.донатToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.донатToolStripMenuItem.Text = "Donate";
-            this.донатToolStripMenuItem.Click += new System.EventHandler(this.донатToolStripMenuItem_Click);
+            this.donateToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.wallet;
+            this.donateToolStripMenuItem.Name = "donateToolStripMenuItem";
+            this.donateToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.donateToolStripMenuItem.Text = "Donate";
+            this.donateToolStripMenuItem.Click += new System.EventHandler(this.донатToolStripMenuItem_Click);
             // 
-            // логToolStripMenuItem
+            // logToolStripMenuItem
             // 
-            this.логToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.логToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.log1;
-            this.логToolStripMenuItem.Name = "логToolStripMenuItem";
-            this.логToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
-            this.логToolStripMenuItem.Text = "Log <<";
-            this.логToolStripMenuItem.Click += new System.EventHandler(this.логToolStripMenuItem_Click);
+            this.logToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.logToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.log1;
+            this.logToolStripMenuItem.Name = "logToolStripMenuItem";
+            this.logToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
+            this.logToolStripMenuItem.Text = "Log <<";
+            this.logToolStripMenuItem.Click += new System.EventHandler(this.логToolStripMenuItem_Click);
             // 
-            // tabControl1
+            // tabControl
             // 
-            this.tabControl1.Controls.Add(this.tabPageSteam);
-            this.tabControl1.Controls.Add(this.tabPageGM);
-            this.tabControl1.Controls.Add(this.tabPageSG);
-            this.tabControl1.Controls.Add(this.tabPageSC);
-            this.tabControl1.Controls.Add(this.tabPageUG);
-            this.tabControl1.Controls.Add(this.tabPageST);
-            this.tabControl1.Controls.Add(this.tabPagePB);
-            this.tabControl1.Controls.Add(this.tabPageGA);
-            this.tabControl1.Controls.Add(this.tabPageIG);
-            this.tabControl1.Location = new System.Drawing.Point(4, 27);
-            this.tabControl1.Multiline = true;
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(342, 105);
-            this.tabControl1.TabIndex = 4;
+            this.tabControl.Controls.Add(this.tabPageSteam);
+            this.tabControl.Controls.Add(this.tabPageGM);
+            this.tabControl.Controls.Add(this.tabPageSG);
+            this.tabControl.Controls.Add(this.tabPageSC);
+            this.tabControl.Controls.Add(this.tabPageUG);
+            this.tabControl.Controls.Add(this.tabPageST);
+            this.tabControl.Controls.Add(this.tabPagePB);
+            this.tabControl.Controls.Add(this.tabPageGA);
+            this.tabControl.Controls.Add(this.tabPageIG);
+            this.tabControl.Location = new System.Drawing.Point(4, 27);
+            this.tabControl.Multiline = true;
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(342, 105);
+            this.tabControl.TabIndex = 4;
+            // 
+            // tabPageSteam
+            // 
+            this.tabPageSteam.Controls.Add(this.btnSteamExit);
+            this.tabPageSteam.Controls.Add(this.btnSteamLogin);
+            this.tabPageSteam.Controls.Add(this.linkLabelSteam);
+            this.tabPageSteam.Controls.Add(this.lblSteamStatus);
+            this.tabPageSteam.Location = new System.Drawing.Point(4, 40);
+            this.tabPageSteam.Name = "tabPageSteam";
+            this.tabPageSteam.Size = new System.Drawing.Size(334, 61);
+            this.tabPageSteam.TabIndex = 5;
+            this.tabPageSteam.Text = "Steam";
+            this.tabPageSteam.UseVisualStyleBackColor = true;
+            // 
+            // btnSteamExit
+            // 
+            this.btnSteamExit.Location = new System.Drawing.Point(134, 19);
+            this.btnSteamExit.Name = "btnSteamExit";
+            this.btnSteamExit.Size = new System.Drawing.Size(75, 23);
+            this.btnSteamExit.TabIndex = 29;
+            this.btnSteamExit.Text = "Logout";
+            this.btnSteamExit.UseVisualStyleBackColor = true;
+            this.btnSteamExit.Click += new System.EventHandler(this.btnSteamExit_Click);
+            // 
+            // btnSteamLogin
+            // 
+            this.btnSteamLogin.Location = new System.Drawing.Point(134, 19);
+            this.btnSteamLogin.Name = "btnSteamLogin";
+            this.btnSteamLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnSteamLogin.TabIndex = 12;
+            this.btnSteamLogin.Text = "Login";
+            this.btnSteamLogin.UseVisualStyleBackColor = true;
+            this.btnSteamLogin.Click += new System.EventHandler(this.btnSteamLogin_Click);
+            // 
+            // linkLabelSteam
+            // 
+            this.linkLabelSteam.AutoSize = true;
+            this.linkLabelSteam.Location = new System.Drawing.Point(6, 42);
+            this.linkLabelSteam.Name = "linkLabelSteam";
+            this.linkLabelSteam.Size = new System.Drawing.Size(59, 13);
+            this.linkLabelSteam.TabIndex = 11;
+            this.linkLabelSteam.TabStop = true;
+            this.linkLabelSteam.Text = "To website";
+            this.linkLabelSteam.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel6_LinkClicked);
+            // 
+            // lblSteamStatus
+            // 
+            this.lblSteamStatus.AutoSize = true;
+            this.lblSteamStatus.Location = new System.Drawing.Point(6, 3);
+            this.lblSteamStatus.Name = "lblSteamStatus";
+            this.lblSteamStatus.Size = new System.Drawing.Size(112, 13);
+            this.lblSteamStatus.TabIndex = 10;
+            this.lblSteamStatus.Text = "Status: Not authorized";
             // 
             // tabPageGM
             // 
             this.tabPageGM.Controls.Add(this.btnGMExit);
             this.tabPageGM.Controls.Add(this.cbGMEnable);
-            this.tabPageGM.Controls.Add(this.linkLabel1);
+            this.tabPageGM.Controls.Add(this.linkLabelGM);
             this.tabPageGM.Controls.Add(this.pbGMReload);
             this.tabPageGM.Controls.Add(this.btnGMLogin);
             this.tabPageGM.Controls.Add(this.lblGMStatus);
             this.tabPageGM.Controls.Add(this.lblGMCoal);
             this.tabPageGM.Controls.Add(this.lblGMLevel);
-            this.tabPageGM.Location = new System.Drawing.Point(4, 22);
+            this.tabPageGM.Location = new System.Drawing.Point(4, 40);
             this.tabPageGM.Name = "tabPageGM";
             this.tabPageGM.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGM.Size = new System.Drawing.Size(334, 79);
+            this.tabPageGM.Size = new System.Drawing.Size(334, 61);
             this.tabPageGM.TabIndex = 0;
             this.tabPageGM.Text = "GM";
             this.tabPageGM.UseVisualStyleBackColor = true;
@@ -356,16 +409,16 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.cbGMEnable.UseVisualStyleBackColor = true;
             this.cbGMEnable.CheckedChanged += new System.EventHandler(this.cbGMEnable_CheckedChanged);
             // 
-            // linkLabel1
+            // linkLabelGM
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(6, 42);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(59, 13);
-            this.linkLabel1.TabIndex = 7;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "To website";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.linkLabelGM.AutoSize = true;
+            this.linkLabelGM.Location = new System.Drawing.Point(6, 42);
+            this.linkLabelGM.Name = "linkLabelGM";
+            this.linkLabelGM.Size = new System.Drawing.Size(59, 13);
+            this.linkLabelGM.TabIndex = 7;
+            this.linkLabelGM.TabStop = true;
+            this.linkLabelGM.Text = "To website";
+            this.linkLabelGM.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // pbGMReload
             // 
@@ -418,16 +471,16 @@ namespace KryBot.Gui.WinFormsGui.Forms
             // 
             this.tabPageSG.Controls.Add(this.btnSGExit);
             this.tabPageSG.Controls.Add(this.cbSGEnable);
-            this.tabPageSG.Controls.Add(this.linkLabel2);
+            this.tabPageSG.Controls.Add(this.linkLabelSG);
             this.tabPageSG.Controls.Add(this.pbSGReload);
             this.tabPageSG.Controls.Add(this.lblSGStatus);
             this.tabPageSG.Controls.Add(this.lblSGPoints);
             this.tabPageSG.Controls.Add(this.lblSGLevel);
             this.tabPageSG.Controls.Add(this.btnSGLogin);
-            this.tabPageSG.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSG.Location = new System.Drawing.Point(4, 40);
             this.tabPageSG.Name = "tabPageSG";
             this.tabPageSG.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSG.Size = new System.Drawing.Size(334, 79);
+            this.tabPageSG.Size = new System.Drawing.Size(334, 61);
             this.tabPageSG.TabIndex = 1;
             this.tabPageSG.Text = "SG";
             this.tabPageSG.UseVisualStyleBackColor = true;
@@ -454,16 +507,16 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.cbSGEnable.UseVisualStyleBackColor = true;
             this.cbSGEnable.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
-            // linkLabel2
+            // linkLabelSG
             // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(6, 42);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(59, 13);
-            this.linkLabel2.TabIndex = 12;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "To website";
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
+            this.linkLabelSG.AutoSize = true;
+            this.linkLabelSG.Location = new System.Drawing.Point(6, 42);
+            this.linkLabelSG.Name = "linkLabelSG";
+            this.linkLabelSG.Size = new System.Drawing.Size(59, 13);
+            this.linkLabelSG.TabIndex = 12;
+            this.linkLabelSG.TabStop = true;
+            this.linkLabelSG.Text = "To website";
+            this.linkLabelSG.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // pbSGReload
             // 
@@ -516,15 +569,15 @@ namespace KryBot.Gui.WinFormsGui.Forms
             // 
             this.tabPageSC.Controls.Add(this.btnSCExit);
             this.tabPageSC.Controls.Add(this.cbSCEnable);
-            this.tabPageSC.Controls.Add(this.linkLabel3);
+            this.tabPageSC.Controls.Add(this.linkLabelSC);
             this.tabPageSC.Controls.Add(this.pbSCReload);
             this.tabPageSC.Controls.Add(this.lblSCStatus);
             this.tabPageSC.Controls.Add(this.lblSCPoints);
             this.tabPageSC.Controls.Add(this.lblSCLevel);
             this.tabPageSC.Controls.Add(this.btnSCLogin);
-            this.tabPageSC.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSC.Location = new System.Drawing.Point(4, 40);
             this.tabPageSC.Name = "tabPageSC";
-            this.tabPageSC.Size = new System.Drawing.Size(334, 79);
+            this.tabPageSC.Size = new System.Drawing.Size(334, 61);
             this.tabPageSC.TabIndex = 2;
             this.tabPageSC.Text = "SC";
             this.tabPageSC.UseVisualStyleBackColor = true;
@@ -551,16 +604,16 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.cbSCEnable.UseVisualStyleBackColor = true;
             this.cbSCEnable.CheckedChanged += new System.EventHandler(this.cbSCEnable_CheckedChanged);
             // 
-            // linkLabel3
+            // linkLabelSC
             // 
-            this.linkLabel3.AutoSize = true;
-            this.linkLabel3.Location = new System.Drawing.Point(6, 42);
-            this.linkLabel3.Name = "linkLabel3";
-            this.linkLabel3.Size = new System.Drawing.Size(59, 13);
-            this.linkLabel3.TabIndex = 16;
-            this.linkLabel3.TabStop = true;
-            this.linkLabel3.Text = "To website";
-            this.linkLabel3.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
+            this.linkLabelSC.AutoSize = true;
+            this.linkLabelSC.Location = new System.Drawing.Point(6, 42);
+            this.linkLabelSC.Name = "linkLabelSC";
+            this.linkLabelSC.Size = new System.Drawing.Size(59, 13);
+            this.linkLabelSC.TabIndex = 16;
+            this.linkLabelSC.TabStop = true;
+            this.linkLabelSC.Text = "To website";
+            this.linkLabelSC.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel3_LinkClicked);
             // 
             // pbSCReload
             // 
@@ -619,9 +672,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageUG.Controls.Add(this.lblUGPoints);
             this.tabPageUG.Controls.Add(this.lblUGLevel);
             this.tabPageUG.Controls.Add(this.btnUGLogin);
-            this.tabPageUG.Location = new System.Drawing.Point(4, 22);
+            this.tabPageUG.Location = new System.Drawing.Point(4, 40);
             this.tabPageUG.Name = "tabPageUG";
-            this.tabPageUG.Size = new System.Drawing.Size(334, 79);
+            this.tabPageUG.Size = new System.Drawing.Size(334, 61);
             this.tabPageUG.TabIndex = 4;
             this.tabPageUG.Text = "UG";
             this.tabPageUG.UseVisualStyleBackColor = true;
@@ -634,7 +687,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.btnUGExit.TabIndex = 29;
             this.btnUGExit.Text = "Logout";
             this.btnUGExit.UseVisualStyleBackColor = true;
-            this.btnUGExit.Click += new System.EventHandler(this.btnSPExit_Click);
+            this.btnUGExit.Click += new System.EventHandler(this.btnUGExit_Click);
             // 
             // cbUGEnable
             // 
@@ -646,7 +699,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.cbUGEnable.Size = new System.Drawing.Size(15, 14);
             this.cbUGEnable.TabIndex = 26;
             this.cbUGEnable.UseVisualStyleBackColor = true;
-            this.cbUGEnable.CheckedChanged += new System.EventHandler(this.cbSPEnable_CheckedChanged);
+            this.cbUGEnable.CheckedChanged += new System.EventHandler(this.cbUGEnable_CheckedChanged);
             // 
             // linkLabelUG
             // 
@@ -667,7 +720,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.pbUGReload.Size = new System.Drawing.Size(16, 16);
             this.pbUGReload.TabIndex = 19;
             this.pbUGReload.TabStop = false;
-            this.pbUGReload.Click += new System.EventHandler(this.pbSPReload_Click);
+            this.pbUGReload.Click += new System.EventHandler(this.pbUGReload_Click);
             // 
             // lblUGStatus
             // 
@@ -704,7 +757,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.btnUGLogin.TabIndex = 9;
             this.btnUGLogin.Text = "Login";
             this.btnUGLogin.UseVisualStyleBackColor = true;
-            this.btnUGLogin.Click += new System.EventHandler(this.btnSPLogin_Click);
+            this.btnUGLogin.Click += new System.EventHandler(this.btnUGLogin_Click);
             // 
             // tabPageST
             // 
@@ -716,9 +769,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageST.Controls.Add(this.lblSTPoints);
             this.tabPageST.Controls.Add(this.lblSTLevel);
             this.tabPageST.Controls.Add(this.btnSTLogin);
-            this.tabPageST.Location = new System.Drawing.Point(4, 22);
+            this.tabPageST.Location = new System.Drawing.Point(4, 40);
             this.tabPageST.Name = "tabPageST";
-            this.tabPageST.Size = new System.Drawing.Size(334, 79);
+            this.tabPageST.Size = new System.Drawing.Size(334, 61);
             this.tabPageST.TabIndex = 3;
             this.tabPageST.Text = "ST";
             this.tabPageST.UseVisualStyleBackColor = true;
@@ -813,9 +866,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPagePB.Controls.Add(this.lblPBStatus);
             this.tabPagePB.Controls.Add(this.lblPBPoints);
             this.tabPagePB.Controls.Add(this.lblPBLevel);
-            this.tabPagePB.Location = new System.Drawing.Point(4, 22);
+            this.tabPagePB.Location = new System.Drawing.Point(4, 40);
             this.tabPagePB.Name = "tabPagePB";
-            this.tabPagePB.Size = new System.Drawing.Size(334, 79);
+            this.tabPagePB.Size = new System.Drawing.Size(334, 61);
             this.tabPagePB.TabIndex = 6;
             this.tabPagePB.Text = "PB";
             this.tabPagePB.UseVisualStyleBackColor = true;
@@ -910,9 +963,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageGA.Controls.Add(this.lblGAPoints);
             this.tabPageGA.Controls.Add(this.lblGALevel);
             this.tabPageGA.Controls.Add(this.lblGAStatus);
-            this.tabPageGA.Location = new System.Drawing.Point(4, 22);
+            this.tabPageGA.Location = new System.Drawing.Point(4, 40);
             this.tabPageGA.Name = "tabPageGA";
-            this.tabPageGA.Size = new System.Drawing.Size(334, 79);
+            this.tabPageGA.Size = new System.Drawing.Size(334, 61);
             this.tabPageGA.TabIndex = 7;
             this.tabPageGA.Text = "GA";
             this.tabPageGA.UseVisualStyleBackColor = true;
@@ -995,59 +1048,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.lblGAStatus.Size = new System.Drawing.Size(112, 13);
             this.lblGAStatus.TabIndex = 28;
             this.lblGAStatus.Text = "Status: Not authorized";
-            // 
-            // tabPageSteam
-            // 
-            this.tabPageSteam.Controls.Add(this.btnSteamExit);
-            this.tabPageSteam.Controls.Add(this.btnSteamLogin);
-            this.tabPageSteam.Controls.Add(this.linkLabel6);
-            this.tabPageSteam.Controls.Add(this.lblSteamStatus);
-            this.tabPageSteam.Location = new System.Drawing.Point(4, 40);
-            this.tabPageSteam.Name = "tabPageSteam";
-            this.tabPageSteam.Size = new System.Drawing.Size(334, 61);
-            this.tabPageSteam.TabIndex = 5;
-            this.tabPageSteam.Text = "Steam";
-            this.tabPageSteam.UseVisualStyleBackColor = true;
-            // 
-            // btnSteamExit
-            // 
-            this.btnSteamExit.Location = new System.Drawing.Point(134, 19);
-            this.btnSteamExit.Name = "btnSteamExit";
-            this.btnSteamExit.Size = new System.Drawing.Size(75, 23);
-            this.btnSteamExit.TabIndex = 29;
-            this.btnSteamExit.Text = "Logout";
-            this.btnSteamExit.UseVisualStyleBackColor = true;
-            this.btnSteamExit.Click += new System.EventHandler(this.btnSteamExit_Click);
-            // 
-            // btnSteamLogin
-            // 
-            this.btnSteamLogin.Location = new System.Drawing.Point(134, 19);
-            this.btnSteamLogin.Name = "btnSteamLogin";
-            this.btnSteamLogin.Size = new System.Drawing.Size(75, 23);
-            this.btnSteamLogin.TabIndex = 12;
-            this.btnSteamLogin.Text = "Login";
-            this.btnSteamLogin.UseVisualStyleBackColor = true;
-            this.btnSteamLogin.Click += new System.EventHandler(this.btnSteamLogin_Click);
-            // 
-            // linkLabel6
-            // 
-            this.linkLabel6.AutoSize = true;
-            this.linkLabel6.Location = new System.Drawing.Point(6, 42);
-            this.linkLabel6.Name = "linkLabel6";
-            this.linkLabel6.Size = new System.Drawing.Size(59, 13);
-            this.linkLabel6.TabIndex = 11;
-            this.linkLabel6.TabStop = true;
-            this.linkLabel6.Text = "To website";
-            this.linkLabel6.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel6_LinkClicked);
-            // 
-            // lblSteamStatus
-            // 
-            this.lblSteamStatus.AutoSize = true;
-            this.lblSteamStatus.Location = new System.Drawing.Point(6, 3);
-            this.lblSteamStatus.Name = "lblSteamStatus";
-            this.lblSteamStatus.Size = new System.Drawing.Size(112, 13);
-            this.lblSteamStatus.TabIndex = 10;
-            this.lblSteamStatus.Text = "Status: Not authorized";
             // 
             // tabPageIG
             // 
@@ -1198,8 +1198,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(350, 227);
             this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.tabControl);
+            this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = global::KryBot.Gui.WinFormsGui.Properties.Resources.KryBotPresent_256b;
@@ -1213,11 +1213,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.LocationChanged += new System.EventHandler(this.FormMain_LocationChanged);
             this.Resize += new System.EventHandler(this.FormMain_Resize);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
+            this.tabControl.ResumeLayout(false);
+            this.tabPageSteam.ResumeLayout(false);
+            this.tabPageSteam.PerformLayout();
             this.tabPageGM.ResumeLayout(false);
             this.tabPageGM.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbGMReload)).EndInit();
@@ -1239,8 +1241,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageGA.ResumeLayout(false);
             this.tabPageGA.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbGARefresh)).EndInit();
-            this.tabPageSteam.ResumeLayout(false);
-            this.tabPageSteam.PerformLayout();
             this.tabPageIG.ResumeLayout(false);
             this.tabPageIG.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbIGRefresh)).EndInit();
@@ -1252,20 +1252,20 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		#endregion
 
-		private System.Windows.Forms.StatusStrip statusStrip1;
-		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-		private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
+		private System.Windows.Forms.StatusStrip statusStrip;
+		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
+		private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar;
 		private System.Windows.Forms.MenuStrip menuStrip1;
-		private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
-		private System.Windows.Forms.TabControl tabControl1;
+		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+		private System.Windows.Forms.TabControl tabControl;
 		private System.Windows.Forms.TabPage tabPageGM;
 		private System.Windows.Forms.TabPage tabPageSG;
 		private System.Windows.Forms.TabPage tabPageSC;
 		private System.Windows.Forms.TabPage tabPageST;
 		private System.Windows.Forms.TabPage tabPageUG;
-		private System.Windows.Forms.ToolStripMenuItem логToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem logToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem informationToolStripMenuItem;
 		private System.Windows.Forms.Label lblGMStatus;
 		private System.Windows.Forms.Label lblGMCoal;
 		private System.Windows.Forms.Label lblGMLevel;
@@ -1293,38 +1293,38 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private System.Windows.Forms.PictureBox pbUGReload;
 		private System.Windows.Forms.PictureBox pbSTreload;
 		private System.Windows.Forms.NotifyIcon notifyIcon;
-		private System.Windows.Forms.LinkLabel linkLabel1;
-		private System.Windows.Forms.LinkLabel linkLabel2;
-		private System.Windows.Forms.LinkLabel linkLabel3;
+		private System.Windows.Forms.LinkLabel linkLabelGM;
+		private System.Windows.Forms.LinkLabel linkLabelSG;
+		private System.Windows.Forms.LinkLabel linkLabelSC;
 		private System.Windows.Forms.LinkLabel linkLabelUG;
 		private System.Windows.Forms.LinkLabel linkLabelST;
-		private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem1;
-		private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem сохранитьКакToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem загрузитьToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem saveAsКакToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
 		private System.Windows.Forms.CheckBox cbSTEnable;
 		private System.Windows.Forms.CheckBox cbGMEnable;
 		private System.Windows.Forms.CheckBox cbSGEnable;
 		private System.Windows.Forms.CheckBox cbSCEnable;
 		private System.Windows.Forms.CheckBox cbUGEnable;
 		private System.Windows.Forms.TabPage tabPageSteam;
-		private System.Windows.Forms.LinkLabel linkLabel6;
+		private System.Windows.Forms.LinkLabel linkLabelSteam;
 		private System.Windows.Forms.Label lblSteamStatus;
 		private System.Windows.Forms.Button btnSteamLogin;
 		private System.Windows.Forms.ContextMenuStrip toolStripMenuItem_Main;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Show;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Farm;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Exit;
-		private System.Windows.Forms.ToolStripMenuItem донатToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem donateToolStripMenuItem;
 		private System.Windows.Forms.Button btnGMExit;
 		private System.Windows.Forms.Button btnSGExit;
 		private System.Windows.Forms.Button btnSCExit;
 		private System.Windows.Forms.Button btnUGExit;
 		private System.Windows.Forms.Button btnSTExit;
 		private System.Windows.Forms.Button btnSteamExit;
-		private System.Windows.Forms.ToolStripMenuItem вПапкуСБотомToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem черныйСписокToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem1;
+		private System.Windows.Forms.ToolStripMenuItem openFolderToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem blacklistToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
 		private System.Windows.Forms.TabPage tabPagePB;
 		private System.Windows.Forms.Button btnPBExit;
 		private System.Windows.Forms.Button btnPBLogin;
@@ -1346,33 +1346,33 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		private void Localization()
 		{
-			toolStripStatusLabel1.Text = strings.ProfileLoading;
-			файлToolStripMenuItem.Text = strings.File;
-			вПапкуСБотомToolStripMenuItem.Text = strings.OpenBotFolder;
-			сохранитьToolStripMenuItem.Text = strings.Save;
-			сохранитьКакToolStripMenuItem.Text = strings.SaveAs;
-			загрузитьToolStripMenuItem.Text = strings.Exit;
-			настройкиToolStripMenuItem.Text = strings.Tools;
-			настройкиToolStripMenuItem1.Text = strings.Settings;
-			черныйСписокToolStripMenuItem.Text = strings.Blacklist;
-			оПрограммеToolStripMenuItem.Text = strings.Information;
-			оПрограммеToolStripMenuItem1.Text = strings.AboutProgram;
-			донатToolStripMenuItem.Text = strings.MainForm_Donate;
-			логToolStripMenuItem.Text = $"{strings.Log} <<";
+			toolStripStatusLabel.Text = strings.ProfileLoading;
+			fileToolStripMenuItem.Text = strings.File;
+			openFolderToolStripMenuItem.Text = strings.OpenBotFolder;
+			saveToolStripMenuItem.Text = strings.Save;
+			saveAsКакToolStripMenuItem.Text = strings.SaveAs;
+			exitToolStripMenuItem.Text = strings.Exit;
+			toolsToolStripMenuItem.Text = strings.Tools;
+			settingsToolStripMenuItem.Text = strings.Settings;
+			blacklistToolStripMenuItem.Text = strings.Blacklist;
+			informationToolStripMenuItem.Text = strings.Information;
+			aboutToolStripMenuItem.Text = strings.AboutProgram;
+			donateToolStripMenuItem.Text = strings.MainForm_Donate;
+			logToolStripMenuItem.Text = $"{strings.Log} <<";
 			btnGMExit.Text = strings.Logout;
-			linkLabel1.Text = strings.LinkLabel_OnSite;
+			linkLabelGM.Text = strings.LinkLabel_OnSite;
 			btnGMLogin.Text = strings.Login;
 			lblGMStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
 			lblGMCoal.Text = $"{strings.Points}: ";
 			lblGMLevel.Text = $"{strings.Level}: ";
 			btnSGExit.Text = strings.Logout;
-			linkLabel2.Text = strings.LinkLabel_OnSite;
+			linkLabelSG.Text = strings.LinkLabel_OnSite;
 			lblSGStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
 			lblSGPoints.Text = $"{strings.Points}: ";
 			lblSGLevel.Text = $"{strings.Level}: ";
 			btnSGLogin.Text = strings.Login;
 			btnSCExit.Text = strings.Logout;
-			linkLabel3.Text = strings.LinkLabel_OnSite;
+			linkLabelSC.Text = strings.LinkLabel_OnSite;
 			lblSCStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
 			lblSCPoints.Text = $"{strings.Points}: ";
 			lblSCLevel.Text = $"{strings.Level}: ";
@@ -1403,7 +1403,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			lblGAStatus.Text = $"{ strings.Status}: { strings.Status_NotLogined}";
 			btnSteamExit.Text = strings.Logout;
 			btnSteamLogin.Text = strings.Login;
-			linkLabel6.Text = strings.LinkLabel_OnSite;
+			linkLabelSteam.Text = strings.LinkLabel_OnSite;
 			lblSteamStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
 			btnStart.Text = strings.Start;
 			toolStripMenuItem_Show.Text = strings.Show;

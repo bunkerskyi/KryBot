@@ -86,8 +86,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 {
                     LogMessage.Instance.AddMessage(new Log($"{Messages.GetDateTime()} Обновление...", Color.White, true));
 
-                    toolStripProgressBar1.Style = ProgressBarStyle.Marquee;
-                    toolStripProgressBar1.Visible = true;
+                    toolStripProgressBar.Style = ProgressBarStyle.Marquee;
+                    toolStripProgressBar.Visible = true;
 
                     var log = await Updater.Update();
                     LogMessage.Instance.AddMessage(log);
@@ -98,8 +98,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
                         Application.Exit();
                     }
 
-                    toolStripProgressBar1.Style = ProgressBarStyle.Blocks;
-                    toolStripProgressBar1.Visible = false;
+                    toolStripProgressBar.Style = ProgressBarStyle.Blocks;
+                    toolStripProgressBar.Visible = false;
                 }
             }
 
@@ -245,9 +245,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             btnSteamExit.Visible = false;
             btnIGLogout.Visible = false;
 
-            toolStripProgressBar1.Visible = false;
-            toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = "";
+            toolStripProgressBar.Visible = false;
+            toolStripStatusLabel.Image = null;
+            toolStripStatusLabel.Text = "";
 
             pbGMReload.Visible = false;
             pbSGReload.Visible = false;
@@ -302,7 +302,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
         private void OpenLog()
         {
-            логToolStripMenuItem.Text = $"{strings.Log} <<";
+            logToolStripMenuItem.Text = $"{strings.Log} <<";
             var form = new FormLog(Location.X + Width - 15, Location.Y, _settings) {Owner = this};
 
             LogHide += form.FormHide;
@@ -317,14 +317,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private void UnHideLog()
         {
             LogUnHide?.Invoke();
-            логToolStripMenuItem.Text = $"{strings.Log} <<";
+            logToolStripMenuItem.Text = $"{strings.Log} <<";
             _logActive = true;
         }
 
         private void HideLog()
         {
             LogHide?.Invoke();
-            логToolStripMenuItem.Text = $"{strings.Log} >>";
+            logToolStripMenuItem.Text = $"{strings.Log} >>";
             _logActive = false;
         }
 
@@ -350,11 +350,11 @@ namespace KryBot.Gui.WinFormsGui.Forms
             _farming = true;
             LogMessage.Instance.AddMessage(Messages.DoFarm_Start());
 
-            toolStripProgressBar1.Value = 0;
-            toolStripProgressBar1.Maximum = 8;
-            toolStripProgressBar1.Visible = true;
-            toolStripStatusLabel1.Image = Resources.load;
-            toolStripStatusLabel1.Text = strings.FormMain_DoFarm_Farn;
+            toolStripProgressBar.Value = 0;
+            toolStripProgressBar.Maximum = 8;
+            toolStripProgressBar.Visible = true;
+            toolStripStatusLabel.Image = Resources.load;
+            toolStripStatusLabel.Text = strings.FormMain_DoFarm_Farn;
 
             var stopWatch = new Stopwatch();
             stopWatch.Start();
@@ -384,11 +384,11 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     BlockTabpage(tabPageSG, false);
                     btnSGLogin.Enabled = true;
                     btnSGLogin.Visible = true;
-                    linkLabel2.Enabled = true;
+                    linkLabelSG.Enabled = true;
                     lblSGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
-            toolStripProgressBar1.Value++;
+            toolStripProgressBar.Value++;
 
             if (_bot.SteamGifts.Enabled)
             {
@@ -415,11 +415,11 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     BlockTabpage(tabPageSG, false);
                     btnSGLogin.Enabled = true;
                     btnSGLogin.Visible = true;
-                    linkLabel2.Enabled = true;
+                    linkLabelSG.Enabled = true;
                     lblSGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
-            toolStripProgressBar1.Value++;
+            toolStripProgressBar.Value++;
 
             if (_bot.SteamCompanion.Enabled)
             {
@@ -446,11 +446,11 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     BlockTabpage(tabPageSC, false);
                     btnSCLogin.Enabled = true;
                     btnSCLogin.Visible = true;
-                    linkLabel3.Enabled = true;
+                    linkLabelSC.Enabled = true;
                     lblSCStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
-            toolStripProgressBar1.Value++;
+            toolStripProgressBar.Value++;
 
             if (_bot.UseGamble.Enabled)
             {
@@ -481,7 +481,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     lblUGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
-            toolStripProgressBar1.Value++;
+            toolStripProgressBar.Value++;
 
             if (_bot.SteamTrade.Enabled)
             {
@@ -502,7 +502,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     lblSTStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
-            toolStripProgressBar1.Value++;
+            toolStripProgressBar.Value++;
 
             if (_bot.PlayBlink.Enabled)
             {
@@ -523,7 +523,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     lblPBStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
-            toolStripProgressBar1.Value++;
+            toolStripProgressBar.Value++;
 
             if (_bot.GameAways.Enabled)
             {
@@ -544,7 +544,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     lblGAStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
-            toolStripProgressBar1.Value++;
+            toolStripProgressBar.Value++;
 
             if (_bot.InventoryGifts.Enabled)
             {
@@ -565,7 +565,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     lblGAStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
-            toolStripProgressBar1.Value++;
+            toolStripProgressBar.Value++;
 
             stopWatch.Stop();
             var ts = stopWatch.Elapsed;
@@ -583,9 +583,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
             _bot.ClearGiveawayList();
 
-            toolStripProgressBar1.Visible = false;
-            toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = strings.StatusBar_End;
+            toolStripProgressBar.Visible = false;
+            toolStripStatusLabel.Image = null;
+            toolStripStatusLabel.Text = strings.StatusBar_End;
             _farming = false;
             btnStart.Enabled = true;
             Properties.Settings.Default.Save();
@@ -622,11 +622,11 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
         private async Task<bool> LoginCheck()
         {
-            toolStripProgressBar1.Value = 0;
-            toolStripProgressBar1.Maximum = 9;
-            toolStripProgressBar1.Visible = true;
-            toolStripStatusLabel1.Image = Resources.load;
-            toolStripStatusLabel1.Text = strings.TryLogin;
+            toolStripProgressBar.Value = 0;
+            toolStripProgressBar.Maximum = 9;
+            toolStripProgressBar.Visible = true;
+            toolStripStatusLabel.Image = Resources.load;
+            toolStripStatusLabel.Text = strings.TryLogin;
             var login = false;
 
             if (_bot.Steam.Enabled)
@@ -652,7 +652,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnSteamLogin.Enabled = true;
                 btnSteamLogin.Visible = true;
             }
-            toolStripProgressBar1.Value++;
+            toolStripProgressBar.Value++;
 
             if (_bot.GameMiner.Enabled)
             {
@@ -693,7 +693,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnGMLogin.Visible = true;
             }
 
-            toolStripProgressBar1.Value++;
+            toolStripProgressBar.Value++;
 
             if (_bot.SteamGifts.Enabled)
             {
@@ -731,7 +731,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnSGLogin.Enabled = true;
                 btnSGLogin.Visible = true;
             }
-            toolStripProgressBar1.Value++;
+            toolStripProgressBar.Value++;
 
             if (_bot.SteamCompanion.Enabled)
             {
@@ -769,7 +769,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnSCLogin.Enabled = true;
                 btnSCLogin.Visible = true;
             }
-            toolStripProgressBar1.Value++;
+            toolStripProgressBar.Value++;
 
             if (_bot.UseGamble.Enabled)
             {
@@ -806,7 +806,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnUGLogin.Enabled = true;
                 btnUGLogin.Visible = true;
             }
-            toolStripProgressBar1.Value++;
+            toolStripProgressBar.Value++;
 
             if (_bot.SteamTrade.Enabled)
             {
@@ -833,7 +833,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnSTLogin.Enabled = true;
                 btnSTLogin.Visible = true;
             }
-            toolStripProgressBar1.Value++;
+            toolStripProgressBar.Value++;
 
             if (_bot.PlayBlink.Enabled)
             {
@@ -862,7 +862,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnPBLogin.Enabled = true;
                 btnPBLogin.Visible = true;
             }
-            toolStripProgressBar1.Value++;
+            toolStripProgressBar.Value++;
 
             if (_bot.GameAways.Enabled)
             {
@@ -889,7 +889,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnGALogin.Enabled = true;
                 btnGALogin.Visible = true;
             }
-            toolStripProgressBar1.Value++;
+            toolStripProgressBar.Value++;
 
             if (_bot.InventoryGifts.Enabled)
             {
@@ -916,11 +916,11 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnIGLogin.Enabled = true;
                 btnIGLogin.Visible = true;
             }
-            toolStripProgressBar1.Value++;
+            toolStripProgressBar.Value++;
 
-            toolStripProgressBar1.Visible = false;
-            toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = strings.StatusBar_End;
+            toolStripProgressBar.Visible = false;
+            toolStripStatusLabel.Image = null;
+            toolStripStatusLabel.Text = strings.StatusBar_End;
             return login;
         }
 
@@ -943,8 +943,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             BrowserStart(location, Links.SteamTrade, "SteamTrade - Login", cookie);
             _bot.Save();
 
-            toolStripStatusLabel1.Image = Resources.load;
-            toolStripStatusLabel1.Text = strings.StatusBar_Login;
+            toolStripStatusLabel.Image = Resources.load;
+            toolStripStatusLabel.Text = strings.StatusBar_Login;
             var login = await CheckLoginSt();
             if (login)
             {
@@ -967,8 +967,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnSTLogin.Enabled = true;
                 btnSTLogin.Visible = true;
             }
-            toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = strings.StatusBar_End;
+            toolStripStatusLabel.Image = null;
+            toolStripStatusLabel.Text = strings.StatusBar_End;
         }
 
         private static void BrowserStart(string startPage, string endPage, string title, string phpSessId)
@@ -980,14 +980,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
             form.ShowDialog();
         }
 
-        private async void btnSPLogin_Click(object sender, EventArgs e)
+        private async void btnUGLogin_Click(object sender, EventArgs e)
         {
             btnUGLogin.Enabled = false;
             BrowserStart($"{Links.UseGamble}page/steam", Links.UseGamble, "UseGamble - Login", "");
             _bot.Save();
 
-            toolStripStatusLabel1.Image = Resources.load;
-            toolStripStatusLabel1.Text = strings.StatusBar_Login;
+            toolStripStatusLabel.Image = Resources.load;
+            toolStripStatusLabel.Text = strings.StatusBar_Login;
             var login = await CheckLoginSp();
             if (login)
             {
@@ -1016,8 +1016,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnUGLogin.Enabled = true;
                 btnUGLogin.Visible = true;
             }
-            toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = strings.StatusBar_End;
+            toolStripStatusLabel.Image = null;
+            toolStripStatusLabel.Text = strings.StatusBar_End;
         }
 
         private async void btnSCLogin_Click(object sender, EventArgs e)
@@ -1026,8 +1026,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             BrowserStart($"{Links.SteamCompanion}login", Links.SteamCompanion, "SteamCompanion - Login", "");
             _bot.Save();
 
-            toolStripStatusLabel1.Image = Resources.load;
-            toolStripStatusLabel1.Text = strings.StatusBar_Login;
+            toolStripStatusLabel.Image = Resources.load;
+            toolStripStatusLabel.Text = strings.StatusBar_Login;
             var login = await CheckLoginSc();
             if (login)
             {
@@ -1056,8 +1056,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnSCLogin.Enabled = true;
                 btnSCLogin.Visible = true;
             }
-            toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = strings.StatusBar_End;
+            toolStripStatusLabel.Image = null;
+            toolStripStatusLabel.Text = strings.StatusBar_End;
         }
 
         private async void btnSGLogin_Click(object sender, EventArgs e)
@@ -1071,8 +1071,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             }
             _bot.Save();
 
-            toolStripStatusLabel1.Image = Resources.load;
-            toolStripStatusLabel1.Text = strings.StatusBar_Login;
+            toolStripStatusLabel.Image = Resources.load;
+            toolStripStatusLabel.Text = strings.StatusBar_Login;
             var login = await CheckLoginSg();
             if (login)
             {
@@ -1100,8 +1100,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnSGLogin.Enabled = true;
                 btnSGLogin.Visible = true;
             }
-            toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = strings.StatusBar_End;
+            toolStripStatusLabel.Image = null;
+            toolStripStatusLabel.Text = strings.StatusBar_End;
         }
 
         private async void btnGMLogin_Click(object sender, EventArgs e)
@@ -1117,8 +1117,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             }
             _bot.Save();
 
-            toolStripStatusLabel1.Image = Resources.load;
-            toolStripStatusLabel1.Text = strings.StatusBar_Login;
+            toolStripStatusLabel.Image = Resources.load;
+            toolStripStatusLabel.Text = strings.StatusBar_Login;
             var login = await CheckLoginGm();
             if (login)
             {
@@ -1141,8 +1141,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnGMLogin.Enabled = true;
                 btnGMLogin.Visible = true;
             }
-            toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = strings.StatusBar_End;
+            toolStripStatusLabel.Image = null;
+            toolStripStatusLabel.Text = strings.StatusBar_End;
         }
 
         private async Task<bool> CheckLoginGm()
@@ -1329,7 +1329,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             btnGMExit.Enabled = true;
         }
 
-        private async void pbSPReload_Click(object sender, EventArgs e)
+        private async void pbUGReload_Click(object sender, EventArgs e)
         {
             btnGMExit.Enabled = false;
             pbUGReload.Image = Resources.load;
@@ -1522,7 +1522,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             }
         }
 
-        private void cbSPEnable_CheckedChanged(object sender, EventArgs e)
+        private void cbUGEnable_CheckedChanged(object sender, EventArgs e)
         {
             if (lblUGStatus.Enabled)
             {
@@ -1563,8 +1563,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 "Steam - Login", "");
             _bot.Save();
 
-            toolStripStatusLabel1.Image = Resources.load;
-            toolStripStatusLabel1.Text = strings.StatusBar_Login;
+            toolStripStatusLabel.Image = Resources.load;
+            toolStripStatusLabel.Text = strings.StatusBar_Login;
             var login = await CheckLoginSteam();
             if (login)
             {
@@ -1586,8 +1586,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnSteamLogin.Enabled = true;
                 btnSteamLogin.Visible = true;
             }
-            toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = strings.StatusBar_End;
+            toolStripStatusLabel.Image = null;
+            toolStripStatusLabel.Text = strings.StatusBar_End;
         }
 
         private void FormMain_Resize(object sender, EventArgs e)
@@ -1675,7 +1675,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             _bot.Save();
         }
 
-        private void btnSPExit_Click(object sender, EventArgs e)
+        private void btnUGExit_Click(object sender, EventArgs e)
         {
             _bot.UseGamble.Logout();
             BlockTabpage(tabPageUG, false);
@@ -1745,8 +1745,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             BrowserStart("http://playblink.com/?do=login&act=signin", Links.PlayBlink, "PlayBlink - Login", "");
             _bot.Save();
 
-            toolStripStatusLabel1.Image = Resources.load;
-            toolStripStatusLabel1.Text = strings.StatusBar_Login;
+            toolStripStatusLabel.Image = Resources.load;
+            toolStripStatusLabel.Text = strings.StatusBar_Login;
             var login = await CheckLoginPb();
             if (login)
             {
@@ -1769,8 +1769,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnPBLogin.Enabled = true;
                 btnPBLogin.Visible = true;
             }
-            toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = strings.StatusBar_End;
+            toolStripStatusLabel.Image = null;
+            toolStripStatusLabel.Text = strings.StatusBar_End;
         }
 
         private void btnPBExit_Click(object sender, EventArgs e)
@@ -1823,8 +1823,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
         private void SetStatusPanel(string text, Image image)
         {
-            toolStripStatusLabel1.Image = image;
-            toolStripStatusLabel1.Text = text;
+            toolStripStatusLabel.Image = image;
+            toolStripStatusLabel.Text = text;
         }
 
         private void cbPBEnabled_CheckedChanged(object sender, EventArgs e)
@@ -1848,8 +1848,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             BrowserStart(Links.GameAwaysAuth, Links.GameAways, "GameAways - Login", "");
             _bot.Save();
 
-            toolStripStatusLabel1.Image = Resources.load;
-            toolStripStatusLabel1.Text = strings.StatusBar_Login;
+            toolStripStatusLabel.Image = Resources.load;
+            toolStripStatusLabel.Text = strings.StatusBar_Login;
             var login = await CheckLoginGa();
             if (login)
             {
@@ -1872,8 +1872,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnGALogin.Enabled = true;
                 btnGALogin.Visible = true;
             }
-            toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = strings.StatusBar_End;
+            toolStripStatusLabel.Image = null;
+            toolStripStatusLabel.Text = strings.StatusBar_End;
         }
 
         private void buttonExitGA_Click(object sender, EventArgs e)
@@ -1942,8 +1942,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             BrowserStart(Links.InventoryGiftsAuth, Links.InventoryGifts, "InventoryGifts - Login", "");
             _bot.Save();
 
-            toolStripStatusLabel1.Image = Resources.load;
-            toolStripStatusLabel1.Text = strings.StatusBar_Login;
+            toolStripStatusLabel.Image = Resources.load;
+            toolStripStatusLabel.Text = strings.StatusBar_Login;
             var login = await CheckLoginIg();
             if (login)
             {
@@ -1966,8 +1966,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnIGLogin.Enabled = true;
                 btnIGLogin.Visible = true;
             }
-            toolStripStatusLabel1.Image = null;
-            toolStripStatusLabel1.Text = strings.StatusBar_End;
+            toolStripStatusLabel.Image = null;
+            toolStripStatusLabel.Text = strings.StatusBar_End;
         }
     }
 }

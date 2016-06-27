@@ -32,7 +32,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		/// </summary>
 		private void InitializeComponent()
 		{
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageCommun = new System.Windows.Forms.TabPage();
             this.btnShortcut = new System.Windows.Forms.Button();
             this.gbLang = new System.Windows.Forms.GroupBox();
@@ -97,6 +97,12 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.btnPBCookies = new System.Windows.Forms.Button();
+            this.tabPageGA = new System.Windows.Forms.TabPage();
+            this.tbGAReserv = new System.Windows.Forms.TextBox();
+            this.tbGAMaxBet = new System.Windows.Forms.TextBox();
+            this.lblGAReserv = new System.Windows.Forms.Label();
+            this.lblGAMaxBet = new System.Windows.Forms.Label();
+            this.btnGACookies = new System.Windows.Forms.Button();
             this.tabPageIG = new System.Windows.Forms.TabPage();
             this.tbIGReserv = new System.Windows.Forms.TextBox();
             this.lblIGReserv = new System.Windows.Forms.Label();
@@ -108,15 +114,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.cbIGSteamItems = new System.Windows.Forms.CheckBox();
             this.cbIGSteamGiveaways = new System.Windows.Forms.CheckBox();
             this.btnIGCookie = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabPageGA = new System.Windows.Forms.TabPage();
-            this.tbGAReserv = new System.Windows.Forms.TextBox();
-            this.tbGAMaxBet = new System.Windows.Forms.TextBox();
-            this.lblGAReserv = new System.Windows.Forms.Label();
-            this.lblGAMaxBet = new System.Windows.Forms.Label();
-            this.btnGACookies = new System.Windows.Forms.Button();
-            this.tabControl1.SuspendLayout();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControl.SuspendLayout();
             this.tabPageCommun.SuspendLayout();
             this.gbLang.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -127,27 +127,27 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageSC.SuspendLayout();
             this.tabPageUG.SuspendLayout();
             this.tabPagePB.SuspendLayout();
-            this.tabPageIG.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.tabPageGA.SuspendLayout();
+            this.tabPageIG.SuspendLayout();
+            this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // tabControl
             // 
-            this.tabControl1.Controls.Add(this.tabPageCommun);
-            this.tabControl1.Controls.Add(this.tabPageGM);
-            this.tabControl1.Controls.Add(this.tabPageSG);
-            this.tabControl1.Controls.Add(this.tabPageSC);
-            this.tabControl1.Controls.Add(this.tabPageUG);
-            this.tabControl1.Controls.Add(this.tabPagePB);
-            this.tabControl1.Controls.Add(this.tabPageGA);
-            this.tabControl1.Controls.Add(this.tabPageIG);
-            this.tabControl1.Location = new System.Drawing.Point(0, 27);
-            this.tabControl1.Multiline = true;
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(317, 200);
-            this.tabControl1.TabIndex = 0;
+            this.tabControl.Controls.Add(this.tabPageCommun);
+            this.tabControl.Controls.Add(this.tabPageGM);
+            this.tabControl.Controls.Add(this.tabPageSG);
+            this.tabControl.Controls.Add(this.tabPageSC);
+            this.tabControl.Controls.Add(this.tabPageUG);
+            this.tabControl.Controls.Add(this.tabPagePB);
+            this.tabControl.Controls.Add(this.tabPageGA);
+            this.tabControl.Controls.Add(this.tabPageIG);
+            this.tabControl.Location = new System.Drawing.Point(0, 27);
+            this.tabControl.Multiline = true;
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(317, 200);
+            this.tabControl.TabIndex = 0;
             // 
             // tabPageCommun
             // 
@@ -468,10 +468,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageSG.Controls.Add(this.lblSGMaxValue);
             this.tabPageSG.Controls.Add(this.cbSGGroup);
             this.tabPageSG.Controls.Add(this.cbSGWishlist);
-            this.tabPageSG.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSG.Location = new System.Drawing.Point(4, 40);
             this.tabPageSG.Name = "tabPageSG";
             this.tabPageSG.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSG.Size = new System.Drawing.Size(309, 155);
+            this.tabPageSG.Size = new System.Drawing.Size(309, 156);
             this.tabPageSG.TabIndex = 1;
             this.tabPageSG.Text = "SG";
             this.tabPageSG.UseVisualStyleBackColor = true;
@@ -597,9 +597,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageSC.Controls.Add(this.lblSCMaxValue);
             this.tabPageSC.Controls.Add(this.cbSCGroup);
             this.tabPageSC.Controls.Add(this.cbSCWishlist);
-            this.tabPageSC.Location = new System.Drawing.Point(4, 22);
+            this.tabPageSC.Location = new System.Drawing.Point(4, 40);
             this.tabPageSC.Name = "tabPageSC";
-            this.tabPageSC.Size = new System.Drawing.Size(309, 155);
+            this.tabPageSC.Size = new System.Drawing.Size(309, 156);
             this.tabPageSC.TabIndex = 2;
             this.tabPageSC.Text = "SC";
             this.tabPageSC.UseVisualStyleBackColor = true;
@@ -708,9 +708,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageUG.Controls.Add(this.tbSPMaxValue);
             this.tabPageUG.Controls.Add(this.label3);
             this.tabPageUG.Controls.Add(this.label4);
-            this.tabPageUG.Location = new System.Drawing.Point(4, 22);
+            this.tabPageUG.Location = new System.Drawing.Point(4, 40);
             this.tabPageUG.Name = "tabPageUG";
-            this.tabPageUG.Size = new System.Drawing.Size(309, 155);
+            this.tabPageUG.Size = new System.Drawing.Size(309, 156);
             this.tabPageUG.TabIndex = 4;
             this.tabPageUG.Text = "UG";
             this.tabPageUG.UseVisualStyleBackColor = true;
@@ -821,6 +821,65 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.btnPBCookies.UseVisualStyleBackColor = true;
             this.btnPBCookies.Click += new System.EventHandler(this.btnPBCookies_Click);
             // 
+            // tabPageGA
+            // 
+            this.tabPageGA.Controls.Add(this.tbGAReserv);
+            this.tabPageGA.Controls.Add(this.tbGAMaxBet);
+            this.tabPageGA.Controls.Add(this.lblGAReserv);
+            this.tabPageGA.Controls.Add(this.lblGAMaxBet);
+            this.tabPageGA.Controls.Add(this.btnGACookies);
+            this.tabPageGA.Location = new System.Drawing.Point(4, 40);
+            this.tabPageGA.Name = "tabPageGA";
+            this.tabPageGA.Size = new System.Drawing.Size(309, 156);
+            this.tabPageGA.TabIndex = 9;
+            this.tabPageGA.Text = "GA";
+            this.tabPageGA.UseVisualStyleBackColor = true;
+            // 
+            // tbGAReserv
+            // 
+            this.tbGAReserv.Location = new System.Drawing.Point(254, 127);
+            this.tbGAReserv.Name = "tbGAReserv";
+            this.tbGAReserv.Size = new System.Drawing.Size(30, 20);
+            this.tbGAReserv.TabIndex = 29;
+            this.tbGAReserv.Text = "0";
+            this.tbGAReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EventKeyPress);
+            // 
+            // tbGAMaxBet
+            // 
+            this.tbGAMaxBet.Location = new System.Drawing.Point(134, 127);
+            this.tbGAMaxBet.Name = "tbGAMaxBet";
+            this.tbGAMaxBet.Size = new System.Drawing.Size(30, 20);
+            this.tbGAMaxBet.TabIndex = 28;
+            this.tbGAMaxBet.Text = "30";
+            // 
+            // lblGAReserv
+            // 
+            this.lblGAReserv.AutoSize = true;
+            this.lblGAReserv.Location = new System.Drawing.Point(170, 130);
+            this.lblGAReserv.Name = "lblGAReserv";
+            this.lblGAReserv.Size = new System.Drawing.Size(81, 13);
+            this.lblGAReserv.TabIndex = 27;
+            this.lblGAReserv.Text = "Reserve points:";
+            // 
+            // lblGAMaxBet
+            // 
+            this.lblGAMaxBet.AutoSize = true;
+            this.lblGAMaxBet.Location = new System.Drawing.Point(3, 130);
+            this.lblGAMaxBet.Name = "lblGAMaxBet";
+            this.lblGAMaxBet.Size = new System.Drawing.Size(72, 13);
+            this.lblGAMaxBet.TabIndex = 26;
+            this.lblGAMaxBet.Text = "Maximum bet:";
+            // 
+            // btnGACookies
+            // 
+            this.btnGACookies.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.locked1;
+            this.btnGACookies.Location = new System.Drawing.Point(280, 6);
+            this.btnGACookies.Name = "btnGACookies";
+            this.btnGACookies.Size = new System.Drawing.Size(23, 23);
+            this.btnGACookies.TabIndex = 25;
+            this.btnGACookies.UseVisualStyleBackColor = true;
+            this.btnGACookies.Click += new System.EventHandler(this.btnGACookies_Click);
+            // 
             // tabPageIG
             // 
             this.tabPageIG.Controls.Add(this.tbIGReserv);
@@ -835,7 +894,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageIG.Controls.Add(this.btnIGCookie);
             this.tabPageIG.Location = new System.Drawing.Point(4, 40);
             this.tabPageIG.Name = "tabPageIG";
-            this.tabPageIG.Size = new System.Drawing.Size(309, 137);
+            this.tabPageIG.Size = new System.Drawing.Size(309, 156);
             this.tabPageIG.TabIndex = 8;
             this.tabPageIG.Text = "IG";
             this.tabPageIG.UseVisualStyleBackColor = true;
@@ -936,92 +995,33 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.btnIGCookie.UseVisualStyleBackColor = true;
             this.btnIGCookie.Click += new System.EventHandler(this.btnIGCookie_Click);
             // 
-            // menuStrip1
+            // menuStrip
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.сохранитьToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(317, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(317, 24);
+            this.menuStrip.TabIndex = 1;
+            this.menuStrip.Text = "menuStrip1";
             // 
-            // сохранитьToolStripMenuItem
+            // saveToolStripMenuItem
             // 
-            this.сохранитьToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.check;
-            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
-            this.сохранитьToolStripMenuItem.Text = "Save";
-            this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
-            // 
-            // tabPageGA
-            // 
-            this.tabPageGA.Controls.Add(this.tbGAReserv);
-            this.tabPageGA.Controls.Add(this.tbGAMaxBet);
-            this.tabPageGA.Controls.Add(this.lblGAReserv);
-            this.tabPageGA.Controls.Add(this.lblGAMaxBet);
-            this.tabPageGA.Controls.Add(this.btnGACookies);
-            this.tabPageGA.Location = new System.Drawing.Point(4, 40);
-            this.tabPageGA.Name = "tabPageGA";
-            this.tabPageGA.Size = new System.Drawing.Size(309, 156);
-            this.tabPageGA.TabIndex = 9;
-            this.tabPageGA.Text = "GA";
-            this.tabPageGA.UseVisualStyleBackColor = true;
-            // 
-            // tbGAReserv
-            // 
-            this.tbGAReserv.Location = new System.Drawing.Point(254, 127);
-            this.tbGAReserv.Name = "tbGAReserv";
-            this.tbGAReserv.Size = new System.Drawing.Size(30, 20);
-            this.tbGAReserv.TabIndex = 29;
-            this.tbGAReserv.Text = "0";
-            this.tbGAReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EventKeyPress);
-            // 
-            // tbGAMaxBet
-            // 
-            this.tbGAMaxBet.Location = new System.Drawing.Point(134, 127);
-            this.tbGAMaxBet.Name = "tbGAMaxBet";
-            this.tbGAMaxBet.Size = new System.Drawing.Size(30, 20);
-            this.tbGAMaxBet.TabIndex = 28;
-            this.tbGAMaxBet.Text = "30";
-            // 
-            // lblGAReserv
-            // 
-            this.lblGAReserv.AutoSize = true;
-            this.lblGAReserv.Location = new System.Drawing.Point(170, 130);
-            this.lblGAReserv.Name = "lblGAReserv";
-            this.lblGAReserv.Size = new System.Drawing.Size(81, 13);
-            this.lblGAReserv.TabIndex = 27;
-            this.lblGAReserv.Text = "Reserve points:";
-            // 
-            // lblGAMaxBet
-            // 
-            this.lblGAMaxBet.AutoSize = true;
-            this.lblGAMaxBet.Location = new System.Drawing.Point(3, 130);
-            this.lblGAMaxBet.Name = "lblGAMaxBet";
-            this.lblGAMaxBet.Size = new System.Drawing.Size(72, 13);
-            this.lblGAMaxBet.TabIndex = 26;
-            this.lblGAMaxBet.Text = "Maximum bet:";
-            // 
-            // btnGACookies
-            // 
-            this.btnGACookies.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.locked1;
-            this.btnGACookies.Location = new System.Drawing.Point(280, 6);
-            this.btnGACookies.Name = "btnGACookies";
-            this.btnGACookies.Size = new System.Drawing.Size(23, 23);
-            this.btnGACookies.TabIndex = 25;
-            this.btnGACookies.UseVisualStyleBackColor = true;
-            this.btnGACookies.Click += new System.EventHandler(this.btnGACookies_Click);
+            this.saveToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.check;
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
             // FormSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(317, 225);
-            this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.tabControl);
+            this.Controls.Add(this.menuStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.menuStrip;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormSettings";
@@ -1030,7 +1030,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.Text = "Settings";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSettings_FormClosing);
             this.Load += new System.EventHandler(this.formSettings_Load);
-            this.tabControl1.ResumeLayout(false);
+            this.tabControl.ResumeLayout(false);
             this.tabPageCommun.ResumeLayout(false);
             this.tabPageCommun.PerformLayout();
             this.gbLang.ResumeLayout(false);
@@ -1049,12 +1049,12 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageUG.PerformLayout();
             this.tabPagePB.ResumeLayout(false);
             this.tabPagePB.PerformLayout();
-            this.tabPageIG.ResumeLayout(false);
-            this.tabPageIG.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.tabPageGA.ResumeLayout(false);
             this.tabPageGA.PerformLayout();
+            this.tabPageIG.ResumeLayout(false);
+            this.tabPageIG.PerformLayout();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1062,11 +1062,11 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
 		#endregion
 
-		private System.Windows.Forms.TabControl tabControl1;
+		private System.Windows.Forms.TabControl tabControl;
 		private System.Windows.Forms.TabPage tabPageGM;
 		private System.Windows.Forms.TabPage tabPageSG;
-		private System.Windows.Forms.MenuStrip menuStrip1;
-		private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
+		private System.Windows.Forms.MenuStrip menuStrip;
+		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
 		private System.Windows.Forms.TabPage tabPageSC;
 		private System.Windows.Forms.TabPage tabPageUG;
 		private System.Windows.Forms.TabPage tabPageCommun;
@@ -1168,7 +1168,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			label4.Text = strings.SettingsFform_MaxValue;
 			label9.Text = strings.SettingsForm_PointsReserv;
 			label10.Text = strings.SettingsFform_MaxValue;
-			сохранитьToolStripMenuItem.Text = strings.Save;
+			saveToolStripMenuItem.Text = strings.Save;
 			Text = strings.Settings;
 			Icon = Icon.FromHandle(Resources.settings.GetHicon());
 		    cbIGCSGO.Text = strings.SettingsForm_cbIGCSGO;
