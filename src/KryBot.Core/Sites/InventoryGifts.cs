@@ -58,10 +58,13 @@ namespace KryBot.Core.Sites
 
                     if (points != null && username != null)
                     {
-                        Points = int.Parse(points.InnerText.Split(':')[1].Split('/')[0].Replace(",", "").Replace("P", "").Trim());
+                        Points =
+                            int.Parse(
+                                points.InnerText.Split(':')[1].Split('/')[0].Replace(",", "").Replace("P", "").Trim());
                         Level = int.Parse(points.InnerText.Split(':')[2].Trim());
 
-                        task.SetResult(Messages.ParseProfile("InvetoryGifts", Points, username.Attributes["href"].Value.Split('/')[4]));
+                        task.SetResult(Messages.ParseProfile("InvetoryGifts", Points,
+                            username.Attributes["href"].Value.Split('/')[4]));
                     }
                     else
                     {
@@ -127,7 +130,7 @@ namespace KryBot.Core.Sites
                 {
                     blacklist.RemoveGames(Giveaways);
                     task.SetResult(Messages.ParseGiveawaysFoundMatchGiveaways(content, "InventoryGifts",
-                       Giveaways?.Count.ToString()));
+                        Giveaways?.Count.ToString()));
                 }
             });
             return task.Task.Result;
@@ -141,14 +144,15 @@ namespace KryBot.Core.Sites
 
             for (var i = 0; i < pages; i++)
             {
-                var response = Web.Get( $"{url}&pn={i + 1}", Cookies.Generate());
+                var response = Web.Get($"{url}&pn={i + 1}", Cookies.Generate());
 
                 if (response.RestResponse.Content != string.Empty)
                 {
                     var htmlDoc = new HtmlDocument();
                     htmlDoc.LoadHtml(response.RestResponse.Content);
 
-                    var pageNodeCounter = htmlDoc.DocumentNode.SelectSingleNode("//div[@class='pagination_margin_right']/a[3]");
+                    var pageNodeCounter =
+                        htmlDoc.DocumentNode.SelectSingleNode("//div[@class='pagination_margin_right']/a[3]");
                     if (pageNodeCounter != null)
                     {
                         pages = int.Parse(pageNodeCounter.Attributes["href"].Value.Split('=')[2]);
@@ -158,7 +162,7 @@ namespace KryBot.Core.Sites
                     if (nodes != null)
                     {
                         count += nodes.Count;
-                       AddGiveaways(nodes, nodeClass); 
+                        AddGiveaways(nodes, nodeClass);
                     }
                 }
             }
@@ -183,7 +187,7 @@ namespace KryBot.Core.Sites
                         var price = id.SelectSingleNode(".//span[2]");
                         if (name != null && price != null)
                         {
-                            var giveaway = new InventoryGiftsGiveaway()
+                            var giveaway = new InventoryGiftsGiveaway
                             {
                                 Name = name.InnerText.Trim(),
                                 Id = id.Attributes["href"].Value.Split('/')[3].Split('/')[0]
@@ -245,7 +249,8 @@ namespace KryBot.Core.Sites
                 }
                 else
                 {
-                    task.SetResult(Messages.GiveawayNotJoined("InventoryGifts", giveaway.Name, response.RestResponse.Content));
+                    task.SetResult(Messages.GiveawayNotJoined("InventoryGifts", giveaway.Name,
+                        response.RestResponse.Content));
                 }
             });
             return task.Task.Result;

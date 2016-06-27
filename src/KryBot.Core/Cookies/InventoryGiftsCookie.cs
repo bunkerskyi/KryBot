@@ -8,7 +8,7 @@ namespace KryBot.Core.Cookies
         public string Phpsessid { get; set; }
 
         public string Hash { get; set; }
-           
+
         public string Steamid { get; set; }
 
         public CookieContainer Generate()
@@ -18,17 +18,17 @@ namespace KryBot.Core.Cookies
 
             if (Phpsessid != null)
             {
-                cookie.Add(new Cookie("PHPSESSID", Phpsessid) { Domain = target.Host });
+                cookie.Add(new Cookie("PHPSESSID", Phpsessid) {Domain = target.Host});
             }
 
             if (Hash != null)
             {
-                cookie.Add(new Cookie("hash", Hash) { Domain = target.Host });
+                cookie.Add(new Cookie("hash", Hash) {Domain = target.Host});
             }
 
             if (Steamid != null)
             {
-                cookie.Add(new Cookie("steamid", Steamid) { Domain = target.Host });
+                cookie.Add(new Cookie("steamid", Steamid) {Domain = target.Host});
             }
 
             return cookie;

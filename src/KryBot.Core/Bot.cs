@@ -55,7 +55,6 @@ namespace KryBot.Core
             PlayBlink.Giveaways = new List<PlayBlinkGiveaway>();
             GameAways.Giveaways = new List<GameAwaysGiveaway>();
             InventoryGifts.Giveaways = new List<InventoryGiftsGiveaway>();
-            
         }
 
         public bool Save(string path = FilePaths.Profile)
