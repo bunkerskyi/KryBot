@@ -13,6 +13,7 @@ Free bot for giveaway sites.
 * Steamcompanion
 * Steamportal
 * Usegamble
+* InventoryGifts
 
 
 **Minimum system requirements**: Windows 7 and .NET Framework 4.5
