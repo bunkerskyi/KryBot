@@ -976,7 +976,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
         private static void BrowserStart(string startPage, string endPage, string title, string phpSessId)
         {
-            Form form = new Browser(_bot, startPage, endPage, title, phpSessId);
+            Form form = new Browser(_bot, startPage, endPage, title, phpSessId, _settings.Lang);
             form.Height = Screen.PrimaryScreen.Bounds.Height/2;
             form.Width = Screen.PrimaryScreen.Bounds.Width/2;
             form.Name = "KryBot - CefBrowser";

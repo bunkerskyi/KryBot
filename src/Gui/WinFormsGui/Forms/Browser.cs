@@ -14,17 +14,19 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private readonly Bot _bot;
         private readonly string _endPage;
         private readonly string _phpSessId;
+        private readonly string _lang;
         private readonly string _startPage;
         private readonly string _title;
         private ChromiumWebBrowser _browser;
 
-        public Browser(Bot bot, string startPage, string endPage, string title, string phpSessId)
+        public Browser(Bot bot, string startPage, string endPage, string title, string phpSessId, string lang)
         {
             _bot = bot;
             _startPage = startPage;
             _endPage = endPage;
             _title = title;
             _phpSessId = phpSessId;
+            _lang = lang;
             InitializeComponent();
             InitializeBrowserControl();
         }
@@ -37,7 +39,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 {
                     UserAgent = CefTools.GetUserAgent(),
                     CachePath = $"{Environment.CurrentDirectory}\\CefCache",
-                    PersistSessionCookies = true
+                    PersistSessionCookies = true,
+                    AcceptLanguageList = _lang
                 };
                 Cef.Initialize(cefSettings);
             }
