@@ -105,7 +105,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.Controls.Add(this.groupBox);
             this.Controls.Add(this.labelVersion);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormAbout";
@@ -132,6 +131,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			labelVersion.Text = $"KryBot - {Application.ProductVersion}";
 			groupBox.Text = strings.AboutForm_groupBox1;
 			Text = strings.AboutProgram;
-		}
+            Icon = Icon.FromHandle(Resources.info.GetHicon());
+        }
 	}
 }

@@ -498,4 +498,16 @@
   <data name="SettingsForm_cbIGCSGO" xml:space="preserve">
     <value>CS:GO items</value>
   </data>
+  <data name="BlacklistForm_EnterId" xml:space="preserve">
+    <value>Enter game ID</value>
+  </data>
+  <data name="SettingsForm_FirstCheap" xml:space="preserve">
+    <value>cheap</value>
+  </data>
+  <data name="SettingsForm_FirstExpensive" xml:space="preserve">
+    <value>expensive</value>
+  </data>
+  <data name="Settngs_CreateShortcut" xml:space="preserve">
+    <value>Create shortcut</value>
+  </data>
 </root>

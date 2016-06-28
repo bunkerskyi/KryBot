@@ -125,7 +125,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.Controls.Add(this.listView);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.menuStrip);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -161,6 +160,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             профильSteamToolStripMenuItem.Text = strings.BlacklistForm_SteamAccount;
             toolStripStatusLabel.Text = $"{strings.Count}: 0";
 			Text = strings.Blacklist;
-		}
+            Icon = Icon.FromHandle(Resources.blocked.GetHicon());
+        }
 	}
 }

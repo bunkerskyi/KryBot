@@ -151,6 +151,15 @@ namespace KryBot.CommonResources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter game ID.
+        /// </summary>
+        public static string BlacklistForm_EnterId {
+            get {
+                return ResourceManager.GetString("BlacklistForm_EnterId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Load from....
         /// </summary>
         public static string BlacklistForm_LoadFrom {
@@ -961,6 +970,24 @@ namespace KryBot.CommonResources.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to cheap.
+        /// </summary>
+        public static string SettingsForm_FirstCheap {
+            get {
+                return ResourceManager.GetString("SettingsForm_FirstCheap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to expensive.
+        /// </summary>
+        public static string SettingsForm_FirstExpensive {
+            get {
+                return ResourceManager.GetString("SettingsForm_FirstExpensive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string SettingsForm_gbTimerSettings {
@@ -1056,6 +1083,15 @@ namespace KryBot.CommonResources.Localization {
         public static string SettingsForm_WishlistGiveaways {
             get {
                 return ResourceManager.GetString("SettingsForm_WishlistGiveaways", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create shortcut.
+        /// </summary>
+        public static string Settngs_CreateShortcut {
+            get {
+                return ResourceManager.GetString("Settngs_CreateShortcut", resourceCulture);
             }
         }
         

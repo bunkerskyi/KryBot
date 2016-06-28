@@ -301,7 +301,7 @@
     <value>Нужна авторизация в Steam</value>
   </data>
   <data name="CookieForm_MustRestart" xml:space="preserve">
-    <value>Для применения измененией нужен перезапуск приложения.</value>
+    <value>Для применения изменений нужен перезапуск приложения.</value>
   </data>
   <data name="CookieForm_Save" xml:space="preserve">
     <value>Сохранить</value>
@@ -490,5 +490,17 @@
   </data>
   <data name="SettingsForm_cbIGTF2" xml:space="preserve">
     <value>TF2 предметы</value>
+  </data>
+  <data name="BlacklistForm_EnterId" xml:space="preserve">
+    <value>Введите ID игры</value>
+  </data>
+  <data name="SettingsForm_FirstCheap" xml:space="preserve">
+    <value>дорогие</value>
+  </data>
+  <data name="SettingsForm_FirstExpensive" xml:space="preserve">
+    <value>дешевые</value>
+  </data>
+  <data name="Settngs_CreateShortcut" xml:space="preserve">
+    <value>Создать ярлык</value>
   </data>
 </root>

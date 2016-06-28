@@ -1927,8 +1927,12 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
         private void SetLocalization()
         {
-            CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(_settings.Lang);
-            CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(_settings.Lang);
+            try
+            {
+                CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(_settings.Lang);
+                CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(_settings.Lang);
+            }
+            catch (CultureNotFoundException){}
         }
 
         private void btnIGLogout_Click(object sender, EventArgs e)

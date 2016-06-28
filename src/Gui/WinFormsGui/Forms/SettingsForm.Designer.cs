@@ -1154,6 +1154,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			cbSGSortTeLessLevel.Text = strings.SettingsForm_cbSGSortTeLessLevel;
 			cbSGMinLevel.Text = strings.SettingsForm_cbSGMinLevel;
 			cbSGRegular.Text = strings.SettingsForm_RegularGiveaways;
+		    cbSGGroup.Text = strings.SettingsForm_GroupGiveaways;
 			lblSGReserv.Text = strings.SettingsForm_PointsReserv;
 			lblSGMaxValue.Text = strings.SettingsFform_MaxValue;
 			cbSGWishlist.Text = strings.SettingsForm_WishlistGiveaways;
@@ -1180,6 +1181,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		    lblIGReserv.Text = strings.SettingsForm_PointsReserv;
 		    lblGAMaxBet.Text = strings.SettingsFform_MaxValue;
 		    lblGAReserv.Text = strings.SettingsForm_PointsReserv;
+		    btnShortcut.Text = strings.Settngs_CreateShortcut;
 		}
 
         private System.Windows.Forms.Button btnShortcut;
