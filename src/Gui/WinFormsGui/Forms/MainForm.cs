@@ -1745,7 +1745,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnPBLogin_Click(object sender, EventArgs e)
         {
             btnPBLogin.Enabled = false;
-            BrowserStart("http://playblink.com/?do=login&act=signin", Links.PlayBlink, "PlayBlink - Login");
+            BrowserStart(Links.PlayBlinkAuth, Links.PlayBlink, "PlayBlink - Login");
             _bot.Save();
 
             toolStripStatusLabel.Image = Resources.load;
