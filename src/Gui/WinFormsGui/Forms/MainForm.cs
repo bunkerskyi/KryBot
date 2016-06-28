@@ -941,9 +941,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             var first = await Web.GetAsync(Links.SteamTrade, new CookieContainer());
             var getLoginHref = await _bot.SteamTrade.DoAuth(first.Cookies);
             var location = getLoginHref.RestResponse.ResponseUri.ToString();
-            var cookie = CookieHelper.GetSessCookieInresponse(getLoginHref.Cookies, "steamtrade.info", "PHPSESSID");
+            _bot.SteamTrade.Cookies.PhpSessId = CookieHelper.GetSessCookieInresponse(getLoginHref.Cookies, "steamtrade.info", "PHPSESSID");
 
-            BrowserStart(location, Links.SteamTrade, "SteamTrade - Login", cookie);
+            BrowserStart(location, Links.SteamTrade, "SteamTrade - Login");
             _bot.Save();
 
             toolStripStatusLabel.Image = Resources.load;
@@ -974,9 +974,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             toolStripStatusLabel.Text = strings.StatusBar_End;
         }
 
-        private static void BrowserStart(string startPage, string endPage, string title, string phpSessId)
+        private static void BrowserStart(string startPage, string endPage, string title)
         {
-            Form form = new Browser(_bot, startPage, endPage, title, phpSessId, _settings.Lang);
+            Form form = new Browser(_bot, startPage, endPage, title, _settings.Lang);
             form.Height = Screen.PrimaryScreen.Bounds.Height/2;
             form.Width = Screen.PrimaryScreen.Bounds.Width/2;
             form.Name = "KryBot - CefBrowser";
@@ -986,7 +986,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnUGLogin_Click(object sender, EventArgs e)
         {
             btnUGLogin.Enabled = false;
-            BrowserStart($"{Links.UseGamble}page/steam", Links.UseGamble, "UseGamble - Login", "");
+            BrowserStart($"{Links.UseGamble}page/steam", Links.UseGamble, "UseGamble - Login");
             _bot.Save();
 
             toolStripStatusLabel.Image = Resources.load;
@@ -1026,7 +1026,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnSCLogin_Click(object sender, EventArgs e)
         {
             btnSCLogin.Enabled = false;
-            BrowserStart($"{Links.SteamCompanion}login", Links.SteamCompanion, "SteamCompanion - Login", "");
+            BrowserStart($"{Links.SteamCompanion}login", Links.SteamCompanion, "SteamCompanion - Login");
             _bot.Save();
 
             toolStripStatusLabel.Image = Resources.load;
@@ -1066,7 +1066,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnSGLogin_Click(object sender, EventArgs e)
         {
             btnSGLogin.Enabled = false;
-            BrowserStart($"{Links.SteamGifts}?login", Links.SteamGifts, "SteamGifts - Login", "");
+            BrowserStart($"{Links.SteamGifts}?login", Links.SteamGifts, "SteamGifts - Login");
 
             if (string.IsNullOrEmpty(_bot.SteamGifts.UserAgent))
             {
@@ -1112,7 +1112,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             btnGMLogin.Enabled = false;
             BrowserStart($"{Links.GameMiner}login/steam?backurl=http%3A%2F%2Fgameminer.net%2F%3Flang%3D" +
                          _settings.Lang + @"&agree=True",
-                "http://gameminer.net/?lang=" + _settings.Lang, "GameMiner - Login", "");
+                "http://gameminer.net/?lang=" + _settings.Lang, "GameMiner - Login");
 
             if (string.IsNullOrEmpty(_bot.GameMiner.UserAgent))
             {
@@ -1563,7 +1563,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnSteamLogin_Click(object sender, EventArgs e)
         {
             BrowserStart("https://steamcommunity.com/login/home/?goto=0", "http://steamcommunity.com/id/",
-                "Steam - Login", "");
+                "Steam - Login");
             _bot.Save();
 
             toolStripStatusLabel.Image = Resources.load;
@@ -1745,7 +1745,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnPBLogin_Click(object sender, EventArgs e)
         {
             btnPBLogin.Enabled = false;
-            BrowserStart("http://playblink.com/?do=login&act=signin", Links.PlayBlink, "PlayBlink - Login", "");
+            BrowserStart("http://playblink.com/?do=login&act=signin", Links.PlayBlink, "PlayBlink - Login");
             _bot.Save();
 
             toolStripStatusLabel.Image = Resources.load;
@@ -1848,7 +1848,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void buttonLoginGA_Click(object sender, EventArgs e)
         {
             btnGALogin.Enabled = false;
-            BrowserStart(Links.GameAwaysAuth, Links.GameAways, "GameAways - Login", "");
+            BrowserStart(Links.GameAwaysAuth, Links.GameAways, "GameAways - Login");
             _bot.Save();
 
             toolStripStatusLabel.Image = Resources.load;
@@ -1946,7 +1946,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnIGLogin_Click(object sender, EventArgs e)
         {
             btnIGLogin.Enabled = false;
-            BrowserStart(Links.InventoryGiftsAuth, Links.InventoryGifts, "InventoryGifts - Login", "");
+            BrowserStart(Links.InventoryGiftsAuth, Links.InventoryGifts, "InventoryGifts - Login");
             _bot.Save();
 
             toolStripStatusLabel.Image = Resources.load;

@@ -13,19 +13,17 @@ namespace KryBot.Gui.WinFormsGui.Forms
     {
         private readonly Bot _bot;
         private readonly string _endPage;
-        private readonly string _phpSessId;
         private readonly string _lang;
         private readonly string _startPage;
         private readonly string _title;
         private ChromiumWebBrowser _browser;
 
-        public Browser(Bot bot, string startPage, string endPage, string title, string phpSessId, string lang)
+        public Browser(Bot bot, string startPage, string endPage, string title, string lang)
         {
             _bot = bot;
             _startPage = startPage;
             _endPage = endPage;
             _title = title;
-            _phpSessId = phpSessId;
             _lang = lang;
             InitializeComponent();
             InitializeBrowserControl();
@@ -61,13 +59,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
             toolStripStatusLabelChromium.Text =
                 $"Chromium: {Cef.ChromiumVersion} Cef: {Cef.CefVersion} CefSharp: {Cef.CefSharpVersion}";
 
-            if (_phpSessId != "")
+            if (_startPage == Links.SteamTrade)
             {
                 await Cef.GetGlobalCookieManager().SetCookieAsync(Links.SteamTrade, new Cookie
                 {
                     Domain = "steamtrade.info",
                     Name = "PHPSESSID",
-                    Value = _phpSessId
+                    Value = _bot.SteamTrade.Cookies.PhpSessId
                 });
             }
         }
