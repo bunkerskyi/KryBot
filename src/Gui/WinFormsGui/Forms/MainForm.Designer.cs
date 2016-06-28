@@ -250,7 +250,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             // 
             this.settingsToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.settings;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.настройкиToolStripMenuItem1_Click);
             // 
@@ -258,7 +258,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             // 
             this.blacklistToolStripMenuItem.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.blocked;
             this.blacklistToolStripMenuItem.Name = "blacklistToolStripMenuItem";
-            this.blacklistToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.blacklistToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.blacklistToolStripMenuItem.Text = "Blacklist";
             this.blacklistToolStripMenuItem.Click += new System.EventHandler(this.черныйСписокToolStripMenuItem_Click);
             // 
@@ -1097,6 +1097,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.linkLabelIG.TabIndex = 33;
             this.linkLabelIG.TabStop = true;
             this.linkLabelIG.Text = "To website";
+            this.linkLabelIG.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelIG_LinkClicked);
             // 
             // pbIGRefresh
             // 
@@ -1410,7 +1411,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			toolStripMenuItem_Farm.Text = strings.Farm;
 			toolStripMenuItem_Exit.Text = strings.Exit;
 			Text = $"{Application.ProductName} [{Application.ProductVersion}]";
-		    btnIGLogin.Text = strings.Logout;
+            btnIGLogout.Text = strings.Logout;
 		    btnIGLogin.Text = strings.Login;
             lblIGPoints.Text = $"{strings.Points}: ";
             lblIGLevel.Text = $"{strings.Level}: ";

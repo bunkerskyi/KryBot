@@ -332,9 +332,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.cbSortBy.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSortBy.FormattingEnabled = true;
             this.cbSortBy.ItemHeight = 13;
-            this.cbSortBy.Items.AddRange(new object[] {
-            "дешевые",
-            "дорогие"});
             this.cbSortBy.Location = new System.Drawing.Point(225, 3);
             this.cbSortBy.Name = "cbSortBy";
             this.cbSortBy.Size = new System.Drawing.Size(79, 21);

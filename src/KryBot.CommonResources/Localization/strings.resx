@@ -349,7 +349,7 @@
     <value>No regional restrictions</value>
   </data>
   <data name="SettingsForm_cbSCAutojoin" xml:space="preserve">
-    <value>Automatic entry into the group (required authorization in Steam)</value>
+    <value>Auto entry into the group (required authorization in Steam)</value>
   </data>
   <data name="SettingsForm_cbSCContributors" xml:space="preserve">
     <value>Contributors giveaways</value>

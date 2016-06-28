@@ -1976,5 +1976,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
             toolStripStatusLabel.Image = null;
             toolStripStatusLabel.Text = strings.StatusBar_End;
         }
+
+        private void linkLabelIG_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(Links.InventoryGifts);
+        }
     }
 }

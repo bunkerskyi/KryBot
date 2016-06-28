@@ -31,6 +31,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
         {
             LoadLags();
 
+            cbSortBy.Items.Add(strings.SettingsForm_FirstCheap);
+            cbSortBy.Items.Add(strings.SettingsForm_FirstExpensive);
             cbSortBy.Text = cbSortBy.Items[0].ToString();
 
             if (_bot.Timer)
