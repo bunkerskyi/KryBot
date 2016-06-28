@@ -235,6 +235,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             btnSTLogin.Visible = false;
             btnPBLogin.Visible = false;
             btnSteamLogin.Visible = false;
+            btnGALogin.Visible = false;
             btnIGLogin.Visible = false;
             btnGMExit.Visible = false;
             btnSGExit.Visible = false;
@@ -244,6 +245,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             btnPBExit.Visible = false;
             btnSteamExit.Visible = false;
             btnIGLogout.Visible = false;
+            btnGAExit.Visible = false;
 
             toolStripProgressBar.Visible = false;
             toolStripStatusLabel.Image = null;
@@ -255,6 +257,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             pbUGReload.Visible = false;
             pbSTreload.Visible = false;
             pbPBRefresh.Visible = false;
+            pbGARefresh.Visible = false;
             pbIGRefresh.Visible = false;
 
             if (_logActive)
@@ -617,7 +620,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             lblGALevel.Text = $"{strings.Level}: -";
 
             lblIGPoints.Text = $"{strings.Points}: {_bot.InventoryGifts.Points}";
-            lblGALevel.Text = $"{strings.Level}: {_bot.InventoryGifts.Level}";
+            lblIGLevel.Text = $"{strings.Level}: {_bot.InventoryGifts.Level}";
         }
 
         private async Task<bool> LoginCheck()
