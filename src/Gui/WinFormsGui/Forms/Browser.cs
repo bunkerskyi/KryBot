@@ -35,7 +35,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             {
                 var cefSettings = new CefSettings
                 {
-                    UserAgent = CefTools.GetUserAgent()
+                    UserAgent = CefTools.GetUserAgent(),
+                    CachePath = $"{Environment.CurrentDirectory}\\CefCache",
+                    PersistSessionCookies = true
                 };
                 Cef.Initialize(cefSettings);
             }
