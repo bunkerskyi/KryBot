@@ -9,11 +9,12 @@
 Free bot for giveaway sites.
 
 **Support**
-* Gameminer
-* Steamgifts
-* Steamcompanion
-* Steamportal
-* Usegamble
+* GameMiner
+* SteamGifts
+* SteamCompanion
+* SteamPortal
+* UseGamble
+* GameAways
 * InventoryGifts
 
 
