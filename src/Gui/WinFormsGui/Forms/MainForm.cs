@@ -941,7 +941,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             var first = await Web.GetAsync(Links.SteamTrade, new CookieContainer());
             var getLoginHref = await _bot.SteamTrade.DoAuth(first.Cookies);
             var location = getLoginHref.RestResponse.ResponseUri.ToString();
-            _bot.SteamTrade.Cookies.PhpSessId = CookieHelper.GetSessCookieInresponse(getLoginHref.Cookies, "steamtrade.info", "PHPSESSID");
+            _bot.SteamTrade.Cookies.PhpSessId = CookieHelper.GetSessCookieInresponse(getLoginHref.Cookies,
+                "steamtrade.info", "PHPSESSID");
 
             BrowserStart(location, Links.SteamTrade, "SteamTrade - Login");
             _bot.Save();
@@ -1935,7 +1936,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 CultureInfo.DefaultThreadCurrentCulture = new CultureInfo(_settings.Lang);
                 CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo(_settings.Lang);
             }
-            catch (CultureNotFoundException){}
+            catch (CultureNotFoundException)
+            {
+            }
         }
 
         private void btnIGLogout_Click(object sender, EventArgs e)

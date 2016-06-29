@@ -114,7 +114,7 @@ namespace KryBot.Core.Sites
                         else
                         {
                             task.SetResult(Messages.GiveawayNotJoined("GameMiner", giveaway.Name,
-                            response.RestResponse.Content));
+                                response.RestResponse.Content));
                         }
                     }
                     catch (JsonReaderException)
@@ -125,7 +125,7 @@ namespace KryBot.Core.Sites
                     catch (JsonSerializationException)
                     {
                         var jresponse =
-                                JsonConvert.DeserializeObject<JsonResponseError>(response.RestResponse.Content);
+                            JsonConvert.DeserializeObject<JsonResponseError>(response.RestResponse.Content);
                         task.SetResult(Messages.GiveawayNotJoined("GameMiner", giveaway.Name,
                             jresponse.Error.Message));
                     }
