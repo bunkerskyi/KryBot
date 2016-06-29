@@ -23,7 +23,7 @@ namespace KryBot.Core.Sites
 
         public bool Enabled { get; set; }
         public int Points { get; set; }
-        public int JoinPointsLimit { get; set; }
+        public int JoinPointsLimit { get; set; } = 20000;
         public int PointsReserv { get; set; }
         public GameAwaysCookie Cookies { get; set; }
         public List<GameAwaysGiveaway> Giveaways { get; set; }
@@ -177,7 +177,7 @@ namespace KryBot.Core.Sites
                         }
 
                         var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class='giveaway ']");
-                        AddGiveaways(nodes, Giveaways);
+                        AddGiveaways(nodes);
                     }
                 }
 
@@ -195,7 +195,7 @@ namespace KryBot.Core.Sites
             return task.Task.Result;
         }
 
-        private void AddGiveaways(HtmlNodeCollection nodes, List<GameAwaysGiveaway> giveawaysList)
+        private void AddGiveaways(HtmlNodeCollection nodes)
         {
             if (nodes != null)
             {
@@ -219,7 +219,7 @@ namespace KryBot.Core.Sites
 
                         if (gaGiveaway.Price <= Points && gaGiveaway.Price <= JoinPointsLimit)
                         {
-                            giveawaysList?.Add(gaGiveaway);
+                            Giveaways?.Add(gaGiveaway);
                         }
                     }
                 }
