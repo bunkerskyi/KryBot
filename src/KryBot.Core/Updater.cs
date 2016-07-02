@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
+using System.IO.Compression;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -44,33 +46,36 @@ namespace KryBot.Core
         {
             try
             {
+                GitHunReleaseAssets archive = null;
+                GitHunReleaseAssets singleFile = null;
+
                 DeleteTempFiles();
                 var release = await GetGitHubRelease();
-                var binaryAsset = release.Assets.FirstOrDefault(asset => asset.Name == FilePaths.KryBot);
-                if (binaryAsset == null)
+
+                foreach (var asset in release.Assets)
+                {
+                    if (asset.Name == FilePaths.KryBot)
+                    {
+                        archive = asset;
+                    }
+                    else if(asset.Name == FilePaths.KryBotArchive)
+                    {
+                        singleFile = asset;
+                    }
+                }   
+
+                if (archive == null && singleFile == null)
                 {
                     return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
                 }
-                var stream = new WebClient().OpenRead(binaryAsset.DownloadUrl);
-                if (stream == null)
+
+                if (singleFile != null)
                 {
-                    return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
+                    return await UpdatefromFile(singleFile);
                 }
-                using (var fileStream = File.Open(FilePaths.KryBotNew, FileMode.Create))
+                else
                 {
-                    await stream.CopyToAsync(fileStream);
-                }
-                File.Move(FilePaths.KryBot, FilePaths.KryBotOld);
-                try
-                {
-                    File.Move(FilePaths.KryBotNew, FilePaths.KryBot);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    File.Move(FilePaths.KryBotOld, FilePaths.KryBot);
-                    DeleteTempFiles();
-                    return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
+                    return await UpdateFromArchive(archive);
                 }
             }
             catch (JsonReaderException)
@@ -83,8 +88,80 @@ namespace KryBot.Core
                 DeleteTempFiles();
                 return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
             }
+        }
 
-            return new Log(strings.Updater_Update_UpdateDone, Color.Green, true);
+        private static async Task<Log> UpdatefromFile(GitHunReleaseAssets asset)
+        {
+            var stream = new WebClient().OpenRead(asset.DownloadUrl);
+            if (stream != null)
+            {
+                using (var fileStream = File.Open(FilePaths.KryBotNew, FileMode.Create))
+                {
+                    await stream.CopyToAsync(fileStream);
+                }
+
+                File.Move(FilePaths.KryBot, FilePaths.KryBotOld);
+
+                try
+                {
+                    File.Move(FilePaths.KryBotNew, FilePaths.KryBot);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    File.Move(FilePaths.KryBotOld, FilePaths.KryBot);
+                    DeleteTempFiles();
+                    return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
+                }
+                return new Log(strings.Updater_Update_UpdateDone, Color.Green, true);
+            }
+            return new Log(strings.Updater_Update_UpdateFailed, Color.Red, true);
+        }
+
+        private static async Task<Log> UpdateFromArchive(GitHunReleaseAssets asset)
+        {
+            List<string> filesToMove = new List<string>();
+            var stream = new WebClient().OpenRead(asset.DownloadUrl);
+            if (stream != null)
+            {
+                using (var fileStream = File.Open(FilePaths.KryBotArchive, FileMode.Create))
+                {
+                    await stream.CopyToAsync(fileStream);
+                }
+
+                Debug.WriteLine("Exstract strat");
+                foreach (var entry in ZipFile.OpenRead(FilePaths.KryBotArchive).Entries)
+                {
+                    if (File.Exists(entry.FullName))
+                    {
+                        Debug.WriteLine($"Exstract: {entry.FullName}.new");
+                        entry.ExtractToFile($"{entry.FullName}.new");
+                        Debug.WriteLine($"Move: {entry.FullName} to {entry.FullName}.old");
+                        File.Move(entry.FullName, $"{entry.FullName}.old");
+                        filesToMove.Add(entry.FullName);
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"Exstract: {entry.FullName}");
+                        entry.ExtractToFile(entry.FullName);
+                    }
+                }
+                Debug.WriteLine("Exstract end");
+
+                Debug.WriteLine("Move start");
+                if (filesToMove.Count > 0)
+                {
+                    foreach (var file in filesToMove)
+                    {
+                        Debug.WriteLine($"Move: {file}.new to {file}");
+                        File.Move($"{file}.new", file); 
+                    }
+                }
+                Debug.WriteLine("Move end");
+                return new Log(strings.Updater_Update_UpdateDone, Color.Green, true);
+
+            }
+            return new Log(strings.Updater_Update_UpdateFailed, Color.Red, true);
         }
 
         /// <summary>
@@ -101,8 +178,24 @@ namespace KryBot.Core
 
         private static void DeleteTempFiles()
         {
-            FileHelper.SafelyDelete(FilePaths.KryBotOld);
-            FileHelper.SafelyDelete(FilePaths.KryBotNew);
+            foreach (var directory in Directory.GetDirectories(Environment.CurrentDirectory))
+            {
+                foreach (var file in Directory.GetFiles(directory))
+                {
+                    if (file.Contains(".new") || file.Contains(".old"))
+                    {
+                        FileHelper.SafelyDelete(file);
+                    }
+                }
+
+                foreach (var file in Directory.GetFiles(Environment.CurrentDirectory))
+                {
+                    if (file.Contains(".new") || file.Contains(".old"))
+                    {
+                        FileHelper.SafelyDelete(file);
+                    }
+                }
+            }
         }
 
         private static async Task<GitHubRelease> GetGitHubRelease()
