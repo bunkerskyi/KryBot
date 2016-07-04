@@ -241,6 +241,10 @@ namespace KryBot.Core.Sites
                             task.SetResult(null);
                         }
                     }
+                    else
+                    {
+                        task.SetResult(null);
+                    }
                 }
                 else
                 {
