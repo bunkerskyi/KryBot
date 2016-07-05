@@ -140,7 +140,7 @@ namespace KryBot.Core.Sites
             return task.Task.Result;
         }
 
-        public async Task Join(Blacklist blacklist, bool sort, bool sortToMore)
+        public async Task Join(Blacklist blacklist, bool sort, bool sortToMore, bool WishlistNotSort)
         {
             LogMessage.Instance.AddMessage(await LoadGiveawaysAsync(blacklist));
 
@@ -158,7 +158,49 @@ namespace KryBot.Core.Sites
                     }
                 }
 
+                if (SortToLessLevel)
+                {
+                    Giveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
+                }
+
                 foreach (var giveaway in Giveaways)
+                {
+                    if (giveaway.Price <= Points && PointsReserv <= Points - giveaway.Price)
+                    {
+                        LogMessage.Instance.AddMessage(await JoinGiveaway(giveaway));
+                    }
+                }
+            }
+
+            if (Giveaways?.Count > 0)
+            {
+                if (sort)
+                {
+                    if (sortToMore)
+                    {
+                        if (WishlistNotSort)
+                        {
+                            Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+                        }
+                    }
+                    else
+                    {
+                        if (WishlistNotSort)
+                        {
+                            Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+                        }
+                    }
+                }
+
+                if (SortToLessLevel)
+                {
+                    if (WishlistNotSort)
+                    {
+                        Giveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
+                    }
+                }
+
+                foreach (var giveaway in WishlistGiveaways)
                 {
                     if (giveaway.Price <= Points && PointsReserv <= Points - giveaway.Price)
                     {
@@ -391,7 +433,7 @@ namespace KryBot.Core.Sites
                         }
 
                         var level = node.SelectSingleNode(".//div[@title='Contributor Level']");
-                        sgGiveaway.Level = level == null ? 0 : int.Parse(level.InnerText.Split(' ')[1].Replace("+", ""));
+                        sgGiveaway.Level = level == null ? 0 : int.Parse(level.InnerText.Split(' ')[1].Trim('+'));
 
                         var region = node.SelectSingleNode(".//a[@title='Region Restricted']");
                         if (region != null)

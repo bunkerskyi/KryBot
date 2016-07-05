@@ -406,12 +406,12 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     {
                         LogMessage.Instance.AddMessage(won);
                         if (_settings.ShowWonTip)
-                        {
+                        {   
                             ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
                         }
                     }
 
-                    await _bot.SteamGifts.Join(_bot.Blacklist, _bot.Sort, _bot.SortToMore);
+                    await _bot.SteamGifts.Join(_bot.Blacklist, _bot.Sort, _bot.SortToMore, _bot.WishlistSort);
                 }
                 else
                 {
