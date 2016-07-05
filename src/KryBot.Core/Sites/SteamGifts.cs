@@ -443,7 +443,7 @@ namespace KryBot.Core.Sites
 
                         if (sgGiveaway.Price <= Points &&
                             sgGiveaway.Price <= JoinPointLimit &&
-                            sgGiveaway.Level >= MinLevel)
+                            sgGiveaway.Level <= MinLevel)
                         {
                             giveawaysList?.Add(sgGiveaway);
                         }
