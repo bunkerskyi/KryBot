@@ -454,7 +454,7 @@
     <value>The update is complete. Restarting...</value>
   </data>
   <data name="Updater_Update_UpdateFailed" xml:space="preserve">
-    <value>When updating the error occurred</value>
+    <value>When updating the error occurred. Download the manual: https://github.com/KriBetko/KryBot/releases</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>

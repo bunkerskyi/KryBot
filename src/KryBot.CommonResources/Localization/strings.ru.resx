@@ -265,7 +265,7 @@
     <value>Обновление завершено. Перезапуск...</value>
   </data>
   <data name="Updater_Update_UpdateFailed" xml:space="preserve">
-    <value>При обновлении произошла ошибка</value>
+    <value>При обновлении произошла ошибка. Скачайте вручную: https://github.com/KriBetko/KryBot/releases</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Предупреждение</value>
