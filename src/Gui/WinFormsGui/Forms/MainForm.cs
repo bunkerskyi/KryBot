@@ -406,7 +406,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     {
                         LogMessage.Instance.AddMessage(won);
                         if (_settings.ShowWonTip)
-                        {   
+                        {
                             ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
                         }
                     }

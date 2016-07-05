@@ -140,7 +140,7 @@ namespace KryBot.Core.Sites
             return task.Task.Result;
         }
 
-        public async Task Join(Blacklist blacklist, bool sort, bool sortToMore, bool WishlistNotSort)
+        public async Task Join(Blacklist blacklist, bool sort, bool sortToMore, bool wishlistNotSort)
         {
             LogMessage.Instance.AddMessage(await LoadGiveawaysAsync(blacklist));
 
@@ -178,14 +178,14 @@ namespace KryBot.Core.Sites
                 {
                     if (sortToMore)
                     {
-                        if (WishlistNotSort)
+                        if (wishlistNotSort)
                         {
                             Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
                         }
                     }
                     else
                     {
-                        if (WishlistNotSort)
+                        if (wishlistNotSort)
                         {
                             Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
                         }
@@ -194,7 +194,7 @@ namespace KryBot.Core.Sites
 
                 if (SortToLessLevel)
                 {
-                    if (WishlistNotSort)
+                    if (wishlistNotSort)
                     {
                         Giveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
                     }

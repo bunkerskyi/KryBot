@@ -52,20 +52,17 @@ namespace KryBot.Core
 
                 foreach (var asset in release.Assets)
                 {
-                    if(asset.Name == FilePaths.KryBotArchive)
+                    if (asset.Name == FilePaths.KryBotArchive)
                     {
                         archive = asset;
                     }
-                }   
+                }
 
                 if (archive == null)
                 {
                     return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
                 }
-                else
-                {
-                   return await UpdateFromArchive(archive); 
-                }
+                return await UpdateFromArchive(archive);
             }
             catch (JsonReaderException)
             {
@@ -81,7 +78,7 @@ namespace KryBot.Core
 
         private static async Task<Log> UpdateFromArchive(GitHunReleaseAssets asset)
         {
-            List<string> filesToMove = new List<string>();
+            var filesToMove = new List<string>();
             var stream = new WebClient().OpenRead(asset.DownloadUrl);
             if (stream != null)
             {
@@ -108,12 +105,11 @@ namespace KryBot.Core
                 {
                     foreach (var file in filesToMove)
                     {
-                        File.Move($"{file}.new", file); 
+                        File.Move($"{file}.new", file);
                     }
                 }
 
                 return new Log(strings.Updater_Update_UpdateDone, Color.Green, true);
-
             }
             return new Log(strings.Updater_Update_UpdateFailed, Color.Red, true);
         }
