@@ -343,7 +343,7 @@ namespace KryBot.Core.Sites
 
                 if (Regular)
                 {
-                    LoadGiveawaysByUrl(
+                    content += LoadGiveawaysByUrl(
                         $"{Links.SteamGiftsSearch}",
                         strings.ParseLoadGiveaways_RegularGiveawaysIn,
                         Giveaways);
