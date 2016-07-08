@@ -158,7 +158,7 @@ namespace KryBot.Core.Sites
 
                 foreach (var giveaway in Giveaways)
                 {
-                    if (giveaway.Price <= Points && PointsReserv <= Points - giveaway.Price)
+                    if (giveaway.Price <= Points && PointsReserv <= Points - giveaway.Price && JoinPointsLimit >= giveaway.Price)
                     {
                         LogMessage.Instance.AddMessage(await JoinGiveaway(giveaway, lang));
                     }
