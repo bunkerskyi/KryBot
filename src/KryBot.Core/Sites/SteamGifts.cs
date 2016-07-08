@@ -101,7 +101,7 @@ namespace KryBot.Core.Sites
         private async Task<Log> JoinGiveaway(SteamGiftsGiveaway giveaway)
         {
             var task = new TaskCompletionSource<Log>();
-            await Task.Run(() =>
+            await Task.Run(async () =>
             {
                 Thread.Sleep(400);
                 giveaway = GetJoinData(giveaway);
@@ -134,7 +134,7 @@ namespace KryBot.Core.Sites
                 }
                 else
                 {
-                    task.SetResult(Messages.GiveawayNotJoined("SteamGifts", giveaway.Name, "Failed to get Token"));
+                    task.SetResult(Messages.GiveawayNotJoined("SteamGifts", giveaway.Name, await GetFailedDetail(giveaway.Link)));
                 }
             });
             return task.Task.Result;
@@ -467,6 +467,39 @@ namespace KryBot.Core.Sites
                 }
             }
             return sgGiveaway;
+        }
+
+        private async Task<string> GetFailedDetail(string url)
+        {
+            var task = new TaskCompletionSource<string>();
+            await Task.Run(() =>
+            {
+                var response = Web.Get($"{Links.SteamGifts}{url}", Cookies.Generate(), UserAgent);
+
+                if (response.RestResponse.Content != string.Empty)
+                {
+                    var htmlDoc = new HtmlDocument();
+                    htmlDoc.LoadHtml(response.RestResponse.Content);
+
+                    var errorNode =
+                        htmlDoc.DocumentNode.SelectSingleNode(
+                            "//div[contains(@class, 'sidebar__error') and contains(@class, 'is-disabled')]");
+
+                    if (errorNode != null)
+                    {
+                        task.SetResult(errorNode.InnerText.Trim());
+                    }
+                    else
+                    {
+                        task.SetResult("Failed to get Token");
+                    }
+                }
+                else
+                {
+                    task.SetResult("Failed to get Token");
+                }
+            });
+            return task.Task.Result;
         }
 
         #endregion
