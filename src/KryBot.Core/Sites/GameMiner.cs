@@ -42,8 +42,10 @@ namespace KryBot.Core.Sites
             Enabled = false;
         }
 
-        private void AddGiveaways(JsonRootObject json)
+        private int AddGiveaways(JsonRootObject json)
         {
+            var count = 0;
+
             if (json != null)
             {
                 foreach (var giveaway in json.Giveaways)
@@ -54,9 +56,19 @@ namespace KryBot.Core.Sites
                         break;
                     }
 
-                    if (lot.Price > Points || lot.Price > JoinPointsLimit)
+                    if (lot.Price > Points)
                     {
                         break;
+                    }
+
+                    if (lot.Price >= JoinPointsLimit)
+                    {
+                        break;    
+                    }
+
+                    if (lot.Price > PointsReserv)
+                    {
+                       break;
                     }
 
                     lot.Name = giveaway.Game.Name;
@@ -82,8 +94,11 @@ namespace KryBot.Core.Sites
                     }
 
                     Giveaways?.Add(lot);
+                    count++;
                 }
             }
+
+            return count;
         }
 
         #region JoinGivaway	
@@ -158,7 +173,7 @@ namespace KryBot.Core.Sites
 
                 foreach (var giveaway in Giveaways)
                 {
-                    if (giveaway.Price <= Points && PointsReserv <= Points - giveaway.Price && JoinPointsLimit >= giveaway.Price)
+                    if (giveaway.Price <= Points && PointsReserv <= Points - giveaway.Price)
                     {
                         LogMessage.Instance.AddMessage(await JoinGiveaway(giveaway, lang));
                     }
@@ -316,8 +331,9 @@ namespace KryBot.Core.Sites
 
             if (response.RestResponse.Content != string.Empty)
             {
+                var count = 0;
                 var jsonResponse = JsonConvert.DeserializeObject<JsonRootObject>(response.RestResponse.Content);
-                AddGiveaways(jsonResponse);
+                count += AddGiveaways(jsonResponse);
 
                 if (jsonResponse.LastPage > 1)
                 {
@@ -325,12 +341,12 @@ namespace KryBot.Core.Sites
                     {
                         response = Web.Get($"{url}&page={i + 1}", Cookies.Generate(lang), UserAgent);
                         jsonResponse = JsonConvert.DeserializeObject<JsonRootObject>(response.RestResponse.Content);
-                        AddGiveaways(jsonResponse);
+                        count += AddGiveaways(jsonResponse);
                     }
                 }
 
                 return
-                    $"{Messages.GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {jsonResponse.Total} " +
+                    $"{Messages.GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {count} " +
                     $"{message} {jsonResponse.LastPage} {strings.ParseLoadGiveaways_Pages}\n";
             }
 
