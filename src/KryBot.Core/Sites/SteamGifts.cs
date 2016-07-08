@@ -369,11 +369,10 @@ namespace KryBot.Core.Sites
             var count = 0;
             var pages = 1;
 
-
             for (var i = 0; i < pages; i++)
             {
                 var response = Web.Get(
-                    $"{url}{(i > 0 ? $"&page={i + 1}" : string.Empty)}",
+                    $"{url}{(i > 0 ? $"?page={i + 1}" : string.Empty)}",
                     Cookies.Generate(), UserAgent);
 
                 if (response.RestResponse.Content != string.Empty)
@@ -384,20 +383,13 @@ namespace KryBot.Core.Sites
                     var pageNodeCounter = htmlDoc.DocumentNode.SelectNodes("//div[@class='pagination__navigation']/a");
                     if (pageNodeCounter != null)
                     {
-                        var pageNode =
-                            htmlDoc.DocumentNode.SelectSingleNode(
-                                $"//div[@class='pagination__navigation']/a[{pageNodeCounter.Count - 1}]");
-                        if (pageNode != null)
-                        {
-                            pages = int.Parse(pageNode.Attributes["data-page-number"].Value);
-                        }
+                        pages = int.Parse(pageNodeCounter[pageNodeCounter.Count - 1].Attributes["data-page-number"].Value);
                     }
 
                     var nodes =
                         htmlDoc.DocumentNode.SelectNodes(
                             "//div[@class='widget-container']//div[2]//div[3]//div[@class='giveaway__row-outer-wrap']//div[@class='giveaway__row-inner-wrap']");
-                    count += nodes?.Count ?? 0;
-                    AddGiveaways(nodes, giveawaysList);
+                    count += AddGiveaways(nodes, giveawaysList);
                 }
             }
 
@@ -405,8 +397,10 @@ namespace KryBot.Core.Sites
                 $"{Messages.GetDateTime()} {{SteamGifts}} {strings.ParseLoadGiveaways_Found} {count} {message} {pages} {strings.ParseLoadGiveaways_Pages}\n";
         }
 
-        private void AddGiveaways(HtmlNodeCollection nodes, List<SteamGiftsGiveaway> giveawaysList)
+        private int AddGiveaways(HtmlNodeCollection nodes, List<SteamGiftsGiveaway> giveawaysList)
         {
+            var count = 0;
+
             if (nodes != null)
             {
                 foreach (var node in nodes)
@@ -446,10 +440,13 @@ namespace KryBot.Core.Sites
                             sgGiveaway.Level <= MinLevel)
                         {
                             giveawaysList?.Add(sgGiveaway);
+                            count++;
                         }
                     }
                 }
             }
+
+            return count;
         }
 
         private SteamGiftsGiveaway GetJoinData(SteamGiftsGiveaway sgGiveaway)
