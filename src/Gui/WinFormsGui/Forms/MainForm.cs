@@ -944,7 +944,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             _bot.SteamTrade.Cookies.PhpSessId = CookieHelper.GetSessCookieInresponse(getLoginHref.Cookies,
                 "steamtrade.info", "PHPSESSID");
 
-            BrowserStart(location, Links.SteamTrade, "SteamTrade - Login");
+            BrowserStart(location, Links.SteamTrade, "SteamTrade");
             _bot.Save();
 
             toolStripStatusLabel.Image = Resources.load;
@@ -987,7 +987,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnUGLogin_Click(object sender, EventArgs e)
         {
             btnUGLogin.Enabled = false;
-            BrowserStart($"{Links.UseGamble}page/steam", Links.UseGamble, "UseGamble - Login");
+            BrowserStart($"{Links.UseGamble}page/steam", Links.UseGamble, "UseGamble");
             _bot.Save();
 
             toolStripStatusLabel.Image = Resources.load;
@@ -1027,7 +1027,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnSCLogin_Click(object sender, EventArgs e)
         {
             btnSCLogin.Enabled = false;
-            BrowserStart($"{Links.SteamCompanion}login", Links.SteamCompanion, "SteamCompanion - Login");
+            BrowserStart($"{Links.SteamCompanion}login", Links.SteamCompanion, "SteamCompanion");
             _bot.Save();
 
             toolStripStatusLabel.Image = Resources.load;
@@ -1067,7 +1067,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnSGLogin_Click(object sender, EventArgs e)
         {
             btnSGLogin.Enabled = false;
-            BrowserStart($"{Links.SteamGifts}?login", Links.SteamGifts, "SteamGifts - Login");
+            BrowserStart($"{Links.SteamGifts}?login", Links.SteamGifts, "SteamGifts");
 
             if (string.IsNullOrEmpty(_bot.SteamGifts.UserAgent))
             {
@@ -1113,7 +1113,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             btnGMLogin.Enabled = false;
             BrowserStart($"{Links.GameMiner}login/steam?backurl=http%3A%2F%2Fgameminer.net%2F%3Flang%3D" +
                          _settings.Lang + @"&agree=True",
-                "http://gameminer.net/?lang=" + _settings.Lang, "GameMiner - Login");
+                "http://gameminer.net/?lang=" + _settings.Lang, "GameMiner");
 
             if (string.IsNullOrEmpty(_bot.GameMiner.UserAgent))
             {
@@ -1564,7 +1564,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnSteamLogin_Click(object sender, EventArgs e)
         {
             BrowserStart("https://steamcommunity.com/login/home/?goto=0", "http://steamcommunity.com/id/",
-                "Steam - Login");
+                "Steam");
             _bot.Save();
 
             toolStripStatusLabel.Image = Resources.load;
@@ -1746,7 +1746,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnPBLogin_Click(object sender, EventArgs e)
         {
             btnPBLogin.Enabled = false;
-            BrowserStart(Links.PlayBlinkAuth, Links.PlayBlink, "PlayBlink - Login");
+            BrowserStart(Links.PlayBlinkAuth, Links.PlayBlink, "PlayBlink");
             _bot.Save();
 
             toolStripStatusLabel.Image = Resources.load;
@@ -1849,7 +1849,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void buttonLoginGA_Click(object sender, EventArgs e)
         {
             btnGALogin.Enabled = false;
-            BrowserStart(Links.GameAwaysAuth, Links.GameAways, "GameAways - Login");
+            BrowserStart(Links.GameAwaysAuth, Links.GameAways, "GameAways");
             _bot.Save();
 
             toolStripStatusLabel.Image = Resources.load;
@@ -1949,7 +1949,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private async void btnIGLogin_Click(object sender, EventArgs e)
         {
             btnIGLogin.Enabled = false;
-            BrowserStart(Links.InventoryGiftsAuth, Links.InventoryGifts, "InventoryGifts - Login");
+            BrowserStart(Links.InventoryGiftsAuth, Links.InventoryGifts, "InventoryGifts");
             _bot.Save();
 
             toolStripStatusLabel.Image = Resources.load;

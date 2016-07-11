@@ -18,12 +18,12 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private readonly string _title;
         private ChromiumWebBrowser _browser;
 
-        public Browser(Bot bot, string startPage, string endPage, string title, string lang)
+        public Browser(Bot bot, string startPage, string endPage, string site, string lang)
         {
             _bot = bot;
             _startPage = startPage;
             _endPage = endPage;
-            _title = title;
+            _title = $"{site} Login";
             _lang = lang;
             InitializeComponent();
             InitializeBrowserControl();
@@ -73,7 +73,12 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private void BrowserOnLoadingStateChanged(object sender,
             LoadingStateChangedEventArgs loadingStateChangedEventArgs)
         {
-            if (!loadingStateChangedEventArgs.IsLoading)
+			BeginInvoke(new Action(() =>
+			{
+				Text = $"{_title} - {_browser.Address}";
+			}));
+
+			if (!loadingStateChangedEventArgs.IsLoading)
             {
                 loadStatusLabel.Image = Resources.refresh;
 
