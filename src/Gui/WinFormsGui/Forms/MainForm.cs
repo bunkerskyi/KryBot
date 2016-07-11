@@ -1890,8 +1890,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
         private void buttonExitGA_Click(object sender, EventArgs e)
         {
-            _bot.GameAways.Logout();
-        }
+			_bot.GameAways.Logout();
+			BlockTabpage(tabPageGA, false);
+			btnGALogin.Enabled = true;
+			btnGALogin.Visible = true;
+			btnGAExit.Visible = false;
+			_bot.Save();
+		}
 
         private void linkLabelGA_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
