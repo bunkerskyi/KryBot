@@ -1194,6 +1194,12 @@ namespace KryBot.Gui.WinFormsGui.Forms
             Message_TryLogin("Steam");
             var login = await _bot.Steam.CheckLogin();
             LogMessage.Instance.AddMessage(login);
+
+			if(login.Success)
+			{
+				SetTitle(_bot.Steam.Username);
+			}
+
             return login.Success;
         }
 
@@ -1582,6 +1588,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
                 lblSteamStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
+
+				SetTitle(_bot.Steam.Username);
             }
             else
             {
@@ -1984,5 +1992,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
         {
             Process.Start(Links.InventoryGifts);
         }
+
+		private void SetTitle(string steamLogin)
+		{
+			Text = $"{Application.ProductName} [{Application.ProductVersion}] ({steamLogin})";
+		}
     }
 }

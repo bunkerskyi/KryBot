@@ -21,6 +21,7 @@ namespace KryBot.Core.Sites
 
         public bool Enabled { get; set; }
         public string ProfileLink { get; set; }
+		public string Username { get; set; }
         public SteamCookie Cookies { get; set; }
 
         public void Logout()
@@ -117,7 +118,8 @@ namespace KryBot.Core.Sites
                     else
                     {
                         ProfileLink = login.Attributes["href"].Value;
-                        task.SetResult(Messages.ParseProfile("Steam", login.Attributes["href"].Value.Split('/')[4]));
+						Username = login.Attributes["href"].Value.Split('/')[4];
+						task.SetResult(Messages.ParseProfile("Steam", Username));
                     }
                 }
                 else
