@@ -10,105 +10,113 @@ using KryBot.Core.Helpers;
 using KryBot.Core.Serializable.GitHub;
 using Newtonsoft.Json;
 
+using NLog;
+
 namespace KryBot.Core
 {
-    public static class Updater
-    {
-        /// <summary>
-        ///     Check application updates from GitHub repo.
-        /// </summary>
-        public static async Task<Log> CheckForUpdates()
-        {
-            GitHubRelease release;
-            try
-            {
-                release = await GetGitHubRelease();
-            }
-            catch (JsonReaderException)
-            {
-                return new Log("Updater: JsonReaderException", Color.Red, false);
-            }
+	public static class Updater
+	{
+		private static ILogger _logger = LogManager.GetCurrentClassLogger();
 
-            if (release.Tag != null &&
-                CompareVersion(Application.ProductVersion, release.Tag))
-            {
-                return new Log($"{strings.Updater_HaveUpdate} {release.Tag}", Color.Green, true);
-            }
-            return new Log($"{strings.Updater_CurrentVersion} {release.Tag}", Color.White, false);
-        }
+		/// <summary>
+		///     Check application updates from GitHub repo.
+		/// </summary>
+		public static async Task<Log> CheckForUpdates()
+		{
+			GitHubRelease release;
+			try
+			{
+				release = await GetGitHubRelease();
+			}
+			catch (JsonReaderException e)
+			{
+				_logger.Warn(e);
+				return new Log("Updater: JsonReaderException", Color.Red, false);
+			}
 
-        /// <summary>
-        ///     Update application.
-        /// </summary>
-        public static async Task<Log> Update()
-        {
-            try
-            {
-                DeleteTempFiles();
-                var release = await GetGitHubRelease();
-                var binaryAsset = release.Assets.FirstOrDefault(asset => asset.Name == FilePaths.KryBot);
-                if (binaryAsset == null)
-                {
-                    return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
-                }
-                var stream = new WebClient().OpenRead(binaryAsset.DownloadUrl);
-                if (stream == null)
-                {
-                    return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
-                }
-                using (var fileStream = File.Open(FilePaths.KryBotNew, FileMode.Create))
-                {
-                    await stream.CopyToAsync(fileStream);
-                }
-                File.Move(FilePaths.KryBot, FilePaths.KryBotOld);
-                try
-                {
-                    File.Move(FilePaths.KryBotNew, FilePaths.KryBot);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    File.Move(FilePaths.KryBotOld, FilePaths.KryBot);
-                    DeleteTempFiles();
-                    return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
-                }
-            }
-            catch (JsonReaderException)
-            {
-                return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                DeleteTempFiles();
-                return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
-            }
+			if (release.Tag != null &&
+				CompareVersion(Application.ProductVersion, release.Tag))
+			{
+				return new Log($"{strings.Updater_HaveUpdate} {release.Tag}", Color.Green, true);
+			}
+			return new Log($"{strings.Updater_CurrentVersion} {release.Tag}", Color.White, false);
+		}
 
-            return new Log(strings.Updater_Update_UpdateDone, Color.Green, true);
-        }
+		/// <summary>
+		///     Update application.
+		/// </summary>
+		public static async Task<Log> Update()
+		{
+			try
+			{
+				DeleteTempFiles();
+				var release = await GetGitHubRelease();
+				var binaryAsset = release.Assets.FirstOrDefault(asset => asset.Name == FilePaths.KryBot);
+				if (binaryAsset == null)
+				{
+					return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
+				}
+				var stream = new WebClient().OpenRead(binaryAsset.DownloadUrl);
+				if (stream == null)
+				{
+					return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
+				}
+				using (var fileStream = File.Open(FilePaths.KryBotNew, FileMode.Create))
+				{
+					await stream.CopyToAsync(fileStream);
+				}
+				File.Move(FilePaths.KryBot, FilePaths.KryBotOld);
+				try
+				{
+					File.Move(FilePaths.KryBotNew, FilePaths.KryBot);
+				}
+				catch (Exception ex)
+				{
+					_logger.Error(ex);
+					MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					File.Move(FilePaths.KryBotOld, FilePaths.KryBot);
+					DeleteTempFiles();
+					return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
+				}
+			}
+			catch (JsonReaderException e)
+			{
+				_logger.Warn(e);
+				return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
+			}
+			catch (Exception ex)
+			{
+				_logger.Error(ex);
+				MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				DeleteTempFiles();
+				return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
+			}
 
-        /// <summary>
-        ///     Compare two strings as verions.
-        /// </summary>
-        private static bool CompareVersion(string sClient, string sServer)
-        {
-            var vClient = new Version(sClient);
-            var vServer = new Version(sServer);
-            var compare = vClient.CompareTo(vServer);
+			return new Log(strings.Updater_Update_UpdateDone, Color.Green, true);
+		}
 
-            return compare == -1;
-        }
+		/// <summary>
+		///     Compare two strings as verions.
+		/// </summary>
+		private static bool CompareVersion(string sClient, string sServer)
+		{
+			var vClient = new Version(sClient);
+			var vServer = new Version(sServer);
+			var compare = vClient.CompareTo(vServer);
 
-        private static void DeleteTempFiles()
-        {
-            FileHelper.SafelyDelete(FilePaths.KryBotOld);
-            FileHelper.SafelyDelete(FilePaths.KryBotNew);
-        }
+			return compare == -1;
+		}
 
-        private static async Task<GitHubRelease> GetGitHubRelease()
-        {
-            var json = await Web.GetVersionInGitHubAsync(Links.GitHubLatestReliase);
-            return JsonConvert.DeserializeObject<GitHubRelease>(json);
-        }
-    }
+		private static void DeleteTempFiles()
+		{
+			FileHelper.SafelyDelete(FilePaths.KryBotOld);
+			FileHelper.SafelyDelete(FilePaths.KryBotNew);
+		}
+
+		private static async Task<GitHubRelease> GetGitHubRelease()
+		{
+			var json = await Web.GetVersionInGitHubAsync(Links.GitHubLatestReliase);
+			return JsonConvert.DeserializeObject<GitHubRelease>(json);
+		}
+	}
 }
