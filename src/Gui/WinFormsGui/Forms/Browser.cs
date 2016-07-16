@@ -33,14 +33,16 @@ namespace KryBot.Gui.WinFormsGui.Forms
         {
             if (!Cef.IsInitialized)
             {
-                var cefSettings = new CefSettings
+                Cef.Initialize(new CefSettings
                 {
                     UserAgent = CefTools.GetUserAgent(),
-                    CachePath = $"{Environment.CurrentDirectory}\\CefCache",
                     PersistSessionCookies = true,
-                    AcceptLanguageList = _lang
-                };
-                Cef.Initialize(cefSettings);
+                    AcceptLanguageList = _lang,
+                    CachePath = $"{Environment.CurrentDirectory}\\lib\\CefSharp\\Cache",
+                    LocalesDirPath = $"{Environment.CurrentDirectory}\\lib\\CefSharp\\locales",
+                    ResourcesDirPath = $"{Environment.CurrentDirectory}\\lib\\CefSharp\\pak",
+                    BrowserSubprocessPath = $"{Environment.CurrentDirectory}\\lib\\CefSharp\\CefSharp.BrowserSubprocess.exe"
+                });
             }
 
             _browser = new ChromiumWebBrowser(_startPage)

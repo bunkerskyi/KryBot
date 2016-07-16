@@ -216,7 +216,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
-    <None Include="Properties\app.manifest" />
+    <None Include="Properties\app.manifest">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -273,8 +275,37 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>IF NOT EXIST lib\ mkdir lib
+IF EXIST Exceptionless.dll move Exceptionless.dll lib\
+IF EXIST Exceptionless.Portable.dll move Exceptionless.Portable.dll lib\
+IF EXIST Exceptionless.Windows.dll move Exceptionless.Windows.dll lib\
+IF EXIST KryBot.CommonResources.dll move KryBot.CommonResources.dll lib\
+IF EXIST KryBot.Core.dll move KryBot.Core.dll lib\
+IF EXIST Newtonsoft.Json.dll move Newtonsoft.Json.dll lib\
+IF EXIST RestSharp.dll move RestSharp.dll lib\
+IF EXIST HtmlAgilityPack.dll move HtmlAgilityPack.dll lib\
+
+IF NOT EXIST lib\CefSharp mkdir lib\CefSharp
+IF EXIST CefSharp.Core.dll move CefSharp.Core.dll lib\CefSharp
+IF EXIST CefSharp.BrowserSubprocess.exe move CefSharp.BrowserSubprocess.exe lib\CefSharp
+IF EXIST CefSharp.BrowserSubprocess.Core.dll move CefSharp.BrowserSubprocess.Core.dll lib\CefSharp
+IF EXIST CefSharp.dll move CefSharp.dll lib\CefSharp
+IF EXIST CefSharp.WinForms.dll move CefSharp.WinForms.dll lib\CefSharp
+IF EXIST libcef.dll move libcef.dll lib\CefSharp
+IF EXIST widevinecdmadapter.dll move widevinecdmadapter.dll lib\CefSharp
+IF EXIST icudtl.dat move icudtl.dat lib\CefSharp
+IF EXIST natives_blob.bin move natives_blob.bin lib\CefSharp
+IF EXIST snapshot_blob.bin move snapshot_blob.bin lib\CefSharp
+IF EXIST d3dcompiler_47.dll move d3dcompiler_47.dll lib\CefSharp
+
+IF NOT EXIST lib\CefSharp\locales mkdir lib\CefSharp\locales
+IF EXIST locales\ move locales\* lib\CefSharp\locales
+
+IF NOT EXIST lib\CefSharp\pak mkdir lib\CefSharp\pak
+IF EXIST cef.pak move cef.pak lib\CefSharp\pak\
+IF EXIST cef_100_percent.pak move cef_100_percent.pak lib\CefSharp\pak
+IF EXIST cef_200_percent.pak move cef_200_percent.pak lib\CefSharp\pak
+IF EXIST cef_extensions.pak move cef_extensions.pak lib\CefSharp\pak</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\..\packages\cef.redist.x64.3.2704.1432\build\cef.redist.x64.targets" Condition="Exists('..\..\packages\cef.redist.x64.3.2704.1432\build\cef.redist.x64.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
