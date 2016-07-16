@@ -134,7 +134,8 @@ namespace KryBot.Core.Sites
                 }
                 else
                 {
-                    task.SetResult(Messages.GiveawayNotJoined("SteamGifts", giveaway.Name, await GetFailedDetail(giveaway.Link)));
+                    task.SetResult(Messages.GiveawayNotJoined("SteamGifts", giveaway.Name,
+                        await GetFailedDetail(giveaway.Link)));
                 }
             });
             return task.Task.Result;
@@ -383,7 +384,8 @@ namespace KryBot.Core.Sites
                     var pageNodeCounter = htmlDoc.DocumentNode.SelectNodes("//div[@class='pagination__navigation']/a");
                     if (pageNodeCounter != null)
                     {
-                        pages = int.Parse(pageNodeCounter[pageNodeCounter.Count - 1].Attributes["data-page-number"].Value);
+                        pages =
+                            int.Parse(pageNodeCounter[pageNodeCounter.Count - 1].Attributes["data-page-number"].Value);
                     }
 
                     var nodes =

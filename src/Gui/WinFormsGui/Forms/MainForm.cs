@@ -1195,10 +1195,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
             var login = await _bot.Steam.CheckLogin();
             LogMessage.Instance.AddMessage(login);
 
-			if(login.Success)
-			{
-				SetTitle(_bot.Steam.Username);
-			}
+            if (login.Success)
+            {
+                SetTitle(_bot.Steam.Username);
+            }
 
             return login.Success;
         }
@@ -1589,7 +1589,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 lblSteamStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
 
-				SetTitle(_bot.Steam.Username);
+                SetTitle(_bot.Steam.Username);
             }
             else
             {
@@ -1890,13 +1890,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
         private void buttonExitGA_Click(object sender, EventArgs e)
         {
-			_bot.GameAways.Logout();
-			BlockTabpage(tabPageGA, false);
-			btnGALogin.Enabled = true;
-			btnGALogin.Visible = true;
-			btnGAExit.Visible = false;
-			_bot.Save();
-		}
+            _bot.GameAways.Logout();
+            BlockTabpage(tabPageGA, false);
+            btnGALogin.Enabled = true;
+            btnGALogin.Visible = true;
+            btnGAExit.Visible = false;
+            _bot.Save();
+        }
 
         private void linkLabelGA_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -1998,9 +1998,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             Process.Start(Links.InventoryGifts);
         }
 
-		private void SetTitle(string steamLogin)
-		{
-			Text = $"{Application.ProductName} [{Application.ProductVersion}] ({steamLogin})";
-		}
+        private void SetTitle(string steamLogin)
+        {
+            Text = $"{Application.ProductName} [{Application.ProductVersion}] ({steamLogin})";
+        }
     }
 }

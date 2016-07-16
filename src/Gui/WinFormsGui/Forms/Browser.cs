@@ -41,7 +41,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     CachePath = $"{Environment.CurrentDirectory}\\lib\\CefSharp\\Cache",
                     LocalesDirPath = $"{Environment.CurrentDirectory}\\lib\\CefSharp\\locales",
                     ResourcesDirPath = $"{Environment.CurrentDirectory}\\lib\\CefSharp\\pak",
-                    BrowserSubprocessPath = $"{Environment.CurrentDirectory}\\lib\\CefSharp\\CefSharp.BrowserSubprocess.exe"
+                    BrowserSubprocessPath =
+                        $"{Environment.CurrentDirectory}\\lib\\CefSharp\\CefSharp.BrowserSubprocess.exe"
                 });
             }
 
@@ -75,12 +76,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private void BrowserOnLoadingStateChanged(object sender,
             LoadingStateChangedEventArgs loadingStateChangedEventArgs)
         {
-			BeginInvoke(new Action(() =>
-			{
-				Text = $"{_title} - {_browser.Address}";
-			}));
+            BeginInvoke(new Action(() => { Text = $"{_title} - {_browser.Address}"; }));
 
-			if (!loadingStateChangedEventArgs.IsLoading)
+            if (!loadingStateChangedEventArgs.IsLoading)
             {
                 loadStatusLabel.Image = Resources.refresh;
 

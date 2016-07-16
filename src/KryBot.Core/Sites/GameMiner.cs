@@ -63,12 +63,12 @@ namespace KryBot.Core.Sites
 
                     if (lot.Price >= JoinPointsLimit)
                     {
-                        break;    
+                        break;
                     }
 
                     if (lot.Price > PointsReserv)
                     {
-                       break;
+                        break;
                     }
 
                     lot.Name = giveaway.Game.Name;
