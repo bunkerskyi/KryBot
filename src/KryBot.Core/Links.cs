@@ -46,6 +46,8 @@
 
         public static readonly string SteamGiftsSync = $"{SteamGifts}account/profile/sync";
 
+        public const string SteamGiftsBlackList = "https://www.steamgifts.com/account/settings/giveaways/filters";
+
         #endregion
 
         #region SteamCompanion
