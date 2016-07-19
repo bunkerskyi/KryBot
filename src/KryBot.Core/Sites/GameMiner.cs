@@ -275,9 +275,20 @@ namespace KryBot.Core.Sites
                         {
                             task.SetResult(Messages.GiveawayHaveWon("GameMiner", nodes.Count, Links.GameMinerWon));
                         }
+                        else
+                        {
+                            task.SetResult(null);
+                        }
+                    }
+                    else
+                    {
+                        task.SetResult(null);
                     }
                 }
-                task.SetResult(null);
+                else
+                {
+                    task.SetResult(null);
+                }
             });
             return task.Task.Result;
         }
