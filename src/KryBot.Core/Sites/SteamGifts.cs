@@ -431,5 +431,45 @@ namespace KryBot.Core.Sites
         }
 
         #endregion
+
+        public async Task<Dictionary<int, string>> GetBlaclList()
+        {
+            var task = new TaskCompletionSource<Dictionary<int, string>>();
+            await Task.Run(() =>
+            {
+                var response = Web.Get(Links.SteamGiftsBlackList, Cookies.Generate(), UserAgent);
+
+                if(response.RestResponse.Content != string.Empty)
+                {
+                    var htmlDoc = new HtmlDocument();
+                    htmlDoc.LoadHtml(response.RestResponse.Content);
+
+                    var nodes = htmlDoc.DocumentNode.SelectNodes("//div[@class='table__row-outer-wrap']");
+
+                    Dictionary<int, string> gameList = new Dictionary<int, string>();
+
+                    if (nodes.Count > 0)
+                    {
+                        foreach (var game in nodes)
+                        {
+                            var name = game.SelectSingleNode(".//p[@class='table__column__heading']");
+                            var id = game.SelectSingleNode(".//a[@class='table__column__secondary-link']");
+
+                            if (name != null && id != null)
+                            {
+                                gameList.Add(int.Parse(id.InnerText.Split('/')[4].Split('/')[0]), name.InnerText);
+                            }
+                        }    
+                    }
+
+                    task.SetResult(gameList);
+                }
+                else
+                {
+                    task.SetResult(null);
+                }
+            });
+            return task.Task.Result;
+        }
     }
 }
