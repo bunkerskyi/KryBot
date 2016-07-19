@@ -183,5 +183,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 return SortOrder.Ascending;
             }
         }
+
+        private void FormBlackList_Resize(object sender, EventArgs e)
+        {
+            listView.Columns[1].Width = listView.Width - listView.Columns[0].Width;
+        }
     }
 }
