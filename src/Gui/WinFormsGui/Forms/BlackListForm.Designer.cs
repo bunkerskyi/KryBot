@@ -32,7 +32,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		/// </summary>
 		private void InitializeComponent()
 		{
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormBlackList));
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.delToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -133,6 +132,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.Text = "Blacklist";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormBlackList_FormClosing);
             this.Load += new System.EventHandler(this.formBlackList_Load);
+            this.Resize += new System.EventHandler(this.FormBlackList_Resize);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);
