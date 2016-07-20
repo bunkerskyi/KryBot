@@ -40,7 +40,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.listView = new System.Windows.Forms.ListView();
-            this.steamGiftsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -76,8 +75,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             // loadFromИзToolStripMenuItem
             // 
             this.loadFromИзToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.профильSteamToolStripMenuItem,
-            this.steamGiftsToolStripMenuItem});
+            this.профильSteamToolStripMenuItem});
             this.loadFromИзToolStripMenuItem.Name = "loadFromИзToolStripMenuItem";
             this.loadFromИзToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
             this.loadFromИзToolStripMenuItem.Text = "Load from...";
@@ -85,7 +83,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             // профильSteamToolStripMenuItem
             // 
             this.профильSteamToolStripMenuItem.Name = "профильSteamToolStripMenuItem";
-            this.профильSteamToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.профильSteamToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.профильSteamToolStripMenuItem.Text = "Steam profile";
             this.профильSteamToolStripMenuItem.Click += new System.EventHandler(this.профильSteamToolStripMenuItem_Click);
             // 
@@ -117,13 +115,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
             this.listView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView_ColumnClick);
-            // 
-            // steamGiftsToolStripMenuItem
-            // 
-            this.steamGiftsToolStripMenuItem.Name = "steamGiftsToolStripMenuItem";
-            this.steamGiftsToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
-            this.steamGiftsToolStripMenuItem.Text = "SteamGifts blacklist";
-            this.steamGiftsToolStripMenuItem.Click += new System.EventHandler(this.steamGiftsToolStripMenuItem_Click);
             // 
             // FormBlackList
             // 
@@ -171,7 +162,5 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			Text = strings.Blacklist;
             Icon = Icon.FromHandle(Resources.blocked.GetHicon());
         }
-
-        private System.Windows.Forms.ToolStripMenuItem steamGiftsToolStripMenuItem;
-    }
+	}
 }
