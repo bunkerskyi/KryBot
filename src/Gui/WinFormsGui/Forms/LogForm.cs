@@ -40,7 +40,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             Height = _settings.LogHeight;
             Width = _settings.LogWidth;
             var owner = Owner as FormMain;
-            if (owner != null) AppendText(richTextBox1, owner.LogBuffer.Content, owner.LogBuffer.Color);
+            if (owner != null) AppendText(richTextBox, owner.LogBuffer.Content, owner.LogBuffer.Color);
         }
 
         public void FormHide()
@@ -78,8 +78,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            richTextBox1.SelectionStart = richTextBox1.Text.Length;
-            richTextBox1.ScrollToCaret();
+            richTextBox.SelectionStart = richTextBox.Text.Length;
+            richTextBox.ScrollToCaret();
         }
 
         private void richTextBox1_LinkClicked(object sender, LinkClickedEventArgs e)
@@ -98,7 +98,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             var messageEvent = args as MessageEventArgs;
             if (messageEvent != null)
             {
-                AppendText(richTextBox1, messageEvent.Message, messageEvent.Color);
+                AppendText(richTextBox, messageEvent.Message, messageEvent.Color);
             }
         }
     }

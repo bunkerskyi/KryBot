@@ -13,18 +13,18 @@ namespace KryBot.Gui.WinFormsGui.Forms
     {
         private readonly Bot _bot;
         private readonly string _endPage;
-        private readonly string _phpSessId;
+        private readonly string _lang;
         private readonly string _startPage;
         private readonly string _title;
         private ChromiumWebBrowser _browser;
 
-        public Browser(Bot bot, string startPage, string endPage, string title, string phpSessId)
+        public Browser(Bot bot, string startPage, string endPage, string site, string lang)
         {
             _bot = bot;
             _startPage = startPage;
             _endPage = endPage;
-            _title = title;
-            _phpSessId = phpSessId;
+            _title = $"{site} Login";
+            _lang = lang;
             InitializeComponent();
             InitializeBrowserControl();
         }
@@ -33,11 +33,17 @@ namespace KryBot.Gui.WinFormsGui.Forms
         {
             if (!Cef.IsInitialized)
             {
-                var cefSettings = new CefSettings
+                Cef.Initialize(new CefSettings
                 {
-                    UserAgent = CefTools.GetUserAgent()
-                };
-                Cef.Initialize(cefSettings);
+                    UserAgent = CefTools.GetUserAgent(),
+                    PersistSessionCookies = true,
+                    AcceptLanguageList = _lang,
+                    CachePath = $"{Environment.CurrentDirectory}\\lib\\CefSharp\\Cache",
+                    LocalesDirPath = $"{Environment.CurrentDirectory}\\lib\\CefSharp\\locales",
+                    ResourcesDirPath = $"{Environment.CurrentDirectory}\\lib\\CefSharp\\pak",
+                    BrowserSubprocessPath =
+                        $"{Environment.CurrentDirectory}\\lib\\CefSharp\\CefSharp.BrowserSubprocess.exe"
+                });
             }
 
             _browser = new ChromiumWebBrowser(_startPage)
@@ -56,13 +62,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
             toolStripStatusLabelChromium.Text =
                 $"Chromium: {Cef.ChromiumVersion} Cef: {Cef.CefVersion} CefSharp: {Cef.CefSharpVersion}";
 
-            if (_phpSessId != "")
+            if (_startPage == Links.SteamTrade)
             {
                 await Cef.GetGlobalCookieManager().SetCookieAsync(Links.SteamTrade, new Cookie
                 {
                     Domain = "steamtrade.info",
                     Name = "PHPSESSID",
-                    Value = _phpSessId
+                    Value = _bot.SteamTrade.Cookies.PhpSessId
                 });
             }
         }
@@ -70,6 +76,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private void BrowserOnLoadingStateChanged(object sender,
             LoadingStateChangedEventArgs loadingStateChangedEventArgs)
         {
+            BeginInvoke(new Action(() => { Text = $"{_title} - {_browser.Address}"; }));
+
             if (!loadingStateChangedEventArgs.IsLoading)
             {
                 loadStatusLabel.Image = Resources.refresh;

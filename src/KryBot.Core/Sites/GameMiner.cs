@@ -42,8 +42,10 @@ namespace KryBot.Core.Sites
             Enabled = false;
         }
 
-        private void AddGiveaways(JsonRootObject json)
+        private int AddGiveaways(JsonRootObject json)
         {
+            var count = 0;
+
             if (json != null)
             {
                 foreach (var giveaway in json.Giveaways)
@@ -54,7 +56,17 @@ namespace KryBot.Core.Sites
                         break;
                     }
 
-                    if (lot.Price > Points || lot.Price > JoinPointsLimit)
+                    if (lot.Price > Points)
+                    {
+                        break;
+                    }
+
+                    if (lot.Price >= JoinPointsLimit)
+                    {
+                        break;
+                    }
+
+                    if (lot.Price > PointsReserv)
                     {
                         break;
                     }
@@ -82,8 +94,11 @@ namespace KryBot.Core.Sites
                     }
 
                     Giveaways?.Add(lot);
+                    count++;
                 }
             }
+
+            return count;
         }
 
         #region JoinGivaway	
@@ -113,16 +128,21 @@ namespace KryBot.Core.Sites
                         }
                         else
                         {
-                            var jresponse =
-                                JsonConvert.DeserializeObject<JsonResponseError>(response.RestResponse.Content);
                             task.SetResult(Messages.GiveawayNotJoined("GameMiner", giveaway.Name,
-                                jresponse.Error.Message));
+                                response.RestResponse.Content));
                         }
                     }
                     catch (JsonReaderException)
                     {
                         task.SetResult(Messages.GiveawayNotJoined("GameMiner", giveaway.Name,
                             response.RestResponse.Content));
+                    }
+                    catch (JsonSerializationException)
+                    {
+                        var jresponse =
+                            JsonConvert.DeserializeObject<JsonResponseError>(response.RestResponse.Content);
+                        task.SetResult(Messages.GiveawayNotJoined("GameMiner", giveaway.Name,
+                            jresponse.Error.Message));
                     }
                 }
                 else
@@ -255,9 +275,20 @@ namespace KryBot.Core.Sites
                         {
                             task.SetResult(Messages.GiveawayHaveWon("GameMiner", nodes.Count, Links.GameMinerWon));
                         }
+                        else
+                        {
+                            task.SetResult(null);
+                        }
+                    }
+                    else
+                    {
+                        task.SetResult(null);
                     }
                 }
-                task.SetResult(null);
+                else
+                {
+                    task.SetResult(null);
+                }
             });
             return task.Task.Result;
         }
@@ -311,8 +342,9 @@ namespace KryBot.Core.Sites
 
             if (response.RestResponse.Content != string.Empty)
             {
+                var count = 0;
                 var jsonResponse = JsonConvert.DeserializeObject<JsonRootObject>(response.RestResponse.Content);
-                AddGiveaways(jsonResponse);
+                count += AddGiveaways(jsonResponse);
 
                 if (jsonResponse.LastPage > 1)
                 {
@@ -320,12 +352,12 @@ namespace KryBot.Core.Sites
                     {
                         response = Web.Get($"{url}&page={i + 1}", Cookies.Generate(lang), UserAgent);
                         jsonResponse = JsonConvert.DeserializeObject<JsonRootObject>(response.RestResponse.Content);
-                        AddGiveaways(jsonResponse);
+                        count += AddGiveaways(jsonResponse);
                     }
                 }
 
                 return
-                    $"{Messages.GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {jsonResponse.Total} " +
+                    $"{Messages.GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {count} " +
                     $"{message} {jsonResponse.LastPage} {strings.ParseLoadGiveaways_Pages}\n";
             }
 

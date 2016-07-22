@@ -114,7 +114,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
         private async void добавитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new TextBoxForm("Enter id", true);
+            var form = new TextBoxForm(strings.BlacklistForm_EnterId, true);
             form.ShowDialog();
             if (Properties.Settings.Default._idCache != "0")
             {

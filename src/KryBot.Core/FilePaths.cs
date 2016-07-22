@@ -11,5 +11,7 @@
         public const string KryBotOld = "KryBot.exe.old";
 
         public const string KryBotNew = "KryBot.exe.new";
+
+        public const string KryBotArchive = "KryBot.zip";
     }
 }

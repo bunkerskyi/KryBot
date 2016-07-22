@@ -349,7 +349,7 @@
     <value>No regional restrictions</value>
   </data>
   <data name="SettingsForm_cbSCAutojoin" xml:space="preserve">
-    <value>Automatic entry into the group (required authorization in Steam)</value>
+    <value>Auto entry into the group (required authorization in Steam)</value>
   </data>
   <data name="SettingsForm_cbSCContributors" xml:space="preserve">
     <value>Contributors giveaways</value>
@@ -454,7 +454,7 @@
     <value>The update is complete. Restarting...</value>
   </data>
   <data name="Updater_Update_UpdateFailed" xml:space="preserve">
-    <value>When updating the error occurred</value>
+    <value>When updating the error occurred. Download the manual: https://github.com/KriBetko/KryBot/releases</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Warning</value>
@@ -497,5 +497,17 @@
   </data>
   <data name="SettingsForm_cbIGCSGO" xml:space="preserve">
     <value>CS:GO items</value>
+  </data>
+  <data name="BlacklistForm_EnterId" xml:space="preserve">
+    <value>Enter game ID</value>
+  </data>
+  <data name="SettingsForm_FirstCheap" xml:space="preserve">
+    <value>cheap</value>
+  </data>
+  <data name="SettingsForm_FirstExpensive" xml:space="preserve">
+    <value>expensive</value>
+  </data>
+  <data name="Settngs_CreateShortcut" xml:space="preserve">
+    <value>Create shortcut</value>
   </data>
 </root>

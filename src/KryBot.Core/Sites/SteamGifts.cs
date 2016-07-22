@@ -101,7 +101,7 @@ namespace KryBot.Core.Sites
         private async Task<Log> JoinGiveaway(SteamGiftsGiveaway giveaway)
         {
             var task = new TaskCompletionSource<Log>();
-            await Task.Run(() =>
+            await Task.Run(async () =>
             {
                 Thread.Sleep(400);
                 giveaway = GetJoinData(giveaway);
@@ -134,13 +134,14 @@ namespace KryBot.Core.Sites
                 }
                 else
                 {
-                    task.SetResult(Messages.GiveawayNotJoined("SteamGifts", giveaway.Name, "Failed to get Token"));
+                    task.SetResult(Messages.GiveawayNotJoined("SteamGifts", giveaway.Name,
+                        await GetFailedDetail(giveaway.Link)));
                 }
             });
             return task.Task.Result;
         }
 
-        public async Task Join(Blacklist blacklist, bool sort, bool sortToMore)
+        public async Task Join(Blacklist blacklist, bool sort, bool sortToMore, bool wishlistNotSort)
         {
             LogMessage.Instance.AddMessage(await LoadGiveawaysAsync(blacklist));
 
@@ -158,7 +159,49 @@ namespace KryBot.Core.Sites
                     }
                 }
 
+                if (SortToLessLevel)
+                {
+                    Giveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
+                }
+
                 foreach (var giveaway in Giveaways)
+                {
+                    if (giveaway.Price <= Points && PointsReserv <= Points - giveaway.Price)
+                    {
+                        LogMessage.Instance.AddMessage(await JoinGiveaway(giveaway));
+                    }
+                }
+            }
+
+            if (Giveaways?.Count > 0)
+            {
+                if (sort)
+                {
+                    if (sortToMore)
+                    {
+                        if (wishlistNotSort)
+                        {
+                            Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+                        }
+                    }
+                    else
+                    {
+                        if (wishlistNotSort)
+                        {
+                            Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+                        }
+                    }
+                }
+
+                if (SortToLessLevel)
+                {
+                    if (wishlistNotSort)
+                    {
+                        Giveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
+                    }
+                }
+
+                foreach (var giveaway in WishlistGiveaways)
                 {
                     if (giveaway.Price <= Points && PointsReserv <= Points - giveaway.Price)
                     {
@@ -301,7 +344,7 @@ namespace KryBot.Core.Sites
 
                 if (Regular)
                 {
-                    LoadGiveawaysByUrl(
+                    content += LoadGiveawaysByUrl(
                         $"{Links.SteamGiftsSearch}",
                         strings.ParseLoadGiveaways_RegularGiveawaysIn,
                         Giveaways);
@@ -327,11 +370,10 @@ namespace KryBot.Core.Sites
             var count = 0;
             var pages = 1;
 
-
             for (var i = 0; i < pages; i++)
             {
                 var response = Web.Get(
-                    $"{url}{(i > 0 ? $"&page={i + 1}" : string.Empty)}",
+                    $"{url}{(i > 0 ? $"?page={i + 1}" : string.Empty)}",
                     Cookies.Generate(), UserAgent);
 
                 if (response.RestResponse.Content != string.Empty)
@@ -342,20 +384,14 @@ namespace KryBot.Core.Sites
                     var pageNodeCounter = htmlDoc.DocumentNode.SelectNodes("//div[@class='pagination__navigation']/a");
                     if (pageNodeCounter != null)
                     {
-                        var pageNode =
-                            htmlDoc.DocumentNode.SelectSingleNode(
-                                $"//div[@class='pagination__navigation']/a[{pageNodeCounter.Count - 1}]");
-                        if (pageNode != null)
-                        {
-                            pages = int.Parse(pageNode.Attributes["data-page-number"].Value);
-                        }
+                        pages =
+                            int.Parse(pageNodeCounter[pageNodeCounter.Count - 1].Attributes["data-page-number"].Value);
                     }
 
                     var nodes =
                         htmlDoc.DocumentNode.SelectNodes(
                             "//div[@class='widget-container']//div[2]//div[3]//div[@class='giveaway__row-outer-wrap']//div[@class='giveaway__row-inner-wrap']");
-                    count += nodes?.Count ?? 0;
-                    AddGiveaways(nodes, giveawaysList);
+                    count += AddGiveaways(nodes, giveawaysList);
                 }
             }
 
@@ -363,8 +399,10 @@ namespace KryBot.Core.Sites
                 $"{Messages.GetDateTime()} {{SteamGifts}} {strings.ParseLoadGiveaways_Found} {count} {message} {pages} {strings.ParseLoadGiveaways_Pages}\n";
         }
 
-        private void AddGiveaways(HtmlNodeCollection nodes, List<SteamGiftsGiveaway> giveawaysList)
+        private int AddGiveaways(HtmlNodeCollection nodes, List<SteamGiftsGiveaway> giveawaysList)
         {
+            var count = 0;
+
             if (nodes != null)
             {
                 foreach (var node in nodes)
@@ -391,7 +429,7 @@ namespace KryBot.Core.Sites
                         }
 
                         var level = node.SelectSingleNode(".//div[@title='Contributor Level']");
-                        sgGiveaway.Level = level == null ? 0 : int.Parse(level.InnerText.Split(' ')[1].Replace("+", ""));
+                        sgGiveaway.Level = level == null ? 0 : int.Parse(level.InnerText.Split(' ')[1].Trim('+'));
 
                         var region = node.SelectSingleNode(".//a[@title='Region Restricted']");
                         if (region != null)
@@ -401,13 +439,16 @@ namespace KryBot.Core.Sites
 
                         if (sgGiveaway.Price <= Points &&
                             sgGiveaway.Price <= JoinPointLimit &&
-                            sgGiveaway.Level >= MinLevel)
+                            sgGiveaway.Level <= MinLevel)
                         {
                             giveawaysList?.Add(sgGiveaway);
+                            count++;
                         }
                     }
                 }
             }
+
+            return count;
         }
 
         private SteamGiftsGiveaway GetJoinData(SteamGiftsGiveaway sgGiveaway)
@@ -428,6 +469,39 @@ namespace KryBot.Core.Sites
                 }
             }
             return sgGiveaway;
+        }
+
+        private async Task<string> GetFailedDetail(string url)
+        {
+            var task = new TaskCompletionSource<string>();
+            await Task.Run(() =>
+            {
+                var response = Web.Get($"{Links.SteamGifts}{url}", Cookies.Generate(), UserAgent);
+
+                if (response.RestResponse.Content != string.Empty)
+                {
+                    var htmlDoc = new HtmlDocument();
+                    htmlDoc.LoadHtml(response.RestResponse.Content);
+
+                    var errorNode =
+                        htmlDoc.DocumentNode.SelectSingleNode(
+                            "//div[contains(@class, 'sidebar__error') and contains(@class, 'is-disabled')]");
+
+                    if (errorNode != null)
+                    {
+                        task.SetResult(errorNode.InnerText.Trim());
+                    }
+                    else
+                    {
+                        task.SetResult("Failed to get Token");
+                    }
+                }
+                else
+                {
+                    task.SetResult("Failed to get Token");
+                }
+            });
+            return task.Task.Result;
         }
 
         #endregion

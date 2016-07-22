@@ -168,6 +168,12 @@
   <data name="ParseLoadGiveaways_FoundGiveAwaysInWishList" xml:space="preserve">
     <value>Найдено раздач в вишлисте</value>
   </data>
+  <data name="ParseLoadGiveaways_FoundGiveAwaysInRegion" xml:space="preserve">
+    <value>Найдено раздач с региональными ограничениями</value>
+  </data>
+  <data name="ParseLoadGiveaways_FoundGiveAwaysInMinNumberCopies" xml:space="preserve">
+    <value>Найдено раздач с минимальным количеством копий</value>
+  </data>
   <data name="ParseLoadGiveaways_FoundMatchGiveaways" xml:space="preserve">
     <value>Найдено подходящих раздач</value>
   </data>
@@ -265,7 +271,7 @@
     <value>Обновление завершено. Перезапуск...</value>
   </data>
   <data name="Updater_Update_UpdateFailed" xml:space="preserve">
-    <value>При обновлении произошла ошибка</value>
+    <value>При обновлении произошла ошибка. Скачайте вручную: https://github.com/KriBetko/KryBot/releases</value>
   </data>
   <data name="Warning" xml:space="preserve">
     <value>Предупреждение</value>
@@ -301,7 +307,7 @@
     <value>Нужна авторизация в Steam</value>
   </data>
   <data name="CookieForm_MustRestart" xml:space="preserve">
-    <value>Для применения измененией нужен перезапуск приложения.</value>
+    <value>Для применения изменений нужен перезапуск приложения.</value>
   </data>
   <data name="CookieForm_Save" xml:space="preserve">
     <value>Сохранить</value>
@@ -490,5 +496,17 @@
   </data>
   <data name="SettingsForm_cbIGTF2" xml:space="preserve">
     <value>TF2 предметы</value>
+  </data>
+  <data name="BlacklistForm_EnterId" xml:space="preserve">
+    <value>Введите ID игры</value>
+  </data>
+  <data name="SettingsForm_FirstCheap" xml:space="preserve">
+    <value>дорогие</value>
+  </data>
+  <data name="SettingsForm_FirstExpensive" xml:space="preserve">
+    <value>дешевые</value>
+  </data>
+  <data name="Settngs_CreateShortcut" xml:space="preserve">
+    <value>Создать ярлык</value>
   </data>
 </root>

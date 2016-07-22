@@ -31,6 +31,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
         {
             LoadLags();
 
+            cbSortBy.Items.Add(strings.SettingsForm_FirstCheap);
+            cbSortBy.Items.Add(strings.SettingsForm_FirstExpensive);
             cbSortBy.Text = cbSortBy.Items[0].ToString();
 
             if (_bot.Timer)
@@ -51,12 +53,12 @@ namespace KryBot.Gui.WinFormsGui.Forms
             cbSort.Checked = _bot.Sort;
             if (_bot.SortToMore)
             {
-                cbSortBy.Text = @"дорогие";
+                cbSortBy.Text = strings.SettingsForm_FirstExpensive;
             }
 
             if (_bot.SortToLess)
             {
-                cbSortBy.Text = @"дешевые";
+                cbSortBy.Text = strings.SettingsForm_FirstCheap;
             }
 
             cbGMRegular.Checked = _bot.GameMiner.Regular;
@@ -141,8 +143,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             }
 
             _bot.Sort = cbSort.Checked;
-            _bot.SortToMore = cbSortBy.Text == @"дорогие";
-            _bot.SortToLess = cbSortBy.Text == @"дешевые";
+            _bot.SortToMore = cbSortBy.Text == strings.SettingsForm_FirstExpensive;
+            _bot.SortToLess = cbSortBy.Text == strings.SettingsForm_FirstCheap;
 
             _bot.GameMiner.Regular = cbGMRegular.Checked;
             _bot.GameMiner.Sandbox = chGMSandbox.Checked;
@@ -224,10 +226,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             form.ShowDialog();
         }
 
-        private void btnSPCookies_Click(object sender, EventArgs e)
+        private void btnUGCookies_Click(object sender, EventArgs e)
         {
             var names = new List<string> {"PHPSESSID:" + _bot.UseGamble.Cookies.PhpSessId};
-
             var form = new FormCookie("UseGamble", names, _bot);
             form.ShowDialog();
         }
