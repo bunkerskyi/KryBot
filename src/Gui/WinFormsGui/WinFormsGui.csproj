@@ -281,7 +281,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>IF NOT EXIST lib\ mkdir lib
+    <PostBuildEvent>IF EXIST lib\CefSharp\Cache rd lib\CefSharp\Cache
+
+IF NOT EXIST lib\ mkdir lib
 IF EXIST Exceptionless.dll move Exceptionless.dll lib\
 IF EXIST Exceptionless.Portable.dll move Exceptionless.Portable.dll lib\
 IF EXIST Exceptionless.Windows.dll move Exceptionless.Windows.dll lib\
