@@ -220,5 +220,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 MessageBox.Show(strings.Blacklist_NeedAuth, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void FormBlackList_Resize(object sender, EventArgs e)
+        {
+            listView.Columns[1].Width = listView.Width - listView.Columns[0].Width;
+        }
     }
 }

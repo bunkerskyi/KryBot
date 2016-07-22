@@ -141,6 +141,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.Text = "Blacklist";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormBlackList_FormClosing);
             this.Load += new System.EventHandler(this.formBlackList_Load);
+            this.Resize += new System.EventHandler(this.FormBlackList_Resize);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.statusStrip.ResumeLayout(false);
