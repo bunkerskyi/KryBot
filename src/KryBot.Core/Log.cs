@@ -24,7 +24,6 @@ namespace KryBot.Core
         }
 
         public string Content { get; set; }
-<<<<<<< HEAD:src/KryBot.Core/Log.cs
         public Color Color { get; }
         public bool Success { get; }
 
@@ -32,10 +31,5 @@ namespace KryBot.Core
         {
             return Content;
         }
-=======
-        public Color Color { get; private set; }
-        public bool Success { get; private set; }
-        public bool Echo { get; private set; }
->>>>>>> refs/remotes/origin/master:src/KryBot/Log.cs
     }
 }

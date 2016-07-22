@@ -13,10 +13,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private readonly int _y;
         private bool _win7;
         private int _x;
-<<<<<<< HEAD:src/Gui/WinFormsGui/Forms/LogForm.cs
-=======
-        private bool _win7;
->>>>>>> refs/remotes/origin/master:src/KryBot/formLog.cs
 
         public FormLog(int x, int y, Settings settings)
         {
@@ -70,23 +66,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             }
         }
 
-<<<<<<< HEAD:src/Gui/WinFormsGui/Forms/LogForm.cs
-=======
-        public void LogChanged()
-        {
-            var owner = Owner as FormMain;
-            if (owner != null) AppendText(richTextBox1, owner.LogBuffer.Content, owner.LogBuffer.Color);
-        }
-
-        private void Design()
-        {
-            Text = @"Лог";
-            Icon = Icon.FromHandle(Resources.log.GetHicon());
-            Height = Properties.Settings.Default.LogHeight;
-            Width = Properties.Settings.Default.LogWidth;
-        }
-
->>>>>>> refs/remotes/origin/master:src/KryBot/formLog.cs
         private static void AppendText(RichTextBox box, string text, Color color)
         {
             box.SelectionStart = box.TextLength;
