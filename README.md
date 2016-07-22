@@ -6,21 +6,14 @@
 Free bot for giveaway sites.
 
 **Support**
-<<<<<<< HEAD
+
 * GameMiner
 * SteamGifts
 * SteamCompanion
 * SteamPortal
 * UseGamble
+* PlayBlink
 * GameAways
 * InventoryGifts
-=======
-* Gameminer
-* Steamgifts
-* Steamcompanion
-* UseGamble
-* Playblink
->>>>>>> refs/remotes/origin/master
-
 
 **Minimum system requirements**: Windows 7 and .NET Framework 4.5
