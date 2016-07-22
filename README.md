@@ -6,7 +6,6 @@
 Free bot for giveaway sites.
 
 **Support**
-
 * GameMiner
 * SteamGifts
 * SteamCompanion
