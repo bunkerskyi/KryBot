@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using KryBot.CommonResources.Localization;
@@ -182,6 +183,47 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
                 return SortOrder.Ascending;
             }
+        }
+
+        private async void steamGiftsToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            if (_bot.SteamGifts.Enabled)
+            {
+                toolStripStatusLabel.Image = Resources.load;
+                var list = await _bot.SteamGifts.GetBlaclList();
+
+                if (list != null && list.Count > 0)
+                {
+                    foreach (ListViewItem item in listView.Items)
+                    {
+                        for (var i = 0; i < list.Count; i++)
+                        {
+                            if (item.Text == list.ElementAt(i).Key.ToString())
+                            {
+                                list.Remove(list.ElementAt(i).Key);
+                                i--;
+                            }
+                        }
+                    }
+
+                    foreach (var game in list.Keys)
+                    {
+                        listView.Items.Add(game.ToString()).SubItems.Add(list[game]);
+                    }
+                }
+
+                toolStripStatusLabel.Image = null;
+                toolStripStatusLabel.Text = $"{strings.Count}: {listView.Items.Count}";
+            }
+            else
+            {
+                MessageBox.Show(strings.Blacklist_NeedAuth, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void FormBlackList_Resize(object sender, EventArgs e)
+        {
+            listView.Columns[1].Width = listView.Width - listView.Columns[0].Width;
         }
     }
 }
