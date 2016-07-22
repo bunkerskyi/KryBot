@@ -35,5 +35,10 @@ using System.Runtime.InteropServices;
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
 
+<<<<<<< HEAD:src/Gui/WinFormsGui/Properties/AssemblyInfo.cs
 [assembly: AssemblyVersion("1.4.2.0")]
 [assembly: AssemblyFileVersion("1.4.2.0")]
+=======
+[assembly: AssemblyVersion("1.3.6.1")]
+[assembly: AssemblyFileVersion("1.3.6.1")]
+>>>>>>> refs/remotes/origin/master:src/KryBot/Properties/AssemblyInfo.cs

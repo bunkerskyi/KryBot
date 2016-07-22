@@ -70,6 +70,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
             cbSGWishlist.Checked = _bot.SteamGifts.WishList;
             cbSGGroup.Checked = _bot.SteamGifts.Group;
+            cbSGRegionLocked.Checked = _bot.SteamGifts.Region;
+            cbSGMinNumberCopies.Checked = _bot.SteamGifts.MinNumberCopies;
             cbSGRegular.Checked = _bot.SteamGifts.Regular;
             cbSGMinLevel.Checked = _bot.SteamGifts.SortLevel;
             cbSGSortTeLessLevel.Checked = _bot.SteamGifts.SortToLessLevel;
@@ -77,6 +79,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             numSGLevel.Value = _bot.SteamGifts.MinLevel;
             tbSGMaxValue.Text = _bot.SteamGifts.JoinPointLimit.ToString();
             tbSGReserv.Text = _bot.SteamGifts.PointsReserv.ToString();
+            tbMinNumberCopies.Text = _bot.SteamGifts.NumberCopies.ToString();
 
             cbSCWishlist.Checked = _bot.SteamCompanion.WishList;
             cbSCContributors.Checked = _bot.SteamCompanion.Contributors;
@@ -91,8 +94,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
             tbPBMaxValue.Text = _bot.PlayBlink.MaxJoinValue.ToString();
             tbPBReserv.Text = _bot.PlayBlink.PointReserv.ToString();
 
+<<<<<<< HEAD:src/Gui/WinFormsGui/Forms/SettingsForm.cs
             tbSPMaxValue.Text = _bot.UseGamble.MaxJoinValue.ToString();
             tbSPReserv.Text = _bot.UseGamble.PointsReserv.ToString();
+=======
+            tbUGMaxValue.Text = _bot.UseGamble.MaxJoinValue.ToString();
+            tbUGReserv.Text = _bot.UseGamble.PointsReserv.ToString();
+>>>>>>> refs/remotes/origin/master:src/KryBot/formSettings.cs
 
             tbGAMaxBet.Text = _bot.GameAways.JoinPointsLimit.ToString();
             tbGAReserv.Text = _bot.GameAways.PointsReserv.ToString();
@@ -117,7 +125,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             {
                 "token:" + _bot.GameMiner.Cookies.Token,
                 "_xsrf:" + _bot.GameMiner.Cookies.Xsrf,
-                "UserAgent:" + _bot.GameMiner.UserAgent
+                "UserAgent:" + _bot.UserAgent
             };
 
             var form = new FormCookie("GameMiner", names, _bot);
@@ -156,6 +164,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             _bot.SteamGifts.WishList = cbSGWishlist.Checked;
             _bot.SteamGifts.Group = cbSGGroup.Checked;
             _bot.SteamGifts.Regular = cbSGRegular.Checked;
+            _bot.SteamGifts.Region = cbSGRegionLocked.Checked;
+            _bot.SteamGifts.MinNumberCopies = cbSGMinNumberCopies.Checked;
+            _bot.SteamGifts.NumberCopies = int.Parse(tbMinNumberCopies.Text);
             _bot.SteamGifts.JoinPointLimit = int.Parse(tbSGMaxValue.Text);
             _bot.SteamGifts.PointsReserv = int.Parse(tbSGReserv.Text);
             _bot.SteamGifts.MinLevel = int.Parse(numSGLevel.Value.ToString(CultureInfo.InvariantCulture));
@@ -170,8 +181,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
             _bot.SteamCompanion.JoinPointLimit = int.Parse(tbSCMaxValue.Text);
             _bot.SteamCompanion.PointsReserv = int.Parse(tbSCReserv.Text);
 
+<<<<<<< HEAD:src/Gui/WinFormsGui/Forms/SettingsForm.cs
             _bot.UseGamble.MaxJoinValue = int.Parse(tbSPMaxValue.Text);
             _bot.UseGamble.PointsReserv = int.Parse(tbSPReserv.Text);
+=======
+            _bot.UseGamble.MaxJoinValue = int.Parse(tbUGMaxValue.Text);
+            _bot.UseGamble.PointsReserv = int.Parse(tbUGReserv.Text);
+>>>>>>> refs/remotes/origin/master:src/KryBot/formSettings.cs
 
             _bot.PlayBlink.MaxJoinValue = int.Parse(tbPBMaxValue.Text);
             _bot.PlayBlink.PointReserv = int.Parse(tbPBReserv.Text);
@@ -226,9 +242,26 @@ namespace KryBot.Gui.WinFormsGui.Forms
             form.ShowDialog();
         }
 
-        private void btnSPCookies_Click(object sender, EventArgs e)
+        private void btnUGCookies_Click(object sender, EventArgs e)
         {
             var names = new List<string> {"PHPSESSID:" + _bot.UseGamble.Cookies.PhpSessId};
+<<<<<<< HEAD:src/Gui/WinFormsGui/Forms/SettingsForm.cs
+=======
+
+            var form = new FormCookie("UseGamble", names, _bot);
+            form.ShowDialog();
+        }
+
+        private void btnSTCookies_Click(object sender, EventArgs e)
+        {
+            var names = new List<string>
+            {
+                "PHPSESSID:" + _bot.SteamTrade.Cookies.PhpSessId,
+                "dle_user_id:" + _bot.SteamTrade.Cookies.DleUserId,
+                "dle_password:" + _bot.SteamTrade.Cookies.DlePassword,
+                "passhash:" + _bot.SteamTrade.Cookies.PassHash
+            };
+>>>>>>> refs/remotes/origin/master:src/KryBot/formSettings.cs
 
             var form = new FormCookie("UseGamble", names, _bot);
             form.ShowDialog();
@@ -239,7 +272,70 @@ namespace KryBot.Gui.WinFormsGui.Forms
             _bot.Save();
         }
 
+<<<<<<< HEAD:src/Gui/WinFormsGui/Forms/SettingsForm.cs
         private void EventKeyPress(object sender, KeyPressEventArgs e)
+=======
+        private void tbGMMaxValue_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
+                e.Handled = true;
+        }
+
+        private void tbGMReserv_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
+                e.Handled = true;
+        }
+
+        private void tbSGMaxValue_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
+                e.Handled = true;
+        }
+
+        private void tbSGReserv_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
+                e.Handled = true;
+        }
+
+        private void tbSCMaxValue_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
+                e.Handled = true;
+        }
+
+        private void tbSCReserv_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
+                e.Handled = true;
+        }
+
+        private void tbUGMaxValue_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
+                e.Handled = true;
+        }
+
+        private void tbUGReserv_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
+                e.Handled = true;
+        }
+
+        private void cbTimerEnable_CheckedChanged(object sender, EventArgs e)
+        {
+            gbTimerSettings.Enabled = cbTimerEnable.Checked;
+        }
+
+        private void tbTimerInterval_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
+                e.Handled = true;
+        }
+
+        private void tbTimerLoops_KeyPress(object sender, KeyPressEventArgs e)
+>>>>>>> refs/remotes/origin/master:src/KryBot/formSettings.cs
         {
             if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char) Keys.Back))
                 e.Handled = true;
@@ -331,5 +427,22 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
             new FormCookie("GameAways", cookies, _bot).ShowDialog();
         }
+
+        private void cbSGRegionLocked_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cbSGMinNumberCopies_CheckedChanged(object sender, EventArgs e)
+        {
+            tbMinNumberCopies.Enabled = cbSGMinNumberCopies.Checked;
+        }
+
+        private void tbMinNumberCopies_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && (e.KeyChar != (char)Keys.Back))
+                e.Handled = true;
+        }
+
     }
 }

@@ -168,6 +168,12 @@
   <data name="ParseLoadGiveaways_FoundGiveAwaysInWishList" xml:space="preserve">
     <value>Найдено раздач в вишлисте</value>
   </data>
+  <data name="ParseLoadGiveaways_FoundGiveAwaysInRegion" xml:space="preserve">
+    <value>Найдено раздач с региональными ограничениями</value>
+  </data>
+  <data name="ParseLoadGiveaways_FoundGiveAwaysInMinNumberCopies" xml:space="preserve">
+    <value>Найдено раздач с минимальным количеством копий</value>
+  </data>
   <data name="ParseLoadGiveaways_FoundMatchGiveaways" xml:space="preserve">
     <value>Найдено подходящих раздач</value>
   </data>
