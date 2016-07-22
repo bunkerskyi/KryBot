@@ -185,25 +185,20 @@ namespace KryBot.Gui.WinFormsGui.Forms
             }
         }
 
-        private void FormBlackList_Resize(object sender, EventArgs e)
+        private async void steamGiftsToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            listView.Columns[1].Width = listView.Width - listView.Columns[0].Width;
-        }
-
-        private async void steamGiftsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if(_bot.SteamGifts.Enabled)
+            if (_bot.SteamGifts.Enabled)
             {
                 toolStripStatusLabel.Image = Resources.load;
                 var list = await _bot.SteamGifts.GetBlaclList();
 
-                if(list != null && list.Count > 0)
+                if (list != null && list.Count > 0)
                 {
-                    foreach(ListViewItem item in listView.Items)
+                    foreach (ListViewItem item in listView.Items)
                     {
-                        for(var i = 0; i < list.Count; i++)
+                        for (var i = 0; i < list.Count; i++)
                         {
-                            if(item.Text == list.ElementAt(i).Key.ToString())
+                            if (item.Text == list.ElementAt(i).Key.ToString())
                             {
                                 list.Remove(list.ElementAt(i).Key);
                                 i--;
@@ -211,7 +206,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                         }
                     }
 
-                    foreach(var game in list.Keys)
+                    foreach (var game in list.Keys)
                     {
                         listView.Items.Add(game.ToString()).SubItems.Add(list[game]);
                     }
