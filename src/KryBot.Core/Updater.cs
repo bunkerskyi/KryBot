@@ -51,7 +51,7 @@ namespace KryBot.Core
 			{
 				DeleteTempFiles();
 				var release = await GetGitHubRelease();
-				var binaryAsset = release.Assets.FirstOrDefault(asset => asset.Name == FilePaths.KryBot);
+				var binaryAsset = release.Assets.FirstOrDefault(asset => asset.Name == FilePaths.KryBotArchive);
 				if (binaryAsset == null)
 				{
 					return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
