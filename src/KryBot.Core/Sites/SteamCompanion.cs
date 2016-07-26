@@ -197,6 +197,10 @@ namespace KryBot.Core.Sites
                         task.SetResult(Messages.ParseProfile("SteamCompanion", Points,
                             profileLink.Attributes["href"].Value.Split('/')[4]));
                     }
+                    else
+                    {
+                        task.SetResult(Messages.ParseProfileFailed("SteamCompanion"));
+                    }
                 }
                 else
                 {
