@@ -239,10 +239,12 @@ namespace KryBot.Core.Sites
                                 htmlDoc.DocumentNode.SelectNodes("//div[@class='nPagin']//div[@class='pagin']/span");
                             if (count != null)
                             {
-                                pages = int.Parse(htmlDoc.DocumentNode.
-                                    SelectSingleNode(
-                                        $"//div[@class='nPagin']//div[@class='pagin']/span[{count.Count - 1}]")
-                                    .InnerText);
+                                var pageNode = htmlDoc.DocumentNode.SelectSingleNode(
+                                    $"//div[@class='nPagin']//div[@class='pagin']/span[{count.Count - 1}]");
+                                if (pageNode != null)
+                                {
+                                    pages = int.Parse(pageNode.InnerText);
+                                }
                             }
 
                             var nodes =
