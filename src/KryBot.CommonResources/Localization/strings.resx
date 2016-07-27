@@ -1,0 +1,519 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutForm_groupBox1" xml:space="preserve">
+    <value>Social links</value>
+  </data>
+  <data name="AboutProgram" xml:space="preserve">
+    <value>About program</value>
+  </data>
+  <data name="AccountNotActive" xml:space="preserve">
+    <value>Account is not activated</value>
+  </data>
+  <data name="Agreement" xml:space="preserve">
+    <value>KryBot - Agreement</value>
+  </data>
+  <data name="Autorun_MustHaveAdminPerm" xml:space="preserve">
+    <value>To perform this task, the application must be run with administrator privileges</value>
+  </data>
+  <data name="Autorun_RegisterEditError" xml:space="preserve">
+    <value>When writing to the registry error occurred. Writing to the registry is prohibited by the administrator?</value>
+  </data>
+  <data name="Blacklist" xml:space="preserve">
+    <value>Blacklist</value>
+  </data>
+  <data name="BlacklistForm_Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="BlacklistForm_Del" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="BlacklistForm_LoadFrom" xml:space="preserve">
+    <value>Load from...</value>
+  </data>
+  <data name="BlacklistForm_SteamAccount" xml:space="preserve">
+    <value>Steam Profile</value>
+  </data>
+  <data name="Blacklist_NeedAuth" xml:space="preserve">
+    <value>Need authorization on Steam</value>
+  </data>
+  <data name="CookieForm_MustRestart" xml:space="preserve">
+    <value>To apply the changes need to restart the application</value>
+  </data>
+  <data name="CookieForm_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Count" xml:space="preserve">
+    <value>Count</value>
+  </data>
+  <data name="DonateForm_Donate" xml:space="preserve">
+    <value>Developer Support</value>
+  </data>
+  <data name="DonateForm_Text" xml:space="preserve">
+    <value>You can help the developer material transfer any amount to one of the accounts, iven below:</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="Farm" xml:space="preserve">
+    <value>Farm</value>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="FileDialog_SaveProfile" xml:space="preserve">
+    <value>Save profile</value>
+  </data>
+  <data name="Finish" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="FormMain_btnStart_Click_FarmBegin" xml:space="preserve">
+    <value>Farm started ...</value>
+  </data>
+  <data name="FormMain_btnStart_Click_FarmBeginWithInterval" xml:space="preserve">
+    <value>Farm started at intervals</value>
+  </data>
+  <data name="FormMain_btnStart_Click_FarmFinish" xml:space="preserve">
+    <value>Farm completed</value>
+  </data>
+  <data name="FormMain_btnStart_Click_FarmSkip" xml:space="preserve">
+    <value>Skip attempts farm. Previous farming cycle is not yet over.</value>
+  </data>
+  <data name="FormMain_btnStart_Click_LoopsLeft" xml:space="preserve">
+    <value>cycles left)</value>
+  </data>
+  <data name="FormMain_btnStart_Click_M" xml:space="preserve">
+    <value>m (</value>
+  </data>
+  <data name="FormMain_btnStart_Click_Stop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="FormMain_btnStart_Click_TaskBegin" xml:space="preserve">
+    <value>Processing...</value>
+  </data>
+  <data name="FormMain_btnStart_Click_Старт" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="FormMain_DoFarm_Farn" xml:space="preserve">
+    <value>Farm</value>
+  </data>
+  <data name="FormMain_Label_Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="FormMain_timer_Tick_LoopsLeft" xml:space="preserve">
+    <value>Left cycles</value>
+  </data>
+  <data name="GamesInBlacklist" xml:space="preserve">
+    <value>Games on the blacklist</value>
+  </data>
+  <data name="GetBotInConfig_Config" xml:space="preserve">
+    <value>Configuration</value>
+  </data>
+  <data name="GetBotInConfig_NotLoaded" xml:space="preserve">
+    <value>not loaded. File does not exist or is broken.</value>
+  </data>
+  <data name="GiveawayJoined_ConfirmedFor" xml:space="preserve">
+    <value>confirmed for</value>
+  </data>
+  <data name="GiveawayJoined_Join" xml:space="preserve">
+    <value>Entry into</value>
+  </data>
+  <data name="GiveawayJoined_Points" xml:space="preserve">
+    <value>points</value>
+  </data>
+  <data name="GiveawayNotJoined_NotConfirmed" xml:space="preserve">
+    <value>not confirmed</value>
+  </data>
+  <data name="GiveawayNotJoined_YouMustEnteredToGroup" xml:space="preserve">
+    <value>You must enter the group</value>
+  </data>
+  <data name="GiveawaysHaveWon" xml:space="preserve">
+    <value>Do you have a win</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="Licens" xml:space="preserve">
+    <value>Using the program, you agree that the developer is not responsible for your accounts. All actions are initiated by the user and the user is responsible for them.</value>
+  </data>
+  <data name="LinkLabel_OnSite" xml:space="preserve">
+    <value>To website</value>
+  </data>
+  <data name="LoadProfile_Load" xml:space="preserve">
+    <value>Profile loaded</value>
+  </data>
+  <data name="Log" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginFaild" xml:space="preserve">
+    <value>Authorisation Error</value>
+  </data>
+  <data name="LoginSuccess" xml:space="preserve">
+    <value>Authorized</value>
+  </data>
+  <data name="MainForm_Donate" xml:space="preserve">
+    <value>Donate</value>
+  </data>
+  <data name="MainForm_UpdateInfoAbout" xml:space="preserve">
+    <value>Update on</value>
+  </data>
+  <data name="OpenBotFolder" xml:space="preserve">
+    <value>Open folder with bot</value>
+  </data>
+  <data name="ParseLoadGiveaways_Found" xml:space="preserve">
+    <value>Found</value>
+  </data>
+  <data name="ParseLoadGiveaways_FoundGiveAwaysInGroup" xml:space="preserve">
+    <value>Found group giveaways</value>
+  </data>
+  <data name="ParseLoadGiveaways_FoundGiveAwaysInWishList" xml:space="preserve">
+    <value>Found wishlist giveaways</value>
+  </data>
+  <data name="ParseLoadGiveaways_FoundMatchGiveaways" xml:space="preserve">
+    <value>Found matching giveaways</value>
+  </data>
+  <data name="ParseLoadGiveaways_FreeGoldenGiveawaysIn" xml:space="preserve">
+    <value>free gold giveaways on</value>
+  </data>
+  <data name="ParseLoadGiveaways_GroupGiveAwaysIn" xml:space="preserve">
+    <value>group giveaways on</value>
+  </data>
+  <data name="ParseLoadGiveaways_RegionGiveAwaysIn" xml:space="preserve">
+    <value>region restricted giveaways on</value>
+  </data>
+  <data name="ParseLoadGiveaways_NumberCopiesGiveAwaysIn" xml:space="preserve">
+    <value>giveaways with number of copies on</value>
+  </data>
+  <data name="ParseLoadGiveaways_Pages" xml:space="preserve">
+    <value>pages</value>
+  </data>
+  <data name="ParseLoadGiveaways_RegularGiveawaysIn" xml:space="preserve">
+    <value>regular giveaways on</value>
+  </data>
+  <data name="ParseLoadGiveaways_SandboxGiveawaysIn" xml:space="preserve">
+    <value>sandbox giveaways on</value>
+  </data>
+  <data name="ParseLoadGiveaways_WishListGiveAwaysIn" xml:space="preserve">
+    <value>wishlist giveaways on</value>
+  </data>
+  <data name="ParseLoadGiveaways__ContributorsIn" xml:space="preserve">
+    <value>contributors giveaways on</value>
+  </data>
+  <data name="ParseProfile_LoginOrServerError" xml:space="preserve">
+    <value>Error login/server</value>
+  </data>
+  <data name="ProfileLoading" xml:space="preserve">
+    <value>Loading profile</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveAs" xml:space="preserve">
+    <value>Save as...</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SettingsFform_MaxValue" xml:space="preserve">
+    <value>Maximum bet:</value>
+  </data>
+  <data name="SettingsForm_cbAutorun" xml:space="preserve">
+    <value>Autorun</value>
+  </data>
+  <data name="SettingsForm_cbFarmTip" xml:space="preserve">
+    <value>Notification about farm</value>
+  </data>
+  <data name="SettingsForm_cbGMGolden" xml:space="preserve">
+    <value>Free golden giveaways</value>
+  </data>
+  <data name="SettingsForm_cbGMRegional" xml:space="preserve">
+    <value>No regional restrictions</value>
+  </data>
+  <data name="SettingsForm_cbSCAutojoin" xml:space="preserve">
+    <value>Auto entry into the group (required authorization in Steam)</value>
+  </data>
+  <data name="SettingsForm_cbSCContributors" xml:space="preserve">
+    <value>Contributors giveaways</value>
+  </data>
+  <data name="SettingsForm_cbSGMinLevel" xml:space="preserve">
+    <value>The minimum level of giveaways</value>
+  </data>
+  <data name="SettingsForm_cbSGSortTeLessLevel" xml:space="preserve">
+    <value>First giveaways of the highest level</value>
+  </data>
+  <data name="SettingsForm_cbSort" xml:space="preserve">
+    <value>First</value>
+  </data>
+  <data name="SettingsForm_cbTimerEnable" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="SettingsForm_cbWishlistSort" xml:space="preserve">
+    <value>Do not use sorting to wishlist</value>
+  </data>
+  <data name="SettingsForm_cbWonTip" xml:space="preserve">
+    <value>Notificaions about win</value>
+  </data>
+  <data name="SettingsForm_chGMSandbox" xml:space="preserve">
+    <value>Sandbox giveaways</value>
+  </data>
+  <data name="SettingsForm_Commun" xml:space="preserve">
+    <value>Common</value>
+  </data>
+  <data name="SettingsForm_gbTimerSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SettingsForm_groupBox1" xml:space="preserve">
+    <value>Timer</value>
+  </data>
+  <data name="SettingsForm_GroupGiveaways" xml:space="preserve">
+    <value>Group giveaways</value>
+  </data>
+  <data name="SettingsForm_IntervalNotZero" xml:space="preserve">
+    <value>The interval timer can not be 0</value>
+  </data>
+  <data name="SettingsForm_label5" xml:space="preserve">
+    <value>Interval:</value>
+  </data>
+  <data name="SettingsForm_label6" xml:space="preserve">
+    <value>m</value>
+  </data>
+  <data name="SettingsForm_label7" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SettingsForm_label8" xml:space="preserve">
+    <value>Cycles:</value>
+  </data>
+  <data name="SettingsForm_PointsReserv" xml:space="preserve">
+    <value>Reserve points:</value>
+  </data>
+  <data name="SettingsForm_RegularGiveaways" xml:space="preserve">
+    <value>Regular giveaways</value>
+  </data>
+  <data name="SettingsForm_WishlistGiveaways" xml:space="preserve">
+    <value>Wishlist</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="StatusBar_End" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="StatusBar_Login" xml:space="preserve">
+    <value>Authorization</value>
+  </data>
+  <data name="Status_NotLogined" xml:space="preserve">
+    <value>Not authorized</value>
+  </data>
+  <data name="SteamGroupAlreadyMember" xml:space="preserve">
+    <value>You already are a member of this group</value>
+  </data>
+  <data name="SteamGroupJoined" xml:space="preserve">
+    <value>Joining the group confirmed</value>
+  </data>
+  <data name="SteamGroupNotJoined" xml:space="preserve">
+    <value>Joining the group is not confirmed</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="TryLogin" xml:space="preserve">
+    <value>Authorization...</value>
+  </data>
+  <data name="Updater_CurrentVersion" xml:space="preserve">
+    <value>Current version</value>
+  </data>
+  <data name="Updater_HaveUpdate" xml:space="preserve">
+    <value>Update available</value>
+  </data>
+  <data name="Updater_Update_UpdateDone" xml:space="preserve">
+    <value>The update is complete. Restarting...</value>
+  </data>
+  <data name="Updater_Update_UpdateFailed" xml:space="preserve">
+    <value>When updating the error occurred. Download the manual: https://github.com/KriBetko/KryBot/releases</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="Points" xml:space="preserve">
+    <value>Points</value>
+  </data>
+  <data name="ParseLoadGiveaways_CSGOGiveawaysIn" xml:space="preserve">
+    <value>CS:GO items on</value>
+  </data>
+  <data name="ParseLoadGiveaways_DotaGiveawaysIn" xml:space="preserve">
+    <value>Dota 2 items on</value>
+  </data>
+  <data name="ParseLoadGiveaways_SteamGiveawaysIn" xml:space="preserve">
+    <value>Steam giveaways on</value>
+  </data>
+  <data name="ParseLoadGiveaways_SteamItemsIn" xml:space="preserve">
+    <value>Steam items on</value>
+  </data>
+  <data name="ParseLoadGiveaways_TF2GiveawaysIn" xml:space="preserve">
+    <value>TF2 items on</value>
+  </data>
+  <data name="SettingsForm_cbIGDota" xml:space="preserve">
+    <value>Dota 2 items</value>
+  </data>
+  <data name="SettingsForm_cbIGSteamGiveaways" xml:space="preserve">
+    <value>Steam giveaways</value>
+  </data>
+  <data name="SettingsForm_cbIGSteamItems" xml:space="preserve">
+    <value>Steam items</value>
+  </data>
+  <data name="SettingsForm_cbIGTF2" xml:space="preserve">
+    <value>TF2 items</value>
+  </data>
+  <data name="SettingsForm_cbIGCSGO" xml:space="preserve">
+    <value>CS:GO items</value>
+  </data>
+  <data name="BlacklistForm_EnterId" xml:space="preserve">
+    <value>Enter game ID</value>
+  </data>
+  <data name="SettingsForm_FirstCheap" xml:space="preserve">
+    <value>cheap</value>
+  </data>
+  <data name="SettingsForm_FirstExpensive" xml:space="preserve">
+    <value>expensive</value>
+  </data>
+  <data name="Settngs_CreateShortcut" xml:space="preserve">
+    <value>Create shortcut</value>
+  </data>
+</root>
