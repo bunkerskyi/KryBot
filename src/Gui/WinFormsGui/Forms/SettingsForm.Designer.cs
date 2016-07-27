@@ -63,9 +63,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPageSG = new System.Windows.Forms.TabPage();
-            this.tbMinNumberCopies = new System.Windows.Forms.TextBox();
-            this.cbSGRegionLocked = new System.Windows.Forms.CheckBox();
-            this.cbSGMinNumberCopies = new System.Windows.Forms.CheckBox();
             this.cbSGSortTeLessLevel = new System.Windows.Forms.CheckBox();
             this.numSGLevel = new System.Windows.Forms.NumericUpDown();
             this.cbSGMinLevel = new System.Windows.Forms.CheckBox();
@@ -457,9 +454,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             // 
             // tabPageSG
             // 
-            this.tabPageSG.Controls.Add(this.tbMinNumberCopies);
-            this.tabPageSG.Controls.Add(this.cbSGRegionLocked);
-            this.tabPageSG.Controls.Add(this.cbSGMinNumberCopies);
             this.tabPageSG.Controls.Add(this.cbSGSortTeLessLevel);
             this.tabPageSG.Controls.Add(this.numSGLevel);
             this.tabPageSG.Controls.Add(this.cbSGMinLevel);
