@@ -183,6 +183,12 @@
   <data name="ParseLoadGiveaways_GroupGiveAwaysIn" xml:space="preserve">
     <value>групповых раздач на</value>
   </data>
+  <data name="ParseLoadGiveaways_RegionGiveAwaysIn" xml:space="preserve">
+    <value>раздач с региональными ограничениями на</value>
+  </data>
+  <data name="ParseLoadGiveaways_NumberCopiesGiveAwaysIn" xml:space="preserve">
+    <value>раздач с минимальным количеством копий на</value>
+  </data>
   <data name="ParseLoadGiveaways_Pages" xml:space="preserve">
     <value>страницах</value>
   </data>

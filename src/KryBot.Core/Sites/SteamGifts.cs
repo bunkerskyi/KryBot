@@ -26,6 +26,8 @@ namespace KryBot.Core.Sites
 
         public bool Enabled { get; set; }
         public bool Group { get; set; }
+        public bool Region { get; set; }
+        public bool MinNumberCopies { get; set; }
         public bool Regular { get; set; } = true;
         public bool WishList { get; set; }
         public bool SortLevel { get; set; }
@@ -34,6 +36,7 @@ namespace KryBot.Core.Sites
         public int Level { get; set; }
         public int JoinPointLimit { get; set; } = 300;
         public int PointsReserv { get; set; }
+        public int NumberCopies { get; set; }
         public int MinLevel { get; set; }
         public SteamGiftsCookie Cookies { get; set; }
         public List<SteamGiftsGiveaway> Giveaways { get; set; }
@@ -342,6 +345,22 @@ namespace KryBot.Core.Sites
                         Giveaways);
                 }
 
+                if (Region)
+                {
+                    content += LoadGiveawaysByUrl(
+                        $"{Links.SteamGiftsSearch}?region_restricted=true",
+                        strings.ParseLoadGiveaways_RegionGiveAwaysIn,
+                        Giveaways);
+                }
+
+                if (MinNumberCopies)
+                {
+                    content += LoadGiveawaysByUrl(
+                        $"{Links.SteamGiftsSearch}?copy_min=" + NumberCopies,
+                        strings.ParseLoadGiveaways_NumberCopiesGiveAwaysIn,
+                        Giveaways);
+                }
+
                 if (Regular)
                 {
                     content += LoadGiveawaysByUrl(
@@ -373,7 +392,7 @@ namespace KryBot.Core.Sites
             for (var i = 0; i < pages; i++)
             {
                 var response = Web.Get(
-                    $"{url}{(i > 0 ? $"?page={i + 1}" : string.Empty)}",
+                    $"{url}{(i > 0 ? $"&page={i + 1}" : string.Empty)}",
                     Cookies.Generate(), UserAgent);
 
                 if (response.RestResponse.Content != string.Empty)

@@ -662,13 +662,35 @@ namespace KryBot.CommonResources.Localization {
                 return ResourceManager.GetString("ParseLoadGiveaways_FreeGoldenGiveawaysIn", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to group giveaways on.
         /// </summary>
-        public static string ParseLoadGiveaways_GroupGiveAwaysIn {
-            get {
+        public static string ParseLoadGiveaways_GroupGiveAwaysIn
+        {
+            get
+            {
                 return ResourceManager.GetString("ParseLoadGiveaways_GroupGiveAwaysIn", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to region restricted giveaways on.
+        /// </summary>
+        public static string ParseLoadGiveaways_RegionGiveAwaysIn
+        {
+            get
+            {
+                return ResourceManager.GetString("ParseLoadGiveaways_RegionGiveAwaysIn", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to giveaways with number of copies on.
+        /// </summary>
+        public static string ParseLoadGiveaways_NumberCopiesGiveAwaysIn {
+            get {
+                return ResourceManager.GetString("ParseLoadGiveaways_NumberCopiesGiveAwaysIn", resourceCulture);
             }
         }
         
