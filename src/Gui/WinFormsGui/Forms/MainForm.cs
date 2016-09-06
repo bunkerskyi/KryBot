@@ -136,6 +136,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             }
 
             BlockTabpage(tabPageSC); // disable SC page
+            BlockTabpage(tabPagePB); // disable PB page
         }
 
         private void FormMain_LocationChanged(object sender, EventArgs e)
