@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json;
 
-namespace KryBot.Core.Serializable.UseGamble
+namespace KryBot.Core.Serializable.SteamPortal
 {
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]

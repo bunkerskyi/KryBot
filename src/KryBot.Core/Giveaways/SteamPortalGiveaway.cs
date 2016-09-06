@@ -3,7 +3,7 @@
 namespace KryBot.Core.Giveaways
 {
     [SuppressMessage("ReSharper", "UnusedAutoPropertyAccessor.Global")]
-    public class UseGambleGiveaway : BaseGiveaway
+    public class SteamPortalGiveaway : BaseGiveaway
     {
         public int Price { get; set; }
 

@@ -82,15 +82,15 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.lblSCPoints = new System.Windows.Forms.Label();
             this.lblSCLevel = new System.Windows.Forms.Label();
             this.btnSCLogin = new System.Windows.Forms.Button();
-            this.tabPageUG = new System.Windows.Forms.TabPage();
-            this.btnUGExit = new System.Windows.Forms.Button();
-            this.cbUGEnable = new System.Windows.Forms.CheckBox();
-            this.linkLabelUG = new System.Windows.Forms.LinkLabel();
-            this.pbUGReload = new System.Windows.Forms.PictureBox();
-            this.lblUGStatus = new System.Windows.Forms.Label();
-            this.lblUGPoints = new System.Windows.Forms.Label();
-            this.lblUGLevel = new System.Windows.Forms.Label();
-            this.btnUGLogin = new System.Windows.Forms.Button();
+            this.tabPageSP = new System.Windows.Forms.TabPage();
+            this.btnSPExit = new System.Windows.Forms.Button();
+            this.cbSPEnable = new System.Windows.Forms.CheckBox();
+            this.linkLabelSP = new System.Windows.Forms.LinkLabel();
+            this.pbUSPeload = new System.Windows.Forms.PictureBox();
+            this.lblSPStatus = new System.Windows.Forms.Label();
+            this.lblSPPoints = new System.Windows.Forms.Label();
+            this.lblSPLevel = new System.Windows.Forms.Label();
+            this.btnSPLogin = new System.Windows.Forms.Button();
             this.tabPageST = new System.Windows.Forms.TabPage();
             this.btnSTExit = new System.Windows.Forms.Button();
             this.cbSTEnable = new System.Windows.Forms.CheckBox();
@@ -143,8 +143,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             ((System.ComponentModel.ISupportInitialize)(this.pbSGReload)).BeginInit();
             this.tabPageSC.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSCReload)).BeginInit();
-            this.tabPageUG.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbUGReload)).BeginInit();
+            this.tabPageSP.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbUSPeload)).BeginInit();
             this.tabPageST.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSTreload)).BeginInit();
             this.tabPagePB.SuspendLayout();
@@ -303,7 +303,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabControl.Controls.Add(this.tabPageGM);
             this.tabControl.Controls.Add(this.tabPageSG);
             this.tabControl.Controls.Add(this.tabPageSC);
-            this.tabControl.Controls.Add(this.tabPageUG);
+            this.tabControl.Controls.Add(this.tabPageSP);
             this.tabControl.Controls.Add(this.tabPageST);
             this.tabControl.Controls.Add(this.tabPagePB);
             this.tabControl.Controls.Add(this.tabPageGA);
@@ -662,102 +662,102 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.btnSCLogin.UseVisualStyleBackColor = true;
             this.btnSCLogin.Click += new System.EventHandler(this.btnSCLogin_Click);
             // 
-            // tabPageUG
+            // tabPageSP
             // 
-            this.tabPageUG.Controls.Add(this.btnUGExit);
-            this.tabPageUG.Controls.Add(this.cbUGEnable);
-            this.tabPageUG.Controls.Add(this.linkLabelUG);
-            this.tabPageUG.Controls.Add(this.pbUGReload);
-            this.tabPageUG.Controls.Add(this.lblUGStatus);
-            this.tabPageUG.Controls.Add(this.lblUGPoints);
-            this.tabPageUG.Controls.Add(this.lblUGLevel);
-            this.tabPageUG.Controls.Add(this.btnUGLogin);
-            this.tabPageUG.Location = new System.Drawing.Point(4, 40);
-            this.tabPageUG.Name = "tabPageUG";
-            this.tabPageUG.Size = new System.Drawing.Size(334, 61);
-            this.tabPageUG.TabIndex = 4;
-            this.tabPageUG.Text = "UG";
-            this.tabPageUG.UseVisualStyleBackColor = true;
+            this.tabPageSP.Controls.Add(this.btnSPExit);
+            this.tabPageSP.Controls.Add(this.cbSPEnable);
+            this.tabPageSP.Controls.Add(this.linkLabelSP);
+            this.tabPageSP.Controls.Add(this.pbUSPeload);
+            this.tabPageSP.Controls.Add(this.lblSPStatus);
+            this.tabPageSP.Controls.Add(this.lblSPPoints);
+            this.tabPageSP.Controls.Add(this.lblSPLevel);
+            this.tabPageSP.Controls.Add(this.btnSPLogin);
+            this.tabPageSP.Location = new System.Drawing.Point(4, 40);
+            this.tabPageSP.Name = "tabPageSP";
+            this.tabPageSP.Size = new System.Drawing.Size(334, 61);
+            this.tabPageSP.TabIndex = 4;
+            this.tabPageSP.Text = "SP";
+            this.tabPageSP.UseVisualStyleBackColor = true;
             // 
-            // btnUGExit
+            // btnSPExit
             // 
-            this.btnUGExit.Location = new System.Drawing.Point(134, 19);
-            this.btnUGExit.Name = "btnUGExit";
-            this.btnUGExit.Size = new System.Drawing.Size(75, 23);
-            this.btnUGExit.TabIndex = 29;
-            this.btnUGExit.Text = "Logout";
-            this.btnUGExit.UseVisualStyleBackColor = true;
-            this.btnUGExit.Click += new System.EventHandler(this.btnUGExit_Click);
+            this.btnSPExit.Location = new System.Drawing.Point(134, 19);
+            this.btnSPExit.Name = "btnSPExit";
+            this.btnSPExit.Size = new System.Drawing.Size(75, 23);
+            this.btnSPExit.TabIndex = 29;
+            this.btnSPExit.Text = "Logout";
+            this.btnSPExit.UseVisualStyleBackColor = true;
+            this.btnSPExit.Click += new System.EventHandler(this.btnSPExit_Click);
             // 
-            // cbUGEnable
+            // cbSPEnable
             // 
-            this.cbUGEnable.AutoSize = true;
-            this.cbUGEnable.Checked = true;
-            this.cbUGEnable.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbUGEnable.Location = new System.Drawing.Point(315, 3);
-            this.cbUGEnable.Name = "cbUGEnable";
-            this.cbUGEnable.Size = new System.Drawing.Size(15, 14);
-            this.cbUGEnable.TabIndex = 26;
-            this.cbUGEnable.UseVisualStyleBackColor = true;
-            this.cbUGEnable.CheckedChanged += new System.EventHandler(this.cbUGEnable_CheckedChanged);
+            this.cbSPEnable.AutoSize = true;
+            this.cbSPEnable.Checked = true;
+            this.cbSPEnable.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cbSPEnable.Location = new System.Drawing.Point(315, 3);
+            this.cbSPEnable.Name = "cbSPEnable";
+            this.cbSPEnable.Size = new System.Drawing.Size(15, 14);
+            this.cbSPEnable.TabIndex = 26;
+            this.cbSPEnable.UseVisualStyleBackColor = true;
+            this.cbSPEnable.CheckedChanged += new System.EventHandler(this.cbSPEnable_CheckedChanged);
             // 
-            // linkLabelUG
+            // linkLabelSP
             // 
-            this.linkLabelUG.AutoSize = true;
-            this.linkLabelUG.Location = new System.Drawing.Point(6, 42);
-            this.linkLabelUG.Name = "linkLabelUG";
-            this.linkLabelUG.Size = new System.Drawing.Size(59, 13);
-            this.linkLabelUG.TabIndex = 20;
-            this.linkLabelUG.TabStop = true;
-            this.linkLabelUG.Text = "To website";
-            this.linkLabelUG.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel4_LinkClicked);
+            this.linkLabelSP.AutoSize = true;
+            this.linkLabelSP.Location = new System.Drawing.Point(6, 42);
+            this.linkLabelSP.Name = "linkLabelSP";
+            this.linkLabelSP.Size = new System.Drawing.Size(59, 13);
+            this.linkLabelSP.TabIndex = 20;
+            this.linkLabelSP.TabStop = true;
+            this.linkLabelSP.Text = "To website";
+            this.linkLabelSP.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel4_LinkClicked);
             // 
-            // pbUGReload
+            // pbUSPeload
             // 
-            this.pbUGReload.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.refresh;
-            this.pbUGReload.Location = new System.Drawing.Point(314, 42);
-            this.pbUGReload.Name = "pbUGReload";
-            this.pbUGReload.Size = new System.Drawing.Size(16, 16);
-            this.pbUGReload.TabIndex = 19;
-            this.pbUGReload.TabStop = false;
-            this.pbUGReload.Click += new System.EventHandler(this.pbUGReload_Click);
+            this.pbUSPeload.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.refresh;
+            this.pbUSPeload.Location = new System.Drawing.Point(314, 42);
+            this.pbUSPeload.Name = "pbUSPeload";
+            this.pbUSPeload.Size = new System.Drawing.Size(16, 16);
+            this.pbUSPeload.TabIndex = 19;
+            this.pbUSPeload.TabStop = false;
+            this.pbUSPeload.Click += new System.EventHandler(this.pbSPReload_Click);
             // 
-            // lblUGStatus
+            // lblSPStatus
             // 
-            this.lblUGStatus.AutoSize = true;
-            this.lblUGStatus.Location = new System.Drawing.Point(6, 3);
-            this.lblUGStatus.Name = "lblUGStatus";
-            this.lblUGStatus.Size = new System.Drawing.Size(112, 13);
-            this.lblUGStatus.TabIndex = 17;
-            this.lblUGStatus.Text = "Status: Not authorized";
+            this.lblSPStatus.AutoSize = true;
+            this.lblSPStatus.Location = new System.Drawing.Point(6, 3);
+            this.lblSPStatus.Name = "lblSPStatus";
+            this.lblSPStatus.Size = new System.Drawing.Size(112, 13);
+            this.lblSPStatus.TabIndex = 17;
+            this.lblSPStatus.Text = "Status: Not authorized";
             // 
-            // lblUGPoints
+            // lblSPPoints
             // 
-            this.lblUGPoints.AutoSize = true;
-            this.lblUGPoints.Location = new System.Drawing.Point(6, 29);
-            this.lblUGPoints.Name = "lblUGPoints";
-            this.lblUGPoints.Size = new System.Drawing.Size(39, 13);
-            this.lblUGPoints.TabIndex = 16;
-            this.lblUGPoints.Text = "Points:";
+            this.lblSPPoints.AutoSize = true;
+            this.lblSPPoints.Location = new System.Drawing.Point(6, 29);
+            this.lblSPPoints.Name = "lblSPPoints";
+            this.lblSPPoints.Size = new System.Drawing.Size(39, 13);
+            this.lblSPPoints.TabIndex = 16;
+            this.lblSPPoints.Text = "Points:";
             // 
-            // lblUGLevel
+            // lblSPLevel
             // 
-            this.lblUGLevel.AutoSize = true;
-            this.lblUGLevel.Location = new System.Drawing.Point(6, 16);
-            this.lblUGLevel.Name = "lblUGLevel";
-            this.lblUGLevel.Size = new System.Drawing.Size(36, 13);
-            this.lblUGLevel.TabIndex = 15;
-            this.lblUGLevel.Text = "Level:";
+            this.lblSPLevel.AutoSize = true;
+            this.lblSPLevel.Location = new System.Drawing.Point(6, 16);
+            this.lblSPLevel.Name = "lblSPLevel";
+            this.lblSPLevel.Size = new System.Drawing.Size(36, 13);
+            this.lblSPLevel.TabIndex = 15;
+            this.lblSPLevel.Text = "Level:";
             // 
-            // btnUGLogin
+            // btnSPLogin
             // 
-            this.btnUGLogin.Location = new System.Drawing.Point(134, 19);
-            this.btnUGLogin.Name = "btnUGLogin";
-            this.btnUGLogin.Size = new System.Drawing.Size(75, 23);
-            this.btnUGLogin.TabIndex = 9;
-            this.btnUGLogin.Text = "Login";
-            this.btnUGLogin.UseVisualStyleBackColor = true;
-            this.btnUGLogin.Click += new System.EventHandler(this.btnUGLogin_Click);
+            this.btnSPLogin.Location = new System.Drawing.Point(134, 19);
+            this.btnSPLogin.Name = "btnSPLogin";
+            this.btnSPLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnSPLogin.TabIndex = 9;
+            this.btnSPLogin.Text = "Login";
+            this.btnSPLogin.UseVisualStyleBackColor = true;
+            this.btnSPLogin.Click += new System.EventHandler(this.btnSPLogin_Click);
             // 
             // tabPageST
             // 
@@ -1230,9 +1230,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageSC.ResumeLayout(false);
             this.tabPageSC.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSCReload)).EndInit();
-            this.tabPageUG.ResumeLayout(false);
-            this.tabPageUG.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbUGReload)).EndInit();
+            this.tabPageSP.ResumeLayout(false);
+            this.tabPageSP.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbUSPeload)).EndInit();
             this.tabPageST.ResumeLayout(false);
             this.tabPageST.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSTreload)).EndInit();
@@ -1264,7 +1264,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private System.Windows.Forms.TabPage tabPageSG;
 		private System.Windows.Forms.TabPage tabPageSC;
 		private System.Windows.Forms.TabPage tabPageST;
-		private System.Windows.Forms.TabPage tabPageUG;
+		private System.Windows.Forms.TabPage tabPageSP;
 		private System.Windows.Forms.ToolStripMenuItem logToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem informationToolStripMenuItem;
 		private System.Windows.Forms.Label lblGMStatus;
@@ -1275,29 +1275,29 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private System.Windows.Forms.Button btnSGLogin;
 		private System.Windows.Forms.Button btnSCLogin;
 		private System.Windows.Forms.Button btnSTLogin;
-		private System.Windows.Forms.Button btnUGLogin;
+		private System.Windows.Forms.Button btnSPLogin;
 		private System.Windows.Forms.Label lblSGStatus;
 		private System.Windows.Forms.Label lblSGPoints;
 		private System.Windows.Forms.Label lblSGLevel;
 		private System.Windows.Forms.Label lblSCStatus;
 		private System.Windows.Forms.Label lblSCPoints;
 		private System.Windows.Forms.Label lblSCLevel;
-		private System.Windows.Forms.Label lblUGStatus;
-		private System.Windows.Forms.Label lblUGPoints;
-		private System.Windows.Forms.Label lblUGLevel;
+		private System.Windows.Forms.Label lblSPStatus;
+		private System.Windows.Forms.Label lblSPPoints;
+		private System.Windows.Forms.Label lblSPLevel;
 		private System.Windows.Forms.Label lblSTStatus;
 		private System.Windows.Forms.Label lblSTPoints;
 		private System.Windows.Forms.Label lblSTLevel;
 		private System.Windows.Forms.PictureBox pbGMReload;
 		private System.Windows.Forms.PictureBox pbSGReload;
 		private System.Windows.Forms.PictureBox pbSCReload;
-		private System.Windows.Forms.PictureBox pbUGReload;
+		private System.Windows.Forms.PictureBox pbUSPeload;
 		private System.Windows.Forms.PictureBox pbSTreload;
 		private System.Windows.Forms.NotifyIcon notifyIcon;
 		private System.Windows.Forms.LinkLabel linkLabelGM;
 		private System.Windows.Forms.LinkLabel linkLabelSG;
 		private System.Windows.Forms.LinkLabel linkLabelSC;
-		private System.Windows.Forms.LinkLabel linkLabelUG;
+		private System.Windows.Forms.LinkLabel linkLabelSP;
 		private System.Windows.Forms.LinkLabel linkLabelST;
 		private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
@@ -1307,7 +1307,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private System.Windows.Forms.CheckBox cbGMEnable;
 		private System.Windows.Forms.CheckBox cbSGEnable;
 		private System.Windows.Forms.CheckBox cbSCEnable;
-		private System.Windows.Forms.CheckBox cbUGEnable;
+		private System.Windows.Forms.CheckBox cbSPEnable;
 		private System.Windows.Forms.TabPage tabPageSteam;
 		private System.Windows.Forms.LinkLabel linkLabelSteam;
 		private System.Windows.Forms.Label lblSteamStatus;
@@ -1320,7 +1320,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private System.Windows.Forms.Button btnGMExit;
 		private System.Windows.Forms.Button btnSGExit;
 		private System.Windows.Forms.Button btnSCExit;
-		private System.Windows.Forms.Button btnUGExit;
+		private System.Windows.Forms.Button btnSPExit;
 		private System.Windows.Forms.Button btnSTExit;
 		private System.Windows.Forms.Button btnSteamExit;
 		private System.Windows.Forms.ToolStripMenuItem openFolderToolStripMenuItem;
@@ -1378,12 +1378,12 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			lblSCPoints.Text = $"{strings.Points}: ";
 			lblSCLevel.Text = $"{strings.Level}: ";
 			btnSCLogin.Text = strings.Login;
-			btnUGExit.Text = strings.Logout;
-			linkLabelUG.Text = strings.LinkLabel_OnSite;
-			lblUGStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
-			lblUGPoints.Text = $"{strings.Points}: ";
-			lblUGLevel.Text = $"{strings.Level}: ";
-			btnUGLogin.Text = strings.Login;
+			btnSPExit.Text = strings.Logout;
+			linkLabelSP.Text = strings.LinkLabel_OnSite;
+			lblSPStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
+			lblSPPoints.Text = $"{strings.Points}: ";
+			lblSPLevel.Text = $"{strings.Level}: ";
+			btnSPLogin.Text = strings.Login;
 			btnSTExit.Text = strings.Logout;
 			linkLabelST.Text = strings.LinkLabel_OnSite;
 			lblSTStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";

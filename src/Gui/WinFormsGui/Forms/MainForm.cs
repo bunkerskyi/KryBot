@@ -108,7 +108,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 cbGMEnable.Checked = _bot.GameMiner.Enabled;
                 cbSGEnable.Checked = _bot.SteamGifts.Enabled;
                 cbSCEnable.Checked = _bot.SteamCompanion.Enabled;
-                cbUGEnable.Checked = _bot.UseGamble.Enabled;
+                cbSPEnable.Checked = _bot.SteamPortal.Enabled;
                 cbSTEnable.Checked = _bot.SteamTrade.Enabled;
                 cbPBEnabled.Checked = _bot.SteamTrade.Enabled;
                 cbGAEnabled.Checked = _bot.GameAways.Enabled;
@@ -126,7 +126,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnGMLogin.Visible = true;
                 btnSGLogin.Visible = true;
                 btnSCLogin.Visible = true;
-                btnUGLogin.Visible = true;
+                btnSPLogin.Visible = true;
                 btnSTLogin.Visible = true;
                 btnPBLogin.Visible = true;
                 btnSteamLogin.Visible = true;
@@ -233,7 +233,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             btnGMLogin.Visible = false;
             btnSGLogin.Visible = false;
             btnSCLogin.Visible = false;
-            btnUGLogin.Visible = false;
+            btnSPLogin.Visible = false;
             btnSTLogin.Visible = false;
             btnPBLogin.Visible = false;
             btnSteamLogin.Visible = false;
@@ -242,7 +242,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             btnGMExit.Visible = false;
             btnSGExit.Visible = false;
             btnSCExit.Visible = false;
-            btnUGExit.Visible = false;
+            btnSPExit.Visible = false;
             btnSTExit.Visible = false;
             btnPBExit.Visible = false;
             btnSteamExit.Visible = false;
@@ -256,7 +256,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             pbGMReload.Visible = false;
             pbSGReload.Visible = false;
             pbSCReload.Visible = false;
-            pbUGReload.Visible = false;
+            pbUSPeload.Visible = false;
             pbSTreload.Visible = false;
             pbPBRefresh.Visible = false;
             pbGARefresh.Visible = false;
@@ -457,15 +457,15 @@ namespace KryBot.Gui.WinFormsGui.Forms
             }
             toolStripProgressBar.Value++;
 
-            if (_bot.UseGamble.Enabled)
+            if (_bot.SteamPortal.Enabled)
             {
-                var profile = await _bot.UseGamble.CheckLogin();
+                var profile = await _bot.SteamPortal.CheckLogin();
                 LogMessage.Instance.AddMessage(profile);
                 LoadProfilesInfo?.Invoke();
 
                 if (profile.Success)
                 {
-                    var won = await _bot.UseGamble.CheckWon();
+                    var won = await _bot.SteamPortal.CheckWon();
                     if (won != null)
                     {
                         LogMessage.Instance.AddMessage(won);
@@ -475,15 +475,15 @@ namespace KryBot.Gui.WinFormsGui.Forms
                         }
                     }
 
-                    await _bot.UseGamble.Join(_bot.Sort, _bot.SortToMore, _bot.Blacklist);
+                    await _bot.SteamPortal.Join(_bot.Sort, _bot.SortToMore, _bot.Blacklist);
                 }
                 else
                 {
-                    BlockTabpage(tabPageUG);
-                    btnUGLogin.Enabled = true;
-                    btnUGLogin.Visible = true;
-                    linkLabelUG.Enabled = true;
-                    lblUGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                    BlockTabpage(tabPageSP);
+                    btnSPLogin.Enabled = true;
+                    btnSPLogin.Visible = true;
+                    linkLabelSP.Enabled = true;
+                    lblSPStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             toolStripProgressBar.Value++;
@@ -609,8 +609,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             lblSCPoints.Text = $@"{strings.Points}: {_bot.SteamCompanion.Points}";
             lblSCLevel.Text = $@"{strings.Level}: -";
 
-            lblUGPoints.Text = $@"{strings.Points}: {_bot.UseGamble.Points}";
-            lblUGLevel.Text = $@"{strings.Level}: -";
+            lblSPPoints.Text = $@"{strings.Points}: {_bot.SteamPortal.Points}";
+            lblSPLevel.Text = $@"{strings.Level}: -";
 
             lblSTPoints.Text = $@"{strings.Points}: -";
             lblSTLevel.Text = $@"{strings.Level}: -";
@@ -776,11 +776,11 @@ namespace KryBot.Gui.WinFormsGui.Forms
             }
             toolStripProgressBar.Value++;
 
-            if (_bot.UseGamble.Enabled)
+            if (_bot.SteamPortal.Enabled)
             {
                 if (await CheckLoginSp())
                 {
-                    var won = await _bot.UseGamble.CheckWon();
+                    var won = await _bot.SteamPortal.CheckWon();
                     if (won != null)
                     {
                         LogMessage.Instance.AddMessage(won);
@@ -791,25 +791,25 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     }
 
                     login = true;
-                    btnUGLogin.Enabled = false;
-                    btnUGLogin.Visible = false;
-                    lblUGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
-                    pbUGReload.Visible = true;
-                    btnUGExit.Visible = true;
+                    btnSPLogin.Enabled = false;
+                    btnSPLogin.Visible = false;
+                    lblSPStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                    pbUSPeload.Visible = true;
+                    btnSPExit.Visible = true;
                 }
                 else
                 {
-                    BlockTabpage(tabPageUG);
-                    btnUGLogin.Enabled = true;
-                    btnUGLogin.Visible = true;
-                    lblUGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                    BlockTabpage(tabPageSP);
+                    btnSPLogin.Enabled = true;
+                    btnSPLogin.Visible = true;
+                    lblSPStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             else
             {
-                BlockTabpage(tabPageUG);
-                btnUGLogin.Enabled = true;
-                btnUGLogin.Visible = true;
+                BlockTabpage(tabPageSP);
+                btnSPLogin.Enabled = true;
+                btnSPLogin.Visible = true;
             }
             toolStripProgressBar.Value++;
 
@@ -989,10 +989,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
             form.ShowDialog();
         }
 
-        private async void btnUGLogin_Click(object sender, EventArgs e)
+        private async void btnSPLogin_Click(object sender, EventArgs e)
         {
-            btnUGLogin.Enabled = false;
-            BrowserStart($"{Links.UseGamble}page/steam", Links.UseGamble, "UseGamble");
+            btnSPLogin.Enabled = false;
+            BrowserStart($"{Links.SteamPortal}page/steam", Links.SteamPortal, "SteamPortal");
             _bot.Save();
 
             toolStripStatusLabel.Image = Resources.load;
@@ -1000,30 +1000,30 @@ namespace KryBot.Gui.WinFormsGui.Forms
             var login = await CheckLoginSp();
             if (login)
             {
-                var won = await _bot.UseGamble.CheckWon();
+                var won = await _bot.SteamPortal.CheckWon();
                 if (won != null && won.Content != "\n")
                 {
                     LogMessage.Instance.AddMessage(won);
                 }
 
-                BlockTabpage(tabPageUG);
-                btnUGLogin.Enabled = false;
-                btnUGLogin.Visible = false;
-                lblUGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                BlockTabpage(tabPageSP);
+                btnSPLogin.Enabled = false;
+                btnSPLogin.Visible = false;
+                lblSPStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
                 btnStart.Enabled = true;
-                pbUGReload.Visible = true;
-                btnUGExit.Visible = true;
-                btnUGExit.Enabled = true;
-                cbUGEnable.Checked = true;
-                _bot.UseGamble.Enabled = true;
+                pbUSPeload.Visible = true;
+                btnSPExit.Visible = true;
+                btnSPExit.Enabled = true;
+                cbSPEnable.Checked = true;
+                _bot.SteamPortal.Enabled = true;
             }
             else
             {
-                lblUGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
-                BlockTabpage(tabPageUG);
-                btnUGLogin.Enabled = true;
-                btnUGLogin.Visible = true;
+                lblSPStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                BlockTabpage(tabPageSP);
+                btnSPLogin.Enabled = true;
+                btnSPLogin.Visible = true;
             }
             toolStripStatusLabel.Image = null;
             toolStripStatusLabel.Text = strings.StatusBar_End;
@@ -1180,8 +1180,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
         private async Task<bool> CheckLoginSp()
         {
-            Message_TryLogin("UseGamble");
-            var login = await _bot.UseGamble.CheckLogin();
+            Message_TryLogin("SteamPortal");
+            var login = await _bot.SteamPortal.CheckLogin();
             LogMessage.Instance.AddMessage(login);
             return login.Success;
         }
@@ -1344,29 +1344,29 @@ namespace KryBot.Gui.WinFormsGui.Forms
             btnGMExit.Enabled = true;
         }
 
-        private async void pbUGReload_Click(object sender, EventArgs e)
+        private async void pbSPReload_Click(object sender, EventArgs e)
         {
             btnGMExit.Enabled = false;
-            pbUGReload.Image = Resources.load;
-            SetStatusPanel($"{strings.MainForm_UpdateInfoAbout} UseGamble", Resources.load);
+            pbUSPeload.Image = Resources.load;
+            SetStatusPanel($"{strings.MainForm_UpdateInfoAbout} SteamPortal", Resources.load);
 
             if (await CheckLoginSp())
             {
                 LoadProfilesInfo?.Invoke();
-                btnUGLogin.Enabled = false;
-                btnUGLogin.Visible = false;
-                lblUGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
-                BlockTabpage(tabPageUG);
+                btnSPLogin.Enabled = false;
+                btnSPLogin.Visible = false;
+                lblSPStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                BlockTabpage(tabPageSP);
             }
             else
             {
-                BlockTabpage(tabPageUG);
-                btnUGLogin.Enabled = true;
-                btnUGLogin.Visible = true;
-                lblUGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                BlockTabpage(tabPageSP);
+                btnSPLogin.Enabled = true;
+                btnSPLogin.Visible = true;
+                lblSPStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
             }
 
-            pbUGReload.Image = Resources.refresh;
+            pbUSPeload.Image = Resources.refresh;
             SetStatusPanel(strings.Finish, null);
             btnGMExit.Enabled = true;
         }
@@ -1437,7 +1437,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
         private void linkLabel4_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(Links.UseGamble);
+            Process.Start(Links.SteamPortal);
         }
 
         private void linkLabel5_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -1537,18 +1537,18 @@ namespace KryBot.Gui.WinFormsGui.Forms
             }
         }
 
-        private void cbUGEnable_CheckedChanged(object sender, EventArgs e)
+        private void cbSPEnable_CheckedChanged(object sender, EventArgs e)
         {
-            if (lblUGStatus.Enabled)
+            if (lblSPStatus.Enabled)
             {
-                BlockTabpage(tabPageUG);
-                cbUGEnable.Enabled = true;
-                _bot.UseGamble.Enabled = false;
+                BlockTabpage(tabPageSP);
+                cbSPEnable.Enabled = true;
+                _bot.SteamPortal.Enabled = false;
             }
             else
             {
-                BlockTabpage(tabPageUG);
-                _bot.UseGamble.Enabled = true;
+                BlockTabpage(tabPageSP);
+                _bot.SteamPortal.Enabled = true;
             }
         }
 
@@ -1692,13 +1692,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
             _bot.Save();
         }
 
-        private void btnUGExit_Click(object sender, EventArgs e)
+        private void btnSPExit_Click(object sender, EventArgs e)
         {
-            _bot.UseGamble.Logout();
-            BlockTabpage(tabPageUG);
-            btnUGLogin.Visible = true;
-            btnUGLogin.Enabled = true;
-            btnUGExit.Visible = false;
+            _bot.SteamPortal.Logout();
+            BlockTabpage(tabPageSP);
+            btnSPLogin.Visible = true;
+            btnSPLogin.Enabled = true;
+            btnSPExit.Visible = false;
             _bot.Save();
         }
 
