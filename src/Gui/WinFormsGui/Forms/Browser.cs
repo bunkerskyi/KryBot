@@ -60,7 +60,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             Text = _title;
             Icon = Resources.KryBotPresent_256b;
             toolStripStatusLabelChromium.Text =
-                $"Chromium: {Cef.ChromiumVersion} Cef: {Cef.CefVersion} CefSharp: {Cef.CefSharpVersion}";
+                $@"Chromium: {Cef.ChromiumVersion} Cef: {Cef.CefVersion} CefSharp: {Cef.CefSharpVersion}";
 
             if (_startPage == Links.SteamTrade)
             {
@@ -76,7 +76,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private void BrowserOnLoadingStateChanged(object sender,
             LoadingStateChangedEventArgs loadingStateChangedEventArgs)
         {
-            BeginInvoke(new Action(() => { Text = $"{_title} - {_browser.Address}"; }));
+            BeginInvoke(new Action(() => { Text = $@"{_title} - {_browser.Address}"; }));
 
             if (!loadingStateChangedEventArgs.IsLoading)
             {

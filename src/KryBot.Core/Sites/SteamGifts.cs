@@ -487,14 +487,7 @@ namespace KryBot.Core.Sites
                         htmlDoc.DocumentNode.SelectSingleNode(
                             "//div[contains(@class, 'sidebar__error') and contains(@class, 'is-disabled')]");
 
-                    if (errorNode != null)
-                    {
-                        task.SetResult(errorNode.InnerText.Trim());
-                    }
-                    else
-                    {
-                        task.SetResult("Failed to get Token");
-                    }
+                    task.SetResult(errorNode?.InnerText.Trim() ?? "Failed to get Token");
                 }
                 else
                 {
@@ -513,7 +506,7 @@ namespace KryBot.Core.Sites
             {
                 var response = Web.Get(Links.SteamGiftsBlackList, Cookies.Generate(), UserAgent);
 
-                if(response.RestResponse.Content != string.Empty)
+                if (response.RestResponse.Content != string.Empty)
                 {
                     var htmlDoc = new HtmlDocument();
                     htmlDoc.LoadHtml(response.RestResponse.Content);
@@ -533,7 +526,7 @@ namespace KryBot.Core.Sites
                             {
                                 gameList.Add(int.Parse(id.InnerText.Split('/')[4].Split('/')[0]), name.InnerText);
                             }
-                        }    
+                        }
                     }
 
                     task.SetResult(gameList);

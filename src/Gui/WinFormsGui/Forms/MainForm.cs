@@ -80,7 +80,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
             if (version.Success)
             {
-                var dr = MessageBox.Show($"{version.Content.Replace("\n", "")}. Обновить?", @"Обновление",
+                var dr = MessageBox.Show($@"{version.Content.Replace("\n", "")}. Обновить?", @"Обновление",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 if (dr == DialogResult.Yes)
                 {
@@ -156,7 +156,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     _timer.Start();
                     _timerTickCount.Start();
                     btnStart.Text =
-                        $"{strings.FormMain_btnStart_Click_Stop} ({TimeSpan.FromMilliseconds(_timer.Interval)})";
+                        $@"{strings.FormMain_btnStart_Click_Stop} ({TimeSpan.FromMilliseconds(_timer.Interval)})";
                     if (_settings.ShowFarmTip)
                     {
                         ShowBaloolTip(
@@ -222,7 +222,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private void TimerTickCountOnTick(object sender, EventArgs eventArgs)
         {
             _interval += -1000;
-            btnStart.Text = $"{strings.FormMain_btnStart_Click_Stop} ({TimeSpan.FromMilliseconds(_interval)})";
+            btnStart.Text = $@"{strings.FormMain_btnStart_Click_Stop} ({TimeSpan.FromMilliseconds(_interval)})";
         }
 
         private void Design()
@@ -305,7 +305,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
         private void OpenLog()
         {
-            logToolStripMenuItem.Text = $"{strings.Log} <<";
+            logToolStripMenuItem.Text = $@"{strings.Log} <<";
             var form = new FormLog(Location.X + Width - 15, Location.Y, _settings) {Owner = this};
 
             LogHide += form.FormHide;
@@ -320,14 +320,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private void UnHideLog()
         {
             LogUnHide?.Invoke();
-            logToolStripMenuItem.Text = $"{strings.Log} <<";
+            logToolStripMenuItem.Text = $@"{strings.Log} <<";
             _logActive = true;
         }
 
         private void HideLog()
         {
             LogHide?.Invoke();
-            logToolStripMenuItem.Text = $"{strings.Log} >>";
+            logToolStripMenuItem.Text = $@"{strings.Log} >>";
             _logActive = false;
         }
 
@@ -388,7 +388,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     btnSGLogin.Enabled = true;
                     btnSGLogin.Visible = true;
                     linkLabelSG.Enabled = true;
-                    lblSGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                    lblSGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             toolStripProgressBar.Value++;
@@ -419,7 +419,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     btnSGLogin.Enabled = true;
                     btnSGLogin.Visible = true;
                     linkLabelSG.Enabled = true;
-                    lblSGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                    lblSGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             toolStripProgressBar.Value++;
@@ -450,7 +450,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     btnSCLogin.Enabled = true;
                     btnSCLogin.Visible = true;
                     linkLabelSC.Enabled = true;
-                    lblSCStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                    lblSCStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             toolStripProgressBar.Value++;
@@ -481,7 +481,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     btnUGLogin.Enabled = true;
                     btnUGLogin.Visible = true;
                     linkLabelUG.Enabled = true;
-                    lblUGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                    lblUGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             toolStripProgressBar.Value++;
@@ -502,7 +502,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     btnSTLogin.Enabled = true;
                     btnSTLogin.Visible = true;
                     linkLabelST.Enabled = true;
-                    lblSTStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                    lblSTStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             toolStripProgressBar.Value++;
@@ -523,7 +523,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     btnPBLogin.Enabled = true;
                     btnPBLogin.Visible = true;
                     linkLabelPB.Enabled = true;
-                    lblPBStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                    lblPBStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             toolStripProgressBar.Value++;
@@ -544,7 +544,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     btnGALogin.Enabled = true;
                     btnGALogin.Visible = true;
                     linkLabelGA.Enabled = true;
-                    lblGAStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                    lblGAStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             toolStripProgressBar.Value++;
@@ -565,7 +565,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     btnGALogin.Enabled = true;
                     btnGALogin.Visible = true;
                     linkLabelGA.Enabled = true;
-                    lblGAStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                    lblGAStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             toolStripProgressBar.Value++;
@@ -598,29 +598,29 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
         private void ShowProfileInfo()
         {
-            lblGMCoal.Text = $"{strings.Points}: {_bot.GameMiner.Points}";
-            lblGMLevel.Text = $"{strings.Level}: {_bot.GameMiner.Level}";
+            lblGMCoal.Text = $@"{strings.Points}: {_bot.GameMiner.Points}";
+            lblGMLevel.Text = $@"{strings.Level}: {_bot.GameMiner.Level}";
 
-            lblSGPoints.Text = $"{strings.Points}: {_bot.SteamGifts.Points}";
-            lblSGLevel.Text = $"{strings.Level}: {_bot.SteamGifts.Level}";
+            lblSGPoints.Text = $@"{strings.Points}: {_bot.SteamGifts.Points}";
+            lblSGLevel.Text = $@"{strings.Level}: {_bot.SteamGifts.Level}";
 
-            lblSCPoints.Text = $"{strings.Points}: {_bot.SteamCompanion.Points}";
-            lblSCLevel.Text = $"{strings.Level}: -";
+            lblSCPoints.Text = $@"{strings.Points}: {_bot.SteamCompanion.Points}";
+            lblSCLevel.Text = $@"{strings.Level}: -";
 
-            lblUGPoints.Text = $"{strings.Points}: {_bot.UseGamble.Points}";
-            lblUGLevel.Text = $"{strings.Level}: -";
+            lblUGPoints.Text = $@"{strings.Points}: {_bot.UseGamble.Points}";
+            lblUGLevel.Text = $@"{strings.Level}: -";
 
-            lblSTPoints.Text = $"{strings.Points}: -";
-            lblSTLevel.Text = $"{strings.Level}: -";
+            lblSTPoints.Text = $@"{strings.Points}: -";
+            lblSTLevel.Text = $@"{strings.Level}: -";
 
-            lblPBPoints.Text = $"{strings.Points}: {_bot.PlayBlink.Points}";
-            lblPBLevel.Text = $"{strings.Level}: {_bot.PlayBlink.Level}";
+            lblPBPoints.Text = $@"{strings.Points}: {_bot.PlayBlink.Points}";
+            lblPBLevel.Text = $@"{strings.Level}: {_bot.PlayBlink.Level}";
 
-            lblGAPoints.Text = $"{strings.Points}: {_bot.GameAways.Points}";
-            lblGALevel.Text = $"{strings.Level}: -";
+            lblGAPoints.Text = $@"{strings.Points}: {_bot.GameAways.Points}";
+            lblGALevel.Text = $@"{strings.Level}: -";
 
-            lblIGPoints.Text = $"{strings.Points}: {_bot.InventoryGifts.Points}";
-            lblIGLevel.Text = $"{strings.Level}: {_bot.InventoryGifts.Level}";
+            lblIGPoints.Text = $@"{strings.Points}: {_bot.InventoryGifts.Points}";
+            lblIGLevel.Text = $@"{strings.Level}: {_bot.InventoryGifts.Level}";
         }
 
         private async Task<bool> LoginCheck()
@@ -638,7 +638,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 {
                     btnSteamLogin.Enabled = false;
                     btnSteamLogin.Visible = false;
-                    lblSteamStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                    lblSteamStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                     btnSteamExit.Visible = true;
                 }
                 else
@@ -646,7 +646,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     BlockTabpage(tabPageSteam, false);
                     btnSteamLogin.Enabled = true;
                     btnSteamLogin.Visible = true;
-                    lblSteamStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                    lblSteamStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             else
@@ -676,7 +676,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     login = true;
                     btnGMLogin.Enabled = false;
                     btnGMLogin.Visible = false;
-                    lblGMStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                    lblGMStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                     LoadProfilesInfo?.Invoke();
                     pbGMReload.Visible = true;
                     btnGMExit.Visible = true;
@@ -686,7 +686,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     BlockTabpage(tabPageGM, false);
                     btnGMLogin.Enabled = true;
                     btnGMLogin.Visible = true;
-                    lblGMStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                    lblGMStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             else
@@ -716,7 +716,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     login = true;
                     btnSGLogin.Enabled = false;
                     btnSGLogin.Visible = false;
-                    lblSGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                    lblSGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                     pbSGReload.Visible = true;
                     btnSGExit.Visible = true;
                 }
@@ -725,7 +725,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     BlockTabpage(tabPageSG, false);
                     btnSGLogin.Enabled = true;
                     btnSGLogin.Visible = true;
-                    lblSGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                    lblSGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             else
@@ -754,7 +754,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     login = true;
                     btnSCLogin.Enabled = false;
                     btnSCLogin.Visible = false;
-                    lblSCStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                    lblSCStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                     pbSCReload.Visible = true;
                     btnSCExit.Visible = true;
                 }
@@ -763,7 +763,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     BlockTabpage(tabPageSC, false);
                     btnSCLogin.Enabled = true;
                     btnSCLogin.Visible = true;
-                    lblSCStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                    lblSCStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             else
@@ -791,7 +791,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     login = true;
                     btnUGLogin.Enabled = false;
                     btnUGLogin.Visible = false;
-                    lblUGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                    lblUGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                     pbUGReload.Visible = true;
                     btnUGExit.Visible = true;
                 }
@@ -800,7 +800,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     BlockTabpage(tabPageUG, false);
                     btnUGLogin.Enabled = true;
                     btnUGLogin.Visible = true;
-                    lblUGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                    lblUGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             else
@@ -818,7 +818,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     login = true;
                     btnSTLogin.Enabled = false;
                     btnSTLogin.Visible = false;
-                    lblSTStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                    lblSTStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                     pbSTreload.Visible = true;
                     btnSTExit.Visible = true;
                 }
@@ -827,7 +827,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     BlockTabpage(tabPageST, false);
                     btnSTLogin.Enabled = true;
                     btnSTLogin.Visible = true;
-                    lblSTStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                    lblSTStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             else
@@ -846,7 +846,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     login = true;
                     btnPBLogin.Enabled = false;
                     btnPBLogin.Visible = false;
-                    lblPBStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                    lblPBStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                     LoadProfilesInfo?.Invoke();
                     pbPBRefresh.Visible = true;
                     btnPBExit.Visible = true;
@@ -856,7 +856,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     BlockTabpage(tabPagePB, false);
                     btnPBLogin.Enabled = true;
                     btnPBLogin.Visible = true;
-                    lblPBStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                    lblPBStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             else
@@ -875,7 +875,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     login = true;
                     btnGALogin.Enabled = false;
                     btnGALogin.Visible = false;
-                    lblGAStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                    lblGAStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                     btnGAExit.Visible = true;
                 }
                 else
@@ -883,7 +883,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     BlockTabpage(tabPageGA, false);
                     btnGALogin.Enabled = true;
                     btnGALogin.Visible = true;
-                    lblGAStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                    lblGAStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             else
@@ -902,7 +902,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     login = true;
                     btnIGLogin.Enabled = false;
                     btnIGLogin.Visible = false;
-                    lblIGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                    lblIGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                     btnIGLogout.Visible = true;
                 }
                 else
@@ -910,7 +910,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     BlockTabpage(tabPageIG, false);
                     btnIGLogin.Enabled = true;
                     btnIGLogin.Visible = true;
-                    lblIGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                    lblIGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 }
             }
             else
@@ -955,7 +955,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 BlockTabpage(tabPageST, true);
                 btnSTLogin.Enabled = false;
                 btnSTLogin.Visible = false;
-                lblSTStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                lblSTStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
                 btnStart.Enabled = true;
                 pbSTreload.Visible = true;
@@ -966,7 +966,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             }
             else
             {
-                lblSTStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                lblSTStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 BlockTabpage(tabPageST, false);
                 btnSTLogin.Enabled = true;
                 btnSTLogin.Visible = true;
@@ -1004,7 +1004,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 BlockTabpage(tabPageUG, true);
                 btnUGLogin.Enabled = false;
                 btnUGLogin.Visible = false;
-                lblUGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                lblUGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
                 btnStart.Enabled = true;
                 pbUGReload.Visible = true;
@@ -1015,7 +1015,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             }
             else
             {
-                lblUGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                lblUGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 BlockTabpage(tabPageUG, false);
                 btnUGLogin.Enabled = true;
                 btnUGLogin.Visible = true;
@@ -1044,7 +1044,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 BlockTabpage(tabPageSC, true);
                 btnSCLogin.Enabled = false;
                 btnSCLogin.Visible = false;
-                lblSCStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                lblSCStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
                 btnStart.Enabled = true;
                 pbSCReload.Visible = true;
@@ -1055,7 +1055,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             }
             else
             {
-                lblSCStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                lblSCStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 BlockTabpage(tabPageSC, false);
                 btnSCLogin.Enabled = true;
                 btnSCLogin.Visible = true;
@@ -1088,7 +1088,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 BlockTabpage(tabPageSG, true);
                 btnSGLogin.Enabled = false;
                 btnSGLogin.Visible = false;
-                lblSGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                lblSGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
                 btnStart.Enabled = true;
                 pbSGReload.Visible = true;
@@ -1099,7 +1099,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             }
             else
             {
-                lblSGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                lblSGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 BlockTabpage(tabPageSG, false);
                 btnSGLogin.Enabled = true;
                 btnSGLogin.Visible = true;
@@ -1129,7 +1129,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 BlockTabpage(tabPageGM, true);
                 btnGMLogin.Enabled = false;
                 btnGMLogin.Visible = false;
-                lblGMStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                lblGMStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
                 btnStart.Enabled = true;
                 pbGMReload.Visible = true;
@@ -1140,7 +1140,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             }
             else
             {
-                lblGMStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                lblGMStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 BlockTabpage(tabPageGM, false);
                 btnGMLogin.Enabled = true;
                 btnGMLogin.Visible = true;
@@ -1245,7 +1245,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
                 btnGMLogin.Enabled = false;
                 btnGMLogin.Visible = false;
-                lblGMStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                lblGMStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
                 BlockTabpage(tabPageGM, true);
             }
@@ -1254,7 +1254,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 BlockTabpage(tabPageGM, false);
                 btnGMLogin.Enabled = true;
                 btnGMLogin.Visible = true;
-                lblGMStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                lblGMStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
             }
 
             SetStatusPanel(strings.Finish, null);
@@ -1285,7 +1285,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
                 btnSGLogin.Enabled = false;
                 btnSGLogin.Visible = false;
-                lblSGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                lblSGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 BlockTabpage(tabPageSG, true);
             }
             else
@@ -1293,7 +1293,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 BlockTabpage(tabPageSG, false);
                 btnSGLogin.Enabled = true;
                 btnSGLogin.Visible = true;
-                lblSGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                lblSGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
             }
 
             SetStatusPanel(strings.Finish, null);
@@ -1317,7 +1317,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 }
                 btnSCLogin.Enabled = false;
                 btnSCLogin.Visible = false;
-                lblSCStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                lblSCStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 BlockTabpage(tabPageSC, true);
 
                 var async = await _bot.SteamCompanion.Sync();
@@ -1331,7 +1331,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 BlockTabpage(tabPageSC, false);
                 btnSCLogin.Enabled = true;
                 btnSCLogin.Visible = true;
-                lblSCStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                lblSCStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
             }
 
             SetStatusPanel(strings.Finish, null);
@@ -1350,7 +1350,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 LoadProfilesInfo?.Invoke();
                 btnUGLogin.Enabled = false;
                 btnUGLogin.Visible = false;
-                lblUGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                lblUGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 BlockTabpage(tabPageUG, true);
             }
             else
@@ -1358,7 +1358,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 BlockTabpage(tabPageUG, false);
                 btnUGLogin.Enabled = true;
                 btnUGLogin.Visible = true;
-                lblUGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                lblUGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
             }
 
             pbUGReload.Image = Resources.refresh;
@@ -1377,7 +1377,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 LoadProfilesInfo?.Invoke();
                 btnSTLogin.Enabled = false;
                 btnSTLogin.Visible = false;
-                lblSTStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                lblSTStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 BlockTabpage(tabPageST, true);
             }
             else
@@ -1385,7 +1385,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 BlockTabpage(tabPageST, false);
                 btnSTLogin.Enabled = true;
                 btnSTLogin.Visible = true;
-                lblSTStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                lblSTStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
             }
 
             SetStatusPanel(strings.Finish, null);
@@ -1586,14 +1586,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnSteamExit.Enabled = true;
                 btnSteamExit.Visible = true;
 
-                lblSteamStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                lblSteamStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
 
                 SetTitle(_bot.Steam.Username);
             }
             else
             {
-                lblSteamStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                lblSteamStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 BlockTabpage(tabPageSteam, false);
                 btnSteamLogin.Enabled = true;
                 btnSteamLogin.Visible = true;
@@ -1765,7 +1765,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 BlockTabpage(tabPagePB, true);
                 btnPBLogin.Enabled = false;
                 btnPBLogin.Visible = false;
-                lblPBStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                lblPBStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
                 btnStart.Enabled = true;
                 pbPBRefresh.Visible = true;
@@ -1776,7 +1776,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             }
             else
             {
-                lblPBStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                lblPBStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 BlockTabpage(tabPagePB, false);
                 btnPBLogin.Enabled = true;
                 btnPBLogin.Visible = true;
@@ -1811,7 +1811,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 LoadProfilesInfo?.Invoke();
                 btnPBLogin.Enabled = false;
                 btnPBLogin.Visible = false;
-                lblPBStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                lblPBStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 BlockTabpage(tabPagePB, true);
             }
             else
@@ -1819,7 +1819,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 BlockTabpage(tabPagePB, false);
                 btnPBLogin.Enabled = true;
                 btnPBLogin.Visible = true;
-                lblPBStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                lblPBStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
             }
 
             SetStatusPanel(strings.Finish, null);
@@ -1868,7 +1868,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 BlockTabpage(tabPageGA, true);
                 btnGALogin.Enabled = false;
                 btnGALogin.Visible = false;
-                lblGAStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                lblGAStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
                 btnStart.Enabled = true;
                 pbGARefresh.Visible = true;
@@ -1879,7 +1879,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             }
             else
             {
-                lblGAStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                lblGAStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 BlockTabpage(tabPageGA, false);
                 btnGALogin.Enabled = true;
                 btnGALogin.Visible = true;
@@ -1973,7 +1973,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 BlockTabpage(tabPageIG, true);
                 btnIGLogin.Enabled = false;
                 btnIGLogin.Visible = false;
-                lblIGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
+                lblIGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
                 LoadProfilesInfo?.Invoke();
                 btnStart.Enabled = true;
                 pbIGRefresh.Visible = true;
@@ -1984,7 +1984,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             }
             else
             {
-                lblIGStatus.Text = $"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
+                lblIGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
                 BlockTabpage(tabPageIG, false);
                 btnIGLogin.Enabled = true;
                 btnIGLogin.Visible = true;
@@ -2000,7 +2000,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
         private void SetTitle(string steamLogin)
         {
-            Text = $"{Application.ProductName} [{Application.ProductVersion}] ({steamLogin})";
+            Text = $@"{Application.ProductName} [{Application.ProductVersion}] ({steamLogin})";
         }
     }
 }
