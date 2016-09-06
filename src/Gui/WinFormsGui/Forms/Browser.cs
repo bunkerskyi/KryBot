@@ -76,7 +76,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private void BrowserOnLoadingStateChanged(object sender,
             LoadingStateChangedEventArgs loadingStateChangedEventArgs)
         {
-            Invoke(new MethodInvoker(() => { Text = $@"{_title} - {_browser?.Address}"; }));
+            try
+            {
+                Invoke(new MethodInvoker(() => { Text = $@"{_title} - {_browser?.Address}"; }));
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
 
             if (!loadingStateChangedEventArgs.IsLoading)
             {
