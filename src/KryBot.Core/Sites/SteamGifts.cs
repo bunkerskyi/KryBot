@@ -173,31 +173,31 @@ namespace KryBot.Core.Sites
                 }
             }
 
-            if (Giveaways?.Count > 0)
+            if (WishlistGiveaways?.Count > 0)
             {
                 if (sort)
                 {
                     if (sortToMore)
                     {
-                        if (wishlistNotSort)
+                        if (!wishlistNotSort)
                         {
-                            Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+                            WishlistGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
                         }
                     }
                     else
                     {
-                        if (wishlistNotSort)
+                        if (!wishlistNotSort)
                         {
-                            Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+                            WishlistGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
                         }
                     }
                 }
 
                 if (SortToLessLevel)
                 {
-                    if (wishlistNotSort)
+                    if (!wishlistNotSort)
                     {
-                        Giveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
+                        WishlistGiveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
                     }
                 }
 
