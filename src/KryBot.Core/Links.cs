@@ -64,17 +64,17 @@
 
         #endregion
 
-        #region UseGamble
+        #region SteamPortal
 
-        public const string UseGamble = "http://usegamble.com/";
+        public const string SteamPortal = "http://steamportal.net/";
 
-        public static readonly string UseGambleJoin = $"{UseGamble}page/join";
+        public static readonly string SteamPortalJoin = $"{SteamPortal}page/join";
 
-        public static readonly string UseGambleWon = $"{UseGamble}profile/logs";
+        public static readonly string SteamPortalWon = $"{SteamPortal}profile/logs";
 
-        public static readonly string UseGambleGiveaways = $"{UseGamble}page";
+        public static readonly string SteamPortalGiveaways = $"{SteamPortal}page";
 
-        public static readonly string UseGambleGaPage = $"{UseGamble}page/ga_page";
+        public static readonly string SteamPortalGaPage = $"{SteamPortal}page/ga_page";
 
         #endregion
 

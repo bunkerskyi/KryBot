@@ -44,7 +44,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.3.5\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.3.8\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
@@ -68,7 +68,7 @@
     <Compile Include="Cookies\SteamCompanionCookie.cs" />
     <Compile Include="Cookies\SteamCookie.cs" />
     <Compile Include="Cookies\SteamGiftsCookie.cs" />
-    <Compile Include="Cookies\UseGambleCookie.cs" />
+    <Compile Include="Cookies\SteamPortalCookie.cs" />
     <Compile Include="Cookies\SteamTradeCookie.cs" />
     <Compile Include="FilePaths.cs" />
     <Compile Include="Giveaways\BaseGiveaway.cs" />
@@ -78,7 +78,7 @@
     <Compile Include="Giveaways\PlayBlinkGiveaway.cs" />
     <Compile Include="Giveaways\SteamCompanionGiveaway.cs" />
     <Compile Include="Giveaways\SteamGiftsGiveaway.cs" />
-    <Compile Include="Giveaways\UseGambleGiveaway.cs" />
+    <Compile Include="Giveaways\SteamPortalGiveaway.cs" />
     <Compile Include="Giveaways\SteamTradeGiveaway.cs" />
     <Compile Include="Helpers\AutorunHelper.cs" />
     <Compile Include="Helpers\CookieHelper.cs" />
@@ -103,8 +103,8 @@
     <Compile Include="Serializable\Steam\ProfileGames.cs" />
     <Compile Include="Serializable\Steam\ProfileGamesList.cs" />
     <Compile Include="Serializable\Steam\SteamXmlUserId64.cs" />
-    <Compile Include="Serializable\UseGamble\JsonJoin.cs" />
-    <Compile Include="Serializable\UseGamble\TargetH.cs" />
+    <Compile Include="Serializable\SteamPortal\JsonJoin.cs" />
+    <Compile Include="Serializable\SteamPortal\TargetH.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -116,7 +116,7 @@
     <Compile Include="Sites\Steam.cs" />
     <Compile Include="Sites\SteamCompanion.cs" />
     <Compile Include="Sites\SteamGifts.cs" />
-    <Compile Include="Sites\UseGamble.cs" />
+    <Compile Include="Sites\SteamPortal.cs" />
     <Compile Include="Sites\SteamTrade.cs" />
     <Compile Include="Updater.cs" />
     <Compile Include="Web.cs" />
@@ -142,9 +142,11 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -8,7 +8,8 @@ namespace KryBot.Core.Helpers
         public static void Create()
         {
             var shortcut = new WshShell()
-                .CreateShortcut($"{Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)}\\KryBot.lnk")
+                    .CreateShortcut(
+                        $"{Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory)}\\KryBot.lnk")
                 as IWshShortcut;
             if (shortcut != null)
             {

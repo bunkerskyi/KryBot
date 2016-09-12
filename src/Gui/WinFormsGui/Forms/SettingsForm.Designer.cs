@@ -85,7 +85,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.lblSCMaxValue = new System.Windows.Forms.Label();
             this.cbSCGroup = new System.Windows.Forms.CheckBox();
             this.cbSCWishlist = new System.Windows.Forms.CheckBox();
-            this.tabPageUG = new System.Windows.Forms.TabPage();
+            this.tabPageSP = new System.Windows.Forms.TabPage();
             this.btnSPCookies = new System.Windows.Forms.Button();
             this.tbSPReserv = new System.Windows.Forms.TextBox();
             this.tbSPMaxValue = new System.Windows.Forms.TextBox();
@@ -125,7 +125,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageSG.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSGLevel)).BeginInit();
             this.tabPageSC.SuspendLayout();
-            this.tabPageUG.SuspendLayout();
+            this.tabPageSP.SuspendLayout();
             this.tabPagePB.SuspendLayout();
             this.tabPageGA.SuspendLayout();
             this.tabPageIG.SuspendLayout();
@@ -138,7 +138,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabControl.Controls.Add(this.tabPageGM);
             this.tabControl.Controls.Add(this.tabPageSG);
             this.tabControl.Controls.Add(this.tabPageSC);
-            this.tabControl.Controls.Add(this.tabPageUG);
+            this.tabControl.Controls.Add(this.tabPageSP);
             this.tabControl.Controls.Add(this.tabPagePB);
             this.tabControl.Controls.Add(this.tabPageGA);
             this.tabControl.Controls.Add(this.tabPageIG);
@@ -698,19 +698,19 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.cbSCWishlist.Text = "Wishlist";
             this.cbSCWishlist.UseVisualStyleBackColor = true;
             // 
-            // tabPageUG
+            // tabPageSP
             // 
-            this.tabPageUG.Controls.Add(this.btnSPCookies);
-            this.tabPageUG.Controls.Add(this.tbSPReserv);
-            this.tabPageUG.Controls.Add(this.tbSPMaxValue);
-            this.tabPageUG.Controls.Add(this.label3);
-            this.tabPageUG.Controls.Add(this.label4);
-            this.tabPageUG.Location = new System.Drawing.Point(4, 40);
-            this.tabPageUG.Name = "tabPageUG";
-            this.tabPageUG.Size = new System.Drawing.Size(309, 156);
-            this.tabPageUG.TabIndex = 4;
-            this.tabPageUG.Text = "UG";
-            this.tabPageUG.UseVisualStyleBackColor = true;
+            this.tabPageSP.Controls.Add(this.btnSPCookies);
+            this.tabPageSP.Controls.Add(this.tbSPReserv);
+            this.tabPageSP.Controls.Add(this.tbSPMaxValue);
+            this.tabPageSP.Controls.Add(this.label3);
+            this.tabPageSP.Controls.Add(this.label4);
+            this.tabPageSP.Location = new System.Drawing.Point(4, 40);
+            this.tabPageSP.Name = "tabPageSP";
+            this.tabPageSP.Size = new System.Drawing.Size(309, 156);
+            this.tabPageSP.TabIndex = 4;
+            this.tabPageSP.Text = "SP";
+            this.tabPageSP.UseVisualStyleBackColor = true;
             // 
             // btnSPCookies
             // 
@@ -720,7 +720,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.btnSPCookies.Size = new System.Drawing.Size(23, 23);
             this.btnSPCookies.TabIndex = 18;
             this.btnSPCookies.UseVisualStyleBackColor = true;
-            this.btnSPCookies.Click += new System.EventHandler(this.btnUGCookies_Click);
+            this.btnSPCookies.Click += new System.EventHandler(this.btnSPCookies_Click);
             // 
             // tbSPReserv
             // 
@@ -1042,8 +1042,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             ((System.ComponentModel.ISupportInitialize)(this.numSGLevel)).EndInit();
             this.tabPageSC.ResumeLayout(false);
             this.tabPageSC.PerformLayout();
-            this.tabPageUG.ResumeLayout(false);
-            this.tabPageUG.PerformLayout();
+            this.tabPageSP.ResumeLayout(false);
+            this.tabPageSP.PerformLayout();
             this.tabPagePB.ResumeLayout(false);
             this.tabPagePB.PerformLayout();
             this.tabPageGA.ResumeLayout(false);
@@ -1065,7 +1065,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private System.Windows.Forms.MenuStrip menuStrip;
 		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
 		private System.Windows.Forms.TabPage tabPageSC;
-		private System.Windows.Forms.TabPage tabPageUG;
+		private System.Windows.Forms.TabPage tabPageSP;
 		private System.Windows.Forms.TabPage tabPageCommun;
 		private System.Windows.Forms.ComboBox cbSortBy;
 		private System.Windows.Forms.CheckBox cbSort;
