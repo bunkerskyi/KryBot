@@ -510,4 +510,7 @@
   <data name="Settngs_CreateShortcut" xml:space="preserve">
     <value>Create shortcut</value>
   </data>
+  <data name="SettingsForm_cbSGSortToMoreCopies" xml:space="preserve">
+    <value>First giveaways of the more copies</value>
+  </data>
 </root>

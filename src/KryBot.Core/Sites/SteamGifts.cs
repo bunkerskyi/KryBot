@@ -30,6 +30,7 @@ namespace KryBot.Core.Sites
         public bool WishList { get; set; }
         public bool SortLevel { get; set; }
         public bool SortToLessLevel { get; set; }
+        public bool SortToMoreCopies { get; set; }
         public int Points { get; set; }
         public int Level { get; set; }
         public int JoinPointLimit { get; set; } = 300;
@@ -162,6 +163,10 @@ namespace KryBot.Core.Sites
                 if (SortToLessLevel)
                 {
                     Giveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
+                }
+                else if(SortToMoreCopies)
+                {
+                    Giveaways.Sort((a, b) => a.Copies.CompareTo(b.Copies));
                 }
 
                 foreach (var giveaway in Giveaways)
@@ -422,7 +427,11 @@ namespace KryBot.Core.Sites
 
                         foreach (var price in node.SelectNodes(".//span[@class='giveaway__heading__thin']"))
                         {
-                            if (!price.InnerText.Contains("Copies"))
+                            if(price.InnerText.Contains("Copies"))
+                            {
+                                sgGiveaway.Copies = int.Parse(price.InnerText.Replace(" Copies)", "").Split('(')[1]);
+                            }
+                            else
                             {
                                 sgGiveaway.Price = int.Parse(price.InnerText.Split('(')[1].Split('P')[0]);
                             }

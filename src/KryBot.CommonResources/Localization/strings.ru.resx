@@ -509,4 +509,7 @@
   <data name="Settngs_CreateShortcut" xml:space="preserve">
     <value>Создать ярлык</value>
   </data>
+  <data name="SettingsForm_cbSGSortToMoreCopies" xml:space="preserve">
+    <value>Сначала раздачи с наибольшим количеством копий</value>
+  </data>
 </root>

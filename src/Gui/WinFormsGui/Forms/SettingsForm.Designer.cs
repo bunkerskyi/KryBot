@@ -63,7 +63,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPageSG = new System.Windows.Forms.TabPage();
-            this.cbSGSortTeLessLevel = new System.Windows.Forms.CheckBox();
+            this.rbSGSortToMoreCopies = new System.Windows.Forms.RadioButton();
+            this.rbSGSortTeLessLevel = new System.Windows.Forms.RadioButton();
             this.numSGLevel = new System.Windows.Forms.NumericUpDown();
             this.cbSGMinLevel = new System.Windows.Forms.CheckBox();
             this.cbSGRegular = new System.Windows.Forms.CheckBox();
@@ -454,7 +455,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             // 
             // tabPageSG
             // 
-            this.tabPageSG.Controls.Add(this.cbSGSortTeLessLevel);
+            this.tabPageSG.Controls.Add(this.rbSGSortToMoreCopies);
+            this.tabPageSG.Controls.Add(this.rbSGSortTeLessLevel);
             this.tabPageSG.Controls.Add(this.numSGLevel);
             this.tabPageSG.Controls.Add(this.cbSGMinLevel);
             this.tabPageSG.Controls.Add(this.cbSGRegular);
@@ -473,19 +475,31 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageSG.Text = "SG";
             this.tabPageSG.UseVisualStyleBackColor = true;
             // 
-            // cbSGSortTeLessLevel
+            // rbSGSortToMoreCopies
             // 
-            this.cbSGSortTeLessLevel.AutoSize = true;
-            this.cbSGSortTeLessLevel.Location = new System.Drawing.Point(6, 98);
-            this.cbSGSortTeLessLevel.Name = "cbSGSortTeLessLevel";
-            this.cbSGSortTeLessLevel.Size = new System.Drawing.Size(190, 17);
-            this.cbSGSortTeLessLevel.TabIndex = 14;
-            this.cbSGSortTeLessLevel.Text = "First giveaways of the highest level";
-            this.cbSGSortTeLessLevel.UseVisualStyleBackColor = true;
+            this.rbSGSortToMoreCopies.AutoSize = true;
+            this.rbSGSortToMoreCopies.Location = new System.Drawing.Point(6, 100);
+            this.rbSGSortToMoreCopies.Name = "rbSGSortToMoreCopies";
+            this.rbSGSortToMoreCopies.Size = new System.Drawing.Size(187, 17);
+            this.rbSGSortToMoreCopies.TabIndex = 16;
+            this.rbSGSortToMoreCopies.TabStop = true;
+            this.rbSGSortToMoreCopies.Text = "First giveaways of the more copies";
+            this.rbSGSortToMoreCopies.UseVisualStyleBackColor = true;
+            // 
+            // rbSGSortTeLessLevel
+            // 
+            this.rbSGSortTeLessLevel.AutoSize = true;
+            this.rbSGSortTeLessLevel.Location = new System.Drawing.Point(6, 77);
+            this.rbSGSortTeLessLevel.Name = "rbSGSortTeLessLevel";
+            this.rbSGSortTeLessLevel.Size = new System.Drawing.Size(189, 17);
+            this.rbSGSortTeLessLevel.TabIndex = 15;
+            this.rbSGSortTeLessLevel.TabStop = true;
+            this.rbSGSortTeLessLevel.Text = "First giveaways of the highest level";
+            this.rbSGSortTeLessLevel.UseVisualStyleBackColor = true;
             // 
             // numSGLevel
             // 
-            this.numSGLevel.Location = new System.Drawing.Point(183, 74);
+            this.numSGLevel.Location = new System.Drawing.Point(190, 51);
             this.numSGLevel.Maximum = new decimal(new int[] {
             10,
             0,
@@ -498,7 +512,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             // cbSGMinLevel
             // 
             this.cbSGMinLevel.AutoSize = true;
-            this.cbSGMinLevel.Location = new System.Drawing.Point(6, 75);
+            this.cbSGMinLevel.Location = new System.Drawing.Point(6, 52);
             this.cbSGMinLevel.Name = "cbSGMinLevel";
             this.cbSGMinLevel.Size = new System.Drawing.Size(178, 17);
             this.cbSGMinLevel.TabIndex = 12;
@@ -565,7 +579,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             // cbSGGroup
             // 
             this.cbSGGroup.AutoSize = true;
-            this.cbSGGroup.Location = new System.Drawing.Point(6, 52);
+            this.cbSGGroup.Location = new System.Drawing.Point(6, 29);
             this.cbSGGroup.Name = "cbSGGroup";
             this.cbSGGroup.Size = new System.Drawing.Size(108, 17);
             this.cbSGGroup.TabIndex = 1;
@@ -575,7 +589,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             // cbSGWishlist
             // 
             this.cbSGWishlist.AutoSize = true;
-            this.cbSGWishlist.Location = new System.Drawing.Point(6, 29);
+            this.cbSGWishlist.Location = new System.Drawing.Point(128, 6);
             this.cbSGWishlist.Name = "cbSGWishlist";
             this.cbSGWishlist.Size = new System.Drawing.Size(62, 17);
             this.cbSGWishlist.TabIndex = 0;
@@ -1114,7 +1128,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private System.Windows.Forms.CheckBox cbSCRegular;
 		private System.Windows.Forms.NumericUpDown numSGLevel;
 		private System.Windows.Forms.CheckBox cbSGMinLevel;
-		private System.Windows.Forms.CheckBox cbSGSortTeLessLevel;
 		private System.Windows.Forms.TabPage tabPagePB;
 		private System.Windows.Forms.Button btnPBCookies;
 		private System.Windows.Forms.TextBox tbPBReserv;
@@ -1148,8 +1161,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			cbGMRegular.Text = strings.SettingsForm_RegularGiveaways;
 			label2.Text = strings.SettingsForm_PointsReserv;
 			label1.Text = strings.SettingsFform_MaxValue;
-			cbSGSortTeLessLevel.Text = strings.SettingsForm_cbSGSortTeLessLevel;
-			cbSGMinLevel.Text = strings.SettingsForm_cbSGMinLevel;
+			rbSGSortTeLessLevel.Text = strings.SettingsForm_cbSGSortTeLessLevel;
+            rbSGSortToMoreCopies.Text = strings.SettingsForm_cbSGSortToMoreCopies;
+            cbSGMinLevel.Text = strings.SettingsForm_cbSGMinLevel;
 			cbSGRegular.Text = strings.SettingsForm_RegularGiveaways;
 		    cbSGGroup.Text = strings.SettingsForm_GroupGiveaways;
 			lblSGReserv.Text = strings.SettingsForm_PointsReserv;
@@ -1199,5 +1213,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private System.Windows.Forms.Label lblGAReserv;
         private System.Windows.Forms.Label lblGAMaxBet;
         private System.Windows.Forms.Button btnGACookies;
+        private System.Windows.Forms.RadioButton rbSGSortToMoreCopies;
+        private System.Windows.Forms.RadioButton rbSGSortTeLessLevel;
     }
 }

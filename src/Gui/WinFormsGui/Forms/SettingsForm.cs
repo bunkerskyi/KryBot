@@ -72,7 +72,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             cbSGGroup.Checked = _bot.SteamGifts.Group;
             cbSGRegular.Checked = _bot.SteamGifts.Regular;
             cbSGMinLevel.Checked = _bot.SteamGifts.SortLevel;
-            cbSGSortTeLessLevel.Checked = _bot.SteamGifts.SortToLessLevel;
+            rbSGSortTeLessLevel.Checked = _bot.SteamGifts.SortToLessLevel;
+            rbSGSortToMoreCopies.Checked = _bot.SteamGifts.SortToMoreCopies;
             numSGLevel.Enabled = _bot.SteamGifts.SortLevel;
             numSGLevel.Value = _bot.SteamGifts.MinLevel;
             tbSGMaxValue.Text = _bot.SteamGifts.JoinPointLimit.ToString();
@@ -160,7 +161,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             _bot.SteamGifts.PointsReserv = int.Parse(tbSGReserv.Text);
             _bot.SteamGifts.MinLevel = int.Parse(numSGLevel.Value.ToString(CultureInfo.InvariantCulture));
             _bot.SteamGifts.SortLevel = cbSGMinLevel.Checked;
-            _bot.SteamGifts.SortToLessLevel = cbSGSortTeLessLevel.Checked;
+            _bot.SteamGifts.SortToLessLevel = rbSGSortTeLessLevel.Checked;
+            _bot.SteamGifts.SortToMoreCopies = rbSGSortToMoreCopies.Checked;
 
             _bot.SteamCompanion.WishList = cbSCWishlist.Checked;
             _bot.SteamCompanion.Contributors = cbSCContributors.Checked;
