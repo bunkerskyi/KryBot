@@ -1,408 +1,434 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+
 using HtmlAgilityPack;
+
 using KryBot.CommonResources.Localization;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
 using KryBot.Core.Serializable.GameMiner;
+
 using Newtonsoft.Json;
+
 using RestSharp;
 
 namespace KryBot.Core.Sites
 {
-    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-    public class GameMiner
-    {
-        public GameMiner()
-        {
-            Cookies = new GameMinerCookie();
-            Giveaways = new List<GameMinerGiveaway>();
-        }
+	[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+	public class GameMiner
+	{
+		public GameMiner()
+		{
+			Cookies = new GameMinerCookie();
+			Giveaways = new List<GameMinerGiveaway>();
+		}
 
-        public bool Enabled { get; set; }
-        public int Points { get; set; }
-        public int Level { get; set; }
-        public int JoinPointsLimit { get; set; } = 50;
-        public int PointsReserv { get; set; }
-        public bool Sandbox { get; set; } = true;
-        public bool Regular { get; set; } = true;
-        public bool FreeGolden { get; set; } = true;
-        public bool NoRegion { get; set; }
-        public GameMinerCookie Cookies { get; set; }
-        public List<GameMinerGiveaway> Giveaways { get; set; }
-        public string UserAgent { get; set; }
+		public bool Enabled { get; set; }
 
-        public void Logout()
-        {
-            Cookies = new GameMinerCookie();
-            Enabled = false;
-        }
+		public int Points { get; set; }
 
-        private int AddGiveaways(JsonRootObject json)
-        {
-            var count = 0;
+		public int Level { get; set; }
 
-            if (json != null)
-            {
-                foreach (var giveaway in json.Giveaways)
-                {
-                    var lot = new GameMinerGiveaway();
-                    if (giveaway.Golden && giveaway.Price != 0)
-                    {
-                        break;
-                    }
+		public int JoinPointsLimit { get; set; } = 50;
 
-                    if (lot.Price > Points)
-                    {
-                        break;
-                    }
+		public int PointsReserv { get; set; }
 
-                    if (lot.Price >= JoinPointsLimit)
-                    {
-                        break;
-                    }
+		public bool Sandbox { get; set; } = true;
 
-                    if (lot.Price > PointsReserv)
-                    {
-                        break;
-                    }
+		public bool Regular { get; set; } = true;
 
-                    lot.Name = giveaway.Game.Name;
-                    lot.Id = giveaway.Code;
-                    lot.IsRegular = giveaway.Sandbox == null;
-                    lot.IsSandbox = giveaway.Sandbox != null;
-                    lot.IsGolden = giveaway.Golden;
-                    lot.Page = json.Page;
-                    lot.Price = giveaway.Price;
+		public bool FreeGolden { get; set; } = true;
 
-                    if (giveaway.RegionlockTypeId != null)
-                    {
-                        lot.Region = giveaway.RegionlockTypeId;
-                    }
+		public bool NoRegion { get; set; }
 
-                    if (giveaway.Game.Url != "javascript:void(0);")
-                    {
-                        lot.StoreId = giveaway.Game.Url.Split('/')[4];
-                    }
-                    else
-                    {
-                        break;
-                    }
+		public GameMinerCookie Cookies { get; set; }
 
-                    Giveaways?.Add(lot);
-                    count++;
-                }
-            }
+		public List<GameMinerGiveaway> Giveaways { get; set; }
 
-            return count;
-        }
+		public string UserAgent { get; set; }
 
-        #region JoinGivaway	
+		public void Logout()
+		{
+			Cookies = new GameMinerCookie();
+			Enabled = false;
+		}
 
-        private async Task<Log> JoinGiveaway(GameMinerGiveaway giveaway, string lang)
-        {
-            var task = new TaskCompletionSource<Log>();
-            await Task.Run(() =>
-            {
-                Thread.Sleep(400);
+		private int AddGiveaways(JsonRootObject json)
+		{
+			var count = 0;
 
-                var response =
-                    Web.Post(
-                        $"{Links.GameMiner}giveaway/enter/{giveaway.Id}?{(giveaway.IsSandbox ? "sandbox" : "coal")}_page={giveaway.Page}",
-                        GenerateJoinData(), Cookies.Generate(lang), UserAgent);
+			if (json != null)
+			{
+				foreach (var giveaway in json.Giveaways)
+				{
+					var lot = new GameMinerGiveaway();
+					if (giveaway.Golden &&
+						giveaway.Price != 0)
+					{
+						break;
+					}
 
-                if (response.RestResponse.Content != string.Empty)
-                {
-                    try
-                    {
-                        var jsonresponse = JsonConvert.DeserializeObject<JsonResponse>(response.RestResponse.Content);
-                        if (jsonresponse.Status == "ok")
-                        {
-                            Points = jsonresponse.Coal;
-                            task.SetResult(Messages.GiveawayJoined("GameMiner", giveaway.Name, giveaway.Price,
-                                jsonresponse.Coal));
-                        }
-                        else
-                        {
-                            task.SetResult(Messages.GiveawayNotJoined("GameMiner", giveaway.Name,
-                                response.RestResponse.Content));
-                        }
-                    }
-                    catch (JsonReaderException)
-                    {
-                        task.SetResult(Messages.GiveawayNotJoined("GameMiner", giveaway.Name,
-                            response.RestResponse.Content));
-                    }
-                    catch (JsonSerializationException)
-                    {
-                        var jresponse =
-                            JsonConvert.DeserializeObject<JsonResponseError>(response.RestResponse.Content);
-                        task.SetResult(Messages.GiveawayNotJoined("GameMiner", giveaway.Name,
-                            jresponse.Error.Message));
-                    }
-                }
-                else
-                {
-                    task.SetResult(Messages.GiveawayNotJoined("GameMiner", giveaway.Name, "Content is empty"));
-                }
-            });
-            return task.Task.Result;
-        }
+					if (lot.Price > Points)
+					{
+						break;
+					}
 
-        public async Task Join(Blacklist blacklist, bool sort, bool sortToMore, string lang)
-        {
-            LogMessage.Instance.AddMessage(await LoadGiveaways(blacklist, lang));
+					if (lot.Price >= JoinPointsLimit)
+					{
+						break;
+					}
 
-            if (Giveaways?.Count > 0)
-            {
-                if (sort)
-                {
-                    if (sortToMore)
-                    {
-                        Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
-                    }
-                    else
-                    {
-                        Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
-                    }
-                }
+					if (lot.Price > PointsReserv)
+					{
+						break;
+					}
 
-                foreach (var giveaway in Giveaways)
-                {
-                    if (giveaway.Price <= Points && PointsReserv <= Points - giveaway.Price)
-                    {
-                        LogMessage.Instance.AddMessage(await JoinGiveaway(giveaway, lang));
-                    }
-                }
-            }
-        }
+					lot.Name = giveaway.Game.Name;
+					lot.Id = giveaway.Code;
+					lot.IsRegular = giveaway.Sandbox == null;
+					lot.IsSandbox = giveaway.Sandbox != null;
+					lot.IsGolden = giveaway.Golden;
+					lot.Page = json.Page;
+					lot.Price = giveaway.Price;
 
-        private List<Parameter> GenerateJoinData()
-        {
-            var list = new List<Parameter>();
+					if (giveaway.RegionlockTypeId != null)
+					{
+						lot.Region = giveaway.RegionlockTypeId;
+					}
 
-            var xsrfParam = new Parameter
-            {
-                Type = ParameterType.GetOrPost,
-                Name = "_xsrf",
-                Value = Cookies.Xsrf
-            };
-            list.Add(xsrfParam);
+					if (giveaway.Game.Url != "javascript:void(0);")
+					{
+						lot.StoreId = giveaway.Game.Url.Split('/')[4];
+					}
+					else
+					{
+						break;
+					}
 
-            var jsonParam = new Parameter
-            {
-                Type = ParameterType.GetOrPost,
-                Name = "json",
-                Value = "true"
-            };
-            list.Add(jsonParam);
+					Giveaways?.Add(lot);
+					count++;
+				}
+			}
 
-            return list;
-        }
+			return count;
+		}
 
-        #endregion
+		#region JoinGivaway	
+		private async Task<Log> JoinGiveaway(GameMinerGiveaway giveaway, string lang)
+		{
+			var task = new TaskCompletionSource<Log>();
+			await Task.Run(() =>
+				{
+					Thread.Sleep(400);
 
-        #region Parse
+					var response =
+						Web.Post(
+							$"{Links.GameMiner}giveaway/enter/{giveaway.Id}?{(giveaway.IsSandbox ? "sandbox" : "coal")}_page={giveaway.Page}",
+							GenerateJoinData(),
+							Cookies.Generate(lang),
+							UserAgent);
 
-        public async Task<Log> CheckLogin(string lang)
-        {
-            var task = new TaskCompletionSource<Log>();
-            await Task.Run(() =>
-            {
-                var response = Web.Get(Links.GameMiner, Cookies.Generate(lang), UserAgent);
+					if (response.RestResponse.Content != string.Empty)
+					{
+						try
+						{
+							var jsonresponse = JsonConvert.DeserializeObject<JsonResponse>(response.RestResponse.Content);
+							if (jsonresponse.Status == "ok")
+							{
+								Points = jsonresponse.Coal;
+								task.SetResult(Messages.GiveawayJoined("GameMiner",
+									giveaway.Name,
+									giveaway.Price,
+									jsonresponse.Coal));
+							}
+							else
+							{
+								task.SetResult(Messages.GiveawayNotJoined("GameMiner",
+									giveaway.Name,
+									response.RestResponse.Content));
+							}
+						}
+						catch (JsonReaderException)
+						{
+							task.SetResult(Messages.GiveawayNotJoined("GameMiner",
+								giveaway.Name,
+								response.RestResponse.Content));
+						}
+						catch (JsonSerializationException)
+						{
+							var jresponse =
+								JsonConvert.DeserializeObject<JsonResponseError>(response.RestResponse.Content);
+							task.SetResult(Messages.GiveawayNotJoined("GameMiner",
+								giveaway.Name,
+								jresponse.Error.Message));
+						}
+					}
+					else
+					{
+						task.SetResult(Messages.GiveawayNotJoined("GameMiner", giveaway.Name, "Content is empty"));
+					}
+				});
+			return task.Task.Result;
+		}
 
-                if (response.RestResponse.Content != string.Empty)
-                {
-                    var htmlDoc = new HtmlDocument();
-                    htmlDoc.LoadHtml(response.RestResponse.Content);
+		public async Task Join(Blacklist blacklist, bool sort, bool sortToMore, string lang)
+		{
+			LogMessage.Instance.AddMessage(await LoadGiveaways(blacklist, lang));
 
-                    var coal = htmlDoc.DocumentNode.SelectSingleNode("//span[@class='user__coal']");
-                    var level = htmlDoc.DocumentNode.SelectSingleNode("//span[@class='g-level-icon']");
-                    var username = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='dashboard__user-name']");
+			if (Giveaways?.Count > 0)
+			{
+				if (sort)
+				{
+					if (sortToMore)
+					{
+						Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+					}
+					else
+					{
+						Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+					}
+				}
 
-                    if (coal != null && level != null && username != null)
-                    {
-                        Points = int.Parse(coal.InnerText);
-                        Level = int.Parse(level.InnerText);
+				foreach (var giveaway in Giveaways)
+				{
+					if (giveaway.Price <= Points &&
+						PointsReserv <= Points - giveaway.Price)
+					{
+						LogMessage.Instance.AddMessage(await JoinGiveaway(giveaway, lang));
+					}
+				}
+			}
+		}
 
-                        task.SetResult(Messages.ParseProfile("GameMiner", Points, Level,
-                            username.InnerText.Trim().Replace("\n1", "")));
-                    }
-                    else
-                    {
-                        task.SetResult(Messages.ParseProfileFailed("GameMiner"));
-                    }
-                }
-                else
-                {
-                    task.SetResult(Messages.ParseProfileFailed("GameMiner"));
-                }
-            });
-            return task.Task.Result;
-        }
+		private List<Parameter> GenerateJoinData()
+		{
+			var list = new List<Parameter>();
 
-        public async Task<Log> CheckWon(string lang)
-        {
-            var task = new TaskCompletionSource<Log>();
-            await Task.Run(() =>
-            {
-                var response = Web.Get(Links.GameMinerWon, Cookies.Generate(lang), UserAgent);
-                if (response.RestResponse.Content != string.Empty)
-                {
-                    var htmlDoc = new HtmlDocument();
-                    htmlDoc.LoadHtml(response.RestResponse.Content);
+			var xsrfParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "_xsrf",
+				Value = Cookies.Xsrf
+			};
+			list.Add(xsrfParam);
 
-                    var nodes = htmlDoc.DocumentNode.SelectNodes(
-                        "//tbody[@class='giveaways__giveaways']//td[@class='valign-middle m-table-state-finished']");
+			var jsonParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "json",
+				Value = "true"
+			};
+			list.Add(jsonParam);
 
-                    if (nodes != null)
-                    {
-                        for (var i = 0; i < nodes.Count; i++)
-                        {
-                            if (!nodes[i].InnerText.Contains("требует подтверждения") &&
-                                !nodes[i].InnerText.Contains("to be confirmed"))
-                            {
-                                nodes.Remove(nodes[i]);
-                                i--;
-                            }
-                        }
+			return list;
+		}
+		#endregion
 
-                        if (nodes.Count > 0)
-                        {
-                            task.SetResult(Messages.GiveawayHaveWon("GameMiner", nodes.Count, Links.GameMinerWon));
-                        }
-                        else
-                        {
-                            task.SetResult(null);
-                        }
-                    }
-                    else
-                    {
-                        task.SetResult(null);
-                    }
-                }
-                else
-                {
-                    task.SetResult(null);
-                }
-            });
-            return task.Task.Result;
-        }
+		#region Parse
+		public async Task<Log> CheckLogin(string lang)
+		{
+			var task = new TaskCompletionSource<Log>();
+			await Task.Run(() =>
+				{
+					var response = Web.Get(Links.GameMiner, Cookies.Generate(lang), UserAgent);
 
-        private async Task<Log> LoadGiveaways(Blacklist blackList, string lang)
-        {
-            var task = new TaskCompletionSource<Log>();
-            await Task.Run(() =>
-            {
-                var content = string.Empty;
+					if (response.RestResponse.Content != string.Empty)
+					{
+						var htmlDoc = new HtmlDocument();
+						htmlDoc.LoadHtml(response.RestResponse.Content);
 
-                Giveaways?.Clear();
+						var coal = htmlDoc.DocumentNode.SelectSingleNode("//span[@class='user__coal']");
+						var level = htmlDoc.DocumentNode.SelectSingleNode("//span[@class='g-level-icon']");
+						var username = htmlDoc.DocumentNode.SelectSingleNode("//a[@class='dashboard__user-name']");
 
-                if (FreeGolden)
-                {
-                    content += LoadGiveawaysByUrl(Links.GameMinerGoldenGiveaways,
-                        strings.ParseLoadGiveaways_FreeGoldenGiveawaysIn,
-                        lang);
-                }
+						if (coal != null &&
+							level != null &&
+							username != null)
+						{
+							Points = int.Parse(coal.InnerText);
+							Level = int.Parse(level.InnerText);
 
-                if (Regular)
-                {
-                    content += LoadGiveawaysByUrl(Links.GameMinerRegularGiveaways,
-                        strings.ParseLoadGiveaways_RegularGiveawaysIn, lang);
-                }
+							task.SetResult(Messages.ParseProfile("GameMiner",
+								Points,
+								Level,
+								username.InnerText.Trim().Replace("\n1", "")));
+						}
+						else
+						{
+							task.SetResult(Messages.ParseProfileFailed("GameMiner"));
+						}
+					}
+					else
+					{
+						task.SetResult(Messages.ParseProfileFailed("GameMiner"));
+					}
+				});
+			return task.Task.Result;
+		}
 
-                if (Sandbox)
-                {
-                    content += LoadGiveawaysByUrl(Links.GameMinerSandboxGiveaways,
-                        strings.ParseLoadGiveaways_SandboxGiveawaysIn, lang);
-                }
+		public async Task<Log> CheckWon(string lang)
+		{
+			var task = new TaskCompletionSource<Log>();
+			await Task.Run(() =>
+				{
+					var response = Web.Get(Links.GameMinerWon, Cookies.Generate(lang), UserAgent);
+					if (response.RestResponse.Content != string.Empty)
+					{
+						var htmlDoc = new HtmlDocument();
+						htmlDoc.LoadHtml(response.RestResponse.Content);
 
-                if (Giveaways == null)
-                {
-                    task.SetResult(Messages.ParseGiveawaysEmpty(content, "GameMiner"));
-                }
-                else
-                {
-                    blackList.RemoveGames(Giveaways);
-                    task.SetResult(Messages.ParseGiveawaysFoundMatchGiveaways(content, "GameMiner",
-                        Giveaways.Count.ToString()));
-                }
-            });
+						var nodes = htmlDoc.DocumentNode.SelectNodes(
+							"//tbody[@class='giveaways__giveaways']//td[@class='valign-middle m-table-state-finished']");
 
-            return task.Task.Result;
-        }
+						if (nodes != null)
+						{
+							for (var i = 0; i < nodes.Count; i++)
+							{
+								if (!nodes[i].InnerText.Contains("требует подтверждения") &&
+									!nodes[i].InnerText.Contains("to be confirmed"))
+								{
+									nodes.Remove(nodes[i]);
+									i--;
+								}
+							}
 
-        private string LoadGiveawaysByUrl(string url, string message, string lang)
-        {
-            var response = Web.Get(url, Cookies.Generate(lang), UserAgent);
+							if (nodes.Count > 0)
+							{
+								task.SetResult(Messages.GiveawayHaveWon("GameMiner", nodes.Count, Links.GameMinerWon));
+							}
+							else
+							{
+								task.SetResult(null);
+							}
+						}
+						else
+						{
+							task.SetResult(null);
+						}
+					}
+					else
+					{
+						task.SetResult(null);
+					}
+				});
+			return task.Task.Result;
+		}
 
-            if (response.RestResponse.Content != string.Empty)
-            {
-                var count = 0;
-                var jsonResponse = JsonConvert.DeserializeObject<JsonRootObject>(response.RestResponse.Content);
-                count += AddGiveaways(jsonResponse);
+		private async Task<Log> LoadGiveaways(Blacklist blackList, string lang)
+		{
+			var task = new TaskCompletionSource<Log>();
+			await Task.Run(() =>
+				{
+					var content = string.Empty;
 
-                if (jsonResponse.LastPage > 1)
-                {
-                    for (var i = 1; i < jsonResponse.LastPage + 1; i++)
-                    {
-                        response = Web.Get($"{url}&page={i + 1}", Cookies.Generate(lang), UserAgent);
-                        jsonResponse = JsonConvert.DeserializeObject<JsonRootObject>(response.RestResponse.Content);
-                        count += AddGiveaways(jsonResponse);
-                    }
-                }
+					Giveaways?.Clear();
 
-                return
-                    $"{Messages.GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {count} " +
-                    $"{message} {jsonResponse.LastPage} {strings.ParseLoadGiveaways_Pages}\n";
-            }
+					if (FreeGolden)
+					{
+						content += LoadGiveawaysByUrl(Links.GameMinerGoldenGiveaways,
+							strings.ParseLoadGiveaways_FreeGoldenGiveawaysIn,
+							lang);
+					}
 
-            return string.Empty;
-        }
+					if (Regular)
+					{
+						content += LoadGiveawaysByUrl(Links.GameMinerRegularGiveaways,
+							strings.ParseLoadGiveaways_RegularGiveawaysIn,
+							lang);
+					}
 
-        #endregion
+					if (Sandbox)
+					{
+						content += LoadGiveawaysByUrl(Links.GameMinerSandboxGiveaways,
+							strings.ParseLoadGiveaways_SandboxGiveawaysIn,
+							lang);
+					}
 
-        #region Sync
+					if (Giveaways == null)
+					{
+						task.SetResult(Messages.ParseGiveawaysEmpty(content, "GameMiner"));
+					}
+					else
+					{
+						blackList.RemoveGames(Giveaways);
+						task.SetResult(Messages.ParseGiveawaysFoundMatchGiveaways(content,
+							"GameMiner",
+							Giveaways.Count.ToString()));
+					}
+				});
 
-        public async Task<Log> Sync(string lang) //TODO Move log response in Messages
-        {
-            var task = new TaskCompletionSource<Log>();
-            await Task.Run(() =>
-            {
-                var response = Web.Post(Links.GameMinerSync, GenerateSyncData(), Cookies.Generate(lang), UserAgent);
-                if (response.RestResponse.Content != "")
-                {
-                    task.SetResult(response.RestResponse.StatusCode == HttpStatusCode.OK
-                        ? new Log($"{Messages.GetDateTime()} {{GameMiner}} Sync success", Color.Green, true)
-                        : new Log($"{Messages.GetDateTime()} {{GameMiner}} Sync failed", Color.Red, false));
-                }
-                else
-                {
-                    task.SetResult(Messages.ParseProfileFailed("GameMiner"));
-                }
-            });
-            return task.Task.Result;
-        }
+			return task.Task.Result;
+		}
 
-        private List<Parameter> GenerateSyncData()
-        {
-            var list = new List<Parameter>();
+		private string LoadGiveawaysByUrl(string url, string message, string lang)
+		{
+			var response = Web.Get(url, Cookies.Generate(lang), UserAgent);
 
-            var xsrfParam = new Parameter
-            {
-                Type = ParameterType.GetOrPost,
-                Name = "_xsrf",
-                Value = Cookies.Xsrf
-            };
-            list.Add(xsrfParam);
+			if (response.RestResponse.Content != string.Empty)
+			{
+				var count = 0;
+				var jsonResponse = JsonConvert.DeserializeObject<JsonRootObject>(response.RestResponse.Content);
+				count += AddGiveaways(jsonResponse);
 
-            return list;
-        }
+				if (jsonResponse.LastPage > 1)
+				{
+					for (var i = 1; i < jsonResponse.LastPage + 1; i++)
+					{
+						response = Web.Get($"{url}&page={i + 1}", Cookies.Generate(lang), UserAgent);
+						jsonResponse = JsonConvert.DeserializeObject<JsonRootObject>(response.RestResponse.Content);
+						count += AddGiveaways(jsonResponse);
+					}
+				}
 
-        #endregion
-    }
+				return
+					$"{Messages.GetDateTime()} {{GameMiner}} {strings.ParseLoadGiveaways_Found} {count} " +
+					$"{message} {jsonResponse.LastPage} {strings.ParseLoadGiveaways_Pages}\n";
+			}
+
+			return string.Empty;
+		}
+		#endregion
+
+		#region Sync
+		public async Task<Log> Sync(string lang)//TODO Move log response in Messages
+		{
+			var task = new TaskCompletionSource<Log>();
+			await Task.Run(() =>
+				{
+					var response = Web.Post(Links.GameMinerSync, GenerateSyncData(), Cookies.Generate(lang), UserAgent);
+					if (response.RestResponse.Content != "")
+					{
+						task.SetResult(response.RestResponse.StatusCode == HttpStatusCode.OK
+							? new Log($"{Messages.GetDateTime()} {{GameMiner}} Sync success", Color.Green, true)
+							: new Log($"{Messages.GetDateTime()} {{GameMiner}} Sync failed", Color.Red, false));
+					}
+					else
+					{
+						task.SetResult(Messages.ParseProfileFailed("GameMiner"));
+					}
+				});
+			return task.Task.Result;
+		}
+
+		private List<Parameter> GenerateSyncData()
+		{
+			var list = new List<Parameter>();
+
+			var xsrfParam = new Parameter
+			{
+				Type = ParameterType.GetOrPost,
+				Name = "_xsrf",
+				Value = Cookies.Xsrf
+			};
+			list.Add(xsrfParam);
+
+			return list;
+		}
+		#endregion
+	}
 }
