@@ -16,5 +16,7 @@ namespace KryBot.Core.Giveaways
         public string Link { get; set; }
 
         public string Region { get; set; }
+
+        public int Copies { get; set; } = 1;
     }
 }

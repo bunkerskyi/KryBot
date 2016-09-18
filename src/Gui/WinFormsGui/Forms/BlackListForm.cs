@@ -32,7 +32,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     listView.Items.Add(item.Id).SubItems.Add(item.Name);
                 }
             }
-            toolStripStatusLabel.Text = $"{strings.Count}: {listView.Items.Count}";
+            toolStripStatusLabel.Text = $@"{strings.Count}: {listView.Items.Count}";
         }
 
         private void Design()
@@ -67,7 +67,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     listView.Items.Remove(listView.Items[listView.SelectedItems[i].Index]);
                     i--;
                 }
-                toolStripStatusLabel.Text = $"{strings.Count}: {listView.Items.Count}";
+                toolStripStatusLabel.Text = $@"{strings.Count}: {listView.Items.Count}";
             }
         }
 
@@ -99,7 +99,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 }
 
                 toolStripStatusLabel.Image = null;
-                toolStripStatusLabel.Text = $"{strings.Count}: {listView.Items.Count}";
+                toolStripStatusLabel.Text = $@"{strings.Count}: {listView.Items.Count}";
             }
             else
             {
@@ -122,7 +122,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     .SubItems.Add(await LoadName(Properties.Settings.Default._idCache));
                 Properties.Settings.Default._idCache = "0";
             }
-            toolStripStatusLabel.Text = $"{strings.Count}: {listView.Items.Count}";
+            toolStripStatusLabel.Text = $@"{strings.Count}: {listView.Items.Count}";
         }
 
         private async Task<string> LoadName(string id)
@@ -213,7 +213,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 }
 
                 toolStripStatusLabel.Image = null;
-                toolStripStatusLabel.Text = $"{strings.Count}: {listView.Items.Count}";
+                toolStripStatusLabel.Text = $@"{strings.Count}: {listView.Items.Count}";
             }
             else
             {

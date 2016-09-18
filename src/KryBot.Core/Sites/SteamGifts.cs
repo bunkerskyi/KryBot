@@ -43,7 +43,7 @@ namespace KryBot.Core.Sites
 		public bool SortLevel { get; set; }
 
 		public bool SortToLessLevel { get; set; }
-
+		public bool SortToMoreCopies { get; set; }
 		public int Points { get; set; }
 
 		public int Level { get; set; }
@@ -198,6 +198,10 @@ namespace KryBot.Core.Sites
 				{
 					Giveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
 				}
+				else if(SortToMoreCopies)
+				{
+					Giveaways.Sort((a, b) => a.Copies.CompareTo(b.Copies));
+				}
 
 				foreach (var giveaway in Giveaways)
 				{
@@ -209,31 +213,31 @@ namespace KryBot.Core.Sites
 				}
 			}
 
-			if (Giveaways?.Count > 0)
+			if (WishlistGiveaways?.Count > 0)
 			{
 				if (sort)
 				{
 					if (sortToMore)
 					{
-						if (wishlistNotSort)
+						if (!wishlistNotSort)
 						{
-							Giveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
+							WishlistGiveaways.Sort((a, b) => b.Price.CompareTo(a.Price));
 						}
 					}
 					else
 					{
-						if (wishlistNotSort)
+						if (!wishlistNotSort)
 						{
-							Giveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
+							WishlistGiveaways.Sort((a, b) => a.Price.CompareTo(b.Price));
 						}
 					}
 				}
 
 				if (SortToLessLevel)
 				{
-					if (wishlistNotSort)
+					if (!wishlistNotSort)
 					{
-						Giveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
+						WishlistGiveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
 					}
 				}
 
@@ -466,7 +470,11 @@ namespace KryBot.Core.Sites
 
 						foreach (var price in node.SelectNodes(".//span[@class='giveaway__heading__thin']"))
 						{
-							if (!price.InnerText.Contains("Copies"))
+							if(price.InnerText.Contains("Copies"))
+							{
+								sgGiveaway.Copies = int.Parse(price.InnerText.Replace(" Copies)", "").Split('(')[1]);
+							}
+							else
 							{
 								sgGiveaway.Price = int.Parse(price.InnerText.Split('(')[1].Split('P')[0]);
 							}
@@ -532,19 +540,12 @@ namespace KryBot.Core.Sites
 							htmlDoc.DocumentNode.SelectSingleNode(
 								"//div[contains(@class, 'sidebar__error') and contains(@class, 'is-disabled')]");
 
-						if (errorNode != null)
-						{
-							task.SetResult(errorNode.InnerText.Trim());
-						}
-						else
-						{
-							task.SetResult("Failed to get Token");
-						}
-					}
-					else
-					{
-						task.SetResult("Failed to get Token");
-					}
+					task.SetResult(errorNode?.InnerText.Trim() ?? "Failed to get Token");
+				}
+				else
+				{
+					task.SetResult("Failed to get Token");
+				}
 				});
 			return task.Task.Result;
 		}
@@ -557,7 +558,7 @@ namespace KryBot.Core.Sites
 				{
 					var response = Web.Get(Links.SteamGiftsBlackList, Cookies.Generate(), UserAgent);
 
-					if (response.RestResponse.Content != string.Empty)
+				if (response.RestResponse.Content != string.Empty)
 					{
 						var htmlDoc = new HtmlDocument();
 						htmlDoc.LoadHtml(response.RestResponse.Content);
@@ -578,7 +579,7 @@ namespace KryBot.Core.Sites
 								{
 									gameList.Add(int.Parse(id.InnerText.Split('/')[4].Split('/')[0]), name.InnerText);
 								}
-							}
+						}
 						}
 
 						task.SetResult(gameList);

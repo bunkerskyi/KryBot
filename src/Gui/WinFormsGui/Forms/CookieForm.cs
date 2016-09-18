@@ -90,9 +90,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     ShowMessage();
                     break;
 
-                case "UseGamble":
-                    _bot.UseGamble.Cookies.PhpSessId = (Controls["PHPSESSID"] as TextBox)?.Text;
-                    _bot.UseGamble.Enabled = true;
+                case "SteamPortal":
+                    _bot.SteamPortal.Cookies.PhpSessId = (Controls["PHPSESSID"] as TextBox)?.Text;
+                    _bot.SteamPortal.Enabled = true;
                     _bot.Save();
                     ShowMessage();
                     break;

@@ -5,37 +5,37 @@ using System.Threading.Tasks;
 using HtmlAgilityPack;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
-using KryBot.Core.Serializable.UseGamble;
+using KryBot.Core.Serializable.SteamPortal;
 using Newtonsoft.Json;
 using RestSharp;
 
 namespace KryBot.Core.Sites
 {
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-    public class UseGamble
+    public class SteamPortal
     {
-        public UseGamble()
+        public SteamPortal()
         {
-            Cookies = new UseGambleCookie();
-            Giveaways = new List<UseGambleGiveaway>();
+            Cookies = new SteamPortalCookie();
+            Giveaways = new List<SteamPortalGiveaway>();
         }
 
         public bool Enabled { get; set; }
         public int Points { get; set; }
         public int MaxJoinValue { get; set; } = 30;
         public int PointsReserv { get; set; }
-        public UseGambleCookie Cookies { get; set; }
-        public List<UseGambleGiveaway> Giveaways { get; set; }
+        public SteamPortalCookie Cookies { get; set; }
+        public List<SteamPortalGiveaway> Giveaways { get; set; }
 
         public void Logout()
         {
-            Cookies = new UseGambleCookie();
+            Cookies = new SteamPortalCookie();
             Enabled = false;
         }
 
         #region JoinGiveaway
 
-        private async Task<Log> JoinGiveaway(UseGambleGiveaway giveaway)
+        private async Task<Log> JoinGiveaway(SteamPortalGiveaway giveaway)
         {
             var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
@@ -51,7 +51,7 @@ namespace KryBot.Core.Sites
                     };
                     list.Add(header);
 
-                    var response = Web.Post(Links.UseGambleJoin,
+                    var response = Web.Post(Links.SteamPortalJoin,
                         GenerateJoinData(giveaway.Code), list,
                         Cookies.Generate());
                     var jresponse =
@@ -59,12 +59,12 @@ namespace KryBot.Core.Sites
                     if (jresponse.Error == 0)
                     {
                         Points = jresponse.TargetH.MyCoins;
-                        task.SetResult(Messages.GiveawayJoined("UseGamble", giveaway.Name, giveaway.Price,
+                        task.SetResult(Messages.GiveawayJoined("SteamPortal", giveaway.Name, giveaway.Price,
                             jresponse.TargetH.MyCoins));
                     }
                     else
                     {
-                        task.SetResult(Messages.GiveawayNotJoined("UseGamble", giveaway.Name, "Error"));
+                        task.SetResult(Messages.GiveawayNotJoined("SteamPortal", giveaway.Name, "Error"));
                     }
                 }
                 else
@@ -127,7 +127,7 @@ namespace KryBot.Core.Sites
             var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
-                var response = Web.Get(Links.UseGamble, Cookies.Generate());
+                var response = Web.Get(Links.SteamPortal, Cookies.Generate());
 
                 if (response.RestResponse.Content != string.Empty)
                 {
@@ -139,16 +139,16 @@ namespace KryBot.Core.Sites
                     if (points != null && profileLink != null)
                     {
                         Points = int.Parse(points.InnerText);
-                        task.SetResult(Messages.ParseProfile("UseGamble", Points, profileLink.InnerText));
+                        task.SetResult(Messages.ParseProfile("SteamPortal", Points, profileLink.InnerText));
                     }
                     else
                     {
-                        task.SetResult(Messages.ParseProfileFailed("UseGamble"));
+                        task.SetResult(Messages.ParseProfileFailed("SteamPortal"));
                     }
                 }
                 else
                 {
-                    task.SetResult(Messages.ParseProfileFailed("UseGamble"));
+                    task.SetResult(Messages.ParseProfileFailed("SteamPortal"));
                 }
             });
             return task.Task.Result;
@@ -159,7 +159,7 @@ namespace KryBot.Core.Sites
             var task = new TaskCompletionSource<Log>();
             await Task.Run(() =>
             {
-                var response = Web.Get(Links.UseGambleWon, Cookies.Generate());
+                var response = Web.Get(Links.SteamPortalWon, Cookies.Generate());
                 if (response.RestResponse.Content != string.Empty)
                 {
                     var htmlDoc = new HtmlDocument();
@@ -177,7 +177,7 @@ namespace KryBot.Core.Sites
                                 i--;
                             }
                         }
-                        task.SetResult(Messages.GiveawayHaveWon("UseGamble", nodes.Count, Links.UseGambleWon));
+                        task.SetResult(Messages.GiveawayHaveWon("SteamPortal", nodes.Count, Links.SteamPortalWon));
                     }
                     else
                     {
@@ -213,7 +213,7 @@ namespace KryBot.Core.Sites
                         };
                         headerList.Add(header);
 
-                        var jsonresponse = Web.Post(Links.UseGambleGaPage,
+                        var jsonresponse = Web.Post(Links.SteamPortalGaPage,
                             GeneratePageData(i + 1), headerList,
                             Cookies.Generate());
                         if (jsonresponse.RestResponse.Content != string.Empty)
@@ -228,7 +228,7 @@ namespace KryBot.Core.Sites
                     }
                     else
                     {
-                        var response = Web.Get(Links.UseGambleGiveaways, Cookies.Generate());
+                        var response = Web.Get(Links.SteamPortalGiveaways, Cookies.Generate());
 
                         if (response.RestResponse.Content != string.Empty)
                         {
@@ -239,10 +239,12 @@ namespace KryBot.Core.Sites
                                 htmlDoc.DocumentNode.SelectNodes("//div[@class='nPagin']//div[@class='pagin']/span");
                             if (count != null)
                             {
-                                pages = int.Parse(htmlDoc.DocumentNode.
-                                    SelectSingleNode(
-                                        $"//div[@class='nPagin']//div[@class='pagin']/span[{count.Count - 1}]")
-                                    .InnerText);
+                                var pageNode = htmlDoc.DocumentNode.SelectSingleNode(
+                                    $"//div[@class='nPagin']//div[@class='pagin']/span[{count.Count - 1}]");
+                                if (pageNode != null)
+                                {
+                                    pages = int.Parse(pageNode.InnerText);
+                                }
                             }
 
                             var nodes =
@@ -254,12 +256,12 @@ namespace KryBot.Core.Sites
 
                 if (Giveaways == null)
                 {
-                    task.SetResult(Messages.ParseGiveawaysEmpty("UseGamble"));
+                    task.SetResult(Messages.ParseGiveawaysEmpty("SteamPortal"));
                 }
                 else
                 {
                     blackList.RemoveGames(Giveaways);
-                    task.SetResult(Messages.ParseGiveawaysFoundMatchGiveaways("UseGamble", Giveaways.Count.ToString()));
+                    task.SetResult(Messages.ParseGiveawaysFoundMatchGiveaways("SteamPortal", Giveaways.Count.ToString()));
                 }
             });
             return task.Task.Result;
@@ -275,7 +277,7 @@ namespace KryBot.Core.Sites
                     var storeId = node.SelectSingleNode(".//a[@class='steam-icon']");
                     if (name != null && storeId != null)
                     {
-                        var spGiveaway = new UseGambleGiveaway
+                        var spGiveaway = new SteamPortalGiveaway
                         {
                             Name = name.InnerText,
                             StoreId = storeId.Attributes["href"].Value.Split('/')[4]

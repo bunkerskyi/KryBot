@@ -60,7 +60,7 @@ namespace KryBot.Gui.WinFormsGui.Forms
             Text = _title;
             Icon = Resources.KryBotPresent_256b;
             toolStripStatusLabelChromium.Text =
-                $"Chromium: {Cef.ChromiumVersion} Cef: {Cef.CefVersion} CefSharp: {Cef.CefSharpVersion}";
+                $@"Chromium: {Cef.ChromiumVersion} Cef: {Cef.CefVersion} CefSharp: {Cef.CefSharpVersion}";
 
             if (_startPage == Links.SteamTrade)
             {
@@ -76,7 +76,14 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private void BrowserOnLoadingStateChanged(object sender,
             LoadingStateChangedEventArgs loadingStateChangedEventArgs)
         {
-            BeginInvoke(new Action(() => { Text = $"{_title} - {_browser.Address}"; }));
+            try
+            {
+                Invoke(new MethodInvoker(() => { Text = $@"{_title} - {_browser?.Address}"; }));
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
 
             if (!loadingStateChangedEventArgs.IsLoading)
             {
@@ -112,9 +119,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
                         Exit();
                     }
 
-                    if (_endPage == Links.UseGamble)
+                    if (_endPage == Links.SteamPortal)
                     {
-                        UseGambleAuth();
+                        SteamPortalAuth();
                         Exit();
                     }
 
@@ -225,16 +232,16 @@ namespace KryBot.Gui.WinFormsGui.Forms
             _bot.SteamTrade.Enabled = true;
         }
 
-        private async void UseGambleAuth()
+        private async void SteamPortalAuth()
         {
-            foreach (var cookie in await GetCookies(Links.UseGamble))
+            foreach (var cookie in await GetCookies(Links.SteamPortal))
             {
                 if (cookie.Name == "PHPSESSID")
                 {
-                    _bot.UseGamble.Cookies.PhpSessId = cookie.Value;
+                    _bot.SteamPortal.Cookies.PhpSessId = cookie.Value;
                 }
             }
-            _bot.UseGamble.Enabled = true;
+            _bot.SteamPortal.Enabled = true;
         }
 
         private async void SteamCompanionAuth()
