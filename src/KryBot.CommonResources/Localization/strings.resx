@@ -513,4 +513,10 @@
   <data name="SettingsForm_cbSGSortToMoreCopies" xml:space="preserve">
     <value>First giveaways of the more copies</value>
   </data>
+  <data name="Copies" xml:space="preserve">
+    <value>Number of copies</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
 </root>

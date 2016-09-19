@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,8 +9,6 @@ using HtmlAgilityPack;
 using KryBot.CommonResources.Localization;
 using KryBot.Core.Cookies;
 using KryBot.Core.Giveaways;
-using KryBot.Core.Helpers;
-using KryBot.Core.Modifiers;
 using KryBot.Core.Serializable.GameMiner;
 using KryBot.Core.Serializable.SteamGifts;
 
@@ -22,14 +19,13 @@ using RestSharp;
 namespace KryBot.Core.Sites
 {
 	[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-	public class SteamGifts
+	public class SteamGifts : BaseGiveawaySite<SteamGiftsGiveaway>
 	{
 		public SteamGifts()
 		{
 			Cookies = new SteamGiftsCookie();
 			Giveaways = new List<SteamGiftsGiveaway>();
 			WishlistGiveaways = new List<SteamGiftsGiveaway>();
-			ModifierTargets = new List<ModifierProperty>();
 		}
 
 		public bool Enabled { get; set; }
@@ -43,7 +39,9 @@ namespace KryBot.Core.Sites
 		public bool SortLevel { get; set; }
 
 		public bool SortToLessLevel { get; set; }
+
 		public bool SortToMoreCopies { get; set; }
+
 		public int Points { get; set; }
 
 		public int Level { get; set; }
@@ -59,14 +57,6 @@ namespace KryBot.Core.Sites
 		public List<SteamGiftsGiveaway> Giveaways { get; set; }
 
 		public List<SteamGiftsGiveaway> WishlistGiveaways { get; set; }
-
-		public List<ModifierProperty> ModifierTargets { get; set; }
-
-		private void FillModifierTargets()
-		{
-			ModifierTargets.Add(new ModifierProperty {PropertyName = nameof(SteamGiftsGiveaway.Level), DisplayName = "Уровень"});
-			ModifierTargets.Add(new ModifierProperty {PropertyName = nameof(SteamGiftsGiveaway.Price), DisplayName = "Цена"});
-		}
 
 		public string UserAgent { get; set; }
 
@@ -198,7 +188,7 @@ namespace KryBot.Core.Sites
 				{
 					Giveaways.Sort((a, b) => b.Level.CompareTo(a.Level));
 				}
-				else if(SortToMoreCopies)
+				else if (SortToMoreCopies)
 				{
 					Giveaways.Sort((a, b) => a.Copies.CompareTo(b.Copies));
 				}
@@ -470,7 +460,7 @@ namespace KryBot.Core.Sites
 
 						foreach (var price in node.SelectNodes(".//span[@class='giveaway__heading__thin']"))
 						{
-							if(price.InnerText.Contains("Copies"))
+							if (price.InnerText.Contains("Copies"))
 							{
 								sgGiveaway.Copies = int.Parse(price.InnerText.Replace(" Copies)", "").Split('(')[1]);
 							}
@@ -540,12 +530,12 @@ namespace KryBot.Core.Sites
 							htmlDoc.DocumentNode.SelectSingleNode(
 								"//div[contains(@class, 'sidebar__error') and contains(@class, 'is-disabled')]");
 
-					task.SetResult(errorNode?.InnerText.Trim() ?? "Failed to get Token");
-				}
-				else
-				{
-					task.SetResult("Failed to get Token");
-				}
+						task.SetResult(errorNode?.InnerText.Trim() ?? "Failed to get Token");
+					}
+					else
+					{
+						task.SetResult("Failed to get Token");
+					}
 				});
 			return task.Task.Result;
 		}
@@ -558,7 +548,7 @@ namespace KryBot.Core.Sites
 				{
 					var response = Web.Get(Links.SteamGiftsBlackList, Cookies.Generate(), UserAgent);
 
-				if (response.RestResponse.Content != string.Empty)
+					if (response.RestResponse.Content != string.Empty)
 					{
 						var htmlDoc = new HtmlDocument();
 						htmlDoc.LoadHtml(response.RestResponse.Content);
@@ -579,7 +569,7 @@ namespace KryBot.Core.Sites
 								{
 									gameList.Add(int.Parse(id.InnerText.Split('/')[4].Split('/')[0]), name.InnerText);
 								}
-						}
+							}
 						}
 
 						task.SetResult(gameList);

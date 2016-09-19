@@ -71,6 +71,8 @@
     <Compile Include="Cookies\SteamPortalCookie.cs" />
     <Compile Include="Cookies\SteamTradeCookie.cs" />
     <Compile Include="FilePaths.cs" />
+    <Compile Include="Helpers\ResourceHelper.cs" />
+    <Compile Include="Modifiers\CanBeUsedLikeModifierAttribute.cs" />
     <Compile Include="Modifiers\FilterOperation.cs" />
     <Compile Include="Modifiers\GiveawayFiltering.cs" />
     <Compile Include="Giveaways\BaseGiveaway.cs" />
@@ -114,6 +116,7 @@
     <Compile Include="Messages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Links.cs" />
+    <Compile Include="Sites\BaseGiveawaySite.cs" />
     <Compile Include="Sites\GameAways.cs" />
     <Compile Include="Sites\GameMiner.cs" />
     <Compile Include="Sites\InventoryGifts.cs" />

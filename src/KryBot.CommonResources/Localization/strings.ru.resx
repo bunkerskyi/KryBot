@@ -512,4 +512,10 @@
   <data name="SettingsForm_cbSGSortToMoreCopies" xml:space="preserve">
     <value>Сначала раздачи с наибольшим количеством копий</value>
   </data>
+  <data name="Copies" xml:space="preserve">
+    <value>Количество копий</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Стоимость</value>
+  </data>
 </root>
