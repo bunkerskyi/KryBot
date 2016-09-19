@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using System.Xml.Serialization;
 
 using KryBot.Core.Giveaways;
 using KryBot.Core.Modifiers;
@@ -8,6 +9,7 @@ namespace KryBot.Core.Sites
 {
 	public abstract class BaseGiveawaySite<T> where T : BaseGiveaway
 	{
+		[XmlIgnore]
 		public List<ModifierProperty> ModifierTargets { get; set; }
 
 		protected void FillModifierTargets()
