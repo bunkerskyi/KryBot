@@ -136,7 +136,11 @@ namespace KryBot.Gui.WinFormsGui.Forms
             }
 
             BlockTabpage(tabPageSC); // disable SC page
+            BlockTabpage(tabPageSP); // disable SP page
+            BlockTabpage(tabPageST); // disable ST page
             BlockTabpage(tabPagePB); // disable PB page
+            BlockTabpage(tabPageGA); // disable GA page
+            BlockTabpage(tabPageIG); // disable IG page 
         }
 
         private void FormMain_LocationChanged(object sender, EventArgs e)
