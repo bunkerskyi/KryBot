@@ -429,12 +429,10 @@ namespace KryBot.Core.Sites
                         {
                             if(price.InnerText.Contains("Copies"))
                             {
-                                var str = price.InnerText;
-                                if (str.Contains(","))
-                                {
-                                    str = str.Replace(",", "");
-                                }
-                                sgGiveaway.Copies = int.Parse(str.Replace(" Copies)", "").Split('(')[1]);
+                                sgGiveaway.Copies = int.Parse(price.InnerText
+                                    .Replace(",", "")
+                                    .Replace(" Copies)", "")
+                                    .Split('(')[1]);
                             }
                             else
                             {
