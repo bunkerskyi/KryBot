@@ -55,15 +55,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.btnSteamLogin = new System.Windows.Forms.Button();
             this.linkLabelSteam = new System.Windows.Forms.LinkLabel();
             this.lblSteamStatus = new System.Windows.Forms.Label();
-            this.tabPageGM = new System.Windows.Forms.TabPage();
-            this.btnGMExit = new System.Windows.Forms.Button();
-            this.cbGMEnable = new System.Windows.Forms.CheckBox();
-            this.linkLabelGM = new System.Windows.Forms.LinkLabel();
-            this.pbGMReload = new System.Windows.Forms.PictureBox();
-            this.btnGMLogin = new System.Windows.Forms.Button();
-            this.lblGMStatus = new System.Windows.Forms.Label();
-            this.lblGMCoal = new System.Windows.Forms.Label();
-            this.lblGMLevel = new System.Windows.Forms.Label();
             this.tabPageSG = new System.Windows.Forms.TabPage();
             this.btnSGExit = new System.Windows.Forms.Button();
             this.cbSGEnable = new System.Windows.Forms.CheckBox();
@@ -137,8 +128,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPageSteam.SuspendLayout();
-            this.tabPageGM.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbGMReload)).BeginInit();
             this.tabPageSG.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSGReload)).BeginInit();
             this.tabPageSC.SuspendLayout();
@@ -300,7 +289,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabPageSteam);
-            this.tabControl.Controls.Add(this.tabPageGM);
             this.tabControl.Controls.Add(this.tabPageSG);
             this.tabControl.Controls.Add(this.tabPageSC);
             this.tabControl.Controls.Add(this.tabPageSP);
@@ -321,9 +309,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageSteam.Controls.Add(this.btnSteamLogin);
             this.tabPageSteam.Controls.Add(this.linkLabelSteam);
             this.tabPageSteam.Controls.Add(this.lblSteamStatus);
-            this.tabPageSteam.Location = new System.Drawing.Point(4, 40);
+            this.tabPageSteam.Location = new System.Drawing.Point(4, 22);
             this.tabPageSteam.Name = "tabPageSteam";
-            this.tabPageSteam.Size = new System.Drawing.Size(334, 61);
+            this.tabPageSteam.Size = new System.Drawing.Size(334, 79);
             this.tabPageSteam.TabIndex = 5;
             this.tabPageSteam.Text = "Steam";
             this.tabPageSteam.UseVisualStyleBackColor = true;
@@ -368,105 +356,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.lblSteamStatus.TabIndex = 10;
             this.lblSteamStatus.Text = "Status: Not authorized";
             // 
-            // tabPageGM
-            // 
-            this.tabPageGM.Controls.Add(this.btnGMExit);
-            this.tabPageGM.Controls.Add(this.cbGMEnable);
-            this.tabPageGM.Controls.Add(this.linkLabelGM);
-            this.tabPageGM.Controls.Add(this.pbGMReload);
-            this.tabPageGM.Controls.Add(this.btnGMLogin);
-            this.tabPageGM.Controls.Add(this.lblGMStatus);
-            this.tabPageGM.Controls.Add(this.lblGMCoal);
-            this.tabPageGM.Controls.Add(this.lblGMLevel);
-            this.tabPageGM.Location = new System.Drawing.Point(4, 40);
-            this.tabPageGM.Name = "tabPageGM";
-            this.tabPageGM.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGM.Size = new System.Drawing.Size(334, 61);
-            this.tabPageGM.TabIndex = 0;
-            this.tabPageGM.Text = "GM";
-            this.tabPageGM.UseVisualStyleBackColor = true;
-            // 
-            // btnGMExit
-            // 
-            this.btnGMExit.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnGMExit.Location = new System.Drawing.Point(134, 19);
-            this.btnGMExit.Name = "btnGMExit";
-            this.btnGMExit.Size = new System.Drawing.Size(75, 23);
-            this.btnGMExit.TabIndex = 27;
-            this.btnGMExit.Text = "Logout";
-            this.btnGMExit.UseVisualStyleBackColor = true;
-            this.btnGMExit.Click += new System.EventHandler(this.btnGMExit_Click);
-            // 
-            // cbGMEnable
-            // 
-            this.cbGMEnable.AutoSize = true;
-            this.cbGMEnable.Checked = true;
-            this.cbGMEnable.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbGMEnable.Location = new System.Drawing.Point(315, 3);
-            this.cbGMEnable.Name = "cbGMEnable";
-            this.cbGMEnable.Size = new System.Drawing.Size(15, 14);
-            this.cbGMEnable.TabIndex = 26;
-            this.cbGMEnable.UseVisualStyleBackColor = true;
-            this.cbGMEnable.CheckedChanged += new System.EventHandler(this.cbGMEnable_CheckedChanged);
-            // 
-            // linkLabelGM
-            // 
-            this.linkLabelGM.AutoSize = true;
-            this.linkLabelGM.Location = new System.Drawing.Point(6, 42);
-            this.linkLabelGM.Name = "linkLabelGM";
-            this.linkLabelGM.Size = new System.Drawing.Size(59, 13);
-            this.linkLabelGM.TabIndex = 7;
-            this.linkLabelGM.TabStop = true;
-            this.linkLabelGM.Text = "To website";
-            this.linkLabelGM.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
-            // pbGMReload
-            // 
-            this.pbGMReload.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.refresh;
-            this.pbGMReload.Location = new System.Drawing.Point(314, 42);
-            this.pbGMReload.Name = "pbGMReload";
-            this.pbGMReload.Size = new System.Drawing.Size(16, 16);
-            this.pbGMReload.TabIndex = 6;
-            this.pbGMReload.TabStop = false;
-            this.pbGMReload.Click += new System.EventHandler(this.pbGMReload_Click);
-            // 
-            // btnGMLogin
-            // 
-            this.btnGMLogin.Location = new System.Drawing.Point(134, 19);
-            this.btnGMLogin.Name = "btnGMLogin";
-            this.btnGMLogin.Size = new System.Drawing.Size(75, 23);
-            this.btnGMLogin.TabIndex = 5;
-            this.btnGMLogin.Text = "Login";
-            this.btnGMLogin.UseVisualStyleBackColor = true;
-            this.btnGMLogin.Click += new System.EventHandler(this.btnGMLogin_Click);
-            // 
-            // lblGMStatus
-            // 
-            this.lblGMStatus.AutoSize = true;
-            this.lblGMStatus.Location = new System.Drawing.Point(6, 3);
-            this.lblGMStatus.Name = "lblGMStatus";
-            this.lblGMStatus.Size = new System.Drawing.Size(112, 13);
-            this.lblGMStatus.TabIndex = 3;
-            this.lblGMStatus.Text = "Status: Not authorized";
-            // 
-            // lblGMCoal
-            // 
-            this.lblGMCoal.AutoSize = true;
-            this.lblGMCoal.Location = new System.Drawing.Point(6, 29);
-            this.lblGMCoal.Name = "lblGMCoal";
-            this.lblGMCoal.Size = new System.Drawing.Size(39, 13);
-            this.lblGMCoal.TabIndex = 2;
-            this.lblGMCoal.Text = "Points:";
-            // 
-            // lblGMLevel
-            // 
-            this.lblGMLevel.AutoSize = true;
-            this.lblGMLevel.Location = new System.Drawing.Point(6, 16);
-            this.lblGMLevel.Name = "lblGMLevel";
-            this.lblGMLevel.Size = new System.Drawing.Size(36, 13);
-            this.lblGMLevel.TabIndex = 1;
-            this.lblGMLevel.Text = "Level:";
-            // 
             // tabPageSG
             // 
             this.tabPageSG.Controls.Add(this.btnSGExit);
@@ -477,10 +366,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageSG.Controls.Add(this.lblSGPoints);
             this.tabPageSG.Controls.Add(this.lblSGLevel);
             this.tabPageSG.Controls.Add(this.btnSGLogin);
-            this.tabPageSG.Location = new System.Drawing.Point(4, 40);
+            this.tabPageSG.Location = new System.Drawing.Point(4, 22);
             this.tabPageSG.Name = "tabPageSG";
             this.tabPageSG.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSG.Size = new System.Drawing.Size(334, 61);
+            this.tabPageSG.Size = new System.Drawing.Size(334, 79);
             this.tabPageSG.TabIndex = 1;
             this.tabPageSG.Text = "SG";
             this.tabPageSG.UseVisualStyleBackColor = true;
@@ -575,9 +464,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageSC.Controls.Add(this.lblSCPoints);
             this.tabPageSC.Controls.Add(this.lblSCLevel);
             this.tabPageSC.Controls.Add(this.btnSCLogin);
-            this.tabPageSC.Location = new System.Drawing.Point(4, 40);
+            this.tabPageSC.Location = new System.Drawing.Point(4, 22);
             this.tabPageSC.Name = "tabPageSC";
-            this.tabPageSC.Size = new System.Drawing.Size(334, 61);
+            this.tabPageSC.Size = new System.Drawing.Size(334, 79);
             this.tabPageSC.TabIndex = 2;
             this.tabPageSC.Text = "SC";
             this.tabPageSC.UseVisualStyleBackColor = true;
@@ -672,9 +561,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageSP.Controls.Add(this.lblSPPoints);
             this.tabPageSP.Controls.Add(this.lblSPLevel);
             this.tabPageSP.Controls.Add(this.btnSPLogin);
-            this.tabPageSP.Location = new System.Drawing.Point(4, 40);
+            this.tabPageSP.Location = new System.Drawing.Point(4, 22);
             this.tabPageSP.Name = "tabPageSP";
-            this.tabPageSP.Size = new System.Drawing.Size(334, 61);
+            this.tabPageSP.Size = new System.Drawing.Size(334, 79);
             this.tabPageSP.TabIndex = 4;
             this.tabPageSP.Text = "SP";
             this.tabPageSP.UseVisualStyleBackColor = true;
@@ -769,9 +658,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageST.Controls.Add(this.lblSTPoints);
             this.tabPageST.Controls.Add(this.lblSTLevel);
             this.tabPageST.Controls.Add(this.btnSTLogin);
-            this.tabPageST.Location = new System.Drawing.Point(4, 40);
+            this.tabPageST.Location = new System.Drawing.Point(4, 22);
             this.tabPageST.Name = "tabPageST";
-            this.tabPageST.Size = new System.Drawing.Size(334, 61);
+            this.tabPageST.Size = new System.Drawing.Size(334, 79);
             this.tabPageST.TabIndex = 3;
             this.tabPageST.Text = "ST";
             this.tabPageST.UseVisualStyleBackColor = true;
@@ -866,9 +755,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPagePB.Controls.Add(this.lblPBStatus);
             this.tabPagePB.Controls.Add(this.lblPBPoints);
             this.tabPagePB.Controls.Add(this.lblPBLevel);
-            this.tabPagePB.Location = new System.Drawing.Point(4, 40);
+            this.tabPagePB.Location = new System.Drawing.Point(4, 22);
             this.tabPagePB.Name = "tabPagePB";
-            this.tabPagePB.Size = new System.Drawing.Size(334, 61);
+            this.tabPagePB.Size = new System.Drawing.Size(334, 79);
             this.tabPagePB.TabIndex = 6;
             this.tabPagePB.Text = "PB";
             this.tabPagePB.UseVisualStyleBackColor = true;
@@ -963,9 +852,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageGA.Controls.Add(this.lblGAPoints);
             this.tabPageGA.Controls.Add(this.lblGALevel);
             this.tabPageGA.Controls.Add(this.lblGAStatus);
-            this.tabPageGA.Location = new System.Drawing.Point(4, 40);
+            this.tabPageGA.Location = new System.Drawing.Point(4, 22);
             this.tabPageGA.Name = "tabPageGA";
-            this.tabPageGA.Size = new System.Drawing.Size(334, 61);
+            this.tabPageGA.Size = new System.Drawing.Size(334, 79);
             this.tabPageGA.TabIndex = 7;
             this.tabPageGA.Text = "GA";
             this.tabPageGA.UseVisualStyleBackColor = true;
@@ -1059,9 +948,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageIG.Controls.Add(this.lblIGStatus);
             this.tabPageIG.Controls.Add(this.lblIGPoints);
             this.tabPageIG.Controls.Add(this.lblIGLevel);
-            this.tabPageIG.Location = new System.Drawing.Point(4, 40);
+            this.tabPageIG.Location = new System.Drawing.Point(4, 22);
             this.tabPageIG.Name = "tabPageIG";
-            this.tabPageIG.Size = new System.Drawing.Size(334, 61);
+            this.tabPageIG.Size = new System.Drawing.Size(334, 79);
             this.tabPageIG.TabIndex = 8;
             this.tabPageIG.Text = "IG";
             this.tabPageIG.UseVisualStyleBackColor = true;
@@ -1221,9 +1110,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabControl.ResumeLayout(false);
             this.tabPageSteam.ResumeLayout(false);
             this.tabPageSteam.PerformLayout();
-            this.tabPageGM.ResumeLayout(false);
-            this.tabPageGM.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbGMReload)).EndInit();
             this.tabPageSG.ResumeLayout(false);
             this.tabPageSG.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSGReload)).EndInit();
@@ -1260,18 +1146,13 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
 		private System.Windows.Forms.TabControl tabControl;
-		private System.Windows.Forms.TabPage tabPageGM;
 		private System.Windows.Forms.TabPage tabPageSG;
 		private System.Windows.Forms.TabPage tabPageSC;
 		private System.Windows.Forms.TabPage tabPageST;
 		private System.Windows.Forms.TabPage tabPageSP;
 		private System.Windows.Forms.ToolStripMenuItem logToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem informationToolStripMenuItem;
-		private System.Windows.Forms.Label lblGMStatus;
-		private System.Windows.Forms.Label lblGMCoal;
-		private System.Windows.Forms.Label lblGMLevel;
 		private System.Windows.Forms.Button btnStart;
-		private System.Windows.Forms.Button btnGMLogin;
 		private System.Windows.Forms.Button btnSGLogin;
 		private System.Windows.Forms.Button btnSCLogin;
 		private System.Windows.Forms.Button btnSTLogin;
@@ -1288,13 +1169,11 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private System.Windows.Forms.Label lblSTStatus;
 		private System.Windows.Forms.Label lblSTPoints;
 		private System.Windows.Forms.Label lblSTLevel;
-		private System.Windows.Forms.PictureBox pbGMReload;
 		private System.Windows.Forms.PictureBox pbSGReload;
 		private System.Windows.Forms.PictureBox pbSCReload;
 		private System.Windows.Forms.PictureBox pbUSPeload;
 		private System.Windows.Forms.PictureBox pbSTreload;
 		private System.Windows.Forms.NotifyIcon notifyIcon;
-		private System.Windows.Forms.LinkLabel linkLabelGM;
 		private System.Windows.Forms.LinkLabel linkLabelSG;
 		private System.Windows.Forms.LinkLabel linkLabelSC;
 		private System.Windows.Forms.LinkLabel linkLabelSP;
@@ -1304,7 +1183,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private System.Windows.Forms.ToolStripMenuItem saveAsКакToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
 		private System.Windows.Forms.CheckBox cbSTEnable;
-		private System.Windows.Forms.CheckBox cbGMEnable;
 		private System.Windows.Forms.CheckBox cbSGEnable;
 		private System.Windows.Forms.CheckBox cbSCEnable;
 		private System.Windows.Forms.CheckBox cbSPEnable;
@@ -1317,7 +1195,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Farm;
 		private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem_Exit;
 		private System.Windows.Forms.ToolStripMenuItem donateToolStripMenuItem;
-		private System.Windows.Forms.Button btnGMExit;
 		private System.Windows.Forms.Button btnSGExit;
 		private System.Windows.Forms.Button btnSCExit;
 		private System.Windows.Forms.Button btnSPExit;
@@ -1360,12 +1237,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			aboutToolStripMenuItem.Text = strings.AboutProgram;
 			donateToolStripMenuItem.Text = strings.MainForm_Donate;
 			logToolStripMenuItem.Text = $"{strings.Log} <<";
-			btnGMExit.Text = strings.Logout;
-			linkLabelGM.Text = strings.LinkLabel_OnSite;
-			btnGMLogin.Text = strings.Login;
-			lblGMStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";
-			lblGMCoal.Text = $"{strings.Points}: ";
-			lblGMLevel.Text = $"{strings.Level}: ";
 			btnSGExit.Text = strings.Logout;
 			linkLabelSG.Text = strings.LinkLabel_OnSite;
 			lblSGStatus.Text = $"{strings.Status}: {strings.Status_NotLogined}";

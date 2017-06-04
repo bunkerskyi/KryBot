@@ -63,15 +63,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
         {
             switch (_site)
             {
-                case "GameMiner":
-                    _bot.GameMiner.Cookies.Token = (Controls["token"] as TextBox)?.Text;
-                    _bot.GameMiner.Cookies.Xsrf = (Controls["_xsrf"] as TextBox)?.Text;
-                    _bot.GameMiner.UserAgent = (Controls["UserAgent"] as TextBox)?.Text;
-                    _bot.GameMiner.Enabled = true;
-                    _bot.Save();
-                    ShowMessage();
-                    break;
-
                 case "SteamGifts":
                     _bot.SteamGifts.Cookies.PhpSessId = (Controls["PHPSESSID"] as TextBox)?.Text;
                     _bot.SteamGifts.UserAgent = (Controls["UserAgent"] as TextBox)?.Text;

@@ -637,6 +637,24 @@ namespace KryBot.CommonResources.Localization {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Найдено раздач с минимальным количеством копий.
+        /// </summary>
+        public static string ParseLoadGiveaways_FoundGiveAwaysInMinNumberCopies {
+            get {
+                return ResourceManager.GetString("ParseLoadGiveaways_FoundGiveAwaysInMinNumberCopies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Найдено раздач с региональными ограничениями.
+        /// </summary>
+        public static string ParseLoadGiveaways_FoundGiveAwaysInRegion {
+            get {
+                return ResourceManager.GetString("ParseLoadGiveaways_FoundGiveAwaysInRegion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Found wishlist giveaways.
         /// </summary>
         public static string ParseLoadGiveaways_FoundGiveAwaysInWishList {
@@ -817,24 +835,6 @@ namespace KryBot.CommonResources.Localization {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Free golden giveaways.
-        /// </summary>
-        public static string SettingsForm_cbGMGolden {
-            get {
-                return ResourceManager.GetString("SettingsForm_cbGMGolden", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на No regional restrictions.
-        /// </summary>
-        public static string SettingsForm_cbGMRegional {
-            get {
-                return ResourceManager.GetString("SettingsForm_cbGMRegional", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Ищет локализованную строку, похожую на CS:GO items.
         /// </summary>
         public static string SettingsForm_cbIGCSGO {
@@ -957,15 +957,6 @@ namespace KryBot.CommonResources.Localization {
         public static string SettingsForm_cbWonTip {
             get {
                 return ResourceManager.GetString("SettingsForm_cbWonTip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Sandbox giveaways.
-        /// </summary>
-        public static string SettingsForm_chGMSandbox {
-            get {
-                return ResourceManager.GetString("SettingsForm_chGMSandbox", resourceCulture);
             }
         }
         

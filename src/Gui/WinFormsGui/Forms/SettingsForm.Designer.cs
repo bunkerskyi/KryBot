@@ -52,16 +52,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.cbTimerEnable = new System.Windows.Forms.CheckBox();
             this.cbSortBy = new System.Windows.Forms.ComboBox();
             this.cbSort = new System.Windows.Forms.CheckBox();
-            this.tabPageGM = new System.Windows.Forms.TabPage();
-            this.btbGMCookies = new System.Windows.Forms.Button();
-            this.cbGMRegional = new System.Windows.Forms.CheckBox();
-            this.cbGMGolden = new System.Windows.Forms.CheckBox();
-            this.chGMSandbox = new System.Windows.Forms.CheckBox();
-            this.cbGMRegular = new System.Windows.Forms.CheckBox();
-            this.tbGMReserv = new System.Windows.Forms.TextBox();
-            this.tbGMMaxValue = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.tabPageSG = new System.Windows.Forms.TabPage();
             this.rbSGSortToMoreCopies = new System.Windows.Forms.RadioButton();
             this.rbSGSortTeLessLevel = new System.Windows.Forms.RadioButton();
@@ -122,7 +112,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.gbLang.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.gbTimerSettings.SuspendLayout();
-            this.tabPageGM.SuspendLayout();
             this.tabPageSG.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSGLevel)).BeginInit();
             this.tabPageSC.SuspendLayout();
@@ -136,7 +125,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabPageCommun);
-            this.tabControl.Controls.Add(this.tabPageGM);
             this.tabControl.Controls.Add(this.tabPageSG);
             this.tabControl.Controls.Add(this.tabPageSC);
             this.tabControl.Controls.Add(this.tabPageSP);
@@ -161,9 +149,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageCommun.Controls.Add(this.groupBox1);
             this.tabPageCommun.Controls.Add(this.cbSortBy);
             this.tabPageCommun.Controls.Add(this.cbSort);
-            this.tabPageCommun.Location = new System.Drawing.Point(4, 40);
+            this.tabPageCommun.Location = new System.Drawing.Point(4, 22);
             this.tabPageCommun.Name = "tabPageCommun";
-            this.tabPageCommun.Size = new System.Drawing.Size(309, 156);
+            this.tabPageCommun.Size = new System.Drawing.Size(309, 174);
             this.tabPageCommun.TabIndex = 5;
             this.tabPageCommun.Text = "Commun";
             this.tabPageCommun.UseVisualStyleBackColor = true;
@@ -348,111 +336,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.cbSort.Text = "First";
             this.cbSort.UseVisualStyleBackColor = true;
             // 
-            // tabPageGM
-            // 
-            this.tabPageGM.Controls.Add(this.btbGMCookies);
-            this.tabPageGM.Controls.Add(this.cbGMRegional);
-            this.tabPageGM.Controls.Add(this.cbGMGolden);
-            this.tabPageGM.Controls.Add(this.chGMSandbox);
-            this.tabPageGM.Controls.Add(this.cbGMRegular);
-            this.tabPageGM.Controls.Add(this.tbGMReserv);
-            this.tabPageGM.Controls.Add(this.tbGMMaxValue);
-            this.tabPageGM.Controls.Add(this.label2);
-            this.tabPageGM.Controls.Add(this.label1);
-            this.tabPageGM.Location = new System.Drawing.Point(4, 40);
-            this.tabPageGM.Name = "tabPageGM";
-            this.tabPageGM.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGM.Size = new System.Drawing.Size(309, 156);
-            this.tabPageGM.TabIndex = 0;
-            this.tabPageGM.Text = "GM";
-            this.tabPageGM.UseVisualStyleBackColor = true;
-            // 
-            // btbGMCookies
-            // 
-            this.btbGMCookies.Image = global::KryBot.Gui.WinFormsGui.Properties.Resources.locked1;
-            this.btbGMCookies.Location = new System.Drawing.Point(280, 6);
-            this.btbGMCookies.Name = "btbGMCookies";
-            this.btbGMCookies.Size = new System.Drawing.Size(23, 23);
-            this.btbGMCookies.TabIndex = 9;
-            this.btbGMCookies.UseVisualStyleBackColor = true;
-            this.btbGMCookies.Click += new System.EventHandler(this.btbGMCookies_Click);
-            // 
-            // cbGMRegional
-            // 
-            this.cbGMRegional.AutoSize = true;
-            this.cbGMRegional.Location = new System.Drawing.Point(6, 75);
-            this.cbGMRegional.Name = "cbGMRegional";
-            this.cbGMRegional.Size = new System.Drawing.Size(133, 17);
-            this.cbGMRegional.TabIndex = 8;
-            this.cbGMRegional.Text = "No regional restrictions";
-            this.cbGMRegional.UseVisualStyleBackColor = true;
-            // 
-            // cbGMGolden
-            // 
-            this.cbGMGolden.AutoSize = true;
-            this.cbGMGolden.Location = new System.Drawing.Point(6, 52);
-            this.cbGMGolden.Name = "cbGMGolden";
-            this.cbGMGolden.Size = new System.Drawing.Size(135, 17);
-            this.cbGMGolden.TabIndex = 6;
-            this.cbGMGolden.Text = "Free golden giveaways";
-            this.cbGMGolden.UseVisualStyleBackColor = true;
-            // 
-            // chGMSandbox
-            // 
-            this.chGMSandbox.AutoSize = true;
-            this.chGMSandbox.Location = new System.Drawing.Point(6, 29);
-            this.chGMSandbox.Name = "chGMSandbox";
-            this.chGMSandbox.Size = new System.Drawing.Size(121, 17);
-            this.chGMSandbox.TabIndex = 5;
-            this.chGMSandbox.Text = "Sandbox giveaways";
-            this.chGMSandbox.UseVisualStyleBackColor = true;
-            // 
-            // cbGMRegular
-            // 
-            this.cbGMRegular.AutoSize = true;
-            this.cbGMRegular.Location = new System.Drawing.Point(6, 6);
-            this.cbGMRegular.Name = "cbGMRegular";
-            this.cbGMRegular.Size = new System.Drawing.Size(116, 17);
-            this.cbGMRegular.TabIndex = 4;
-            this.cbGMRegular.Text = "Regular giveaways";
-            this.cbGMRegular.UseVisualStyleBackColor = true;
-            // 
-            // tbGMReserv
-            // 
-            this.tbGMReserv.Location = new System.Drawing.Point(254, 127);
-            this.tbGMReserv.Name = "tbGMReserv";
-            this.tbGMReserv.Size = new System.Drawing.Size(30, 20);
-            this.tbGMReserv.TabIndex = 3;
-            this.tbGMReserv.Text = "0";
-            this.tbGMReserv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EventKeyPress);
-            // 
-            // tbGMMaxValue
-            // 
-            this.tbGMMaxValue.Location = new System.Drawing.Point(134, 127);
-            this.tbGMMaxValue.Name = "tbGMMaxValue";
-            this.tbGMMaxValue.Size = new System.Drawing.Size(30, 20);
-            this.tbGMMaxValue.TabIndex = 2;
-            this.tbGMMaxValue.Text = "50";
-            this.tbGMMaxValue.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EventKeyPress);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(170, 130);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(81, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Reserve points:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 130);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Maximum bet:";
-            // 
             // tabPageSG
             // 
             this.tabPageSG.Controls.Add(this.rbSGSortToMoreCopies);
@@ -467,10 +350,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageSG.Controls.Add(this.lblSGMaxValue);
             this.tabPageSG.Controls.Add(this.cbSGGroup);
             this.tabPageSG.Controls.Add(this.cbSGWishlist);
-            this.tabPageSG.Location = new System.Drawing.Point(4, 40);
+            this.tabPageSG.Location = new System.Drawing.Point(4, 22);
             this.tabPageSG.Name = "tabPageSG";
             this.tabPageSG.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSG.Size = new System.Drawing.Size(309, 156);
+            this.tabPageSG.Size = new System.Drawing.Size(309, 174);
             this.tabPageSG.TabIndex = 1;
             this.tabPageSG.Text = "SG";
             this.tabPageSG.UseVisualStyleBackColor = true;
@@ -608,9 +491,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageSC.Controls.Add(this.lblSCMaxValue);
             this.tabPageSC.Controls.Add(this.cbSCGroup);
             this.tabPageSC.Controls.Add(this.cbSCWishlist);
-            this.tabPageSC.Location = new System.Drawing.Point(4, 40);
+            this.tabPageSC.Location = new System.Drawing.Point(4, 22);
             this.tabPageSC.Name = "tabPageSC";
-            this.tabPageSC.Size = new System.Drawing.Size(309, 156);
+            this.tabPageSC.Size = new System.Drawing.Size(309, 174);
             this.tabPageSC.TabIndex = 2;
             this.tabPageSC.Text = "SC";
             this.tabPageSC.UseVisualStyleBackColor = true;
@@ -719,9 +602,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageSP.Controls.Add(this.tbSPMaxValue);
             this.tabPageSP.Controls.Add(this.label3);
             this.tabPageSP.Controls.Add(this.label4);
-            this.tabPageSP.Location = new System.Drawing.Point(4, 40);
+            this.tabPageSP.Location = new System.Drawing.Point(4, 22);
             this.tabPageSP.Name = "tabPageSP";
-            this.tabPageSP.Size = new System.Drawing.Size(309, 156);
+            this.tabPageSP.Size = new System.Drawing.Size(309, 174);
             this.tabPageSP.TabIndex = 4;
             this.tabPageSP.Text = "SP";
             this.tabPageSP.UseVisualStyleBackColor = true;
@@ -779,9 +662,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPagePB.Controls.Add(this.label9);
             this.tabPagePB.Controls.Add(this.label10);
             this.tabPagePB.Controls.Add(this.btnPBCookies);
-            this.tabPagePB.Location = new System.Drawing.Point(4, 40);
+            this.tabPagePB.Location = new System.Drawing.Point(4, 22);
             this.tabPagePB.Name = "tabPagePB";
-            this.tabPagePB.Size = new System.Drawing.Size(309, 156);
+            this.tabPagePB.Size = new System.Drawing.Size(309, 174);
             this.tabPagePB.TabIndex = 7;
             this.tabPagePB.Text = "PB";
             this.tabPagePB.UseVisualStyleBackColor = true;
@@ -839,9 +722,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageGA.Controls.Add(this.lblGAReserv);
             this.tabPageGA.Controls.Add(this.lblGAMaxBet);
             this.tabPageGA.Controls.Add(this.btnGACookies);
-            this.tabPageGA.Location = new System.Drawing.Point(4, 40);
+            this.tabPageGA.Location = new System.Drawing.Point(4, 22);
             this.tabPageGA.Name = "tabPageGA";
-            this.tabPageGA.Size = new System.Drawing.Size(309, 156);
+            this.tabPageGA.Size = new System.Drawing.Size(309, 174);
             this.tabPageGA.TabIndex = 9;
             this.tabPageGA.Text = "GA";
             this.tabPageGA.UseVisualStyleBackColor = true;
@@ -903,9 +786,9 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.tabPageIG.Controls.Add(this.cbIGSteamItems);
             this.tabPageIG.Controls.Add(this.cbIGSteamGiveaways);
             this.tabPageIG.Controls.Add(this.btnIGCookie);
-            this.tabPageIG.Location = new System.Drawing.Point(4, 40);
+            this.tabPageIG.Location = new System.Drawing.Point(4, 22);
             this.tabPageIG.Name = "tabPageIG";
-            this.tabPageIG.Size = new System.Drawing.Size(309, 156);
+            this.tabPageIG.Size = new System.Drawing.Size(309, 174);
             this.tabPageIG.TabIndex = 8;
             this.tabPageIG.Text = "IG";
             this.tabPageIG.UseVisualStyleBackColor = true;
@@ -1049,8 +932,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             this.groupBox1.PerformLayout();
             this.gbTimerSettings.ResumeLayout(false);
             this.gbTimerSettings.PerformLayout();
-            this.tabPageGM.ResumeLayout(false);
-            this.tabPageGM.PerformLayout();
             this.tabPageSG.ResumeLayout(false);
             this.tabPageSG.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSGLevel)).EndInit();
@@ -1074,7 +955,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		#endregion
 
 		private System.Windows.Forms.TabControl tabControl;
-		private System.Windows.Forms.TabPage tabPageGM;
 		private System.Windows.Forms.TabPage tabPageSG;
 		private System.Windows.Forms.MenuStrip menuStrip;
 		private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
@@ -1083,14 +963,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private System.Windows.Forms.TabPage tabPageCommun;
 		private System.Windows.Forms.ComboBox cbSortBy;
 		private System.Windows.Forms.CheckBox cbSort;
-		private System.Windows.Forms.CheckBox cbGMRegional;
-		private System.Windows.Forms.CheckBox cbGMGolden;
-		private System.Windows.Forms.CheckBox chGMSandbox;
-		private System.Windows.Forms.CheckBox cbGMRegular;
-		private System.Windows.Forms.TextBox tbGMReserv;
-		private System.Windows.Forms.TextBox tbGMMaxValue;
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.TextBox tbSGReserv;
 		private System.Windows.Forms.TextBox tbSGMaxValue;
 		private System.Windows.Forms.Label lblSGReserv;
@@ -1107,7 +979,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 		private System.Windows.Forms.TextBox tbSPMaxValue;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.Button btbGMCookies;
 		private System.Windows.Forms.Button btnSGCookies;
 		private System.Windows.Forms.Button btnSCCookies;
 		private System.Windows.Forms.Button btnSPCookies;
@@ -1155,12 +1026,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 			label5.Text = strings.SettingsForm_label5;
 			cbTimerEnable.Text = strings.SettingsForm_cbTimerEnable;
 			cbSort.Text = strings.SettingsForm_cbSort;
-			cbGMRegional.Text = strings.SettingsForm_cbGMRegional;
-			cbGMGolden.Text = strings.SettingsForm_cbGMGolden;
-			chGMSandbox.Text = strings.SettingsForm_chGMSandbox;
-			cbGMRegular.Text = strings.SettingsForm_RegularGiveaways;
-			label2.Text = strings.SettingsForm_PointsReserv;
-			label1.Text = strings.SettingsFform_MaxValue;
 			rbSGSortTeLessLevel.Text = strings.SettingsForm_cbSGSortTeLessLevel;
             rbSGSortToMoreCopies.Text = strings.SettingsForm_cbSGSortToMoreCopies;
             cbSGMinLevel.Text = strings.SettingsForm_cbSGMinLevel;

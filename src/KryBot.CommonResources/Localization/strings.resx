@@ -237,6 +237,7 @@
   <data name="GiveawayJoined_Join" xml:space="preserve">
     <value>Entry into</value>
   </data>
+  <!-- ReSharper disable once NotOverriddenInSpecificCulture -->
   <data name="GiveawayJoined_Points" xml:space="preserve">
     <value>points</value>
   </data>
@@ -342,12 +343,6 @@
   <data name="SettingsForm_cbFarmTip" xml:space="preserve">
     <value>Notification about farm</value>
   </data>
-  <data name="SettingsForm_cbGMGolden" xml:space="preserve">
-    <value>Free golden giveaways</value>
-  </data>
-  <data name="SettingsForm_cbGMRegional" xml:space="preserve">
-    <value>No regional restrictions</value>
-  </data>
   <data name="SettingsForm_cbSCAutojoin" xml:space="preserve">
     <value>Auto entry into the group (required authorization in Steam)</value>
   </data>
@@ -371,9 +366,6 @@
   </data>
   <data name="SettingsForm_cbWonTip" xml:space="preserve">
     <value>Notificaions about win</value>
-  </data>
-  <data name="SettingsForm_chGMSandbox" xml:space="preserve">
-    <value>Sandbox giveaways</value>
   </data>
   <data name="SettingsForm_Commun" xml:space="preserve">
     <value>Common</value>
@@ -408,6 +400,7 @@
   <data name="SettingsForm_RegularGiveaways" xml:space="preserve">
     <value>Regular giveaways</value>
   </data>
+  <!-- ReSharper disable once NotOverriddenInSpecificCulture -->
   <data name="SettingsForm_WishlistGiveaways" xml:space="preserve">
     <value>Wishlist</value>
   </data>
@@ -465,6 +458,7 @@
   <data name="Logout" xml:space="preserve">
     <value>Logout</value>
   </data>
+  <!-- ReSharper disable once NotOverriddenInSpecificCulture -->
   <data name="Points" xml:space="preserve">
     <value>Points</value>
   </data>
@@ -512,5 +506,11 @@
   </data>
   <data name="SettingsForm_cbSGSortToMoreCopies" xml:space="preserve">
     <value>First giveaways of the more copies</value>
+  </data>
+  <data name="ParseLoadGiveaways_FoundGiveAwaysInRegion" xml:space="preserve">
+    <value>Найдено раздач с региональными ограничениями</value>
+  </data>
+  <data name="ParseLoadGiveaways_FoundGiveAwaysInMinNumberCopies" xml:space="preserve">
+    <value>Найдено раздач с минимальным количеством копий</value>
   </data>
 </root>

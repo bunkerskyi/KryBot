@@ -61,13 +61,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 cbSortBy.Text = strings.SettingsForm_FirstCheap;
             }
 
-            cbGMRegular.Checked = _bot.GameMiner.Regular;
-            chGMSandbox.Checked = _bot.GameMiner.Sandbox;
-            cbGMGolden.Checked = _bot.GameMiner.FreeGolden;
-            cbGMRegional.Checked = _bot.GameMiner.NoRegion;
-            tbGMMaxValue.Text = _bot.GameMiner.JoinPointsLimit.ToString();
-            tbGMReserv.Text = _bot.GameMiner.PointsReserv.ToString();
-
             cbSGWishlist.Checked = _bot.SteamGifts.WishList;
             cbSGGroup.Checked = _bot.SteamGifts.Group;
             cbSGRegular.Checked = _bot.SteamGifts.Regular;
@@ -112,19 +105,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             cbWishlistSort.Checked = _bot.WishlistSort;
         }
 
-        private void btbGMCookies_Click(object sender, EventArgs e)
-        {
-            var names = new List<string>
-            {
-                "token:" + _bot.GameMiner.Cookies.Token,
-                "_xsrf:" + _bot.GameMiner.Cookies.Xsrf,
-                "UserAgent:" + _bot.GameMiner.UserAgent
-            };
-
-            var form = new FormCookie("GameMiner", names, _bot);
-            form.ShowDialog();
-        }
-
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveSettings();
@@ -146,13 +126,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             _bot.Sort = cbSort.Checked;
             _bot.SortToMore = cbSortBy.Text == strings.SettingsForm_FirstExpensive;
             _bot.SortToLess = cbSortBy.Text == strings.SettingsForm_FirstCheap;
-
-            _bot.GameMiner.Regular = cbGMRegular.Checked;
-            _bot.GameMiner.Sandbox = chGMSandbox.Checked;
-            _bot.GameMiner.FreeGolden = cbGMGolden.Checked;
-            _bot.GameMiner.NoRegion = cbGMRegional.Checked;
-            _bot.GameMiner.JoinPointsLimit = int.Parse(tbGMMaxValue.Text);
-            _bot.GameMiner.PointsReserv = int.Parse(tbGMReserv.Text);
 
             _bot.SteamGifts.WishList = cbSGWishlist.Checked;
             _bot.SteamGifts.Group = cbSGGroup.Checked;

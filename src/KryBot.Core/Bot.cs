@@ -12,7 +12,6 @@ namespace KryBot.Core
     {
         public Bot()
         {
-            GameMiner = new GameMiner();
             SteamGifts = new SteamGifts();
             SteamCompanion = new SteamCompanion();
             SteamPortal = new SteamPortal();
@@ -32,7 +31,6 @@ namespace KryBot.Core
         public int TimerInterval { get; set; }
         public int TimerLoops { get; set; }
 
-        public GameMiner GameMiner { get; set; }
         public SteamGifts SteamGifts { get; set; }
         public SteamCompanion SteamCompanion { get; set; }
         public SteamPortal SteamPortal { get; set; }
@@ -45,7 +43,6 @@ namespace KryBot.Core
 
         public void ClearGiveawayList()
         {
-            GameMiner.Giveaways = new List<GameMinerGiveaway>();
             SteamGifts.Giveaways = new List<SteamGiftsGiveaway>();
             SteamGifts.WishlistGiveaways = new List<SteamGiftsGiveaway>();
             SteamCompanion.Giveaways = new List<SteamCompanionGiveaway>();

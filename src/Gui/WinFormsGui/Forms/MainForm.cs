@@ -105,7 +105,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
             if (LoadProfile())
             {
-                cbGMEnable.Checked = _bot.GameMiner.Enabled;
                 cbSGEnable.Checked = _bot.SteamGifts.Enabled;
                 cbSCEnable.Checked = _bot.SteamCompanion.Enabled;
                 cbSPEnable.Checked = _bot.SteamPortal.Enabled;
@@ -123,7 +122,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             }
             else
             {
-                btnGMLogin.Visible = true;
                 btnSGLogin.Visible = true;
                 btnSCLogin.Visible = true;
                 btnSPLogin.Visible = true;
@@ -231,7 +229,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
         private void Design()
         {
             btnStart.Enabled = false;
-            btnGMLogin.Visible = false;
             btnSGLogin.Visible = false;
             btnSCLogin.Visible = false;
             btnSPLogin.Visible = false;
@@ -240,7 +237,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             btnSteamLogin.Visible = false;
             btnGALogin.Visible = false;
             btnIGLogin.Visible = false;
-            btnGMExit.Visible = false;
             btnSGExit.Visible = false;
             btnSCExit.Visible = false;
             btnSPExit.Visible = false;
@@ -254,7 +250,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             toolStripStatusLabel.Image = null;
             toolStripStatusLabel.Text = "";
 
-            pbGMReload.Visible = false;
             pbSGReload.Visible = false;
             pbSCReload.Visible = false;
             pbUSPeload.Visible = false;
@@ -364,37 +359,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
             var stopWatch = new Stopwatch();
             stopWatch.Start();
-
-            if (_bot.GameMiner.Enabled)
-            {
-                var profile = await _bot.GameMiner.CheckLogin(_settings.Lang);
-                LogMessage.Instance.AddMessage(profile);
-                LoadProfilesInfo?.Invoke();
-
-                if (profile.Success)
-                {
-                    var won = await _bot.GameMiner.CheckWon(_settings.Lang);
-                    if (won != null)
-                    {
-                        LogMessage.Instance.AddMessage(won);
-                        if (_settings.ShowWonTip)
-                        {
-                            ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
-                        }
-                    }
-
-                    await _bot.GameMiner.Join(_bot.Blacklist, _bot.Sort, _bot.SortToMore, _settings.Lang);
-                }
-                else
-                {
-                    BlockTabpage(tabPageSG);
-                    btnSGLogin.Enabled = true;
-                    btnSGLogin.Visible = true;
-                    linkLabelSG.Enabled = true;
-                    lblSGStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
-                }
-            }
-            toolStripProgressBar.Value++;
 
             if (_bot.SteamGifts.Enabled)
             {
@@ -601,9 +565,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
         private void ShowProfileInfo()
         {
-            lblGMCoal.Text = $@"{strings.Points}: {_bot.GameMiner.Points}";
-            lblGMLevel.Text = $@"{strings.Level}: {_bot.GameMiner.Level}";
-
             lblSGPoints.Text = $@"{strings.Points}: {_bot.SteamGifts.Points}";
             lblSGLevel.Text = $@"{strings.Level}: {_bot.SteamGifts.Level}";
 
@@ -658,47 +619,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 btnSteamLogin.Enabled = true;
                 btnSteamLogin.Visible = true;
             }
-            toolStripProgressBar.Value++;
-
-            if (_bot.GameMiner.Enabled)
-            {
-                if (await CheckLoginGm())
-                {
-                    var won = await _bot.GameMiner.CheckWon(_settings.Lang);
-                    if (won != null)
-                    {
-                        LogMessage.Instance.AddMessage(won);
-                        if (_settings.ShowWonTip)
-                        {
-                            ShowBaloolTip(won.Content.Split(']')[1], 5000, ToolTipIcon.Info);
-                        }
-                    }
-
-                    LoadProfilesInfo?.Invoke();
-
-                    login = true;
-                    btnGMLogin.Enabled = false;
-                    btnGMLogin.Visible = false;
-                    lblGMStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
-                    LoadProfilesInfo?.Invoke();
-                    pbGMReload.Visible = true;
-                    btnGMExit.Visible = true;
-                }
-                else
-                {
-                    BlockTabpage(tabPageGM);
-                    btnGMLogin.Enabled = true;
-                    btnGMLogin.Visible = true;
-                    lblGMStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
-                }
-            }
-            else
-            {
-                BlockTabpage(tabPageGM);
-                btnGMLogin.Enabled = true;
-                btnGMLogin.Visible = true;
-            }
-
             toolStripProgressBar.Value++;
 
             if (_bot.SteamGifts.Enabled)
@@ -1114,55 +1034,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             toolStripStatusLabel.Text = strings.StatusBar_End;
         }
 
-        private async void btnGMLogin_Click(object sender, EventArgs e)
-        {
-            btnGMLogin.Enabled = false;
-            BrowserStart($"{Links.GameMiner}login/steam?backurl=http%3A%2F%2Fgameminer.net%2F%3Flang%3D" +
-                         _settings.Lang + @"&agree=True",
-                "http://gameminer.net/?lang=" + _settings.Lang, "GameMiner");
-
-            if (string.IsNullOrEmpty(_bot.GameMiner.UserAgent))
-            {
-                _bot.GameMiner.UserAgent = CefTools.GetUserAgent();
-            }
-            _bot.Save();
-
-            toolStripStatusLabel.Image = Resources.load;
-            toolStripStatusLabel.Text = strings.StatusBar_Login;
-            var login = await CheckLoginGm();
-            if (login)
-            {
-                BlockTabpage(tabPageGM);
-                btnGMLogin.Enabled = false;
-                btnGMLogin.Visible = false;
-                lblGMStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
-                LoadProfilesInfo?.Invoke();
-                btnStart.Enabled = true;
-                pbGMReload.Visible = true;
-                btnGMExit.Visible = true;
-                btnGMExit.Enabled = true;
-                cbGMEnable.Checked = true;
-                _bot.GameMiner.Enabled = true;
-            }
-            else
-            {
-                lblGMStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
-                BlockTabpage(tabPageGM);
-                btnGMLogin.Enabled = true;
-                btnGMLogin.Visible = true;
-            }
-            toolStripStatusLabel.Image = null;
-            toolStripStatusLabel.Text = strings.StatusBar_End;
-        }
-
-        private async Task<bool> CheckLoginGm()
-        {
-            Message_TryLogin("GameMiner");
-            var login = await _bot.GameMiner.CheckLogin(_settings.Lang);
-            LogMessage.Instance.AddMessage(login);
-            return login.Success;
-        }
-
         private async Task<bool> CheckLoginSg()
         {
             Message_TryLogin("SteamGifts");
@@ -1233,44 +1104,8 @@ namespace KryBot.Gui.WinFormsGui.Forms
             return login.Success;
         }
 
-        private async void pbGMReload_Click(object sender, EventArgs e)
-        {
-            btnGMExit.Enabled = false;
-            pbGMReload.Image = Resources.load;
-            SetStatusPanel($"{strings.MainForm_UpdateInfoAbout} GameMiner", Resources.load);
-
-            if (await CheckLoginGm())
-            {
-                LoadProfilesInfo?.Invoke();
-
-                var async = await _bot.GameMiner.Sync(_settings.Lang);
-                if (async != null)
-                {
-                    LogMessage.Instance.AddMessage(async);
-                }
-
-                btnGMLogin.Enabled = false;
-                btnGMLogin.Visible = false;
-                lblGMStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginSuccess}";
-                LoadProfilesInfo?.Invoke();
-                BlockTabpage(tabPageGM);
-            }
-            else
-            {
-                BlockTabpage(tabPageGM);
-                btnGMLogin.Enabled = true;
-                btnGMLogin.Visible = true;
-                lblGMStatus.Text = $@"{strings.FormMain_Label_Status}: {strings.LoginFaild}";
-            }
-
-            SetStatusPanel(strings.Finish, null);
-            pbGMReload.Image = Resources.refresh;
-            btnGMExit.Enabled = true;
-        }
-
         private async void pbSGReload_Click(object sender, EventArgs e)
         {
-            btnGMExit.Enabled = false;
             pbSGReload.Image = Resources.load;
             SetStatusPanel($"{strings.MainForm_UpdateInfoAbout} SteamGifts", Resources.load);
 
@@ -1304,12 +1139,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
             SetStatusPanel(strings.Finish, null);
             pbSGReload.Image = Resources.refresh;
-            btnGMExit.Enabled = true;
         }
 
         private async void pbSCReload_Click(object sender, EventArgs e)
         {
-            btnGMExit.Enabled = false;
             pbSCReload.Image = Resources.load;
             SetStatusPanel($"{strings.MainForm_UpdateInfoAbout} SteamCompanion", Resources.load);
 
@@ -1342,12 +1175,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
             SetStatusPanel(strings.Finish, null);
             pbSCReload.Image = Resources.refresh;
-            btnGMExit.Enabled = true;
         }
 
         private async void pbSPReload_Click(object sender, EventArgs e)
         {
-            btnGMExit.Enabled = false;
             pbUSPeload.Image = Resources.load;
             SetStatusPanel($"{strings.MainForm_UpdateInfoAbout} SteamPortal", Resources.load);
 
@@ -1369,12 +1200,10 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
             pbUSPeload.Image = Resources.refresh;
             SetStatusPanel(strings.Finish, null);
-            btnGMExit.Enabled = true;
         }
 
         private async void pbSTreload_Click(object sender, EventArgs e)
         {
-            btnGMExit.Enabled = false;
             pbSTreload.Image = Resources.load;
             SetStatusPanel($"{strings.MainForm_UpdateInfoAbout} SteamTrade", Resources.load);
 
@@ -1396,7 +1225,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
             SetStatusPanel(strings.Finish, null);
             pbSTreload.Image = Resources.refresh;
-            btnGMExit.Enabled = true;
         }
 
         private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -1419,11 +1247,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
                     LogHide?.Invoke();
                 }
             }
-        }
-
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Process.Start(Links.GameMiner);
         }
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -1520,21 +1343,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             {
                 BlockTabpage(tabPageSG);
                 _bot.SteamGifts.Enabled = true;
-            }
-        }
-
-        private void cbGMEnable_CheckedChanged(object sender, EventArgs e)
-        {
-            if (lblGMStatus.Enabled)
-            {
-                BlockTabpage(tabPageGM);
-                cbGMEnable.Enabled = true;
-                _bot.GameMiner.Enabled = false;
-            }
-            else
-            {
-                BlockTabpage(tabPageGM);
-                _bot.GameMiner.Enabled = true;
             }
         }
 
@@ -1720,16 +1528,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
             btnSGLogin.Visible = true;
             btnSGLogin.Enabled = true;
             btnSGExit.Visible = false;
-            _bot.Save();
-        }
-
-        private void btnGMExit_Click(object sender, EventArgs e)
-        {
-            _bot.GameMiner.Logout();
-            BlockTabpage(tabPageGM);
-            btnGMLogin.Enabled = true;
-            btnGMLogin.Visible = true;
-            btnGMExit.Visible = false;
             _bot.Save();
         }
 

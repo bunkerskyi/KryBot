@@ -101,12 +101,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
 
                 if (_browser.Address == _endPage || _browser.Address == "https://www.steamgifts.com/register")
                 {
-                    if (_endPage.Contains("http://gameminer.net/?lang="))
-                    {
-                        GameMinerAuth();
-                        Exit();
-                    }
-
                     if (_endPage == Links.SteamGifts)
                     {
                         SteamGiftsAuth();
@@ -281,24 +275,6 @@ namespace KryBot.Gui.WinFormsGui.Forms
                 }
             }
             _bot.SteamGifts.Enabled = true;
-        }
-
-        private async void GameMinerAuth()
-        {
-            foreach (var cookie in await GetCookies(Links.GameMiner))
-            {
-                if (cookie.Name == "token")
-                {
-                    _bot.GameMiner.Cookies.Token = cookie.Value;
-                }
-
-                if (cookie.Name == "_xsrf")
-                {
-                    _bot.GameMiner.Cookies.Xsrf = cookie.Value;
-                }
-            }
-
-            _bot.GameMiner.Enabled = true;
         }
 
         private async void SteamAuth()

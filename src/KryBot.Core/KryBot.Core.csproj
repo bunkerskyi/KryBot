@@ -58,7 +58,6 @@
     <Compile Include="Bot.cs" />
     <Compile Include="Cookies\BaseCookie.cs" />
     <Compile Include="Cookies\GameAwaysCookie.cs" />
-    <Compile Include="Cookies\GameMinerCookie.cs" />
     <Compile Include="Cookies\InventoryGiftsCookie.cs" />
     <Compile Include="Cookies\PlayBlinkCookie.cs" />
     <Compile Include="Cookies\SteamCompanionCookie.cs" />
@@ -69,7 +68,6 @@
     <Compile Include="FilePaths.cs" />
     <Compile Include="Giveaways\BaseGiveaway.cs" />
     <Compile Include="Giveaways\GameAwaysGiveaway.cs" />
-    <Compile Include="Giveaways\GameMinerGiveaway.cs" />
     <Compile Include="Giveaways\InventoryGiftsGiveaway.cs" />
     <Compile Include="Giveaways\PlayBlinkGiveaway.cs" />
     <Compile Include="Giveaways\SteamCompanionGiveaway.cs" />
@@ -83,14 +81,10 @@
     <Compile Include="LogManager.cs" />
     <Compile Include="LogMessage.cs" />
     <Compile Include="Serializable\GameAways\JsonJoinResponse.cs" />
-    <Compile Include="Serializable\GameMiner\JsonGame.cs" />
-    <Compile Include="Serializable\GameMiner\JsonGiveaway.cs" />
-    <Compile Include="Serializable\GameMiner\JsonResponse.cs" />
-    <Compile Include="Serializable\GameMiner\JsonResponseError.cs" />
-    <Compile Include="Serializable\GameMiner\JsonResponseErrorDetail.cs" />
-    <Compile Include="Serializable\GameMiner\JsonRootObject.cs" />
     <Compile Include="Serializable\GitHub\GitHubRelease.cs" />
     <Compile Include="Serializable\GitHub\GitHunReleaseAssets.cs" />
+    <Compile Include="Serializable\SteamGifts\JsonResponseError.cs" />
+    <Compile Include="Serializable\SteamGifts\JsonResponseErrorDetail.cs" />
     <Compile Include="Serializable\SteamGifts\JsonResponseJoin.cs" />
     <Compile Include="Serializable\SteamGifts\JsonResponseSyncAccount.cs" />
     <Compile Include="Serializable\Steam\GameDetail.cs" />
@@ -106,7 +100,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Links.cs" />
     <Compile Include="Sites\GameAways.cs" />
-    <Compile Include="Sites\GameMiner.cs" />
     <Compile Include="Sites\InventoryGifts.cs" />
     <Compile Include="Sites\PlayBlink.cs" />
     <Compile Include="Sites\Steam.cs" />

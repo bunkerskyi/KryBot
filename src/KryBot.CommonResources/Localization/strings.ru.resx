@@ -335,12 +335,6 @@
   <data name="SettingsForm_cbFarmTip" xml:space="preserve">
     <value>Оповещение о фарме</value>
   </data>
-  <data name="SettingsForm_cbGMGolden" xml:space="preserve">
-    <value>Бесплатные золотые раздачи</value>
-  </data>
-  <data name="SettingsForm_cbGMRegional" xml:space="preserve">
-    <value>Без региональных ограничений</value>
-  </data>
   <data name="SettingsForm_cbSort" xml:space="preserve">
     <value>Сначала</value>
   </data>
@@ -352,9 +346,6 @@
   </data>
   <data name="SettingsForm_cbWonTip" xml:space="preserve">
     <value>Оповещение о победах</value>
-  </data>
-  <data name="SettingsForm_chGMSandbox" xml:space="preserve">
-    <value>Раздачи из песочницы</value>
   </data>
   <data name="SettingsForm_Commun" xml:space="preserve">
     <value>Общие</value>
