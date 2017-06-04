@@ -3,14 +3,11 @@ using System.Security;
 using System.Windows.Forms;
 using KryBot.CommonResources.Localization;
 using Microsoft.Win32;
-using NLog;
 
 namespace KryBot.Core.Helpers
 {
     public static class AutorunHelper
     {
-        private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
-
         public static bool SetAutorun(string path)
         {
             try
@@ -19,20 +16,18 @@ namespace KryBot.Core.Helpers
                 key?.SetValue("KryBot", path);
                 return true;
             }
-            catch (SecurityException e)
+            catch (SecurityException)
             {
                 MessageBox.Show(
                     strings.Autorun_RegisterEditError,
                     strings.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Logger.Warn(e);
                 return false;
             }
-            catch (UnauthorizedAccessException e)
+            catch (UnauthorizedAccessException)
             {
                 MessageBox.Show(
                     strings.Autorun_RegisterEditError,
                     strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Logger.Error(e);
                 return false;
             }
         }
@@ -45,25 +40,22 @@ namespace KryBot.Core.Helpers
                 key?.DeleteValue("KryBot");
                 return true;
             }
-            catch (SecurityException e)
+            catch (SecurityException)
             {
                 MessageBox.Show(
                     strings.Autorun_MustHaveAdminPerm,
                     strings.Warning, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                Logger.Warn(e);
                 return false;
             }
-            catch (UnauthorizedAccessException e)
+            catch (UnauthorizedAccessException)
             {
                 MessageBox.Show(
                     strings.Autorun_RegisterEditError,
                     strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Logger.Error(e);
                 return false;
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
-                Logger.Error(e);
                 return false;
             }
         }

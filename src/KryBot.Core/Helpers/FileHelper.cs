@@ -3,14 +3,11 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml.Serialization;
 using KryBot.CommonResources.Localization;
-using NLog;
 
 namespace KryBot.Core.Helpers
 {
     public static class FileHelper
     {
-        private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
-
         /// <summary>
         ///     Read (deserialize) the file into new object and then return it.
         /// </summary>
@@ -27,7 +24,6 @@ namespace KryBot.Core.Helpers
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Logger.Error(ex);
             }
             return new T();
         }
@@ -59,9 +55,8 @@ namespace KryBot.Core.Helpers
                     return (T) serializer.Deserialize(reader);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Logger.Warn(e);
                 return new T();
             }
         }
@@ -86,7 +81,6 @@ namespace KryBot.Core.Helpers
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Logger.Error(ex);
                 return false;
             }
         }

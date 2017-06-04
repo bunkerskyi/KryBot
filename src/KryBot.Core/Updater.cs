@@ -9,14 +9,11 @@ using KryBot.CommonResources.Localization;
 using KryBot.Core.Helpers;
 using KryBot.Core.Serializable.GitHub;
 using Newtonsoft.Json;
-using NLog;
 
 namespace KryBot.Core
 {
     public static class Updater
     {
-        private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
-
         /// <summary>
         ///     Check application updates from GitHub repo.
         /// </summary>
@@ -27,9 +24,8 @@ namespace KryBot.Core
             {
                 release = await GetGitHubRelease();
             }
-            catch (JsonReaderException e)
+            catch (JsonReaderException)
             {
-                Logger.Warn(e);
                 return new Log("Updater: JsonReaderException", Color.Red, false);
             }
 
@@ -71,21 +67,18 @@ namespace KryBot.Core
                 }
                 catch (Exception ex)
                 {
-                    Logger.Error(ex);
                     MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     File.Move(FilePaths.KryBotOld, FilePaths.KryBot);
                     DeleteTempFiles();
                     return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
                 }
             }
-            catch (JsonReaderException e)
+            catch (JsonReaderException)
             {
-                Logger.Warn(e);
                 return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
             }
             catch (Exception ex)
             {
-                Logger.Error(ex);
                 MessageBox.Show(ex.Message, strings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 DeleteTempFiles();
                 return new Log(strings.Updater_Update_UpdateFailed, Color.Red, false);
