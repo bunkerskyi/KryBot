@@ -8,6 +8,7 @@ namespace KryBot.Core.Giveaways
     {
         public int Price { get; set; }
 
+        // ReSharper disable once UnusedMember.Global
         public int Level { get; set; }
 
         public string Id { get; set; }

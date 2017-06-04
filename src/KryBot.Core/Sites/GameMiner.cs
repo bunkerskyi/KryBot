@@ -275,14 +275,9 @@ namespace KryBot.Core.Sites
                             }
                         }
 
-                        if (nodes.Count > 0)
-                        {
-                            task.SetResult(Messages.GiveawayHaveWon("GameMiner", nodes.Count, Links.GameMinerWon));
-                        }
-                        else
-                        {
-                            task.SetResult(null);
-                        }
+                        task.SetResult(nodes.Count > 0
+                            ? Messages.GiveawayHaveWon("GameMiner", nodes.Count, Links.GameMinerWon)
+                            : null);
                     }
                     else
                     {
