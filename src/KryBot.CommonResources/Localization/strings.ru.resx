@@ -512,4 +512,13 @@
   <data name="SettingsForm_cbSGSortToMoreCopies" xml:space="preserve">
     <value>Сначала раздачи с наибольшим количеством копий</value>
   </data>
+  <data name="GiveawayJoined_Points" xml:space="preserve">
+    <value>points</value>
+  </data>
+  <data name="SettingsForm_WishlistGiveaways" xml:space="preserve">
+    <value>Wishlist</value>
+  </data>
+  <data name="Points" xml:space="preserve">
+    <value>Points</value>
+  </data>
 </root>
