@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KryBot.CommonResources", "KryBot.CommonResources\KryBot.CommonResources.csproj", "{8FD581BC-1678-4559-86F8-9C100C863C10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsGui", "Gui\WinFormsGui\WinFormsGui.csproj", "{02B7FA51-A168-4261-BE3C-4955DA32159E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KryBot.WFGui", "Gui\WinFormsGui\KryBot.WFGui.csproj", "{02B7FA51-A168-4261-BE3C-4955DA32159E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KryBot.Core", "KryBot.Core\KryBot.Core.csproj", "{F7D47659-0A64-4B26-9E93-45FDEA8ECB07}"
 EndProject
