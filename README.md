@@ -1,3 +1,4 @@
+# This project is no longer maintained!
 # KryBot
 
 [![Build status](https://ci.appveyor.com/api/projects/status/ag44wfy6vnmm2nhn/branch/master?svg=true&passingText=master%20-%20OK&failingText=master%20-%20Fails)](https://ci.appveyor.com/project/KriBetko/krybot/branch/master)
